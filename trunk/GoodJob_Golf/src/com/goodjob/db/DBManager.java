@@ -9,16 +9,8 @@ package com.goodjob.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Enumeration;
-import java.util.Properties;
-import java.util.ResourceBundle;
-import org.apache.commons.dbcp.BasicDataSource;
-import org.apache.commons.dbcp.ConnectionFactory;
-import org.apache.commons.dbcp.DataSourceConnectionFactory;
-import org.apache.commons.dbcp.PoolableConnectionFactory;
-import org.apache.commons.dbcp.PoolingDriver;
-import org.apache.commons.pool.ObjectPool;
-import org.apache.commons.pool.impl.GenericObjectPool;
+
+import org.apache.commons.dbutils.DbUtils;
 
 /**
  * <table><tr><td>
@@ -35,7 +27,11 @@ public class DBManager {
 	private static final String connName = "mysql";
 	private static String pool = null;
 	private static DBManager instance = null;
-
+	private static String dbUser = "";
+	private static String dbPass = "";
+	private static String dbHost = "";
+	private static String dbName = "";
+	
 	/**
 	 * 커넥션을 얻어 온다. 
 	 * getConnection
@@ -45,126 +41,8 @@ public class DBManager {
 	 */
 	public static Connection getConnection() throws SQLException{
 		
-		if(instance == null) {
-			if(!initDrivers(connName))
-				return null;
-		}
-		Connection conn = DriverManager.getConnection("jdbc:apache:commons:dbcp:" + connName);
+		DbUtils.loadDriver("com.mysql.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://"+dbHost+"/"+dbName, dbUser, dbPass);
 		return conn;
-	}
-	
-	/**
-	 * 커넥션의 세팅값이 있는지 조사한다. 
-	 * initDrivers
-	 * @return boolean
-	 */
-	public synchronized static boolean initDrivers(String connName){
-		
-		if(instance == null){
-			
-			String tmp = "";
-			DBManager  connPool = new DBManager();
-			ResourceBundle rbun = ResourceBundle.getBundle("com.goodjob.db.dbpool");
-			Enumeration enumeration = rbun.getKeys();
-			Properties  props  = new Properties();
-			props.put("db" , connName);
-			
-			try{
-				
-				while(enumeration.hasMoreElements()){
-					tmp = (String)enumeration.nextElement();
-					props.put( tmp , rbun.getString(tmp));
-				}
-				
-				connPool.loadDrivers(props);
-				
-			}catch(Exception e) {
-				return false;
-			}
-
-			instance = connPool;
-		}
-		return true;
-	}
-	
-	/**
-	 * BasicDataSource 에 디비 세팅값을 세팅한다. 
-	 * loadDrivers
-	 * @param props void
-	 */
-	private void loadDrivers(Properties props){
-
-		BasicDataSource  bds = null;
-		String  name    = null;
-		String  pool    = null;
-		String  driver  = null;
-		String  url   = null;
-		String  db   = null;
-		String  user  = null;
-		String  password = null;
-		int   maxActive = 10;
-		int   maxIdle  = 30;
-		int   maxWait  = 10000;
-		boolean  defaultAutoCommit = false;
-		boolean  defaultReadOnly   = false;
-
-		try{
-			db					= props.getProperty("db");
-			driver     			= props.getProperty(db+".driver");
-			url      				= props.getProperty(db+".url");
-			user     			= props.getProperty(db+".user");
-			password    	= props.getProperty(db+".password");
-			maxActive    	= Integer.parseInt(props.getProperty(db+".maxActive"));
-			maxIdle     		= Integer.parseInt(props.getProperty(db+".maxIdle"));
-			maxWait     		= Integer.parseInt(props.getProperty(db+".maxWait"));
-			defaultAutoCommit 	= props.getProperty(db+".defaultAutoCommit").equals("true");
-			defaultReadOnly   	= props.getProperty(db+".defaultReadOnly").equals("true");
-
-			bds = new BasicDataSource();
-			bds.setDriverClassName(driver);
-			bds.setUrl(url);
-			bds.setUsername(user);
-			bds.setPassword(password);
-			bds.setMaxActive(maxActive);
-			bds.setMaxIdle(maxIdle);
-			bds.setMaxWait(maxWait);
-			bds.setDefaultAutoCommit(defaultAutoCommit);
-			bds.setDefaultReadOnly(defaultReadOnly);
-
-			createPools(db, bds);
-
-			System.out.println("Initialized pool : " + db);
-
-		}catch(Exception e) {
-			System.out.println("Can't initialize pool : " + db);
-		}
-	}
-
-	/**
-	 * 실제로 디비커넥션을 생성 한다. 
-	 * createPools
-	 * @param pool
-	 * @param bds
-	 * @throws Exception void
-	 */
-	private void createPools(String pool, BasicDataSource bds) throws Exception {
-		try{
-
-			ObjectPool    connectionPool    = new GenericObjectPool(null);
-			ConnectionFactory  connectionFactory = new DataSourceConnectionFactory(bds);
-			PoolableConnectionFactory poolableConnectionFactory; 
-
-			try{
-				poolableConnectionFactory = new PoolableConnectionFactory(connectionFactory, connectionPool, null, null, false, true);
-			} catch(Exception e) {
-				return;
-			}
-
-			PoolingDriver driver = new PoolingDriver();
-			driver.registerPool(pool, connectionPool);
-
-		}catch(Exception e)	{
-			e.printStackTrace();
-		}
 	}
 }

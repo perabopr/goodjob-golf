@@ -8,6 +8,10 @@
 	BoardDao dao = new BoardDao();
 
 	BoardDto dto = new BoardDto();
+	
+	
+	
+	
 	dto.setSeq(1);
 	dto.setName("샘플");
 	

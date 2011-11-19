@@ -75,6 +75,10 @@ public class BoardDao {
 		return map.get("cnt");
 	}
 	
+	/**
+	 * 
+	 * @param dto
+	 */
 	public void setUpdate(BoardDto dto){
 		
 		Connection conn = null;

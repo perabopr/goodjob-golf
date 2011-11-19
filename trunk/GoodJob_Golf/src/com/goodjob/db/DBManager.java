@@ -9,6 +9,7 @@ package com.goodjob.db;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 import org.apache.commons.dbutils.DbUtils;
 
@@ -24,13 +25,19 @@ import org.apache.commons.dbutils.DbUtils;
 
 public class DBManager {
 	
-	private static final String connName = "mysql";
-	private static String pool = null;
-	private static DBManager instance = null;
-	private static String dbUser = "";
-	private static String dbPass = "";
-	private static String dbHost = "";
-	private static String dbName = "";
+	private static String driver = "";
+	private static String url = "";
+	private static String user = "";
+	private static String password = "";
+	
+	static {
+		
+		ResourceBundle rb = ResourceBundle.getBundle("com.goodjob.db.dbpool");
+		driver = rb.getString("driver");
+		url = rb.getString("url");
+		user = rb.getString("user");
+		password = rb.getString("password");
+	}
 	
 	/**
 	 * 커넥션을 얻어 온다. 
@@ -41,8 +48,8 @@ public class DBManager {
 	 */
 	public static Connection getConnection() throws SQLException{
 		
-		DbUtils.loadDriver("com.mysql.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mysql://"+dbHost+"/"+dbName, dbUser, dbPass);
+		DbUtils.loadDriver(driver);
+		Connection conn = DriverManager.getConnection(url, user, password);
 		return conn;
 	}
 }

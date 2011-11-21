@@ -7,6 +7,6 @@
 <%
 	BoardDao dao = new BoardDao();
 
-	List<BoardDto> list = dao.getList();
+	//List<BoardDto> list = dao.getList();
 	
 %>

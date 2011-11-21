@@ -11,6 +11,7 @@ import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.log4j.Logger;
 
 import com.goodjob.db.DBManager;
 import com.goodjob.sql.ZIPCODE;
@@ -21,21 +22,27 @@ import com.goodjob.sql.ZIPCODE;
  */
 public class ZipCodeDao {
 
+	Logger logger = Logger.getLogger(this.getClass());
+	
 	public List<ZipCodeDto> getAddress(String dong){
 		
 		List<ZipCodeDto> list = null;
 		Connection conn = null;
 		try {
+			
+			
+			Object[] params = new Object[1];
+			params[0] = dong;
+			
           	conn = DBManager.getConnection();
-			ArrayList<String> params = new ArrayList<String>();
-			params.add(dong);
 			
 			ResultSetHandler rsh = new BeanListHandler(ZipCodeDto.class);
 			QueryRunner qr = new QueryRunner();
 			list = (List<ZipCodeDto>)qr.query(conn, ZIPCODE.address, rsh , params);
            
+			
 		} catch (Exception e) {
-			System.out.println(e);
+			logger.debug(e.getMessage());
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
@@ -48,6 +55,14 @@ public class ZipCodeDao {
 		ZipCodeDao dao = new ZipCodeDao();
 		List<ZipCodeDto> list = dao.getAddress("서초");
 		
-		System.out.println(list.size());
+		ZipCodeDto dto;
+		for(int i = 0 ; i < list.size(); i++){
+			
+			dto = list.get(i);
+			System.out.println("SIDO : " + dto.getSido());
+			System.out.println("DONG : " + dto.getDong());
+			System.out.println("=");
+			
+		}
 	}
 }

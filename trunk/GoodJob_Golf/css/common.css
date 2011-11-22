@@ -1,0 +1,122 @@
+@charset "euc-kr";
+
+body, td {margin:0;padding:0;font:12px"µ¸¿ò",Arial;color:#58595B;line-height:16px;} 
+img {border:0;}
+
+a:link    {color:#976712;text-decoration:none;}
+a:visited {color:#666666;text-decoration:none;}
+a:active  {color:#666666;text-decoration:none;}
+a:hover  {color:#CB8303;text-decoration:none}
+
+.normal{font:12px "µ¸¿ò","dotum"; color:#58595B; text-decoration:none;}
+.normal_s{font:11px "µ¸¿ò","dotum"; color:#58595B; text-decoration:none;}
+.normal_b{font:12px "µ¸¿ò","dotum"; color:#58595B; text-decoration:none; font-weight:bold;}
+.orange{font:12px "µ¸¿ò","dotum"; color:#F96F0A; text-decoration:none; font-weight:bold;}
+.orange_s{font:11px "µ¸¿ò","dotum"; color:#F96F0A; text-decoration:none;font-weight:bold;}
+.blue{font:12px "µ¸¿ò","dotum"; color:#2860C7; text-decoration:none; font-weight:bold;}
+.blue_s{font:11px "µ¸¿ò","dotum"; color:#2860C7; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.blue_ss{font:11px "µ¸¿ò","dotum"; color:#2860C7; text-decoration:none; letter-spacing:-0.05em;}
+.red{font:12px "µ¸¿ò","dotum"; color:#E42F1D; text-decoration:none; font-weight:bold;}
+.red_s{font:11px "µ¸¿ò","dotum"; color:#E42F1D; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.red_ss{font:11px "µ¸¿ò","dotum"; color:#E42F1D; text-decoration:none; letter-spacing:-0.05em;}
+.white{font:12px "µ¸¿ò","dotum"; color:#FFFFFF; text-decoration:none;}
+.yellow_b{font:13px "µ¸¿ò","dotum"; color:#F9FD8E; text-decoration:none;font-weight:bold;}
+
+
+/*½Ç½Ã°£ºÎÅ·Á¤º¸*/
+
+.field{font:12px "µ¸¿ò","dotum"; color:#58595B; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+a:link.field{text-decoration:none; font-size: 9pt; color:#58595B;}
+a:visited.field{text-decoration:none; font-size: 9pt; color:#458595B;}
+a:hover.field{text-decoration:none; font-size: 9pt; color:white;}
+a:active.field{text-decoration:none; font-size: 9pt; color:#58595B;}
+
+.realtime_day{font:11px "µ¸¿ò","dotum"; color:#808285; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.realtime_week{font:11px "µ¸¿ò","dotum"; color:#58595B; text-decoration:none; letter-spacing:-0.05em;}
+.realtime_sat{font:11px "µ¸¿ò","dotum"; color:#228ADA; text-decoration:none; letter-spacing:-0.05em;}
+.realtime_sun{font:11px "µ¸¿ò","dotum"; color:#FF3600; text-decoration:none; letter-spacing:-0.05em;}
+
+.realtime_team{font:12px "µ¸¿ò","dotum"; color:#FF7E00; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+a:link.realtime_team{text-decoration:none; font-size: 9pt; color:#FF7E00;}
+a:visited.realtime_team{text-decoration:none; font-size: 9pt; color:#FF7E00;}
+a:hover.realtime_team{text-decoration:none; font-size: 9pt; color:#FF7E00;}
+a:active.realtime_team{text-decoration:none; font-size: 9pt; color:#FF7E00;}
+
+/*¸ÞÀÎ°Ô½ÃÆÇ¸®½ºÆ®*/
+
+.board_date{font:11px "µ¸¿ò","dotum"; color:#808285; text-decoration:none;}
+.board_list{font:12px "µ¸¿ò","dotum"; color:#976712; text-decoration:none; letter-spacing:-0.05em;}
+a:link.board_list{text-decoration:none; font-size: 9pt; color:#976712;}
+a:visited.board_list{text-decoration:none; font-size: 9pt; color:#FF7E00;}
+a:hover.board_list{text-decoration:none; font-size: 9pt; color:#FF7E00;}
+a:active.board_list{text-decoration:none; font-size: 9pt; color:#FF7E00;}
+
+/*¼­ºê°Ô½ÃÆÇ¸®½ºÆ®*/
+
+.b_list{font:12px "µ¸¿ò","dotum"; color:#58595B; text-decoration:none; letter-spacing:-0.05em;}
+a:link.b_list{text-decoration:none; font-size: 9pt; color:#58595B;}
+a:visited.b_list{text-decoration:none; font-size: 9pt; color:#58595B;}
+a:hover.b_list{text-decoration:underline; font-size: 9pt; color:#FF3C00; }
+a:active.b_list{text-decoration:none; font-size: 9pt; color:#FF3C00;}
+
+
+/*¼­ºê_º»¹®*/
+
+.cc_name{font:14px "±¼¸²","gulim"; color:#1B9FD0; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.sub_title{font:14px "±¼¸²","gulim"; color:#052B48; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.map_title{font:14px "±¼¸²","gulim"; color:#ffffff; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+
+/*´Þ·Â*/
+.sunday{font:11px "µ¸¿ò","dotum"; color:#F33117; text-decoration:none;}
+.saturday{font:11px "µ¸¿ò","dotum"; color:#1953D8; text-decoration:none;}
+.day{font:11px "µ¸¿ò","dotum"; color:#58595B; text-decoration:none;}
+.month{font:13px "±¼¸²","gulim"; color:#32A800; text-decoration:none;font-weight:bold; }
+.regist_no{font:11px "µ¸¿ò","dotum"; color:#F33117; text-decoration:none;}
+.regist_yes{font:11px "µ¸¿ò","dotum"; color:#1953D8; text-decoration:none;}
+
+/*Áö¿ª¸µÅ©*/
+
+.total{font:12px "µ¸¿ò","dotum"; color:#808285; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.area{font:12px "µ¸¿ò","dotum"; color:#939598; text-decoration:none; letter-spacing:-0.05em;}
+a:link.area{text-decoration:none; font-size: 9pt; color:#939598;}
+a:visited.area{text-decoration:none; font-size: 9pt; color:#FF7E00;}
+a:hover.area{text-decoration:none; font-size: 9pt; color:#FF7E00;}
+a:active.area{text-decoration:none; font-size: 9pt; color:#FF7E00;}
+
+
+/*°¡°ÝÇ¥½Ã*/
+
+.normal_fee{font:11px "µ¸¿ò","dotum"; color:#808285; text-decoration:none; letter-spacing:-0.05em;}
+.normal_fee_b{font:11px "µ¸¿ò","dotum"; color:#808285; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.mem_fee{font:11px "µ¸¿ò","dotum"; color:#EF4E0E; text-decoration:none; letter-spacing:-0.05em;}
+.mem_fee_b{font:11px "µ¸¿ò","dotum"; color:#EF4E0E; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+
+/*È¸¿ø°¡ÀÔ*/
+
+.mem_subject{font:12px "µ¸¿ò","dotum"; color:#808285; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.mem_notice{font:11px "µ¸¿ò","dotum"; color:#5B9116; text-decoration:none; letter-spacing:-0.05em;}
+.mem_input, select{background-color:F8F8F8;font-family:µ¸¿ò,dotum;font-size:12px;color:#636163;height:14pt;border:1 solid #bcbec1;}
+.mem_login, select{background-color:F8F8F8;font-family:µ¸¿ò,dotum;font-size:12px;color:#636163;height:16pt;border:1 solid #bcbec1;}
+
+
+/*±âÅ¸*/
+
+.location{font:11px "µ¸¿ò","dotum"; color:#808285; text-decoration:none; letter-spacing:-0.05em;}
+.location_b{font:11px "µ¸¿ò","dotum"; color:#808285; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+
+/* input box ½ºÅ¸ÀÏ */
+
+.input_01, select{background-color:ffffff;font-family:µ¸¿ò,gulim;font-size:12px;color:#636163;height:16pt;border:1 solid #bcbec0;}
+.box_01, textarea, select{background-color:FFFFFF;font-family:±¼¸²,gulim;font-size:12px;color:#636163;border:1 solid #BCBEC1}
+
+
+
+body {
+scrollbar-highlight-color:#FFFFFF; 
+scrollbar-3dlight-color:#B58E63; 
+scrollbar-face-color:#F2ECE6; 
+scrollbar-shadow-color:#B58E63; 
+scrollbar-darkshadow-color:white; 
+scrollbar-track-color:#FFFFFF; 
+scrollbar-arrow-color:#B58E63;
+}

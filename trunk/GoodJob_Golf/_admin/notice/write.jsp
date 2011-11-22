@@ -2,6 +2,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.goodjob.common.*"%>
 <%@page import="com.goodjob.board.*"%>
+<%@page import="com.goodjob.conf.Config"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,19 +10,24 @@
 </head>
 <body>
 <%
+	request.setCharacterEncoding("UTF-8");
 	
-	FileUpload fileUpload = new FileUpload(request, "/home/hosting_users/savekorea2400/www/tmp/", 1024*1024*5);
+	String up_dir = Config.get("bbs_dir");
+	
+	FileUpload fileUpload = new FileUpload(request, up_dir, 1024*1024*5);
 
 	Map<String,String> paramMap = fileUpload.getParamMap();
 	Map<String,String> fileMap = fileUpload.getParamAfterUpload();
-
+	
 	String idx = (String)paramMap.get("idx");
 	String email = (String)paramMap.get("email");
 	String subject = (String)paramMap.get("subject");
+	
 	String content = (String)paramMap.get("content");
 	String password = (String)paramMap.get("password");
-	
 	String upfile = (String)fileMap.get("upfile");
+	
+	System.out.println(upfile);
 	
 	BoardDto dto = new BoardDto();
 	dto.setEmail(email);

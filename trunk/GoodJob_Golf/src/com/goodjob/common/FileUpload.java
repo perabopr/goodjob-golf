@@ -15,6 +15,8 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
+import com.goodjob.util.Utils;
+
 /**
  * ex) FileUploader fileUploader = new FileUploader(request, "C:\\",
  * 1024*1024*3); Map fileMap = fileUploader.getParamAfterUpload();
@@ -77,7 +79,7 @@ public class FileUpload {
 		// 업로드 핸들러 생성
 		ServletFileUpload upload = new ServletFileUpload(factory);
 		upload.setSizeMax(requestLimit); // Set overall request size constraint
-
+		//upload.setHeaderEncoding("utf-8");
 		items = upload.parseRequest(request); // Parse the request
 
 		// 파람값들을 맵에 셋팅
@@ -93,7 +95,7 @@ public class FileUpload {
 			FileItem item = (FileItem) iter.next();
 
 			if (item.isFormField()) {
-				paramMap.put(item.getFieldName(), item.getString());
+				paramMap.put(item.getFieldName(), item.getString("utf-8"));
 			}
 		}
 	}
@@ -170,11 +172,23 @@ public class FileUpload {
 		for (int i = 0; i < files.length; i++) {
 			String alreadyPath = files[i].getPath();
 			if (filePath.equals(alreadyPath)) {
-				filePath = filePath + "0";
+				filePath = this.fileRename(filePath, Utils.getDate("_MMddHHmmssSSS"));
+				break;
 			}
 		}
 
 		return filePath;
+	}
+	
+	
+	/**
+	 * 파일명 중복 처리
+	 * @param fileName
+	 * @param tail
+	 * @return
+	 */
+	public String fileRename(String fileName , String tail){
+		return fileName.substring(0,fileName.lastIndexOf(".")) + tail + fileName.substring(fileName.lastIndexOf("."));
 	}
 
 	/**

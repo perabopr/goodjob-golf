@@ -26,7 +26,7 @@ import com.goodjob.sql.BBS;
  */
 public class BoardDao {
 
-	public List<BoardDto> getList(Map<String,String> data) {
+	public List<BoardDto> getList(String tableName , Map<String,String> data) {
 
 		List<BoardDto> list = null;
 		Connection conn = null;
@@ -81,7 +81,7 @@ public class BoardDao {
 	 * @param keyword
 	 * @return
 	 */
-	public int getTotalCount(Map<String,String> data) {
+	public int getTotalCount(String tableName , Map<String,String> data) {
 		Connection conn = null;
 		Map<String, Integer> map = null;
 		try {
@@ -135,14 +135,18 @@ public class BoardDao {
 		Connection conn = null;
 		try {
 			
-			ArrayList<Integer> params = new ArrayList<Integer>();
-			params.add(seq);
-			
-			conn = DBManager.getConnection();
-			ResultSetHandler rsh = new BeanHandler(BoardDto.class);
-			QueryRunner qr = new QueryRunner();
-			dto = (BoardDto) qr.query(conn, BBS.totalcnt , rsh , params.toArray());
-
+			if(seq > 0 ){
+				ArrayList<Integer> params = new ArrayList<Integer>();
+				params.add(seq);
+				
+				conn = DBManager.getConnection();
+				ResultSetHandler rsh = new BeanHandler(BoardDto.class);
+				QueryRunner qr = new QueryRunner();
+				dto = (BoardDto) qr.query(conn, BBS.totalcnt , rsh , params.toArray());
+			}
+			else{
+				dto = new BoardDto();
+			}
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -173,11 +177,11 @@ public class BoardDao {
 		}
 	}
 	
-	public int getMaxSeq(String tableName){
+	public Long getMaxSeq(String tableName){
 		
 		BoardDto dto = null;
 		Connection conn = null;
-		Map<String,Integer> map = null;
+		Map<String,Long> map = null;
 		try {
 			
 			conn = DBManager.getConnection();
@@ -236,17 +240,25 @@ public class BoardDao {
 		try {
 
 			conn = DBManager.getConnection();
-
+			
+			Long seq = this.getMaxSeq(tableName);
+			
 			ArrayList<Object> params = new ArrayList<Object>();
+			params.add(seq);
+			params.add(dto.getMem_id());
 			params.add(dto.getName());
 			params.add(dto.getEmail());
 			params.add(dto.getSubject());
 			params.add(dto.getContent());
+			params.add(dto.getPassword());
+			params.add(dto.getFilename());
+			params.add("A");			//position
+			params.add(seq);
 			params.add(dto.getIshtml());
-			params.add(dto.getSeq());
+			params.add(dto.getWriteip());
 
 			QueryRunner queryRunner = new QueryRunner();
-			queryRunner.update(conn, BBS.update, params);
+			queryRunner.update(conn, BBS.insert, params);
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -276,4 +288,23 @@ public class BoardDao {
 			DbUtils.closeQuietly(conn);
 		}
 	}
+	
+	public String Position(String pos, String org_pos)
+    {
+        if(org_pos == null || "".equals(org_pos))
+            org_pos = "A";
+        int n = pos.length();
+        int m = org_pos.length();
+        if(n == m)
+        {
+            pos = (new StringBuilder(String.valueOf(pos))).append("A").toString();
+        } else
+        {
+            char t_pos = pos.charAt(n - 1);
+            int ascii = t_pos + 1;
+            t_pos = (char)ascii;
+            pos = (new StringBuilder(String.valueOf(pos))).append(t_pos).toString();
+        }
+        return pos;
+    }
 }

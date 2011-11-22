@@ -15,6 +15,6 @@
 	dto.setSeq(1);
 	//dto.setName("샘플");
 	
-	dao.setUpdate(dto);
+	//dao.setUpdate(dto);
 	
 %>

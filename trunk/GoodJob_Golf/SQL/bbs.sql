@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS `notice_bbs` (
-  `idx` int(11) NOT NULL auto_increment,
+  `seq` int(11) NOT NULL auto_increment,
   `mem_id` varchar(50) default NULL,
   `name` varchar(30) default NULL,
   `email` varchar(100) default NULL,
@@ -14,5 +14,5 @@ CREATE TABLE IF NOT EXISTS `notice_bbs` (
   `ishtml` char(1) default NULL,
   `writeip` varchar(15) default NULL,
   `notice` char(1) default NULL,
-  PRIMARY KEY  (`idx`)
+  PRIMARY KEY  (`seq`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

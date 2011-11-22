@@ -26,8 +26,8 @@ public class BBS {
 	public static final String update = "UPDATE notice_bbs SET " + 
 										 " name = ?, email = ?, subject = ?, content = ?, ishtml = ? where seq = ? ";
 	
-	public static final String insert = " INSERT INTO notice_bbs (seq,mem_id,name,email,subject,content,password,readcount,write_date,filename,position,thread,ishtml,writeip) " + 
-										 "VALUES (?,?,?,?,?,?,?,0,date_format(curdate(),'%Y-%m-%d'),?,?,?,?,?)";
+	public static final String insert = " INSERT INTO notice_bbs (seq,mem_id,name,email,subject,content,password,readcount,write_date,filename,position,thread,ishtml,writeip,notice) " + 
+										 "VALUES (? , ? , ? , ? , ? , ? , ? , 0 , date_format(curdate(),'%Y-%m-%d') , ? , ? , ? , ? , ? , ? )";
 	
 	public static final String reply = " INSERT INTO notice_bbs (seq,mem_id,name,email,subject,content,password,readcount,write_date,filename,position,thread,ishtml,writeip) " + 
 										"VALUES (?,?,?,?,?,?,?,0,date_format(curdate(),'%Y-%m-%d'),?,?,?,?,?)";

@@ -256,9 +256,10 @@ public class BoardDao {
 			params.add(seq);
 			params.add(dto.getIshtml());
 			params.add(dto.getWriteip());
+			params.add(dto.getNotice());
 
 			QueryRunner queryRunner = new QueryRunner();
-			queryRunner.update(conn, BBS.insert, params);
+			queryRunner.update(conn, BBS.insert, params.toArray());
 
 		} catch (Exception e) {
 			System.out.println(e);

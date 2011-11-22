@@ -76,9 +76,7 @@ function bbs_submit() {
 	}
 	
 	frm.submit();
-
-
-  	}
+}
 
 function getFileExtension(filePath)
 {

@@ -62,7 +62,7 @@ public class BoardDao {
 			params.add(((npage-1)* BBS.per_page));
 			params.add((npage*BBS.per_page));
 			
-			list = (List<BoardDto>) qr.query(conn , String.format(BBS.list, where), rsh , params.toArray());
+			list = (List<BoardDto>) qr.query(conn , String.format(BBS.list, tableName, where), rsh , params.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -112,7 +112,7 @@ public class BoardDao {
 				params.add(keyword);
 			}
 			
-			map = (Map) qr.query(conn, String.format(BBS.totalcnt, where) , rsh , params.toArray());
+			map = (Map) qr.query(conn, String.format(BBS.totalcnt, tableName , where) , rsh , params.toArray());
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -142,7 +142,7 @@ public class BoardDao {
 				conn = DBManager.getConnection();
 				ResultSetHandler rsh = new BeanHandler(BoardDto.class);
 				QueryRunner qr = new QueryRunner();
-				dto = (BoardDto) qr.query(conn, BBS.totalcnt , rsh , params.toArray());
+				dto = (BoardDto) qr.query(conn, String.format(BBS.view,tableName) , rsh , params.toArray());
 			}
 			else{
 				dto = new BoardDto();
@@ -168,7 +168,7 @@ public class BoardDao {
 			ResultSetHandler rsh = new BeanHandler(BoardDto.class);
 			QueryRunner qr = new QueryRunner();
 			
-			int result = qr.update(conn, BBS.readcount, seq);
+			int result = qr.update(conn, String.format(BBS.readcount,tableName) , seq);
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -188,7 +188,7 @@ public class BoardDao {
 			
 			ResultSetHandler rsh = new MapHandler();
 			QueryRunner qr = new QueryRunner();
-			map = (Map) qr.query(conn, BBS.max , rsh);
+			map = (Map) qr.query(conn, String.format(BBS.max,tableName) , rsh);
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -220,7 +220,7 @@ public class BoardDao {
 			params.add(dto.getSeq());
 
 			QueryRunner queryRunner = new QueryRunner();
-			queryRunner.update(conn, BBS.update, params);
+			queryRunner.update(conn, String.format(BBS.update,tableName) , params);
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -251,6 +251,7 @@ public class BoardDao {
 			params.add(dto.getSubject());
 			params.add(dto.getContent());
 			params.add(dto.getPassword());
+			params.add("%Y-%m-%d");
 			params.add(dto.getFilename());
 			params.add("A");			//position
 			params.add(seq);
@@ -259,7 +260,7 @@ public class BoardDao {
 			params.add(dto.getNotice());
 
 			QueryRunner queryRunner = new QueryRunner();
-			queryRunner.update(conn, BBS.insert, params.toArray());
+			queryRunner.update(conn, String.format(BBS.insert,tableName) , params.toArray());
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -281,7 +282,7 @@ public class BoardDao {
 			conn = DBManager.getConnection();
 
 			QueryRunner queryRunner = new QueryRunner();
-			queryRunner.update(conn, BBS.delete, seq);
+			queryRunner.update(conn, String.format(BBS.delete,tableName) , seq);
 
 		} catch (Exception e) {
 			System.out.println(e);

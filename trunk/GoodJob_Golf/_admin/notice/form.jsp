@@ -12,7 +12,7 @@
 	String idx = StringUtils.trimToEmpty(request.getParameter("idx"));
 	String thread = StringUtils.trimToEmpty(request.getParameter("thread"));
 	
-	BoardDto dto = dao.getView("notice_bbs" , NumberUtils.toInt(idx,0));
+	BoardDto dto = dao.getView("TB_NOTICE_BBS" , NumberUtils.toInt(idx,0));
 	
 %>
 <html>
@@ -42,17 +42,22 @@ textarea {color:#555555;background-color:#FFFFFF;border:1 solid #CDCDCD ; font-s
 
 </style>
 <script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
-<script type="text/javascript" src="/js/wysiwyg.js"></script>
+<script type="text/javascript" src="/js/highgardenEditor.js"></script>
 <script language="javascript" type="text/javascript">
 	
 function bbs_submit() {
 	
-
 	if(!$('#subject').val()) {
 		alert('제목을 입력하시기 바랍니다.');
 		$('#subject').focus();
 		return;
 	} 
+
+	if(!$('#name').val()) {
+		alert('이름을 입력하시기 바랍니다.');
+		$('#name').focus();
+		return;
+	}
 	
 	if(!$('#content').val()) {
 		alert('내용을 입력하시기 바랍니다.');
@@ -94,6 +99,14 @@ function getFileExtension(filePath)
 
 //-->
 </script>
+<script language="JavaScript" type="text/javascript">
+//<![CDATA[
+
+/** 자바 스크립트 전역변수 설정 **/
+var rootDir = '.';
+
+ //]]>
+</script>
 </head>
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
@@ -115,6 +128,13 @@ function getFileExtension(filePath)
 					<td class="btable4" colspan="2"></td>
 				</tr>
 				<tr>
+					<td class="ptable2" >이름</td>
+					<td class="ptable3"><input id="name" type="text" name="name" value="<%=StringUtils.trimToEmpty(dto.getName())%>" maxlength="100" size="55" /></td>
+				</tr>
+				<tr>
+					<td class="btable4" colspan="2"></td>
+				</tr>
+				<tr>
 					<td class="ptable2" >이메일</td>
 					<td class="ptable3"><input id="email" type="text" name="email" value="<%=StringUtils.trimToEmpty(dto.getEmail())%>" maxlength="100" size="55" /></td>
 				</tr>
@@ -124,7 +144,7 @@ function getFileExtension(filePath)
 				<tr>
 					<td class="ptable2">내용</td>
 					<td class="ptable3">
-					<textarea id="content" name="content"  type="editor" style="width:400px;height:230px;">
+					<textarea cols="60" rows="5" name="content" id="content" title="higheditor_simple" style="width:400px;height:300px;">
 					<%=StringUtils.trimToEmpty(dto.getContent())%>
 					</textarea>
 					</td>
@@ -149,7 +169,9 @@ function getFileExtension(filePath)
 		</td>
 	</tr>
 	<tr height="50">
-		<td align="center"><input type="button" value="글쓰기" onclick="bbs_submit();"/></td>
+		<td align="center"><input type="button" value="글쓰기" onclick="bbs_submit();"/>
+		&nbsp;<input type="button" value="목록" onclick="location.href='./list.jsp'"/>
+		</td>
 	</tr>
 </FORM>
 </table>

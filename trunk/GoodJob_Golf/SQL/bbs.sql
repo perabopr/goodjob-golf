@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `notice_bbs` (
+CREATE TABLE IF NOT EXISTS `TB_NOTICE_BBS` (
   `seq` int(11) NOT NULL auto_increment,
   `mem_id` varchar(50) default NULL,
   `name` varchar(30) default NULL,

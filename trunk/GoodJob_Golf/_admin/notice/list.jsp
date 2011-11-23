@@ -1,15 +1,24 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
+<%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="java.sql.*,java.util.*" %>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
 <%@ page import="com.goodjob.board.*" %>
 <%@ page import="com.goodjob.db.*" %>
 <%
+	//통합 게시판 
 	BoardDao dao = new BoardDao();
 	
-	Map<String,String> params = new HashMap<String,String>();
+	String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
+	String field = StringUtils.trimToEmpty(request.getParameter("field"));
+	String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
 	
-	List<BoardDto> bbsList = dao.getList("" , params);
+	Map<String,String> params = new HashMap<String,String>();
+	params.put("npage",npage);
+	params.put("field",field);
+	params.put("keyword",keyword);
+	
+	List<BoardDto> bbsList = dao.getList("TB_NOTICE_BBS" , params);
 	
 %>
 <html>
@@ -36,45 +45,39 @@
       <td>
         <table border="0" cellpadding="0" cellspacing="0" width="669">
          <tr>
-            <td align="center" height="30" width="41" class=normal_s>번호</td>
-            <td align="center" width="300" class=normal_s>제 목</td>
-            <td align="center" class=normal_s>글쓴이</td>
-            <td align="center" class=normal_s>작성일</td>
-            <td align="center" class=normal_s>조회</td>
+            <td align="center" height="30" width="40" class=normal_s>번호</td>
+            <td align="center" width="350" class=normal_s>제 목</td>
+            <td align="center" width="80" class=normal_s>글쓴이</td>
+            <td align="center" width="80" class=normal_s>작성일</td>
+            <td align="center" width="50" class=normal_s>조회</td>
           </tr>
           <tr>
-            <td colspan="10" bgcolor="#E5E5E5" height="1"></td>
+            <td colspan="5" bgcolor="#E5E5E5" height="1"></td>
+          </tr>
+<%
+	if(bbsList != null && !bbsList.isEmpty()){
+		
+		int size = bbsList.size();
+		BoardDto dto;
+		for(int i = 0 ; i < size ; i++){
+			
+			dto = bbsList.get(i);
+			
+%>
+          <tr>
+            <td align="center" height="30" width="40" class=normal_s><%=dto.getSeq()%></td>
+            <td align="center" width="350" class=normal_s><a href="./view.jsp?seq=<%=dto.getSeq()%>"><%=dto.getSubject()%></a></td>
+            <td align="center" width="80" class=normal_s><%=dto.getName()%></td>
+            <td align="center" width="80" class=normal_s><%=dto.getWrite_date()%></td>
+            <td align="center" width="50" class=normal_s><%=dto.getReadcount()%></td>
           </tr>
           <tr>
-            <td align="center" height="30" width="41" class=normal_s>100</td>
-            <td align="center" width="62" class=normal_s>11/12/31</td>
-            <td width="62" align="center" class=normal_s>홍길동</td>
-            <td width="183" align="center" class=blue_ss>골프장명은 여기로</td>
-            <td width="57" align="center" class=normal_s>11/12/31</td>
-            <td width="56" align="center" class=normal_s>2명</td>
-            <td width="51" align="center" class=normal_s>30대</td>
-            <td width="49" align="center" class=normal_s>2건</td>
-            <td align="center" width="48" class=normal_s>100</td>
-            <td align="center" width="60" class=blue_s>진행중</td>
+            <td colspan="5" bgcolor="#E5E5E5" height="1"></td>
           </tr>
-          <tr>
-            <td colspan="10" bgcolor="#E5E5E5" height="1"></td>
-          </tr>
-          <tr>
-            <td bgcolor="white" height="30" align="center" class=normal_s>99</td>
-            <td bgcolor="white" align="center" class=normal_s>11/12/31</td>
-            <td bgcolor="white" align="center" class=normal_s>홍길동</td>
-            <td bgcolor="white" align="center" class=blue_ss>골프장명은 여기로</td>
-            <td bgcolor="white" align="center" class=normal_s>11/12/31</td>
-            <td bgcolor="white" align="center" class=normal_s>3명</td>
-            <td bgcolor="white" align="center" class=normal_s>40대</td>
-            <td bgcolor="white" align="center" class=normal_s>3건</td>
-            <td bgcolor="white" align="center" class=normal_s>190</td>
-            <td bgcolor="white" align="center" class=orange_s>완료</td>
-          </tr>
-          <tr>
-            <td height="1" colspan="10" bgcolor="#E5E5E5"></td>
-          </tr>
+<%
+		}
+	}
+%>
          </table>
 		</td>
     </tr>
@@ -83,7 +86,7 @@
     </tr>
     
     <tr>
-      <td height="250" align="center"></td>
+      <td align="center"><input type="button" value="글쓰기" onclick="location.href='form.jsp';"/></td>
     </tr>
   </table>
   </td>

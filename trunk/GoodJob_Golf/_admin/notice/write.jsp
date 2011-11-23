@@ -23,15 +23,16 @@
 	String email = (String)paramMap.get("email");
 	String subject = (String)paramMap.get("subject");
 	
+	String name = (String)paramMap.get("name");
 	String content = (String)paramMap.get("content");
 	String password = (String)paramMap.get("password");
 	String upfile = (String)fileMap.get("upfile");
 	
-	System.out.println(upfile);
+	//System.out.println(upfile);
 	
 	BoardDto dto = new BoardDto();
 	dto.setEmail(email);
-	dto.setName("");
+	dto.setName(name);
 	dto.setMem_id("");
 	dto.setSubject(subject);
 	dto.setContent(content);
@@ -41,6 +42,9 @@
 	dto.setIshtml("N");
 	
 	BoardDao dao = new BoardDao();
-	dao.setInsert("notice_bbs" , dto);
+	dao.setInsert("TB_NOTICE_BBS" , dto);
 	
+	try{
+		response.sendRedirect("./list.jsp");
+	}catch(Exception e){}
 %>

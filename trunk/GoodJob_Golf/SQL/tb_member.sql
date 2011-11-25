@@ -17,5 +17,3 @@ CREATE TABLE tb_member (
   UNIQUE KEY u_mem_id (MEM_ID),
   KEY index_secession (SECESSION)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
-SMS_AUTH

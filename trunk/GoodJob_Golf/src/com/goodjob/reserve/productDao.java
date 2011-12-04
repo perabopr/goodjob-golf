@@ -13,83 +13,72 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
-import com.goodjob.reserve.dto.RegionDto;
 import com.goodjob.db.DBManager;
+
+import com.goodjob.reserve.dto.ProductDto;
+import com.goodjob.reserve.dto.ProductSubDto;
 import com.goodjob.sql.RESERVE;
 
-public class RegionDao {
-	
-	/**
-	 * 지역 - 전체가져오기.
-	 * @return
-	 */
-	public List<RegionDto> getRegionList(String rType){
-		
-		List<RegionDto> list = null;
+public class productDao {
+	public void setProductInsert(ProductDto prdtDto){
 		Connection conn = null;
 		
-		try {
+		try{
 			conn = DBManager.getConnection();
-			
 			ArrayList<Object> bind = new ArrayList<Object>();
-			bind.add(rType);
-			ResultSetHandler rsh = new BeanListHandler(RegionDto.class);
-			QueryRunner qr = new QueryRunner();
-						
-			list = (List<RegionDto>) qr.query(conn , RESERVE.region_select, rsh , bind.toArray());
+			bind.add(prdtDto.getMenu_seq());
+			bind.add(prdtDto.getGolflink_seq());
+			bind.add(prdtDto.getProduct_year());
+			bind.add(prdtDto.getProduct_month());
+			bind.add(prdtDto.getProduct_day());
+			bind.add(prdtDto.getView_yn());
 			
+			QueryRunner qr = new QueryRunner();
+			
+			qr.update(conn, RESERVE.product_insert, bind.toArray());
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
-
-		return list;
 	}
 	
-	/**
-	 * 지역 - 입력하기.
-	 * @param rgDto
-	 */
-	public void setRegionInsert(RegionDto rgDto){
+	public void setProductUpdate(ProductDto prdtDto){
 		Connection conn = null;
 		
 		try{
 			conn = DBManager.getConnection();
-			
 			ArrayList<Object> bind = new ArrayList<Object>();
-			bind.add(rgDto.getRegion_name());
-			bind.add(rgDto.getRegion_type());
-			bind.add(rgDto.getRegion_etc());
+			bind.add(prdtDto.getProduct_year());
+			bind.add(prdtDto.getProduct_month());
+			bind.add(prdtDto.getProduct_day());
+			bind.add(prdtDto.getView_yn());
+			bind.add(prdtDto.getProduct_seq());
 			
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn, RESERVE.region_insert, bind.toArray());
-		}
-		catch (Exception e){
+			
+			qr.update(conn, RESERVE.product_update, bind.toArray());			
+		} catch (Exception e) {
 			System.out.println(e);
-		}
-		finally{
+		} finally {
 			DbUtils.closeQuietly(conn);
 		}
 	}
 	
-	/**
-	 * 지역 - 삭제하기.
-	 * @param seq
-	 */
-	public void setRegionDelete(int seq){
+	public void setProductDelete(int prdt_seq){
 		Connection conn = null;
 		
 		try{
 			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(prdt_seq);
 			
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn, RESERVE.region_insert, seq);
-		}
-		catch(Exception e){
+			
+			qr.update(conn, RESERVE.product_delete, bind.toArray());
+		} catch (Exception e) {
 			System.out.println(e);
-		}
-		finally{
+		} finally {
 			DbUtils.closeQuietly(conn);
 		}
 	}

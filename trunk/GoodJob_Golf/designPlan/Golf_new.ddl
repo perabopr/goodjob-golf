@@ -1,12 +1,10 @@
+DROP TABLE IF EXISTS TB_GOLFLINK_PRICE;
 DROP TABLE IF EXISTS TB_CONDO_RESERVE_TERM;
 DROP TABLE IF EXISTS TB_CONDO_GALLERY;
 DROP TABLE IF EXISTS TB_CONDO;
 DROP TABLE IF EXISTS TB_GOLFLINK_RESERVE;
-DROP TABLE IF EXISTS TB_PACKAGE_SUB;
 DROP TABLE IF EXISTS TB_PACKAGE_PRICE;
 DROP TABLE IF EXISTS TB_PACKAGE;
-DROP TABLE IF EXISTS TB_GOLFLINK_SUB;
-DROP TABLE IF EXISTS TB_GOLFLINK_PRICE;
 DROP TABLE IF EXISTS TB_GOLFLINK_COURSE;
 DROP TABLE IF EXISTS TB_PRODUCT_SUB;
 DROP TABLE IF EXISTS TB_PRODUCT;
@@ -40,19 +38,23 @@ CREATE TABLE TB_GOLFLINK(
 		menu_seq                      		INT		 NULL ,
 		golflink_name                 		VARCHAR(50)		 NOT NULL,
 		region_seq                    		INT		 NULL ,
-		golflink_type                 		VARCHAR(50)		 NULL ,
-		course_guid                 		TEXT			 NULL ,
+		holl_type                     		VARCHAR(50)		 NULL ,
+		course_guide                  		VARCHAR(1000)		 NULL ,
 		golflink_address1             		VARCHAR(100)		 NULL ,
 		golflink_address2             		VARCHAR(100)		 NULL ,
-		point_x         		    		INT		 NULL ,
-		point_y			             		INT		 NULL ,
+		point_x                       		INT		 NULL ,
+		point_y                       		INT		 NULL ,
 		img_main                      		VARCHAR(50)		 NULL ,
 		img_sub1                      		VARCHAR(50)		 NULL ,
 		img_sub2                      		VARCHAR(50)		 NULL ,
 		img_sub3                      		VARCHAR(50)		 NULL ,
-		img_map                       		VARCHAR(50)		 NULL ,
-		cancel_term                    		VARCHAR(2)		 NULL ,
-		view_yn                       		CHAR(1)		 DEFAULT 'N'		 NOT NULL
+		img_sub4                      		VARCHAR(50)		 NULL ,
+		cancel_term                   		VARCHAR(2)		 NULL ,
+		view_yn                       		CHAR(1)		 DEFAULT 'N'		 NOT NULL,
+		cancel_rule                   		TEXT		 NULL ,
+		promise_rule                  		TEXT		 NULL ,
+		use_guide                     		TEXT		 NULL ,
+		golflink_guide                		TEXT		 NULL 
 );
 
 /**********************************/
@@ -60,8 +62,8 @@ CREATE TABLE TB_GOLFLINK(
 /**********************************/
 CREATE TABLE TB_PRODUCT(
 		product_seq                   		INT		 NOT NULL AUTO_INCREMENT  primary key,
-		menu_seq                      		INT		 NULL ,
-		golflink_seq                  		INT		 NULL ,
+		menu_seq                      		INT		 NOT NULL,
+		golflink_seq                  		INT		 NOT NULL,
 		product_year                  		CHAR(4)		 NOT NULL,
 		product_month                 		CHAR(2)		 NOT NULL,
 		product_day                   		CHAR(2)		 NOT NULL,
@@ -73,7 +75,7 @@ CREATE TABLE TB_PRODUCT(
 /**********************************/
 CREATE TABLE TB_PRODUCT_SUB(
 		productsub_seq                		INT		 NOT NULL AUTO_INCREMENT  primary key,
-		product_seq                   		INT		 NULL ,
+		product_seq                   		INT		 NOT NULL,
 		time_start                    		CHAR(4)		 NULL ,
 		time_end                      		CHAR(4)		 NULL ,
 		goodjob_price                 		INT		 NOT NULL,
@@ -85,55 +87,9 @@ CREATE TABLE TB_PRODUCT_SUB(
 /* Table Name: 골프장코스 */
 /**********************************/
 CREATE TABLE TB_GOLFLINK_COURSE(
-		golflink_seq                  		INT		 NULL ,
+		golflink_course_seq					INT 	 NOT NULL AUTO_INCREMENT  primary key,
+		golflink_seq                  		INT		 NOT NULL,
 		course_name                   		VARCHAR(50)		 NOT NULL
-);
-
-/**********************************/
-/* Table Name: 금액정보 */
-/**********************************/
-CREATE TABLE TB_GOLFLINK_PRICE(
-		golflink_seq                  		INT		 NULL ,
-		regular_1nor_weekday          		INT		 NULL ,
-		regular_1nor_holiday          		INT		 NULL ,
-		regular_1sale_weekday         		INT		 NULL ,
-		regular_1sale_holiday         		INT		 NULL ,
-		regular_4_weekday             		INT		 NULL ,
-		regular_4_holiday             		INT		 NULL ,
-		event_1nor_mon                		INT		 NULL ,
-		event_1nor_tues               		INT		 NULL ,
-		event_1nor_wednes             		INT		 NULL ,
-		event_1nor_thurs              		INT		 NULL ,
-		event_1nor_fri                		INT		 NULL ,
-		event_1nor_satur              		INT		 NULL ,
-		event_1nor_sun                		INT		 NULL ,
-		event_1sale_mon               		INT		 NULL ,
-		event_1sale_tues              		INT		 NULL ,
-		event_1sale_wednes            		INT		 NULL ,
-		event_1sale_thurs             		INT		 NULL ,
-		event_1sale_fri               		INT		 NULL ,
-		event_1sale_satur             		INT		 NULL ,
-		event_1sale_sun               		INT		 NULL ,
-		event_4_mon                   		INT		 NULL ,
-		event_4_tues                  		INT		 NULL ,
-		event_4_wednes                		INT		 NULL ,
-		event_4_thurs                 		INT		 NULL ,
-		event_4_fri                   		INT		 NULL ,
-		event_4_satur                 		INT		 NULL ,
-		event_4_sun                   		INT		 NULL 
-);
-
-/**********************************/
-/* Table Name: 골프장상세정보 */
-/**********************************/
-CREATE TABLE TB_GOLFLINK_SUB(
-		golflink_seq                  		INT		 NULL ,
-		real_reserve                  		TEXT		 NULL ,
-		use_guide                     		TEXT		 NULL ,
-		golflink_guide	            		TEXT		 NULL ,
-		way_map                       		TEXT		 NULL ,
-		promise_rule                  		TEXT		 NULL ,
-		use_rule                      		TEXT		 NULL 
 );
 
 /**********************************/
@@ -141,9 +97,9 @@ CREATE TABLE TB_GOLFLINK_SUB(
 /**********************************/
 CREATE TABLE TB_PACKAGE(
 		package_seq                   		INT		 NOT NULL AUTO_INCREMENT  primary key,
-		package_name                  		VARCHAR(50)		 NOT NULL,
+		package_name1                 		VARCHAR(50)		 NOT NULL,
+		package_name2                 		VARCHAR(50)		 NULL ,
 		region_seq_1                  		INT		 NOT NULL,
-		region_seq_2                  		INT		 NULL ,
 		package_type                  		VARCHAR(50)		 NOT NULL,
 		img_main                      		VARCHAR(50)		 NULL ,
 		img_sub                       		VARCHAR(50)		 NULL ,
@@ -151,8 +107,15 @@ CREATE TABLE TB_PACKAGE(
 		img_sub2                      		VARCHAR(50)		 NULL ,
 		img_sub3                      		VARCHAR(50)		 NULL ,
 		img_sub4                      		VARCHAR(50)		 NULL ,
-		img_map                       		VARCHAR(50)		 NULL ,
-		view_yn                       		CHAR(1)		 NULL 
+		address1                      		VARCHAR(50)		 NULL ,
+		address2                      		VARCHAR(50)		 NULL ,
+		point_x                       		INT		 NULL ,
+		point_y                       		INT		 NULL ,
+		view_yn                       		CHAR(1)		 NULL ,
+		package_guide                 		TEXT		 NULL ,
+		use_guide                     		TEXT		 NULL ,
+		golflink_guide                		TEXT		 NULL ,
+		way_map                       		TEXT		 NULL 
 );
 
 /**********************************/
@@ -177,25 +140,12 @@ CREATE TABLE TB_PACKAGE_PRICE(
 );
 
 /**********************************/
-/* Table Name: 패키지상세정보 */
-/**********************************/
-CREATE TABLE TB_PACKAGE_SUB(
-		package_seq                   		INT		 NOT NULL,
-		include_desc                  		TEXT		 NULL ,
-		not_include_desc              		TEXT		 NULL ,
-		etc_desc                      		TEXT		 NULL ,
-		promise_rule                  		TEXT		 NULL ,
-		use_rule                      		TEXT		 NULL ,
-		default_rule                  		TEXT		 NULL ,
-		way_map                       		TEXT		 NULL 
-);
-
-/**********************************/
 /* Table Name: 예약현황 */
 /**********************************/
 CREATE TABLE TB_GOLFLINK_RESERVE(
+		reserve_seq                   		INT		 NOT NULL AUTO_INCREMENT  primary key,
 		menu_seq                      		INT		 NOT NULL,
-		productsub_seq                		INT		 NOT NULL AUTO_INCREMENT  primary key,
+		productsub_seq                		INT		 NOT NULL,
 		golflink_name                 		VARCHAR(50)		 NOT NULL,
 		reserve_name                  		VARCHAR(8)		 NOT NULL,
 		reserve_day                   		DATETIME		 NOT NULL,
@@ -255,6 +205,15 @@ CREATE TABLE TB_CONDO_RESERVE_TERM(
 		reserve_end                   		DATE		 NOT NULL
 );
 
+/**********************************/
+/* Table Name: 골프장_가격 */
+/**********************************/
+CREATE TABLE TB_GOLFLINK_PRICE(
+		golflink_seq                  		INT		 NOT NULL,
+		price_type                    		VARCHAR(2)		 NOT NULL,
+		golflink_price                		INT		 NOT NULL
+);
+
 
 ALTER TABLE TB_REGION ADD CONSTRAINT IDX_TB_REGION_PK PRIMARY KEY (region_seq);
 
@@ -273,19 +232,12 @@ ALTER TABLE TB_PRODUCT_SUB ADD CONSTRAINT IDX_TB_PRODUCT_SUB_FK0 FOREIGN KEY (pr
 
 ALTER TABLE TB_GOLFLINK_COURSE ADD CONSTRAINT IDX_TB_GOLFLINK_COURSE_FK0 FOREIGN KEY (golflink_seq) REFERENCES TB_GOLFLINK (golflink_seq);
 
-ALTER TABLE TB_GOLFLINK_PRICE ADD CONSTRAINT IDX_TB_GOLFLINK_PRICE_FK0 FOREIGN KEY (golflink_seq) REFERENCES TB_GOLFLINK (golflink_seq);
-
-ALTER TABLE TB_GOLFLINK_SUB ADD CONSTRAINT IDX_TB_GOLFLINK_SUB_FK0 FOREIGN KEY (golflink_seq) REFERENCES TB_GOLFLINK (golflink_seq);
-
 ALTER TABLE TB_PACKAGE ADD CONSTRAINT IDX_TB_PACKAGE_PK PRIMARY KEY (package_seq);
 
 ALTER TABLE TB_PACKAGE_PRICE ADD CONSTRAINT IDX_TB_PACKAGE_PRICE_PK PRIMARY KEY (package_seq);
 ALTER TABLE TB_PACKAGE_PRICE ADD CONSTRAINT IDX_TB_PACKAGE_PRICE_FK0 FOREIGN KEY (package_seq) REFERENCES TB_PACKAGE (package_seq);
 
-ALTER TABLE TB_PACKAGE_SUB ADD CONSTRAINT IDX_TB_PACKAGE_SUB_PK PRIMARY KEY (package_seq);
-ALTER TABLE TB_PACKAGE_SUB ADD CONSTRAINT IDX_TB_PACKAGE_SUB_FK0 FOREIGN KEY (package_seq) REFERENCES TB_PACKAGE (package_seq);
-
-ALTER TABLE TB_GOLFLINK_RESERVE ADD CONSTRAINT IDX_TB_GOLFLINK_RESERVE_PK PRIMARY KEY (productsub_seq);
+ALTER TABLE TB_GOLFLINK_RESERVE ADD CONSTRAINT IDX_TB_GOLFLINK_RESERVE_PK PRIMARY KEY (reserve_seq);
 ALTER TABLE TB_GOLFLINK_RESERVE ADD CONSTRAINT IDX_TB_GOLFLINK_RESERVE_FK0 FOREIGN KEY (productsub_seq) REFERENCES TB_PRODUCT_SUB (productsub_seq);
 
 ALTER TABLE TB_CONDO ADD CONSTRAINT IDX_TB_CONDO_PK PRIMARY KEY (condo_seq);
@@ -295,4 +247,7 @@ ALTER TABLE TB_CONDO_GALLERY ADD CONSTRAINT IDX_TB_CONDO_GALLERY_FK0 FOREIGN KEY
 
 ALTER TABLE TB_CONDO_RESERVE_TERM ADD CONSTRAINT IDX_TB_CONDO_RESERVE_TERM_PK PRIMARY KEY (condoterm_seq);
 ALTER TABLE TB_CONDO_RESERVE_TERM ADD CONSTRAINT IDX_TB_CONDO_RESERVE_TERM_FK0 FOREIGN KEY (condo_seq) REFERENCES TB_CONDO (condo_seq);
+
+ALTER TABLE TB_GOLFLINK_PRICE ADD CONSTRAINT IDX_TB_GOLFLINK_PRICE_PK PRIMARY KEY (golflink_seq, price_type);
+ALTER TABLE TB_GOLFLINK_PRICE ADD CONSTRAINT IDX_TB_GOLFLINK_PRICE_FK0 FOREIGN KEY (golflink_seq) REFERENCES TB_GOLFLINK (golflink_seq);
 

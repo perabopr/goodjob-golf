@@ -1,6 +1,7 @@
 package com.goodjob.reserve.dto;
 
 public class GolfLinkReserveDto {
+	private int reserve_seq;
 	private int menu_seq;       
 	private int productsub_seq; 
 	private String golflink_name;  
@@ -14,6 +15,12 @@ public class GolfLinkReserveDto {
 	private int product_price;  
 	private String process_status;
 	
+	public int getReserve_seq() {
+		return reserve_seq;
+	}
+	public void setReserve_seq(int reserve_seq) {
+		this.reserve_seq = reserve_seq;
+	}
 	public int getMenu_seq() {
 		return menu_seq;
 	}
@@ -85,5 +92,5 @@ public class GolfLinkReserveDto {
 	}
 	public void setProcess_status(String process_status) {
 		this.process_status = process_status;
-	} 
+	}
 }

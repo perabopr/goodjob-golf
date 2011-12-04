@@ -4,16 +4,25 @@ public class GolfLinkDto {
 	private int golflink_seq;     
 	private int menu_seq;
 	private String golflink_name;    
-	private int region_seq;       
-	private String golflink_type;    
+	private int region_seq;  
+	private String region_name;
+	private String holl_type;    
+	private String course_guide;
 	private String golflink_address1;
 	private String golflink_address2;
+	private int point_x;
+	private int point_y;
 	private String img_main;         
 	private String img_sub1;         
 	private String img_sub2;         
 	private String img_sub3;         
-	private String img_map;          
+	private String img_sub4;    
+	private String cancel_term;
 	private String view_yn;
+	private String cancel_rule;
+	private String promise_rule;
+	private String use_guide;
+	private String golflink_guide;
 	
 	public int getGolflink_seq() {
 		return golflink_seq;
@@ -39,11 +48,23 @@ public class GolfLinkDto {
 	public void setRegion_seq(int region_seq) {
 		this.region_seq = region_seq;
 	}
-	public String getGolflink_type() {
-		return golflink_type;
+	public String getRegion_name() {
+		return region_name;
 	}
-	public void setGolflink_type(String golflink_type) {
-		this.golflink_type = golflink_type;
+	public void setRegion_name(String region_name) {
+		this.region_name = region_name;
+	}
+	public String getHoll_type() {
+		return holl_type;
+	}
+	public void setHoll_type(String holl_type) {
+		this.holl_type = holl_type;
+	}
+	public String getCourse_guide() {
+		return course_guide;
+	}
+	public void setCourse_guide(String course_guide) {
+		this.course_guide = course_guide;
 	}
 	public String getGolflink_address1() {
 		return golflink_address1;
@@ -56,6 +77,18 @@ public class GolfLinkDto {
 	}
 	public void setGolflink_address2(String golflink_address2) {
 		this.golflink_address2 = golflink_address2;
+	}
+	public int getPoint_x() {
+		return point_x;
+	}
+	public void setPoint_x(int point_x) {
+		this.point_x = point_x;
+	}
+	public int getPoint_y() {
+		return point_y;
+	}
+	public void setPoint_y(int point_y) {
+		this.point_y = point_y;
 	}
 	public String getImg_main() {
 		return img_main;
@@ -81,16 +114,46 @@ public class GolfLinkDto {
 	public void setImg_sub3(String img_sub3) {
 		this.img_sub3 = img_sub3;
 	}
-	public String getImg_map() {
-		return img_map;
+	public String getImg_sub4() {
+		return img_sub4;
 	}
-	public void setImg_map(String img_map) {
-		this.img_map = img_map;
+	public void setImg_sub4(String img_sub4) {
+		this.img_sub4 = img_sub4;
+	}
+	public String getCancel_term() {
+		return cancel_term;
+	}
+	public void setCancel_term(String cancel_term) {
+		this.cancel_term = cancel_term;
 	}
 	public String getView_yn() {
 		return view_yn;
 	}
 	public void setView_yn(String view_yn) {
 		this.view_yn = view_yn;
+	}
+	public String getCancel_rule() {
+		return cancel_rule;
+	}
+	public void setCancel_rule(String cancel_rule) {
+		this.cancel_rule = cancel_rule;
+	}
+	public String getPromise_rule() {
+		return promise_rule;
+	}
+	public void setPromise_rule(String promise_rule) {
+		this.promise_rule = promise_rule;
+	}
+	public String getUse_guide() {
+		return use_guide;
+	}
+	public void setUse_guide(String use_guide) {
+		this.use_guide = use_guide;
+	}
+	public String getGolflink_guide() {
+		return golflink_guide;
+	}
+	public void setGolflink_guide(String golflink_guide) {
+		this.golflink_guide = golflink_guide;
 	}
 }

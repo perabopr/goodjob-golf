@@ -1,9 +1,16 @@
 package com.goodjob.reserve.dto;
 
 public class GolfLinkCourseDto {
+	private int golflink_course_seq;
 	private int golflink_seq;
 	private String course_name;
 	
+	public int getGolflink_course_seq() {
+		return golflink_course_seq;
+	}
+	public void setGolflink_course_seq(int golflink_course_seq) {
+		this.golflink_course_seq = golflink_course_seq;
+	}
 	public int getGolflink_seq() {
 		return golflink_seq;
 	}

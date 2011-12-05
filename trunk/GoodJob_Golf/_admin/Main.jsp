@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
-<title>±»Àâ°ñÇÁ ÅëÇÕ °ü¸®ÀÚ</title>
+<title>êµ³ìž¡ê³¨í”„ í†µí•© ê´€ë¦¬ìž</title>
 </head>
 
 <frameset cols="200, 1*" border="0">
@@ -16,7 +15,7 @@
 	</frameset>
 	<noframes>
 	<body bgcolor="white">
-	<p>ÀÌ ÆäÀÌÁö¸¦ º¸·Á¸é, ÇÁ·¹ÀÓÀ» º¼ ¼ö ÀÖ´Â ºê¶ó¿ìÀú°¡ ÇÊ¿äÇÕ´Ï´Ù.</p>
+	<p>ì´ íŽ˜ì´ì§€ë¥¼ ë³´ë ¤ë©´, í”„ë ˆìž„ì„ ë³¼ ìˆ˜ ìžˆëŠ” ë¸Œë¼ìš°ì €ê°€ í•„ìš”í•©ë‹ˆë‹¤.</p>
 	</body>
 	</noframes>
 </frameset>

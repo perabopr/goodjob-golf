@@ -23,6 +23,7 @@ public class MemberDto implements Serializable {
 	private String mem_mtel;
 	private String sms_yn;
 	private String email_yn;
+	private String mem_type;
 	private String recommend;
 	private String secession;
 	private String reg_dt;
@@ -103,4 +104,11 @@ public class MemberDto implements Serializable {
 	public void setLogin_attempt(int login_attempt) {
 		this.login_attempt = login_attempt;
 	}
+	public String getMem_type() {
+		return mem_type;
+	}
+	public void setMem_type(String memType) {
+		mem_type = memType;
+	}
+	
 }

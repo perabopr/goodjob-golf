@@ -9,8 +9,10 @@ package com.goodjob.sql;
  */
 public class MEMBER {
 	
+	public static final int per_page = 20;
+	
 	//회원 리스트
-	public static final String list = " select * from tb_member where SECESSION = 'N' order by mem_no desc limit ? , ? ";
+	public static final String list = " select mem_no,mem_id,mem_name,mem_pwd,mem_mtel,sms_yn,email_yn,mem_type,reg_dt from tb_member where SECESSION = 'N' %s order by mem_no desc limit ? , ? ";
 	
 	//회원 상세
 	public static final String view = " select * from tb_member where mem_no = ? ";
@@ -18,6 +20,9 @@ public class MEMBER {
 	//업데이트
 	public static final String update = " update tb_member "+
 										"set  MEM_NAME = ?, MEM_PWD = password(?), MEM_MTEL = ?, SMS_YN = ?, EMAIL_YN = ?, RECOMMEND = ? where MEM_ID = ?";
+	
+	//업데이트
+	public static final String type_update = " update tb_member set MEM_TYPE = ? where MEM_ID = ?";
 	
 	//회원등록
 	public static final String insert = " insert into tb_member "+ 

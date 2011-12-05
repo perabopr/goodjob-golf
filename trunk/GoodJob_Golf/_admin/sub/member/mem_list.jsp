@@ -2,9 +2,34 @@
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.goodjob.member.*"%>
+<%@page import="com.goodjob.util.PageNavigater"%>
+<%@page import="com.goodjob.sql.MEMBER"%>
+<%
+	
+	String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"), "1");
+	String field = StringUtils.defaultIfEmpty(request.getParameter("field"), "");
+	String keyword = StringUtils.defaultIfEmpty(request.getParameter("keyword"), "");
+
+	PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , MEMBER.per_page );
+	
+	MemberDao mDao = new MemberDao();
+	
+	Map<String,String> params = new HashMap<String,String>();
+	params.put("npage",npage);
+	params.put("field",field);
+	params.put("keyword",keyword);
+	
+	List<MemberDto> mList = mDao.getMemberList(params);
+	
+	String strPage = paging.getPaging(100, true);
+
+%>
 <html>
 <head>
 <link rel="stylesheet" href="../../style.css">
+<script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
 <title></title>
 <script language="javascript">
 <!-- 
@@ -15,6 +40,20 @@ winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scr
 win = window.open(mypage, myname, winprops) 
 if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); } 
 } 
+
+	function mem_type_update(){
+
+		
+	}
+
+
+	//페이지이동
+	function goPage(npage){
+		this.forms = document.frm;
+		forms.npage.value = npage;
+		forms.submit();
+	}
+	
 //--> 
 </script>
 </head>
@@ -36,44 +75,62 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
           <td bgcolor="#e6e7e8" align="center" width="358"><span class=normal_b>회원가입상태</span></td>
           <td bgcolor="#e6e7e8" align="center" width="278">&nbsp;</td>
         </tr>
+<%
+	int mSize = mList.size();
+
+	MemberDto mDto;
+	for(int i = 0 ; i < mSize ; i++){ 
+		mDto = mList.get(i);
+%>
         <tr>
-          <td bgcolor="white" align="center" height="25">2011-12-31 12:30</td>
-          <td align="center" bgcolor="white">홍길동</td>
-          <td align="center" bgcolor="white">abc@naver.com</td>
-          <td align="center" bgcolor="white">010-123-4567 </td>
-          <td align="center" bgcolor="white"><select name="formselect1" size="1">
+          <td bgcolor="white" align="center" height="25"><%=mDto.getReg_dt()%></td>
+          <td align="center" bgcolor="white"><%=mDto.getMem_name()%></td>
+          <td align="center" bgcolor="white"><%=mDto.getMem_id()%></td>
+          <td align="center" bgcolor="white"><%=mDto.getMem_mtel()%></td>
+          <td align="center" bgcolor="white">
+          	<select name="mem_type" size="1">
               <option>무료회원</option>
               <option>유료회원(1년)</option>
               <option>유료회원(2년)</option>
             </select>
-            <img align="absmiddle" src="../../images/common/btn_save2.gif" width="32" height="16" border="0"></td>
-          <td align="center" bgcolor="white"><a href="mem_detail.html" onClick="NewWindow(this.href,'name','740','520','yes');return false;"><img align="absmiddle" src="../../images/common/btn_detail.gif" width="75" height="22" border="0"></a></td>
+            <a href=""></a><img align="absmiddle" src="../../images/common/btn_save2.gif" width="32" height="16" border="0"></a></td>
+          <td align="center" bgcolor="white"><a href="mem_detail.jsp?mem_no=<%=mDto.getMem_no()%>" onClick="NewWindow(this.href,'name','740','520','yes');return false;"><img align="absmiddle" src="../../images/common/btn_detail.gif" width="75" height="22" border="0"></a></td>
         </tr>
+<%
+	}
+%>
       </table></td>
   </tr>
+<form name="frm" method="post">
+<input type="hidden" name="npage" value=""/>
   <tr>
     <td align="center" style="padding-top:50px;padding-bottom:40px;"><table border="0" cellpadding="0" cellspacing="0" width="50%">
         <tr>
-          <td align="center"><p><img align="absmiddle" src="../../images/board/btn_prev_dual.gif" width="16" height="15" border="0"> <img align="absmiddle" src="../../images/board/btn_prev.gif" width="16" height="15" border="0"> <span class=normal_b>1 &nbsp;</span>I &nbsp;2 &nbsp;I &nbsp;3 &nbsp;I &nbsp;4 &nbsp;I &nbsp;5 &nbsp;I &nbsp;6 &nbsp;I &nbsp;7 &nbsp;I &nbsp;8 &nbsp;I &nbsp;9 &nbsp;I &nbsp;10 <img align="absmiddle" src="../../images/board/btn_next.gif" width="16" height="15" border="0"> <img align="absmiddle"
+          <td align="center"><p><span class=normal_b>
+          <!--img align="absmiddle" src="../../images/board/btn_prev_dual.gif" width="16" height="15" border="0"> <img align="absmiddle" src="../../images/board/btn_prev.gif" width="16" height="15" border="0"> <span class=normal_b>1 &nbsp;</span>I &nbsp;2 &nbsp;I &nbsp;3 &nbsp;I &nbsp;4 &nbsp;I &nbsp;5 &nbsp;I &nbsp;6 &nbsp;I &nbsp;7 &nbsp;I &nbsp;8 &nbsp;I &nbsp;9 &nbsp;I &nbsp;10 <img align="absmiddle" src="../../images/board/btn_next.gif" width="16" height="15" border="0"> <img align="absmiddle"
 src="../../images/board/btn_next_dual.gif"
-width="16" height="15" border="0"></p></td>
+width="16" height="15" border="0"-->
+<%=strPage%></span>
+</p></td>
         </tr>
         <tr>
           <td height="4" align="center">&nbsp;</td>
         </tr>
         <tr>
-          <td height="4" align="center"><select name="formselect1" size="1">
-              <option>선택하세요</option>
-              <option>가입일</option>
-              <option>회원명</option>
-              <option>아이디</option>
-              <option>회원가입상태</option>
+          <td height="4" align="center">
+          <select name="field" size="1">
+              <option value="">선택하세요</option>
+              <option value="">가입일</option>
+              <option value="">회원명</option>
+              <option value="">아이디</option>
+              <option value="">회원가입상태</option>
             </select>
-            <input name="key" type="text" size="30" class="input_box">
+            <input name="keyword" type="text" size="30" class="input_box">
             <input name="imagefield" type="image" src="../../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle"></td>
         </tr>
       </table></td>
   </tr>
+</form>
 </table>
 </body>
 </html>

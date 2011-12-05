@@ -16,9 +16,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
-import com.goodjob.board.BoardDto;
 import com.goodjob.db.DBManager;
-import com.goodjob.sql.BBS;
 import com.goodjob.sql.MEMBER;
 
 /**
@@ -38,6 +36,9 @@ public class MemberDao {
 		Connection conn = null;
 		
 		int npage = NumberUtils.toInt(params.get("npage"), 1);
+		String field = StringUtils.defaultIfEmpty(params.get("field"), "");
+		String keyword = StringUtils.defaultIfEmpty(params.get("keyword"), "");
+		
 		try {
 			conn = DBManager.getConnection();
 			
@@ -45,11 +46,30 @@ public class MemberDao {
 			ResultSetHandler rsh = new BeanListHandler(MemberDto.class);
 			QueryRunner qr = new QueryRunner();
 			
-			//페이징
-			bind.add(((npage-1)* BBS.per_page));
-			bind.add((npage*BBS.per_page));
+			//검색조건
+			String where = "";
+			if("name".equals(field)){
+				where = "WHERE MEM_NAME LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("id".equals(field)){
+				where = "WHERE MEM_ID LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("type".equals(field)){
+				where = "WHERE MEM_TYPE = ? " ;
+				bind.add(keyword);
+			}
+			else if("reg_dt".equals(field)){
+				where = "WHERE date_format(reg_dt,'%Y%m%d') = ? " ;
+				bind.add(keyword);
+			}
 			
-			list = (List<MemberDto>) qr.query(conn , MEMBER.list, rsh , bind.toArray());
+			//페이징
+			bind.add(((npage-1)* MEMBER.per_page));
+			bind.add((npage*MEMBER.per_page));
+			
+			list = (List<MemberDto>) qr.query(conn , String.format(MEMBER.list,where) , rsh , bind.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -140,6 +160,31 @@ public class MemberDao {
 			bind.add(mDto.getEmail_yn());
 			bind.add(mDto.getRecommend());
 			bind.add(mDto.getMem_id());
+			
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn , MEMBER.update , bind.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
+	
+	/**
+	 * 회원 수정
+	 * @param mDto
+	 */
+	public void MemberType(String mem_id , String type){
+		Connection conn = null;
+		
+		try {
+			
+			conn = DBManager.getConnection();
+			
+			ArrayList<String> bind = new ArrayList<String>();
+			bind.add(type);
+			bind.add(mem_id);
 			
 			QueryRunner qr = new QueryRunner();
 			qr.update(conn , MEMBER.update , bind.toArray());

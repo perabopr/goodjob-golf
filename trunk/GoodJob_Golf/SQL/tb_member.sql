@@ -7,6 +7,7 @@ CREATE TABLE tb_member (
   MEM_MTEL varbinary(13) default NULL,
   SMS_YN char(1) default NULL,
   EMAIL_YN char(1) default NULL,
+  MEM_TYPE char(1) default 'F',
   RECOMMEND varbinary(100) default NULL,
   SECESSION char(1) default 'N',
   SECESSION_DT datetime default NULL,

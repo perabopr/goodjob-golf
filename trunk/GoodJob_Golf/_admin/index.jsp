@@ -12,12 +12,12 @@
 <body leftmargin="0" marginwidth="0" topmargin="150" marginheight="150" bgcolor="#E4E4E4">
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="601">
   <tr>
-    <td width="100%" align="center"><p><img src="/Admin/images/common/img_login_top.gif" width="601" height="141" border="0"></p></td>
+    <td width="100%" align="center"><p><img src="/_admin/images/common/img_login_top.gif" width="601" height="141" border="0"></p></td>
   </tr>
   <tr>
     <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="601">
         <tr>
-          <td width="330"><p><img src="/Admin/images/common/img_login_id_title.gif" width="330" height="60" border="0"></p></td>
+          <td width="330"><p><img src="/_admin/images/common/img_login_id_title.gif" width="330" height="60" border="0"></p></td>
           <td width="271" bgcolor="#414042"><table border="0" cellpadding="0" cellspacing="0">
               <tr>
                 <td width="261"><p>
@@ -37,12 +37,12 @@
       </table></td>
   </tr>
   <tr>
-    <td align="right" background="/Admin/images/common/img_login_bg.gif" height="120"  style="padding-right:100"><p>
-        <input type="image" src="/Admin/images/common/btn_login.gif" width="185" height="45" onclick="location.href='/Admin/sub/';" border="0" name="a11">
+    <td align="right" background="/_admin/images/common/img_login_bg.gif" height="120"  style="padding-right:100"><p>
+        <input type="image" src="/_admin/images/common/btn_login.gif" width="185" height="45" onclick="location.href='/_admin/sub/';" border="0" name="a11">
         &gt;</p></td>
   </tr>
   <tr>
-    <td align="center"><p><img src="/Admin/images/common/img_login_bottom.gif" width="601" height="44" border="0"></p></td>
+    <td align="center"><p><img src="/_admin/images/common/img_login_bottom.gif" width="601" height="44" border="0"></p></td>
   </tr>
 </table>
 </body>

@@ -12,6 +12,7 @@ import java.net.Socket;
 import java.security.MessageDigest;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -25,11 +26,13 @@ import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
+import org.dom4j.tree.BaseElement;
 
 import com.goodjob.board.BoardDto;
 import com.goodjob.db.DBManager;
 import com.goodjob.sql.BBS;
 import com.goodjob.sql.SMS;
+import com.goodjob.util.Utils;
 
 /**
  * @author gundallove@gmail.com
@@ -37,12 +40,12 @@ import com.goodjob.sql.SMS;
  */
 public class SMSDao {
 	
-	private String charsetType = " UTF-8"; //EUC-KR 또는 UTF-8
+	private String charsetType = "UTF-8"; //EUC-KR 또는 UTF-8
 	
 	private final int port = 80;
 	private final String sms_url = "http://sslsms.cafe24.com/sms_sender.php"; // SMS 전송요청 URL
-	private final String strId = "";		// SMS아이디
-	private final String strAuthKey = "";	//인증키
+	private final String strId = "savekorea2400";		// SMS아이디
+	private final String strAuthKey = "90c3ee898f3fa17524d98bb0ab1bccda";	//인증키
 	
 	public boolean send(Map<String,String> params) {
 		
@@ -58,12 +61,18 @@ public class SMSDao {
 		    String secure 		= base64Encode(strAuthKey);
 		    String msg 			= base64Encode(StringUtils.defaultString(params.get("msg"), ""));
 		    String rphone 		= base64Encode(StringUtils.defaultString(params.get("rphone"), ""));
-		    String sphone1 		= base64Encode(StringUtils.defaultString(params.get("sphone1"), ""));
-		    String sphone2 		= base64Encode(StringUtils.defaultString(params.get("sphone2"), ""));
-		    String sphone3 		= base64Encode(StringUtils.defaultString(params.get("sphone3"), ""));
+		    
+		    String sphone 		= StringUtils.defaultString(params.get("sphone"), "");
+		    String[] phoneArr = sphone.split("-");
+		    phoneArr[0] = base64Encode(phoneArr[0]);
+		    phoneArr[1] = base64Encode(phoneArr[1]);
+		    phoneArr[2] = base64Encode(phoneArr[2]);
+		    
 		    String rdate 		= base64Encode(StringUtils.defaultString(params.get("rdate"), ""));
 		    String rtime 		= base64Encode(StringUtils.defaultString(params.get("rtime"), ""));
 		    /*--------------------- 필수 값 -------------------*/
+		    
+		    
 		    
 		    String mode 		= base64Encode("1");
 		    String testflag 	= base64Encode(StringUtils.defaultString(params.get("testflag"), ""));
@@ -80,7 +89,7 @@ public class SMSDao {
 		    String arrKey[] = {"user_id","secure","msg", "rphone","sphone1","sphone2","sphone3","rdate","rtime"
 		                       ,"mode","testflag","destination","repeatFlag","repeatNum", "repeatTime"};
 		    
-		    String valKey[]= {user_id,secure,msg,rphone,sphone1,sphone2,sphone3,rdate,rtime,mode
+		    String valKey[]= {user_id,secure,msg,rphone,phoneArr[0],phoneArr[1],phoneArr[2],rdate,rtime,mode
 		    				,testflag,destination,repeatFlag,repeatNum,repeatTime};
 		    
 	    
@@ -107,7 +116,7 @@ public class SMSDao {
 		        data.append("\r\n"+valKey[i]+"\r\n");
 		        data.append("--"+boundary+"\r\n");
 		    }
-	
+		    
 		    InetAddress addr = InetAddress.getByName(host);
 		    Socket socket = new Socket(host, port);
 		    
@@ -125,14 +134,21 @@ public class SMSDao {
 		    // 결과값 얻기
 		    rd = new BufferedReader(new InputStreamReader(socket.getInputStream(),charsetType));
 		    String line;
+		    StringBuffer temp = new StringBuffer();
 		    ArrayList<String> tmpArr = new ArrayList<String>(); 
 		    while ((line = rd.readLine()) != null) {
 		        tmpArr.add(line);
+		        temp.append(line + "\n");
 		    }
 	
+		    System.out.println(temp.toString());
+		    
+		    
 		    String tmpMsg = tmpArr.get(tmpArr.size()-1);
 		    String[] rMsg = tmpMsg.split(",");
 		    String result= rMsg[0]; //발송결과
+		    
+		    System.out.println("result : "+ result);
 		    
 		    if("success".equals(result)){
 		    	//발송 성공시 로그저장
@@ -301,5 +317,27 @@ public class SMSDao {
 	    byte[] strByte = decoder.decodeBuffer(str);
 	    String result = new String(strByte);
 	    return result ;
+	}
+	
+	public static void main(String[] a){
+		
+		SMSDao dao = new SMSDao();
+		
+		/*
+		 String msg 			= base64Encode(StringUtils.defaultString(params.get("msg"), ""));
+		    String rphone 		= base64Encode(StringUtils.defaultString(params.get("rphone"), ""));
+		    String sphone 		= base64Encode(StringUtils.defaultString(params.get("sphone"), ""));
+		    String rdate 		= base64Encode(StringUtils.defaultString(params.get("rdate"), ""));
+		    String rtime 		= base64Encode(StringUtils.defaultString(params.get("rtime"), ""));
+		 */
+		Map<String,String> params = new HashMap<String, String>();
+		params.put("msg","SMS 테스트~~~");
+		params.put("rphone","010-8638-3389");
+		params.put("sphone","010-8638-3389");
+		//params.put("rdate",Utils.getDate("yyyyMMdd"));
+		//params.put("rtime",Utils.getDate("HHmm")+"00");
+		
+		dao.send(params);
+		
 	}
 }

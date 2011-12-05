@@ -6,7 +6,7 @@
 <%
 	String currMonth = StringUtils.trimToEmpty(request.getParameter("m"));
 	if(currMonth.length() == 0 ){
-		currMonth = Now
+		//currMonth = Now
 	}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

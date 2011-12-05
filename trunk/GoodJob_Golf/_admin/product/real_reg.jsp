@@ -14,7 +14,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../style.css">
 <title></title>
 <script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
 <script language="javascript" type="text/javascript">
@@ -155,13 +155,13 @@ function getFileExtension(filePath)
               </tr>
               <tr>
                 <td width="495"><input id="address2" name="address2" class="input_box" size="80"></td>
-                <td width="77"><a href="../../inc/zip.html" onClick="NewWindow(this.href,'name','420','400','yes');return false;"><img align="absmiddle" src="../../images/inc/btn_search.gif" width="45" height="22" border="0"></a></td>
+                <td width="77"><a href="../inc/zip.html" onClick="NewWindow(this.href,'name','420','400','yes');return false;"><img align="absmiddle" src="../images/inc/btn_search.gif" width="45" height="22" border="0"></a></td>
               </tr>
               <tr>
                 <td colspan="2" height="2" width="572"></td>
               </tr>
               <tr>
-                <td colspan="2" width="572"><a href="../../inc/naver_map.html" onClick="NewWindow(this.href,'name','420','400','yes');return false;"><img align="absmiddle" src="../../images/inc/btn_search_xy.gif" width="65" height="22" border="0"></a> &nbsp;&nbsp;X&nbsp;
+                <td colspan="2" width="572"><a href="../inc/naver_map.html" onClick="NewWindow(this.href,'name','420','400','yes');return false;"><img align="absmiddle" src="../images/inc/btn_search_xy.gif" width="65" height="22" border="0"></a> &nbsp;&nbsp;X&nbsp;
                   <input id="pointx" name="pointx" class="input_box" size="20">
                   &nbsp;&nbsp;Y&nbsp;
                   <input id="pointy" name="pointy" class="input_box" size="20"></td>
@@ -247,7 +247,7 @@ function getFileExtension(filePath)
       </table></td>
   </tr>
   <tr>
-    <td colspan="2" align="center" style="padding-top:20px;padding-bottom:20px;"><img align="absmiddle" src="../../images/inc/btn_regist2.gif" width="74" height="26" border="0" onclick="real_submit();"></td>
+    <td colspan="2" align="center" style="padding-top:20px;padding-bottom:20px;"><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0" onclick="real_submit();"></td>
   </tr>
 </table>
 </FORM>

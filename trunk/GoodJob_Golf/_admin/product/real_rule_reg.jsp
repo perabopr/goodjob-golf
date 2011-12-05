@@ -6,7 +6,7 @@ String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../style.css">
 <title></title>
 <script language="JavaScript"> 
 <!-- 
@@ -132,7 +132,7 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
       </table></td>
   </tr>
   <tr>
-    <td align="center" style="padding-top:20px;padding-bottom:20px;"><img align="absmiddle" src="../../images/inc/btn_regist2.gif" width="74" height="26" border="0"></td>
+    <td align="center" style="padding-top:20px;padding-bottom:20px;"><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0"></td>
   </tr>
 </table>
 </body>

@@ -94,7 +94,7 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
             </tr>
             </table>
         </td>
-        <td align="center" bgcolor="white"><a href="real_time_input.html" onClick="NewWindow(this.href,'name','820','520','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
+        <td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_real_time_reg.jsp?glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','820','520','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
         <td align="center" bgcolor="white"><a href="real_rule_reg.jsp?glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
         <td align="center" bgcolor="white"><a href="#"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></td>
     </tr>

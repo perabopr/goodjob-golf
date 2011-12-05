@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -50,19 +49,19 @@
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td width="20" height="25" align="center"><img src="/_admin/images/common/menu_bullet.gif" width="4" height="4" align="absmiddle"></td>
-                                <td width="160" ONCLICK="return toggleMenu(1)" STYLE="cursor:hand"><b><font color="white">∏ﬁ¿Œ∞¸∏Æ</font></b></td>
+                                <td width="160" ONCLICK="return toggleMenu(1)" STYLE="cursor:hand"><b><font color="white">Î©îÏù∏Í¥ÄÎ¶¨</font></b></td>
                             </tr>
                         </table>
                         <table id="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td width="20" height="22">&nbsp;</td>
-                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>ªÛ«∞µÓ∑œ</a></td>
+                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>ÏÉÅÌíàÎì±Î°ù</a></td>
                             </tr>
                         </table>
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td width="20" height="25" align="center"><img src="/_admin/images/common/menu_bullet.gif" width="4" height="4" align="absmiddle"></td>
-                                <td width="160" ONCLICK="return toggleMenu(2)" STYLE="cursor:hand"><b><font color="white">ªÛ«∞∞¸∏Æ</font></b></td>
+                                <td width="160" ONCLICK="return toggleMenu(2)" STYLE="cursor:hand"><b><font color="white">ÏÉÅÌíàÍ¥ÄÎ¶¨</font></b></td>
                             </tr>
                         </table>
                     </td>
@@ -72,27 +71,27 @@
                         <table id="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td height="22">&nbsp;</td>
-                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/real_list.jsp?menu=1" class=left_menu>Ω«Ω√∞£øπæ‡</a></td>
+                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/real_list.jsp?menu=1" class=left_menu>Ïã§ÏãúÍ∞ÑÏòàÏïΩ</a></td>
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>
-                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/real_list.jsp?menu=2" class=left_menu>ªÁ¿¸øπæ‡</a></td>
+                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/real_list.jsp?menu=2" class=left_menu>ÏÇ¨Ï†ÑÏòàÏïΩ</a></td>
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>
-                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="package/domestic_list.html" class=left_menu>±π≥ª∆–≈∞¡ˆ</a></td>
+                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="package/domestic_list.html" class=left_menu>Íµ≠ÎÇ¥Ìå®ÌÇ§ÏßÄ</a></td>
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>
-                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="package/overseas_list.html" class=left_menu>«ÿø‹∆–≈∞¡ˆ</a></td>
+                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="package/overseas_list.html" class=left_menu>Ìï¥Ïô∏Ìå®ÌÇ§ÏßÄ</a></td>
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>
-                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="condo/condo_list.html" class=left_menu>ƒ‹µµ</a></td>
+                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="condo/condo_list.html" class=left_menu>ÏΩòÎèÑ</a></td>
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>
-                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>º“º»ƒø∏”Ω∫</a></td>
+                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>ÏÜåÏÖúÏª§Î®∏Ïä§</a></td>
                             </tr>
                         </table>
                     </td>
@@ -101,53 +100,53 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td width="20" height="25" align="center"><img src="/_admin/images/common/menu_bullet.gif" width="4" height="4" align="absmiddle"></td>
-                    <td width="160" ONCLICK="return toggleMenu(3)" STYLE="cursor:hand"><b><font color="white">øπæ‡∞¸∏Æ</font></b></td>
+                    <td width="160" ONCLICK="return toggleMenu(3)" STYLE="cursor:hand"><b><font color="white">ÏòàÏïΩÍ¥ÄÎ¶¨</font></b></td>
                 </tr>
             </table>
             <table id="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/realtime_list.html" class=left_menu>Ω«Ω√∞£øπæ‡</a></td>
+                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/realtime_list.html" class=left_menu>Ïã§ÏãúÍ∞ÑÏòàÏïΩ</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/before_list.html" class=left_menu>ªÁ¿¸øπæ‡</a></td>
+                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/before_list.html" class=left_menu>ÏÇ¨Ï†ÑÏòàÏïΩ</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/domestic_list.html"" class=left_menu>±π≥ª∆–≈∞¡ˆ</a></td>
+                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/domestic_list.html"" class=left_menu>Íµ≠ÎÇ¥Ìå®ÌÇ§ÏßÄ</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/overseas_list.html"" class=left_menu>«ÿø‹∆–≈∞¡ˆ</a></td>
+                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/overseas_list.html"" class=left_menu>Ìï¥Ïô∏Ìå®ÌÇ§ÏßÄ</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/condo_list.html" class=left_menu>ƒ‹µµ</a></td>
+                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/condo_list.html" class=left_menu>ÏΩòÎèÑ</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>º“º»ƒø∏”Ω∫</a></td>
+                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>ÏÜåÏÖúÏª§Î®∏Ïä§</a></td>
                 </tr>
             </table>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td width="20" height="25" align="center"><img src="/_admin/images/common/menu_bullet.gif" width="4" height="4" align="absmiddle"></td>
-                    <td width="160" ONCLICK="return toggleMenu(4)" STYLE="cursor:hand"><b><font color="white">»∏ø¯∞¸∏Æ</font></b></td>
+                    <td width="160" ONCLICK="return toggleMenu(4)" STYLE="cursor:hand"><b><font color="white">ÌöåÏõêÍ¥ÄÎ¶¨</font></b></td>
                 </tr>
             </table>
             <table id="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="member/mem_list.html" class=left_menu>»∏ø¯∞°¿‘«ˆ»≤</a></td>
+                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="member/mem_list.html" class=left_menu>ÌöåÏõêÍ∞ÄÏûÖÌòÑÌô©</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>SMS ∫∏≥ª±‚</a></td>
+                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>SMS Î≥¥ÎÇ¥Í∏∞</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>E-Mail ∫∏≥ª±‚</a></td>
+                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>E-Mail Î≥¥ÎÇ¥Í∏∞</a></td>
                 </tr>
             </table>
             <table width="100%" border="0" cellpadding="0" cellspacing="0">
@@ -156,7 +155,7 @@
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td width="20" height="25" align="center"><img src="/_admin/images/common/menu_bullet.gif" width="4" height="4" align="absmiddle"></td>
-                                <td width="160" ONCLICK="toggleMenu(5)" STYLE="cursor:hand"><font color="white"><b>≈Î∞Ë∞¸∏Æ</b></font></td>
+                                <td width="160" ONCLICK="toggleMenu(5)" STYLE="cursor:hand"><font color="white"><b>ÌÜµÍ≥ÑÍ¥ÄÎ¶¨</b></font></td>
                             </tr>
                         </table>
                     </td>
@@ -166,19 +165,19 @@
                         <table id="menu2" name="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td width="20" height="25">&nbsp;</td>
-                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>Ω≈±‘»∏ø¯∫–ºÆ</a></td>
+                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>Ïã†Í∑úÌöåÏõêÎ∂ÑÏÑù</a></td>
                             </tr>
                             <tr>
                                 <td height="25">&nbsp;</td>
-                                <td><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a href="#" target="main" class=left_menu>πÊπÆ¿⁄∫–ºÆ</a></td>
+                                <td><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a href="#" target="main" class=left_menu>Î∞©Î¨∏ÏûêÎ∂ÑÏÑù</a></td>
                             </tr>
                             <tr>
                                 <td height="25">&nbsp;</td>
-                                <td><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a href="#" target="main" class=left_menu>∞·¡¶ºˆ¥‹∫–ºÆ</a></td>
+                                <td><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a href="#" target="main" class=left_menu>Í≤∞Ï†úÏàòÎã®Î∂ÑÏÑù</a></td>
                             </tr>
                             <tr>
                                 <td height="25">&nbsp;</td>
-                                <td><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a href="#" target="main" class=left_menu>¿Œ±‚∞Ò«¡¿Â∫–ºÆ</a></td>
+                                <td><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a href="#" target="main" class=left_menu>Ïù∏Í∏∞Í≥®ÌîÑÏû•Î∂ÑÏÑù</a></td>
                             </tr>
                         </table>
                     </td>
@@ -190,7 +189,7 @@
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td width="20" height="25" align="center"><img src="/_admin/images/common/menu_bullet.gif" width="4" height="4" align="absmiddle"></td>
-                                <td width="160" ONCLICK="toggleMenu(6)" STYLE="cursor:hand"><font color="white"><b>∞‘Ω√∆«∞¸∏Æ</b></font></td>
+                                <td width="160" ONCLICK="toggleMenu(6)" STYLE="cursor:hand"><font color="white"><b>Í≤åÏãúÌåêÍ¥ÄÎ¶¨</b></font></td>
                             </tr>
                         </table>
                     </td>
@@ -200,7 +199,7 @@
                         <table id="menu2" name="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td height="25" width="20">&nbsp;</td>
-                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="board/notice_list.html" class=left_menu>∞¯¡ˆªÁ«◊</a></td>
+                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="board/notice_list.html" class=left_menu>Í≥µÏßÄÏÇ¨Ìï≠</a></td>
                             </tr>
                             <tr>
                                 <td height="25" width="20">&nbsp;</td>
@@ -208,7 +207,7 @@
                             </tr>
                             <tr>
                                 <td height="25" width="20">&nbsp;</td>
-                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="board/join_list.html" class=left_menu>JOIN ƒøπ¬¥œ∆º</a></td>
+                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="board/join_list.html" class=left_menu>JOIN Ïª§ÎÆ§ÎãàÌã∞</a></td>
                             </tr>
                         </table>
                     </td>

@@ -532,11 +532,19 @@
                     <net.java.amateras.db.visual.model.ColumnModel>
                       <columnName>view_yn</columnName>
                       <logicalName>노출여부</logicalName>
-                      <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
+                      <columnType class="net.java.amateras.db.dialect.ColumnType">
+                        <name>CHAR</name>
+                        <logicalName>Character</logicalName>
+                        <supportSize>true</supportSize>
+                        <type>1</type>
+                      </columnType>
                       <size>1</size>
                       <notNull>true</notNull>
                       <primaryKey>false</primaryKey>
-                      <description></description>
+                      <description>N : 예약불가&#x0D;
+Y : 예약가능&#x0D;
+1 : 마감&#x0D;
+2 : 휴장</description>
                       <autoIncrement>false</autoIncrement>
                       <defaultValue>&apos;N&apos;</defaultValue>
                     </net.java.amateras.db.visual.model.ColumnModel>

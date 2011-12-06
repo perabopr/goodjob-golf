@@ -619,6 +619,22 @@ Y : 예약가능&#x0D;
                             <defaultValue></defaultValue>
                           </net.java.amateras.db.visual.model.ColumnModel>
                           <net.java.amateras.db.visual.model.ColumnModel>
+                            <columnName>golflink_course</columnName>
+                            <logicalName>골프장_코스명</logicalName>
+                            <columnType class="net.java.amateras.db.dialect.ColumnType">
+                              <name>VARCHAR</name>
+                              <logicalName>String</logicalName>
+                              <supportSize>true</supportSize>
+                              <type>12</type>
+                            </columnType>
+                            <size>50</size>
+                            <notNull>false</notNull>
+                            <primaryKey>false</primaryKey>
+                            <description></description>
+                            <autoIncrement>false</autoIncrement>
+                            <defaultValue></defaultValue>
+                          </net.java.amateras.db.visual.model.ColumnModel>
+                          <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>time_start</columnName>
                             <logicalName>시작시간</logicalName>
                             <columnType class="net.java.amateras.db.dialect.ColumnType">
@@ -637,7 +653,7 @@ Y : 예약가능&#x0D;
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>time_end</columnName>
                             <logicalName>종료시간</logicalName>
-                            <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[3]/columnType"/>
+                            <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
                             <size>4</size>
                             <notNull>false</notNull>
                             <primaryKey>false</primaryKey>
@@ -664,7 +680,7 @@ Y : 예약가능&#x0D;
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>NH_price</columnName>
                             <logicalName>NH금액</logicalName>
-                            <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[5]/columnType"/>
+                            <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[6]/columnType"/>
                             <size></size>
                             <notNull>true</notNull>
                             <primaryKey>false</primaryKey>

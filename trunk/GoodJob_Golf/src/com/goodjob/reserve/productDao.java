@@ -82,4 +82,30 @@ public class productDao {
 			DbUtils.closeQuietly(conn);
 		}
 	}
+	
+	public List<ProductSubDto> getProductSubSelect(ProductDto prdtDto){
+		List<ProductSubDto> list = null;
+		Connection conn = null;
+		
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(prdtDto.getProduct_year());
+			bind.add(prdtDto.getProduct_month());
+			bind.add(prdtDto.getProduct_day());
+			
+			ResultSetHandler rsh = new BeanListHandler(ProductSubDto.class);
+			
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<ProductSubDto>)qr.query(conn, RESERVE.product_sub_select_date, rsh, bind.toArray());	
+					
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return list;
+	}
 }

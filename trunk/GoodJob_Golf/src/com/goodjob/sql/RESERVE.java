@@ -243,17 +243,19 @@ public class RESERVE {
 	public static final String product_sub_insert
 		=	"INSERT INTO tb_product_sub(" +
 				" product_seq" +
+				",golflink_course" +
 				",time_start" +
 				",time_end" +
 				",goodjob_price" +
 				",NH_price" +
 				",product_status)" +
-			"VALUES(?,?,?,?,?,?,?)";
+			"VALUES(?,?,?,?,?,?,?,?)";
 	
 	public static final String product_sub_select
 		=	"SELECT" +
 				" productsub_seq" +
 				",product_seq" +
+				",golflink_course" +
 				",time_start" +
 				",time_end" +
 				",goodjob_price" +
@@ -261,10 +263,29 @@ public class RESERVE {
 				",product_status " +
 			"FROM tb_product_sub " +
 			"WHERE productsub_seq = ?";
+	
+	public static final String product_sub_select_date
+		=	"SELECT "+
+				" a.productsub_seq" +
+				",a.product_seq" +
+				",a.golflink_course" +
+				",a.time_start" +
+				",a.time_end" + 
+				",a.goodjob_price" + 
+				",a.NH_price" +
+				",a.product_status " + 
+				"FROM tb_product_sub a " +
+				"INNER JOIN tb_product b ON(a.product_seq = b.product_seq) " +
+				"WHERE b.product_year = ? " +
+				"AND b.product_month = ? " +
+				"AND b.product_day = ? " +
+				"ORDER BY a.productsub_seq";
+				
 
 	public static final String product_sub_update
 		=	"UPDATE tb_product_sub " +
-			"SET time_start = ?" +
+			"SET golflink_course = ?" +
+			",time_start = ?" +
 			",time_end = ?" +
 			",goodjob_price = ?" +
 			",NH_price = ?" +

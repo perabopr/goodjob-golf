@@ -5,6 +5,7 @@ package com.goodjob.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 /**
  * @author Administrator
@@ -24,5 +25,23 @@ public class Utils {
 			date = formater.format(new Date());
 		}catch(Exception e){}
 		return date;
+	}
+	
+	/**
+	 * 인증번호 
+	 * @param length
+	 * @return
+	 */
+	public static String authNumber(int length)
+	{
+	     Random rnd = new Random();
+	     String numTemp[] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+	     String auth = "";
+
+	     for(int i=0; i<length; i++)
+	     {
+	           auth = auth+numTemp[rnd.nextInt(10)];
+	      }
+	      return auth;
 	}
 }

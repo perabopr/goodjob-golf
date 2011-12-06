@@ -43,8 +43,8 @@
      <tr>
        <td width="207" colspan="2" height="40" align="right"><table border="0" cellpadding="0" cellspacing="0" width="170">
            <tr>
-             <td width="104"><a href="/member/join_agreement.jsp"><img src="images/img_leftmenu/btn_join_s.gif" width="55" height="13" border="0"></a></td>
-             <td width="104"><a href="/member/id_pass_search.jsp"><img src="images/img_leftmenu/btn_id_pw_s.gif" width="108" height="13" border="0"></a></td>
+             <td width="104"><a href="/member/join_agreement.jsp"><img src="/images/img_leftmenu/btn_join_s.gif" width="55" height="13" border="0"></a></td>
+             <td width="104"><a href="/member/id_pass_search.jsp"><img src="/images/img_leftmenu/btn_id_pw_s.gif" width="108" height="13" border="0"></a></td>
            </tr>
          </table></td>
      </tr>

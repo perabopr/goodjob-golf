@@ -2,7 +2,7 @@
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
-<%@ page import="java.sql.*,java.util.*" %>
+<%@ page import="java.util.*" %>
 <%
 	
 	
@@ -12,9 +12,10 @@
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
 <title>Welcome to GoodJobGolf</title>
 <link rel="stylesheet" href="/css/common.css" type="text/css">
+<script src="/js/jquery-1.5.2.min.js" type="text/javascript"></script>
 <script language="javascript" src="/js/flashObject.js"></script>
 </head>
-<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" background="images/bg_main.jpg">
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" background="/images/bg_main.jpg">
 <table border="0" width="100%" cellpadding="0" cellspacing="0">
   <tr>
     <td width="100%" align="center"><table border="0" width="1000" cellpadding="0" cellspacing="0" align="center">

@@ -3,7 +3,20 @@
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="java.sql.*,java.util.*" %>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
+<%@page import="com.goodjob.reserve.dto.GolfLinkCourseDto"%>
+<%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%
+	String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));
+	GolfLinkDao gfdao = new GolfLinkDao(); 
+	List<GolfLinkCourseDto> glcDto = gfdao.getGolfLinkCourseSelect(Integer.parseInt(glSeq));
+	
+	String ddlCourseHTML = "<select name='course_list'><option value=''>선택하세요</option>";
+	for(int i = 0; i < glcDto.size();i++){
+		ddlCourseHTML += "<option value='" + glcDto.get(i).getGolflink_course_seq() +"'>" + glcDto.get(i).getCourse_name() + "</option>";
+	}
+	ddlCourseHTML += "</select>";
+
+String nowDate = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date());
 int action = 0;  // incoming request for moving calendar up(1) down(0) for month
 int currYear = 0; // if it is not retrieved from incoming URL (month=) then it is set to current year
 int currMonth = 0; // same as year
@@ -67,6 +80,87 @@ else
 <head>
 <title>실시간 골프장 시간 및 가격입력</title>
 <link rel="stylesheet" href="../../style.css" type="text/css">
+<script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
+<script type="text/javascript">
+var selDate = "<%= nowDate%>";
+function selSetting(sDate){
+	var splitDate = sDate.split('/');
+	selDate = splitDate[0] + "/" + LenChk(splitDate[1], 2) + "/" + LenChk(splitDate[2], 2);
+
+	//초기화
+	var arrChkItems = $("input[name='timeItems']");
+	if(arrChkItems.length > 0){
+		for(i = arrChkItems.length; i >= 0;i--){
+			$("#tbTimeCost tr:eq("+(i+1)+")").remove();
+		}
+	}
+
+	//ajax호출 - 입력값 확인.
+	$.ajax({
+	  url: "/_admin/product/ajax/ajax_datetimecost_list.jsp?date="+selDate,
+	  cache: false,
+	  success: function(html){
+		var evalData = eval("("+html+")");
+		for(i=0;i<evalData.ProductSub.length;i++){
+			addTime(evalData.ProductSub[i].c,evalData.ProductSub[i].d.substring(0,2),evalData.ProductSub[i].d.substring(2,4),evalData.ProductSub[i].f,evalData.ProductSub[i].g);
+		}
+		
+		//기본행
+		addTime('','0','0','','');
+	  }
+	});
+}
+function addTime(vCourse, vTimeH, vTimeM, nPrice, sPrice){
+	var currMD = selDate.split('/');
+	var timecostHTML = "";
+	timecostHTML += "<tr><td bgcolor='white' align='center' width='40'>"+currMD[1]+"/"+currMD[2]+"</td>"
+		+"<td bgcolor='white' align='center'><%= ddlCourseHTML%>"
+		+"</td><td bgcolor='white' align='center'><select name='course_hour'>"
+	for(i=0;i<24;i++){
+		var ih = LenChk(i, 2);
+		
+		if(ih == vTimeH){
+			timecostHTML += "<option value='" + ih + "' selected>" + ih + "</option>";
+		}else{
+			timecostHTML += "<option value='" + ih + "'>" + ih + "</option>";
+		}		
+	}
+	timecostHTML += "</select>시";
+	timecostHTML += "<select name='course_minute'>";
+	for(i=0;i<60;i++){
+		var im = LenChk(i, 2);
+		
+		if(im == vTimeM){
+			timecostHTML += "<option value='" + im + "' selected>" + im + "</option>";
+		}else{
+			timecostHTML += "<option value='" + im + "'>" + im + "</option>";
+		}	
+	}  
+	timecostHTML += "</select>분 </td>";
+	timecostHTML += "<td align='center' bgcolor='white'><input class='input_box' size='10' name='courseN' value='" + nPrice + "' ></td>";
+	timecostHTML += "<td align='center' bgcolor='white'><input class='input_box' size='10' name='courseS' value='" + sPrice + "' ></td>";
+	timecostHTML += "<td align='center' bgcolor='white'><input type='checkbox' name='timeItems' /></td>";
+	timecostHTML += "</tr>";
+	$("#tbTimeCost").append(timecostHTML);
+
+	$("#tbTimeCost tr:last-child select[name='course_list']").val(vCourse);
+}
+function removeTime(){
+	var arrChkItems = $("input[name='timeItems']");
+	for(i = 0; i < arrChkItems.length;i++){
+		if(arrChkItems[i].checked){
+			$("#tbTimeCost tr:eq("+(i+1)+")").remove();
+		}
+	}
+}
+function LenChk(inval, n)
+{
+	var tmp = "00000" + inval;
+	var len = tmp.length;
+	return (tmp.substring(len - n, len));
+}
+
+</script>
 </head>
 <body>
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="760">
@@ -74,7 +168,7 @@ else
     <td align="center" width="760" class=title>★ 실시간 골프장 시간 및 가격입력 ★</td>
   </tr>
   <tr>
-    <td align="right" style="padding-right:20px;" height="35"><img src="../../images/inc/month_prev.gif" width="41" height="16" border="0" align="absmiddle" onclick="location.href='pop_real_time_reg.jsp?month=<%=currMonth%>&year=<%=currYear%>&action=0'"> &nbsp;<span class=month><%= (currYear) %>년 <%= (currMonth+1) %>월</span> &nbsp;<img align="absmiddle" src="../../images/inc/month_next.gif" width="41" height="16" border="0" onclick="location.href='pop_real_time_reg.jsp?month=<%=currMonth%>&year=<%=currYear%>&action=1'"></td>
+    <td align="right" style="padding-right:20px;" height="35"><img src="../../images/inc/month_prev.gif" width="41" height="16" border="0" align="absmiddle" onclick="location.href='pop_real_time_reg.jsp?glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=0'"> &nbsp;<span class=month><%= (currYear) %>년 <%= (currMonth+1) %>월</span> &nbsp;<img align="absmiddle" src="../../images/inc/month_next.gif" width="41" height="16" border="0" onclick="location.href='pop_real_time_reg.jsp?glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=1'"></td>
   </tr>
   <tr>
     <td align="center"><table border="0" width="740" cellpadding="2" cellspacing="1" bgcolor="#D1D3D4">
@@ -149,7 +243,7 @@ else
 	            <tr>
 	            <td align="center" height="20"><img align="absmiddle" src="../../images/inc/btn_day_close.gif" width="28" height="16" border="0"></td>
 	            <td align="center"><img align="absmiddle" src="../../images/inc/btn_day_rest.gif" width="28" height="16" border="0"></td>
-	            <td align="center"><img src="../../images/inc/btn_edit3.gif" width="28" height="16" border="0" align="absmiddle"></td>
+	            <td align="center"><img src="../../images/inc/btn_edit3.gif" width="28" height="16" border="0" align="absmiddle" onclick="selSetting('<%=currYear + "/" + (currMonth+1) + "/" + dispDay%>');"></td>
 	            </tr>
 	            </table>
 	        </td>
@@ -198,7 +292,7 @@ else
     <td align="center">&nbsp;</td>
   </tr>
   <tr>
-    <td align="center"><table border="0" width="745" cellpadding="2" cellspacing="1" bgcolor="#D1D3D4" height="50">
+    <td align="center"><table id="tbTimeCost" name="tbTimeCost" border="0" width="745" cellpadding="2" cellspacing="1" bgcolor="#D1D3D4">
         <tr>
           <td bgcolor="#F1F1F1" align="center" height="19" width="40">날짜</td>
           <td bgcolor="#F1F1F1" align="center" height="19" width="161">코스선택 </td>
@@ -206,113 +300,11 @@ else
           <td align="center" bgcolor="#F1F1F1" height="19" width="112">정상가</td>
           <td align="center" bgcolor="#F1F1F1" height="19" width="95">할인가</td>
           <td width="95" height="19" align="center" bgcolor="#F1F1F1">
-          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" width="32" height="16" border="0">
-          	<img src="../../images/inc/btn_del2.gif" width="32" height="16" border="0" align="absmiddle">
+          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" width="32" height="16" border="0" onclick="addTime('','0','0','','');">
+          	<img src="../../images/inc/btn_del2.gif" width="32" height="16" border="0" align="absmiddle" onclick="removeTime();">
           	<img align="absmiddle" src="../../images/inc/btn_save.gif" width="32" height="16" border="0">
 		  </td>
         </tr>
-        <tr>
-          <td bgcolor="white" align="center" width="40"> 7/3</td>
-          <td bgcolor="white" align="center">
-          	<select name="formselect1" size="1">
-            	<option>선택하세요</option>
-            </select>
-          </td>
-          <td bgcolor="white" align="center">
-          	<select id=course1_hour name=course1_hour>
-              <option selected value=0>0</option>
-              <option value=1>1</option>
-              <option value=2>2</option>
-              <option value=3>3</option>
-              <option value=4>4</option>
-              <option value=5>5</option>
-              <option value=6>6</option>
-              <option value=7>7</option>
-              <option value=8>8</option>
-              <option value=9>9</option>
-              <option value=10>10</option>
-              <option value=11>11</option>
-              <option value=12>12</option>
-              <option value=13>13</option>
-              <option value=14>14</option>
-              <option value=15>15</option>
-              <option value=16>16</option>
-              <option value=17>17</option>
-              <option value=18>18</option>
-              <option value=19>19</option>
-              <option value=20>20</option>
-              <option value=21>21</option>
-              <option value=22>22</option>
-              <option value=23>23</option>
-            </select>
-                 	 시
-            <select id=course1_minute name=course1_minute>
-              <option selected value=0>0</option>
-              <option value=1>1</option>
-              <option value=2>2</option>
-              <option value=3>3</option>
-              <option value=4>4</option>
-              <option value=5>5</option>
-              <option value=6>6</option>
-              <option value=7>7</option>
-              <option value=8>8</option>
-              <option value=9>9</option>
-              <option value=10>10</option>
-              <option value=11>11</option>
-              <option value=12>12</option>
-              <option value=13>13</option>
-              <option value=14>14</option>
-              <option value=15>15</option>
-              <option value=16>16</option>
-              <option value=17>17</option>
-              <option value=18>18</option>
-              <option value=19>19</option>
-              <option value=20>20</option>
-              <option value=21>21</option>
-              <option value=22>22</option>
-              <option value=23>23</option>
-              <option value=24>24</option>
-              <option value=25>25</option>
-              <option value=26>26</option>
-              <option value=27>27</option>
-              <option value=28>28</option>
-              <option value=29>29</option>
-              <option value=30>30</option>
-              <option value=31>31</option>
-              <option value=32>32</option>
-              <option value=33>33</option>
-              <option value=34>34</option>
-              <option value=35>35</option>
-              <option value=36>36</option>
-              <option value=37>37</option>
-              <option value=38>38</option>
-              <option value=39>39</option>
-              <option value=40>40</option>
-              <option value=41>41</option>
-              <option value=42>42</option>
-              <option value=43>43</option>
-              <option value=44>44</option>
-              <option value=45>45</option>
-              <option value=46>46</option>
-              <option value=47>47</option>
-              <option value=48>48</option>
-              <option value=49>49</option>
-              <option value=50>50</option>
-              <option value=51>51</option>
-              <option value=52>52</option>
-              <option value=53>53</option>
-              <option value=54>54</option>
-              <option value=55>55</option>
-              <option value=56>56</option>
-              <option value=57>57</option>
-              <option value=58>58</option>
-              <option value=59>59</option>
-            </select>분
-            </td>
-            <td align="center" bgcolor="white"><input class="input_box" size="10" id="courseN" name="courseN"></td>
-            <td align="center" bgcolor="white"><input class="input_box" size="10" id="courseS" name="courseS"></td>
-            <td align="center" bgcolor="white"><input type="checkbox" id="timeItem" name="timeItems" /></td>            
-            </tr>
       </table></td>
   </tr>
   <tr>

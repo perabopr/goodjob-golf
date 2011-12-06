@@ -22,12 +22,12 @@
 			return;
 		}
 
-		if($('#auth_yn').val() != 'Y') {
+		if($('#auth_yn').val() != 'N') {
 			alert('휴대폰 인증을 하지 않았습니다.');
 			return;
 		}
 		
-		location.href="/member/join_mem_input.jsp";
+		location.href="/member/join_member_form.jsp";
    	}
 
    	function sms_send(){
@@ -57,18 +57,14 @@
 		
 		$.ajax({
 			type: "POST",
-			url: "/event/201112/eventFM2ndAjax.jsp",
+			url: "/event/201112/",
 			data: "fmoney="+$('#fmoney').val()+"&memo="+$('#memo').val(),
 			success: function(msg){
 				if($.trim(msg) == '1'){
-					alert("패밀리머니 기부를 하셨습니다. 감사합니다");
-					total_star++;
-					my_fm = eval(my_fm) - eval($('#fmoney').val()); 
-					total_fm = eval(total_fm) + eval($('#fmoney').val());
-					donation_result();
+					
 				}
 				else{
-					alert("패밀리머니 기부시 오류가 발생했습니다!");
+					
 				}
 		}});
 	}

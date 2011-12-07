@@ -59,7 +59,13 @@
                       <td width="235" valign="top">
                         <table border="0" width="235" cellpadding="0" cellspacing="0">
                           <tr>
-                            <td background="/images/img_leftmenu/img_left_bg.jpg" width="235"><table border="0" cellpadding="0" cellspacing="0" width="235" bgcolor="#052B48">
+                            <td background="/images/img_leftmenu/img_left_bg.jpg" width="235">
+<%
+	String current_url = StringUtils.trimToEmpty(request.getRequestURI());
+	if(current_url.indexOf("/member/") == -1){
+	
+%>
+                            <table border="0" cellpadding="0" cellspacing="0" width="235" bgcolor="#052B48">
                                 <tr>
                                   <td width="235" height="146" align="center" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="235">
                                       <tr>
@@ -70,9 +76,14 @@
                                         <%@ include file="/include/logon_form.jsp" %>
                                          </td>
                                       </tr>
-                                    </table></td>
+                                    </table>
+                                  </td>
                                 </tr>
-                              </table></td>
+                              </table>
+<%
+	}
+%>
+                            </td>
                           </tr>
                           <tr>
                             <td height="10"></td>

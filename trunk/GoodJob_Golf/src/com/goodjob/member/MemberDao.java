@@ -13,10 +13,12 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.db.DBManager;
+import com.goodjob.sql.BBS;
 import com.goodjob.sql.MEMBER;
 
 /**
@@ -113,8 +115,9 @@ public class MemberDao {
 	 * 회원 가입
 	 * @param mDto
 	 */
-	public void MemberRegist(MemberDto mDto){
+	public boolean memberRegist(MemberDto mDto){
 		
+		boolean isSuccess = false;
 		Connection conn = null;
 		
 		try {
@@ -132,13 +135,17 @@ public class MemberDao {
 			bind.add(mDto.getRecommend());
 			
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn , MEMBER.insert , bind.toArray());
+			int result = qr.update(conn , MEMBER.insert , bind.toArray());
+			
+			if(result != 0)
+				isSuccess = true;
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
+		return isSuccess;
 	}
 	
 	/**
@@ -204,11 +211,8 @@ public class MemberDao {
 		Connection conn = null;
 		
 		try {
-			
 			conn = DBManager.getConnection();
-			
 			String[] bind = {mem_id};
-			
 			QueryRunner qr = new QueryRunner();
 			qr.update(conn , MEMBER.secession , bind);
 			
@@ -246,6 +250,23 @@ public class MemberDao {
 		
 		boolean isDuplicate = false;
 		
-		return true;
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			String[] bind = {mem_id};
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			
+			Map<String,Long> map = (Map)qr.query(conn , MEMBER.dup_id , rsh , bind);
+			long cnt = map.get("cnt");
+			if(cnt > 0) isDuplicate = true;
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return isDuplicate;
 	}
 }

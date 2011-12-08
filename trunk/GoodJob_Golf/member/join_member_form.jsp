@@ -36,6 +36,12 @@
 			return;
 		}
 
+		if($('#mem_pwd').val().length() < 4) {
+			alert('비밀번호가 너무 짧습니다.');
+			$('#mem_pwd').focus();
+			return;
+		}
+
 		if(!$('#mem_pwd_re').val()) {
 			alert('비밀번호 확인을 입력해 주세요');
 			$('#mem_pwd_re').focus();
@@ -65,60 +71,26 @@
 			$('#mobile3').focus();
 			return;
 		}
-
-		var obj = document.joinForm;
-		obj.action = "join_member_exe.jsp";
-		obj.submit();
+ 	      
+		var frm = document.joinForm;
+		frm.target =  "ifr_hidden"; 
+		frm.action = "join_member_exe.jsp";
+		frm.submit();
 		
-		//location.href="/member/join_member_form.jsp";
    	}
 
 	function domainChange(val){
-		$('#mem_domain').val(val);
-	}
+		if(val == ''){
+			$("input[name=mem_domain]").attr("readonly",false);
+			$('#mem_domain').val("");
+		}
+		else{
+			$("input[name=mem_domain]").attr("readonly",true);
+			$('#mem_domain').val(val);
+		}
 
-	function domainChange2(val){
-		$('#recom_domain').val(val);
 	}
 	
-   	function sms_send(){
-
-   		if(!$('#mobile0').val()) {
-			alert('이통사를 선택해 주세요.');
-			return;
-		}
-
-   		if(!$('#mobile1').val()) {
-			alert('핸드폰 앞자리를 선택해 주세요.');
-			$('#mobile1').focus();
-			return;
-		}
-
-   		if(!$('#mobile2').val()) {
-			alert('핸드폰 번호를 입력해 주세요.');
-			$('#mobile2').focus();
-			return;
-		}
-
-   		if(!$('#mobile3').val()) {
-   			alert('핸드폰 번호를 입력해 주세요.');
-			$('#mobile3').focus();
-			return;
-		}
-		
-		$.ajax({
-			type: "POST",
-			url: "/event/201112/",
-			data: "fmoney="+$('#fmoney').val()+"&memo="+$('#memo').val(),
-			success: function(msg){
-				if($.trim(msg) == '1'){
-					
-				}
-				else{
-					
-				}
-		}});
-	}
 //-->
 </script>
 					<!--############### 중앙 컨텐츠 영역 #################-->
@@ -164,9 +136,9 @@
                                                                     <tr>
                                                                       <td height="27"><input id="mem_id" class="mem_input" type="text" size="15" name="mem_id"/>
                                                                         @
-                                                                        <input id="mem_domain" class="mem_input" type="text" size="15" name="mem_domain">
-                                                                        <select name="formselect1" size="1" onchange="domainChange(this.value);">
-                                                                          <option value="">선택하세요</option>
+                                                                        <input id="mem_domain" class="mem_input" type="text" size="15" name="mem_domain" readonly>
+                                                                        <select id="domain_sel" name="formselect1" size="1" onchange="domainChange(this.value);">
+                                                                          
                                                                           <option value="naver.com">naver.com</option>
                                                                           <option value="hanmail.net">hanmail.net</option>
                                                                           <option value="dreamwiz.com">dreamwiz.com</option>
@@ -238,7 +210,7 @@
                                                                     </tr>
                                                                   </table></td>
                                                               </tr>
-                                                              <tr>
+                                                              <!--tr>
                                                                 <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">추천인 아이디</td>
                                                                 <td bgcolor="white" style="padding-left:10px;"><input id="recom_id" class="mem_input" type="text" size="15" name="recom_id">
                                                                   @
@@ -257,7 +229,7 @@
                                                                           <option value="gmail.com">gmail.com</option>
                                                                           <option value="">직접입력하기</option>
                                                                         </select></td>
-                                                              </tr>
+                                                              </tr-->
                                                               <tr>
                                                                 <td bgcolor="#AED247" colspan="2" width="593"></td>
                                                               </tr>
@@ -281,7 +253,11 @@
                             <td>&nbsp;</td>
                           </tr>
                         </table>
-					
+				  
+				  <!--실시간 테이블 시작--> 
+                  <iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe> 
+                  <!--실시간 테이블  끝-->
+                  
 					<!-- 하단  회사 소개 부분  -->
                     <%@ include file="/include/copyright.jsp" %>
                     <!-- 하단  회사 소개 부분  -->

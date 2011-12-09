@@ -2,8 +2,9 @@ package com.goodjob.reserve.dto;
 
 public class ProductSubDto {
 	private int productsub_seq;
+	private String productsub_seqs;
 	private int product_seq;   
-	private String golflink_course;
+	private int golflink_course_seq;
 	private String time_start;    
 	private String time_end;      
 	private int goodjob_price; 
@@ -16,17 +17,23 @@ public class ProductSubDto {
 	public void setProductsub_seq(int productsub_seq) {
 		this.productsub_seq = productsub_seq;
 	}
+	public String getProductsub_seqs() {
+		return productsub_seqs;
+	}
+	public void setProductsub_seqs(String productsub_seqs) {
+		this.productsub_seqs = productsub_seqs;
+	}
 	public int getProduct_seq() {
 		return product_seq;
 	}
 	public void setProduct_seq(int product_seq) {
 		this.product_seq = product_seq;
 	}
-	public String getGolflink_course() {
-		return golflink_course;
+	public int getGolflink_course_seq() {
+		return golflink_course_seq;
 	}
-	public void setGolflink_course(String golflink_course) {
-		this.golflink_course = golflink_course;
+	public void setGolflink_course_seq(int golflink_course_seq) {
+		this.golflink_course_seq = golflink_course_seq;
 	}
 	public String getTime_start() {
 		return time_start;

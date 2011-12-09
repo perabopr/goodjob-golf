@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><%@ page import="org.apache.commons.dbutils.*" %><%@ page import="org.apache.commons.lang.StringUtils"%><%@ page import="java.sql.*,java.util.*" %><%@ page import="org.apache.commons.dbutils.handlers.*" %><%@ page import="com.goodjob.reserve.dto.ProductDto"%><%@ page import="com.goodjob.reserve.dto.ProductSubDto"%><%@ page import="com.goodjob.reserve.productDao"%><% 
+String menuseq = request.getParameter("mnseq");
+String golflinkseq = request.getParameter("glseq");
 String pDate = StringUtils.trimToEmpty(request.getParameter("date"));
 String[] arrDate = pDate.split("/");
 String pYear = arrDate[0];
@@ -6,6 +8,8 @@ String pMonth = arrDate[1];
 String pDay = arrDate[2];
 
 ProductDto pdDto = new ProductDto();
+pdDto.setMenu_seq(Integer.parseInt(menuseq));
+pdDto.setGolflink_seq(Integer.parseInt(golflinkseq));
 pdDto.setProduct_year(pYear);
 pdDto.setProduct_month(pMonth);
 pdDto.setProduct_day(pDay);
@@ -19,7 +23,7 @@ for(int i = 0; i < arrPrdtSub.size();i++){
 	returnJson += "{";
 	returnJson += "\"a\":\"" + arrPrdtSub.get(i).getProductsub_seq() + "\",";
 	returnJson += "\"b\":\"" + arrPrdtSub.get(i).getProduct_seq() + "\",";
-	returnJson += "\"c\":\"" + arrPrdtSub.get(i).getGolflink_course() + "\",";
+	returnJson += "\"c\":\"" + arrPrdtSub.get(i).getGolflink_course_seq() + "\",";
 	returnJson += "\"d\":\"" + arrPrdtSub.get(i).getTime_start() + "\",";
 	returnJson += "\"e\":\"" + arrPrdtSub.get(i).getTime_end() + "\",";
 	returnJson += "\"f\":\"" + arrPrdtSub.get(i).getGoodjob_price() + "\",";

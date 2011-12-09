@@ -1,10 +1,10 @@
-<%@page import="com.goodjob.reserve.dto.GolfLinkDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="java.sql.*,java.util.*" %>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
 <%@ page import="com.goodjob.reserve.dto.RegionDto"%>
+<%@ page import="com.goodjob.reserve.dto.GolfLinkDto"%>
 <%@ page import="com.goodjob.reserve.*" %>
 <%@ page import="com.goodjob.db.*" %>
 <%
@@ -23,7 +23,8 @@
 	}
 	
 	GolfLinkDao dld = new GolfLinkDao();
-	List<GolfLinkDto> arrGolfLink = dld.getGolfLinkList(Integer.parseInt(menuSeq));
+	List<GolfLinkDto> arrGolfLink = null;
+	arrGolfLink = dld.getGolfLinkList(Integer.parseInt(menuSeq));
 	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -94,7 +95,7 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
             </tr>
             </table>
         </td>
-        <td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_real_time_reg.jsp?glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','820','520','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
+        <td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_real_time_reg.jsp?menuseq=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','820','520','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
         <td align="center" bgcolor="white"><a href="real_rule_reg.jsp?glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
         <td align="center" bgcolor="white"><a href="#"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></td>
     </tr>

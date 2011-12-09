@@ -227,12 +227,25 @@ public class RESERVE {
 			"FROM tb_product " +
 			"WHERE product_seq = ?";
 	
+	public static final String product_select_where
+		=	"SELECT" +
+				" product_seq" +
+				",menu_seq" +
+				",golflink_seq" +
+				",product_year" +
+				",product_month" +
+				",product_day" +
+				",view_yn " +
+			"FROM tb_product " +
+			"WHERE menu_seq = ? " +
+			"AND golflink_seq = ? " +
+			"AND product_year = ? " +
+			"AND product_month = ? " +
+			"ORDER BY product_year, product_month, product_day";
+	
 	public static final String product_update
 		=	"UPDATE tb_product" +
-				"SET product_year = ?" +
-				",product_month = ?" +
-			    ",product_day = ?" +
-			    ",view_yn = ? " +
+				"SET view_yn = ? " +
 		    "WHERE product_seq = ?";
 	
 	public static final String product_delete
@@ -243,19 +256,19 @@ public class RESERVE {
 	public static final String product_sub_insert
 		=	"INSERT INTO tb_product_sub(" +
 				" product_seq" +
-				",golflink_course" +
+				",golflink_course_seq" +
 				",time_start" +
 				",time_end" +
 				",goodjob_price" +
 				",NH_price" +
 				",product_status)" +
-			"VALUES(?,?,?,?,?,?,?,?)";
+			"VALUES(?,?,?,?,?,?,?)";
 	
 	public static final String product_sub_select
 		=	"SELECT" +
 				" productsub_seq" +
 				",product_seq" +
-				",golflink_course" +
+				",golflink_course_seq" +
 				",time_start" +
 				",time_end" +
 				",goodjob_price" +
@@ -268,7 +281,7 @@ public class RESERVE {
 		=	"SELECT "+
 				" a.productsub_seq" +
 				",a.product_seq" +
-				",a.golflink_course" +
+				",a.golflink_course_seq" +
 				",a.time_start" +
 				",a.time_end" + 
 				",a.goodjob_price" + 
@@ -276,7 +289,9 @@ public class RESERVE {
 				",a.product_status " + 
 				"FROM tb_product_sub a " +
 				"INNER JOIN tb_product b ON(a.product_seq = b.product_seq) " +
-				"WHERE b.product_year = ? " +
+				"WHERE b.menu_seq = ? " +
+				"AND b.golflink_seq = ? " +
+				"AND b.product_year = ? " +
 				"AND b.product_month = ? " +
 				"AND b.product_day = ? " +
 				"ORDER BY a.productsub_seq";
@@ -284,7 +299,7 @@ public class RESERVE {
 
 	public static final String product_sub_update
 		=	"UPDATE tb_product_sub " +
-			"SET golflink_course = ?" +
+			"SET golflink_course_seq = ?" +
 			",time_start = ?" +
 			",time_end = ?" +
 			",goodjob_price = ?" +
@@ -294,5 +309,6 @@ public class RESERVE {
 
 	public static final String product_sub_delete
 		=	"DELETE FROM tb_product_sub " +
-			"WHERE productsub_seq = ?";
+			"WHERE product_seq = ? " +
+			"AND productsub_seq NOT IN (%s)";
 }

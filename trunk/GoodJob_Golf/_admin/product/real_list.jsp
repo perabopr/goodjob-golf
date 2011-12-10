@@ -5,12 +5,14 @@
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
 <%@ page import="com.goodjob.reserve.dto.RegionDto"%>
 <%@ page import="com.goodjob.reserve.dto.GolfLinkDto"%>
+<%@page import="com.goodjob.reserve.dto.GolfLinkCourseDto"%>
 <%@ page import="com.goodjob.reserve.*" %>
 <%@ page import="com.goodjob.db.*" %>
 <%
+String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
+
 	RegionDao regionDao = new RegionDao();
 	List<RegionDto> arrRegions = regionDao.getRegionList("1");
-	String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
 	String mainTitle = "";
 	String pageName = "";
 
@@ -25,7 +27,6 @@
 	GolfLinkDao dld = new GolfLinkDao();
 	List<GolfLinkDto> arrGolfLink = null;
 	arrGolfLink = dld.getGolfLinkList(Integer.parseInt(menuSeq));
-	
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -48,13 +49,13 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
     <td class=title><%= mainTitle%></td>
-    <td align="right" style="padding-right:30px;"><select name="formselect1" size="1">
+    <td align="right" style="padding-right:30px;"><select name=""ddl_region"" size="1">
         <option>전체지역보기</option>
 <% 
 	if (arrRegions != null && !arrRegions.isEmpty()){
 		for(int i = 0; i < arrRegions.size();i++){
 %>
-        <option><%=arrRegions.get(i).getRegion_name() %></option>
+        <option value="<%=arrRegions.get(i).getRegion_seq() %>"><%=arrRegions.get(i).getRegion_name() %></option>
 <%
 		}
 	}
@@ -72,7 +73,13 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 	    <td bgcolor="#e6e7e8" align="center" width="236"><span class=list_title>골프장명</span></td>
 	    <td bgcolor="#e6e7e8" align="center" width="293"><span class=list_title>주소</span></td>
 	    <td bgcolor="#e6e7e8" align="center" width="159"><span class=list_title>운영방식</span></td>
+	<%
+		if(menuSeq.startsWith("1")){
+	%>
 	    <td width="249" align="center" bgcolor="#E6E7E8"><span class=list_title>코스입력</span></td>
+	<%
+		}
+	%>
 	    <td width="233" align="center" bgcolor="#E6E7E8"><span class=list_title>시간 및 가격입력</span></td>
 	    <td align="center" bgcolor="#E6E7E8" width="248"><span class=list_title>위약처리규정입력 및 수정</span></td>
 	    <td align="center" bgcolor="#E6E7E8" width="216"><span class=list_title>골프장 정보</span></td>
@@ -87,6 +94,9 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 		<td align="center" bgcolor="white"><span class=list_subject><%= arrGolfLink.get(i).getGolflink_name()%></span></td>
 		<td align="center" bgcolor="white"><%= arrGolfLink.get(i).getGolflink_address1()%></td>
 		<td align="center" bgcolor="white"><%= pageName %></td>
+	<%
+	if(menuSeq.startsWith("1")){
+	%>
         <td align="center" bgcolor="white">
         	<table border="0" cellpadding="0" cellspacing="0" width="90%">
             <tr>
@@ -95,9 +105,12 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
             </tr>
             </table>
         </td>
+	<%
+		}
+	%>
         <td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_real_time_reg.jsp?menuseq=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','820','520','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
-        <td align="center" bgcolor="white"><a href="real_rule_reg.jsp?glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
-        <td align="center" bgcolor="white"><a href="#"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></td>
+        <td align="center" bgcolor="white"><a href="real_rule_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
+        <td align="center" bgcolor="white"><a href="real_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></td>
     </tr>
     <%
 		}

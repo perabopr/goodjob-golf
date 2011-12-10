@@ -79,7 +79,7 @@
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>
-                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="package/domestic_list.html" class=left_menu>국내패키지</a></td>
+                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/package_list.jsp?menu=3" class=left_menu>국내패키지</a></td>
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>
@@ -87,7 +87,7 @@
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>
-                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="condo/condo_list.html" class=left_menu>콘도</a></td>
+                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/condo_list.jsp?menu=4" class=left_menu>콘도</a></td>
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>

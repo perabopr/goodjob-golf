@@ -19,7 +19,7 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 
-	String up_dir = Config.get("real_dir");
+	String up_dir = Config.get("reserve_dir");
 	
 	FileUpload fileUpload = new FileUpload(request, up_dir, 1024*1024*5);
 
@@ -34,6 +34,9 @@
 	
 	GolfLinkDto glDto = new GolfLinkDto();
 	glDto.setMenu_seq(Integer.parseInt(paramMap.get("menuSeq")));
+	if(paramMap.get("glSeq").length() > 0){
+		glDto.setGolflink_seq(Integer.parseInt(paramMap.get("glSeq")));
+	}
 	glDto.setGolflink_name((String)paramMap.get("golflinkName"));
 	glDto.setRegion_seq(Integer.parseInt(paramMap.get("regionSeq")));
 	glDto.setHoll_type((String)paramMap.get("hollType"));
@@ -55,18 +58,28 @@
 	glDto.setUse_guide(paramMap.get("content3"));
 	glDto.setGolflink_guide(paramMap.get("content4"));
 	
-	GolfLinkDao glDao = new GolfLinkDao();
-	glDao.setGolfLinkInsert(glDto);
+	GolfLinkDao glDao = new GolfLinkDao();	
+	int idSeq = 0;
+	
+	if(paramMap.get("glSeq").length() > 0){
+		idSeq = glDto.getGolflink_seq();
+		glDao.setGolfLinkUpdate(glDto);
+		glDao.setGolfLinkPriceDelete(idSeq);
+	}else{
+		idSeq = glDao.setGolfLinkInsert(glDto);
+	}
 		
-	for(int i = 1; i <= 3;i++){
+	for(int i = 1; i <= 2;i++){
 		if(paramMap.get("priceN" + Integer.toString(i)).length() > 0){
 			GolfLinkPriceDto glpDto1 = new GolfLinkPriceDto();
+			glpDto1.setGolflink_seq(idSeq);
 			glpDto1.setPrice_type(Integer.toString(i*2-1));
 			glpDto1.setGolflink_price(Integer.parseInt(paramMap.get("priceN" + Integer.toString(i))));
 			glDao.setGolfLinkPriceInsert(glpDto1);
 		}
 		if(paramMap.get("priceS" + Integer.toString(i)).length() > 0){
 			GolfLinkPriceDto glpDto2 = new GolfLinkPriceDto();
+			glpDto2.setGolflink_seq(idSeq);
 			glpDto2.setPrice_type(Integer.toString(i*2));
 			glpDto2.setGolflink_price(Integer.parseInt(paramMap.get("priceS" + Integer.toString(i))));
 			glDao.setGolfLinkPriceInsert(glpDto2);

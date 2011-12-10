@@ -36,7 +36,7 @@ public class productDao {
 	}
 	public int setProductInsert(ProductDto prdtDto){
 		Connection conn = null;
-		int inSeq = 0;
+		int idSeq = 0;
 		try{
 			conn = DBManager.getConnection();
 			ArrayList<Object> bind = new ArrayList<Object>();
@@ -56,7 +56,7 @@ public class productDao {
 			Statement stmt = conn.createStatement();
 			ResultSet rst = stmt.executeQuery(RESERVE.getSequenceId);
 			if(rst.next()){
-				inSeq = rst.getInt(1);
+				idSeq = rst.getInt(1);
 			}
 			
 		} catch (Exception e) {
@@ -64,7 +64,7 @@ public class productDao {
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
-		return inSeq;
+		return idSeq;
 	}
 
 	public List<ProductDto> getProductSelect(ProductDto prdtDto){

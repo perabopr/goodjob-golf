@@ -6,9 +6,6 @@
 <%@ page import="com.goodjob.reserve.dto.ProductSubDto"%>
 <%@ page import="com.goodjob.reserve.productDao"%>
 <%
-/*
-여기 수정하자;;;;;
-*/
 String menuSeq = request.getParameter("menuseq");
 String prdtSeq = request.getParameter("prdtseq");
 String glSeq = request.getParameter("glseq");

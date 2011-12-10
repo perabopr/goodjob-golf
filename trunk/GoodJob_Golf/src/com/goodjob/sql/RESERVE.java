@@ -133,7 +133,7 @@ public class RESERVE {
 				" golflink_seq" +
 				",price_type" +
 				",golflink_price)" +
-			"VALUES(last_insert_id(),?,?)";
+			"VALUES(?,?,?)";
 	public static final String golflink_price_select
 		= 	"SELECT" +
 				" golflink_seq" +
@@ -203,6 +203,57 @@ public class RESERVE {
 	public static final String golflink_reserve_delete
 		=	"DELETE FROM tb_golflink_reserve " +
 			"WHERE productsub_seq = ?";
+	
+	/*----------------------------------------------------------------- tb_golflink_promise*/
+	public static final String golflink_promise_select
+		=	"SELECT " +
+				" golflink_seq" +
+				",promise1_type" + 
+				",promise1" +
+				",promise2_type" +
+				",promise2" +
+				",promise3_type" +
+				",promise3" + 
+				",promise4_type" +
+				",promise4" + 
+				",promise5_type" +
+				",promise5" +
+				",cancelrule " +
+			"FROM tb_golflink_promise " +
+			"WHERE golflink_seq = ?";
+	public static final String golflink_promise_insert
+		=	"INSERT INTO tb_golflink_promise(" +
+			" golflink_seq" +
+			",promise1_type" +
+			",promise1" +
+			",promise2_type" +
+			",promise2" +
+			",promise3_type" +
+			",promise3" +
+			",promise4_type" +
+			",promise4" +
+			",promise5_type" +
+			",promise5" +
+			",cancelrule" +
+			")VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+	public static final String golflink_promise_update
+		=	"UPDATE tb_golflink_promise" +
+				"SET " +
+				" promise1_type = ?" +
+				",promise1 = ?" +
+				",promise2_type = ?" +
+				",promise2 = ?" +
+				",promise3_type = ?" +
+				",promise3 = ?" +
+				",promise4_type = ?" +
+				",promise4 = ?" +
+				",promise5_type = ?" +
+				",promise5 = ?" +
+				",cancelrule = ? " +
+			"WHERE golflink_seq = ?";
+	public static final String golflink_promise_delete
+		=	"DELETE FROM tb_golflink_promise " +	
+			"WHERE golflink_seq = ?";
 	
 	/*----------------------------------------------------------------- tb_product*/
 	public static final String product_insert
@@ -311,4 +362,231 @@ public class RESERVE {
 		=	"DELETE FROM tb_product_sub " +
 			"WHERE product_seq = ? " +
 			"AND productsub_seq NOT IN (%s)";
+
+	/*----------------------------------------------------------------- tb_package*/
+	public static final String package_select
+		=	"SELECT " +
+				" a.package_seq" +
+				",a.package_name1" +
+				",a.package_name2" +
+				",a.region_seq" +
+				",b.region_name" +
+				",a.package_type" +
+				",a.img_main" +
+				",a.img_sub" +
+				",a.img_sub1" +
+				",a.img_sub2" +
+				",a.img_sub3" +
+				",a.img_sub4" +
+				",a.address1" +
+				",a.address2" +
+				",a.point_x" +
+				",a.point_y" +
+				",a.view_yn" +
+				",a.package_guide" +
+				",a.use_guide" +
+				",a.golflink_guide" +
+				",a.way_map " +
+			"FROM tb_package a " +
+			"	INNER JOIN tb_region b on(a.region_seq = b.region_seq) " +
+			"WHERE 1=1 " + "%s";
+	public static final String package_insert
+		=	"INSERT INTO tb_package(" +
+				" package_name1" +
+				",package_name2" +
+				",region_seq_1" +
+				",package_type" +
+				",img_main" +
+				",img_sub" +
+				",img_sub1" +
+				",img_sub2" +
+				",img_sub3" +
+				",img_sub4" +
+				",address1" +
+				",address2" +
+				",point_x" +
+				",point_y" +
+				",view_yn" +
+				",package_guide" +
+				",use_guide" +
+				",golflink_guide" +
+				",way_map" +
+			")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	public static final String package_update
+		=	"UPDATE tb_package " +
+			"SET " +
+				" package_name1 = ?" +
+				",package_name2 = ?" +
+				",region_seq_1 = ?" +
+				",package_type = ?" +
+				",img_main = ?" +
+				",img_sub = ?" +
+				",img_sub1 = ?" +
+				",img_sub2 = ?" +
+				",img_sub3 = ?" +
+				",img_sub4 = ?" +
+				",address1 = ?" +
+				",address2 = ?" +
+				",point_x = ?" +
+				",point_y = ?" +
+				",view_yn = ?" +
+				",package_guide = ?" +
+				",use_guide = ?" +
+				",golflink_guide = ?" +
+				",way_map = ? " +
+			"WHERE package_seq = ?";
+	public static final String package_delete
+		=	"DELETE FROM tb_package " +
+			"WHERE package_seq = ?";
+	/*----------------------------------------------------------------- tb_package_price*/
+	public static final String package_price_select
+		=	"SELECT "+
+				" package_seq" +
+				",peak_n_mon" +
+				",peak_n_tue" +
+				",peak_n_wed" +
+				",peak_n_thu" +
+				",peak_n_fri" +
+				",peak_n_sat" +
+				",peak_n_sun" +
+				",peak_s_mon" +
+				",peak_s_tue" +
+				",peak_s_wed" +
+				",peak_s_thu" +
+				",peak_s_fri" +
+				",peak_s_sat" +
+				",peak_s_sun" +
+				",off_n_mon" +
+				",off_n_tue" +
+				",off_n_wed" +
+				",off_n_thu" +
+				",off_n_fri" +
+				",off_n_sat" +
+				",off_n_sun" +
+				",off_s_mon" +
+				",off_s_tue" +
+				",off_s_wed" +
+				",off_s_thu" +
+				",off_s_fri" +
+				",off_s_sat" +
+				",off_s_sun " +
+			"FROM tb_package_price " +
+			"WHERE package_seq = ?";
+	public static final String package_price_insert
+		=	"INSERT INTO tb_package_price(" +
+				" package_seq" +
+				",peak_n_mon" +
+				",peak_n_tue" +
+				",peak_n_wed" +
+				",peak_n_thu" +
+				",peak_n_fri" +
+				",peak_n_sat" +
+				",peak_n_sun" +
+				",peak_s_mon" +
+				",peak_s_tue" +
+				",peak_s_wed" +
+				",peak_s_thu" +
+				",peak_s_fri" +
+				",peak_s_sat" +
+				",peak_s_sun" +
+				",off_n_mon" +
+				",off_n_tue" +
+				",off_n_wed" +
+				",off_n_thu" +
+				",off_n_fri" +
+				",off_n_sat" +
+				",off_n_sun" +
+				",off_s_mon" +
+				",off_s_tue" +
+				",off_s_wed" +
+				",off_s_thu" +
+				",off_s_fri" +
+				",off_s_sat" +
+				",off_s_sun " +
+			")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	public static String package_price_update
+		=	"UPDATE tb_package_price " +
+				"SET " +
+				" peak_n_mon = ?" +
+				",peak_n_tue = ?" +
+				",peak_n_wed = ?" +
+				",peak_n_thu = ?" +
+				",peak_n_fri = ?" +
+				",peak_n_sat = ?" +
+				",peak_n_sun = ?" +
+				",peak_s_mon = ?" +
+				",peak_s_tue = ?" +
+				",peak_s_wed = ?" +
+				",peak_s_thu = ?" +
+				",peak_s_fri = ?" +
+				",peak_s_sat = ?" +
+				",peak_s_sun = ?" +
+				",off_n_mon = ?" +
+				",off_n_tue = ?" +
+				",off_n_wed = ?" +
+				",off_n_thu = ?" +
+				",off_n_fri = ?" +
+				",off_n_sat = ?" +
+				",off_n_sun = ?" +
+				",off_s_mon = ?" +
+				",off_s_tue = ?" +
+				",off_s_wed = ?" +
+				",off_s_thu = ?" +
+				",off_s_fri = ?" +
+				",off_s_sat = ?" +
+				",off_s_sun = ?" +
+			"WHERE package_seq = ?";
+	public static String package_price_delete
+		=	"DELETE FROM tb_package_price " +
+			"WHERE package_seq = ?";
+	/*----------------------------------------------------------------- tb_package_promise*/
+	public static final String package_promise_select
+		=	"SELECT " +
+				" package_seq" +
+				",promise1_type" + 
+				",promise1" +
+				",promise2_type" +
+				",promise2" +
+				",promise3_type" +
+				",promise3" + 
+				",promise4_type" +
+				",promise4" + 
+				",promise5_type" +
+				",promise5" +
+				",cancelrule " +
+			"FROM tb_package_promise " +
+			"WHERE package_seq = ?";
+	public static final String package_promise_insert
+		=	"INSERT INTO tb_package_promise(" +
+			" package_seq" +
+			",promise1_type" +
+			",promise1" +
+			",promise2_type" +
+			",promise2" +
+			",promise3_type" +
+			",promise3" +
+			",promise4_type" +
+			",promise4" +
+			",promise5_type" +
+			",promise5" +
+			",cancelrule" +
+			")VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+	public static final String package_promise_update
+		=	"UPDATE tb_package_promise" +
+				"SET " +
+				" promise1_type = ?" +
+				",promise1 = ?" +
+				",promise2_type = ?" +
+				",promise2 = ?" +
+				",promise3_type = ?" +
+				",promise3 = ?" +
+				",promise4_type = ?" +
+				",promise4 = ?" +
+				",promise5_type = ?" +
+				",promise5 = ?" +
+				",cancelrule = ? " +
+			"WHERE package_seq = ?";
+	public static final String package_promise_delete
+		=	"DELETE FROM tb_package_promise " +	
+			"WHERE package_seq = ?";
 }

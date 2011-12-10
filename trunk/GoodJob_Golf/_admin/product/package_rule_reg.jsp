@@ -1,32 +1,26 @@
-<%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="java.sql.*,java.util.*" %>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
 <%@ page import="com.goodjob.db.*" %>
-<%@page import="com.goodjob.reserve.dto.GolfLinkPromiseDto"%>
+<%@ page import="com.goodjob.reserve.PackageDao"%>
+<%@ page import="com.goodjob.reserve.dto.PackagePromiseDto"%>
 <%
-String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
-String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));
+String pkSeq = StringUtils.trimToEmpty(request.getParameter("pkSeq"));
 
-List<GolfLinkPromiseDto> arrList = null;
-GolfLinkPromiseDto glpList = new GolfLinkPromiseDto();  
-GolfLinkDao glDao = new GolfLinkDao();
-if(glSeq.length() > 0){
-	arrList = glDao.getGolfLinkPromiseSelect(Integer.parseInt(glSeq));
+List<PackagePromiseDto> arrList = null;
+PackagePromiseDto pkProList = new PackagePromiseDto();  
+PackageDao pkDao = new PackageDao();
+if(pkSeq.length() > 0){
+	arrList = pkDao.getPackagePromiseSelect(Integer.parseInt(pkSeq));
 	if(arrList != null && arrList.size() > 0){
-		glpList = arrList.get(0);
+		pkProList = arrList.get(0);
 	}
 }
 
 
-String pageTitle = "";
-if(menuSeq.startsWith("1")){
-	pageTitle += "★  실시간골프장 위약처리규정 ★";
-}else{
-	pageTitle += "★  사전골프장 위약처리규정 ★";
-}
+String pageTitle = "★ 국내패키지 위약처리규정 ★";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -46,9 +40,8 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 </script>
 </head>
 <body topmargin="10" marginheight="10">
-<FORM NAME="frm" METHOD="post" ACTION="real_rule_reg_ok.jsp" >
-<input type="hidden" id="menuSeq" name="menuSeq" value="<%= menuSeq%>" />
-<input type="hidden" id="glSeq" name="glSeq" value="<%= glSeq%>" />
+<FORM NAME="frm" METHOD="post" ACTION="package_rule_reg_ok.jsp" >
+<input type="hidden" id="pkSeq" name="pkSeq" value="<%= pkSeq%>" />
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
     <td class=title><%= pageTitle %></td>
@@ -67,10 +60,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white">
-              	<input class="input_box" size="55" id="promise1" name="promise1" value="<%= glpList.getPromise1()%>">
+              	<input class="input_box" size="55" id="promise1" name="promise1" value="<%= pkProList.getPromise1()%>">
               </td>
               <td align="center" bgcolor="white">
-              	<input class="input_box" size="55" id="promise1_type" name="promise1_type" value="<%= glpList.getPromise1_type()%>">
+              	<input class="input_box" size="55" id="promise1_type" name="promise1_type" value="<%= pkProList.getPromise1_type()%>">
               </td>
               </tr>
             </table></td>
@@ -84,10 +77,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise2" value="<%= glpList.getPromise2()%>">
+                  <input class="input_box" size="55" name="promise2" value="<%= pkProList.getPromise2()%>">
                 </td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise2_type" value="<%= glpList.getPromise2_type()%>">
+              <input class="input_box" size="55" name="promise2_type" value="<%= pkProList.getPromise2_type()%>">
               </td>
               </tr>
             </table></td>
@@ -101,10 +94,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise3" value="<%= glpList.getPromise3()%>">
+                  <input class="input_box" size="55" name="promise3" value="<%= pkProList.getPromise3()%>">
 				</td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise3_type" value="<%= glpList.getPromise3_type()%>">
+              <input class="input_box" size="55" name="promise3_type" value="<%= pkProList.getPromise3_type()%>">
               </td>
               </tr>
             </table></td>
@@ -118,10 +111,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise4" value="<%= glpList.getPromise4()%>">
+                  <input class="input_box" size="55" name="promise4" value="<%= pkProList.getPromise4()%>">
 			</td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise4_type" value="<%= glpList.getPromise4_type()%>">
+              <input class="input_box" size="55" name="promise4_type" value="<%= pkProList.getPromise4_type()%>">
               </td>
               </tr>
             </table></td>
@@ -136,10 +129,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               <tr>
               
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise5" value="<%= glpList.getPromise5()%>">
+                  <input class="input_box" size="55" name="promise5" value="<%= pkProList.getPromise5()%>">
 			</td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise5_type" value="<%= glpList.getPromise5_type()%>">
+              <input class="input_box" size="55" name="promise5_type" value="<%= pkProList.getPromise5_type()%>">
               </td>
               </tr>
             </table></td>
@@ -154,7 +147,7 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;" width="162"><span class=list_title>취소규정</span></td>
           <td bgcolor="white" style="padding-left:10px;" width="710">
-              <textarea class="box03" rows="8" cols="113" id="cancelrule" name="cancelrule"><%= glpList.getCancelrule() %></textarea>
+              <textarea class="box03" rows="8" cols="113" id="cancelrule" name="cancelrule"><%= pkProList.getCancelrule() %></textarea>
             </td>
         </tr>
       </table></td>

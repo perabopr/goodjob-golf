@@ -33,6 +33,7 @@ import com.goodjob.db.DBManager;
 import com.goodjob.sql.BBS;
 import com.goodjob.sql.SMS;
 import com.goodjob.util.Utils;
+import com.mysql.jdbc.Util;
 
 /**
  * @author gundallove@gmail.com
@@ -233,24 +234,30 @@ public class SMSDao {
 	 * 인증
 	 * @param params
 	 */
-	public void auth(Map<String,Object> params){
+	public boolean auth(Map<String,String> params){
 		
+		boolean isSend = false;
 		Connection conn = null;
 		try {
 			conn = DBManager.getConnection();
 			
 			ArrayList<Object> bind = new ArrayList<Object>();
-			bind.add(params.get("auth_no"));
-			bind.add(params.get("tel_no"));
+			bind.add(params.get("sphone"));
+			bind.add(params.get("authNum"));
 			
-			QueryRunner queryRunner = new QueryRunner();
-			queryRunner.update(conn, SMS.auth , bind.toArray());
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn, SMS.auth , bind.toArray());
+			
+			this.send(params);
+			
+			isSend = true;
 
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
+		return isSend;
 	}
 	
 	/**
@@ -258,7 +265,7 @@ public class SMSDao {
 	 * @param params
 	 * @return 0 : 인증 성공  , 1 : 일치하는 인증값 없음 , 2 : 인증번호 시간 초과 
 	 */
-	public int check(Map<String,Object> params){
+	public int authCheck(Map<String,String> params){
 		
 		int check = 0;
 		Connection conn = null;
@@ -268,7 +275,7 @@ public class SMSDao {
 			
 			ArrayList<Object> bind = new ArrayList<Object>();
 			bind.add(params.get("auth_no"));
-			bind.add(params.get("tel_no"));
+			bind.add(params.get("sphone"));
 			
 			QueryRunner queryRunner = new QueryRunner();
 			ResultSetHandler rsh = new MapHandler();

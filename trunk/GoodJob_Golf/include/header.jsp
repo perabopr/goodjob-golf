@@ -67,16 +67,8 @@
 %>
                             <table border="0" cellpadding="0" cellspacing="0" width="235" bgcolor="#052B48">
                                 <tr>
-                                  <td width="235" height="146" align="center" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="235">
-                                      <tr>
-                                        <td><img src="/images/img_leftmenu/img_login_title.gif" width="235" height="49" border="0"></td>
-                                      </tr>
-                                      <tr>
-                                        <td align="center">
-                                        <%@ include file="/include/logon_form.jsp" %>
-                                         </td>
-                                      </tr>
-                                    </table>
+                                  <td width="235" align="center" valign="top">
+                                   <%@ include file="/include/logon_form.jsp" %>
                                   </td>
                                 </tr>
                               </table>

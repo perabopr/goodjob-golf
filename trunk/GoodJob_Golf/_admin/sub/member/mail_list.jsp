@@ -41,25 +41,9 @@ win = window.open(mypage, myname, winprops)
 if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); } 
 } 
 
-	function mem_type_update(index , id){
+	function mem_type_update(){
 
-		var mem_type = document.getElementsByName("mem_type");
-
-		var i = mem_type[index].options.selectedIndex;
-		var selValue = mem_type[index].options[i].value;
-				
-		$.ajax({
-			type: "POST",
-			url: "/_admin/sub/mem_type_update.jsp",
-			data: "mem_type="+selValue+"&mem_id="+sphone,
-			success: function(msg){
-				if($.trim(msg) == '0'){
-					
-				}
-				else{
-					
-				}
-		}});
+		
 	}
 
 
@@ -76,7 +60,7 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 <body topmargin="10" marginheight="10">
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
-    <td class=title>★ 회원가입현황 ★</td>
+    <td class=title>★ 회원 이메일 발송 ★</td>
   </tr>
   <tr>
     <td align="center" width="1852">&nbsp;</td>
@@ -104,12 +88,12 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
           <td align="center" bgcolor="white"><%=mDto.getMem_id()%></td>
           <td align="center" bgcolor="white"><%=mDto.getMem_mtel()%></td>
           <td align="center" bgcolor="white">
-          	<select id="mem_type" name="mem_type" size="1">
-              <option value="F"<%if("F".equals(mDto.getMem_type())) out.println(" selected");%>>무료회원</option>
-              <option value="1"<%if("1".equals(mDto.getMem_type())) out.println(" selected");%>>유료회원(1년)</option>
-              <option value="2"<%if("2".equals(mDto.getMem_type())) out.println(" selected");%>>유료회원(2년)</option>
+          	<select name="mem_type" size="1">
+              <option value="">무료회원</option>
+              <option value="">유료회원(1년)</option>
+              <option value="">유료회원(2년)</option>
             </select>
-            <a href=""></a><img align="absmiddle" src="../../images/common/btn_save2.gif" onclick="mem_type_update(<%=i%>,'<%=mDto.getMem_id()%>');" width="32" height="16" border="0"></a></td>
+            <a href=""></a><img align="absmiddle" src="../../images/common/btn_save2.gif" width="32" height="16" border="0"></a></td>
           <td align="center" bgcolor="white"><a href="mem_detail.jsp?mem_no=<%=mDto.getMem_no()%>" onClick="NewWindow(this.href,'name','740','520','yes');return false;"><img align="absmiddle" src="../../images/common/btn_detail.gif" width="75" height="22" border="0"></a></td>
         </tr>
 <%

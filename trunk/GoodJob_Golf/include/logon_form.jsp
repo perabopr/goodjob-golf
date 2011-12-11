@@ -15,19 +15,66 @@
 			return;
 		} 
 				
-		var lo_form = document.forms["logonFrm"];
-
-		/*
-		if(!$('#privacy_chk').is(':checked')) {
-			alert("개인보수집동의해야 \n저장 할 수 있습니다.");
-			return;
-		}
-		*/
-		lo_form.action = "/logon/logon.jsp";
-		lo_form.submit();
+		var frm = document.forms["logonFrm"];
+		frm.action = "/logon/logon.jsp";
+		frm.submit();
    	}
 //-->
 </script>
+<%
+	String ses_mem_id = (String)session.getAttribute("mem_id");
+	String ses_mem_name = (String)session.getAttribute("mem_name");
+	
+	if(ses_mem_id != null && ses_mem_id.length() > 0){
+%>
+<table border="0" cellpadding="0" cellspacing="0" width="235">
+   <tr>
+     <td></td>
+   </tr>
+   <tr>
+     <td height="70" align="center">
+<table border="0" cellpadding="0" cellspacing="0" width="207">
+<form name="logonFrm" method="post" action="">
+     <tr>
+       <td><div class="white_b" style="padding-left:15px;"><%=ses_mem_id%></div></td>
+     </tr>
+     <tr>
+       <td height="5"></td>
+     </tr>
+     <tr>
+       <td><div class="white_b" style="padding-left:15px;"><%=ses_mem_name%></div></td>
+     </tr>
+     
+     <tr>
+       <td height="5"></td>
+     </tr>
+     <tr>
+       <td align="center"><a href="/logon/logout.jsp"><img src="/images/common/btn_log_out.gif"  border="0"></a></td>
+     </tr>
+     <tr>
+       <td height="5"></td>
+     </tr>
+     <tr>
+       <td align="center"><img src="/images/common/btn_modify_out.gif"  border="0"></td>
+     </tr>
+     <tr>
+       <td height="5"></td>
+     </tr>
+</form>
+</table>
+       </td>
+    </tr>
+  </table>
+<%
+	}
+	else{
+%>
+<table border="0" cellpadding="0" cellspacing="0" width="235">
+  <tr>
+    <td><img src="/images/img_leftmenu/img_login_title.gif" width="235" height="49" border="0"></td>
+  </tr>
+  <tr>
+    <td height="146" align="center">
 <table border="0" cellpadding="0" cellspacing="0" width="207">
 <form name="logonFrm" method="post" action="">
      <tr>
@@ -38,7 +85,7 @@
        <td height="2"></td>
      </tr>
      <tr>
-       <td width="103"><input id="mem_pwd" class="input_01" type="text" size="20" name="mem_pwd" value=""></td>
+       <td width="103"><input id="mem_pwd" class="input_01" type="password" size="20" name="mem_pwd" value=""></td>
      </tr>
      <tr>
        <td width="207" colspan="2" height="40" align="right"><table border="0" cellpadding="0" cellspacing="0" width="170">
@@ -49,5 +96,11 @@
          </table></td>
      </tr>
 </form>
-   </table>
+</table>
+       </td>
+    </tr>
+  </table>
+<%
+	}
+%>
    

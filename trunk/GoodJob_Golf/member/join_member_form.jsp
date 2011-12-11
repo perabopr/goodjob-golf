@@ -3,6 +3,8 @@
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
 <%
+	//String ses_mem_id = (String)session.getAttribute("mem_id");
+	//String ses_mem_name = (String)session.getAttribute("mem_name");
 	
 %>
 <!-- 상단 영역 -->
@@ -36,7 +38,7 @@
 			return;
 		}
 
-		if($('#mem_pwd').val().length() < 4) {
+		if($('#mem_pwd').val().length < 4) {
 			alert('비밀번호가 너무 짧습니다.');
 			$('#mem_pwd').focus();
 			return;
@@ -76,7 +78,6 @@
 		frm.target =  "ifr_hidden"; 
 		frm.action = "join_member_exe.jsp";
 		frm.submit();
-		
    	}
 
 	function domainChange(val){
@@ -88,7 +89,6 @@
 			$("input[name=mem_domain]").attr("readonly",true);
 			$('#mem_domain').val(val);
 		}
-
 	}
 	
 //-->
@@ -139,7 +139,7 @@
                                                                         <input id="mem_domain" class="mem_input" type="text" size="15" name="mem_domain" readonly>
                                                                         <select id="domain_sel" name="formselect1" size="1" onchange="domainChange(this.value);">
                                                                           
-                                                                          <option value="naver.com">naver.com</option>
+                                                                          <option value="naver.com" selected>naver.com</option>
                                                                           <option value="hanmail.net">hanmail.net</option>
                                                                           <option value="dreamwiz.com">dreamwiz.com</option>
                                                                           <option value="empal.com">empal.com</option>
@@ -169,8 +169,8 @@
                                                               <tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>핸드폰</td>
                                                                 <td bgcolor="white" style="padding-left:10px;">
-                                                                <select id="mobile1" name="formselect1" size="1">
-                                                                            <option value="010">010</option>
+                                                                <select id="mobile1" name="mobile1" size="1">
+                                                                            <option value="010" selected>010</option>
                                                                             <option value="011">011</option>
                                                                             <option value="016">016</option>
                                                                             <option value="017">017</option>
@@ -178,9 +178,9 @@
                                                                             <option value="019">019</option>
                                                                           </select>
                                                                   -
-                                                                  <input id="mobile2" class="mem_input" type="text" size="8" name="id" maxlength="4">
+                                                                  <input id="mobile2" class="mem_input" type="text" size="8" name="mobile2" maxlength="4">
                                                                   -
-                                                                  <input id="mobile3" class="mem_input" type="text" size="8" name="id" maxlength="4"></td>
+                                                                  <input id="mobile3" class="mem_input" type="text" size="8" name="mobile3" maxlength="4"></td>
                                                               </tr>
                                                               <tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>SMS 수신여부</td>

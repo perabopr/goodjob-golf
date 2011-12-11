@@ -22,7 +22,7 @@
 			return;
 		}
 
-		if($('#auth_yn').val() != 'N') {
+		if($('#auth_yn').val() != 'Y') {
 			alert('휴대폰 인증을 하지 않았습니다.');
 			return;
 		}
@@ -30,7 +30,7 @@
 		location.href="/member/join_member_form.jsp";
    	}
 
-   	function sms_send(){
+   	function sms_auth(){
 
    		if(!$('#mobile0').val()) {
 			alert('이통사를 선택해 주세요.');
@@ -54,17 +54,59 @@
 			$('#mobile3').focus();
 			return;
 		}
-		
+
+		var sphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
 		$.ajax({
 			type: "POST",
-			url: "/event/201112/",
-			data: "fmoney="+$('#fmoney').val()+"&memo="+$('#memo').val(),
+			url: "/common/authSMS.jsp",
+			data: "sphone="+sphone,
 			success: function(msg){
-				if($.trim(msg) == '1'){
-					
+				if($.trim(msg) == '0'){
+					alert("인증 번호가 발송 되었습니다.");
 				}
 				else{
-					
+					alert("인증 번호가 발송중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
+				}
+		}});
+	}
+
+   	function auth_check(){
+   	   	
+   		if(!$('#mobile1').val()) {
+			alert('핸드폰 앞자리를 선택해 주세요.');
+			$('#mobile1').focus();
+			return;
+		}
+
+   		if(!$('#mobile2').val()) {
+			alert('핸드폰 번호를 입력해 주세요.');
+			$('#mobile2').focus();
+			return;
+		}
+
+   		if(!$('#mobile3').val()) {
+   			alert('핸드폰 번호를 입력해 주세요.');
+			$('#mobile3').focus();
+			return;
+		}
+
+		var sphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
+		var auth_no = $('#auth_no').val();
+		$.ajax({
+			type: "POST",
+			url: "/common/authCheckSMS.jsp",
+			data: "sphone="+sphone+"&auth_no="+auth_no,
+			success: function(msg){
+			//0 : 인증 성공  , 1 : 일치하는 인증값 없음 , 2 : 인증번호 시간 초과 
+				if($.trim(msg) == '0'){
+					$('#auth_yn').val("Y");
+					alert("인증이 정상적으로 완료 되었습니다.");
+				}
+				else if($.trim(msg) == '1'){
+					alert("일치하는 인증값 없습니다. 잠시후 다시 시도해 주세요!");
+				}
+				else if($.trim(msg) == '2'){
+					alert("입력하신 인증번호는 시간이 초과되었습니다. 잠시후 다시 시도해 주세요!");
 				}
 		}});
 	}
@@ -124,13 +166,13 @@
                                                                 <td width="494" bgcolor="white" align="center" height="100"><table border="0" cellpadding="2" cellspacing="1" width="95%">
                                                                     <tr>
                                                                       <td height="40" align="center"><p>
-                                                                          <select id="mobile0" name="formselect1" size="1">
+                                                                          <select id="mobile0" name="mobile0" size="1">
                                                                             <option value="">통신사선택</option>
                                                                             <option value="SKT">SKT</option>
                                                                             <option value="KT">KT</option>
                                                                             <option value="LG">LG</option>
                                                                           </select>
-                                                                          <select id="mobile1" name="formselect1" size="1">
+                                                                          <select id="mobile1" name="mobile1" size="1">
                                                                             <option value="010">010</option>
                                                                             <option value="011">011</option>
                                                                             <option value="016">016</option>
@@ -139,15 +181,15 @@
                                                                             <option value="019">019</option>
                                                                           </select>
                                                                           -
-                                                                          <input id="mobile1" class="mem_input" type="text" size="8" name="id" maxlength="4">
+                                                                          <input id="mobile2" class="mem_input" type="text" size="8" name="mobile2" maxlength="4">
                                                                           -
-                                                                          <input id="mobile1" class="mem_input" type="text" size="8" name="id" maxlength="4">
-                                                                          <img align="absmiddle" src="/images/mem_join/btn_number_send.gif" width="75" height="19" border="0"></p></td>
+                                                                          <input id="mobile3" class="mem_input" type="text" size="8" name="mobile3" maxlength="4">
+                                                                          <img align="absmiddle" src="/images/mem_join/btn_number_send.gif" onclick="sms_auth();" width="75" height="19" border="0"></p></td>
                                                                     </tr>
                                                                     <tr>
                                                                       <td height="40" align="center"><p><img align="absmiddle" src="/images/mem_join/btn_send_title.gif" width="81" height="19" border="0">
-                                                                          <input id="auth_num" class="mem_input" type="text" size="15" name="id">
-                                                                          <img align="absmiddle" src="/images/mem_join/btn_send_confirm.gif" width="42" height="19" border="0"></p></td>
+                                                                          <input id="auth_no" class="mem_input" type="text" size="15" name="id">
+                                                                          <img align="absmiddle" src="/images/mem_join/btn_send_confirm.gif" onclick="auth_check();" width="42" height="19" border="0"></p></td>
                                                                     </tr>
                                                                     
                                                                   </table></td>

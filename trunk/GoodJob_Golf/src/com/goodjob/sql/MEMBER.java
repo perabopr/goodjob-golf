@@ -39,4 +39,6 @@ public class MEMBER {
 	
 	//탈퇴
 	public static final String secession = " update tb_member set SECESSION = 'Y' , SECESSION_DT = now()  where mem_id= ? ";
+	
+	public static final String logon = " select mem_id , mem_pwd , mem_name , mem_mtel , password(?) as input_pwd from tb_member where mem_id= ? ";
 }

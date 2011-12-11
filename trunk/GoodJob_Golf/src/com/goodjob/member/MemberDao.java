@@ -18,7 +18,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.db.DBManager;
-import com.goodjob.sql.BBS;
 import com.goodjob.sql.MEMBER;
 
 /**
@@ -87,14 +86,14 @@ public class MemberDao {
 	 * @param mem_no
 	 * @return
 	 */
-	public MemberDto getMember(int mem_no){
+	public MemberDto getMember(String mem_id){
 		
 		MemberDto mDto = null;
 		Connection conn = null;
 		
 		try {
 			
-			Integer[] bind = {mem_no};
+			String[] bind = {mem_id};
 			conn = DBManager.getConnection();
 			
 			ResultSetHandler rsh = new BeanHandler(MemberDto.class);
@@ -268,5 +267,29 @@ public class MemberDao {
 		}
 		
 		return isDuplicate;
+	}
+	
+	public MemberDto logon(String mem_id , String mem_pwd){
+		
+		MemberDto mDto = null;
+		Connection conn = null;
+		
+		try {
+			
+			String[] bind = {mem_pwd,mem_id};
+			conn = DBManager.getConnection();
+			
+			ResultSetHandler rsh = new BeanHandler(MemberDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			mDto = (MemberDto)qr.query(conn , MEMBER.logon , rsh , bind);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return mDto;
 	}
 }

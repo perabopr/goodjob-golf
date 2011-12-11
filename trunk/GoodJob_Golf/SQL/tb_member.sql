@@ -3,7 +3,7 @@ CREATE TABLE tb_member (
   MEM_NO int(11) NOT NULL auto_increment,
   MEM_ID varbinary(100) NOT NULL,
   MEM_NAME varbinary(20) NOT NULL,
-  MEM_PWD varbinary(20) NOT NULL,
+  MEM_PWD varbinary(100) NOT NULL,
   MEM_MTEL varbinary(13) default NULL,
   SMS_YN char(1) default NULL,
   EMAIL_YN char(1) default NULL,

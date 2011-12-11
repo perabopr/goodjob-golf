@@ -26,11 +26,27 @@
 	Map<String,String> paramMap = fileUpload.getParamMap();
 	Map<String,String> fileMap = fileUpload.getParamAfterUpload();
 	
-	String upfile0 = (String)fileMap.get("img0");
-	String upfile1 = (String)fileMap.get("img1");
-	String upfile2 = (String)fileMap.get("img2");
-	String upfile3 = (String)fileMap.get("img3");
-	String upfile4 = (String)fileMap.get("img4");
+	String upfile0 = fileMap.get("txtimg0");
+	String upfile1 = fileMap.get("txtimg1");
+	String upfile2 = fileMap.get("txtimg2");
+	String upfile3 = fileMap.get("txtimg3");
+	String upfile4 = fileMap.get("txtimg4");
+	
+	if(fileMap.get("img0") != null){
+		upfile0 = (String)fileMap.get("img0");
+	}
+	if(fileMap.get("img1") != null){
+		upfile1 = (String)fileMap.get("img1");
+	}
+	if(fileMap.get("img2") != null){
+		upfile2 = (String)fileMap.get("img2");
+	}
+	if(fileMap.get("img3") != null){
+		upfile3 = (String)fileMap.get("img3");
+	}
+	if(fileMap.get("img4") != null){
+		upfile4 = (String)fileMap.get("img4");
+	}
 	
 	PackageDto pkDto = new PackageDto();
 	if(paramMap.get("pkSeq").length() > 0){
@@ -38,12 +54,12 @@
 	}
 	pkDto.setPackage_name1(paramMap.get("package_name1"));
 	pkDto.setPackage_name2(paramMap.get("package_name2"));
-	pkDto.setRegion_seq_1(Integer.parseInt(paramMap.get("regionseq")));
-	pkDto.setImg_sub(paramMap.get("upfile0"));
-	pkDto.setImg_sub1(paramMap.get("upfile1"));
-	pkDto.setImg_sub2(paramMap.get("upfile2"));
-	pkDto.setImg_sub3(paramMap.get("upfile3"));
-	pkDto.setImg_sub4(paramMap.get("upfile4"));
+	pkDto.setRegion_seq(Integer.parseInt(paramMap.get("regionseq")));
+	pkDto.setImg_sub(upfile0);
+	pkDto.setImg_sub1(upfile1);
+	pkDto.setImg_sub2(upfile2);
+	pkDto.setImg_sub3(upfile3);
+	pkDto.setImg_sub4(upfile4);
 	pkDto.setAddress1(paramMap.get("address1"));
 	pkDto.setAddress2(paramMap.get("address2"));
 	pkDto.setPoint_x(Integer.parseInt(paramMap.get("pointx")));
@@ -91,6 +107,8 @@
 	if(paramMap.get("pkSeq").length() > 0){//수정
 		pkDao.setPackageUpdate(pkDto);
 		pkDao.setPackagePriceDelete(pkpDto);
+		pkpDto.setPackage_seq(Integer.parseInt(paramMap.get("pkSeq")));
+		pkDao.setPackagePriceInsert(pkpDto);
 	}else{//추가
 		pkDao.setPackageInsert(pkDto, pkpDto);
 	}

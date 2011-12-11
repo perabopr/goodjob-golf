@@ -394,7 +394,7 @@ public class RESERVE {
 		=	"INSERT INTO tb_package(" +
 				" package_name1" +
 				",package_name2" +
-				",region_seq_1" +
+				",region_seq" +
 				",package_type" +
 				",img_main" +
 				",img_sub" +
@@ -417,7 +417,7 @@ public class RESERVE {
 			"SET " +
 				" package_name1 = ?" +
 				",package_name2 = ?" +
-				",region_seq_1 = ?" +
+				",region_seq = ?" +
 				",package_type = ?" +
 				",img_main = ?" +
 				",img_sub = ?" +

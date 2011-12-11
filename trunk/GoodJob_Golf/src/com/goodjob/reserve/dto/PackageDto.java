@@ -15,8 +15,8 @@ public class PackageDto {
 	private String img_sub4 = "";
 	private String address1 = "";
 	private String address2 = "";
-	private int point_x;
-	private int point_y;
+	private String point_x = "";
+	private String point_y = "";
 	private String view_yn = "";
 	private String package_guide = "";
 	private String use_guide = "";
@@ -107,16 +107,16 @@ public class PackageDto {
 	public void setAddress2(String address2) {
 		this.address2 = address2;
 	}
-	public int getPoint_x() {
+	public String getPoint_x() {
 		return point_x;
 	}
-	public void setPoint_x(int point_x) {
+	public void setPoint_x(String point_x) {
 		this.point_x = point_x;
 	}
-	public int getPoint_y() {
+	public String getPoint_y() {
 		return point_y;
 	}
-	public void setPoint_y(int point_y) {
+	public void setPoint_y(String point_y) {
 		this.point_y = point_y;
 	}
 	public String getView_yn() {

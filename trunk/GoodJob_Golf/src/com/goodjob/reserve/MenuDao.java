@@ -15,7 +15,7 @@ import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.reserve.dto.MenuDto;
 import com.goodjob.db.DBManager;
-import com.goodjob.sql.RESERVE;
+import com.goodjob.sql.PRODUCT;
 
 public class MenuDao {
 	/**
@@ -34,7 +34,7 @@ public class MenuDao {
 			ResultSetHandler rsh = new BeanListHandler(MenuDto.class);
 			QueryRunner qr = new QueryRunner();
 						
-			list = (List<MenuDto>) qr.query(conn , RESERVE.menu_select, rsh , bind.toArray());
+			list = (List<MenuDto>) qr.query(conn , PRODUCT.menu_select, rsh , bind.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -59,7 +59,7 @@ public class MenuDao {
 			bind.add(mDto.getMenu_name());
 			
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn, RESERVE.menu_insert, bind.toArray());
+			qr.update(conn, PRODUCT.menu_insert, bind.toArray());
 		}
 		catch (Exception e){
 			System.out.println(e);
@@ -80,7 +80,7 @@ public class MenuDao {
 			conn = DBManager.getConnection();
 			
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn, RESERVE.menu_insert, seq);
+			qr.update(conn, PRODUCT.menu_insert, seq);
 		}
 		catch(Exception e){
 			System.out.println(e);

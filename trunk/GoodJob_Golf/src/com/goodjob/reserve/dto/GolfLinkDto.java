@@ -10,8 +10,8 @@ public class GolfLinkDto {
 	private String course_guide = "";
 	private String golflink_address1 = "";
 	private String golflink_address2 = "";
-	private int point_x;
-	private int point_y;
+	private String point_x = "";
+	private String point_y = "";
 	private String img_main = "";         
 	private String img_sub1 = "";         
 	private String img_sub2 = "";         
@@ -78,16 +78,16 @@ public class GolfLinkDto {
 	public void setGolflink_address2(String golflink_address2) {
 		this.golflink_address2 = golflink_address2;
 	}
-	public int getPoint_x() {
+	public String getPoint_x() {
 		return point_x;
 	}
-	public void setPoint_x(int point_x) {
+	public void setPoint_x(String point_x) {
 		this.point_x = point_x;
 	}
-	public int getPoint_y() {
+	public String getPoint_y() {
 		return point_y;
 	}
-	public void setPoint_y(int point_y) {
+	public void setPoint_y(String point_y) {
 		this.point_y = point_y;
 	}
 	public String getImg_main() {

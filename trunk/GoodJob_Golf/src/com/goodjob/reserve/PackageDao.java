@@ -16,7 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.db.DBManager;
-import com.goodjob.sql.RESERVE;
+import com.goodjob.sql.PRODUCT;
 import com.goodjob.reserve.dto.PackageDto;
 import com.goodjob.reserve.dto.PackagePriceDto;
 import com.goodjob.reserve.dto.PackagePromiseDto;
@@ -39,7 +39,7 @@ public class PackageDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			list = (List<PackageDto>)qr.query(conn, String.format(RESERVE.package_select, strWhere), rsh);	
+			list = (List<PackageDto>)qr.query(conn, String.format(PRODUCT.package_select, strWhere), rsh);	
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -81,11 +81,11 @@ public class PackageDao {
 			
 			//패키지 추가.
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn, RESERVE.package_insert, bind.toArray());
+			qr.update(conn, PRODUCT.package_insert, bind.toArray());
 			
 			//생성키 반환.
 			Statement stmt = conn.createStatement();
-			ResultSet rst = stmt.executeQuery(RESERVE.getSequenceId);
+			ResultSet rst = stmt.executeQuery(PRODUCT.getSequenceId);
 			if(rst.next()){
 				idSeq = rst.getInt(1);
 			}
@@ -133,7 +133,7 @@ public class PackageDao {
 			bind.add(pkDto.getPackage_seq());
 			
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn, RESERVE.package_update, bind.toArray());			
+			qr.update(conn, PRODUCT.package_update, bind.toArray());			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -156,7 +156,7 @@ public class PackageDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.package_update, bind.toArray());			
+			qr.update(conn, PRODUCT.package_update, bind.toArray());			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -183,7 +183,7 @@ public class PackageDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			list = (List<PackagePriceDto>)qr.query(conn, RESERVE.package_price_select, rsh, bind.toArray());	
+			list = (List<PackagePriceDto>)qr.query(conn, PRODUCT.package_price_select, rsh, bind.toArray());	
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -235,7 +235,7 @@ public class PackageDao {
 			bind.add(ppDto.getOff_s_sun());			
 			
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn, RESERVE.package_price_insert, bind.toArray());			
+			qr.update(conn, PRODUCT.package_price_insert, bind.toArray());			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -285,7 +285,7 @@ public class PackageDao {
 			bind.add(ppDto.getPackage_seq());	
 			
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn, RESERVE.package_price_update, bind.toArray());			
+			qr.update(conn, PRODUCT.package_price_update, bind.toArray());			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -307,7 +307,7 @@ public class PackageDao {
 			bind.add(ppDto.getPackage_seq());
 			
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn, RESERVE.package_price_delete, bind.toArray());			
+			qr.update(conn, PRODUCT.package_price_delete, bind.toArray());			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -333,7 +333,7 @@ public class PackageDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			list = (List<PackagePromiseDto>)qr.query(conn, RESERVE.package_promise_select, rsh, bind.toArray());	
+			list = (List<PackagePromiseDto>)qr.query(conn, PRODUCT.package_promise_select, rsh, bind.toArray());	
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -368,7 +368,7 @@ public class PackageDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.package_promise_insert, bind.toArray());
+			qr.update(conn, PRODUCT.package_promise_insert, bind.toArray());
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -400,7 +400,7 @@ public class PackageDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.package_promise_update, bind.toArray());
+			qr.update(conn, PRODUCT.package_promise_update, bind.toArray());
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -422,7 +422,7 @@ public class PackageDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.package_promise_delete, bind.toArray());
+			qr.update(conn, PRODUCT.package_promise_delete, bind.toArray());
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {

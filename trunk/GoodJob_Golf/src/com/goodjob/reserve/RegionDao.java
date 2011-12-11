@@ -15,7 +15,7 @@ import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.reserve.dto.RegionDto;
 import com.goodjob.db.DBManager;
-import com.goodjob.sql.RESERVE;
+import com.goodjob.sql.PRODUCT;
 
 public class RegionDao {
 	
@@ -36,7 +36,7 @@ public class RegionDao {
 			ResultSetHandler rsh = new BeanListHandler(RegionDto.class);
 			QueryRunner qr = new QueryRunner();
 						
-			list = (List<RegionDto>) qr.query(conn , RESERVE.region_select, rsh , bind.toArray());
+			list = (List<RegionDto>) qr.query(conn , PRODUCT.region_select, rsh , bind.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -63,7 +63,7 @@ public class RegionDao {
 			bind.add(rgDto.getRegion_etc());
 			
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn, RESERVE.region_insert, bind.toArray());
+			qr.update(conn, PRODUCT.region_insert, bind.toArray());
 		}
 		catch (Exception e){
 			System.out.println(e);
@@ -84,7 +84,7 @@ public class RegionDao {
 			conn = DBManager.getConnection();
 			
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn, RESERVE.region_insert, seq);
+			qr.update(conn, PRODUCT.region_insert, seq);
 		}
 		catch(Exception e){
 			System.out.println(e);

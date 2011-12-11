@@ -44,7 +44,7 @@ String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));
 			}
 		}
 	}
-	
+
 String pageTitle = "";
 if(menuSeq.startsWith("1")){
 	pageTitle += "★  실시간 ";

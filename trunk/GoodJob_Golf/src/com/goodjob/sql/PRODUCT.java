@@ -1,6 +1,6 @@
 package com.goodjob.sql;
 
-public class RESERVE {
+public class PRODUCT {
 	public static final String getSequenceId = "select last_insert_id()";
 	
 	public static final String region_select = "select * from tb_region where region_type= ?";
@@ -589,4 +589,130 @@ public class RESERVE {
 	public static final String package_promise_delete
 		=	"DELETE FROM tb_package_promise " +	
 			"WHERE package_seq = ?";
+	/*----------------------------------------------------------------- tb_condo*/
+	public static final String condo_select
+		=	"SELECT " +
+				" condo_seq" +
+				",condo_name" +
+				",region_seq" +
+				",saledate_start" +
+				",saledate_end" +
+				",img_main" +
+				",address1" +
+				",address2" +
+				",point_x" +
+				",point_y" +
+				",view_yn" +
+				",condo_info" +
+				",detail_info" +
+				",way_map" +
+				",edit_rule " +
+			"FROM tb_condo " + 
+			"WHERE 1=1 %s";
+	public static final String condo_insert
+		=	"INSERT INTO tb_condo(" +
+				"condo_name" +
+				",region_seq" +
+				",saledate_start" +
+				",saledate_end" +
+				",img_main" +
+				",address1" +
+				",address2" +
+				",point_x" +
+				",point_y" +
+				",view_yn" +
+				",condo_info" +
+				",detail_info" +
+				",way_map" +
+				",edit_rule) " +
+			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	public static final String condo_update
+		=	"UPDATE tb_condo " +
+				"SET " +
+				" condo_name = ?" +
+				",region_seq = ?" +
+				",saledate_start = ?" +
+				",saledate_end = ?" +
+				",img_main = ?" +
+				",address1 = ?" +
+				",address2 = ?" +
+				",point_x = ?" +
+				",point_y = ?" +
+				",view_yn = ?" +
+				",condo_info = ?" +
+				",detail_info = ?" +
+				",way_map = ?" +
+				",edit_rule = ? " +
+			"WHERE condo_seq = ?";
+	public static final String condo_delete
+		=	"DELETE FROM tb_condo " +
+			"WHERE condo_seq = ?";
+	/*----------------------------------------------------------------- tb_condo_gallery*/
+	public static final String condo_gallery_select
+		=	"SELECT " +
+				" condoimg_seq" +
+				",condo_seq" +
+				",condo_img " +
+			"FROM tb_condo_gallery" +
+			"WHERE condo_seq = ?";
+	public static final String condo_gallery_insert
+		=	"INSERT INTO tb_condo_gallery(" +
+				" condo_seq" +
+				",condo_img) "+
+			"VALUES(?,?)";
+	public static final String condo_gallery_update
+		=	"UPDATE tb_condo_gallery " +
+				"SET " +
+				" condo_seq = ?" +
+				",condo_img = ? "+
+			"WHERE condoimg_seq = ?";
+	
+	public static final String condo_gallery_delete
+		=	"DELETE FROM tb_condo_gallery" +
+			"WHERE condo_seq = ? " +
+			"AND condoimg_seq NOT IN (%s)";			
+	/*----------------------------------------------------------------- tb_condo_term*/
+	public static final String condo_term_select
+		=	"SELECT " +
+				" condoterm_seq" +
+				",condo_seq" +
+				",reserve_start" +
+				",reserve_end" +
+				",price_n1" +
+				",price_n2" +
+				",price_n3" +
+				",price_s1" +
+				",price_s2" +
+				",price_s3 " +
+			"FROM tb_condo_reserve_term " +
+			"WHERE condo_seq = ? " +
+			"ORDER BY condoterm_seq";
+	public static final String condo_term_insert
+		=	"INSERT INTO tb_condo_reserve_term(" +
+				"condo_seq" +
+				",reserve_start" +
+				",reserve_end" +
+				",price_n1" +
+				",price_n2" +
+				",price_n3" +
+				",price_s1" +
+				",price_s2" +
+				",price_s3) " +
+			"VALUES(?,?,?,?,?,?,?,?,?)";
+	public static final String condo_term_update
+		=	"UPDATE tb_condo_reserve_term " +
+				"SET " +
+				" reserve_start = ?" +
+				",reserve_end = ?" +
+				",price_n1 = ?" +
+				",price_n2 = ?" +
+				",price_n3 = ?" +
+				",price_s1 = ?" +
+				",price_s2 = ?" +
+				",price_s3 = ? "+
+			"WHERE condoterm_seq = ?";
+	public static final String condo_term_delete
+		=	"DELETE FROM tb_condo_reserve_term " +
+			"WHERE condo_seq = ? " +
+			"AND condoterm_seq NOT IN (%s)";
 }

@@ -56,8 +56,8 @@
 	glDto.setCourse_guide((String)paramMap.get("courseGuide"));
 	glDto.setGolflink_address1((String)paramMap.get("address1"));
 	glDto.setGolflink_address2((String)paramMap.get("address2"));
-	glDto.setPoint_x(Integer.parseInt(paramMap.get("pointx")));
-	glDto.setPoint_y(Integer.parseInt(paramMap.get("pointy")));
+	glDto.setPoint_x(paramMap.get("pointx"));
+	glDto.setPoint_y(paramMap.get("pointy"));
 	glDto.setImg_main(upfile0);
 	glDto.setImg_sub1(upfile1);
 	glDto.setImg_sub2(upfile2);

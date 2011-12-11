@@ -19,7 +19,7 @@ import com.goodjob.db.DBManager;
 
 import com.goodjob.reserve.dto.ProductDto;
 import com.goodjob.reserve.dto.ProductSubDto;
-import com.goodjob.sql.RESERVE;
+import com.goodjob.sql.PRODUCT;
 
 public class productDao {
 	public int getSequenceId(){
@@ -50,11 +50,11 @@ public class productDao {
 			QueryRunner qr = new QueryRunner();
 			
 			//추가
-			qr.update(conn, RESERVE.product_insert, bind.toArray());
+			qr.update(conn, PRODUCT.product_insert, bind.toArray());
 			
 			//생성키 반환.
 			Statement stmt = conn.createStatement();
-			ResultSet rst = stmt.executeQuery(RESERVE.getSequenceId);
+			ResultSet rst = stmt.executeQuery(PRODUCT.getSequenceId);
 			if(rst.next()){
 				idSeq = rst.getInt(1);
 			}
@@ -82,7 +82,7 @@ public class productDao {
 					
 			QueryRunner qr = new QueryRunner();
 			
-			list = (List<ProductDto>)qr.query(conn, RESERVE.product_select_where, rsh, bind.toArray());			
+			list = (List<ProductDto>)qr.query(conn, PRODUCT.product_select_where, rsh, bind.toArray());			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -103,7 +103,7 @@ public class productDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.product_update, bind.toArray());			
+			qr.update(conn, PRODUCT.product_update, bind.toArray());			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -121,7 +121,7 @@ public class productDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.product_delete, bind.toArray());
+			qr.update(conn, PRODUCT.product_delete, bind.toArray());
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -146,7 +146,7 @@ public class productDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			list = (List<ProductSubDto>)qr.query(conn, RESERVE.product_sub_select_date, rsh, bind.toArray());	
+			list = (List<ProductSubDto>)qr.query(conn, PRODUCT.product_sub_select_date, rsh, bind.toArray());	
 					
 		} catch (Exception e) {
 			System.out.println(e);
@@ -166,7 +166,7 @@ public class productDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, String.format(RESERVE.product_sub_delete, prdtsubDto.getProductsub_seqs()), bind.toArray());
+			qr.update(conn, String.format(PRODUCT.product_sub_delete, prdtsubDto.getProductsub_seqs()), bind.toArray());
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -189,7 +189,7 @@ public class productDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.product_sub_insert, bind.toArray());			
+			qr.update(conn, PRODUCT.product_sub_insert, bind.toArray());			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -211,7 +211,7 @@ public class productDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.product_sub_update, bind.toArray());			
+			qr.update(conn, PRODUCT.product_sub_update, bind.toArray());			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

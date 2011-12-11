@@ -16,7 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.db.DBManager;
-import com.goodjob.sql.RESERVE;
+import com.goodjob.sql.PRODUCT;
 import com.goodjob.reserve.dto.GolfLinkCourseDto;
 import com.goodjob.reserve.dto.GolfLinkDto;
 import com.goodjob.reserve.dto.GolfLinkPriceDto;
@@ -39,7 +39,7 @@ public class GolfLinkDao {
 			ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
 			QueryRunner qr = new QueryRunner();
 						
-			list = (List<GolfLinkDto>) qr.query(conn , RESERVE.golflink_select_full, rsh , bind.toArray());
+			list = (List<GolfLinkDto>) qr.query(conn , PRODUCT.golflink_select_full, rsh , bind.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -67,7 +67,7 @@ public class GolfLinkDao {
 			ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
 			QueryRunner qr = new QueryRunner();			
 			
-			list = (List<GolfLinkDto>)qr.query(conn, RESERVE.golflink_select, rsh, bind.toArray());
+			list = (List<GolfLinkDto>)qr.query(conn, PRODUCT.golflink_select, rsh, bind.toArray());
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -110,11 +110,11 @@ public class GolfLinkDao {
 			bind.add(gldto.getGolflink_guide());
 			
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn, RESERVE.golflink_insert, bind.toArray());
+			qr.update(conn, PRODUCT.golflink_insert, bind.toArray());
 			
 			//생성키 반환.
 			Statement stmt = conn.createStatement();
-			ResultSet rst = stmt.executeQuery(RESERVE.getSequenceId);
+			ResultSet rst = stmt.executeQuery(PRODUCT.getSequenceId);
 			if(rst.next()){
 				idSeq = rst.getInt(1);
 			}
@@ -161,7 +161,7 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.golflink_update, bind.toArray());			
+			qr.update(conn, PRODUCT.golflink_update, bind.toArray());			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -182,7 +182,7 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.golflink_delete, bind.toArray());
+			qr.update(conn, PRODUCT.golflink_delete, bind.toArray());
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -207,7 +207,7 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			list = (List<GolfLinkPriceDto>)qr.query(conn, RESERVE.golflink_price_select, rsh, bind.toArray());	
+			list = (List<GolfLinkPriceDto>)qr.query(conn, PRODUCT.golflink_price_select, rsh, bind.toArray());	
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -232,7 +232,7 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.golflink_price_insert, bind.toArray());
+			qr.update(conn, PRODUCT.golflink_price_insert, bind.toArray());
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -253,7 +253,7 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.golflink_price_delete, bind.toArray());
+			qr.update(conn, PRODUCT.golflink_price_delete, bind.toArray());
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -278,7 +278,7 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			list = (List<GolfLinkCourseDto>)qr.query(conn, RESERVE.golflink_course_select, rsh, bind.toArray());			
+			list = (List<GolfLinkCourseDto>)qr.query(conn, PRODUCT.golflink_course_select, rsh, bind.toArray());			
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -302,7 +302,7 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.golflink_course_insert, bind.toArray());
+			qr.update(conn, PRODUCT.golflink_course_insert, bind.toArray());
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -323,7 +323,7 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.golflink_course_delete, bind.toArray());
+			qr.update(conn, PRODUCT.golflink_course_delete, bind.toArray());
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -349,7 +349,7 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			list = (List<GolfLinkPromiseDto>)qr.query(conn, RESERVE.golflink_promise_select, rsh, bind.toArray());	
+			list = (List<GolfLinkPromiseDto>)qr.query(conn, PRODUCT.golflink_promise_select, rsh, bind.toArray());	
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -384,7 +384,7 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.golflink_promise_insert, bind.toArray());
+			qr.update(conn, PRODUCT.golflink_promise_insert, bind.toArray());
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -416,7 +416,7 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.golflink_promise_update, bind.toArray());
+			qr.update(conn, PRODUCT.golflink_promise_update, bind.toArray());
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -438,7 +438,7 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, RESERVE.golflink_promise_delete, bind.toArray());
+			qr.update(conn, PRODUCT.golflink_promise_delete, bind.toArray());
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {

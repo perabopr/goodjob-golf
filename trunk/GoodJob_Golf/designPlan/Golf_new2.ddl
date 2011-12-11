@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS TB_PACKAGE_PROMISE;
 DROP TABLE IF EXISTS TB_GOLFLINK_PROMISE;
 DROP TABLE IF EXISTS TB_GOLFLINK_PRICE;
-DROP TABLE IF EXISTS TB_CONDO_RESERVE_TERM;
+DROP TABLE IF EXISTS TB_CONDO_TERM;
 DROP TABLE IF EXISTS TB_CONDO_GALLERY;
 DROP TABLE IF EXISTS TB_CONDO;
 DROP TABLE IF EXISTS TB_GOLFLINK_RESERVE;
@@ -44,8 +44,8 @@ CREATE TABLE TB_GOLFLINK(
 		course_guide                  		VARCHAR(1000)		 NULL ,
 		golflink_address1             		VARCHAR(100)		 NULL ,
 		golflink_address2             		VARCHAR(100)		 NULL ,
-		point_x                       		INT		 NULL ,
-		point_y                       		INT		 NULL ,
+		point_x                       		VARCHAR(10)		 NULL ,
+		point_y                       		VARCHAR(10)		 NULL ,
 		img_main                      		VARCHAR(50)		 NULL ,
 		img_sub1                      		VARCHAR(50)		 NULL ,
 		img_sub2                      		VARCHAR(50)		 NULL ,
@@ -112,8 +112,8 @@ CREATE TABLE TB_PACKAGE(
 		img_sub4                      		VARCHAR(50)		 NULL ,
 		address1                      		VARCHAR(50)		 NULL ,
 		address2                      		VARCHAR(50)		 NULL ,
-		point_x                       		INT		 NULL ,
-		point_y                       		INT		 NULL ,
+		point_x                       		VARCHAR(10)		 NULL ,
+		point_y                       		VARCHAR(10)		 NULL ,
 		view_yn                       		CHAR(1)		 NULL ,
 		package_guide                 		TEXT		 NULL ,
 		use_guide                     		TEXT		 NULL ,
@@ -180,26 +180,19 @@ CREATE TABLE TB_GOLFLINK_RESERVE(
 /**********************************/
 CREATE TABLE TB_CONDO(
 		condo_seq                     		INT		 NOT NULL AUTO_INCREMENT,
-		region_seq                    		INT		 NULL ,
 		condo_name                    		VARCHAR(50)		 NOT NULL,
-		condo_desc                    		TEXT		 NULL ,
-		condo_location                		MEDIUMINT(10)		 NULL ,
-		use_method                    		MEDIUMINT(10)		 NULL ,
-		condo_term                    		MEDIUMINT(10)		 NULL ,
-		condo_homepage                		MEDIUMINT(10)		 NULL ,
+		region_seq                    		INT		 NOT NULL,
+		saledate_start                		VARCHAR(10)		 NULL ,
+		saledate_end                  		MEDIUMINT(10)		 NULL ,
 		img_main                      		VARCHAR(50)		 NULL ,
-		img_sub                       		VARCHAR(50)		 NULL ,
+		address1                      		VARCHAR(50)		 NOT NULL,
+		address2                      		VARCHAR(50)		 NOT NULL,
+		point_x                       		VARCHAR(10)		 NULL ,
+		point_y                       		VARCHAR(10)		 NULL ,
+		view_yn                       		CHAR(1)		 DEFAULT 'N'		 NOT NULL,
 		condo_info                    		VARCHAR(50)		 NULL ,
 		detail_info                   		VARCHAR(50)		 NULL ,
 		way_map                       		VARCHAR(50)		 NULL ,
-		reserve_term1                 		VARCHAR(10)		 NULL ,
-		reserve_term2                 		VARCHAR(10)		 NULL ,
-		family_week_price             		INT		 NULL ,
-		family_holiday_price          		INT		 NULL ,
-		sweet_week_price              		INT		 NULL ,
-		sweet_holiday_price           		INT		 NULL ,
-		gold_week_price               		INT		 NULL ,
-		gold_holiday_price            		INT		 NULL ,
 		edit_rule                     		TEXT		 NULL 
 );
 
@@ -215,11 +208,17 @@ CREATE TABLE TB_CONDO_GALLERY(
 /**********************************/
 /* Table Name: 콘도예약기간 */
 /**********************************/
-CREATE TABLE TB_CONDO_RESERVE_TERM(
+CREATE TABLE TB_CONDO_TERM(
 		condoterm_seq                 		INT		 NOT NULL AUTO_INCREMENT,
 		condo_seq                     		INT		 NOT NULL,
 		reserve_start                 		DATE		 NOT NULL,
-		reserve_end                   		DATE		 NOT NULL
+		reserve_end                   		DATE		 NOT NULL,
+		price_n1                      		INT		 NULL ,
+		price_n2                      		INT		 NULL ,
+		price_n3                      		INT		 NULL ,
+		price_s1                      		INT		 NULL ,
+		price_s2                      		INT		 NULL ,
+		price_s3                      		INT		 NULL 
 );
 
 /**********************************/
@@ -301,8 +300,8 @@ ALTER TABLE TB_CONDO ADD CONSTRAINT IDX_TB_CONDO_PK PRIMARY KEY (condo_seq);
 ALTER TABLE TB_CONDO_GALLERY ADD CONSTRAINT IDX_TB_CONDO_GALLERY_PK PRIMARY KEY (condoimg_seq);
 ALTER TABLE TB_CONDO_GALLERY ADD CONSTRAINT IDX_TB_CONDO_GALLERY_FK0 FOREIGN KEY (condo_seq) REFERENCES TB_CONDO (condo_seq);
 
-ALTER TABLE TB_CONDO_RESERVE_TERM ADD CONSTRAINT IDX_TB_CONDO_RESERVE_TERM_PK PRIMARY KEY (condoterm_seq);
-ALTER TABLE TB_CONDO_RESERVE_TERM ADD CONSTRAINT IDX_TB_CONDO_RESERVE_TERM_FK0 FOREIGN KEY (condo_seq) REFERENCES TB_CONDO (condo_seq);
+ALTER TABLE TB_CONDO_TERM ADD CONSTRAINT IDX_TB_CONDO_TERM_PK PRIMARY KEY (condoterm_seq);
+ALTER TABLE TB_CONDO_TERM ADD CONSTRAINT IDX_TB_CONDO_TERM_FK0 FOREIGN KEY (condo_seq) REFERENCES TB_CONDO (condo_seq);
 
 ALTER TABLE TB_GOLFLINK_PRICE ADD CONSTRAINT IDX_TB_GOLFLINK_PRICE_PK PRIMARY KEY (golflink_seq, price_type);
 ALTER TABLE TB_GOLFLINK_PRICE ADD CONSTRAINT IDX_TB_GOLFLINK_PRICE_FK0 FOREIGN KEY (golflink_seq) REFERENCES TB_GOLFLINK (golflink_seq);

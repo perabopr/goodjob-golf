@@ -62,8 +62,8 @@
 	pkDto.setImg_sub4(upfile4);
 	pkDto.setAddress1(paramMap.get("address1"));
 	pkDto.setAddress2(paramMap.get("address2"));
-	pkDto.setPoint_x(Integer.parseInt(paramMap.get("pointx")));
-	pkDto.setPoint_y(Integer.parseInt(paramMap.get("pointy")));
+	pkDto.setPoint_x(paramMap.get("pointx"));
+	pkDto.setPoint_y(paramMap.get("pointy"));
 	pkDto.setView_yn(paramMap.get("rdbView"));
 	pkDto.setPackage_guide(paramMap.get("content1"));
 	pkDto.setUse_guide(paramMap.get("content2"));

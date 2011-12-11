@@ -52,7 +52,7 @@ List<RegionDto> arrRegions = regionDao.getRegionList("1");
       </tr>
       <tr>
         <td bgcolor="white" align="center" bgcolor="white">수도권 </td>
-      <td align="center" bgcolor="white"><span class=list_subject>대영베이스</span></td>
+        <td align="center" bgcolor="white"><span class=list_subject>대영베이스</span></td>
         <td align="center" bgcolor="white">경기도 여주</td>
         <td align="center" bgcolor="white">100,000원</td>
         <td align="center" bgcolor="white" span class=red>80,000원</td>
@@ -62,7 +62,7 @@ List<RegionDto> arrRegions = regionDao.getRegionList("1");
     </td>
   </tr>
   <tr>
-    <td colspan="2" align="center" height="100"><a href="condo_input.html"><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0"></a></td>
+    <td colspan="2" align="center" height="100"><a href="condo_reg.jsp?condoSeq="><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0"></a></td>
   </tr>
 </table>
 </body>

@@ -27,10 +27,23 @@
 	Map<String,String> fileMap = fileUpload.getParamAfterUpload();
 	
 	String upfile0 = "";//(String)fileMap.get("img0");
-	String upfile1 = (String)fileMap.get("img1");
-	String upfile2 = (String)fileMap.get("img2");
-	String upfile3 = (String)fileMap.get("img3");
-	String upfile4 = (String)fileMap.get("img4");
+	String upfile1 = fileMap.get("txtimg1");
+	String upfile2 = fileMap.get("txtimg2");
+	String upfile3 = fileMap.get("txtimg3");
+	String upfile4 = fileMap.get("txtimg4");
+	
+	if(fileMap.get("img1") != null){
+		upfile1 = (String)fileMap.get("img1");
+	}
+	if(fileMap.get("img2") != null){
+		upfile2 = (String)fileMap.get("img2");
+	}
+	if(fileMap.get("img3") != null){
+		upfile3 = (String)fileMap.get("img3");
+	}
+	if(fileMap.get("img4") != null){
+		upfile4 = (String)fileMap.get("img4");
+	}
 	
 	GolfLinkDto glDto = new GolfLinkDto();
 	glDto.setMenu_seq(Integer.parseInt(paramMap.get("menuSeq")));

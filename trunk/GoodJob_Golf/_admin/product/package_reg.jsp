@@ -98,28 +98,33 @@ function frmSubmit(){
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>목록이미지</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><input class="upload" name="img0" type="file" size="55">
-            (313x110) </td>
+          <td bgcolor="white" style="padding-left:10px;">
+          <input type="hidden" id="txtimg0" name="txtimg0" value="<%= vPk.getImg_sub() %>">
+          <input class="upload" name="img0" type="file" size="55">(313x110)</td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이미지업로드1</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><input class="upload" name="img1" type="file" size="55">
-            (270x202) </td>
+          <td bgcolor="white" style="padding-left:10px;">
+          <input type="hidden" id="txtimg1" name="txtimg1" value="<%= vPk.getImg_sub1() %>">
+          <input class="upload" name="img1" type="file" size="55">(270x202) </td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이미지업로드2</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><input class="upload" name="img2" type="file" size="55">
-            (270x202)</td>
+          <td bgcolor="white" style="padding-left:10px;">
+          <input type="hidden" id="txtimg2" name="txtimg2" value="<%= vPk.getImg_sub2() %>">
+          <input class="upload" name="img2" type="file" size="55">(270x202)</td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이미지업로드3</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><input class="upload" name="img3" type="file" size="55">
-            (270x202)</td>
+          <td bgcolor="white" style="padding-left:10px;">
+          <input type="hidden" id="txtimg3" name="txtimg3" value="<%= vPk.getImg_sub3() %>">
+          <input class="upload" name="img3" type="file" size="55">(270x202)</td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이미지업로드4</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><input class="upload" name="img4" type="file" size="55">
-            (270x202)</td>
+          <td bgcolor="white" style="padding-left:10px;">
+          <input type="hidden" id="txtimg4" name="txtimg4" value="<%= vPk.getImg_sub4() %>">
+          <input class="upload" name="img4" type="file" size="55">(270x202)</td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>주소</span></td>

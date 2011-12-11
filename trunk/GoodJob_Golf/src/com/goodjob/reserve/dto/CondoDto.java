@@ -4,6 +4,7 @@ public class CondoDto {
 	private int condo_seq;
 	private String condo_name = "";
 	private int region_seq;
+	private String region_name = "";
 	private String saledate_start = "";
 	private String saledate_end = "";
 	private String img_main = "";
@@ -12,6 +13,8 @@ public class CondoDto {
 	private String point_x = "";
 	private String point_y = "";
 	private String view_yn = "";
+	private String reserve_start = "";
+	private String reserve_end = "";
 	private String condo_info = "";
 	private String detail_info = "";
 	private String way_map = "";
@@ -34,6 +37,12 @@ public class CondoDto {
 	}
 	public void setRegion_seq(int region_seq) {
 		this.region_seq = region_seq;
+	}
+	public String getRegion_name() {
+		return region_name;
+	}
+	public void setRegion_name(String region_name) {
+		this.region_name = region_name;
 	}
 	public String getSaledate_start() {
 		return saledate_start;
@@ -82,6 +91,18 @@ public class CondoDto {
 	}
 	public void setView_yn(String view_yn) {
 		this.view_yn = view_yn;
+	}
+	public String getReserve_start() {
+		return reserve_start;
+	}
+	public void setReserve_start(String reserve_start) {
+		this.reserve_start = reserve_start;
+	}
+	public String getReserve_end() {
+		return reserve_end;
+	}
+	public void setReserve_end(String reserve_end) {
+		this.reserve_end = reserve_end;
 	}
 	public String getCondo_info() {
 		return condo_info;

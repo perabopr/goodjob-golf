@@ -1,3 +1,6 @@
+<%@page import="com.goodjob.reserve.dto.CondoRoomDto"%>
+<%@page import="com.goodjob.reserve.dto.CondoGalleryDto"%>
+<%@page import="com.goodjob.reserve.dto.CondoDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
@@ -7,11 +10,32 @@
 <%@ page import="com.goodjob.db.*" %>
 <%@ page import="com.goodjob.reserve.dto.RegionDto"%>
 <%
-String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
+String condoSeq = StringUtils.trimToEmpty(request.getParameter("condoSeq"));
 
 RegionDao regionDao = new RegionDao();
 List<RegionDto> arrRegions = regionDao.getRegionList("1");
 
+CondoDao cDao = new CondoDao();
+List<CondoDto> arrlist = null;
+CondoDto vcDto = new CondoDto();
+List<CondoGalleryDto> arrlist2 = null;
+CondoGalleryDto vcgDto = new CondoGalleryDto();
+List<CondoRoomDto> arrlist3 = null;
+CondoRoomDto vcrDto = new CondoRoomDto();
+if(condoSeq.length() > 0){
+	arrlist = cDao.getCondoSelect("AND a.condo_seq = '" + condoSeq + "'");
+	if(arrlist.size() == 1){
+		vcDto = arrlist.get(0); 
+		arrlist2 = cDao.getCondoGallerySelect(vcDto.getCondo_seq());
+		if(arrlist2.size() == 1){
+			vcgDto = arrlist2.get(0);
+		}
+		arrlist3 = cDao.getCondoTermSelect(vcDto.getCondo_seq());
+		if(arrlist3.size() == 1){
+			vcrDto = arrlist3.get(0);
+		}
+	}
+}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -47,10 +71,29 @@ $(function() {
 	$( "#ReserveDateEnd" ).datepicker({dateFormat:'yy-mm-dd'});
 });
 
+var galleryCnt = 0;
+function addgallery(){
+	galleryCnt++;
+	var strgallery = "<tr id='trgallery"+galleryCnt+"'><td><input type='hidden' name='condoimgseq' >"
+		+ "<input class='upload' name='imggallery' type='file' size='55'>"
+		+ "<img align='absmiddle' src='../images/inc/btn_del.gif' width='13' height='14' border='0' onclick='delgallery("+galleryCnt+")'>"
+		+ "</td></tr>";
+	$("#tbGallery").append(strgallery);
+}
+
+function delgallery(obje){
+	$("#trgallery"+obje).remove();
+}
+
+function condoReg(){
+	frm.submit();
+}
 //--> 
 </script>
 </head>
 <body topmargin="10" marginheight="10">
+<FORM NAME="frm" METHOD="post" ACTION="condo_reg_ok.jsp"  enctype="multipart/form-data">
+<input type="hidden" id="condoSeq" name="condoSeq" value="<%= condoSeq%>" />
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
     <td class=title>★ 콘도 등록 ★</td>
@@ -62,7 +105,7 @@ $(function() {
     <td align="center"><table border="0" width="900" cellpadding="2" cellspacing="1" bgcolor="#CCCCCC">
         <tr>
           <td bgcolor="#E6E7E8" align="right" style="padding-right:10px;" width="162"><span class=list_title>콘도명</span></td>
-          <td width="712" bgcolor="white" style="padding-left:10px;"><input class="input_box" size="40" name="subject"></td>
+          <td width="712" bgcolor="white" style="padding-left:10px;"><input class="input_box" size="40" id="condoname" name="condoname" value="<%= vcDto.getCondo_name() %>"></td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>지역선택</span></td>
@@ -71,9 +114,15 @@ $(function() {
 <% 
 	if (arrRegions != null && !arrRegions.isEmpty()){
 		for(int i = 0; i < arrRegions.size();i++){
+			if(vcDto.getRegion_seq() == arrRegions.get(i).getRegion_seq()){
 %>
-        <option value="<%=arrRegions.get(i).getRegion_seq() %>"><%=arrRegions.get(i).getRegion_name() %></option>
+	        <option value="<%=arrRegions.get(i).getRegion_seq() %>" selected><%=arrRegions.get(i).getRegion_name() %></option>
 <%
+			}else{
+%>
+	        <option value="<%=arrRegions.get(i).getRegion_seq() %>"><%=arrRegions.get(i).getRegion_name() %></option>
+<%
+			}
 		}
 	}
 %>
@@ -82,26 +131,27 @@ $(function() {
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>할인기간</span></td>
           <td bgcolor="white" style="padding-left:10px;"><img align="absmiddle" src="../images/common/img_calendar.gif" width="15" height="16" border="0">
-            <input class="input_box" size="13" id="saleDateStart" name="saleDateStart" readonly>
+            <input class="input_box" size="13" id="saleDateStart" name="saleDateStart" readonly value="<%= vcDto.getSaledate_start() %>">
             ~ <img align="absmiddle" src="../images/common/img_calendar.gif" width="15" height="16" border="0">
-            <input class="input_box" size="13" id="saleDateEnd" name="saleDateEnd" readonly></td>
+            <input class="input_box" size="13" id="saleDateEnd" name="saleDateEnd" readonly value="<%= vcDto.getSaledate_end() %>"></td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>목록이미지</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><input class="upload" name="image1" type="file" size="55">
-            (313x110) </td>
+          <td bgcolor="white" style="padding-left:10px;">
+          	<input type="hidden" name="txtimgmain" value="<%= vcDto.getImg_main() %>">
+          	<input class="upload" name="imgmain" type="file" size="55">(313x110) </td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>주소</span></td>
           <td bgcolor="white" style="padding-left:10px;"><table border="0" width="80%" cellpadding="0" cellspacing="0">
               <tr>
-                <td colspan="2" width="572"><input class="input_box" size="80" name="subject"></td>
+                <td colspan="2" width="572"><input class="input_box" size="80" id="address1" name="address1" value="<%= vcDto.getAddress1()%>"></td>
               </tr>
               <tr>
                 <td colspan="2" height="2" width="572"></td>
               </tr>
               <tr>
-                <td width="495"><input class="input_box" size="80" name="subject"></td>
+                <td width="495"><input class="input_box" size="80" id="address2" name="address2" value="<%= vcDto.getAddress2()%>"></td>
                 <td width="77"><a href="../inc/zip.html" onClick="NewWindow(this.href,'name','420','400','yes');return false;"><img align="absmiddle" src="../images/inc/btn_search.gif" width="45" height="22" border="0"></a></td>
               </tr>
               <tr>
@@ -109,18 +159,33 @@ $(function() {
               </tr>
               <tr>
                 <td colspan="2" width="572"><a href="../inc/naver_map.html" onClick="NewWindow(this.href,'name','420','400','yes');return false;"><img align="absmiddle" src="../images/inc/btn_search_xy.gif" width="65" height="22" border="0"></a> &nbsp;&nbsp;X&nbsp;
-                  <input class="input_box" size="20" name="subject">
+                  <input class="input_box" size="20" id="pointx" name="pointx" value="<%= vcDto.getPoint_x()%>">
                   &nbsp;&nbsp;Y&nbsp;
-                  <input class="input_box" size="20" name="subject"></td>
+                  <input class="input_box" size="20" id="pointy" name="pointy" value="<%= vcDto.getPoint_y()%>"></td>
               </tr>
             </table></td>
         </tr>
         <tr>
-          <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>노출여부</span></td>
-          <td bgcolor="white" style="padding-left:10px;"> 노출함
-            <input type="radio" name="formradio3">
+          <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;" height="25"><span class=list_title>노출여부</span></td>
+          <td bgcolor="white" style="padding-left:10px;">
+          <%
+          	if(vcDto.getView_yn().startsWith("Y")){
+          %>
+          	노출함
+            <input type="radio" id="viewY" name="rdbView" value="Y" checked>
             &nbsp;&nbsp;노출안함
-            <input type="radio" name="formradio4" checked></td>
+            <input type="radio" id="viewN" name="rdbView" value="N">
+          <%
+          	}else{
+          %>
+          	노출함
+            <input type="radio" id="viewY" name="rdbView" value="Y">
+            &nbsp;&nbsp;노출안함
+            <input type="radio" id="viewN" name="rdbView" checked value="N">
+          <%
+          	}
+          %>
+          </td>
         </tr>
       </table></td>
   </tr>
@@ -136,9 +201,9 @@ $(function() {
     <td align="center"><table width="900" cellpadding="2" cellspacing="1" bgcolor="silver">
         <tr>
           <td bgcolor="#FCF9EB" align=middle width="340"><p><img align="absmiddle" src="../images/common/img_calendar.gif" width="15" height="16" border="0">
-              <input class="input_box" size="13" id="ReserveDateStart" name="ReserveDateStart" readonly>
+              <input class="input_box" size="13" id="ReserveDateStart" name="ReserveDateStart" readonly value="<%= vcDto.getReserve_start()%>">
               ~ <img align="absmiddle" src="../images/common/img_calendar.gif" width="15" height="16" border="0">
-              <input class="input_box" size="13" id="ReserveDateEnd" name="ReserveDateEnd" readonly>
+              <input class="input_box" size="13" id="ReserveDateEnd" name="ReserveDateEnd" readonly value="<%= vcDto.getReserve_end()%>">
             </p></td>
           <td width="307" align="center" bgcolor="#FCF9EB" colspan="3"><b>정상가</b></td>
           <td bgcolor=#fcf9eb colspan="3" align=middle  할인요금 width="271"><b>할인가</b></td>
@@ -153,13 +218,13 @@ $(function() {
           <td bgcolor=#fcf9eb align=middle 주말 width="84">휴일</td>
         </tr>
         <tr>
-          <td height="11" align="center" bgcolor="white"><input class="input_box" size="55" name="subject"></td>
-          <td height="11" align="center" bgcolor="white"><input class="input_box" size="10" name="subject"></td>
-          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" name="subject"></td>
-          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" name="subject"></td>
-          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" name="subject"></td>
-          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" name="subject"></td>
-          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" name="subject"></td>
+          <td height="11" align="center" bgcolor="white"><input class="input_box" size="55" id="roomtype" name="roomtype"></td>
+          <td height="11" align="center" bgcolor="white"><input class="input_box" size="10" id="priceN1" name="priceN1"></td>
+          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" id="priceN2" name="priceN2"></td>
+          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" id="priceN3" name="priceN3"></td>
+          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" id="priceS1" name="priceS1"></td>
+          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" id="priceS2" name="priceS2"></td>
+          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" id="priceS3" name="priceS3"></td>
         </tr>
       </table></td>
   </tr>
@@ -170,27 +235,79 @@ $(function() {
     <td align="center"><table border="0" width="899" cellpadding="2" cellspacing="1" bgcolor="#CCCCCC">
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;" width="162"><span class=list_title>콘도안내</span></td>
-          <td bgcolor="white" style="padding-left:10px;" width="710"><textarea class="box03" rows="6" cols="113" name="content1"></textarea></td>
+          <td bgcolor="white" style="padding-left:10px;" width="710"><textarea class="box03" rows="6" cols="113" id="content1" name="content1"><%= vcDto.getCondo_info()%></textarea></td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>상세정보</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="6" cols="113" name="content1"></textarea></td>
+          <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="6" cols="113" id="content2" name="content2"><%= vcDto.getDetail_info()%></textarea></td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>사진갤러리</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><p>
-              <input class="upload" name="image1" type="file" size="55">
-              <img align="absmiddle" src="../images/inc/btn_plus.gif" width="32" height="16" border="0"></p></td>
+          <td bgcolor="white" style="padding-left:10px;">
+			<table border="0">
+			<tr>
+			<!-- 
+			<td valign="top">
+	          	<img align="absmiddle" src="../images/inc/btn_plus.gif" width="32" height="16" border="0" onclick="addgallery();">
+	        </td>
+	         -->
+	        <td>
+	        	<table  border="0" id="tbGallery">
+	        	<tr id="trgallery1">
+	        	<td>
+		        	<input type="hidden" name="condoimgseq1" value="">
+		        	<input type="hidden" name="condoimg1" value="">
+		            <input class="upload" name="imggallery1" type="file" size="55">
+		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('1');"> -->
+	        	</td>
+	        	</tr>
+	        	<tr id="trgallery2">
+	        	<td>
+		        	<input type="hidden" name="condoimgseq2" value="">
+		        	<input type="hidden" name="condoimg2" value="">
+		            <input class="upload" name="imggallery2" type="file" size="55">
+		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('2');"> -->
+	        	</td>
+	        	</tr>
+	        	<tr id="trgallery3">
+	        	<td>
+		        	<input type="hidden" name="condoimgseq3" value="">
+		        	<input type="hidden" name="condoimg3" value="">
+		            <input class="upload" name="imggallery3" type="file" size="55">
+		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('3');"> -->
+	        	</td>
+	        	</tr>
+	        	<tr id="trgallery4">
+	        	<td>
+		        	<input type="hidden" name="condoimgseq4" value="">
+		        	<input type="hidden" name="condoimg4" value="">
+		            <input class="upload" name="imggallery4" type="file" size="55">
+		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('4');"> -->
+	        	</td>
+	        	</tr>
+	        	<tr id="trgallery5">
+	        	<td>
+		        	<input type="hidden" name="condoimgseq" value="">
+		            <input class="upload" name="imggallery5" type="file" size="55">
+		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('5');"> -->
+	        	</td>
+	        	</tr>
+	        	</table>
+	        </td>
+            </tr>
+            </table>
+          </td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>오시는길</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="8" cols="113" name="content1"></textarea></td>
+          <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="8" cols="113" id="content3" name="content3"><%= vcDto.getWay_map()%></textarea></td>
         </tr>
       </table></td>
   </tr>
   <tr>
-    <td align="center" style="padding-top:20px;padding-bottom:20px;"><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0"></td>
+    <td align="center" style="padding-top:20px;padding-bottom:20px;"><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0" onclick="condoReg();"></td>
   </tr>
 </table>
+</FORM>
 </body>
 </html>

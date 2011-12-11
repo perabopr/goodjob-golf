@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS TB_PACKAGE_PROMISE;
 DROP TABLE IF EXISTS TB_GOLFLINK_PROMISE;
 DROP TABLE IF EXISTS TB_GOLFLINK_PRICE;
-DROP TABLE IF EXISTS TB_CONDO_TERM;
+DROP TABLE IF EXISTS TB_CONDO_ROOM;
 DROP TABLE IF EXISTS TB_CONDO_GALLERY;
 DROP TABLE IF EXISTS TB_CONDO;
 DROP TABLE IF EXISTS TB_GOLFLINK_RESERVE;
@@ -183,13 +183,15 @@ CREATE TABLE TB_CONDO(
 		condo_name                    		VARCHAR(50)		 NOT NULL,
 		region_seq                    		INT		 NOT NULL,
 		saledate_start                		VARCHAR(10)		 NULL ,
-		saledate_end                  		MEDIUMINT(10)		 NULL ,
+		saledate_end                  		VARCHAR(10)		 NULL ,
 		img_main                      		VARCHAR(50)		 NULL ,
 		address1                      		VARCHAR(50)		 NOT NULL,
 		address2                      		VARCHAR(50)		 NOT NULL,
 		point_x                       		VARCHAR(10)		 NULL ,
 		point_y                       		VARCHAR(10)		 NULL ,
 		view_yn                       		CHAR(1)		 DEFAULT 'N'		 NOT NULL,
+		reserve_start                 		VARCHAR(10)		 NULL ,
+		reserve_end                   		VARCHAR(10)		 NULL ,
 		condo_info                    		VARCHAR(50)		 NULL ,
 		detail_info                   		VARCHAR(50)		 NULL ,
 		way_map                       		VARCHAR(50)		 NULL ,
@@ -208,11 +210,10 @@ CREATE TABLE TB_CONDO_GALLERY(
 /**********************************/
 /* Table Name: 콘도예약기간 */
 /**********************************/
-CREATE TABLE TB_CONDO_TERM(
+CREATE TABLE TB_CONDO_ROOM(
 		condoterm_seq                 		INT		 NOT NULL AUTO_INCREMENT,
 		condo_seq                     		INT		 NOT NULL,
-		reserve_start                 		DATE		 NOT NULL,
-		reserve_end                   		DATE		 NOT NULL,
+		roomtype                      		VARCHAR(50)		 NULL ,
 		price_n1                      		INT		 NULL ,
 		price_n2                      		INT		 NULL ,
 		price_n3                      		INT		 NULL ,
@@ -300,8 +301,8 @@ ALTER TABLE TB_CONDO ADD CONSTRAINT IDX_TB_CONDO_PK PRIMARY KEY (condo_seq);
 ALTER TABLE TB_CONDO_GALLERY ADD CONSTRAINT IDX_TB_CONDO_GALLERY_PK PRIMARY KEY (condoimg_seq);
 ALTER TABLE TB_CONDO_GALLERY ADD CONSTRAINT IDX_TB_CONDO_GALLERY_FK0 FOREIGN KEY (condo_seq) REFERENCES TB_CONDO (condo_seq);
 
-ALTER TABLE TB_CONDO_TERM ADD CONSTRAINT IDX_TB_CONDO_TERM_PK PRIMARY KEY (condoterm_seq);
-ALTER TABLE TB_CONDO_TERM ADD CONSTRAINT IDX_TB_CONDO_TERM_FK0 FOREIGN KEY (condo_seq) REFERENCES TB_CONDO (condo_seq);
+ALTER TABLE TB_CONDO_ROOM ADD CONSTRAINT IDX_TB_CONDO_ROOM_PK PRIMARY KEY (condoterm_seq);
+ALTER TABLE TB_CONDO_ROOM ADD CONSTRAINT IDX_TB_CONDO_ROOM_FK0 FOREIGN KEY (condo_seq) REFERENCES TB_CONDO (condo_seq);
 
 ALTER TABLE TB_GOLFLINK_PRICE ADD CONSTRAINT IDX_TB_GOLFLINK_PRICE_PK PRIMARY KEY (golflink_seq, price_type);
 ALTER TABLE TB_GOLFLINK_PRICE ADD CONSTRAINT IDX_TB_GOLFLINK_PRICE_FK0 FOREIGN KEY (golflink_seq) REFERENCES TB_GOLFLINK (golflink_seq);

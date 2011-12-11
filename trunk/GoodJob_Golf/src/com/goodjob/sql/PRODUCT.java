@@ -592,22 +592,26 @@ public class PRODUCT {
 	/*----------------------------------------------------------------- tb_condo*/
 	public static final String condo_select
 		=	"SELECT " +
-				" condo_seq" +
-				",condo_name" +
-				",region_seq" +
-				",saledate_start" +
-				",saledate_end" +
-				",img_main" +
-				",address1" +
-				",address2" +
-				",point_x" +
-				",point_y" +
-				",view_yn" +
-				",condo_info" +
-				",detail_info" +
-				",way_map" +
-				",edit_rule " +
-			"FROM tb_condo " + 
+				" a.condo_seq" +
+				",a.condo_name" +
+				",a.region_seq" +
+				",b.region_name" +
+				",a.saledate_start" +
+				",a.saledate_end" +
+				",a.img_main" +
+				",a.address1" +
+				",a.address2" +
+				",a.point_x" +
+				",a.point_y" +
+				",a.view_yn" +
+				",a.reserve_start" +
+				",a.reserve_end" +
+				",a.condo_info" +
+				",a.detail_info" +
+				",a.way_map" +
+				",a.edit_rule " +
+			"FROM tb_condo a " +
+			"INNER JOIN tb_region b on(a.region_seq = b.region_seq) " +
 			"WHERE 1=1 %s";
 	public static final String condo_insert
 		=	"INSERT INTO tb_condo(" +
@@ -621,11 +625,13 @@ public class PRODUCT {
 				",point_x" +
 				",point_y" +
 				",view_yn" +
+				",reserve_start" +
+				",reserve_end" +
 				",condo_info" +
 				",detail_info" +
 				",way_map" +
 				",edit_rule) " +
-			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public static final String condo_update
 		=	"UPDATE tb_condo " +
 				"SET " +
@@ -639,6 +645,8 @@ public class PRODUCT {
 				",point_x = ?" +
 				",point_y = ?" +
 				",view_yn = ?" +
+				",reserve_start = ?" +
+				",reserve_end = ?" +
 				",condo_info = ?" +
 				",detail_info = ?" +
 				",way_map = ?" +
@@ -650,69 +658,65 @@ public class PRODUCT {
 	/*----------------------------------------------------------------- tb_condo_gallery*/
 	public static final String condo_gallery_select
 		=	"SELECT " +
-				" condoimg_seq" +
-				",condo_seq" +
+				" condoimg_seq " +
+				",condo_seq " +
 				",condo_img " +
-			"FROM tb_condo_gallery" +
+			"FROM tb_condo_gallery " +
 			"WHERE condo_seq = ?";
 	public static final String condo_gallery_insert
-		=	"INSERT INTO tb_condo_gallery(" +
-				" condo_seq" +
+		=	"INSERT INTO tb_condo_gallery( " +
+				" condo_seq " +
 				",condo_img) "+
 			"VALUES(?,?)";
 	public static final String condo_gallery_update
 		=	"UPDATE tb_condo_gallery " +
 				"SET " +
-				" condo_seq = ?" +
-				",condo_img = ? "+
+				"condo_img = ? "+
 			"WHERE condoimg_seq = ?";
 	
 	public static final String condo_gallery_delete
-		=	"DELETE FROM tb_condo_gallery" +
+		=	"DELETE FROM tb_condo_gallery " +
 			"WHERE condo_seq = ? " +
 			"AND condoimg_seq NOT IN (%s)";			
-	/*----------------------------------------------------------------- tb_condo_term*/
+	/*----------------------------------------------------------------- tb_condo_room*/
 	public static final String condo_term_select
 		=	"SELECT " +
-				" condoterm_seq" +
-				",condo_seq" +
-				",reserve_start" +
-				",reserve_end" +
-				",price_n1" +
-				",price_n2" +
-				",price_n3" +
-				",price_s1" +
-				",price_s2" +
+				" condoterm_seq " +
+				",condo_seq " +
+				",roomtype " +
+				",price_n1 " +
+				",price_n2 " +
+				",price_n3 " +
+				",price_s1 " +
+				",price_s2 " +
 				",price_s3 " +
-			"FROM tb_condo_reserve_term " +
+			"FROM tb_condo_room " +
 			"WHERE condo_seq = ? " +
 			"ORDER BY condoterm_seq";
-	public static final String condo_term_insert
-		=	"INSERT INTO tb_condo_reserve_term(" +
-				"condo_seq" +
-				",reserve_start" +
-				",reserve_end" +
-				",price_n1" +
-				",price_n2" +
-				",price_n3" +
-				",price_s1" +
-				",price_s2" +
+	public static final String condo_room_insert
+		=	"INSERT INTO tb_condo_room( " +
+				" condo_seq " +
+				",roomtype " +
+				",price_n1 " +
+				",price_n2 " +
+				",price_n3 " +
+				",price_s1 " +
+				",price_s2 " +
 				",price_s3) " +
 			"VALUES(?,?,?,?,?,?,?,?,?)";
-	public static final String condo_term_update
-		=	"UPDATE tb_condo_reserve_term " +
+	public static final String condo_room_update
+		=	"UPDATE tb_condo_room " +
 				"SET " +
-				" reserve_start = ?" +
-				",reserve_end = ?" +
-				",price_n1 = ?" +
-				",price_n2 = ?" +
-				",price_n3 = ?" +
-				",price_s1 = ?" +
-				",price_s2 = ?" +
+				" roomtype = ? " +
+				",price_n1 = ? " +
+				",price_n2 = ? " +
+				",price_n3 = ? " +
+				",price_s1 = ? " +
+				",price_s2 = ? " +
 				",price_s3 = ? "+
 			"WHERE condoterm_seq = ?";
-	public static final String condo_term_delete
-		=	"DELETE FROM tb_condo_reserve_term " +
+	public static final String condo_room_delete
+		=	"DELETE FROM tb_condo_room " +
 			"WHERE condo_seq = ? " +
 			"AND condoterm_seq NOT IN (%s)";
 }

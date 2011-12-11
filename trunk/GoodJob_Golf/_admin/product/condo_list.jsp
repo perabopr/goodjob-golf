@@ -6,11 +6,15 @@
 <%@ page import="com.goodjob.reserve.*" %>
 <%@ page import="com.goodjob.db.*" %>
 <%@ page import="com.goodjob.reserve.dto.RegionDto"%>
+<%@page import="com.goodjob.reserve.dto.CondoDto"%>
 <%
 String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
 
 RegionDao regionDao = new RegionDao();
 List<RegionDto> arrRegions = regionDao.getRegionList("1");
+
+CondoDao cDao = new CondoDao();
+List<CondoDto> arrCondo = cDao.getCondoSelect("");
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -46,18 +50,28 @@ List<RegionDto> arrRegions = regionDao.getRegionList("1");
         <td bgcolor="#e6e7e8" align="center" height="25" width="230"><span class=list_title>지역</span></td>
         <td bgcolor="#e6e7e8" align="center" width="355"><span class=list_title>콘도명</span></td>
         <td bgcolor="#e6e7e8" align="center" width="501"><span class=list_title>위치</span></td>
+         <!-- 
         <td bgcolor="#e6e7e8" align="center" width="237"><span class=list_title>주중가</span></td>
         <td align="center" bgcolor="#E6E7E8" width="260"><span class=list_title>주말가</span></td>
+        -->
         <td align="center" bgcolor="#E6E7E8" width="268"></td>
       </tr>
+<%
+	for(int i = 0; i < arrCondo.size(); i++){
+%>
       <tr>
-        <td bgcolor="white" align="center" bgcolor="white">수도권 </td>
-        <td align="center" bgcolor="white"><span class=list_subject>대영베이스</span></td>
-        <td align="center" bgcolor="white">경기도 여주</td>
+        <td bgcolor="white" align="center" bgcolor="white"><%= arrCondo.get(i).getRegion_name() %></td>
+        <td align="center" bgcolor="white"><span class=list_subject><%= arrCondo.get(i).getCondo_name() %></span></td>
+        <td align="center" bgcolor="white"><%= arrCondo.get(i).getAddress1()%></td>
+         <!-- 
         <td align="center" bgcolor="white">100,000원</td>
         <td align="center" bgcolor="white" span class=red>80,000원</td>
-        <td align="center" bgcolor="white"><a href=#"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></td>
+         -->
+        <td align="center" bgcolor="white"><a href="condo_reg.jsp?condoSeq=<%= arrCondo.get(i).getCondo_seq() %>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></td>
       </tr>
+<%
+	}
+%>
     </table>
     </td>
   </tr>

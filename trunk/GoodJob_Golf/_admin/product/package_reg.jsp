@@ -171,6 +171,7 @@ function frmSubmit(){
           <%
           	}
           %>
+          </td>
         </tr>
       </table></td>
   </tr>

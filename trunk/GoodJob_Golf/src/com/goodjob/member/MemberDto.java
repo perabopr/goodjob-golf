@@ -29,6 +29,7 @@ public class MemberDto implements Serializable {
 	private String reg_dt;
 	private String login_dt;
 	private int login_attempt;
+	private String input_pwd;
 	
 	
 	public Long getMem_no() {
@@ -110,5 +111,10 @@ public class MemberDto implements Serializable {
 	public void setMem_type(String memType) {
 		mem_type = memType;
 	}
-	
+	public String getInput_pwd() {
+		return input_pwd;
+	}
+	public void setInput_pwd(String inputPwd) {
+		input_pwd = inputPwd;
+	}
 }

@@ -6,6 +6,8 @@
 <%@page import="com.goodjob.member.MemberDto"%>
 <%
 	
+	request.setCharacterEncoding("utf-8");
+
 	String mem_name 	= StringUtils.trimToEmpty(request.getParameter("mem_name"));
 	String mem_id 		= StringUtils.trimToEmpty(request.getParameter("mem_id"));
 	String mem_domain 	= StringUtils.trimToEmpty(request.getParameter("mem_domain"));
@@ -31,15 +33,7 @@
 	}
 	else{
 		
-		/*
-		bind.add(mDto.getMem_id());
-			bind.add(mDto.getMem_name());
-			bind.add(mDto.getMem_pwd());
-			bind.add(mDto.getMem_mtel());
-			bind.add(mDto.getSms_yn());
-			bind.add(mDto.getEmail_yn());
-			bind.add(mDto.getRecommend());
-		*/
+		
 		MemberDto mDto = new MemberDto();
 		mDto.setMem_id(mem_id+"@"+mem_domain);
 		mDto.setMem_name(mem_name);

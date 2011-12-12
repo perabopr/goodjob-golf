@@ -1,7 +1,7 @@
 package com.goodjob.reserve.dto;
 
 public class CondoRoomDto {
-	private int condoterm_seq;
+	private int condoroom_seq;
 	private int condo_seq;
 	private String roomtype = "";
 	private int price_n1;
@@ -11,11 +11,11 @@ public class CondoRoomDto {
 	private int price_s2;
 	private int price_s3;
 	
-	public int getCondoterm_seq() {
-		return condoterm_seq;
+	public int getCondoroom_seq() {
+		return condoroom_seq;
 	}
-	public void setCondoterm_seq(int condoterm_seq) {
-		this.condoterm_seq = condoterm_seq;
+	public void setCondoroom_seq(int condoterm_seq) {
+		this.condoroom_seq = condoterm_seq;
 	}
 	public int getCondo_seq() {
 		return condo_seq;

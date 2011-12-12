@@ -14,25 +14,25 @@
 	
 	String up_dir = Config.get("bbs_dir");
 	
+	
 	FileUpload fileUpload = new FileUpload(request, up_dir, 1024*1024*5);
 
-	Map<String,String> paramMap = fileUpload.getParamMap();
+	//Map<String,String> paramMap = fileUpload.getParamMap();
 	Map<String,String> fileMap = fileUpload.getParamAfterUpload();
 	
-	String idx = (String)paramMap.get("idx");
-	String email = (String)paramMap.get("email");
-	String subject = (String)paramMap.get("subject");
+	String idx = fileUpload.getParameter("idx");
+	String email = fileUpload.getParameter("email");
+	String subject = fileUpload.getParameter("subject");
 	
-	String name = (String)paramMap.get("name");
-	String content = (String)paramMap.get("content");
-	String password = (String)paramMap.get("password");
+	String[] name = fileUpload.getParameterValues("name");
+	
+	String content = fileUpload.getParameter("content");
+	String password = fileUpload.getParameter("password");
 	String upfile = (String)fileMap.get("upfile");
-	
-	//System.out.println(upfile);
 	
 	BoardDto dto = new BoardDto();
 	dto.setEmail(email);
-	dto.setName(name);
+	dto.setName(name[0]);
 	dto.setMem_id("");
 	dto.setSubject(subject);
 	dto.setContent(content);

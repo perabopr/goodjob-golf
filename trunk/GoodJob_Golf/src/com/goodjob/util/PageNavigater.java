@@ -85,10 +85,10 @@ public class PageNavigater {
 		
 		StringBuffer str 	= new StringBuffer();
 		// onMouseOver=\"roll_over(this, true);\" onMouseOut=\"roll_over(this,false);\"
-		String firstImage 	= "<img class=\"paging01\" src=\"/_admin/images/board/btn_prev_dual.gif\" border=\"0\" alt=\"처음페이지\" >";
-		String prevImage 	= "<img class=\"paging01\" src=\"/_admin/images/board/btn_prev.gif\" border=\"0\" alt=\"이전페이지\" >";
-		String nextImage 	= "<img class=\"paging01\" src=\"/_admin/images/board/btn_next.gif\" border=\"0\" alt=\"다음페이지\" >";
-		String lastImage 	= "<img class=\"paging01\" src=\"/_admin/images/board/btn_next_dual.gif\" border=\"0\" alt=\"마지막페이지\" >";
+		String firstImage 	= "<img align=\"absmiddle\" src=\"/_admin/images/board/btn_prev_dual.gif\" border=\"0\" alt=\"처음페이지\" >";
+		String prevImage 	= "<img align=\"absmiddle\" src=\"/_admin/images/board/btn_prev.gif\" border=\"0\" alt=\"이전페이지\" >";
+		String nextImage 	= "<img align=\"absmiddle\" src=\"/_admin/images/board/btn_next.gif\" border=\"0\" alt=\"다음페이지\" >";
+		String lastImage 	= "<img align=\"absmiddle\" src=\"/_admin/images/board/btn_next_dual.gif\" border=\"0\" alt=\"마지막페이지\" >";
 		
 		int blockCnt = 1; //현재 블럭 번호
 
@@ -99,7 +99,7 @@ public class PageNavigater {
 		int prePage 	= ((blockCnt-2)*blockSize)+1; 	//이전블럭시작페이지
 		
 		
-		str.append("<div>\n");
+		str.append("<div><span class=normal_b>\n");
 		
 		//처음페이지
 		if(npage != 1){
@@ -150,7 +150,7 @@ public class PageNavigater {
 				str.append("<A HREF=\"#\">"+lastImage+"</a> \n");
 			}
 		}
-		str.append("</div>\n");
+		str.append("</span></div>\n");
 		
 		return str.toString();
 	}

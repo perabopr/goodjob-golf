@@ -1,25 +1,32 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
+<%@ page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@ page import="java.sql.*,java.util.*" %>
-<%@ page import="org.apache.commons.dbutils.handlers.*" %>
 <%@ page import="com.goodjob.board.*" %>
-<%@ page import="com.goodjob.db.*" %>
+<%@page import="com.goodjob.util.PageNavigater"%>
+<%@page import="com.goodjob.sql.BBS"%>
 <%
 	//통합 게시판 
-	BoardDao dao = new BoardDao();
+	BoardDao bDao = new BoardDao();
 	
 	String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
 	String field = StringUtils.trimToEmpty(request.getParameter("field"));
 	String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
+	
+	PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , BBS.per_page );
 	
 	Map<String,String> params = new HashMap<String,String>();
 	params.put("npage",npage);
 	params.put("field",field);
 	params.put("keyword",keyword);
 	
-	List<BoardDto> bbsList = dao.getList("TB_NOTICE_BBS" , params);
 	
+	List<BoardDto> bbsList = bDao.getList("TB_NOTICE_BBS" , params);
+	
+	int totalCount = bDao.getTotalCount("TB_NOTICE_BBS" , params);
+	
+	String strPage = paging.getPaging(totalCount, false);
 %>
 <html>
 <head>
@@ -74,7 +81,7 @@
 					<tr>
                      <td height="24" width="40" align="center"><%=dto.getSeq()%></td>
                      <td width="10"><img src="../../images/board/bl.gif" width="10" height="22"></td>
-                     <td width="437" class="list"><a href="notice_view.html"><a href="./view.jsp?seq=<%=dto.getSeq()%>"><%=dto.getSubject()%></a></a></td>
+                     <td width="437" class="list"><a href="notice_view.html"><a href="./notice_view.jsp?seq=<%=dto.getSeq()%>"><%=dto.getSubject()%></a></a></td>
                      <td width="10">&nbsp;</td>
                      <td width="9"><img src="../../images/board/bl.gif" width="10" height="22"></td>
                      <td width="80" align="center"><%=dto.getWrite_date()%></td>
@@ -117,11 +124,7 @@
             </table></td>
         </tr>
                 <tr>
-                    <td height="50" align="center">
-                        <p><img align="absmiddle" src="../../images/board/btn_prev_dual.gif" width="16" height="15" border="0"> <img align="absmiddle" src="../../images/board/btn_prev.gif" width="16" height="15" border="0"> <span class=normal_b>1 &nbsp;</span>I &nbsp;2 &nbsp;I &nbsp;3 &nbsp;I &nbsp;4 &nbsp;I &nbsp;5 &nbsp;I &nbsp;6 &nbsp;I &nbsp;7 &nbsp;I &nbsp;8 &nbsp;I &nbsp;9 &nbsp;I &nbsp;10 <img align="absmiddle" src="../../images/board/btn_next.gif" width="16" height="15" border="0">
-<img align="absmiddle" src="../../images/board/btn_next_dual.gif"
-width="16" height="15" border="0"></p>
-                    </td>
+                    <td height="50" align="center"><p><span class=normal_b><%=strPage%></span></p></td>
                 </tr>
         <tr>
           <td align="right"><a href="notice_write.jsp"><img src="../../images/board/bbs_write.gif" border="0"></a></td>

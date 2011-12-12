@@ -21,7 +21,7 @@
 <script type="text/javascript" src="/js/highgardenEditor.js"></script>
 <script language="javascript" type="text/javascript">
 	
-function bbs_submit() {
+function on_submit() {
 	
 	if(!$('#subject').val()) {
 		alert('제목을 입력하시기 바랍니다.');
@@ -29,6 +29,7 @@ function bbs_submit() {
 		return;
 	} 
 
+	/*
 	if(!$('#name').val()) {
 		alert('이름을 입력하시기 바랍니다.');
 		$('#name').focus();
@@ -55,7 +56,7 @@ function bbs_submit() {
 			return;
 		}
 	}
-	
+	*/
 	frm.submit();
 }
 
@@ -92,6 +93,9 @@ var rootDir = '.';
   <tr>
     <td align="center">&nbsp;</td>
   </tr>
+<FORM NAME="frm" METHOD="post" ACTION="notice_write_reg.jsp"  enctype="multipart/form-data">
+<input type="hidden" name="idx" values="<%=idx%>"/>
+<input type="hidden" name="thread" values="<%=thread%>"/>
   <tr>
     <td align="center"><table width="600" border="0" cellspacing="0" cellpadding="0">
         <tr>
@@ -125,7 +129,7 @@ var rootDir = '.';
           <td align="center"><table width="500" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="200">&nbsp;</td>
-                <td align="center" width="100"><input type="image" src="../../images/board/bbs_reg.gif"  border="0"></td>
+                <td align="center" width="100"><a href="javascript:on_submit();"><img src="../../images/board/bbs_reg.gif" border="0"></a></td>
                 <td align="center" width="100"><a href="notice_list.asp"><img src="../../images/board/bbs_cancel.gif"  border="0"></a></td>
                 <td width="200" align="right">&nbsp;</td>
               </tr>
@@ -133,6 +137,7 @@ var rootDir = '.';
         </tr>
       </table></td>
   </tr>
+</FORM>
   <tr>
     <td align="center"><p>&nbsp;</p></td>
   </tr>

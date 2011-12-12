@@ -83,7 +83,7 @@ public class BoardDao {
 	 */
 	public int getTotalCount(String tableName , Map<String,String> data) {
 		Connection conn = null;
-		Map<String, Integer> map = null;
+		Map<String, Long> map = null;
 		try {
 			
 			String field = StringUtils.defaultIfEmpty(data.get("field"), "");
@@ -112,7 +112,7 @@ public class BoardDao {
 				params.add(keyword);
 			}
 			
-			map = (Map) qr.query(conn, String.format(BBS.totalcnt, tableName , where) , rsh , params.toArray());
+			map = (Map<String, Long>)qr.query(conn, String.format(BBS.totalcnt, tableName , where) , rsh , params.toArray());
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -120,7 +120,7 @@ public class BoardDao {
 			DbUtils.closeQuietly(conn);
 		}
 
-		return map.get("cnt");
+		return NumberUtils.toInt(map.get("cnt")+"");
 	}
 
 	/**

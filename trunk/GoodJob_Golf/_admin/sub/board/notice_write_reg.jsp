@@ -14,29 +14,29 @@
 	
 	String up_dir = Config.get("bbs_dir");
 	
-	FileUpload fileUpload = new FileUpload(request, up_dir, 1024*1024*5);
+	FileUpload upload = new FileUpload(request, up_dir, 1024*1024*5);
 
-	Map<String,String> paramMap = fileUpload.getParamMap();
-	Map<String,String> fileMap = fileUpload.getParamAfterUpload();
+	//Map<String,String> paramMap = fileUpload.getParamMap();
+	Map<String,String> fileMap = upload.getParamAfterUpload();
 	
-	String idx = (String)paramMap.get("idx");
-	String email = (String)paramMap.get("email");
-	String subject = (String)paramMap.get("subject");
+	String idx = upload.getParameter("idx");
+	String email = upload.getParameter("email");
+	String subject = upload.getParameter("subject");
 	
-	String name = (String)paramMap.get("name");
-	String content = (String)paramMap.get("content");
-	String password = (String)paramMap.get("password");
+	String name = upload.getParameter("name");
+	String content = upload.getParameter("content");
+	String password = upload.getParameter("password");
 	String upfile = (String)fileMap.get("upfile");
 	
 	//System.out.println(upfile);
 	
 	BoardDto dto = new BoardDto();
-	dto.setEmail(email);
-	dto.setName(name);
+	dto.setEmail("savekorea@goodjobgolf.com");
+	dto.setName("관리자");
 	dto.setMem_id("");
 	dto.setSubject(subject);
 	dto.setContent(content);
-	dto.setPassword(password);
+	dto.setPassword("1111");
 	dto.setFilename(upfile);
 	dto.setWriteip(request.getRemoteAddr());
 	dto.setIshtml("N");
@@ -45,6 +45,6 @@
 	dao.setInsert("TB_NOTICE_BBS" , dto);
 	
 	try{
-		response.sendRedirect("./list.jsp");
+		response.sendRedirect("./notice_list.jsp");
 	}catch(Exception e){}
 %>

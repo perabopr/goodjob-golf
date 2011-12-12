@@ -52,12 +52,7 @@ function bbs_submit() {
 		$('#subject').focus();
 		return;
 	} 
-
-	if(!$('#name').val()) {
-		alert('이름을 입력하시기 바랍니다.');
-		$('#name').focus();
-		return;
-	}
+	
 	
 	if(!$('#content').val()) {
 		alert('내용을 입력하시기 바랍니다.');
@@ -123,6 +118,13 @@ var rootDir = '.';
 				<tr>
 					<td class="ptable2" >제목</td>
 					<td class="ptable3"><input id="subject" type="text" name="subject" value="<%=StringUtils.trimToEmpty(dto.getSubject())%>" maxlength="100" size="55" /></td>
+				</tr>
+				<tr>
+					<td class="btable4" colspan="2"></td>
+				</tr>
+				<tr>
+					<td class="ptable2" >이름</td>
+					<td class="ptable3"><input id="name" type="text" name="name" value="<%=StringUtils.trimToEmpty(dto.getName())%>" maxlength="100" size="55" /></td>
 				</tr>
 				<tr>
 					<td class="btable4" colspan="2"></td>

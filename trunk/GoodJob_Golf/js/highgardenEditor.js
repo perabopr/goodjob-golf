@@ -209,7 +209,7 @@ function HighEditor(oldTxtArea, mode){
         if(this.iconSet[this.mode][j] == "-"){
           iconHtml += '<span style="width:3px">&nbsp;</span>';
         }else if(this.iconSet[this.mode][j] == "--"){
-          iconHtml += '</div><div style="padding-top:2px;padding-right:2px;padding-bottom:2px;">';
+          iconHtml += '</div><div style="padding-top:2px;padding-bottom:2px;">';
         }else if(this.iconSet[this.mode][j] == "fontsize"){
           iconHtml += '<select style="width:60px;height:20px;" name="fontsize" align="absolute middle" onchange="editorExec(\'' + this.iconSet[this.mode][j] + '\', false, this.value,\'' + this.newTxtAreaId + '\')">';
           for(k=0;k<this.fontsize.length;k++){

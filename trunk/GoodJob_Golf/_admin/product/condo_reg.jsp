@@ -19,21 +19,13 @@ CondoDao cDao = new CondoDao();
 List<CondoDto> arrlist = null;
 CondoDto vcDto = new CondoDto();
 List<CondoGalleryDto> arrlist2 = null;
-CondoGalleryDto vcgDto = new CondoGalleryDto();
 List<CondoRoomDto> arrlist3 = null;
-CondoRoomDto vcrDto = new CondoRoomDto();
 if(condoSeq.length() > 0){
 	arrlist = cDao.getCondoSelect("AND a.condo_seq = '" + condoSeq + "'");
 	if(arrlist.size() == 1){
 		vcDto = arrlist.get(0); 
-		arrlist2 = cDao.getCondoGallerySelect(vcDto.getCondo_seq());
-		if(arrlist2.size() == 1){
-			vcgDto = arrlist2.get(0);
-		}
-		arrlist3 = cDao.getCondoTermSelect(vcDto.getCondo_seq());
-		if(arrlist3.size() == 1){
-			vcrDto = arrlist3.get(0);
-		}
+		arrlist2 = cDao.getCondoGallerySelect(vcDto.getCondo_seq());		
+		arrlist3 = cDao.getCondoRoomSelect(vcDto.getCondo_seq());
 	}
 }
 %>
@@ -217,15 +209,65 @@ function condoReg(){
           <td align="center" bgcolor="#FCF9EB" width="88">주말</td>
           <td bgcolor=#fcf9eb align=middle 주말 width="84">휴일</td>
         </tr>
-        <tr>
-          <td height="11" align="center" bgcolor="white"><input class="input_box" size="55" id="roomtype" name="roomtype"></td>
-          <td height="11" align="center" bgcolor="white"><input class="input_box" size="10" id="priceN1" name="priceN1"></td>
-          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" id="priceN2" name="priceN2"></td>
-          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" id="priceN3" name="priceN3"></td>
-          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" id="priceS1" name="priceS1"></td>
-          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" id="priceS2" name="priceS2"></td>
-          <td height="22" align="center" bgcolor="white"><input class="input_box" size="10" id="priceS3" name="priceS3"></td>
+	<% 
+		for(int i = 1; i < 11;i++){
+			if(arrlist3.size() >= i){
+	%>
+		<tr>
+          <td height="11" align="center" bgcolor="white">
+          	<input type="hidden" id="condoroomseq<%=i%>" name="condoroomseq<%=i%>" value="<%= arrlist3.get(i-1).getCondoroom_seq()%>">
+          	<input class="input_box" size="55" id="roomtype<%=i%>" name="roomtype<%=i%>" value="<%= arrlist3.get(i-1).getRoomtype()%>">
+          </td>
+          <td height="11" align="center" bgcolor="white">
+          	<input class="input_box" size="10" id="price1N<%=i%>" name="price1N<%=i%>" value="<%= arrlist3.get(i-1).getPrice_n1()%>">
+          </td>
+          <td height="22" align="center" bgcolor="white">
+          	<input class="input_box" size="10" id="price2N<%=i%>" name="price2N<%=i%>" value="<%= arrlist3.get(i-1).getPrice_n2()%>">
+          </td>
+          <td height="22" align="center" bgcolor="white">
+          	<input class="input_box" size="10" id="price3N<%=i%>" name="price3N<%=i%>" value="<%= arrlist3.get(i-1).getPrice_n3()%>">
+          </td>
+          <td height="22" align="center" bgcolor="white">
+          	<input class="input_box" size="10" id="price1S<%=i%>" name="price1S<%=i%>" value="<%= arrlist3.get(i-1).getPrice_s1()%>">
+          </td>
+          <td height="22" align="center" bgcolor="white">
+          	<input class="input_box" size="10" id="price2S<%=i%>" name="price2S<%=i%>" value="<%= arrlist3.get(i-1).getPrice_s2()%>">
+          </td>
+          <td height="22" align="center" bgcolor="white">
+          	<input class="input_box" size="10" id="price3S<%=i%>" name="price3S<%=i%>" value="<%= arrlist3.get(i-1).getPrice_s3()%>">
+          </td>
         </tr>
+	<%
+			}else{
+	%>
+		<tr>
+          <td height="11" align="center" bgcolor="white">
+          	<input type="hidden" id="condoroomseq<%=i%>" name="condoroomseq<%=i%>" value="">
+          	<input class="input_box" size="55" id="roomtype<%=i%>" name="roomtype<%=i%>" value="">
+          </td>
+          <td height="11" align="center" bgcolor="white">
+          	<input class="input_box" size="10" id="price1N<%=i%>" name="price1N<%=i%>" value="">
+          </td>
+          <td height="22" align="center" bgcolor="white">
+          	<input class="input_box" size="10" id="price2N<%=i%>" name="price2N<%=i%>" value="">
+          </td>
+          <td height="22" align="center" bgcolor="white">
+          	<input class="input_box" size="10" id="price3N<%=i%>" name="price3N<%=i%>" value="">
+          </td>
+          <td height="22" align="center" bgcolor="white">
+          	<input class="input_box" size="10" id="price1S<%=i%>" name="price1S<%=i%>" value="">
+          </td>
+          <td height="22" align="center" bgcolor="white">
+          	<input class="input_box" size="10" id="price2S<%=i%>" name="price2S<%=i%>" value="">
+          </td>
+          <td height="22" align="center" bgcolor="white">
+          	<input class="input_box" size="10" id="price3S<%=i%>" name="price3S<%=i%>" value="">
+          </td>
+        </tr>
+	<%
+			}
+		} 
+	%>
       </table></td>
   </tr>
   <tr>
@@ -255,39 +297,40 @@ function condoReg(){
 	        	<table  border="0" id="tbGallery">
 	        	<tr id="trgallery1">
 	        	<td>
-		        	<input type="hidden" name="condoimgseq1" value="">
-		        	<input type="hidden" name="condoimg1" value="">
+		        	<input type="hidden" name="condoimgseq1" value="<% if(arrlist2.size()>0){out.print(arrlist2.get(0).getCondoimg_seq());} %>">
+		        	<input type="hidden" name="condoimg1" value="<% if(arrlist2.size()>0){out.print(arrlist2.get(1).getCondo_img());} %>">
 		            <input class="upload" name="imggallery1" type="file" size="55">
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('1');"> -->
 	        	</td>
 	        	</tr>
 	        	<tr id="trgallery2">
 	        	<td>
-		        	<input type="hidden" name="condoimgseq2" value="">
-		        	<input type="hidden" name="condoimg2" value="">
+		        	<input type="hidden" name="condoimgseq2" value="<% if(arrlist2.size()>0){out.print(arrlist2.get(1).getCondoimg_seq());} %>">
+		        	<input type="hidden" name="condoimg2" value="<% if(arrlist2.size()>0){out.print(arrlist2.get(1).getCondo_img());} %>">
 		            <input class="upload" name="imggallery2" type="file" size="55">
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('2');"> -->
 	        	</td>
 	        	</tr>
 	        	<tr id="trgallery3">
 	        	<td>
-		        	<input type="hidden" name="condoimgseq3" value="">
-		        	<input type="hidden" name="condoimg3" value="">
+		        	<input type="hidden" name="condoimgseq3" value="<% if(arrlist2.size()>0){out.print(arrlist2.get(2).getCondoimg_seq());} %>">
+		        	<input type="hidden" name="condoimg3" value="<% if(arrlist2.size()>0){out.print(arrlist2.get(2).getCondo_img());} %>">
 		            <input class="upload" name="imggallery3" type="file" size="55">
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('3');"> -->
 	        	</td>
 	        	</tr>
 	        	<tr id="trgallery4">
 	        	<td>
-		        	<input type="hidden" name="condoimgseq4" value="">
-		        	<input type="hidden" name="condoimg4" value="">
+		        	<input type="hidden" name="condoimgseq4" value="<% if(arrlist2.size()>0){out.print(arrlist2.get(3).getCondoimg_seq());} %>">
+		        	<input type="hidden" name="condoimg4" value="<% if(arrlist2.size()>0){out.print(arrlist2.get(3).getCondo_img());} %>">
 		            <input class="upload" name="imggallery4" type="file" size="55">
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('4');"> -->
 	        	</td>
 	        	</tr>
 	        	<tr id="trgallery5">
 	        	<td>
-		        	<input type="hidden" name="condoimgseq" value="">
+		        	<input type="hidden" name="condoimgseq5" value="<% if(arrlist2.size()>0){out.print(arrlist2.get(4).getCondoimg_seq());} %>">
+		        	<input type="hidden" name="condoimg5" value="<% if(arrlist2.size()>0){out.print(arrlist2.get(4).getCondo_img());} %>">
 		            <input class="upload" name="imggallery5" type="file" size="55">
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('5');"> -->
 	        	</td>

@@ -247,7 +247,7 @@ public class CondoDao {
 	 * @param idSeq
 	 * @return
 	 */
-	public List<CondoRoomDto> getCondoTermSelect(int idSeq){
+	public List<CondoRoomDto> getCondoRoomSelect(int idSeq){
 		List<CondoRoomDto> list = null;
 		Connection conn = null;
 		try {
@@ -272,7 +272,7 @@ public class CondoDao {
 	 * 콘도룸 - 추가.
 	 * @param ctDto
 	 */
-	public void setCondoTermInsert(CondoRoomDto ctDto){
+	public void setCondoRoomInsert(CondoRoomDto ctDto){
 		Connection conn = null;
 		try{
 			conn = DBManager.getConnection();
@@ -300,12 +300,11 @@ public class CondoDao {
 	 * 콘도룸 - 수정.
 	 * @param ctDto
 	 */
-	public void setCondoTermUpdate(CondoRoomDto ctDto){
+	public void setCondoRoomUpdate(CondoRoomDto ctDto){
 		Connection conn = null;
 		try{
 			conn = DBManager.getConnection();
 			ArrayList<Object> bind = new ArrayList<Object>();
-			bind.add(ctDto.getCondo_seq());
 			bind.add(ctDto.getRoomtype());
 			bind.add(ctDto.getPrice_n1());
 			bind.add(ctDto.getPrice_n2());
@@ -313,7 +312,7 @@ public class CondoDao {
 			bind.add(ctDto.getPrice_s1());
 			bind.add(ctDto.getPrice_s2());
 			bind.add(ctDto.getPrice_s3());
-			bind.add(ctDto.getCondoterm_seq());
+			bind.add(ctDto.getCondoroom_seq());
 			
 			QueryRunner qr = new QueryRunner();
 			
@@ -330,7 +329,7 @@ public class CondoDao {
 	 * @param idSeq
 	 * @param strWhere
 	 */
-	public void setCondoTermDelete(int idSeq, String strWhere){
+	public void setCondoRoomDelete(int idSeq, String strWhere){
 		Connection conn = null;
 		try{
 			conn = DBManager.getConnection();

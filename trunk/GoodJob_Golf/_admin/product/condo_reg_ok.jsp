@@ -1,3 +1,4 @@
+<%@page import="com.goodjob.reserve.dto.CondoRoomDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
@@ -54,22 +55,63 @@
 		idSeq = cDao.setCondoInsert(cDto);
 	}
 	
+	//** 객실
+	for(int i = 1;i < 11;i++){
+		String condoroomseq = StringUtils.trimToEmpty(paramMap.get("condoroomseq" +i));
+		String roomtype = StringUtils.trimToEmpty(paramMap.get("roomtype" +i));
+		String price1N = StringUtils.trimToEmpty(paramMap.get("price1N" +i));
+		if(price1N.length()==0){price1N = "0";}
+		String price2N = StringUtils.trimToEmpty(paramMap.get("price2N" +i));
+		if(price2N.length()==0){price2N = "0";}
+		String price3N = StringUtils.trimToEmpty(paramMap.get("price3N" +i));
+		if(price3N.length()==0){price3N = "0";}
+		String price1S = StringUtils.trimToEmpty(paramMap.get("price1S" +i));
+		if(price1S.length()==0){price1S = "0";}
+		String price2S = StringUtils.trimToEmpty(paramMap.get("price2S" +i));
+		if(price2S.length()==0){price2S = "0";}
+		String price3S = StringUtils.trimToEmpty(paramMap.get("price3S" +i));
+		if(price3S.length()==0){price3S = "0";}
 
-	String imgseq1 = paramMap.get("condoimgseq1");
-	String upfilegallery1 = paramMap.get("condoimg1");
-	if(fileMap.get("imggallery1") != null){
-		upfilegallery1 = (String)fileMap.get("imggallery1");
+		CondoRoomDto crDto = new CondoRoomDto();
+		crDto.setCondo_seq(idSeq);
+		crDto.setRoomtype(roomtype);
+		crDto.setPrice_n1(Integer.parseInt(price1N));
+		crDto.setPrice_n2(Integer.parseInt(price2N));
+		crDto.setPrice_n3(Integer.parseInt(price3N));
+		crDto.setPrice_s1(Integer.parseInt(price1N));
+		crDto.setPrice_s2(Integer.parseInt(price2S));
+		crDto.setPrice_s3(Integer.parseInt(price3S));
+		if(condoroomseq.length() > 0){	//수정
+			crDto.setCondoroom_seq(Integer.parseInt(condoroomseq));
+			cDao.setCondoRoomUpdate(crDto);
+		}else{	//추가
+			if(roomtype.length()>0){
+				cDao.setCondoRoomInsert(crDto);
+			}
+		}
 	}
 	
-	CondoGalleryDto cgDto1 = new CondoGalleryDto();
-	cgDto1.setCondo_seq(idSeq);
-	cgDto1.setCondo_img(upfilegallery1);
-
-	if(imgseq1.length() > 0){	//수정
-		cgDto1.setCondoimg_seq(Integer.parseInt(imgseq1));
-		cDao.setCondoGalleryUpdate(cgDto1);
-	}else{//추가
-		cDao.setCondoGalleryInsert(cgDto1);
+	//** 이미지갤러리
+	for(int i = 1; i < 6;i++){
+		String imgseq = StringUtils.trimToEmpty(paramMap.get("condoimgseq"+i));		
+		String upfilegallery = StringUtils.trimToEmpty(paramMap.get("condoimg"+i));
+		if(fileMap.get("imggallery" + i) != null){
+			upfilegallery = (String)fileMap.get("imggallery" + i);
+		}
+		
+		CondoGalleryDto cgDto = new CondoGalleryDto();
+		cgDto.setCondo_seq(idSeq);
+		cgDto.setCondo_img(upfilegallery);
+	
+		if(imgseq.length() > 0){	//수정
+			cgDto.setCondoimg_seq(Integer.parseInt(imgseq));
+			cDao.setCondoGalleryUpdate(cgDto);
+		}else{//추가
+			cDao.setCondoGalleryInsert(cgDto);
+		}
 	}
 	
+	try{
+		response.sendRedirect("./condo_reg.jsp?condoSeq=" + paramMap.get("condoSeq"));
+	}catch(Exception e){}
 %>

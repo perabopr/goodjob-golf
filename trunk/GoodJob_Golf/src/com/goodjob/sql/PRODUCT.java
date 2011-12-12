@@ -662,7 +662,8 @@ public class PRODUCT {
 				",condo_seq " +
 				",condo_img " +
 			"FROM tb_condo_gallery " +
-			"WHERE condo_seq = ?";
+			"WHERE condo_seq = ? " +
+			"ORDER BY condoimg_seq";
 	public static final String condo_gallery_insert
 		=	"INSERT INTO tb_condo_gallery( " +
 				" condo_seq " +
@@ -681,7 +682,7 @@ public class PRODUCT {
 	/*----------------------------------------------------------------- tb_condo_room*/
 	public static final String condo_term_select
 		=	"SELECT " +
-				" condoterm_seq " +
+				" condoroom_seq " +
 				",condo_seq " +
 				",roomtype " +
 				",price_n1 " +
@@ -692,7 +693,7 @@ public class PRODUCT {
 				",price_s3 " +
 			"FROM tb_condo_room " +
 			"WHERE condo_seq = ? " +
-			"ORDER BY condoterm_seq";
+			"ORDER BY condoroom_seq";
 	public static final String condo_room_insert
 		=	"INSERT INTO tb_condo_room( " +
 				" condo_seq " +
@@ -703,7 +704,7 @@ public class PRODUCT {
 				",price_s1 " +
 				",price_s2 " +
 				",price_s3) " +
-			"VALUES(?,?,?,?,?,?,?,?,?)";
+			"VALUES(?,?,?,?,?,?,?,?)";
 	public static final String condo_room_update
 		=	"UPDATE tb_condo_room " +
 				"SET " +
@@ -714,9 +715,9 @@ public class PRODUCT {
 				",price_s1 = ? " +
 				",price_s2 = ? " +
 				",price_s3 = ? "+
-			"WHERE condoterm_seq = ?";
+			"WHERE condoroom_seq = ?";
 	public static final String condo_room_delete
 		=	"DELETE FROM tb_condo_room " +
 			"WHERE condo_seq = ? " +
-			"AND condoterm_seq NOT IN (%s)";
+			"AND condoroom_seq NOT IN (%s)";
 }

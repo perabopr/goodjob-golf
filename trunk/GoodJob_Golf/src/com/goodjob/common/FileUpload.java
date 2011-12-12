@@ -27,10 +27,13 @@ public class FileUpload {
 	private HttpServletRequest request = null;
 	private File uploadDir = null;
 	private List items = null;
-	private Map<String, String> paramMap = null;
+	private Map<String, String[]> paramMap = null;
+	private Map<String, String> fileItemMap = null;
 	private long requestLimit = 100 * 1024 * 1024; // 한번에 업로드 용량은 기본 100메가
 	private long fileLimit = 5 * 1024 * 1024; // 업로드 가능한 파일의 용량은 기본 5메가
 
+	private boolean multipart = false;
+	
 	public FileUpload(HttpServletRequest request, String uploadDir)
 			throws Exception {
 		this.request = request;
@@ -89,13 +92,29 @@ public class FileUpload {
 
 	// 폼의 필드값을 map에 저장한다.
 	private void processFormField(List items) throws Exception {
-		paramMap = new HashMap<String,String>();
+		paramMap = new HashMap<String,String[]>();
 		Iterator<FileItem> iter = items.iterator();
 		while (iter.hasNext()) {
 			FileItem item = (FileItem) iter.next();
 
 			if (item.isFormField()) {
-				paramMap.put(item.getFieldName(), item.getString("utf-8"));
+				
+				String name = item.getFieldName();
+				//paramMap.put(item.getFieldName(), item.getString("utf-8"));
+				
+				String value = item.getString("utf-8");
+				
+                String[] values = (String[])paramMap.get(name);
+                if (values == null) {
+                    values = new String[] { value };
+                } else {
+                    String[] tempValues = new String[values.length + 1];
+                    System.arraycopy(values, 0, tempValues, 0, 1);
+                    tempValues[tempValues.length - 1] = value;
+                    values = tempValues;
+                }
+                paramMap.put(name, values);
+                
 			}
 		}
 	}
@@ -129,7 +148,9 @@ public class FileUpload {
 
 		boolean writeToFile = true; // 파일에 쓸것인지 구분 플래그
 		Iterator<FileItem> iter = items.iterator();
-
+		
+		fileItemMap = new HashMap<String,String>();
+		
 		chkFileLimit(); // 파일들의 사이즈 체크
 
 		while (iter.hasNext()) {
@@ -146,7 +167,7 @@ public class FileUpload {
 						String updFilePath = uploadDir + "\\" + fileName;
 						String newFilePath = getNewFilePath(updFilePath); //동일한 파일명으로 업로드 될수 있기때문에  파일명이 같을경우 파일명  뒤에 '0'을 붙여 업로드한다.
 						File newFile = new File(newFilePath);
-						paramMap.put(item.getFieldName(), newFile.getName()); // 새로운  파일명을  리턴헤주기  위해  맵에  담는다.
+						fileItemMap.put(item.getFieldName(), newFile.getName()); // 새로운  파일명을  리턴헤주기  위해  맵에  담는다.
 						item.write(newFile); // 파일을 쓴다.
 					}
 
@@ -158,7 +179,7 @@ public class FileUpload {
 				}
 			}
 		}
-		return paramMap;
+		return fileItemMap;
 	}
 
 	// 새로운 파일명을 생성한다.
@@ -191,13 +212,20 @@ public class FileUpload {
 		return fileName.substring(0,fileName.lastIndexOf(".")) + tail + fileName.substring(fileName.lastIndexOf("."));
 	}
 
-	/**
-	 * request상의 param들을 map으로 반환한다.
-	 * 
-	 * @return Map
-	 */
-	public Map getParamMap() {
-		return paramMap;
-	}
-
+    /**
+     * 주어진 파라미터에 대한 값을 리턴
+     */
+    public String getParameter(String name) {
+        
+    	String[] values = (String[])paramMap.get(name);
+    	if (values == null) return null;
+    	return values[0];
+    }
+    
+    /**
+     * 파라미터의 값들을 리턴
+     */
+    public String[] getParameterValues(String name) {
+    	return (String[])paramMap.get(name);
+    }
 }

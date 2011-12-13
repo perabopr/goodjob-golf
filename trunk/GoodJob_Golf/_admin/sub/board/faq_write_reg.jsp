@@ -46,12 +46,12 @@
 	
 	if("modify".equals(mode)){
 		
-		dao.setUpdate("TB_NOTICE_BBS" , dto);
-		response.sendRedirect("./notice_view.jsp?seq="+seq);
+		dao.setUpdate("TB_FAQ_BBS" , dto);
+		response.sendRedirect("./faq_view.jsp?seq="+seq);
 	}
 	else{
 		
-		dao.setInsert("TB_NOTICE_BBS" , dto);
-		response.sendRedirect("./notice_list.jsp");
+		dao.setInsert("TB_FAQ_BBS" , dto);
+		response.sendRedirect("./faq_list.jsp");
 	}
 %>

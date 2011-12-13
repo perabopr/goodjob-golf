@@ -29,6 +29,7 @@ public class FileUpload {
 	private List items = null;
 	private Map<String, String[]> paramMap = null;
 	private Map<String, String> fileItemMap = null;
+	private Map<String, String[]> fileArrayMap = null;
 	private long requestLimit = 100 * 1024 * 1024; // 한번에 업로드 용량은 기본 100메가
 	private long fileLimit = 5 * 1024 * 1024; // 업로드 가능한 파일의 용량은 기본 5메가
 
@@ -170,16 +171,76 @@ public class FileUpload {
 						fileItemMap.put(item.getFieldName(), newFile.getName()); // 새로운  파일명을  리턴헤주기  위해  맵에  담는다.
 						item.write(newFile); // 파일을 쓴다.
 					}
-
-					// 파일업로드가 아닌 다른출력방식을 사용하고 싶을때...
-					/*
-					 * else { InputStream uploadedStream =
-					 * item.getInputStream(); uploadedStream.close(); }
-					 */
 				}
 			}
 		}
 		return fileItemMap;
+	}
+	
+	/**
+	 * request상의 모든파일을 업로드한다.<br>
+	 * 파일명의 중복을 피하기 위해 중복될경우 파일명 뒤에 '0'을 붙여 업로드한다.<br>
+	 * 업로드후 변경된 파일명과 param들을 map으로 리턴받아 처리한다.
+	 * 
+	 * @throws Exception
+	 */
+	public Map<String,String[]> getParamArrayAfterUpload() throws Exception {
+
+		boolean writeToFile = true; // 파일에 쓸것인지 구분 플래그
+		Iterator<FileItem> iter = items.iterator();
+		
+		fileArrayMap = new HashMap<String,String[]>();
+		
+		chkFileLimit(); // 파일들의 사이즈 체크
+
+		while (iter.hasNext()) {
+			FileItem item = (FileItem) iter.next();
+			// Process a file upload
+			if (!item.isFormField()) {
+				
+				String filePath = item.getName();
+				File file = new File(filePath);
+				
+				String fileName = file.getName();
+
+				/*
+				 String[] values = (String[])paramMap.get(name);
+               if (values == null) {
+                   values = new String[] { value };
+               } else {
+                   String[] tempValues = new String[values.length + 1];
+                   System.arraycopy(values, 0, tempValues, 0, 1);
+                   tempValues[tempValues.length - 1] = value;
+                   values = tempValues;
+               }
+                
+				 */
+				
+				if (fileName != null && !"".equals(fileName)) {
+					// 파일업로드시...
+					if (writeToFile) {
+						String updFilePath = uploadDir + "\\" + fileName;
+						String newFilePath = getNewFilePath(updFilePath); //동일한 파일명으로 업로드 될수 있기때문에  파일명이 같을경우 파일명  뒤에 '0'을 붙여 업로드한다.
+						File newFile = new File(newFilePath);
+						
+						String[] values = (String[])fileArrayMap.get(item.getFieldName());
+						if (values == null) {
+			                   values = new String[] { newFile.getName() };
+			               } else {
+			                   String[] tempValues = new String[values.length + 1];
+			                   System.arraycopy(values, 0, tempValues, 0, 1);
+			                   tempValues[tempValues.length - 1] = newFile.getName();
+			                   values = tempValues;
+			               }
+						
+						fileArrayMap.put(item.getFieldName(), values); // 새로운  파일명을  리턴헤주기  위해  맵에  담는다.
+						item.write(newFile); // 파일을 쓴다.
+					}
+
+				}
+			}
+		}
+		return fileArrayMap;
 	}
 
 	// 새로운 파일명을 생성한다.

@@ -17,7 +17,7 @@
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
-<link rel="stylesheet" href="../../style.css" type="text/css">
+<link rel="stylesheet" href="/_admin/css/style.css" type="text/css">
 <script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
 <script type="text/javascript" src="/js/highgardenEditor.js"></script>
 <script language="javascript" type="text/javascript">
@@ -89,12 +89,12 @@ var rootDir = '.';
 <body>
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
-    <td class=title>★ FAQ ★</td>
+    <td class=title>★ 공지사항 ★</td>
   </tr>
   <tr>
     <td align="center">&nbsp;</td>
   </tr>
-<FORM NAME="frm" METHOD="post" ACTION="faq_write_reg.jsp"  enctype="multipart/form-data">
+<FORM NAME="frm" METHOD="post" ACTION="notice_write_reg.jsp"  enctype="multipart/form-data">
 <input type="hidden" id="seq" name="seq" value="<%=seq%>"/>
 <input type="hidden" id="mode" name="mode" value="<%=mode%>"/>
 <input type="hidden" id="thread" name="thread" value="<%=dto.getThread()%>"/>
@@ -103,18 +103,18 @@ var rootDir = '.';
         <tr>
           <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td width="70"><img src="../../images/board/if_sbj.gif" width="48" height="20"></td>
+                <td width="70"><img src="/_admin/images/board/if_sbj.gif" width="48" height="20"></td>
                 <td><input id="subject" class="input_box" size="86" type="text" name="subject" value="<%=StringUtils.trimToEmpty(dto.getSubject())%>" maxlength="100" size="55" /></td>
               </tr>
             </table></td>
         </tr>
         <tr>
-          <td><img src="../../images/board/line05.gif" width="600" height="7"></td>
+          <td><img src="/_admin/images/board/line05.gif" width="600" height="7"></td>
         </tr>
         <tr>
           <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td width="70" valign="top"><img src="../../images/board/if_cts.gif" width="48" height="20"></td>
+                <td width="70" valign="top"><img src="/_admin/images/board/if_cts.gif" width="48" height="20"></td>
                 <td>
 				<textarea cols="85" rows="18" name="content" id="content" title="higheditor_simple" class="box03" style="width:530px;height:350px;"><%=StringUtils.trimToEmpty(dto.getContent())%></textarea>
                 </td>
@@ -122,7 +122,7 @@ var rootDir = '.';
             </table></td>
         </tr>
         <tr>
-          <td>&nbsp;<img src="../../images/board/line05.gif" width="600" height="7"></td>
+          <td>&nbsp;<img src="/_admin/images/board/line05.gif" width="600" height="7"></td>
         </tr>
         <tr>
           <td><p>&nbsp;</p></td>
@@ -131,8 +131,8 @@ var rootDir = '.';
           <td align="center"><table width="500" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="200">&nbsp;</td>
-                <td align="center" width="100"><a href="javascript:on_submit();"><img src="../../images/board/bbs_reg.gif" border="0"></a></td>
-                <td align="center" width="100"><a href="javascript:history.go(-1);"><img src="../../images/board/bbs_cancel.gif"  border="0"></a></td>
+                <td align="center" width="100"><a href="javascript:on_submit();"><img src="/_admin/images/board/bbs_reg.gif" border="0"></a></td>
+                <td align="center" width="100"><a href="javascript:history.go(-1);"><img src="/_admin/images/board/bbs_cancel.gif"  border="0"></a></td>
                 <td width="200" align="right">&nbsp;</td>
               </tr>
             </table></td>

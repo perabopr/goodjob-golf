@@ -89,12 +89,12 @@ var rootDir = '.';
 <body>
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
-    <td class=title>★ 공지사항 ★</td>
+    <td class=title>★ FAQ ★</td>
   </tr>
   <tr>
     <td align="center">&nbsp;</td>
   </tr>
-<FORM NAME="frm" METHOD="post" ACTION="notice_write_reg.jsp"  enctype="multipart/form-data">
+<FORM NAME="frm" METHOD="post" ACTION="faq_write_reg.jsp"  enctype="multipart/form-data">
 <input type="hidden" id="seq" name="seq" value="<%=seq%>"/>
 <input type="hidden" id="mode" name="mode" value="<%=mode%>"/>
 <input type="hidden" id="thread" name="thread" value="<%=dto.getThread()%>"/>

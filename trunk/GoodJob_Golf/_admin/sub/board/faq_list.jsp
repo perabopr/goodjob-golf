@@ -18,7 +18,7 @@
 	params.put("field",field);
 	params.put("keyword",keyword);
 	
-	List<BoardDto> bbsList = dao.getList("TB_NOTICE_BBS" , params);
+	List<BoardDto> bbsList = dao.getList("TB_FAQ_BBS" , params);
 	
 %>
 <html>
@@ -29,7 +29,7 @@
 <body bgcolor="white">
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
-    <td class=title>★ 공지사항 ★</td>
+    <td class=title>★ FAQ ★</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -58,9 +58,8 @@
               </tr>
             </table>
             <table width="580" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-                <td>
-                <table width="600" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td><table width="600" border="0" cellspacing="0" cellpadding="0">
 <%
 	if(bbsList != null && !bbsList.isEmpty()){
 		
@@ -74,7 +73,7 @@
 					<tr>
                      <td height="24" width="40" align="center"><%=dto.getSeq()%></td>
                      <td width="10"><img src="../../images/board/bl.gif" width="10" height="22"></td>
-                     <td width="437" class="list"><a href="notice_view.html"><a href="./view.jsp?seq=<%=dto.getSeq()%>"><%=dto.getSubject()%></a></a></td>
+                     <td width="437" class="list"><a href="./faq_view.jsp?seq=<%=dto.getSeq()%>"><%=dto.getSubject()%></a></a></td>
                      <td width="10">&nbsp;</td>
                      <td width="9"><img src="../../images/board/bl.gif" width="10" height="22"></td>
                      <td width="80" align="center"><%=dto.getWrite_date()%></td>
@@ -84,7 +83,8 @@
 		}
 	}
 %>
-				</table></td>
+				</tr>
+                  </table></td>
               </tr>
               <tr>
                 <td><img src="../../images/board/line02.gif" width="600" height="4"></td>
@@ -116,15 +116,12 @@
               </tr>
             </table></td>
         </tr>
-                <tr>
-                    <td height="50" align="center">
-                        <p><img align="absmiddle" src="../../images/board/btn_prev_dual.gif" width="16" height="15" border="0"> <img align="absmiddle" src="../../images/board/btn_prev.gif" width="16" height="15" border="0"> <span class=normal_b>1 &nbsp;</span>I &nbsp;2 &nbsp;I &nbsp;3 &nbsp;I &nbsp;4 &nbsp;I &nbsp;5 &nbsp;I &nbsp;6 &nbsp;I &nbsp;7 &nbsp;I &nbsp;8 &nbsp;I &nbsp;9 &nbsp;I &nbsp;10 <img align="absmiddle" src="../../images/board/btn_next.gif" width="16" height="15" border="0">
-<img align="absmiddle" src="../../images/board/btn_next_dual.gif"
-width="16" height="15" border="0"></p>
-                    </td>
-                </tr>
         <tr>
-          <td align="right"><a href="notice_write.html"><img src="../../images/board/bbs_write.gif" border="0"></a></td>
+          <td height="50" align="center"><p><img align="absmiddle" src="../../images/board/btn_prev_dual.gif" width="16" height="15" border="0"> <img align="absmiddle" src="../../images/board/btn_prev.gif" width="16" height="15" border="0"> <span class=normal_b>1 &nbsp;</span>I &nbsp;2 &nbsp;I &nbsp;3 &nbsp;I &nbsp;4 &nbsp;I &nbsp;5 &nbsp;I &nbsp;6 &nbsp;I &nbsp;7 &nbsp;I &nbsp;8 &nbsp;I &nbsp;9 &nbsp;I &nbsp;10 <img align="absmiddle" src="../../images/board/btn_next.gif" width="16" height="15" border="0"> <img align="absmiddle" src="../../images/board/btn_next_dual.gif"
+width="16" height="15" border="0"></p></td>
+        </tr>
+        <tr>
+          <td align="right"><a href="faq_write.jsp"><img src="../../images/board/bbs_write.gif" border="0"></a></td>
         </tr>
       </table></td>
   </tr>
@@ -133,5 +130,4 @@ width="16" height="15" border="0"></p>
   </tr>
 </table>
 </body>
-
 </html>

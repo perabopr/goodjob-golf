@@ -12,18 +12,39 @@
 	String thread = StringUtils.trimToEmpty(request.getParameter("thread"));
 	String npage = StringUtils.trimToEmpty(request.getParameter("npage"));
 	
-	BoardDto dto = dao.getView("TB_NOTICE_BBS" , NumberUtils.toInt(seq,0));
+	BoardDto dto = dao.getView("TB_FAQ_BBS" , NumberUtils.toInt(seq,0));
 	
 %>
 <HTML>
 <HEAD>
 <META HTTP-EQUIV="content-type" CONTENT="text/html; charset=euc-kr">
 <LINK REL="stylesheet" HREF="../../style.css" TYPE="text/css">
+<script src="/js/jquery-1.5.2.min.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+	function board_del(seq){
+
+		alert(seq);
+		
+		$.ajax({
+			type: "POST",
+			url: "/_admin/sub/board/board_delete_ajax.jsp",
+			data: "tname=faq&seq="+seq,
+			success: function(msg){
+				if($.trim(msg) == '0'){
+					alert("글이 정상적으로 삭제 되었습니다.");
+					location.href="./faq_list.jsp";
+				}
+				else{
+					alert("글삭제시 오류 발생!");
+				}
+		}});
+}
+</script>
 </HEAD>
 <body bgcolor="white">
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
-    <td class=title>★ 공지사항★</td>
+    <td class=title>★ FAQ ★</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -78,8 +99,8 @@
                 <td width="200"><a href="notice_list.jsp?npage=<%=npage%>"><img src="../../images/board/bbs_list.gif" width="53" height="22" border='0'></a></td>
                 <td width="350" align="right"><table border="0" width="150" cellpadding="0" cellspacing="0">
                     <tr>
-                      <td width="75" align="center"><a href="notice_write.jsp?seq=<%=seq%>&mode=modify"><img src="../../images/board/bbs_modify.gif" width="53" height="22" border="0"></a></td>
-                      <td width="75" align="center"><a href="notice_del.jsp?seq=<%=seq%>"><img src="../../images/board/bbs_del.gif" width="53" height="22" border="0"></a></td>
+                      <td width="75" align="center"><a href="faq_write.jsp?seq=<%=seq%>&mode=modify"><img src="../../images/board/bbs_modify.gif" width="53" height="22" border="0"></a></td>
+                      <td width="75" align="center"><a href="javascript:board_del(<%=seq%>);"><img src="../../images/board/bbs_del.gif" width="53" height="22" border="0"></a></td>
                     </tr>
                   </table></td>
               </tr>

@@ -201,15 +201,15 @@
                         <table id="menu2" name="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td height="25" width="20">&nbsp;</td>
-                                <td width="160"><img align="absmiddle" src="../images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="board/notice_list.jsp" class=left_menu>공지사항</a></td>
+                                <td width="160"><img align="absmiddle" src="../images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/board/notice_list.jsp" class=left_menu>공지사항</a></td>
                             </tr>
                             <tr>
                                 <td height="25" width="20">&nbsp;</td>
-                                <td width="160"><img align="absmiddle" src="../images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="board/faq_list.jsp" class=left_menu>FAQ</a></td>
+                                <td width="160"><img align="absmiddle" src="../images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/board/faq_list.jsp" class=left_menu>FAQ</a></td>
                             </tr>
                             <tr>
                                 <td height="25" width="20">&nbsp;</td>
-                                <td width="160"><img align="absmiddle" src="../images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="board/join_list.jsp" class=left_menu>JOIN 커뮤니티</a></td>
+                                <td width="160"><img align="absmiddle" src="../images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/board/join_list.jsp" class=left_menu>JOIN 커뮤니티</a></td>
                             </tr>
                         </table>
                     </td>

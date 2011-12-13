@@ -206,7 +206,6 @@ public class BoardDao {
 	public void setUpdate(String tableName , BoardDto dto) {
 
 		Connection conn = null;
-		Map<String, Integer> map = null;
 		try {
 
 			conn = DBManager.getConnection();
@@ -220,7 +219,7 @@ public class BoardDao {
 			params.add(dto.getSeq());
 
 			QueryRunner queryRunner = new QueryRunner();
-			queryRunner.update(conn, String.format(BBS.update,tableName) , params);
+			queryRunner.update(conn, String.format(BBS.update,tableName) , params.toArray());
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -275,7 +274,9 @@ public class BoardDao {
 	 * @param tableName
 	 * @param seq
 	 */
-	public void setDelete(String tableName , int seq){
+	public boolean setDelete(String tableName , int seq){
+		
+		boolean isDel = false;
 		Connection conn = null;
 		try {
 
@@ -283,12 +284,15 @@ public class BoardDao {
 
 			QueryRunner queryRunner = new QueryRunner();
 			queryRunner.update(conn, String.format(BBS.delete,tableName) , seq);
-
+			
+			isDel = true;
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
+		return isDel;
 	}
 	
 	public String Position(String pos, String org_pos)

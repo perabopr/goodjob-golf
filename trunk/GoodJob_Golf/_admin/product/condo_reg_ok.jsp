@@ -18,35 +18,35 @@
 	
 	FileUpload fileUpload = new FileUpload(request, up_dir, 1024*1024*5);
 
-	Map<String,String> paramMap = fileUpload.getParamMap();
+	//Map<String,String> paramMap = fileUpload.getParamMap();
 	Map<String,String> fileMap = fileUpload.getParamAfterUpload();
 	
-	String upfilemain = fileMap.get("txtimgmain");
+	String upfilemain = fileUpload.getParameter("txtimgmain");
 	if(fileMap.get("imgmain") != null){
-		upfilemain = (String)fileMap.get("imgmain");
+		upfilemain = (String)fileUpload.getParameter("imgmain");
 	}
 	
 	int idSeq = 0;
 	CondoDto cDto = new CondoDto();
-	if(paramMap.get("condoSeq").length() > 0){
-		idSeq = Integer.parseInt(paramMap.get("condoSeq"));
+	if(fileUpload.getParameter("condoSeq").length() > 0){
+		idSeq = Integer.parseInt(fileUpload.getParameter("condoSeq"));
 		cDto.setCondo_seq(idSeq);
 	}
-	cDto.setCondo_name(paramMap.get("condoname"));
-	cDto.setRegion_seq(Integer.parseInt(paramMap.get("ddl_region")));
-	cDto.setSaledate_start(paramMap.get("saleDateStart"));
-	cDto.setSaledate_end(paramMap.get("saleDateEnd"));
-	cDto.setImg_main(paramMap.get("upfilemain"));
-	cDto.setAddress1(paramMap.get("address1"));
-	cDto.setAddress2(paramMap.get("address2"));
-	cDto.setPoint_x(paramMap.get("pointx"));
-	cDto.setPoint_y(paramMap.get("pointy"));
-	cDto.setView_yn(paramMap.get("rdbView"));
-	cDto.setReserve_start(paramMap.get("ReserveDateStart"));
-	cDto.setReserve_end(paramMap.get("ReserveDateEnd"));
-	cDto.setCondo_info(paramMap.get("content1"));
-	cDto.setWay_map(paramMap.get("content2"));
-	cDto.setEdit_rule(paramMap.get("content3"));
+	cDto.setCondo_name(fileUpload.getParameter("condoname"));
+	cDto.setRegion_seq(Integer.parseInt(fileUpload.getParameter("ddl_region")));
+	cDto.setSaledate_start(fileUpload.getParameter("saleDateStart"));
+	cDto.setSaledate_end(fileUpload.getParameter("saleDateEnd"));
+	cDto.setImg_main(fileUpload.getParameter("upfilemain"));
+	cDto.setAddress1(fileUpload.getParameter("address1"));
+	cDto.setAddress2(fileUpload.getParameter("address2"));
+	cDto.setPoint_x(fileUpload.getParameter("pointx"));
+	cDto.setPoint_y(fileUpload.getParameter("pointy"));
+	cDto.setView_yn(fileUpload.getParameter("rdbView"));
+	cDto.setReserve_start(fileUpload.getParameter("ReserveDateStart"));
+	cDto.setReserve_end(fileUpload.getParameter("ReserveDateEnd"));
+	cDto.setCondo_info(fileUpload.getParameter("content1"));
+	cDto.setDetail_info(fileUpload.getParameter("content2"));
+	cDto.setWay_map(fileUpload.getParameter("content3"));
 	
 	CondoDao cDao = new CondoDao();
 	if(idSeq > 0){//수정
@@ -57,19 +57,19 @@
 	
 	//** 객실
 	for(int i = 1;i < 11;i++){
-		String condoroomseq = StringUtils.trimToEmpty(paramMap.get("condoroomseq" +i));
-		String roomtype = StringUtils.trimToEmpty(paramMap.get("roomtype" +i));
-		String price1N = StringUtils.trimToEmpty(paramMap.get("price1N" +i));
+		String condoroomseq = StringUtils.trimToEmpty(fileUpload.getParameter("condoroomseq" +i));
+		String roomtype = StringUtils.trimToEmpty(fileUpload.getParameter("roomtype" +i));
+		String price1N = StringUtils.trimToEmpty(fileUpload.getParameter("price1N" +i));
 		if(price1N.length()==0){price1N = "0";}
-		String price2N = StringUtils.trimToEmpty(paramMap.get("price2N" +i));
+		String price2N = StringUtils.trimToEmpty(fileUpload.getParameter("price2N" +i));
 		if(price2N.length()==0){price2N = "0";}
-		String price3N = StringUtils.trimToEmpty(paramMap.get("price3N" +i));
+		String price3N = StringUtils.trimToEmpty(fileUpload.getParameter("price3N" +i));
 		if(price3N.length()==0){price3N = "0";}
-		String price1S = StringUtils.trimToEmpty(paramMap.get("price1S" +i));
+		String price1S = StringUtils.trimToEmpty(fileUpload.getParameter("price1S" +i));
 		if(price1S.length()==0){price1S = "0";}
-		String price2S = StringUtils.trimToEmpty(paramMap.get("price2S" +i));
+		String price2S = StringUtils.trimToEmpty(fileUpload.getParameter("price2S" +i));
 		if(price2S.length()==0){price2S = "0";}
-		String price3S = StringUtils.trimToEmpty(paramMap.get("price3S" +i));
+		String price3S = StringUtils.trimToEmpty(fileUpload.getParameter("price3S" +i));
 		if(price3S.length()==0){price3S = "0";}
 
 		CondoRoomDto crDto = new CondoRoomDto();
@@ -78,7 +78,7 @@
 		crDto.setPrice_n1(Integer.parseInt(price1N));
 		crDto.setPrice_n2(Integer.parseInt(price2N));
 		crDto.setPrice_n3(Integer.parseInt(price3N));
-		crDto.setPrice_s1(Integer.parseInt(price1N));
+		crDto.setPrice_s1(Integer.parseInt(price1S));
 		crDto.setPrice_s2(Integer.parseInt(price2S));
 		crDto.setPrice_s3(Integer.parseInt(price3S));
 		if(condoroomseq.length() > 0){	//수정
@@ -93,8 +93,8 @@
 	
 	//** 이미지갤러리
 	for(int i = 1; i < 6;i++){
-		String imgseq = StringUtils.trimToEmpty(paramMap.get("condoimgseq"+i));		
-		String upfilegallery = StringUtils.trimToEmpty(paramMap.get("condoimg"+i));
+		String imgseq = StringUtils.trimToEmpty(fileUpload.getParameter("condoimgseq"+i));		
+		String upfilegallery = StringUtils.trimToEmpty(fileUpload.getParameter("condoimg"+i));
 		if(fileMap.get("imggallery" + i) != null){
 			upfilegallery = (String)fileMap.get("imggallery" + i);
 		}
@@ -110,8 +110,8 @@
 			cDao.setCondoGalleryInsert(cgDto);
 		}
 	}
-	
+
 	try{
-		response.sendRedirect("./condo_reg.jsp?condoSeq=" + paramMap.get("condoSeq"));
+		response.sendRedirect("./condo_reg.jsp?condoSeq=" + fileUpload.getParameter("condoSeq"));
 	}catch(Exception e){}
 %>

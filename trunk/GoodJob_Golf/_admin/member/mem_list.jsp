@@ -28,7 +28,7 @@
 %>
 <html>
 <head>
-<link rel="stylesheet" href="../../style.css">
+<link rel="stylesheet" href="../style.css">
 <script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
 <title></title>
 <script language="javascript">
@@ -142,7 +142,7 @@ width="16" height="15" border="0"-->
               <option value="">회원가입상태</option>
             </select>
             <input name="keyword" type="text" size="30" class="input_box">
-            <input name="imagefield" type="image" src="../../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle"></td>
+            <input name="imagefield" type="image" src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle"></td>
         </tr>
       </table></td>
   </tr>

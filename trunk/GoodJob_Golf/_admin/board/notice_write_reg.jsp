@@ -51,7 +51,10 @@
 	}
 	else{
 		
-		dao.setInsert("TB_NOTICE_BBS" , dto);
+		//for(int i = 0 ; i < 500 ; i++)
+			dao.setInsert("TB_NOTICE_BBS" , dto);
+		
+		
 		response.sendRedirect("./notice_list.jsp");
 	}
 %>

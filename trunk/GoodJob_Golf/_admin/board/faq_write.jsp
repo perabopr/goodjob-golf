@@ -11,7 +11,7 @@
 	String thread = StringUtils.trimToEmpty(request.getParameter("thread"));
 	String mode = StringUtils.trimToEmpty(request.getParameter("mode"));
 	
-	BoardDto dto = dao.getView("TB_NOTICE_BBS" , NumberUtils.toInt(seq,0));
+	BoardDto dto = dao.getView("TB_FAQ_BBS" , NumberUtils.toInt(seq,0));
 	
 %>
 <html>
@@ -29,36 +29,8 @@ function on_submit() {
 		$('#subject').focus();
 		return;
 	} 
-
-	/*
-	if(!$('#name').val()) {
-		alert('이름을 입력하시기 바랍니다.');
-		$('#name').focus();
-		return;
-	}
 	
-	if(!$('#content').val()) {
-		alert('내용을 입력하시기 바랍니다.');
-		$('#content').focus();
-		return;
-	}
-
-	if(!$('#password').val()) {
-		alert('비밀번호를 입력하시기 바랍니다.');
-		$('#password').focus();
-		return;
-	} 
-	
-	 
-	if($('#upfile').val()) {
-		var src = getFileExtension($('#upfile').val());
-		if ( !((src.toLowerCase() == "png") || (src.toLowerCase() == "gif") || (src.toLowerCase() == "jpg") || (src.toLowerCase() == "jpeg")) ) {
-			alert('gif , jpg , png 파일만 지원합니다.');
-			return;
-		}
-	}
-	*/
-	frm.submit();
+	document.frm.submit();
 }
 
 function getFileExtension(filePath)

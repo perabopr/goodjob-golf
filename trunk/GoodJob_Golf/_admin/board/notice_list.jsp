@@ -21,7 +21,6 @@
 	params.put("field",field);
 	params.put("keyword",keyword);
 	
-	
 	List<BoardDto> bbsList = bDao.getList("TB_NOTICE_BBS" , params);
 	
 	int totalCount = bDao.getTotalCount("TB_NOTICE_BBS" , params);
@@ -32,6 +31,29 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
 <link rel="stylesheet" href="/_admin/css/style.css" type="text/css">
+<script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
+<script language="javascript" type="text/javascript">
+	
+function on_search() {
+
+	var frm = document.frm;
+	if(!$('#keyword').val()) {
+		alert('검색어를 입력하시기 바랍니다.');
+		$('#keyword').focus();
+		return;
+	} 
+	frm.action="notice_list.jsp"
+	frm.submit();
+}
+
+function goPage(val){
+	var frm = document.frm;
+	frm.npage.value=val;
+	frm.action="notice_list.jsp"
+	frm.submit();
+}
+//-->
+</script>
 </head>
 <body bgcolor="white">
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -106,18 +128,23 @@
               <tr>
                 <td align="center"><p><img src="/_admin/images/board/line01.gif" width="600" height="1"></p></td>
               </tr>
+              <form name="frm" method="post">
+              <input type="hidden" name="npage" value="<%=npage%>"/>
               <tr>
-                <td height="45" align="center" bgcolor="#f5f5f5"><table border="0" cellpadding="0" cellspacing="0" width="230">
+                <td height="45" align="center" bgcolor="#f5f5f5">
+                <table border="0" cellpadding="0" cellspacing="0" width="230">
                     <tr>
-                      <td><select name="keyfield" class="form_style6">
+                      <td><select id="field" name="field" class="form_style6">
                           <option value="subject">제 목</option>
                           <option value="content">내 용</option>
                         </select></td>
-                      <td><input name="key" type="text" size="15" class="input_box"></td>
-                      <td><input name="imagefield" type="image" src="/_admin/images/board/bt_search.gif" border="0" width="43" height="19"></td>
+                      <td><input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="15" class="input_box"></td>
+                      <td><a href="javascript:on_search();"><img src="/_admin/images/board/bt_search.gif" border="0" width="43" height="19"></a></td>
                     </tr>
-                  </table></td>
+                  </table>
+                  </td>
               </tr>
+              </form>
               <tr>
                 <td align="center"><p><img src="/_admin/images/board/line01.gif" width="600" height="1"></p></td>
               </tr>

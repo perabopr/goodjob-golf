@@ -7,6 +7,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @author Administrator
  *
@@ -43,5 +49,61 @@ public class Utils {
 	           auth = auth+numTemp[rnd.nextInt(10)];
 	      }
 	      return auth;
+	}
+	
+	/**
+	 * <pre>
+	 * String getCookie
+	 * 쿠키로 저장된 값(userid)이 있으면 값을 가져온다
+	 * @param request
+	 * @param name
+	 * @return
+	 * </pre>
+	 */
+	public static String getCookie(HttpServletRequest request, String name)
+	{		 
+		Cookie[] cookie = request.getCookies();
+		String value = "";
+		
+		if(cookie == null) return "";
+		
+		for(int i=0; i<cookie.length;i++){
+			if(name.equals(cookie[i].getName()))
+				value = StringUtils.trimToEmpty(cookie[i].getValue());
+		}
+
+		return value;
+	}
+	
+	/**
+	 * <pre>
+	 * void setCookie
+	 * 쿠키값을 설정한다
+	 * @param response
+	 * @param name
+	 * @param value
+	 * </pre>
+	 */
+	public static void setCookie(HttpServletResponse response, String name, String value)	{
+		
+		Cookie cookie=new Cookie(name,value);		//일반적 쿠키 
+		response.addCookie(cookie);
+	}
+	
+	/**
+	 * <pre>
+	 * void setCookie
+	 * 쿠키값을 설정한다
+	 * @param response
+	 * @param name
+	 * @param value
+	 * @param time 	쿠키 시간 
+	 * </pre>
+	 */
+	public static void setCookie(HttpServletResponse response, String name, String value , int time)	{
+		
+		Cookie cookie=new Cookie(name,value);		//쿠키 세팅
+		cookie.setMaxAge(60*time);							//쿠키 시간 세팅
+		response.addCookie(cookie);						//실제 쿠키
 	}
 }

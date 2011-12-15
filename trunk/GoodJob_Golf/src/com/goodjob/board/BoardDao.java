@@ -45,22 +45,22 @@ public class BoardDao {
 			
 			//검색조건
 			String where = "";
-			if("name".equals(field)){
+			if("name".equals(field) && keyword.length()>0){
 				where = "WHERE name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
-			else if("subject".equals(field)){
+			else if("subject".equals(field) && keyword.length()>0){
 				where = "WHERE subject LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
-			else if("content".equals(field)){
+			else if("content".equals(field) && keyword.length()>0){
 				where = "WHERE content LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
 			
 			//페이징
 			params.add(((npage-1)* BBS.per_page));
-			params.add((npage*BBS.per_page));
+			params.add(BBS.per_page);
 			
 			list = (List<BoardDto>) qr.query(conn , String.format(BBS.list, tableName, where), rsh , params.toArray());
 			
@@ -99,15 +99,15 @@ public class BoardDao {
 			
 			//검색조건
 			String where = "";
-			if("name".equals(field)){
+			if("name".equals(field) && keyword.length()>0){
 				where = "WHERE name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
-			else if("subject".equals(field)){
+			else if("subject".equals(field) && keyword.length()>0){
 				where = "WHERE subject LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
-			else if("content".equals(field)){
+			else if("content".equals(field) && keyword.length()>0){
 				where = "WHERE content LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}

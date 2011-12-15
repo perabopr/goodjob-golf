@@ -12,7 +12,7 @@ public class MEMBER {
 	public static final int per_page = 20;
 	
 	//회원 리스트
-	public static final String list = " select mem_no,mem_id,mem_name,mem_pwd,mem_mtel,sms_yn,email_yn,mem_type,reg_dt from tb_member where SECESSION = 'N' %s order by mem_no desc limit ? , ? ";
+	public static final String list = " select mem_no,mem_id,mem_name,mem_pwd,mem_jumin,mem_mtel,sms_yn,email_yn,mem_type,reg_dt from tb_member where SECESSION = 'N' %s order by mem_no desc limit ? , ? ";
 	
 	//회원 상세
 	public static final String view = " select * from tb_member where mem_no = ? ";
@@ -26,8 +26,8 @@ public class MEMBER {
 	
 	//회원등록
 	public static final String insert = " insert into tb_member "+ 
-										" (MEM_NO,MEM_ID,MEM_NAME,MEM_PWD,MEM_MTEL,SMS_YN,EMAIL_YN,RECOMMEND,REG_DT)"+
-										" values(? ,? ,? ,password(?) ,? ,? ,? ,? ,DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s'))";
+										" (MEM_NO,MEM_ID,MEM_NAME,MEM_PWD,MEM_JUMIN,MEM_MTEL,SMS_YN,EMAIL_YN,RECOMMEND,REG_DT)"+
+										" values(? ,? ,? ,password(?),? ,? ,? ,? ,? ,DATE_FORMAT(NOW(),'%Y-%m-%d %H:%i:%s'))";
 	
 	//아이디 찾기
 	public static final String id_find = " select mem_id where tb_member where mem_name = ? and mem_mtel = ? ";

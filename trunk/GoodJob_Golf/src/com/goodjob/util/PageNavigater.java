@@ -103,16 +103,16 @@ public class PageNavigater {
 		
 		//처음페이지
 		if(npage != 1){
-			str.append("<A HREF=\"javascript:goPage('1');\">"+firstImage+"</A>< \n");
+			str.append("<A HREF=\"javascript:goPage('1');\">"+firstImage+"</A>\n");
 		} else{
 			if(!isDisable){
-				str.append("<li class=\"imgPage\"><A HREF=\"#\">"+firstImage+"</a></li> \n");
+				str.append("<li class=\"imgPage\"><A HREF=\"#\">"+firstImage+"</a></li>\n");
 			}
 		}
 		
 		//이전페이지
 		if(prePage > 0){
-			str.append("<A HREF=\"javascript:goPage('"+prePage+"');\">"+prevImage+"</A> \n");
+			str.append("<A HREF=\"javascript:goPage('"+prePage+"');\">"+prevImage+"</A>\n");
 		} else{
 			if(!isDisable){
 				str.append("<A HREF=\"#\">"+prevImage+"</a> \n");
@@ -127,7 +127,7 @@ public class PageNavigater {
 			}
 			
 			if(i == npage){
-				str.append("<A HREF=\"#\">" + i + "</a>\n");
+				str.append(i+"&nbsp;");
 			} else{
 				str.append("<a href=\"javascript:goPage('"+i+"');\">" + i + "</a>\n");
 			}

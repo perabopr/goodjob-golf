@@ -3,10 +3,6 @@
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@ page import="java.util.*" %>
-<%
-	
-	
-%>
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
@@ -14,19 +10,47 @@
 <link rel="stylesheet" href="/css/common.css" type="text/css">
 <script src="/js/jquery-1.5.2.min.js" type="text/javascript"></script>
 <script language="javascript" src="/js/flashObject.js"></script>
+<style type="text/css">
+select {
+	behavior: url('/inc/selectbox.htc');
+}
+</style>
+<script language="javascript" type="text/javascript">
+
+	function logon_ok() {
+		
+		if(!$('#mem_id').val()) {
+			alert('아이디를 입력하시기 바랍니다.');
+			$('#mem_id').focus();
+			return;
+		}
+
+		if(!$('#mem_pwd').val()) {
+			alert('비밀번호를 입력하시기 바랍니다.');
+			$('#mem_pwd').focus();
+			return;
+		} 
+				
+		var frm = document.forms["logonFrm"];
+		frm.action = "/logon/logon.jsp";
+		frm.submit();
+   	}
+//-->
+</script>
 </head>
 <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" background="/images/bg_main.jpg">
 <table border="0" width="100%" cellpadding="0" cellspacing="0">
   <tr>
     <td width="100%" align="center"><table border="0" width="1000" cellpadding="0" cellspacing="0" align="center">
         <tr>
-          <td width="1000"><table border="0" width="100%" cellpadding="0" cellspacing="0">
+          <td width="100%">
+          <table border="0" width="100%" cellpadding="0" cellspacing="0">
               <tr>
                 <td height="146"><script>flashObject("/images/swf/navigation.swf","","1000","146")</script></td>
               </tr>
               <tr>
                 <td>
-                <table border="0" width="1000" cellpadding="0" cellspacing="0">
+                <table border="0" width="100%" cellpadding="0" cellspacing="0">
                     <tr>
                       <td colspan="3" background="/images/common/img_top_bg.jpg" height="50" valign="top" width="1000" align="right">
                       	<table cellpadding="0" cellspacing="0" width="749" bgcolor="#052B48">

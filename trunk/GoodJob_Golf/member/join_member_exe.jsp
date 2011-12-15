@@ -15,6 +15,10 @@
 	String mobile1 	= StringUtils.trimToEmpty(request.getParameter("mobile1"));
 	String mobile2 	= StringUtils.trimToEmpty(request.getParameter("mobile2"));
 	String mobile3 	= StringUtils.trimToEmpty(request.getParameter("mobile3"));
+	
+	String mem_jumin1 	= StringUtils.trimToEmpty(request.getParameter("mem_jumin1"));
+	String mem_jumin2 	= StringUtils.trimToEmpty(request.getParameter("mem_jumin2"));
+	
 	String sms_yn 	= StringUtils.trimToEmpty(request.getParameter("sms_yn"));
 	String email_yn 	= StringUtils.trimToEmpty(request.getParameter("email_yn"));
 
@@ -36,6 +40,7 @@
 		
 		MemberDto mDto = new MemberDto();
 		mDto.setMem_id(mem_id+"@"+mem_domain);
+		mDto.setMem_jumin(mem_jumin1+"-"+mem_jumin1);
 		mDto.setMem_name(mem_name);
 		mDto.setMem_pwd(mem_pwd);
 		mDto.setMem_mtel(mobile1+"-"+mobile2+"-"+mobile3);

@@ -1,26 +1,4 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<script language="javascript" type="text/javascript">
-
-	function logon_ok() {
-		
-		if(!$('#mem_id').val()) {
-			alert('아이디를 입력하시기 바랍니다.');
-			$('#mem_id').focus();
-			return;
-		}
-
-		if(!$('#mem_pwd').val()) {
-			alert('비밀번호를 입력하시기 바랍니다.');
-			$('#mem_pwd').focus();
-			return;
-		} 
-				
-		var frm = document.forms["logonFrm"];
-		frm.action = "/logon/logon.jsp";
-		frm.submit();
-   	}
-//-->
-</script>
 <%
 	String ses_mem_id = (String)session.getAttribute("mem_id");
 	String ses_mem_name = (String)session.getAttribute("mem_name");
@@ -78,7 +56,7 @@
 <table border="0" cellpadding="0" cellspacing="0" width="207">
 <form name="logonFrm" method="post" action="">
      <tr>
-       <td width="103"><input id="mem_id" class="input_01" type="text" size="20" name="mem_id" value=""></td>
+       <td width="103"><input id="mem_id" class="input_01" type="text" size="20" name="mem_id" value="<%=com.goodjob.util.Utils.getCookie(request,"golf.mem_id")%>"></td>
        <td rowspan="3" align="right"><a href="javascript:logon_ok();"><img src="/images/img_leftmenu/btn_login_confirm.gif" width="64" height="51" border="0"></a></td>
      </tr>
      <tr>

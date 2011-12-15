@@ -49,19 +49,19 @@ public class MemberDao {
 			
 			//검색조건
 			String where = "";
-			if("name".equals(field)){
+			if("name".equals(field) && keyword.length() > 0){
 				where = "WHERE MEM_NAME LIKE concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
-			else if("id".equals(field)){
+			else if("id".equals(field) && keyword.length() > 0){
 				where = "WHERE MEM_ID LIKE concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
-			else if("type".equals(field)){
+			else if("type".equals(field) && keyword.length() > 0){
 				where = "WHERE MEM_TYPE = ? " ;
 				bind.add(keyword);
 			}
-			else if("reg_dt".equals(field)){
+			else if("reg_dt".equals(field) && keyword.length() > 0){
 				where = "WHERE date_format(reg_dt,'%Y%m%d') = ? " ;
 				bind.add(keyword);
 			}
@@ -79,6 +79,51 @@ public class MemberDao {
 		}
 
 		return list;
+	}
+	
+	public int getTotalMember(Map<String,String> params){
+		
+		Connection conn = null;
+		Map<String, Long> map = null;
+		
+		String field = StringUtils.defaultIfEmpty(params.get("field"), "");
+		String keyword = StringUtils.defaultIfEmpty(params.get("keyword"), "");
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			
+			//검색조건
+			String where = "";
+			if("name".equals(field) && keyword.length() > 0){
+				where = "WHERE MEM_NAME LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("id".equals(field) && keyword.length() > 0){
+				where = "WHERE MEM_ID LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("type".equals(field) && keyword.length() > 0){
+				where = "WHERE MEM_TYPE = ? " ;
+				bind.add(keyword);
+			}
+			else if("reg_dt".equals(field) && keyword.length() > 0){
+				where = "WHERE date_format(reg_dt,'%Y%m%d') = ? " ;
+				bind.add(keyword);
+			}
+			
+			map = (Map<String, Long>) qr.query(conn , String.format(MEMBER.list,where) , rsh , bind.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return NumberUtils.toInt(map.get("cnt")+"");
 	}
 	
 	/**
@@ -128,6 +173,7 @@ public class MemberDao {
 			bind.add(mDto.getMem_id());
 			bind.add(mDto.getMem_name());
 			bind.add(mDto.getMem_pwd());
+			bind.add(mDto.getMem_jumin());
 			bind.add(mDto.getMem_mtel());
 			bind.add(mDto.getSms_yn());
 			bind.add(mDto.getEmail_yn());

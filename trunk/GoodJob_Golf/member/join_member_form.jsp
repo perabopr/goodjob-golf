@@ -32,6 +32,17 @@
 			return;
 		}
 
+		if(!$('#mem_jumin1').val() || !$('#mem_jumin2').val()) {
+			alert('주민번호를 입력해 주세요');
+			$('#mem_jumin').focus();
+		
+			return;
+		}
+		else{
+			var resno = $('#mem_jumin1').val()+"-"+$('#mem_jumin2').val();
+			chkresno(resno);
+		}
+		
 		if(!$('#mem_pwd').val()) {
 			alert('비밀번호를 입력해 주세요');
 			$('#mem_pwd').focus();
@@ -80,6 +91,43 @@
 		frm.submit();
    	}
 
+	function chkresno(resno) {
+
+		  // 주민번호의 형태와 7번째 자리(성별) 유효성 검사
+		  fmt = /^\d{6}-[1234]\d{6}$/;
+		  if (!fmt.test(resno)) {
+		    alert("잘못된 주민등록번호입니다."); return;
+		  }
+
+		  // 날짜 유효성 검사
+		  birthYear = (resno.charAt(7) <= "2") ? "19" : "20";
+		  birthYear += resno.substr(0, 2);
+		  birthMonth = resno.substr(2, 2) - 1;
+		  birthDate = resno.substr(4, 2);
+		  birth = new Date(birthYear, birthMonth, birthDate);
+
+		  if ( birth.getYear() % 100 != resno.substr(0, 2) ||
+		       birth.getMonth() != birthMonth ||
+		       birth.getDate() != birthDate) {
+		    alert("잘못된 주민등록번호입니다."); return;
+		  }
+
+		  // Check Sum 코드의 유효성 검사
+		  buf = new Array(13);
+		  for (i = 0; i < 6; i++) buf[i] = parseInt(resno.charAt(i));
+		  for (i = 6; i < 13; i++) buf[i] = parseInt(resno.charAt(i + 1));
+
+		  multipliers = [2,3,4,5,6,7,8,9,2,3,4,5];
+		  for (i = 0, sum = 0; i < 12; i++) sum += (buf[i] *= multipliers[i]);
+
+		  if ((11 - (sum % 11)) % 10 != buf[12]) {
+		    alert("잘못된 주민등록번호입니다."); return;
+		  }
+
+		  //alert("정상적인 주민등록번호입니다.");
+		  
+		}
+	
 	function domainChange(val){
 		if(val == ''){
 			$("input[name=mem_domain]").attr("readonly",false);
@@ -156,6 +204,11 @@
                                                                       <td height="20"><span class=mem_notice>자주 사용하시는 E-mail계정을 입력하시기 바랍니다.</span></td>
                                                                     </tr>
                                                                   </table></td>
+                                                              </tr>
+                                                               <tr>
+                                                                <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>주민등록번호</td>
+                                                                <td bgcolor="white" style="padding-left:10px;"><input id="mem_jumin1" class="mem_input" type="text" size="15" name="mem_jumin1">-
+                                                                <input id="mem_jumin2" class="mem_input" type="password" size="15" name="mem_jumin2"></td>
                                                               </tr>
                                                               <tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>비밀번호</td>

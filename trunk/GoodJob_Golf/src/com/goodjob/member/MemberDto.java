@@ -20,6 +20,7 @@ public class MemberDto implements Serializable {
 	private String mem_id;
 	private String mem_name;
 	private String mem_pwd;
+	private String mem_jumin;
 	private String mem_mtel;
 	private String sms_yn;
 	private String email_yn;
@@ -55,6 +56,13 @@ public class MemberDto implements Serializable {
 	}
 	public void setMem_pwd(String mem_pwd) {
 		this.mem_pwd = mem_pwd;
+	}
+	
+	public String getMem_jumin() {
+		return mem_jumin;
+	}
+	public void setMem_jumin(String memJumin) {
+		mem_jumin = memJumin;
 	}
 	public String getMem_mtel() {
 		return mem_mtel;

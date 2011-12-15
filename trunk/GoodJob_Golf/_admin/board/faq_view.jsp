@@ -94,7 +94,7 @@
         <tr>
           <td align="center"><table width="500" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td width="200"><a href="notice_list.jsp?npage=<%=npage%>"><img src="/_admin/images/board/bbs_list.gif" width="53" height="22" border='0'></a></td>
+                <td width="200"><a href="faq_list.jsp?npage=<%=npage%>"><img src="/_admin/images/board/bbs_list.gif" width="53" height="22" border='0'></a></td>
                 <td width="350" align="right"><table border="0" width="150" cellpadding="0" cellspacing="0">
                     <tr>
                       <td width="75" align="center"><a href="faq_write.jsp?seq=<%=seq%>&mode=modify"><img src="/_admin/images/board/bbs_modify.gif" width="53" height="22" border="0"></a></td>

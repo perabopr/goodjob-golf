@@ -313,4 +313,14 @@ public class BoardDao {
         }
         return pos;
     }
+	
+	public List<BoardDto> getJoinList(Map<String,String> data) {
+		
+		return null;
+	}
+	
+	public List<BoardDto> getJoinCommentList(Map<String,String> data) {
+		
+		return null;
+	}
 }

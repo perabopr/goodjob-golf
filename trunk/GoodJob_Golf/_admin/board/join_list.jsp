@@ -21,10 +21,10 @@
 	params.put("field",field);
 	params.put("keyword",keyword);
 	
-	List<BoardDto> bbsList = dao.getList("TB_NOTICE_BBS" , params);
+	List<JoinBoardDto> bbsList = dao.getJoinList(params);
 	
 	RegionDao regionDao = new RegionDao();
-	List<RegionDto> arrRegions = regionDao.getRegionList("1");
+	//List<RegionDto> arrRegions = regionDao.getRegionList("1");
 	
 %>
 <html>
@@ -71,19 +71,19 @@
 	if(bbsList != null && !bbsList.isEmpty()){
 		
 		int size = bbsList.size();
-		BoardDto dto;
+		JoinBoardDto jDto;
 		for(int i = 0 ; i < size ; i++){
 			
-			dto = bbsList.get(i);
+			jDto = bbsList.get(i);
 			
 %>
 					<tr>
-                     <td height="24" width="40" align="center"><%=dto.getSeq()%></td>
+                     <td height="24" width="40" align="center"><%=jDto.getJoin_no()%></td>
                      <td width="10"><img src="/_admin/images/board/bl.gif" width="10" height="22"></td>
-                     <td width="437" class="list"><a href="notice_view.html"><a href="./view.jsp?seq=<%=dto.getSeq()%>"><%=dto.getSubject()%></a></a></td>
+                     <td width="437" class="list"><a href="notice_view.html"><a href="./view.jsp?seq=<%=jDto.getJoin_no()%>"><%=jDto.getGolflink_name()%></a></a></td>
                      <td width="10">&nbsp;</td>
                      <td width="9"><img src="/_admin/images/board/bl.gif" width="10" height="22"></td>
-                     <td width="80" align="center"><%=dto.getWrite_date()%></td>
+                     <td width="80" align="center"><%=jDto.getReg_dt()%></td>
                      <td width="14">&nbsp;</td>
                    </tr>
 <%
@@ -130,7 +130,7 @@ width="16" height="15" border="0"></p>
                     </td>
                 </tr>
         <tr>
-          <td align="right"><a href="notice_write.html"><img src="/_admin/images/board/bbs_write.gif" border="0"></a></td>
+          <td align="right"><a href="join_write.jsp"><img src="/_admin/images/board/bbs_write.gif" border="0"></a></td>
         </tr>
       </table></td>
   </tr>

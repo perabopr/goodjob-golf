@@ -314,13 +314,313 @@ public class BoardDao {
         return pos;
     }
 	
-	public List<BoardDto> getJoinList(Map<String,String> data) {
+	public List<JoinBoardDto> getJoinList(Map<String,String> data) {
 		
-		return null;
+		List<JoinBoardDto> list = null;
+		Connection conn = null;
+		
+		String field = StringUtils.defaultIfEmpty(data.get("field"), "");
+		String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
+		int npage = NumberUtils.toInt(data.get("npage"), 1);
+		
+		try {
+			conn = DBManager.getConnection();
+
+			ArrayList<Object> params = new ArrayList<Object>();
+			
+			ResultSetHandler rsh = new BeanListHandler(JoinBoardDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			//검색조건
+			String where = "";
+			if("name".equals(field) && keyword.length()>0){
+				where = "WHERE name LIKE concat('%',?,'%') " ;
+				params.add(keyword);
+			}
+			else if("subject".equals(field) && keyword.length()>0){
+				where = "WHERE subject LIKE concat('%',?,'%') " ;
+				params.add(keyword);
+			}
+			else if("content".equals(field) && keyword.length()>0){
+				where = "WHERE content LIKE concat('%',?,'%') " ;
+				params.add(keyword);
+			}
+			
+			//페이징
+			params.add(((npage-1)* BBS.per_page));
+			params.add(BBS.per_page);
+			
+			list = (List<JoinBoardDto>) qr.query(conn , String.format(BBS.join_list,where), rsh , params.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return list;
 	}
 	
-	public List<BoardDto> getJoinCommentList(Map<String,String> data) {
+	public int getJoinTotalCount(Map<String,String> data){
 		
-		return null;
+		Connection conn = null;
+		Map<String, Long> map = null;
+		try {
+			
+			String field = StringUtils.defaultIfEmpty(data.get("field"), "");
+			String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
+			
+			ArrayList<Object> params = new ArrayList<Object>();
+			
+			conn = DBManager.getConnection();
+
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			
+			//검색조건
+			String where = "";
+			if("name".equals(field) && keyword.length()>0){
+				where = "WHERE name LIKE concat('%',?,'%') " ;
+				params.add(keyword);
+			}
+			else if("subject".equals(field) && keyword.length()>0){
+				where = "WHERE subject LIKE concat('%',?,'%') " ;
+				params.add(keyword);
+			}
+			else if("content".equals(field) && keyword.length()>0){
+				where = "WHERE content LIKE concat('%',?,'%') " ;
+				params.add(keyword);
+			}
+			
+			map = (Map<String, Long>)qr.query(conn, String.format(BBS.join_totalcnt, where) , rsh , params.toArray());
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return NumberUtils.toInt(map.get("cnt")+"");
+	}
+	
+	public JoinBoardDto getJoinView(int join_no){
+		
+		JoinBoardDto jDto = null;
+		Connection conn = null;
+		try {
+			
+			if(join_no > 0 ){
+				
+				Object[] params = {join_no};
+				
+				conn = DBManager.getConnection();
+				ResultSetHandler rsh = new BeanHandler(BoardDto.class);
+				QueryRunner qr = new QueryRunner();
+				jDto = (JoinBoardDto) qr.query(conn, String.format(BBS.join_view) , rsh , params);
+			}
+			else{
+				jDto = new JoinBoardDto();
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return jDto;
+	}
+	
+	public void setJoinReadcount(int join_no){
+		Connection conn = null;
+		try {
+			conn = DBManager.getConnection();
+			ResultSetHandler rsh = new BeanHandler(BoardDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			int result = qr.update(conn, BBS.join_readcount , join_no);
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
+	
+	public void setJoinUpdate(JoinBoardDto jDto){
+		
+		Connection conn = null;
+		try {
+
+			conn = DBManager.getConnection();
+
+			ArrayList<Object> params = new ArrayList<Object>();
+			params.add(jDto.getJoin_name());
+			params.add(jDto.getTel1());
+			params.add(jDto.getTel2());
+			params.add(jDto.getTel3());
+			params.add(jDto.getRegion());
+			params.add(jDto.getGolflink_name());
+			params.add(jDto.getSex());
+			params.add(jDto.getAge());
+			params.add(jDto.getJoin_person());
+			params.add(jDto.getRounding_dt());
+			params.add(jDto.getPrice_info1());
+			params.add(jDto.getPrice_info2());
+			params.add(jDto.getPrice_info3());
+			params.add(jDto.getContent());
+			params.add(jDto.getJoin_no());
+
+			QueryRunner queryRunner = new QueryRunner();
+			queryRunner.update(conn, BBS.join_update , params.toArray());
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
+	
+	public void setJoinInsert(JoinBoardDto jDto){
+		
+		Connection conn = null;
+		try {
+
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> params = new ArrayList<Object>();
+			params.add(jDto.getJoin_name());
+			params.add(jDto.getTel1());
+			params.add(jDto.getTel2());
+			params.add(jDto.getTel3());
+			params.add(jDto.getRegion());
+			params.add(jDto.getGolflink_name());
+			params.add(jDto.getSex());
+			params.add(jDto.getAge());
+			params.add(jDto.getJoin_person());
+			params.add(jDto.getRounding_dt());
+			params.add(jDto.getPrice_info1());
+			params.add(jDto.getPrice_info2());
+			params.add(jDto.getPrice_info3());
+			params.add(jDto.getContent());
+			
+			
+			params.add(jDto.getJoin_name());params.add(jDto.getJoin_name());
+			
+
+			QueryRunner queryRunner = new QueryRunner();
+			queryRunner.update(conn, BBS.join_insert , params.toArray());
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+	}
+	
+	/**
+	 * 조인 글 삭제
+	 * @param join_no
+	 * @return
+	 */
+	public boolean setJoinDelete(int join_no){
+		
+		boolean isDel = false;
+		Connection conn = null;
+		try {
+
+			conn = DBManager.getConnection();
+
+			QueryRunner queryRunner = new QueryRunner();
+			queryRunner.update(conn, BBS.join_delete , join_no);
+			
+			isDel = true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		return isDel;
+	}
+	
+	/**
+	 * 조인 게시판 코멘트 리스트
+	 * @param join_no
+	 * @return
+	 */
+	public List<JoinBoardDto> getJoinCommentList(int join_no) {
+		
+		Connection conn = null;
+		List<JoinBoardDto> list = null;
+		try {
+			
+			Object[] params = {join_no};
+			
+			conn = DBManager.getConnection();
+			ResultSetHandler rsh = new BeanHandler(JoinBoardDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<JoinBoardDto>) qr.query(conn , BBS.join_clist, rsh , params);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 댓글 저장
+	 * @param jDto
+	 */
+	public void setCommentInsert(JoinBoardDto jDto){
+		
+		Connection conn = null;
+		try {
+
+			conn = DBManager.getConnection();
+
+			ArrayList<Object> params = new ArrayList<Object>();
+			params.add(jDto.getJoin_no());
+			params.add(jDto.getCmt_name());
+			params.add(jDto.getContent());
+			
+			QueryRunner queryRunner = new QueryRunner();
+			queryRunner.update(conn, BBS.join_cinsert , params.toArray());
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
+	
+	/**
+	 * 댓글 삭제
+	 * @param cmt_no
+	 * @return
+	 */
+	public boolean setCommentDelete(int cmt_no){
+		
+		boolean isDel = false;
+		Connection conn = null;
+		try {
+
+			conn = DBManager.getConnection();
+
+			QueryRunner queryRunner = new QueryRunner();
+			queryRunner.update(conn, BBS.join_cdelete , cmt_no);
+			
+			isDel = true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		return isDel;
 	}
 }

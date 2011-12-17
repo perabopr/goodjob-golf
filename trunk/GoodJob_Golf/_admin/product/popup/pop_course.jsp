@@ -3,8 +3,8 @@
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="java.sql.*,java.util.*" %>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
-<%@page import="com.goodjob.reserve.dto.GolfLinkCourseDto"%>
-<%@page import="com.goodjob.reserve.GolfLinkDao"%>
+<%@page import="com.goodjob.product.dto.GolfLinkCourseDto"%>
+<%@page import="com.goodjob.product.GolfLinkDao"%>
 <%
 	String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));
 	GolfLinkDao gfdao = new GolfLinkDao(); 

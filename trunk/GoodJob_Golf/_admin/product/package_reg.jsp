@@ -3,11 +3,11 @@
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="java.sql.*,java.util.*" %>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
-<%@ page import="com.goodjob.reserve.*" %>
+<%@ page import="com.goodjob.product.*" %>
 <%@ page import="com.goodjob.db.*" %>
-<%@ page import="com.goodjob.reserve.dto.RegionDto"%>
-<%@ page import="com.goodjob.reserve.dto.PackageDto"%>
-<%@ page import="com.goodjob.reserve.dto.PackagePriceDto"%>
+<%@ page import="com.goodjob.product.dto.RegionDto"%>
+<%@ page import="com.goodjob.product.dto.PackageDto"%>
+<%@ page import="com.goodjob.product.dto.PackagePriceDto"%>
 <%
 String pkSeq = StringUtils.trimToEmpty(request.getParameter("pkSeq"));
 

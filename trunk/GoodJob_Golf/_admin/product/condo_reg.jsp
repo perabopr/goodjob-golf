@@ -1,14 +1,14 @@
-<%@page import="com.goodjob.reserve.dto.CondoRoomDto"%>
-<%@page import="com.goodjob.reserve.dto.CondoGalleryDto"%>
-<%@page import="com.goodjob.reserve.dto.CondoDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="java.sql.*,java.util.*" %>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
-<%@ page import="com.goodjob.reserve.*" %>
+<%@ page import="com.goodjob.product.*" %>
 <%@ page import="com.goodjob.db.*" %>
-<%@ page import="com.goodjob.reserve.dto.RegionDto"%>
+<%@ page import="com.goodjob.product.dto.RegionDto"%>
+<%@ page import="com.goodjob.product.dto.CondoRoomDto"%>
+<%@ page import="com.goodjob.product.dto.CondoGalleryDto"%>
+<%@ page import="com.goodjob.product.dto.CondoDto"%>
 <%
 String condoSeq = StringUtils.trimToEmpty(request.getParameter("condoSeq"));
 

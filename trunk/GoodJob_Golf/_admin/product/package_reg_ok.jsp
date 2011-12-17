@@ -6,9 +6,9 @@
 <%@ page import="com.goodjob.db.*" %>
 <%@ page import="com.goodjob.common.*"%>
 <%@ page import="com.goodjob.conf.Config"%>
-<%@page import="com.goodjob.reserve.PackageDao"%>
-<%@page import="com.goodjob.reserve.dto.PackagePriceDto"%>
-<%@page import="com.goodjob.reserve.dto.PackageDto"%>
+<%@page import="com.goodjob.product.PackageDao"%>
+<%@page import="com.goodjob.product.dto.PackagePriceDto"%>
+<%@page import="com.goodjob.product.dto.PackageDto"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>

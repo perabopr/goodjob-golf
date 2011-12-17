@@ -1,4 +1,4 @@
-package com.goodjob.reserve.dto;
+package com.goodjob.product.dto;
 
 public class GolfLinkReserveDto {
 	private int reserve_seq;

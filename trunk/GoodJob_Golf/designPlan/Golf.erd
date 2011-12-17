@@ -530,14 +530,25 @@
                       <defaultValue></defaultValue>
                     </net.java.amateras.db.visual.model.ColumnModel>
                     <net.java.amateras.db.visual.model.ColumnModel>
-                      <columnName>view_yn</columnName>
-                      <logicalName>노출여부</logicalName>
+                      <columnName>product_date</columnName>
+                      <logicalName>상품이용날짜</logicalName>
                       <columnType class="net.java.amateras.db.dialect.ColumnType">
                         <name>CHAR</name>
                         <logicalName>Character</logicalName>
                         <supportSize>true</supportSize>
                         <type>1</type>
                       </columnType>
+                      <size>8</size>
+                      <notNull>true</notNull>
+                      <primaryKey>false</primaryKey>
+                      <description></description>
+                      <autoIncrement>false</autoIncrement>
+                      <defaultValue></defaultValue>
+                    </net.java.amateras.db.visual.model.ColumnModel>
+                    <net.java.amateras.db.visual.model.ColumnModel>
+                      <columnName>view_yn</columnName>
+                      <logicalName>노출여부</logicalName>
+                      <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[7]/columnType"/>
                       <size>1</size>
                       <notNull>true</notNull>
                       <primaryKey>false</primaryKey>
@@ -712,12 +723,7 @@ Y : 예약가능&#x0D;
                           <net.java.amateras.db.visual.model.ColumnModel>
                             <columnName>product_status</columnName>
                             <logicalName>상품상태</logicalName>
-                            <columnType class="net.java.amateras.db.dialect.ColumnType">
-                              <name>CHAR</name>
-                              <logicalName>Character</logicalName>
-                              <supportSize>true</supportSize>
-                              <type>1</type>
-                            </columnType>
+                            <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../../columns/net.java.amateras.db.visual.model.ColumnModel[7]/columnType"/>
                             <size>1</size>
                             <notNull>false</notNull>
                             <primaryKey>false</primaryKey>

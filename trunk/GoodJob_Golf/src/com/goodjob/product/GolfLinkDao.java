@@ -1,4 +1,4 @@
-package com.goodjob.reserve;
+package com.goodjob.product;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,10 +17,10 @@ import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.db.DBManager;
 import com.goodjob.sql.PRODUCT;
-import com.goodjob.reserve.dto.GolfLinkCourseDto;
-import com.goodjob.reserve.dto.GolfLinkDto;
-import com.goodjob.reserve.dto.GolfLinkPriceDto;
-import com.goodjob.reserve.dto.GolfLinkPromiseDto;
+import com.goodjob.product.dto.GolfLinkCourseDto;
+import com.goodjob.product.dto.GolfLinkDto;
+import com.goodjob.product.dto.GolfLinkPriceDto;
+import com.goodjob.product.dto.GolfLinkPromiseDto;
 
 public class GolfLinkDao {	
 	/**

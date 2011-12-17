@@ -1,4 +1,4 @@
-package com.goodjob.reserve;
+package com.goodjob.product;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,9 +17,9 @@ import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.db.DBManager;
 import com.goodjob.sql.PRODUCT;
-import com.goodjob.reserve.dto.PackageDto;
-import com.goodjob.reserve.dto.PackagePriceDto;
-import com.goodjob.reserve.dto.PackagePromiseDto;
+import com.goodjob.product.dto.PackageDto;
+import com.goodjob.product.dto.PackagePriceDto;
+import com.goodjob.product.dto.PackagePromiseDto;
 
 public class PackageDao {
 	

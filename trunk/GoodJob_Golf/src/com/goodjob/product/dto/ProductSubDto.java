@@ -1,4 +1,4 @@
-package com.goodjob.reserve.dto;
+package com.goodjob.product.dto;
 
 public class ProductSubDto {
 	private int productsub_seq;

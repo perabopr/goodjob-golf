@@ -1,7 +1,7 @@
-package com.goodjob.reserve.dto;
+package com.goodjob.product.dto;
 
-public class GolfLinkPromiseDto {
-	private int golflink_seq;
+public class PackagePromiseDto {
+	private int package_seq;
 	private String promise1_type = "";
 	private String promise1 = "";
 	private String promise2_type = "";
@@ -14,11 +14,11 @@ public class GolfLinkPromiseDto {
 	private String promise5 = "";
 	private String cancelrule = "";
 	
-	public int getGolflink_seq() {
-		return golflink_seq;
+	public int getPackage_seq() {
+		return package_seq;
 	}
-	public void setGolflink_seq(int golflink_seq) {
-		this.golflink_seq = golflink_seq;
+	public void setPackage_seq(int package_seq) {
+		this.package_seq = package_seq;
 	}
 	public String getPromise1_type() {
 		return promise1_type;

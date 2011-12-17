@@ -1,4 +1,4 @@
-package com.goodjob.reserve;
+package com.goodjob.product;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
-import com.goodjob.reserve.dto.MenuDto;
+import com.goodjob.product.dto.MenuDto;
 import com.goodjob.db.DBManager;
 import com.goodjob.sql.PRODUCT;
 

@@ -17,6 +17,7 @@ import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.db.DBManager;
 import com.goodjob.reserve.dto.GolfLinkDto;
+import com.goodjob.reserve.dto.GolfLinkPriceDto;
 import com.goodjob.reserve.dto.ProductDto;
 import com.goodjob.sql.RESERVE;
 
@@ -65,4 +66,50 @@ public class GolfLinkDao {
 
 		return list;
 	}
+	
+	public List<GolfLinkDto> getGolfLinkDetail(int idSeq){
+		List<GolfLinkDto> list = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(idSeq);
+			ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<GolfLinkDto>) qr.query(conn , RESERVE.getDetailGolf, rsh, bind.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return list;		
+	}
+	
+	public List<GolfLinkPriceDto> getGolfLinkPrice(int idSeq){
+		List<GolfLinkPriceDto> list = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(idSeq);
+			ResultSetHandler rsh = new BeanListHandler(GolfLinkPriceDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<GolfLinkPriceDto>) qr.query(conn , RESERVE.getDetailGolfPrice, rsh, bind.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return list;		
+	}
+	
+	
 }

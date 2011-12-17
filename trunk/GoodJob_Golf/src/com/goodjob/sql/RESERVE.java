@@ -25,5 +25,40 @@ public class RESERVE {
 			"AND B.product_status = '0' " +
 			"AND A.golflink_seq = ? " +
 			"AND A.product_date >= ? AND A.product_date <= ? " +
-		"GROUP BY A.product_year, A.product_month, A.product_day ";
+		"GROUP BY A.product_year, A.product_month, A.product_day ";	
+
+	public static final String getDetailGolf
+		=	"SELECT " +
+				" golflink_seq " +
+				",menu_seq " +
+				",golflink_name " +
+				",region_seq " +
+				",holl_type " +
+				",course_guide " +
+				",golflink_address1 " +
+				",golflink_address2 " +
+				",point_x " +
+				",point_y " +
+				",img_main " +
+				",img_sub1 " +
+				",img_sub2 " +
+				",img_sub3 " +
+				",img_sub4 " +
+				",cancel_term " +
+				",view_yn" +
+				",cancel_rule" +
+				",promise_rule" +
+				",use_guide" +
+				",golflink_guide " +	
+			"FROM tb_golflink " +
+			"WHERE view_yn = 'Y' " +
+				"AND golflink_seq = ?";	
+
+	public static final String getDetailGolfPrice
+		= 	"SELECT" +
+				" golflink_seq" +
+				",price_type" +
+				",golflink_price " +
+			"FROM tb_golflink_price "	+ 
+			"WHERE golflink_seq = ?";
 }

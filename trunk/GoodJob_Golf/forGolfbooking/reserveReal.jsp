@@ -114,26 +114,26 @@ for (int i = 1; i < 15 ;i++){
 	String weekClass = "day";
 	switch(incWeek)
 	{
-		case 1:
+		case 2:
 			weekImg = "img_monday.gif";
 			break;
-		case 2:
+		case 3:
 			weekImg = "img_tuesday.gif";
 			break;
-		case 3:
+		case 4:
 			weekImg = "img_wednesday.gif";
 			break;
-		case 4:
+		case 5:
 			weekImg = "img_thursday.gif";
 			break;
-		case 5:
+		case 6:
 			weekImg = "img_friday.gif";
 			break;
-		case 6:
+		case 7:
 			weekImg = "img_saturday.gif";
 			weekClass = "saturday";
 			break;
-		case 7:
+		case 1:
 			weekImg = "img_sunday.gif";
 			weekClass = "sunday";
 			break;
@@ -171,6 +171,7 @@ for(int i = 0; i < listGolf.size(); i++){
 		incDate.add(incDate.DATE, 1);
 		
 		String pDate = "";
+		String cDate = "";
 		int rCnt = 0;
 		for(int j = 0; j < listPrdt.size(); j++){
 			if(listPrdt.get(j).getProduct_year().equals(cYear)
@@ -178,6 +179,7 @@ for(int i = 0; i < listGolf.size(); i++){
 					&&listPrdt.get(j).getProduct_day().equals(cDay))
 			{
 				pDate = cYear + "/" + cMonth + "/" + cDay;
+				cDate = cYear + cMonth + cDay;
 				rCnt = listPrdt.get(j).getProduct_cnt();
 			}
 		}		
@@ -188,7 +190,7 @@ for(int i = 0; i < listGolf.size(); i++){
 		}else{
 %>
 		<TD bgColor=white height=30 align=center>
-		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate %></br>--------------------</br>예약가능팀 : <%=rCnt %>팀');" onMouseout="hideddrivetip()">
+		<a href="/forGolfbooking/detail.jsp?menu=<%=menuNum%>&golf=<%=listGolf.get(i).getGolflink_seq()%>&date=<%=sDate %>&cdate=<%=cDate%>"><IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate %></br>--------------------</br>예약가능팀 : <%=rCnt %>팀');" onMouseout="hideddrivetip()"></a>
 		</TD>
 <%
 		}

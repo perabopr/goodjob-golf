@@ -3,8 +3,8 @@
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="java.sql.*,java.util.*" %>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
-<%@ page import="com.goodjob.reserve.dto.ProductDto"%>
-<%@ page import="com.goodjob.reserve.productDao"%>
+<%@ page import="com.goodjob.product.dto.ProductDto"%>
+<%@ page import="com.goodjob.product.productDao"%>
 <%
 String menuseq = request.getParameter("mnseq");
 String golflinkseq = request.getParameter("glseq");

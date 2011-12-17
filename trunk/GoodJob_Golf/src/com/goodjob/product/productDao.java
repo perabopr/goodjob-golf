@@ -45,6 +45,10 @@ public class productDao {
 			bind.add(prdtDto.getProduct_year());
 			bind.add(prdtDto.getProduct_month());
 			bind.add(prdtDto.getProduct_day());
+			prdtDto.setProduct_date(prdtDto.getProduct_year()
+					+prdtDto.getProduct_month()
+					+prdtDto.getProduct_day());
+			bind.add(prdtDto.getProduct_date());
 			bind.add(prdtDto.getView_yn());
 			
 			QueryRunner qr = new QueryRunner();

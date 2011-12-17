@@ -4,8 +4,8 @@
 <%@ page import="java.sql.*,java.util.*" %>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
 <%@ page import="com.goodjob.db.*" %>
-<%@ page import="com.goodjob.reserve.PackageDao"%>
-<%@ page import="com.goodjob.reserve.dto.PackagePromiseDto"%>
+<%@ page import="com.goodjob.product.PackageDao"%>
+<%@ page import="com.goodjob.product.dto.PackagePromiseDto"%>
 <%
 String pkSeq = StringUtils.trimToEmpty(request.getParameter("pkSeq"));
 

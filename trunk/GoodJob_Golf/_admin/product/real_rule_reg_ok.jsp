@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.goodjob.reserve.GolfLinkDao"%>
-<%@ page import="com.goodjob.reserve.dto.GolfLinkPromiseDto"%>
+<%@ page import="com.goodjob.product.GolfLinkDao"%>
+<%@ page import="com.goodjob.product.dto.GolfLinkPromiseDto"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="java.sql.*,java.util.*" %>

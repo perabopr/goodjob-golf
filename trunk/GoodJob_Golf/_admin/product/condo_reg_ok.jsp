@@ -1,4 +1,3 @@
-<%@page import="com.goodjob.reserve.dto.CondoRoomDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
@@ -7,9 +6,10 @@
 <%@ page import="com.goodjob.db.*" %>
 <%@ page import="com.goodjob.common.*"%>
 <%@ page import="com.goodjob.conf.Config"%>
-<%@page import="com.goodjob.reserve.CondoDao"%>
-<%@page import="com.goodjob.reserve.dto.CondoDto"%>
-<%@page import="com.goodjob.reserve.dto.CondoGalleryDto"%>
+<%@page import="com.goodjob.product.CondoDao"%>
+<%@page import="com.goodjob.product.dto.CondoDto"%>
+<%@page import="com.goodjob.product.dto.CondoGalleryDto"%>
+<%@page import="com.goodjob.product.dto.CondoRoomDto"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%
 	request.setCharacterEncoding("UTF-8");

@@ -1,11 +1,11 @@
-<%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="java.sql.*,java.util.*" %>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
 <%@ page import="com.goodjob.db.*" %>
-<%@page import="com.goodjob.reserve.dto.GolfLinkPromiseDto"%>
+<%@ page import="com.goodjob.product.dto.GolfLinkPromiseDto"%>
+<%@ page import="com.goodjob.product.GolfLinkDao"%>
 <%
 String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
 String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));

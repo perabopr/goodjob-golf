@@ -7,18 +7,24 @@
 
 
 	String seq = StringUtils.trimToEmpty(request.getParameter("seq"));
+	String join_no = StringUtils.trimToEmpty(request.getParameter("join_no"));
 	String tname = StringUtils.trimToEmpty(request.getParameter("tname"));
-	
-	if("notice".equals(tname))
-		tname = "TB_NOTICE_BBS";
-	else if("faq".equals(tname))
-		tname = "TB_FAQ_BBS";
-	else if("join".equals(tname))
-		tname = "TB_FAQ_BBS";
 	
 	BoardDao dao = new BoardDao();
 	
-	boolean isDel = dao.setDelete(tname , NumberUtils.toInt(seq));
+	boolean isDel = false;
+	
+	if("notice".equals(tname)){
+		tname = "TB_NOTICE_BBS";
+		isDel = dao.setDelete(tname , NumberUtils.toInt(seq));
+	}
+	else if("faq".equals(tname)){
+		tname = "TB_FAQ_BBS";
+		isDel = dao.setDelete(tname , NumberUtils.toInt(seq));
+	}
+	else if("join".equals(tname)){
+		isDel = dao.setJoinDelete(NumberUtils.toInt(join_no));
+	}
 	
 	if(isDel)
 		out.println("0");

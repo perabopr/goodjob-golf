@@ -56,7 +56,8 @@ CREATE TABLE TB_GOLFLINK(
 		cancel_rule                   		TEXT		 NULL ,
 		promise_rule                  		TEXT		 NULL ,
 		use_guide                     		TEXT		 NULL ,
-		golflink_guide                		TEXT		 NULL 
+		golflink_guide                		TEXT		 NULL ,
+		use_rule                      		TEXT		 NULL 
 );
 
 /**********************************/
@@ -69,6 +70,7 @@ CREATE TABLE TB_PRODUCT(
 		product_year                  		CHAR(4)		 NOT NULL,
 		product_month                 		CHAR(2)		 NOT NULL,
 		product_day                   		CHAR(2)		 NOT NULL,
+		product_date                  		CHAR(8)		 NOT NULL,
 		view_yn                       		CHAR(1)		 DEFAULT 'N'		 NOT NULL
 );
 
@@ -162,17 +164,22 @@ CREATE TABLE TB_PACKAGE_PRICE(
 CREATE TABLE TB_GOLFLINK_RESERVE(
 		reserve_seq                   		INT		 NOT NULL AUTO_INCREMENT,
 		menu_seq                      		INT		 NOT NULL,
+		golflink_seq                  		INT		 NOT NULL,
+		product_seq                   		INT		 NOT NULL,
 		productsub_seq                		INT		 NOT NULL,
-		golflink_name                 		VARCHAR(50)		 NOT NULL,
-		reserve_name                  		VARCHAR(8)		 NOT NULL,
 		reserve_day                   		DATETIME		 NOT NULL,
+		reserve_name                  		VARCHAR(8)		 NOT NULL,
+		reserve_uid                   		VARCHAR(50)		 NOT NULL,
+		golflink_name                 		VARCHAR(50)		 NOT NULL,
 		booking_day                   		CHAR(10)		 NOT NULL,
-		booking_time                  		CHAR(4)		 NULL ,
+		booking_time                  		CHAR(4)		 NOT NULL,
 		golflink_course               		VARCHAR(50)		 NULL ,
 		per_num                       		VARCHAR(2)		 NOT NULL,
 		reserve_phone                 		VARCHAR(13)		 NOT NULL,
 		product_price                 		INT		 NOT NULL,
-		process_status                		CHAR(1)		 DEFAULT 1		 NOT NULL
+		coupon_price                  		INT		 NOT NULL,
+		process_status                		CHAR(1)		 DEFAULT 1		 NOT NULL,
+		card_bill_num                 		VARCHAR(20)		 NULL 
 );
 
 /**********************************/

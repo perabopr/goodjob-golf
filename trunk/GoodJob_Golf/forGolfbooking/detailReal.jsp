@@ -154,6 +154,9 @@ function DisplayMenu(vIdx){
 function reserveSubmit(gcId){
 	$("#menu").val("1");
 	$("#gcId").val(gcId);
+	$("#golf").val('<%=request.getParameter("golf")%>');
+	$("#date").val('<%=request.getParameter("date")%>');
+	$("#cdate").val('<%=request.getParameter("cdate")%>');
 	frm.submit();
 }
 
@@ -194,6 +197,9 @@ function preResDate(cDate){
 <FORM NAME="frm" METHOD="post" ACTION="rule.jsp">
 <input type="hidden" id="menu" name="menu" >
 <input type="hidden" id="gcId" name="gcId" >
+<input type="hidden" id="golf" name="golf" >
+<input type="hidden" id="date" name="date" >
+<input type="hidden" id="cdate" name="cdate" >
 </FORM>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
 <TR>

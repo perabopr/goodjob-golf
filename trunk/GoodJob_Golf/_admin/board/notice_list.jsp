@@ -135,8 +135,8 @@ function goPage(val){
                 <table border="0" cellpadding="0" cellspacing="0" width="230">
                     <tr>
                       <td><select id="field" name="field" class="form_style6">
-                          <option value="subject">제 목</option>
-                          <option value="content">내 용</option>
+                          <option value="subject"<%=("subject".equals(field)?" selected":"")%>>제 목</option>
+                          <option value="content"<%=("content".equals(field)?" selected":"")%>>내 용</option>
                         </select></td>
                       <td><input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="15" class="input_box"></td>
                       <td><a href="javascript:on_search();"><img src="/_admin/images/board/bt_search.gif" border="0" width="43" height="19"></a></td>

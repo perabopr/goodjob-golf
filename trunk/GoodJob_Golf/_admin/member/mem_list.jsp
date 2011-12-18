@@ -28,18 +28,18 @@
 %>
 <html>
 <head>
-<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="/_admin/style.css">
 <script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
 <title></title>
 <script language="javascript">
 <!-- 
-function NewWindow(mypage, myname, w, h, scroll) { 
-var winl = (screen.width - w) / 2; 
-var wint = (screen.height - h) / 2; 
-winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable' 
-win = window.open(mypage, myname, winprops) 
-if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); } 
-} 
+	function NewWindow(mypage, myname, w, h, scroll) { 
+		var winl = (screen.width - w) / 2; 
+		var wint = (screen.height - h) / 2; 
+		winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable' 
+		win = window.open(mypage, myname, winprops) 
+		if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); } 
+	} 
 
 	function mem_type_update(index , id){
 
@@ -47,27 +47,42 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 
 		var i = mem_type[index].options.selectedIndex;
 		var selValue = mem_type[index].options[i].value;
-				
-		$.ajax({
-			type: "POST",
-			url: "/_admin/sub/mem_type_update.jsp",
-			data: "mem_type="+selValue+"&mem_id="+sphone,
-			success: function(msg){
-				if($.trim(msg) == '0'){
-					
-				}
-				else{
-					
-				}
-		}});
+
+		if(confirm("회원가입상태를 변경할까요?")){
+			$.ajax({
+				type: "POST",
+				url: "/_admin/member/mem_type_update.jsp",
+				data: "mem_type="+selValue+"&mem_id="+id,
+				success: function(msg){
+					if($.trim(msg) == '0'){
+						alert("회원가입상태를 변경했습니다.");
+						document.location.reload();
+					}
+					else{
+						alert("회원가입상태 변경 실패!");
+					}
+			}});
+		}
 	}
 
 
-	//페이지이동
-	function goPage(npage){
-		this.forms = document.frm;
-		forms.npage.value = npage;
-		forms.submit();
+	function on_search() {
+
+		var frm = document.frm;
+		if(!$('#keyword').val()) {
+			alert('검색어를 입력하시기 바랍니다.');
+			$('#keyword').focus();
+			return;
+		} 
+		frm.action="mem_list.jsp"
+		frm.submit();
+	}
+
+	function goPage(val){
+		var frm = document.frm;
+		frm.npage.value=val;
+		frm.action="mem_list.jsp"
+		frm.submit();
 	}
 	
 //--> 
@@ -109,8 +124,8 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               <option value="1"<%if("1".equals(mDto.getMem_type())) out.println(" selected");%>>유료회원(1년)</option>
               <option value="2"<%if("2".equals(mDto.getMem_type())) out.println(" selected");%>>유료회원(2년)</option>
             </select>
-            <a href=""></a><img align="absmiddle" src="../../images/common/btn_save2.gif" onclick="mem_type_update(<%=i%>,'<%=mDto.getMem_id()%>');" width="32" height="16" border="0"></a></td>
-          <td align="center" bgcolor="white"><a href="mem_detail.jsp?mem_no=<%=mDto.getMem_no()%>" onClick="NewWindow(this.href,'name','740','520','yes');return false;"><img align="absmiddle" src="../../images/common/btn_detail.gif" width="75" height="22" border="0"></a></td>
+            <a href=""></a><a href="javascript:mem_type_update(<%=i%>,'<%=mDto.getMem_id()%>');"><img align="absmiddle" src="/_admin/images/common/btn_save2.gif" onclick="" width="32" height="16" border="0"></a></td>
+          <td align="center" bgcolor="white"><a href="mem_detail.jsp?mem_id=<%=mDto.getMem_id()%>" onClick="NewWindow(this.href,'name','760','600','yes');return false;"><img align="absmiddle" src="/_admin/images/common/btn_detail.gif" width="75" height="22" border="0"></a></td>
         </tr>
 <%
 	}
@@ -122,11 +137,7 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
   <tr>
     <td align="center" style="padding-top:50px;padding-bottom:40px;"><table border="0" cellpadding="0" cellspacing="0" width="50%">
         <tr>
-          <td align="center"><p><span class=normal_b>
-          <!--img align="absmiddle" src="../../images/board/btn_prev_dual.gif" width="16" height="15" border="0"> <img align="absmiddle" src="../../images/board/btn_prev.gif" width="16" height="15" border="0"> <span class=normal_b>1 &nbsp;</span>I &nbsp;2 &nbsp;I &nbsp;3 &nbsp;I &nbsp;4 &nbsp;I &nbsp;5 &nbsp;I &nbsp;6 &nbsp;I &nbsp;7 &nbsp;I &nbsp;8 &nbsp;I &nbsp;9 &nbsp;I &nbsp;10 <img align="absmiddle" src="../../images/board/btn_next.gif" width="16" height="15" border="0"> <img align="absmiddle"
-src="../../images/board/btn_next_dual.gif"
-width="16" height="15" border="0"-->
-<%=strPage%></span>
+          <td align="center"><p><span class=normal_b><%=strPage%></span>
 </p></td>
         </tr>
         <tr>
@@ -136,13 +147,13 @@ width="16" height="15" border="0"-->
           <td height="4" align="center">
           <select name="field" size="1">
               <option value="">선택하세요</option>
-              <option value="">가입일</option>
-              <option value="">회원명</option>
-              <option value="">아이디</option>
-              <option value="">회원가입상태</option>
+              <option value="reg_dt"<%=("reg_dt".equals(field)?" selected":"")%>>가입일</option>
+              <option value="name"<%=("name".equals(field)?" selected":"")%>>회원명</option>
+              <option value="id"<%=("id".equals(field)?" selected":"")%>>아이디</option>
+              <option value="type"<%=("type".equals(field)?" selected":"")%>>회원가입상태</option>
             </select>
-            <input name="keyword" type="text" size="30" class="input_box">
-            <input name="imagefield" type="image" src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle"></td>
+            <input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="30" class="input_box">
+           <a href="javascript:on_search();"><img src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle"></a></td>
         </tr>
       </table></td>
   </tr>

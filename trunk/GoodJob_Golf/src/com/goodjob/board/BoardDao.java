@@ -4,6 +4,7 @@
 package com.goodjob.board;
 
 import java.sql.Connection;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -62,7 +63,7 @@ public class BoardDao {
 			params.add(((npage-1)* BBS.per_page));
 			params.add(BBS.per_page);
 			
-			list = (List<BoardDto>) qr.query(conn , String.format(BBS.list, tableName, where), rsh , params.toArray());
+			list = (List<BoardDto>) qr.query(conn , MessageFormat.format(BBS.list, tableName, where), rsh , params.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -112,7 +113,7 @@ public class BoardDao {
 				params.add(keyword);
 			}
 			
-			map = (Map<String, Long>)qr.query(conn, String.format(BBS.totalcnt, tableName , where) , rsh , params.toArray());
+			map = (Map<String, Long>)qr.query(conn, MessageFormat.format(BBS.totalcnt, tableName , where) , rsh , params.toArray());
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -250,7 +251,6 @@ public class BoardDao {
 			params.add(dto.getSubject());
 			params.add(dto.getContent());
 			params.add(dto.getPassword());
-			params.add("%Y-%m-%d");
 			params.add(dto.getFilename());
 			params.add("A");			//position
 			params.add(seq);
@@ -319,9 +319,14 @@ public class BoardDao {
 		List<JoinBoardDto> list = null;
 		Connection conn = null;
 		
-		String field = StringUtils.defaultIfEmpty(data.get("field"), "");
-		String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
+		String region = StringUtils.trimToEmpty(data.get("region"));
+		String sex = StringUtils.trimToEmpty(data.get("sex"));
+		String age = StringUtils.trimToEmpty(data.get("age"));
+		String join_no = StringUtils.trimToEmpty(data.get("join_no"));
+		String keyword = StringUtils.trimToEmpty(data.get("keyword"));
+		
 		int npage = NumberUtils.toInt(data.get("npage"), 1);
+		int per_page = NumberUtils.toInt(data.get("per_page"), 1);
 		
 		try {
 			conn = DBManager.getConnection();
@@ -332,25 +337,33 @@ public class BoardDao {
 			QueryRunner qr = new QueryRunner();
 			
 			//검색조건
-			String where = "";
-			if("name".equals(field) && keyword.length()>0){
-				where = "WHERE name LIKE concat('%',?,'%') " ;
+			StringBuilder where = new StringBuilder();
+			if(keyword.length()>0){
+				where.append("and content LIKE concat('%',?,'%') ");
 				params.add(keyword);
 			}
-			else if("subject".equals(field) && keyword.length()>0){
-				where = "WHERE subject LIKE concat('%',?,'%') " ;
-				params.add(keyword);
+			if(region.length()>0){
+				where.append("and region = ? ");
+				params.add(region);
 			}
-			else if("content".equals(field) && keyword.length()>0){
-				where = "WHERE content LIKE concat('%',?,'%') " ;
-				params.add(keyword);
+			if(sex.length()>0){
+				where.append("and sex = ? ");
+				params.add(sex);
+			}
+			if(age.length()>0){
+				where.append("and age = ? ");
+				params.add(age);
+			}
+			if(join_no.length()>0){
+				where.append("and join_no < ? ");
+				params.add(join_no);
 			}
 			
 			//페이징
-			params.add(((npage-1)* BBS.per_page));
-			params.add(BBS.per_page);
+			params.add(((npage-1)* per_page));
+			params.add(per_page);
 			
-			list = (List<JoinBoardDto>) qr.query(conn , String.format(BBS.join_list,where), rsh , params.toArray());
+			list = (List<JoinBoardDto>) qr.query(conn , MessageFormat.format(BBS.join_list,where.toString()), rsh , params.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -405,7 +418,7 @@ public class BoardDao {
 	
 	public JoinBoardDto getJoinView(int join_no){
 		
-		JoinBoardDto jDto = null;
+		JoinBoardDto jDto = new JoinBoardDto();
 		Connection conn = null;
 		try {
 			
@@ -414,9 +427,9 @@ public class BoardDao {
 				Object[] params = {join_no};
 				
 				conn = DBManager.getConnection();
-				ResultSetHandler rsh = new BeanHandler(BoardDto.class);
+				ResultSetHandler rsh = new BeanHandler(JoinBoardDto.class);
 				QueryRunner qr = new QueryRunner();
-				jDto = (JoinBoardDto) qr.query(conn, String.format(BBS.join_view) , rsh , params);
+				jDto = (JoinBoardDto) qr.query(conn, BBS.join_view , rsh , params);
 			}
 			else{
 				jDto = new JoinBoardDto();
@@ -503,10 +516,6 @@ public class BoardDao {
 			params.add(jDto.getPrice_info3());
 			params.add(jDto.getContent());
 			
-			
-			params.add(jDto.getJoin_name());params.add(jDto.getJoin_name());
-			
-
 			QueryRunner queryRunner = new QueryRunner();
 			queryRunner.update(conn, BBS.join_insert , params.toArray());
 
@@ -516,6 +525,27 @@ public class BoardDao {
 			DbUtils.closeQuietly(conn);
 		}
 		
+	}
+	
+	public boolean setJoinStatus(int join_no){
+		
+		boolean isUpdate = false;
+		Connection conn = null;
+		try {
+
+			conn = DBManager.getConnection();
+
+			QueryRunner queryRunner = new QueryRunner();
+			queryRunner.update(conn, BBS.join_status , join_no);
+			
+			isUpdate = true;
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return isUpdate;
 	}
 	
 	/**
@@ -532,7 +562,9 @@ public class BoardDao {
 			conn = DBManager.getConnection();
 
 			QueryRunner queryRunner = new QueryRunner();
+			
 			queryRunner.update(conn, BBS.join_delete , join_no);
+			queryRunner.update(conn, BBS.join_cdelete , join_no);
 			
 			isDel = true;
 			
@@ -558,7 +590,8 @@ public class BoardDao {
 			Object[] params = {join_no};
 			
 			conn = DBManager.getConnection();
-			ResultSetHandler rsh = new BeanHandler(JoinBoardDto.class);
+			
+			ResultSetHandler rsh = new BeanListHandler(JoinBoardDto.class);
 			QueryRunner qr = new QueryRunner();
 			
 			list = (List<JoinBoardDto>) qr.query(conn , BBS.join_clist, rsh , params);
@@ -586,10 +619,13 @@ public class BoardDao {
 			ArrayList<Object> params = new ArrayList<Object>();
 			params.add(jDto.getJoin_no());
 			params.add(jDto.getCmt_name());
-			params.add(jDto.getContent());
+			params.add(jDto.getComment());
 			
 			QueryRunner queryRunner = new QueryRunner();
 			queryRunner.update(conn, BBS.join_cinsert , params.toArray());
+			
+			queryRunner.update(conn, BBS.join_apply , jDto.getJoin_no());
+			
 
 		} catch (Exception e) {
 			System.out.println(e);

@@ -2,7 +2,7 @@
 
 body, td {margin:0;padding:0;font:12px"µ¸¿ò",Arial;color:#58595B;line-height:16px;} 
 img {border:0;}
-
+form {margin : 0px;}
 a:link    {color:#976712;text-decoration:none;}
 a:visited {color:#666666;text-decoration:none;}
 a:active  {color:#666666;text-decoration:none;}
@@ -19,8 +19,11 @@ a:hover  {color:#CB8303;text-decoration:none}
 .red{font:12px "µ¸¿ò","dotum"; color:#E42F1D; text-decoration:none; font-weight:bold;}
 .red_s{font:11px "µ¸¿ò","dotum"; color:#E42F1D; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
 .red_ss{font:11px "µ¸¿ò","dotum"; color:#E42F1D; text-decoration:none; letter-spacing:-0.05em;}
+.yellow{font:12px "µ¸¿ò","dotum"; color:#FFF450; text-decoration:none;font-weight:bold;}
+.white_m{font:12px "µ¸¿ò","dotum"; color:#FFFFFF; text-decoration:none;}
 .white{font:12px "µ¸¿ò","dotum"; color:#FFFFFF; text-decoration:none;}
-.white_b{font:12px "µ¸¿ò","dotum"; color:#FFFFFF; text-decoration:none;;font-weight:bold;}
+.white_b{font:12px "µ¸¿ò","dotum"; color:#FFFFFF; text-decoration:none; font-weight:bold;}
+.white_s{font:11px "µ¸¿ò","dotum"; color:#FFFFFF; text-decoration:none;letter-spacing:-0.08em;}
 .yellow_b{font:13px "µ¸¿ò","dotum"; color:#F9FD8E; text-decoration:none;font-weight:bold;}
 
 
@@ -46,11 +49,11 @@ a:active.realtime_team{text-decoration:none; font-size: 9pt; color:#FF7E00;}
 /*¸ÞÀÎ°Ô½ÃÆÇ¸®½ºÆ®*/
 
 .board_date{font:11px "µ¸¿ò","dotum"; color:#808285; text-decoration:none;}
-.board_list{font:12px "µ¸¿ò","dotum"; color:#976712; text-decoration:none; letter-spacing:-0.05em;}
-a:link.board_list{text-decoration:none; font-size: 9pt; color:#976712;}
-a:visited.board_list{text-decoration:none; font-size: 9pt; color:#FF7E00;}
-a:hover.board_list{text-decoration:none; font-size: 9pt; color:#FF7E00;}
-a:active.board_list{text-decoration:none; font-size: 9pt; color:#FF7E00;}
+.board_list{font:11px "µ¸¿ò","dotum"; color:#976712; text-decoration:none; letter-spacing:-0.05em;}
+a:link.board_list{text-decoration:none; font-size: 9pt; color:#E53B07;}
+a:visited.board_list{text-decoration:none; font-size: 9pt; color:#808285;}
+a:hover.board_list{text-decoration:none; font-size: 9pt; color:#E53B07;text-decoration:underline;}
+a:active.board_list{text-decoration:none; font-size: 9pt; color:#E53B07;}
 
 /*¼­ºê°Ô½ÃÆÇ¸®½ºÆ®*/
 
@@ -108,7 +111,8 @@ a:active.area{text-decoration:none; font-size: 9pt; color:#FF7E00;}
 /* input box ½ºÅ¸ÀÏ */
 
 .input_01, select{background-color:ffffff;font-family:µ¸¿ò,gulim;font-size:12px;color:#636163;height:16pt;border:1 solid #bcbec0;}
-.box_01, textarea, select{background-color:FFFFFF;font-family:±¼¸²,gulim;font-size:12px;color:#636163;border:1 solid #BCBEC1}
+.input_02{background-color:FFFFFF;font-family:µ¸¿ò,dotum;font-size:12px;color:#636163;height:14pt;border:1 solid #bcbec1;}
+.box_01, textarea, select, input{font-family:µ¸¿ò,dotum;font-size:12px;color:#636163;border:0 solid #BCBEC1}
 
 
 

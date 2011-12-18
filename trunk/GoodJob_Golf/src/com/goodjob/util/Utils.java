@@ -3,6 +3,7 @@
  */
 package com.goodjob.util;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -33,6 +34,10 @@ public class Utils {
 		return date;
 	}
 	
+	public static String numberFormat(int num){
+		NumberFormat format = NumberFormat.getInstance();
+		return format.format(num);
+	}
 	/**
 	 * 인증번호 
 	 * @param length

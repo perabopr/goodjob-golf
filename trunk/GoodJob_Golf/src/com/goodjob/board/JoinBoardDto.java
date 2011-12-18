@@ -24,14 +24,15 @@ public class JoinBoardDto implements Serializable{
 	private String region;
 	private String golflink_name;
 	private String sex;
-	private Integer age;
-	private Integer join_person;
+	private Integer age=0;
+	private Integer join_person=0;
 	private String rounding_dt;
-	private Integer price_info1;
-	private Integer price_info2;
-	private Integer price_info3;
+	private String price_info1;
+	private String price_info2;
+	private String price_info3;
 	private String content;
 	private Integer readcount;
+	private Integer apply_count;
 	private String join_status;
 	private String reg_dt;
 	
@@ -105,23 +106,25 @@ public class JoinBoardDto implements Serializable{
 	public void setRounding_dt(String rounding_dt) {
 		this.rounding_dt = rounding_dt;
 	}
-	public Integer getPrice_info1() {
+
+	
+	public String getPrice_info1() {
 		return price_info1;
 	}
-	public void setPrice_info1(Integer price_info1) {
-		this.price_info1 = price_info1;
+	public void setPrice_info1(String priceInfo1) {
+		price_info1 = priceInfo1;
 	}
-	public Integer getPrice_info2() {
+	public String getPrice_info2() {
 		return price_info2;
 	}
-	public void setPrice_info2(Integer price_info2) {
-		this.price_info2 = price_info2;
+	public void setPrice_info2(String priceInfo2) {
+		price_info2 = priceInfo2;
 	}
-	public Integer getPrice_info3() {
+	public String getPrice_info3() {
 		return price_info3;
 	}
-	public void setPrice_info3(Integer price_info3) {
-		this.price_info3 = price_info3;
+	public void setPrice_info3(String priceInfo3) {
+		price_info3 = priceInfo3;
 	}
 	public String getContent() {
 		return content;
@@ -131,6 +134,13 @@ public class JoinBoardDto implements Serializable{
 	}
 	public Integer getReadcount() {
 		return readcount;
+	}
+	
+	public Integer getApply_count() {
+		return apply_count;
+	}
+	public void setApply_count(Integer applyCount) {
+		apply_count = applyCount;
 	}
 	public void setReadcount(Integer readcount) {
 		this.readcount = readcount;

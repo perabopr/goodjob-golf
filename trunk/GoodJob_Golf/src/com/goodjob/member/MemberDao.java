@@ -50,19 +50,19 @@ public class MemberDao {
 			//검색조건
 			String where = "";
 			if("name".equals(field) && keyword.length() > 0){
-				where = "WHERE MEM_NAME LIKE concat('%',?,'%') " ;
+				where = " AND MEM_NAME LIKE concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
 			else if("id".equals(field) && keyword.length() > 0){
-				where = "WHERE MEM_ID LIKE concat('%',?,'%') " ;
+				where = " AND MEM_ID = ? " ;
 				bind.add(keyword);
 			}
 			else if("type".equals(field) && keyword.length() > 0){
-				where = "WHERE MEM_TYPE = ? " ;
+				where = " AND MEM_TYPE = ? " ;
 				bind.add(keyword);
 			}
 			else if("reg_dt".equals(field) && keyword.length() > 0){
-				where = "WHERE date_format(reg_dt,'%Y%m%d') = ? " ;
+				where = " AND date_format(reg_dt,'%Y%m%d') = ? " ;
 				bind.add(keyword);
 			}
 			
@@ -227,9 +227,9 @@ public class MemberDao {
 	 * 회원 수정
 	 * @param mDto
 	 */
-	public void MemberType(String mem_id , String type){
+	public boolean memberTypeUpdate(String mem_id , String type){
 		Connection conn = null;
-		
+		boolean isUpdate = false;
 		try {
 			
 			conn = DBManager.getConnection();
@@ -239,13 +239,42 @@ public class MemberDao {
 			bind.add(mem_id);
 			
 			QueryRunner qr = new QueryRunner();
-			qr.update(conn , MEMBER.update , bind.toArray());
+			qr.update(conn , MEMBER.type_update , bind.toArray());
+			
+			isUpdate = true;
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
+		
+		return isUpdate;
+	}
+	
+	public boolean memberMemoUpdate(String mem_id , String memo){
+		Connection conn = null;
+		boolean isUpdate = false;
+		try {
+			
+			conn = DBManager.getConnection();
+			
+			ArrayList<String> bind = new ArrayList<String>();
+			bind.add(memo);
+			bind.add(mem_id);
+			
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn , MEMBER.memo_update , bind.toArray());
+			
+			isUpdate = true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return isUpdate;
 	}
 	
 	/**
@@ -322,7 +351,7 @@ public class MemberDao {
 		
 		try {
 			
-			String[] bind = {mem_pwd,mem_id};
+			String[] bind = {mem_id};
 			conn = DBManager.getConnection();
 			
 			ResultSetHandler rsh = new BeanHandler(MemberDto.class);

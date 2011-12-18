@@ -2,7 +2,11 @@
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
-<%@page import="com.goodjob.member.*"%>
+<%@page import="com.goodjob.member.*"%><%
+	
+	MemberDao mDao = new MemberDao();
+	MemberDto mDto = mDao.getMember(StringUtils.trimToEmpty((String)session.getAttribute("mem_id")));
+%>
 <!-- 상단 영역 -->
 <%@ include file="/include/header.jsp" %>
 <!-- 상단 영역 -->
@@ -179,7 +183,7 @@
                                                               <tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject width="162">회원명</td>
                                                                 <td bgcolor="white" style="padding-left:10px;" width="410">
-                                                                <input id="mem_name" class="mem_input" type="text" size="15" name="mem_name" value=""></td>
+                                                                <input id="mem_name" class="mem_input" type="text" size="15" name="mem_name" value="<%=mDto.getMem_name()%>"></td>
                                                               </tr>
                                                               <tr>
                                                                 <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;">아이디</td>

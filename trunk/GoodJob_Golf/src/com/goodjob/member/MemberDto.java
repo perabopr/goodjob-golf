@@ -31,7 +31,7 @@ public class MemberDto implements Serializable {
 	private String login_dt;
 	private int login_attempt;
 	private String input_pwd;
-	
+	private String memo;
 	
 	public Long getMem_no() {
 		return mem_no;
@@ -124,5 +124,11 @@ public class MemberDto implements Serializable {
 	}
 	public void setInput_pwd(String inputPwd) {
 		input_pwd = inputPwd;
+	}
+	public String getMemo() {
+		return memo;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 }

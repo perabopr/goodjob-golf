@@ -11,10 +11,10 @@ public class BBS {
 
 	public static final int per_page = 20;
 	
-	public static final String list = "SELECT seq , name , email , subject , readcount , write_date , filename , position, thread FROM %s " +
-										" %s ORDER BY thread desc , position LIMIT ? , ? ";
+	public static final String list = "SELECT seq , name , email , subject , readcount , date_format(write_date,''%Y-%m-%d'') write_date , filename , position, thread FROM {0} " +
+										" {1} ORDER BY thread desc , position LIMIT ? , ? ";
 	
-	public static final String totalcnt = "SELECT COUNT(*) AS CNT FROM %s %s ";
+	public static final String totalcnt = "SELECT COUNT(*) AS CNT FROM {0} {1} ";
 	
 	public static final String max = " SELECT IFNULL(MAX(seq),0)+1 as seq FROM %s ";
 	
@@ -26,7 +26,7 @@ public class BBS {
 										 " name = ?, email = ?, subject = ?, content = ?, ishtml = ? where seq = ? ";
 	
 	public static final String insert = " INSERT INTO %s (seq,mem_id,name,email,subject,content,password,readcount,write_date,filename,position,thread,ishtml,writeip,notice) " + 
-										 "VALUES (? , ? , ? , ? , ? , ? , ? , 0 , date_format(curdate(),?) , ? , ? , ? , ? , ? , ? )";
+										 "VALUES (? , ? , ? , ? , ? , ? , ? , 0 , now() , ? , ? , ? , ? , ? , ? )";
 	
 	public static final String reply = " INSERT INTO %s (seq,mem_id,name,email,subject,content,password,readcount,write_date,filename,position,thread,ishtml,writeip) " + 
 										"VALUES (?,?,?,?,?,?,?,0,date_format(curdate(),?),?,?,?,?,?)";
@@ -50,10 +50,10 @@ public class BBS {
     "a.price_info2, " +
     "a.price_info3, " +
     "a.content, " +
-    "a.readcount, " +
+    "a.readcount,apply_count, " +
     "a.join_status, " +
-    "a.reg_dt " +
-    "from tb_join_bbs a %s limit ? , ? ";
+    " date_format(a.reg_dt,''%y/%m/%d'') reg_dt " +
+    " from tb_join_bbs a where 1=1 {0} order by a.join_no desc limit ? , ? ";
 	
 	public static final String join_view = "select a.join_no, " +
     "a.join_name, " +
@@ -70,9 +70,9 @@ public class BBS {
     "a.price_info2, " +
     "a.price_info3, " +
     "a.content, " +
-    "a.readcount, " +
+    "a.readcount,apply_count, " +
     "a.join_status, " +
-    "a.reg_dt " +
+    " date_format(a.reg_dt,'%y/%m/%d') reg_dt " +
     "from tb_join_bbs a where join_no = ? ";
 	
 	public static final String join_totalcnt = " select COUNT(*) AS CNT FROM tb_join_bbs %s ";
@@ -81,16 +81,19 @@ public class BBS {
 	
 	//join_status - I : 진행중 , E : 완료   
 	public static final String join_insert = "insert into tb_join_bbs(join_name,tel1,tel2,tel3,region,golflink_name,"+
-					"sex,age,join_person,rounding_dt,price_info1,price_info2,price_info3,content,readcount,join_status,reg_dt ) "+
-					"values(?,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,0 ,'I', now() )";
+					"sex,age,join_person,rounding_dt,price_info1,price_info2,price_info3,content,join_status,reg_dt ) "+
+					"values(?,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,'I', now() )";
 
 	public static final String join_update = "update tb_join_bbs "+
-	"set join_name = ?, tel1 = ?, tel2 = ?, tel3 = ?, region = ?, golflink_name = ?, sex = ?, age = ?, join_person = ?, rounding_dt = ?, price_info1 = ?, price_info2 = ?, price_info3 = ?, content = ?, join_status = ?  "+ 
+	"set join_name = ?, tel1 = ?, tel2 = ?, tel3 = ?, region = ?, golflink_name = ?, sex = ?, age = ?, join_person = ?, rounding_dt = ?, "+
+	"price_info1 = ?, price_info2 = ?, price_info3 = ?, content = ?  "+ 
 	"where join_no = ? ";
 
 	public static final String join_delete = "DELETE FROM tb_join_bbs WHERE join_no = ? ";
 	
-	public static final String join_stats = "update tb_join_bbs set  join_status = ? where join_no = ? ";
+	public static final String join_status = "update tb_join_bbs set  join_status = 'E' where join_no = ? ";
+	
+	public static final String join_apply = "update tb_join_bbs set  apply_count = apply_count + 1 where join_no = ? ";
 	
 	
 	public static final String join_clist = "select a.cmt_no, " +
@@ -103,5 +106,5 @@ public class BBS {
 	public static final String join_cinsert = "insert into tb_join_comment(join_no,cmt_name,comment,reg_dt ) "+
 	"values(? ,? ,? ,now()) ";
 	
-	public static final String join_cdelete = "DELETE FROM tb_join_comment WHERE cmt_no = ? ";
+	public static final String join_cdelete = "DELETE FROM tb_join_comment WHERE join_no = ? ";
 }

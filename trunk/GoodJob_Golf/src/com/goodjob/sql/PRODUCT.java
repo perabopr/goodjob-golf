@@ -358,11 +358,11 @@ public class PRODUCT {
 	public static final String product_sub_update
 		=	"UPDATE tb_product_sub " +
 			"SET golflink_course_seq = ?" +
-			",time_start = ?" +
-			",time_end = ?" +
-			",goodjob_price = ?" +
-			",NH_price = ?" +
-			",product_status = ? " +
+				",time_start = ?" +
+				",time_end = ?" +
+				",goodjob_price = ?" +
+				",NH_price = ?" +
+				",product_status = ? " +
 			"WHERE productsub_seq = ?";
 
 	public static final String product_sub_delete

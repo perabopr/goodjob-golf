@@ -19,8 +19,10 @@ import com.goodjob.db.DBManager;
 import com.goodjob.reserve.dto.GolfLinkDto;
 import com.goodjob.reserve.dto.GolfLinkPriceDto;
 import com.goodjob.reserve.dto.GolfLinkPromiseDto;
+import com.goodjob.reserve.dto.GolfLinkReserveDto;
 import com.goodjob.reserve.dto.ProductDto;
 import com.goodjob.reserve.dto.ProductReserveDto;
+import com.goodjob.sql.PRODUCT;
 import com.goodjob.sql.RESERVE;
 
 public class GolfLinkDao {
@@ -156,5 +158,68 @@ public class GolfLinkDao {
 		}
 
 		return list;
+	}
+	
+	public List<ProductReserveDto> getGolfProduct(int productsubSeq){
+		List<ProductReserveDto> list = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(productsubSeq);
+			ResultSetHandler rsh = new BeanListHandler(ProductReserveDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<ProductReserveDto>) qr.query(conn , RESERVE.getProductReserve2, rsh, bind.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return list;
+	}
+	
+	public void setGolfReserve(GolfLinkReserveDto glrDto){
+		int idSeq = 0;
+		Connection conn = null;
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(glrDto.getReserve_name());
+			bind.add(glrDto.getReserve_uid());
+			bind.add(glrDto.getPer_num());
+			bind.add(glrDto.getReserve_phone());
+			bind.add(glrDto.getProduct_price());
+			bind.add(glrDto.getCoupon_price());
+			bind.add(glrDto.getProcess_status());
+			bind.add(glrDto.getCard_bill_num());
+			bind.add(glrDto.getProductsub_seq());
+			
+			QueryRunner qr = new QueryRunner();
+			
+			//예약
+			qr.update(conn, RESERVE.setGolfLinkReserve_insert, bind.toArray());
+			
+			//생성키 반환.
+			Statement stmt = conn.createStatement();
+			ResultSet rst = stmt.executeQuery(PRODUCT.getSequenceId);
+			if(rst.next()){
+				idSeq = rst.getInt(1);
+			}
+			
+			//상품상세 "예약중"상태로 변경.
+			bind = new ArrayList<Object>();
+			bind.add("1");
+			bind.add(glrDto.getProductsub_seq());
+			qr.update(conn, RESERVE.setProductSub_update, bind.toArray());
+			
+		}catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
 	}
 }

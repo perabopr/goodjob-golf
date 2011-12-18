@@ -31,7 +31,7 @@
 	}
 	else{
 		
-		if(!mDto.getMem_pwd().equals(mDto.getInput_pwd())){
+		if(!mDto.getMem_pwd().equals(mem_pwd)){
 %>
 	<script language="javascript" type="text/javascript">
 		alert("비밀번호가 일치하지 않습니다.");

@@ -15,6 +15,7 @@ CREATE TABLE tb_member (
   REG_DT varbinary(20) default NULL,
   LOGIN_DT varbinary(20) default NULL,
   LOGIN_ATTEMPT int(1) default '0',
+  MEMO text default NULL,
   PRIMARY KEY  (MEM_NO),
   UNIQUE KEY u_mem_id (MEM_ID),
   KEY index_secession (SECESSION)

@@ -103,10 +103,10 @@ public class PageNavigater {
 		
 		//처음페이지
 		if(npage != 1){
-			str.append("<A HREF=\"javascript:goPage('1');\">"+firstImage+"</A>\n");
+			str.append("<A HREF=\"javascript:goPage('1');\">"+firstImage+"</A>&nbsp;");
 		} else{
 			if(!isDisable){
-				str.append("<li class=\"imgPage\"><A HREF=\"#\">"+firstImage+"</a></li>\n");
+				str.append(firstImage+"&nbsp;");
 			}
 		}
 		

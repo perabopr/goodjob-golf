@@ -1,11 +1,11 @@
-BODY,TD,SELECT,input,DIV,form,TEXTAREA,center,option,pre,blockquote{font-size:9pt;font-family:µ∏øÚ;color:#333333;letter-spacing:-0.03em;line-height:18px}
-
+BODY,TD,SELECT,input,DIV,form,TEXTAREA,center,option,pre,blockquote{font-size:9pt;font-family:ÎèãÏõÄ;color:#333333;letter-spacing:-0.03em;line-height:18px}
+form {margin : 0px;}
 A:link    {color:#976712;text-decoration:none;}
 A:visited {color:#666666;text-decoration:none;}
 A:active  {color:#666666;text-decoration:none;}
 A:hover  {color:#CB8303;text-decoration:none}
 
-.list {font-size: 9pt; color: #666666; font-family: "±º∏≤", "±º∏≤√º"}
+.list {font-size: 9pt; color: #666666; font-family: "Íµ¥Î¶º", "Íµ¥Î¶ºÏ≤¥"}
 .list a:link {color: #666666; text-decoration: none}
 .list a:visited {color: #666666; text-decoration: none}
 .list a:hover {color:#000000;  background-color: #F5F5F5; text-decoration:none}
@@ -14,17 +14,17 @@ A:hover  {color:#CB8303;text-decoration:none}
 .head {border:solid 1 #666666;font-size:9pt;color:#666666;background-color:white;height:19px}
 .textarea {border:solid 1;font-size:9pt;color:#666666;background-color:white;}
 .input {border:solid 1;font-size:9pt;color:#666666;background-color:white;}
-.input3, select{font:12px "µ∏øÚ",Arial; border:solid 1px; border-color:#a6a6a6 #d8d8d8 #d8d8d8 #a6a6a6;height:20px}
+.input3, select{font:12px "ÎèãÏõÄ",Arial; border:solid 1px; border-color:#a6a6a6 #d8d8d8 #d8d8d8 #a6a6a6;height:20px}
 .input4 {border:solid 1;font-size:9pt;color:#939598;background-color:white;height:20px}
 .submit {border:solid 0;font-size:9pt;color:white;background-color:#666666;height:19px}
-.mate_no, select{background-color:ffffff;font-family:±º∏≤,gulim;font-size:12px;color:#636163;height:14pt;border:0 solid #bcbec0;height:13.5pt;}
-.input2, select{background-color:FFFFFF;font-family:±º∏≤,Gulim;font-size:12px;color:#636163;border: 1 solid #B0B0B0;height:20px}
+.mate_no, select{background-color:ffffff;font-family:Íµ¥Î¶º,gulim;font-size:12px;color:#636163;height:14pt;border:0 solid #bcbec0;height:13.5pt;}
+.input2, select{background-color:FFFFFF;font-family:Íµ¥Î¶º,Gulim;font-size:12px;color:#636163;border: 1 solid #B0B0B0;height:20px}
 .input4 {border:solid 0;font-size:12pt;color:#F66023;background-color:white;height:23px;font-weight:bold}
 .input5 {border:solid 0;font-size:9pt;color:#333333;background-color:white;height:17px;font-weight:bold}
 .input6 {border:solid 0;font-size:9pt;color:#F66023;background-color:white;height:17px;font-weight:bold}
 .input7 {border:solid 1;font-size:9pt;color:#BCBEC0;background-color:white;height:20px;font-weight:bold}
 .movie {border:solid 0;font-size:13pt;color:#2F72C6;background-color:white;height:15px;font-weight:bold;letter-spacing:1px}
-.cash{font-family:±º∏≤,gulim;font-size:12pt;color:#F86042;text-decoration:none;font-weight:bold}
+.cash{font-family:Íµ¥Î¶º,gulim;font-size:12pt;color:#F86042;text-decoration:none;font-weight:bold}
 
 
 
@@ -40,7 +40,7 @@ td.location {
 }
 .navi {
 	font-size: 11px;
-	font-family: "µ∏øÚ";
+	font-family: "ÎèãÏõÄ";
 	letter-spacing: -1px;
 	color: #666666;
     padding-top:10;        
@@ -49,20 +49,20 @@ td.location {
 }
 
 /*title*/
-.subject{font:15px "µ∏øÚ","dotum"; color:#0B4F7C; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
-.sub_title01{font:12px "µ∏øÚ","dotum"; color:#0B4F7C; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
-.sub_title02{font:12px "µ∏øÚ","dotum"; color:#808285; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
-.coupon_01{font:12px "µ∏øÚ","dotum"; color:#58595B; text-decoration:none; letter-spacing:-0.05em;}
+.subject{font:15px "ÎèãÏõÄ","dotum"; color:#0B4F7C; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.sub_title01{font:12px "ÎèãÏõÄ","dotum"; color:#0B4F7C; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.sub_title02{font:12px "ÎèãÏõÄ","dotum"; color:#808285; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.coupon_01{font:12px "ÎèãÏõÄ","dotum"; color:#58595B; text-decoration:none; letter-spacing:-0.05em;}
 
 
-.sub_title03{font:12px "µ∏øÚ","dotum"; color:#466C8A; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.sub_title03{font:12px "ÎèãÏõÄ","dotum"; color:#466C8A; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
 a:link.sub_title03{text-decoration:none; font-size: 9pt; color:#466C8A;}
 a:visited.sub_title03{text-decoration:none; font-size: 9pt; color:#466C8A;}
 a:hover.sub_title03{text-decoration:underline; font-size: 9pt; color:#466C8A;}
 a:active.sub_title03{text-decoration:none; font-size: 9pt; color:#466C8A;}
 
 
-.notice{font-family:µ∏øÚ,dotum; font-size:9pt;color:#939598;text-decoration:none;font-weight:bold;line-height:14pt;}
+.notice{font-family:ÎèãÏõÄ,dotum; font-size:9pt;color:#939598;text-decoration:none;font-weight:bold;line-height:14pt;}
 a:link.notice{text-decoration:none; font-size: 9pt; color:#939598;line-height:10pt;}
 a:visited.notice{text-decoration:none; font-size: 9pt; color:#939598;line-height:10pt;}
 a:hover.notice{text-decoration:none; font-size: 9pt; color:#F9365A;line-height:10pt;}
@@ -83,29 +83,29 @@ a:active.notice{text-decoration:none; font-size: 9pt; color:#237DC9;line-height:
 
 .input_tright {border:solid 1 #009999;font-family:"verdana","","u";color:#333333; font-size:8pt; height=20px;text-align : right;}
 
-/* input box Ω∫≈∏¿œ */
+/* input box Ïä§ÌÉÄÏùº */
 
 .event_title{font-size:20pt;color:#ffffff;text-decoration:none;font-weight:bold;line-height:20pt;}
 
-.box01, select{background-color:ffffff;font-family:±º∏≤,gulim;font-size:12px;color:#636163;height:15pt;border:1 solid #bcbec0}
+.box01, select{background-color:ffffff;font-family:Íµ¥Î¶º,gulim;font-size:12px;color:#636163;height:15pt;border:1 solid #bcbec0}
 
-.box02, select{background-color:f1f1f1;font-family:±º∏≤,gulim;font-size:12px;color:#636163;height:15pt;border:1 solid #bcbec0}
+.box02, select{background-color:f1f1f1;font-family:Íµ¥Î¶º,gulim;font-size:12px;color:#636163;height:15pt;border:1 solid #bcbec0}
 
-.box03, textarea, select{background-color:FFFFFF;font-family:±º∏≤,gulim;font-size:12px;color:#636163;border:1 solid #bcbec0}
+.box03, textarea, select{background-color:FFFFFF;font-family:Íµ¥Î¶º,gulim;font-size:12px;color:#636163;border:1 solid #bcbec0}
 
-.golf_list{font:12px "µ∏øÚ", Arial;color:#CE4E99;text-decoration:none;font-weight:bold;text-align:center;}
+.golf_list{font:12px "ÎèãÏõÄ", Arial;color:#CE4E99;text-decoration:none;font-weight:bold;text-align:center;}
 
-.japan_schedule_01{font:12px "µ∏øÚ", Arial;color:#6D6E71;text-decoration:none;font-weight:bold;text-align:center;}
-.japan_schedule_02{font:12px "µ∏øÚ", Arial;color:#CE4E99;text-decoration:none;font-weight:bold;text-align:left;}
-.japan_hotel{color:#F94242; font:12px "µ∏øÚ",Arial;text-decoration:none;text-align:center;}
-.japan_cc{color:#1C83A1; font:12px "µ∏øÚ",Arial;text-decoration:none;text-align:center;}
-.japan_fee {color:#F94242; font:13px "µ∏øÚ",Arial;text-decoration:none;font-weight:bold;}
+.japan_schedule_01{font:12px "ÎèãÏõÄ", Arial;color:#6D6E71;text-decoration:none;font-weight:bold;text-align:center;}
+.japan_schedule_02{font:12px "ÎèãÏõÄ", Arial;color:#CE4E99;text-decoration:none;font-weight:bold;text-align:left;}
+.japan_hotel{color:#F94242; font:12px "ÎèãÏõÄ",Arial;text-decoration:none;text-align:center;}
+.japan_cc{color:#1C83A1; font:12px "ÎèãÏõÄ",Arial;text-decoration:none;text-align:center;}
+.japan_fee {color:#F94242; font:13px "ÎèãÏõÄ",Arial;text-decoration:none;font-weight:bold;}
 
-.japan_cc2{font:12px "µ∏øÚ",Arial; color:#6D6E71; text-decoration:none;font-weight:bold;letter-spacing:-0.05em;}
-a:link.japan_cc2{font:12px "µ∏øÚ",Arial; color:#6D6E71; text-decoration:none;font-weight:bold;letter-spacing:-0.05em;}
-a:visited.japan_cc2{font:12px "µ∏øÚ",Arial; color:#6D6E71; text-decoration:none;font-weight:bold;letter-spacing:-0.05em;}
-a:hover.japan_cc2{font:12px "µ∏øÚ",Arial; color:#F8600D; text-decoration:none;font-weight:bold;letter-spacing:-0.05em;}
-a:active.japan_cc2{font:12px "µ∏øÚ",Arial; color:#6D6E71; text-decoration:none;font-weight:bold;letter-spacing:-0.05em;}
+.japan_cc2{font:12px "ÎèãÏõÄ",Arial; color:#6D6E71; text-decoration:none;font-weight:bold;letter-spacing:-0.05em;}
+a:link.japan_cc2{font:12px "ÎèãÏõÄ",Arial; color:#6D6E71; text-decoration:none;font-weight:bold;letter-spacing:-0.05em;}
+a:visited.japan_cc2{font:12px "ÎèãÏõÄ",Arial; color:#6D6E71; text-decoration:none;font-weight:bold;letter-spacing:-0.05em;}
+a:hover.japan_cc2{font:12px "ÎèãÏõÄ",Arial; color:#F8600D; text-decoration:none;font-weight:bold;letter-spacing:-0.05em;}
+a:active.japan_cc2{font:12px "ÎèãÏõÄ",Arial; color:#6D6E71; text-decoration:none;font-weight:bold;letter-spacing:-0.05em;}
 
 
 body {

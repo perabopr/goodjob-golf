@@ -61,4 +61,34 @@ public class RESERVE {
 				",golflink_price " +
 			"FROM tb_golflink_price "	+ 
 			"WHERE golflink_seq = ?";
+	
+	public static final String getProductReserve
+		=	"SELECT " +				
+				" A.productsub_seq" +
+				",B.product_date" +
+				",A.time_start" +
+				",C.course_name" +
+				",D.holl_type" +
+				",A.product_status " +
+			"FROM tb_product_sub A " +
+				"INNER JOIN tb_product B on(A.product_seq = B.product_seq) " +
+				"INNER JOIN tb_golflink_course C on(C.golflink_course_seq = A.golflink_course_seq) " +
+				"INNER JOIN tb_golflink D on(B.golflink_seq = D.golflink_seq) " +
+			"WHERE B.golflink_seq = ? " +
+				"AND B.product_date = ?";
+	
+	public static final String getGolfPromise
+		=	"SELECT " +
+				" C.promise1_type,C.promise1" +
+				",C.promise2_type,C.promise2" +
+				",C.promise3_type,C.promise3" + 
+				",C.promise4_type,C.promise4" +
+				",C.promise5_type,C.promise5" +
+				",C.cancelrule" +
+				",D.use_rule " +
+			"FROM tb_product_sub A " +
+				"INNER JOIN tb_product B on(A.product_seq = B.product_seq) " +
+				"INNER JOIN tb_golflink_promise C on(B.golflink_seq = C.golflink_seq) " +
+				"INNER JOIN tb_golflink D on(B.golflink_seq = D.golflink_seq) " +
+			"WHERE A.productsub_seq = ?";
 }

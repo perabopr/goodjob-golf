@@ -108,6 +108,7 @@ public class GolfLinkDao {
 			bind.add(gldto.getPromise_rule());
 			bind.add(gldto.getUse_guide());
 			bind.add(gldto.getGolflink_guide());
+			bind.add(gldto.getUse_rule());
 			
 			QueryRunner qr = new QueryRunner();
 			qr.update(conn, PRODUCT.golflink_insert, bind.toArray());
@@ -157,6 +158,7 @@ public class GolfLinkDao {
 			bind.add(gldto.getPromise_rule());
 			bind.add(gldto.getUse_guide());
 			bind.add(gldto.getGolflink_guide());
+			bind.add(gldto.getUse_rule());
 			bind.add(gldto.getGolflink_seq());
 			
 			QueryRunner qr = new QueryRunner();

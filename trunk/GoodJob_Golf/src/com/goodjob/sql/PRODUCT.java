@@ -33,7 +33,8 @@ public class PRODUCT {
 				",cancel_rule" +
 				",promise_rule" +
 				",use_guide" +
-				",golflink_guide) " +
+				",golflink_guide" +
+				",use_rule) " +
 			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";	
 	public static final String golflink_select_full
 	=	"SELECT " +
@@ -58,7 +59,8 @@ public class PRODUCT {
 			",a.cancel_rule" +
 			",a.promise_rule" +
 			",a.use_guide" +
-			",a.golflink_guide " +	
+			",a.golflink_guide" +
+			",a.use_rule " +	
 		"FROM tb_golflink a " +
 		"INNER JOIN tb_region b on(a.region_seq = b.region_seq)" +
 		"WHERE a.menu_seq = ?";	
@@ -84,7 +86,8 @@ public class PRODUCT {
 				",cancel_rule" +
 				",promise_rule" +
 				",use_guide" +
-				",golflink_guide " +	
+				",golflink_guide" +
+				",use_rule " +	
 			"FROM tb_golflink " +
 			"WHERE golflink_seq = ?";
 	public static final String golflink_update
@@ -107,7 +110,8 @@ public class PRODUCT {
 				",cancel_rule = ?" +
 				",promise_rule = ?" +
 				",use_guide = ?" +
-				",golflink_guide = ? " +
+				",golflink_guide = ?" +
+				",use_rule = ? " +
 			"WHERE golflink_seq = ?";	
 	public static final String golflink_delete 
 		=	"DELETE FROM tb_golflink " +
@@ -263,8 +267,9 @@ public class PRODUCT {
 				",product_year" +
 				",product_month" +
 				",product_day" +
+				",product_date" +
 				",view_yn)" +
-			"VALUES(?,?,?,?,?,?)";	
+			"VALUES(?,?,?,?,?,?,?)";	
 	
 	public static final String product_select
 		=	"SELECT" +
@@ -274,6 +279,7 @@ public class PRODUCT {
 				",product_year" +
 				",product_month" +
 				",product_day" +
+				",product_date" +
 				",view_yn " +
 			"FROM tb_product " +
 			"WHERE product_seq = ?";
@@ -286,6 +292,7 @@ public class PRODUCT {
 				",product_year" +
 				",product_month" +
 				",product_day" +
+				",product_date" +
 				",view_yn " +
 			"FROM tb_product " +
 			"WHERE menu_seq = ? " +
@@ -295,7 +302,7 @@ public class PRODUCT {
 			"ORDER BY product_year, product_month, product_day";
 	
 	public static final String product_update
-		=	"UPDATE tb_product" +
+		=	"UPDATE tb_product " +
 				"SET view_yn = ? " +
 		    "WHERE product_seq = ?";
 	

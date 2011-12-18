@@ -67,10 +67,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white">
-              	<input class="input_box" size="55" id="promise1" name="promise1" value="<%= glpList.getPromise1()%>">
+              	<input class="input_box" size="55" id="promise1_type" name="promise1_type" value="<%= glpList.getPromise1_type()%>">
               </td>
               <td align="center" bgcolor="white">
-              	<input class="input_box" size="55" id="promise1_type" name="promise1_type" value="<%= glpList.getPromise1_type()%>">
+              	<input class="input_box" size="55" id="promise1" name="promise1" value="<%= glpList.getPromise1()%>">
               </td>
               </tr>
             </table></td>
@@ -84,10 +84,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise2" value="<%= glpList.getPromise2()%>">
+              <input class="input_box" size="55" name="promise2_type" value="<%= glpList.getPromise2_type()%>">
                 </td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise2_type" value="<%= glpList.getPromise2_type()%>">
+                  <input class="input_box" size="55" name="promise2" value="<%= glpList.getPromise2()%>">
               </td>
               </tr>
             </table></td>
@@ -101,10 +101,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise3" value="<%= glpList.getPromise3()%>">
+              <input class="input_box" size="55" name="promise3_type" value="<%= glpList.getPromise3_type()%>">
 				</td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise3_type" value="<%= glpList.getPromise3_type()%>">
+                  <input class="input_box" size="55" name="promise3" value="<%= glpList.getPromise3()%>">
               </td>
               </tr>
             </table></td>
@@ -118,10 +118,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise4" value="<%= glpList.getPromise4()%>">
+              <input class="input_box" size="55" name="promise4_type" value="<%= glpList.getPromise4_type()%>">
 			</td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise4_type" value="<%= glpList.getPromise4_type()%>">
+                  <input class="input_box" size="55" name="promise4" value="<%= glpList.getPromise4()%>">
               </td>
               </tr>
             </table></td>
@@ -136,10 +136,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               <tr>
               
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise5" value="<%= glpList.getPromise5()%>">
+              <input class="input_box" size="55" name="promise5_type" value="<%= glpList.getPromise5_type()%>">
 			</td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise5_type" value="<%= glpList.getPromise5_type()%>">
+                  <input class="input_box" size="55" name="promise5" value="<%= glpList.getPromise5()%>">
               </td>
               </tr>
             </table></td>

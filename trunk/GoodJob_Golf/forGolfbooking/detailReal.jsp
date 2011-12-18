@@ -1,3 +1,4 @@
+<%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
 <%@page import="com.goodjob.reserve.dto.ProductDto"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="com.goodjob.reserve.dto.GolfLinkPriceDto"%>
@@ -9,6 +10,10 @@
 int menuNum = Integer.parseInt(menuName);
 
 String golfSeq = request.getParameter("golf");
+String curDate = request.getParameter("cdate");
+if(curDate == null || curDate.length() != 8){
+	response.sendRedirect("reserve.jsp?menu=1");
+}
 
 //골프장상세정보.
 GolfLinkDao glDao = new GolfLinkDao();
@@ -74,8 +79,23 @@ pDto.setProduct_startDate(sDate);
 pDto.setProduct_endDate(eDate);
 List<ProductDto> listPrdt = glDao.getGolfProductList(pDto);
 
+//시작일 설정.
 Calendar incDate = Calendar.getInstance();
 incDate.set(tYear, tMonth-1, tDay);
+
+String arrDateStr = "";
+for(int i = 0; i < listPrdt.size();i++){
+	arrDateStr += listPrdt.get(i).getProduct_date()+",";
+}
+if(arrDateStr.length() > 0){
+	arrDateStr = arrDateStr.substring(0,arrDateStr.length()-1);
+}
+
+//선택날짜 예약리스트 가져오기.
+ProductReserveDto prDto = new ProductReserveDto();
+prDto.setGolflink_seq(Integer.parseInt(golfSeq));
+prDto.setProduct_date(curDate);
+List<ProductReserveDto> listPr = glDao.getGolfProduct(prDto);
 %>
 <style type="text/css">
 
@@ -130,8 +150,51 @@ function DisplayMenu(vIdx){
 			break;
 	}
 }
+
+function reserveSubmit(gcId){
+	$("#menu").val("1");
+	$("#gcId").val(gcId);
+	frm.submit();
+}
+
+function nextResDate(cDate){
+	var resDate = "<%=arrDateStr%>";
+	resDate = resDate.split(",");
+	var chkNext = false;
+	for(i = 0; i < resDate.length;i++){
+		if(chkNext){
+			location.href = "/forGolfbooking/detail.jsp?menu=1&golf=<%=golfSeq%>&date=<%=strDate%>&cdate="+resDate[i];
+			return false;
+		}
+		if(resDate[i] == cDate){
+			chkNext = true;
+		}
+	}
+	alert("다음날짜가 없습니다.");
+	return false;
+}
+function preResDate(cDate){
+	var resDate = "<%=arrDateStr%>";
+	resDate = resDate.split(",");
+	var chkPre = false;
+	for(i = resDate.length - 1; i >= 0;i--){
+		if(chkPre){
+			location.href = "/forGolfbooking/detail.jsp?menu=1&golf=<%=golfSeq%>&date=<%=strDate%>&cdate="+resDate[i];
+			return false;
+		}
+		if(resDate[i] == cDate){
+			chkPre = true;
+		}
+	}
+	alert("이전날짜가 없습니다.");
+	return false;	
+}
 //--->
 </script>
+<FORM NAME="frm" METHOD="post" ACTION="rule.jsp">
+<input type="hidden" id="menu" name="menu" >
+<input type="hidden" id="gcId" name="gcId" >
+</FORM>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
 <TR>
 <TD bgColor=white vAlign=top width=745 align=center>
@@ -327,7 +390,7 @@ for (int i = 1; i < 15 ;i++){
 		}else{
 %>
 		<TD bgColor=white height=30 align=center>
-		<a href="/forGolfbooking/detail.jsp?menu=<%=menuNum%>&golf=<%=glDto.getGolflink_seq()%>&date=<%=cDate%>"><IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate %></br>--------------------</br>예약가능팀 : <%=rCnt %>팀');" onMouseout="hideddrivetip()"></a>
+		<a href="/forGolfbooking/detail.jsp?menu=<%=menuNum%>&golf=<%=glDto.getGolflink_seq()%>&date=<%=sDate %>&cdate=<%=cDate%>"><IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate %></br>--------------------</br>예약가능팀 : <%=rCnt %>팀');" onMouseout="hideddrivetip()"></a>
 		</TD>
 <%
 		}
@@ -340,8 +403,8 @@ for (int i = 1; i < 15 ;i++){
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=150>
 <TBODY>
 <TR>
-<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_prev_day.gif" width=65 height=20></TD>
-<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_next_day.gif" width=65 height=20></TD></TR></TBODY></TABLE></TD></TR>
+<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_prev_day.gif" width=65 height=20 onclick="preResDate('<%=curDate%>');"></TD>
+<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_next_day.gif" width=65 height=20 onclick="nextResDate('<%=curDate%>');"></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD vAlign=top width=707 colSpan=2 align=center>
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=704>
@@ -372,28 +435,48 @@ for (int i = 1; i < 15 ;i++){
 <TBODY>
 <TR>
 <TD>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width=706 bgColor=#d1d3d4>
-<TBODY>
+<TABLE id="tbReserveList" border=0 cellSpacing=1 cellPadding=2 width=706 bgColor=#d1d3d4>
 <TR>
 <TD class=normal_b bgColor=#f1f1f1 height=25 width=120 align=center>부킹날짜</TD>
 <TD class=normal_b bgColor=#f1f1f1 height=25 width=120 align=center>부킹시간</TD>
 <TD class=normal_b bgColor=#f1f1f1 width=168 align=center>코스</TD>
 <TD class=normal_b bgColor=#f1f1f1 width=90 align=center>홀구분</TD>
 <TD class=normal_b bgColor=#f1f1f1 width=182 align=center>예약가능여부</TD></TR>
+<%
+	for(int i = 0; i < listPr.size();i++){
+		String tmpDate = listPr.get(i).getProduct_date();
+		String tmpTime = listPr.get(i).getTime_start();
+		tmpDate = tmpDate.substring(0,4) + "-" + tmpDate.substring(4,6) + "-" + tmpDate.substring(6,8);
+		if((Integer.parseInt(tmpTime.substring(0,2)) - 12) > 0){
+			tmpTime = "오후 " + (Integer.parseInt(tmpTime.substring(0,2))-12) + ":" + tmpTime.substring(2,4);
+		}else if(Integer.parseInt(tmpTime.substring(0,2)) == 12){
+			tmpTime = "오후 " + Integer.parseInt(tmpTime.substring(0,2)) + ":" + tmpTime.substring(2,4);
+		}else{
+			tmpTime = "오전 " + Integer.parseInt(tmpTime.substring(0,2)) + ":" + tmpTime.substring(2,4);			
+		}
+		
+%>
 <TR>
-<TD bgColor=white height=25 align=center>2011-12-31</TD>
-<TD bgColor=white height=25 align=center>오전 12:30</TD>
-<TD bgColor=white align=center>코스</TD>
-<TD bgColor=white align=center>36홀</TD>
-<TD bgColor=white align=center><A href="booking_rule.html"><IMG border=0 align=absMiddle src="../../images/booking/btn_regist_ok.gif" width=112 height=20></A></TD></TR>
-<TR>
-<TD bgColor=white height=25 align=center>2011-12-31</TD>
-<TD bgColor=white height=25 align=center>오전 12:30</TD>
-<TD bgColor=white height=25 align=center>코스</TD>
-<TD bgColor=white height=25 align=center>36홀</TD>
+<TD bgColor=white height=25 align=center><%=tmpDate %></TD>
+<TD bgColor=white height=25 align=center><%=tmpTime %></TD>
+<TD bgColor=white align=center><%=listPr.get(i).getCourse_name()%></TD>
+<TD bgColor=white align=center><%=listPr.get(i).getHoll_type() %></TD>
+
+<%
+		if(listPr.get(i).getProduct_status().equals("0")){			
+%>
+<TD bgColor=white align=center><A href="javascript:;" onclick="reserveSubmit('<%=listPr.get(i).getProductsub_seq() %>')"><IMG border=0 align=absMiddle src="../../images/booking/btn_regist_ok.gif" width=112 height=20></A></TD>		
+<%
+		}else{
+%>
 <TD bgColor=white height=25 align=center><IMG border=0 align=absMiddle src="../../images/booking/btn_regist_no.gif" width=112 height=20></TD>
+<%			
+		}
+%>
 </TR>
-</TBODY>
+<%
+	}
+%>
 </TABLE>
 </TD></TR>
 <TR>

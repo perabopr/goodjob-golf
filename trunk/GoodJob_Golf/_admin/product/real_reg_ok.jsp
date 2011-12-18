@@ -70,6 +70,7 @@
 	glDto.setPromise_rule(fileUpload.getParameter("content2"));
 	glDto.setUse_guide(fileUpload.getParameter("content3"));
 	glDto.setGolflink_guide(fileUpload.getParameter("content4"));
+	glDto.setUse_rule(fileUpload.getParameter("content5"));
 	
 	GolfLinkDao glDao = new GolfLinkDao();	
 	int idSeq = 0;

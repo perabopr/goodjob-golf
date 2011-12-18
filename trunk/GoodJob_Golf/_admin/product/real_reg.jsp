@@ -321,6 +321,10 @@ function getFileExtension(filePath)
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>골프장안내</span></td>
           <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="6" cols="113" id="content4" name="content4"><%= gldto.getGolflink_guide()%></textarea></td>
         </tr>
+        <tr>
+          <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이용약관</span></td>
+          <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="6" cols="113" id="content5" name="content5"><%= gldto.getUse_rule()%></textarea></td>
+        </tr>
       </table></td>
   </tr>
   <tr>

@@ -71,6 +71,7 @@ if(request.getParameterValues("pdsubseq") != null && request.getParameterValues(
 		//out.print("<br>");
 		
 	}
+	pd.setProductUpdate(Integer.parseInt(prdtSeq), "Y");
 }else{
 	
 }

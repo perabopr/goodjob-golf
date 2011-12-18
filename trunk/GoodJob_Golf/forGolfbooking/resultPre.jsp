@@ -9,8 +9,8 @@ String date = request.getParameter("date");
 String cdate = request.getParameter("cdate");
 
 String uPhone = "";
-uPhone += request.getParameter("phone1");
-uPhone += request.getParameter("phone2");
+uPhone += request.getParameter("phone1") + "-";
+uPhone += request.getParameter("phone2") + "-";
 uPhone += request.getParameter("phone3");
 int perNum = 4;
 

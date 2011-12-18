@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS TB_CONDO_RESERVE;
+DROP TABLE IF EXISTS TB_PACKAGE_RESERVE;
 DROP TABLE IF EXISTS TB_PACKAGE_PROMISE;
 DROP TABLE IF EXISTS TB_GOLFLINK_PROMISE;
 DROP TABLE IF EXISTS TB_GOLFLINK_PRICE;
@@ -178,7 +180,7 @@ CREATE TABLE TB_GOLFLINK_RESERVE(
 		reserve_phone                 		VARCHAR(13)		 NOT NULL,
 		product_price                 		INT		 NOT NULL,
 		coupon_price                  		INT		 NOT NULL,
-		process_status                		CHAR(1)		 DEFAULT 1		 NOT NULL,
+		process_status                		CHAR(1)		 DEFAULT 0		 NOT NULL,
 		card_bill_num                 		VARCHAR(20)		 NULL 
 );
 
@@ -274,6 +276,42 @@ CREATE TABLE TB_PACKAGE_PROMISE(
 		cancelrule                    		TEXT		 NULL 
 );
 
+/**********************************/
+/* Table Name: 패키지예약현황 */
+/**********************************/
+CREATE TABLE TB_PACKAGE_RESERVE(
+		reserve_seq                   		INT		 NOT NULL AUTO_INCREMENT,
+		menu_seq                      		INT		 NOT NULL,
+		package_seq                   		INT		 NOT NULL,
+		reserve_day                   		DATETIME		 NOT NULL,
+		reserve_name                  		VARCHAR(8)		 NOT NULL,
+		package_name1                 		VARCHAR(50)		 NOT NULL,
+		package_name2                 		VARCHAR(50)		 NOT NULL,
+		tour_date                     		VARCHAR(10)		 NOT NULL,
+		per_num                       		VARCHAR(2)		 DEFAULT 4		 NOT NULL,
+		reserve_phone                 		VARCHAR(13)		 NOT NULL,
+		package_price                 		INT		 NOT NULL,
+		process_status                		CHAR(1)		 DEFAULT 0		 NULL 
+);
+
+/**********************************/
+/* Table Name: 콘도예약현환 */
+/**********************************/
+CREATE TABLE TB_CONDO_RESERVE(
+		reserve_se                    		INT		 NOT NULL AUTO_INCREMENT,
+		menu_seq                      		INT		 NOT NULL,
+		condo_seq                     		INT		 NOT NULL,
+		reserve_day                   		DATETIME		 NOT NULL,
+		reserve_name                  		VARCHAR(8)		 NOT NULL,
+		condo_name                    		VARCHAR(50)		 NOT NULL,
+		roomtype                      		VARCHAR(50)		 NOT NULL,
+		in_date                       		VARCHAR(8)		 NOT NULL,
+		out_date                      		VARCHAR(8)		 NOT NULL,
+		reserve_phone                 		VARCHAR(13)		 NOT NULL,
+		condo_price                   		INT		 NOT NULL,
+		process_status                		CHAR(1)		 DEFAULT 0		 NOT NULL
+);
+
 
 ALTER TABLE TB_REGION ADD CONSTRAINT IDX_TB_REGION_PK PRIMARY KEY (region_seq);
 
@@ -319,4 +357,8 @@ ALTER TABLE TB_GOLFLINK_PROMISE ADD CONSTRAINT IDX_TB_GOLFLINK_PROMISE_FK0 FOREI
 
 ALTER TABLE TB_PACKAGE_PROMISE ADD CONSTRAINT IDX_TB_PACKAGE_PROMISE_PK PRIMARY KEY (package_seq);
 ALTER TABLE TB_PACKAGE_PROMISE ADD CONSTRAINT IDX_TB_PACKAGE_PROMISE_FK0 FOREIGN KEY (package_seq) REFERENCES TB_PACKAGE (package_seq);
+
+ALTER TABLE TB_PACKAGE_RESERVE ADD CONSTRAINT IDX_TB_PACKAGE_RESERVE_PK PRIMARY KEY (reserve_seq);
+
+ALTER TABLE TB_CONDO_RESERVE ADD CONSTRAINT IDX_TB_CONDO_RESERVE_PK PRIMARY KEY (reserve_se);
 

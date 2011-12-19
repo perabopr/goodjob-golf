@@ -20,7 +20,7 @@ DROP TABLE IF EXISTS TB_REGION;
 /* Table Name: 지역정보 */
 /**********************************/
 CREATE TABLE TB_REGION(
-		region_seq                    		INT		 NOT NULL AUTO_INCREMENT,
+		region_seq                    		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		region_type                   		CHAR(1)		 DEFAULT '1'		 NOT NULL,
 		region_name                   		VARCHAR(50)		 NOT NULL,
 		region_etc                    		VARCHAR(100)		 NULL 
@@ -30,7 +30,7 @@ CREATE TABLE TB_REGION(
 /* Table Name: 메뉴정보 */
 /**********************************/
 CREATE TABLE TB_MENU(
-		menu_seq                      		INT		 NOT NULL AUTO_INCREMENT,
+		menu_seq                      		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		menu_name                     		VARCHAR(40)		 NOT NULL
 );
 
@@ -38,7 +38,7 @@ CREATE TABLE TB_MENU(
 /* Table Name: 골프장정보 */
 /**********************************/
 CREATE TABLE TB_GOLFLINK(
-		golflink_seq                  		INT		 NOT NULL AUTO_INCREMENT,
+		golflink_seq                  		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		menu_seq                      		INT		 NULL ,
 		golflink_name                 		VARCHAR(50)		 NOT NULL,
 		region_seq                    		INT		 NULL ,
@@ -66,7 +66,7 @@ CREATE TABLE TB_GOLFLINK(
 /* Table Name: 상품메인정보 */
 /**********************************/
 CREATE TABLE TB_PRODUCT(
-		product_seq                   		INT		 NOT NULL AUTO_INCREMENT,
+		product_seq                   		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		menu_seq                      		INT		 NOT NULL,
 		golflink_seq                  		INT		 NOT NULL,
 		product_year                  		CHAR(4)		 NOT NULL,
@@ -80,7 +80,7 @@ CREATE TABLE TB_PRODUCT(
 /* Table Name: 일별상품상세정보 */
 /**********************************/
 CREATE TABLE TB_PRODUCT_SUB(
-		productsub_seq                		INT		 NOT NULL AUTO_INCREMENT,
+		productsub_seq                		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		product_seq                   		INT		 NOT NULL,
 		golflink_course_seq           		INT		 NULL ,
 		time_start                    		CHAR(4)		 NULL ,
@@ -94,7 +94,7 @@ CREATE TABLE TB_PRODUCT_SUB(
 /* Table Name: 골프장코스 */
 /**********************************/
 CREATE TABLE TB_GOLFLINK_COURSE(
-		golflink_course_seq           		INT		 NOT NULL AUTO_INCREMENT,
+		golflink_course_seq           		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		golflink_seq                  		INT		 NOT NULL,
 		course_name                   		VARCHAR(50)		 NOT NULL
 );
@@ -103,7 +103,7 @@ CREATE TABLE TB_GOLFLINK_COURSE(
 /* Table Name: 골프패키지 */
 /**********************************/
 CREATE TABLE TB_PACKAGE(
-		package_seq                   		INT		 NOT NULL AUTO_INCREMENT,
+		package_seq                   		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		package_name1                 		VARCHAR(50)		 NOT NULL,
 		package_name2                 		VARCHAR(50)		 NULL ,
 		region_seq                    		INT		 NOT NULL,
@@ -164,7 +164,7 @@ CREATE TABLE TB_PACKAGE_PRICE(
 /* Table Name: 예약현황 */
 /**********************************/
 CREATE TABLE TB_GOLFLINK_RESERVE(
-		reserve_seq                   		INT		 NOT NULL AUTO_INCREMENT,
+		reserve_seq                   		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		menu_seq                      		INT		 NOT NULL,
 		golflink_seq                  		INT		 NOT NULL,
 		product_seq                   		INT		 NOT NULL,
@@ -188,7 +188,7 @@ CREATE TABLE TB_GOLFLINK_RESERVE(
 /* Table Name: 콘도예약 */
 /**********************************/
 CREATE TABLE TB_CONDO(
-		condo_seq                     		INT		 NOT NULL AUTO_INCREMENT,
+		condo_seq                     		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		condo_name                    		VARCHAR(50)		 NOT NULL,
 		region_seq                    		INT		 NOT NULL,
 		saledate_start                		VARCHAR(10)		 NULL ,
@@ -211,7 +211,7 @@ CREATE TABLE TB_CONDO(
 /* Table Name: 콘도이미지갤러리 */
 /**********************************/
 CREATE TABLE TB_CONDO_GALLERY(
-		condoimg_seq                  		INT		 NOT NULL AUTO_INCREMENT,
+		condoimg_seq                  		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		condo_seq                     		INT		 NOT NULL,
 		condo_img                     		VARCHAR(50)		 NOT NULL
 );
@@ -220,7 +220,7 @@ CREATE TABLE TB_CONDO_GALLERY(
 /* Table Name: 콘도예약기간 */
 /**********************************/
 CREATE TABLE TB_CONDO_ROOM(
-		condoterm_seq                 		INT		 NOT NULL AUTO_INCREMENT,
+		condoterm_seq                 		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		condo_seq                     		INT		 NOT NULL,
 		roomtype                      		VARCHAR(50)		 NULL ,
 		price_n1                      		INT		 NULL ,
@@ -280,7 +280,7 @@ CREATE TABLE TB_PACKAGE_PROMISE(
 /* Table Name: 패키지예약현황 */
 /**********************************/
 CREATE TABLE TB_PACKAGE_RESERVE(
-		reserve_seq                   		INT		 NOT NULL AUTO_INCREMENT,
+		reserve_seq                   		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		menu_seq                      		INT		 NOT NULL,
 		package_seq                   		INT		 NOT NULL,
 		reserve_day                   		DATETIME		 NOT NULL,
@@ -298,7 +298,7 @@ CREATE TABLE TB_PACKAGE_RESERVE(
 /* Table Name: 콘도예약현환 */
 /**********************************/
 CREATE TABLE TB_CONDO_RESERVE(
-		reserve_se                    		INT		 NOT NULL AUTO_INCREMENT,
+		reserve_se                    		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
 		menu_seq                      		INT		 NOT NULL,
 		condo_seq                     		INT		 NOT NULL,
 		reserve_day                   		DATETIME		 NOT NULL,

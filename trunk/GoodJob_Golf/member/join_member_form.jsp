@@ -28,6 +28,7 @@
 			return;
 		}
 
+		/*
 		if(!$('#mem_jumin1').val() || !$('#mem_jumin2').val()) {
 			alert('주민번호를 입력해 주세요');
 			$('#mem_jumin').focus();
@@ -38,7 +39,7 @@
 			var resno = $('#mem_jumin1').val()+"-"+$('#mem_jumin2').val();
 			chkresno(resno);
 		}
-		
+		*/
 		if(!$('#mem_pwd').val()) {
 			alert('비밀번호를 입력해 주세요');
 			$('#mem_pwd').focus();
@@ -208,11 +209,11 @@
                                                                     </tr>
                                                                   </table></td>
                                                               </tr>
-                                                               <tr>
+                                                               <!--tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>주민등록번호</td>
                                                                 <td bgcolor="white" style="padding-left:10px;"><input id="mem_jumin1" class="mem_input" type="text" size="15" name="mem_jumin1">-
                                                                 <input id="mem_jumin2" class="mem_input" type="password" size="15" name="mem_jumin2"></td>
-                                                              </tr>
+                                                              </tr-->
                                                               <tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>비밀번호</td>
                                                                 <td bgcolor="white" style="padding-left:10px;"><input id="mem_pwd" class="mem_input" type="password" size="20" name="mem_pwd">

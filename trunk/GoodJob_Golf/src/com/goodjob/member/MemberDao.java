@@ -197,7 +197,7 @@ public class MemberDao {
 	 * 회원 수정
 	 * @param mDto
 	 */
-	public void MemberUpdate(MemberDto mDto){
+	public void memberUpdate(MemberDto mDto){
 		Connection conn = null;
 		
 		try {
@@ -205,12 +205,10 @@ public class MemberDao {
 			conn = DBManager.getConnection();
 			
 			ArrayList<Object> bind = new ArrayList<Object>();
-			bind.add(mDto.getMem_name());
 			bind.add(mDto.getMem_pwd());
 			bind.add(mDto.getMem_mtel());
 			bind.add(mDto.getSms_yn());
 			bind.add(mDto.getEmail_yn());
-			bind.add(mDto.getRecommend());
 			bind.add(mDto.getMem_id());
 			
 			QueryRunner qr = new QueryRunner();
@@ -301,18 +299,54 @@ public class MemberDao {
 	 * 아이디 찾기
 	 * @return
 	 */
-	public MemberDto idFind(){
+	public String idFind(String mem_name , String mobile){
 		
-		return null;
+		MemberDto mDto = null;
+		Connection conn = null;
+		
+		try {
+			
+			String[] bind = {mem_name , mobile};
+			conn = DBManager.getConnection();
+			
+			ResultSetHandler rsh = new BeanHandler(MemberDto.class);
+			QueryRunner qr = new QueryRunner();
+			mDto = (MemberDto)qr.query(conn , MEMBER.id_find , rsh , bind);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return mDto.getMem_id();
 	}
 
 	/**
 	 * 비번 찾기
 	 * @return
 	 */
-	public MemberDto pwdFind(){
+	public String pwdFind(String mem_id , String mobile){
 		
-		return null;
+		MemberDto mDto = null;
+		Connection conn = null;
+		
+		try {
+			
+			String[] bind = {mem_id , mobile};
+			conn = DBManager.getConnection();
+			
+			ResultSetHandler rsh = new BeanHandler(MemberDto.class);
+			QueryRunner qr = new QueryRunner();
+			mDto = (MemberDto)qr.query(conn , MEMBER.pwd_find , rsh , bind);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return mDto.getMem_pwd();
 	}
 	
 	/**
@@ -344,6 +378,30 @@ public class MemberDao {
 		return isDuplicate;
 	}
 	
+	public boolean isJumin(String mem_jumin){
+		
+		boolean isDuplicate = false;
+		
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			String[] bind = {mem_jumin};
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			
+			Map<String,Long> map = (Map)qr.query(conn , MEMBER.dup_jumin , rsh , bind);
+			long cnt = map.get("cnt");
+			if(cnt > 0) isDuplicate = true;
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return isDuplicate;
+	}
+
 	public MemberDto logon(String mem_id , String mem_pwd){
 		
 		MemberDto mDto = null;

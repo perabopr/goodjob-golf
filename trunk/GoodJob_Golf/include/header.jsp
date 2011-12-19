@@ -14,13 +14,13 @@
 
 	function logon_ok() {
 		
-		if(!$('#mem_id').val()) {
+		if(!$('#login_id').val()) {
 			alert('아이디를 입력하시기 바랍니다.');
 			$('#mem_id').focus();
 			return;
 		}
 
-		if(!$('#mem_pwd').val()) {
+		if(!$('#login_pwd').val()) {
 			alert('비밀번호를 입력하시기 바랍니다.');
 			$('#mem_pwd').focus();
 			return;
@@ -80,14 +80,14 @@
                           <tr>
                             <td background="/images/img_leftmenu/img_left_bg.jpg" width="235">
 <%
-	String current_url = StringUtils.trimToEmpty(request.getRequestURI());
-	if(current_url.indexOf("/member/") == -1){
+	String curr_url = StringUtils.trimToEmpty(request.getRequestURI());
+	if(curr_url.indexOf("/member_logon.jsp") == -1){
 	
 %>
                             <table border="0" cellpadding="0" cellspacing="0" width="235" bgcolor="#052B48">
                                 <tr>
                                   <td width="235" align="center" valign="top">
-                                   <%@ include file="/include/logon_form.jsp" %>
+                                  <jsp:include page="/include/logon_form.jsp" flush="true"/>
                                   </td>
                                 </tr>
                               </table>

@@ -1,11 +1,25 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
-<%@page import="com.goodjob.member.*"%><%
+<%@ page import="com.goodjob.member.*"%><%
 	
+	String ses_mem_id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"));
+
 	MemberDao mDao = new MemberDao();
-	MemberDto mDto = mDao.getMember(StringUtils.trimToEmpty((String)session.getAttribute("mem_id")));
+	
+	if(ses_mem_id.length()==0){
+%>
+<script language="javascript" type="text/javascript">
+alert("로그인 이후 회원 정보를 수정할 수 있습니다.");
+location.href="/main.jsp";
+</script>
+<%
+		return;
+	}
+	
+	MemberDto mDto = mDao.getMember(ses_mem_id);
+	
+	String[] mobile = mDto.getMem_mtel().split("-");
 %>
 <!-- 상단 영역 -->
 <%@ include file="/include/header.jsp" %>
@@ -13,35 +27,6 @@
 <script language="javascript" type="text/javascript">
 
 	function on_submit() {
-
-		if(!$('#mem_name').val()) {
-			alert('회원명을 입력해 주세요');
-			$('#mem_name').focus();
-			return;
-		}
-
-		if(!$('#mem_id').val()) {
-			alert('아이디를 입력해 주세요');
-			$('#mem_id').focus();
-			return;
-		}
-
-		if(!$('#mem_domain').val()) {
-			alert('도메인을 입력해 주세요');
-			$('#mem_domain').focus();
-			return;
-		}
-
-		if(!$('#mem_jumin1').val() || !$('#mem_jumin2').val()) {
-			alert('주민번호를 입력해 주세요');
-			$('#mem_jumin').focus();
-		
-			return;
-		}
-		else{
-			var resno = $('#mem_jumin1').val()+"-"+$('#mem_jumin2').val();
-			chkresno(resno);
-		}
 		
 		if(!$('#mem_pwd').val()) {
 			alert('비밀번호를 입력해 주세요');
@@ -148,7 +133,7 @@
 //-->
 </script>
 					<!--############### 중앙 컨텐츠 영역 #################-->
-<table border="0" cellpadding="0" cellspacing="0" width="751">
+					<table border="0" cellpadding="0" cellspacing="0" width="751">
                           <tr>
                             <td><table border="0" cellpadding="0" cellspacing="0" width="751">
                                 <tr>
@@ -156,24 +141,24 @@
                                       <tr>
                                         <td align="center" bgcolor="white" width="745" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="95%">
                                             <tr>
-                                              <td align="right" class="location" height="30" width="95%"><a href="/index.html">HOME</a> &gt; <span class=location_b>회원가입</span></td>
+                                              <td align="right" class="location" height="30" width="95%"><a href="/index.html">HOME</a> &gt; <span class=location_b>회원정보수정</span></td>
                                             </tr>
                                             <tr>
-                                              <td bgcolor="#D1D3D4" height="33" class="sub_title" style="padding-left:15px;padding-top:4px">회원가입</td>
+                                              <td bgcolor="#D1D3D4" height="33" class="sub_title" style="padding-left:15px;padding-top:4px">회원정보수정</td>
                                             </tr>
                                             <tr>
                                               <td valign="top" style="padding-left:20px;padding-right:20px;padding-top:10px;padding-bottom:10px;"><table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                   <tr>
                                                     <td width="94%" align="center"><table align="center" border="0" cellpadding="0" cellspacing="0" width="640">
                                                         <tr>
-                                                          <td width="640" style="padding-top:15px;"><img src="../../images/mem_join/img_join_title_input.gif" width="640" height="80" border="0"></td>
+                                                          <td width="640" style="padding-top:15px;"><img src="../../images/mem_join/img_edit_title.gif" width="640" height="80" border="0"></td>
                                                         </tr>
                                                         <tr>
                                                           <td>&nbsp;</td>
                                                         </tr>
-		<form name="joinForm" method="post">
+<form name="joinForm" method="post">
                                                         <tr>
-                                                          <td><img src="../../images/mem_join/img_join_message.gif" width="560" height="50" border="0"></td>
+                                                          <td><img src="../../images/mem_join/img_edit_message.gif" width="560" height="33" border="0"></td>
                                                         </tr>
                                                         <tr>
                                                           <td align="center"><table align="center" border="0" cellpadding="2" cellspacing="1" width="600" bgcolor="#D1D3D4">
@@ -182,74 +167,45 @@
                                                               </tr>
                                                               <tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject width="162">회원명</td>
-                                                                <td bgcolor="white" style="padding-left:10px;" width="410">
-                                                                <input id="mem_name" class="mem_input" type="text" size="15" name="mem_name" value="<%=mDto.getMem_name()%>"></td>
+                                                                <td bgcolor="white" style="padding-left:10px;" width="410" class=normal_b><%=mDto.getMem_name()%></td>
                                                               </tr>
                                                               <tr>
-                                                                <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;">아이디</td>
-                                                                <td bgcolor="white" style="padding-left:10px;"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
-                                                                    <tr>
-                                                                      <td height="27"><input id="mem_id" class="mem_input" type="text" size="15" name="mem_id"/>
-                                                                        @
-                                                                        <input id="mem_domain" class="mem_input" type="text" size="15" name="mem_domain" readonly>
-                                                                        <select id="domain_sel" name="formselect1" size="1" onchange="domainChange(this.value);">
-                                                                          
-                                                                          <option value="naver.com" selected>naver.com</option>
-                                                                          <option value="hanmail.net">hanmail.net</option>
-                                                                          <option value="dreamwiz.com">dreamwiz.com</option>
-                                                                          <option value="empal.com">empal.com</option>
-                                                                          <option value="hanmir.com">hanmir.com</option>
-                                                                          <option value="hanafos.com">hanafos.com</option>
-                                                                          <option value="nate.com">nate.com</option>
-                                                                          <option value="paran.com">paran.com</option>
-                                                                          <option value="yahoo.co.kr">yahoo.co.kr</option>
-                                                                          <option value="gmail.com">gmail.com</option>
-                                                                          <option value="">직접입력하기</option>
-                                                                        </select></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                      <td height="20"><span class=mem_notice>자주 사용하시는 E-mail계정을 입력하시기 바랍니다.</span></td>
-                                                                    </tr>
-                                                                  </table></td>
-                                                              </tr>
-                                                               <tr>
-                                                                <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>주민등록번호</td>
-                                                                <td bgcolor="white" style="padding-left:10px;"><input id="mem_jumin1" class="mem_input" type="text" size="15" name="mem_jumin1">-
-                                                                <input id="mem_jumin2" class="mem_input" type="password" size="15" name="mem_jumin2"></td>
+                                                                <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">아이디</td>
+                                                                <td bgcolor="white" style="padding-left:10px;" class=blue><%=mDto.getMem_id()%></td>
                                                               </tr>
                                                               <tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>비밀번호</td>
-                                                                <td bgcolor="white" style="padding-left:10px;"><input id="mem_pwd" class="mem_input" type="password" size="20" name="mem_pwd">
+                                                                <td bgcolor="white" style="padding-left:10px;"><input class="mem_input" type="password" size="20" id="mem_pwd" name="mem_pwd">
                                                                   4~12자리의 영문이나 숫자 </td>
                                                               </tr>
                                                               <tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>비밀번호확인</td>
-                                                                <td bgcolor="white" style="padding-left:10px;"><input id="mem_pwd_re" class="mem_input" type="password" size="20" name="mem_pwd_re"></td>
+                                                                <td bgcolor="white" style="padding-left:10px;"><input class="mem_input" type="password" size="20" id="mem_pwd_re" name="mem_pwd_re"></td>
                                                               </tr>
                                                               <tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>핸드폰</td>
                                                                 <td bgcolor="white" style="padding-left:10px;">
                                                                 <select id="mobile1" name="mobile1" size="1">
-                                                                            <option value="010" selected>010</option>
-                                                                            <option value="011">011</option>
-                                                                            <option value="016">016</option>
-                                                                            <option value="017">017</option>
-                                                                            <option value="018">018</option>
-                                                                            <option value="019">019</option>
+                                                                            <option value="010"<%=("010".equals(mobile[0])?" selected":"")%>>010</option>
+												                           <option value="011"<%=("011".equals(mobile[0])?" selected":"")%>>011</option>
+												                           <option value="016"<%=("016".equals(mobile[0])?" selected":"")%>>016</option>
+												                           <option value="017"<%=("017".equals(mobile[0])?" selected":"")%>>017</option>
+												                           <option value="018"<%=("018".equals(mobile[0])?" selected":"")%>>018</option>
+												                           <option value="019"<%=("019".equals(mobile[0])?" selected":"")%>>019</option>
                                                                           </select>
                                                                   -
-                                                                  <input id="mobile2" class="mem_input" type="text" size="8" name="mobile2" maxlength="4">
+                                                                  <input id="mobile2" class="mem_input" type="text" size="8" name="mobile2" value="<%=mobile[1]%>" maxlength="4">
                                                                   -
-                                                                  <input id="mobile3" class="mem_input" type="text" size="8" name="mobile3" maxlength="4"></td>
+                                                                  <input id="mobile3" class="mem_input" type="text" size="8" name="mobile3" value="<%=mobile[2]%>" maxlength="4"></td>
                                                               </tr>
                                                               <tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>SMS 수신여부</td>
                                                                 <td bgcolor="white" style="padding-left:10px;"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                     <tr>
                                                                       <td height="23"> 수신
-                                                                        <input type="radio" name="sms_yn" value="Y" checked>
+                                                                        <input type="radio" id="sms_yn" name="sms_yn" value="Y"<%=("Y".equals(mDto.getSms_yn())?" checked":"")%>>
                                                                         &nbsp;&nbsp;수신거부
-                                                                        <input type="radio" name="sms_yn" value="N"></td>
+                                                                        <input type="radio" id="sms_yn" name="sms_yn" value="N"<%=("N".equals(mDto.getSms_yn())?" checked":"")%>></td>
                                                                     </tr>
                                                                     <tr>
                                                                       <td class="mem_notice" height="23">수신거부 시 예약확인 및 취소와 관련된 알림메세지 서비스를 받으실 수 없습니다. </td>
@@ -261,43 +217,24 @@
                                                                 <td bgcolor="white" style="padding-left:10px;"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                     <tr>
                                                                       <td height="23"> 수신
-                                                                        <input type="radio" name="email_yn" value="Y" checked>
+                                                                        <input type="radio" id="email_yn" name="email_yn" value="Y"<%=("Y".equals(mDto.getEmail_yn())?" checked":"")%>>
                                                                         &nbsp;&nbsp;수신거부
-                                                                        <input type="radio" name="email_yn" value="N"></td>
+                                                                        <input type="radio" id="email_yn" name="email_yn" value="N"<%=("N".equals(mDto.getEmail_yn())?" checked":"")%>></td>
                                                                     </tr>
                                                                     <tr>
                                                                       <td class="mem_notice" height="23">수신거부 시 예약확인 및 취소와 관련된 알림메세지 서비스를 받으실 수 없습니다. </td>
                                                                     </tr>
                                                                   </table></td>
                                                               </tr>
-                                                              <!--tr>
-                                                                <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">추천인 아이디</td>
-                                                                <td bgcolor="white" style="padding-left:10px;"><input id="recom_id" class="mem_input" type="text" size="15" name="recom_id">
-                                                                  @
-                                                                  <input id="recom_domain" class="mem_input" type="text" size="15" name=""recom_domain"">
-                                                                  <select name="formselect1" size="1" onchange="domainChange2(this.value);">
-                                                                          <option value="">선택하세요</option>
-                                                                          <option value="naver.com">naver.com</option>
-                                                                          <option value="hanmail.net">hanmail.net</option>
-                                                                          <option value="dreamwiz.com">dreamwiz.com</option>
-                                                                          <option value="empal.com">empal.com</option>
-                                                                          <option value="hanmir.com">hanmir.com</option>
-                                                                          <option value="hanafos.com">hanafos.com</option>
-                                                                          <option value="nate.com">nate.com</option>
-                                                                          <option value="paran.com">paran.com</option>
-                                                                          <option value="yahoo.co.kr">yahoo.co.kr</option>
-                                                                          <option value="gmail.com">gmail.com</option>
-                                                                          <option value="">직접입력하기</option>
-                                                                        </select></td>
-                                                              </tr-->
+                                                              
                                                               <tr>
                                                                 <td bgcolor="#AED247" colspan="2" width="593"></td>
                                                               </tr>
                                                             </table></td>
                                                         </tr>
-			</form>
+</form>
                                                         <tr>
-                                                          <td align="center" style="padding-top:30px;padding-bottom:40px;"><a href="javascript:on_submit();"><img src="/images/mem_join/btn_join_mem.gif" width="130" height="39" border="0"></a></td>
+                                                          <td align="center" style="padding-top:30px;padding-bottom:40px;"><a href="javascript:on_submit();"><img src="/images/mem_join/btn_mem_edit.gif" width="130" height="39" border="0"></a></td>
                                                         </tr>
                                                       </table></td>
                                                   </tr>
@@ -313,11 +250,7 @@
                             <td>&nbsp;</td>
                           </tr>
                         </table>
-				  
-				  <!--실시간 테이블 시작--> 
-                  <iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe> 
-                  <!--실시간 테이블  끝-->
-                  
+					<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"/>
 					<!-- 하단  회사 소개 부분  -->
                     <%@ include file="/include/copyright.jsp" %>
                     <!-- 하단  회사 소개 부분  -->

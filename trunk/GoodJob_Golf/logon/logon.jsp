@@ -10,8 +10,8 @@
 
 	Map<String,String> params = new HashMap<String,String>();
 	
-	String mem_id = StringUtils.defaultString(request.getParameter("mem_id"), "");
-	String mem_pwd = StringUtils.defaultString(request.getParameter("mem_pwd"), "");
+	String mem_id = StringUtils.defaultString(request.getParameter("login_id"), "");
+	String mem_pwd = StringUtils.defaultString(request.getParameter("login_pwd"), "");
 	String id_cookie = StringUtils.defaultString(request.getParameter("id_cookie"), "");
 	String return_url = StringUtils.defaultString(request.getParameter("return_url"), "");
 	

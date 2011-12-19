@@ -150,12 +150,12 @@
                 <td width="25">&nbsp;</td>
                 <td width="286">
                 	<select id="tel1" name="tel1" size="1">
-                           <option value="010">010</option>
-                           <option value="011">011</option>
-                           <option value="016">016</option>
-                           <option value="017">017</option>
-                           <option value="018">018</option>
-                           <option value="019">019</option>
+                           <option value="010"<%=("010".equals(jDto.getTel1())?" selected":"")%>>010</option>
+                           <option value="011"<%=("011".equals(jDto.getTel1())?" selected":"")%>>011</option>
+                           <option value="016"<%=("016".equals(jDto.getTel1())?" selected":"")%>>016</option>
+                           <option value="017"<%=("017".equals(jDto.getTel1())?" selected":"")%>>017</option>
+                           <option value="018"<%=("018".equals(jDto.getTel1())?" selected":"")%>>018</option>
+                           <option value="019"<%=("019".equals(jDto.getTel1())?" selected":"")%>>019</option>
                          </select>
                   -
                   <input class="input_01" type="text" size="6" id="tel2" maxlength="4" value="<%=StringUtils.trimToEmpty(jDto.getTel2())%>" name="tel2">

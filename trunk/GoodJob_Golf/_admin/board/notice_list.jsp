@@ -103,20 +103,20 @@ function goPage(val){
 					<tr>
                      <td height="24" width="40" align="center"><%=dto.getSeq()%></td>
                      <td width="10"><img src="/_admin/images/board/bl.gif" width="10" height="22"></td>
-                     <td width="437" class="list"><a href="notice_view.html"><a href="./notice_view.jsp?seq=<%=dto.getSeq()%>"><%=dto.getSubject()%></a></a></td>
+                     <td width="437" class="list"><a href="./notice_view.jsp?seq=<%=dto.getSeq()%>"><%=dto.getSubject()%></a></a></td>
                      <td width="10">&nbsp;</td>
                      <td width="9"><img src="/_admin/images/board/bl.gif" width="10" height="22"></td>
                      <td width="80" align="center"><%=dto.getWrite_date()%></td>
                      <td width="14">&nbsp;</td>
                    </tr>
+                   <tr>
+                	<td colspan="7"><img src="/_admin/images/board/line02.gif" width="600" height="4"></td>
+              		</tr>
 <%
 		}
 	}
 %>
 				</table></td>
-              </tr>
-              <tr>
-                <td><img src="/_admin/images/board/line02.gif" width="600" height="4"></td>
               </tr>
             </table></td>
         </tr>

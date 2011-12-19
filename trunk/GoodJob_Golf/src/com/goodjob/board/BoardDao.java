@@ -35,6 +35,7 @@ public class BoardDao {
 		String field = StringUtils.defaultIfEmpty(data.get("field"), "");
 		String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
 		int npage = NumberUtils.toInt(data.get("npage"), 1);
+		int per_page = NumberUtils.toInt(data.get("per_page"), BBS.per_page);
 		
 		try {
 			conn = DBManager.getConnection();
@@ -60,8 +61,8 @@ public class BoardDao {
 			}
 			
 			//페이징
-			params.add(((npage-1)* BBS.per_page));
-			params.add(BBS.per_page);
+			params.add(((npage-1)* per_page));
+			params.add(per_page);
 			
 			list = (List<BoardDto>) qr.query(conn , MessageFormat.format(BBS.list, tableName, where), rsh , params.toArray());
 			
@@ -326,7 +327,7 @@ public class BoardDao {
 		String keyword = StringUtils.trimToEmpty(data.get("keyword"));
 		
 		int npage = NumberUtils.toInt(data.get("npage"), 1);
-		int per_page = NumberUtils.toInt(data.get("per_page"), 1);
+		int per_page = NumberUtils.toInt(data.get("per_page"), BBS.per_page);
 		
 		try {
 			conn = DBManager.getConnection();

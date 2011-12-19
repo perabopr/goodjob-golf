@@ -173,9 +173,16 @@ public class SMSDao {
 		try {
 			conn = DBManager.getConnection();
 			ArrayList<Object> bind = new ArrayList<Object>();
+
+			bind.add(StringUtils.trimToEmpty(params.get("mem_id")));
+			bind.add(StringUtils.trimToEmpty(params.get("msg")));
+			bind.add(StringUtils.trimToEmpty(params.get("rphone")));
+			bind.add(StringUtils.trimToEmpty(params.get("sphone")));
+			bind.add(StringUtils.trimToEmpty(params.get("rdate")));
+			bind.add(StringUtils.trimToEmpty(params.get("rtime")));
 			
 			QueryRunner queryRunner = new QueryRunner();
-			queryRunner.update(conn, "" , bind.toArray());
+			queryRunner.update(conn, SMS.log , bind.toArray());
 
 		} catch (Exception e) {
 			System.out.println(e);

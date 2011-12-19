@@ -41,14 +41,14 @@
                                                               <tr>
                                                                 <td width="116" align="right" style="padding-right:10px;" height="2"><span class=normal_b>아이디</span></td>
                                                                 <td width="215">
-                                                                    <input id="mem_id" class="mem_login" type="text" size="33" name="mem_id" value="<%=com.goodjob.util.Utils.getCookie(request,"golf.mem_id")%>">
+                                                                    <input id="login_id" class="mem_login" type="text" size="33" name="login_id" value="<%=com.goodjob.util.Utils.getCookie(request,"golf.mem_id")%>">
                                                                   </td>
                                                                 <td width="160" rowspan="2"><a href="javascript:logon_ok();"><img src="/images/mem_join/btn_login.gif" width="59" height="47" border="0"></a></td>
                                                               </tr>
                                                               <tr>
                                                                 <td width="116" align="right" style="padding-right:10px;" height="2"><span class=normal_b>비밀번호</span></td>
                                                                 <td width="215">
-                                                                    <input id="mem_pwd" class="mem_login" type="password" size="33" name="mem_pwd">
+                                                                    <input id="login_pwd" class="mem_login" type="password" size="33" name="login_pwd">
                                                                   </td>
                                                               </tr>
                                                               <tr>

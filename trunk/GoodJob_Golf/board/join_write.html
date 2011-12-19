@@ -1,16 +1,109 @@
-Ôªø<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="org.apache.commons.dbutils.*" %>
-<%@ page import="org.apache.commons.lang.StringUtils"%>
-<%@ page import="org.apache.commons.lang.math.NumberUtils"%>
-<%
-	
-%>
-<!-- ÏÉÅÎã® ÏòÅÏó≠ -->
-<%@ include file="/include/header.jsp" %>
-<!-- ÏÉÅÎã® ÏòÅÏó≠ -->
-
-					<!--############### Ï§ëÏïô Ïª®ÌÖêÏ∏† ÏòÅÏó≠ #################-->
-					<table border="0" cellpadding="0" cellspacing="0" width="751">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=euc-kr">
+<title>Welcome to GoodJobGolf</title>
+<link rel="stylesheet" href="/css/common.css" type="text/css">
+<style type="text/css">
+select {
+	behavior: url('/inc/selectbox.htc');
+}
+</style>
+<script language="javascript" src="/inc/flashObject.js"></script>
+</head>
+<body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" background="/images/bg_main.jpg">
+<table border="0" width="100%" cellpadding="0" cellspacing="0">
+  <tr>
+    <td width="100%" align="center"><table border="0" width="1000" cellpadding="0" cellspacing="0" align="center">
+        <tr>
+          <td width="1000"><table border="0" width="100%" cellpadding="0" cellspacing="0">
+              <tr>
+                <td height="146"><script>flashObject("/images/swf/navigation.swf","pageNum=5&sub=1","1000","146")</script></td>
+              </tr>
+              <tr>
+                <td><table border="0" width="1000" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td colspan="3" background="/images/common/img_top_bg.jpg" height="50" valign="top" width="1000" align="right"><table cellpadding="0" cellspacing="0" width="749" bgcolor="#052B48">
+                          <tr>
+                            <td width="120"><img src="/images/common/img_search_title.gif" width="120" height="40" alt="∞Ò«¡¿Â ∫¸∏•∞Àªˆ"></td>
+                            <td align="center" width="180"><select name="number"  onchange="f_select(this.selectedIndex);">
+                                <option value="">¡ˆø™º±≈√------------</option>
+                                <option value="1">¿¸√º∫∏±‚</option>
+                                <option value="2">ºˆµµ±«</option>
+                                <option value="3">∞≠ø¯±«</option>
+                                <option value="4">√Ê√ª±«</option>
+                                <option value="5">¿¸∂Û±«</option>
+                                <option value="6">¡¶¡÷±«</option>
+                              </select></td>
+                            <td width="175"><select name="number"  onchange="f_select(this.selectedIndex);">
+                                <option value="">«◊∏Òº±≈√-------------</option>
+                                <option value="1">¿¸√º∫∏±‚</option>
+                                <option value="2">Ω«Ω√∞£∫Œ≈∑ ∞Ò«¡¿Â</option>
+                                <option value="3">ªÁ¿¸Ω≈√ª ∞Ò«¡¿Â</option>
+                                <option value="4">±π≥ª∆–≈∞¡ˆ</option>
+                                <option value="5">«ÿø‹∆–≈∞¡ˆ</option>
+                              </select></td>
+                            <td width="198"><input class="input_01" type="text" size="28" name="day">
+                            <td width="76"><input type="image" name="formimage1" src="/images/common/btn_top_search.gif" width="52" height="22"></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                    <tr>
+                      <td width="235" valign="top"><table border="0" width="235" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td background="/images/img_leftmenu/img_left_bg.jpg" width="235"><table border="0" cellpadding="0" cellspacing="0" width="235" bgcolor="#052B48">
+                                <tr>
+                                  <td width="235" height="146" align="center" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="235">
+                                      <tr>
+                                        <td><img src="/images/img_leftmenu/img_login_title.gif" width="235" height="49" border="0"></td>
+                                      </tr>
+                                      <tr>
+                                        <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="207">
+                                            <tr>
+                                              <td width="103"><input class="input_01" type="text" size="20" name="id" value="æ∆¿Ãµ"></td>
+                                              <td rowspan="3" align="right"><input type="image" name="formimage2" src="/images/img_leftmenu/btn_login_confirm.gif" width="64" height="51" border="0"></td>
+                                            </tr>
+                                            <tr>
+                                              <td height="2"></td>
+                                            </tr>
+                                            <tr>
+                                              <td width="103"><input class="input_01" type="text" size="20" name="pw" value="∫Òπ–π¯»£"></td>
+                                            </tr>
+                                            <tr>
+                                              <td width="207" colspan="2" height="40" align="right"><table border="0" cellpadding="0" cellspacing="0" width="170">
+                                                  <tr>
+                                                    <td width="104"><a href="join_agreement.html"><img src="/images/img_leftmenu/btn_join_s.gif" width="55" height="13" border="0"></a></td>
+                                                    <td width="104"><a href="#"><img src="/images/img_leftmenu/btn_id_pw_s.gif" width="108" height="13" border="0"></a></td>
+                                                  </tr>
+                                                </table></td>
+                                            </tr>
+                                          </table></td>
+                                      </tr>
+                                    </table></td>
+                                </tr>
+                              </table></td>
+                          </tr>
+                          <tr>
+                            <td height="10"></td>
+                          </tr>
+                          <tr>
+                            <td bgcolor="#F7F5F6"><table border="0" width="235" cellpadding="0" cellspacing="0">
+                                <tr>
+                                  <td width="235"><a href="#"><img src="/images/img_leftmenu/img_customer_center.gif" width="235" height="139" border="0"></a></td>
+                                </tr>
+                                <tr>
+                                  <td><a href="#"><img src="/images/img_leftmenu/btn_user_guide.gif" width="235" height="86" border="0"></a></td>
+                                </tr>
+                                <tr>
+                                  <td><a href="#"><img src="/images/img_leftmenu/btn_faq.gif" width="235" height="86" border="0"></a></td>
+                                </tr>
+                                <tr>
+                                  <td><a href="#"><img src="/images/img_leftmenu/btn_event.gif" width="235" height="86" border="0"></a></td>
+                                </tr>
+                              </table></td>
+                          </tr>
+                        </table></td>
+                      <td width="15" valign="top"></td>
+                      <td width="750" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="751">
                           <tr>
                             <td><table border="0" cellpadding="0" cellspacing="0" width="751">
                                 <tr>
@@ -18,10 +111,10 @@
                                       <tr>
                                         <td align="center" bgcolor="white" width="745" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="95%">
                                             <tr>
-                                              <td align="right" class="location" height="30" width="95%"><a href="/index.html">HOME</a> &gt; <span class=location_b>JOIN Ïª§ÎÆ§ÎãàÌã∞</span></td>
+                                              <td align="right" class="location" height="30" width="95%"><a href="/index.html">HOME</a> &gt; <span class=location_b>JOIN ƒøπ¬¥œ∆º</span></td>
                                             </tr>
                                             <tr>
-                                              <td bgcolor="#D1D3D4" height="33" class="sub_title" style="padding-left:15px;padding-top:4px">JOIN Ïª§ÎÆ§ÎãàÌã∞</td>
+                                              <td bgcolor="#D1D3D4" height="33" class="sub_title" style="padding-left:15px;padding-top:4px">JOIN ƒøπ¬¥œ∆º</td>
                                             </tr>
                                             <tr>
                                               <td valign="top" style="padding-left:20px;padding-right:20px;padding-top:10px;padding-bottom:10px;"><table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -39,13 +132,13 @@
                                                                 <td align="center" width="109"><img align="absmiddle" src="../../images/board/img_board_title_writer.gif" width="33" height="15" border="0"></td>
                                                                 <td align="center" bgcolor="#D1D3D4" width="1"></td>
                                                                 <td width="26">&nbsp;</td>
-                                                                <td width="110" class=blue>ÌôçÍ∏∏Îèô</td>
+                                                                <td width="110" class=blue>»´±Êµø</td>
                                                                 <td width="109" align="center"><img src="../../images/board/img_board_title_phone.gif" width="31" height="15" border="0"></td>
                                                                 <td width="1" bgcolor="#D1D3D4"></td>
                                                                 <td width="25">&nbsp;</td>
                                                                 <td width="286"><p>
                                                                     <select name="formselect1" size="1">
-                                                                      <option>ÏÑ†ÌÉù</option>
+                                                                      <option>º±≈√</option>
                                                                       <option>010</option>
                                                                       <option>011</option>
                                                                       <option>016</option>
@@ -71,13 +164,13 @@
                                                                 <td align="center" bgcolor="#D1D3D4" width="1"></td>
                                                                 <td width="25">&nbsp;</td>
                                                                 <td width="110"><select name="formselect1" size="1">
-                                                                    <option>ÏÑ†ÌÉùÌïòÏÑ∏Ïöî</option>
-                                                                    <option>ÏàòÎèÑÍ∂å</option>
-                                                                    <option>Í∞ïÏõêÍ∂å</option>
-                                                                    <option>Ï∂©Ï≤≠Í∂å</option>
-                                                                    <option>Ï†ÑÎùºÍ∂å</option>
-                                                                    <option>Í≤ΩÏÉÅÍ∂å</option>
-                                                                    <option>Ï†úÏ£ºÍ∂å</option>
+                                                                    <option>º±≈√«œººø‰</option>
+                                                                    <option>ºˆµµ±«</option>
+                                                                    <option>∞≠ø¯±«</option>
+                                                                    <option>√Ê√ª±«</option>
+                                                                    <option>¿¸∂Û±«</option>
+                                                                    <option>∞ÊªÛ±«</option>
+                                                                    <option>¡¶¡÷±«</option>
                                                                   </select></td>
                                                                 <td width="109" align="center"><img align="absmiddle" src="../../images/board/img_board_title_cc.gif" width="42" height="15" border="0"></td>
                                                                 <td width="1" bgcolor="#D1D3D4"></td>
@@ -89,22 +182,22 @@
                                                                 <td height="22" align="center" bgcolor="#D1D3D4" width="1"></td>
                                                                 <td height="22" width="25">&nbsp;</td>
                                                                 <td height="22" width="110"><select name="formselect1" size="1">
-                                                                    <option>ÏÑ†ÌÉùÌïòÏÑ∏Ïöî</option>
-                                                                    <option>ÎÇ®ÏÑ±</option>
-                                                                    <option>Ïó¨ÏÑ±</option>
-                                                                    <option>Íµ¨Î∂ÑÏóÜÏùå</option>
+                                                                    <option>º±≈√«œººø‰</option>
+                                                                    <option>≥≤º∫</option>
+                                                                    <option>ø©º∫</option>
+                                                                    <option>±∏∫–æ¯¿Ω</option>
                                                                   </select></td>
                                                                 <td height="22" align="center" width="109"><img src="../../images/board/img_board_title_age.gif" width="43" height="15" border="0"></td>
                                                                 <td height="22" bgcolor="#D1D3D4" width="1"></td>
                                                                 <td height="22" width="25">&nbsp;</td>
                                                                 <td height="22" width="287"><select name="formselect1" size="1">
-                                                                    <option>ÏÑ†ÌÉùÌïòÏÑ∏Ïöî</option>
-                                                                    <option>20ÎåÄ</option>
-                                                                    <option>30ÎåÄ</option>
-                                                                    <option>40ÎåÄ</option>
-                                                                    <option>50ÎåÄ</option>
-                                                                    <option>60ÎåÄ</option>
-                                                                    <option>Íµ¨Î∂ÑÏóÜÏùå</option>
+                                                                    <option>º±≈√«œººø‰</option>
+                                                                    <option>20¥Î</option>
+                                                                    <option>30¥Î</option>
+                                                                    <option>40¥Î</option>
+                                                                    <option>50¥Î</option>
+                                                                    <option>60¥Î</option>
+                                                                    <option>±∏∫–æ¯¿Ω</option>
                                                                   </select></td>
                                                               </tr>
                                                             </table></td>
@@ -119,29 +212,29 @@
                                                                 <td align="center" bgcolor="#D1D3D4" width="1"></td>
                                                                 <td width="25">&nbsp;</td>
                                                                 <td width="110"><select name="formselect1" size="1">
-                                                                    <option>ÏÑ†ÌÉùÌïòÏÑ∏Ïöî</option>
-                                                                    <option>1Î™Ö</option>
-                                                                    <option>2Î™Ö</option>
-                                                                    <option>3Î™Ö</option>
+                                                                    <option>º±≈√«œººø‰</option>
+                                                                    <option>1∏Ì</option>
+                                                                    <option>2∏Ì</option>
+                                                                    <option>3∏Ì</option>
                                                                   </select></td>
                                                                 <td width="109" align="center"><img src="../../images/board/img_board_title_round.gif" width="52" height="15" border="0"></td>
                                                                 <td width="1" bgcolor="#D1D3D4"></td>
                                                                 <td width="25">&nbsp;</td>
                                                                 <td width="287"><p>
                                                                     <select name="formselect1" size="1">
-                                                                      <option>12Ïõî</option>
+                                                                      <option>12ø˘</option>
                                                                     </select>
                                                                     <select name="formselect1" size="1">
-                                                                      <option>31Ïùº</option>
+                                                                      <option>31¿œ</option>
                                                                     </select>
                                                                     <select name="formselect1" size="1">
-                                                                      <option>Ïò§Ï†Ñ</option>
-                                                                      <option>Ïò§ÌõÑ</option>
+                                                                      <option>ø¿¿¸</option>
+                                                                      <option>ø¿»ƒ</option>
                                                                     </select>
                                                                     <input class="input_01" type="text" size="2" name="day">
-                                                                    Ïãú
+                                                                    Ω√
                                                                     <input class="input_01" type="text" size="2" name="day">
-                                                                    Î∂Ñ</p></td>
+                                                                    ∫–</p></td>
                                                               </tr>
                                                               <tr>
                                                                 <td height="30" align="center"><img src="../../images/board/img_board_title_price.gif" width="43" height="15" border="0"></td>
@@ -149,11 +242,11 @@
                                                                 <td height="10">&nbsp;</td>
                                                                 <td height="30" colspan="5"><img src="../../images/board/img_title_greenpee.gif" width="34" height="15" border="0">
                                                                   <input class="input_01" type="text" size="8" name="day">
-                                                                  Ïõê &nbsp;<img src="../../images/board/img_title_cartpee.gif" width="34" height="15" border="0">
+                                                                  ø¯ &nbsp;<img src="../../images/board/img_title_cartpee.gif" width="34" height="15" border="0">
                                                                   <input class="input_01" type="text" size="8" name="day">
-                                                                  Ïõê &nbsp;<img src="../../images/board/img_title_caddiepee.gif" width="34" height="15" border="0">
+                                                                  ø¯ &nbsp;<img src="../../images/board/img_title_caddiepee.gif" width="34" height="15" border="0">
                                                                   <input class="input_01" type="text" size="8" name="day">
-                                                                  Ïõê</td>
+                                                                  ø¯</td>
                                                               </tr>
                                                             </table></td>
                                                         </tr>
@@ -176,8 +269,8 @@
                                                         <tr>
                                                           <td><table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                               <tr>
-                                                                <td width="88"><a href="join_list.html"><img src="../../images/board/btn_list.gif" width="71" height="24" border="0" alt="Î™©Î°ù"></a></td>
-                                                                <td width="480" align="right"><img align="absmiddle" src="../../images/board/btn_input.gif" width="71" height="24" border="0" alt="Îì±Î°ù"></td>
+                                                                <td width="88"><a href="join_list.html"><img src="../../images/board/btn_list.gif" width="71" height="24" border="0" alt="∏Ò∑œ"></a></td>
+                                                                <td width="480" align="right"><img align="absmiddle" src="../../images/board/btn_input.gif" width="71" height="24" border="0" alt="µÓ∑œ"></td>
                                                                 <td width="99" align="right"><img src="../../images/board/btn_cancel.gif" width="71" height="24" border="0" align="absmiddle"></td>
                                                               </tr>
                                                             </table></td>
@@ -198,13 +291,23 @@
                           <tr>
                             <td>&nbsp;</td>
                           </tr>
-                        </table>
-					
-					<!-- ÌïòÎã®  ÌöåÏÇ¨ ÏÜåÍ∞ú Î∂ÄÎ∂Ñ  -->
-                    <%@ include file="/include/copyright.jsp" %>
-                    <!-- ÌïòÎã®  ÌöåÏÇ¨ ÏÜåÍ∞ú Î∂ÄÎ∂Ñ  -->
-					<!--############### Ï§ëÏïô Ïª®ÌÖêÏ∏† ÏòÅÏó≠ #################-->
-					
-<!-- ÌïòÎã® footer  -->
-<%@ include file="/include/footer.jsp" %>
-<!-- ÌïòÎã® footer  -->
+                          <tr>
+                            <td><script>flashObject("/images/swf/bottom_menu.swf","","751","27")</script></td>
+                          </tr>
+                          <tr>
+                            <td height="76"><img src="/images/common/img_copyright.gif" width="751" height="76"></td>
+                          </tr>
+                        </table></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table></td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr>
+    <td height="198" background="/images/common/img_copyright_bg.jpg">&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

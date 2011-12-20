@@ -2,13 +2,56 @@
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
+<%@ page import="java.sql.*,java.util.*" %>
+<%@ page import="com.goodjob.board.*" %>
+<%@page import="com.goodjob.util.PageNavigater"%>
+<%@page import="com.goodjob.sql.BBS"%>
 <%
+	//통합 게시판 
+	BoardDao bDao = new BoardDao();
 	
+	String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
+	String field = StringUtils.trimToEmpty(request.getParameter("field"));
+	String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
+	
+	PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , BBS.per_page );
+	
+	Map<String,String> params = new HashMap<String,String>();
+	params.put("npage",npage);
+	params.put("field",field);
+	params.put("keyword",keyword);
+	
+	List<BoardDto> bbsList = bDao.getList("tb_notice_bbs" , params);
+	
+	int totalCount = bDao.getTotalCount("tb_notice_bbs" , params);
+	
+	String strPage = paging.getPaging(totalCount, false);
 %>
 <!-- 상단 영역 -->
 <%@ include file="/include/header.jsp" %>
 <!-- 상단 영역 -->
+<script language="javascript" type="text/javascript">
+	
+function on_search() {
 
+	var frm = document.frm;
+	if(!$('#keyword').val()) {
+		alert('검색어를 입력하시기 바랍니다.');
+		$('#keyword').focus();
+		return;
+	} 
+	frm.action="notice_list.jsp"
+	frm.submit();
+}
+
+function goPage(val){
+	var frm = document.frm;
+	frm.npage.value=val;
+	frm.action="notice_list.jsp"
+	frm.submit();
+}
+//-->
+</script>
 					<!--############### 중앙 컨텐츠 영역 #################-->
 					<table border="0" cellpadding="0" cellspacing="0" width="751">
                           <tr>
@@ -44,39 +87,57 @@
                                                               </tr>
                                                             </table>
                                                             <table border="0" cellpadding="0" cellspacing="0" width="669">
+<%
+	if(bbsList != null && !bbsList.isEmpty()){
+		
+		int size = bbsList.size();
+		BoardDto dto;
+		for(int i = 0 ; i < size ; i++){
+			
+			dto = bbsList.get(i);
+			
+%>
                                                               <tr>
-                                                                <td align="center" height="30" width="65">100</td>
+                                                                <td align="center" height="30" width="65"><%=dto.getSeq()%></td>
                                                                 <td align="center" width="10"></td>
-                                                                <td width="450"><a href="notice_view.html" class=b_list>공지사항 게시판 제목입니다</a> <img align="absmiddle" src="../../images/board/icon_new.gif" width="10" height="9" border="0"></td>
+                                                                <td width="450"><a href="./notice_view.jsp?seq=<%=dto.getSeq()%>" class=b_list><%=dto.getSubject()%></a><img align="absmiddle" src="../../images/board/icon_new.gif" width="10" height="9" border="0"></td>
                                                                 <td align="center" width="11"></td>
-                                                                <td align="center" width="133">2011-12-31</td>
+                                                                <td align="center" width="133"><%=dto.getReg_dt()%></td>
                                                               </tr>
                                                               <tr>
                                                                 <td height="1" colspan="5" bgcolor="#E5E5E5" width="669"></td>
                                                               </tr>
+<%
+		}
+	}
+%>
                                                             </table></td>
                                                         </tr>
+                                                        <form name="frm" method="post">
+              											<input type="hidden" name="npage" value="<%=npage%>"/>
                                                         <tr>
                                                           <td height="30"></td>
                                                         </tr>
                                                         <tr>
                                                           <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="668">
                                                               <tr>
-                                                                <td width="420"><p><img align="absmiddle" src="/images/board/btn_prev_dual.gif" width="16" height="15" border="0"> <img align="absmiddle" src="/images/board/btn_prev.gif" width="16" height="15" border="0"> <span class=normal_b>1 &nbsp;</span>I &nbsp;2 &nbsp;I &nbsp;3 &nbsp;I &nbsp;4 &nbsp;I &nbsp;5 &nbsp;I &nbsp;6 &nbsp;I &nbsp;7 &nbsp;I &nbsp;8 &nbsp;I &nbsp;9 &nbsp;I &nbsp;10 <img align="absmiddle"
-src="/images/board/btn_next.gif" width="16" height="15" border="0"> <img align="absmiddle" src="/images/board/btn_next_dual.gif" width="16" height="15" border="0"></p></td>
+                                                                <td width="420"><p><%=strPage%></p></td>
                                                                 <td align="right" width="248"><table border="0" cellpadding="0" cellspacing="0" width="230">
                                                                     <tr>
-                                                                      <td><select name="formselect1" size="1">
-                                                                          <option>제목</option>
-                                                                          <option>내용</option>
-                                                                        </select></td>
-                                                                      <td><input class="input_01" type="text" size="18" name="day"></td>
-                                                                      <td><input name="imagefield" type="image" src="../../images/board/bt_search.gif" border="0" width="50" height="19"></td>
+                                                                      <td>
+                                                                        <select id="field" name="field" size="1">
+												                          <option value="subject"<%=("subject".equals(field)?" selected":"")%>>제 목</option>
+												                          <option value="content"<%=("content".equals(field)?" selected":"")%>>내 용</option>
+												                        </select>
+                                                                        </td>
+                                                                      <td><input class="input_01" type="text" size="18" id="keyword" name="keyword" value="<%=keyword%>"></td>
+                                                                      <td><a href="javascript:on_search();"><img src="/images/board/bt_search.gif" border="0" width="50" height="19"></a></td>
                                                                     </tr>
                                                                   </table></td>
                                                               </tr>
                                                             </table></td>
                                                         </tr>
+                                                        </form>
                                                         <tr>
                                                           <td height="250" align="center"></td>
                                                         </tr>

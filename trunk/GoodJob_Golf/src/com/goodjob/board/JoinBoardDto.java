@@ -25,22 +25,21 @@ public class JoinBoardDto implements Serializable{
 	private String region;
 	private String golflink_name;
 	private String sex;
-	private int age=0;
-	private int join_person=0;
+	private String age;
+	private int join_person = 0;
 	private String rounding_dt;
 	private String price_info1;
 	private String price_info2;
 	private String price_info3;
 	private String content;
-	private Integer readcount;
-	private Integer apply_count;
+	private int readcount;
+	private int apply_count;
 	private String join_status;
 	private String reg_dt;
 	
 	private int cmt_seq;
 	private String cmt_name;
 	private String comment;
-	
 	
 	public int getJoin_seq() {
 		return join_seq;
@@ -96,10 +95,10 @@ public class JoinBoardDto implements Serializable{
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-	public int getAge() {
+	public String getAge() {
 		return age;
 	}
-	public void setAge(int age) {
+	public void setAge(String age) {
 		this.age = age;
 	}
 	public int getJoin_person() {
@@ -138,16 +137,16 @@ public class JoinBoardDto implements Serializable{
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Integer getReadcount() {
+	public int getReadcount() {
 		return readcount;
 	}
-	public void setReadcount(Integer readcount) {
+	public void setReadcount(int readcount) {
 		this.readcount = readcount;
 	}
-	public Integer getApply_count() {
+	public int getApply_count() {
 		return apply_count;
 	}
-	public void setApply_count(Integer applyCount) {
+	public void setApply_count(int applyCount) {
 		apply_count = applyCount;
 	}
 	public String getJoin_status() {
@@ -180,4 +179,5 @@ public class JoinBoardDto implements Serializable{
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	
 }

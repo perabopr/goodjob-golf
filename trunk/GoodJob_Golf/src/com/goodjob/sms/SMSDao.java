@@ -276,7 +276,7 @@ public class SMSDao {
 			
 			ArrayList<Object> bind = new ArrayList<Object>();
 			bind.add(params.get("auth_no"));
-			bind.add(params.get("sphone"));
+			bind.add(params.get("rphone"));
 			
 			QueryRunner queryRunner = new QueryRunner();
 			ResultSetHandler rsh = new MapHandler();

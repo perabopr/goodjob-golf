@@ -428,15 +428,15 @@ public class BoardDao {
 		return NumberUtils.toInt(map.get("cnt")+"");
 	}
 	
-	public JoinBoardDto getJoinView(int join_no){
+	public JoinBoardDto getJoinView(int join_seq){
 		
 		JoinBoardDto jDto = new JoinBoardDto();
 		Connection conn = null;
 		try {
 			
-			if(join_no > 0 ){
+			if(join_seq > 0 ){
 				
-				Object[] params = {join_no};
+				Object[] params = {join_seq};
 				
 				conn = DBManager.getConnection();
 				ResultSetHandler rsh = new BeanHandler(JoinBoardDto.class);
@@ -533,7 +533,7 @@ public class BoardDao {
 			queryRunner.update(conn, BBS.join_insert , params.toArray());
 
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}

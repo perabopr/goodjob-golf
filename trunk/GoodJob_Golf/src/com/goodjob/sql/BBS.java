@@ -30,7 +30,7 @@ public class BBS {
 	
 	public static final String delete = "DELETE FROM %s WHERE seq = ? ";
 	
-	public static final String join_list = "select a.join_seq, " +
+	public static final String join_list = "select a.join_seq , " +
     "a.join_name, " +
     "a.mem_id, " +
     "a.tel1, " +
@@ -88,7 +88,7 @@ public class BBS {
 
 	public static final String join_delete = "DELETE FROM tb_join_bbs WHERE join_seq = ? ";
 	
-	public static final String join_status = "update tb_join_bbs set  join_status = 'E' where join_seq = ? ";
+	public static final String join_status = "update tb_join_bbs set join_status = 'E' where join_seq = ? ";
 	
 	public static final String join_apply = "update tb_join_bbs set apply_count = apply_count + 1 where join_seq = ? ";
 	

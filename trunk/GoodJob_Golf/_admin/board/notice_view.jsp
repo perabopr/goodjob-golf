@@ -12,7 +12,7 @@
 	String thread = StringUtils.trimToEmpty(request.getParameter("thread"));
 	String npage = StringUtils.trimToEmpty(request.getParameter("npage"));
 	
-	BoardDto dto = dao.getView("TB_NOTICE_BBS" , NumberUtils.toInt(seq,0));
+	BoardDto dto = dao.getView("tb_notice_bbs" , NumberUtils.toInt(seq,0));
 	
 %>
 <HTML>
@@ -67,7 +67,7 @@
           <td><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="60"><img src="/_admin/images/board/if_date.gif" width="48" height="20"></td>
-                <td width="540"><%=StringUtils.trimToEmpty(dto.getWrite_date())%></td>
+                <td width="540"><%=StringUtils.trimToEmpty(dto.getReg_dt())%></td>
               </tr>
             </table></td>
         </tr>

@@ -8,10 +8,10 @@
 <%
 	BoardDao dao = new BoardDao();
 	 
-	String join_no = StringUtils.trimToEmpty(request.getParameter("join_no"));
+	String join_seq = StringUtils.trimToEmpty(request.getParameter("join_seq"));
 	String mode = StringUtils.trimToEmpty(request.getParameter("mode"));
 	
-	JoinBoardDto jDto = dao.getJoinView(NumberUtils.toInt(join_no,0));
+	JoinBoardDto jDto = dao.getJoinView(NumberUtils.toInt(join_seq,0));
 	
 	String name = jDto.getJoin_name();
 	if(name == null) name = StringUtils.defaultString((String)session.getAttribute("mem_name"),"관리자"); 
@@ -136,7 +136,7 @@
           <td>&nbsp;</td>
         </tr>
 <FORM NAME="frm" METHOD="post" ACTION="join_write_reg.jsp">
-<input type="hidden" id="join_no" name="join_no" value="<%=join_no%>"/>
+<input type="hidden" id="join_no" name="join_no" value="<%=join_seq%>"/>
 <input type="hidden" id="mode" name="mode" value="<%=mode%>"/>
         <tr>
           <td><table border="0" cellpadding="0" cellspacing="0" width="100%">

@@ -9,7 +9,7 @@
 
 	request.setCharacterEncoding("utf-8");
 	
-	String join_no = StringUtils.trimToEmpty(request.getParameter("join_no"));
+	String join_seq = StringUtils.trimToEmpty(request.getParameter("join_seq"));
 	String join_name = StringUtils.trimToEmpty(request.getParameter("join_name"));
 	String tel1 = StringUtils.trimToEmpty(request.getParameter("tel1"));
 	String tel2 = StringUtils.trimToEmpty(request.getParameter("tel2"));
@@ -35,8 +35,9 @@
 	
 	JoinBoardDto jDto = new JoinBoardDto();
 	
-	jDto.setJoin_no(NumberUtils.toInt(join_no));
+	jDto.setJoin_seq(NumberUtils.toInt(join_seq));
 	jDto.setJoin_name(join_name);
+	jDto.setMem_id(StringUtils.trim((String)session.getAttribute("admin_id")));
 	jDto.setTel1(tel1);
 	jDto.setTel2(tel2);
 	jDto.setTel3(tel3);
@@ -57,7 +58,7 @@
 		
 		dao.setJoinUpdate(jDto);
 		
-		response.sendRedirect("./join_view.jsp?join_no="+join_no);
+		response.sendRedirect("./join_view.jsp?join_seq="+join_seq);
 	}
 	else{
 		

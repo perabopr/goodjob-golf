@@ -24,12 +24,12 @@
 	String sex = StringUtils.trimToEmpty(request.getParameter("sex"));
 	String age = StringUtils.trimToEmpty(request.getParameter("age"));
 
-	String join_no = StringUtils.trimToEmpty(request.getParameter("join_no"));
+	String join_seq = StringUtils.trimToEmpty(request.getParameter("join_seq"));
 	String mode = StringUtils.trimToEmpty(request.getParameter("mode"));
 	
-	JoinBoardDto jDto = dao.getJoinView(NumberUtils.toInt(join_no,0));
+	JoinBoardDto jDto = dao.getJoinView(NumberUtils.toInt(join_seq,0));
 	
-	List<JoinBoardDto> cmtList = dao.getJoinCommentList(jDto.getJoin_no());
+	List<JoinBoardDto> cmtList = dao.getJoinCommentList(jDto.getJoin_seq());
 
 	Map<String,String> params = new HashMap<String,String>();
 	params.put("npage","1");
@@ -37,7 +37,7 @@
 	params.put("sex",sex);
 	params.put("age",age);
 	params.put("keyword",keyword);
-	params.put("join_no",join_no);
+	params.put("join_seq",join_seq);
 	params.put("per_page","2");
 	
 	List<JoinBoardDto> bbsList = dao.getJoinList(params);
@@ -232,9 +232,9 @@
         <tr>
           <td height="50" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%">
               <tr>
-                <td width="88"><a href="join_write.jsp?mode=modify&join_no=<%=jDto.getJoin_no()%>"><img src="/_admin/images/board/btn_edit.gif" width="71" height="24" border="0"></a></td>
-                <td width="89"><a href="javascript:join_end(<%=jDto.getJoin_no()%>);"><img src="/_admin/images/board/btn_end.gif" width="71" height="24" border="0"></a></td>
-                <td width="391"><a href="javascript:board_del(<%=jDto.getJoin_no()%>);"><img align="texttop" src="/_admin/images/board/btn_del.gif" width="71" height="24" border="0"></a></td>
+                <td width="88"><a href="join_write.jsp?mode=modify&join_no=<%=jDto.getJoin_seq()%>"><img src="/_admin/images/board/btn_edit.gif" width="71" height="24" border="0"></a></td>
+                <td width="89"><a href="javascript:join_end(<%=jDto.getJoin_seq()%>);"><img src="/_admin/images/board/btn_end.gif" width="71" height="24" border="0"></a></td>
+                <td width="391"><a href="javascript:board_del(<%=jDto.getJoin_seq()%>);"><img align="texttop" src="/_admin/images/board/btn_del.gif" width="71" height="24" border="0"></a></td>
                 <td width="101" align="right"><a href="javascript:go_list();"><img src="/_admin/images/board/btn_list.gif" width="71" height="24" border="0" alt="목록"></a></td>
               </tr>
             </table></td>
@@ -295,7 +295,7 @@
           <td style="padding-left:133px;">골프장 JOIN커뮤니티에 참여를 원하시는 회원분께서는 댓글을 남겨주시기 바랍니다.</td>
         </tr>
         <form name="cmtFrm" method="post">
-        <input type="hidden" name="join_no" value="<%=jDto.getJoin_no()%>"/>
+        <input type="hidden" name="join_seq" value="<%=jDto.getJoin_seq()%>"/>
         <tr>
           <td><table border="0" cellpadding="0" cellspacing="0" width="100%">
               <tr>
@@ -352,10 +352,10 @@
 			
 %>		  
 				<tr>
-                     <td align="center" height="30" width="41" class=normal_s><%=jDto.getJoin_no()%></td>
+                     <td align="center" height="30" width="41" class=normal_s><%=jDto.getJoin_seq()%></td>
                 	<td align="center" width="62" class=normal_s><%=jDto.getReg_dt()%></td>
                 	<td width="62" align="center" class=normal_s><%=jDto.getJoin_name()%></td>
-                <td width="183" align="center"><a href="javascript:go_view(<%=jDto.getJoin_no()%>);" class=board_list><%=jDto.getGolflink_name()%></a></td>
+                <td width="183" align="center"><a href="javascript:go_view(<%=jDto.getJoin_seq()%>);" class=board_list><%=jDto.getGolflink_name()%></a></td>
                 <td width="57" align="center" class=normal_s><%=StringUtils.trimToEmpty(jDto.getRounding_dt()).substring(0,8)%></td>
                 <td width="56" align="center" class=normal_s><%=jDto.getJoin_person()%>명</td>
                 <td width="51" align="center" class=normal_s><%=jDto.getAge()%>대</td>

@@ -4,7 +4,8 @@
 <%@ page import="com.goodjob.common.*"%>
 <%@page import="com.goodjob.board.*"%>
 <%@page import="com.goodjob.conf.Config"%>
-<html>
+
+<%@page import="org.apache.commons.lang.StringUtils"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -27,14 +28,15 @@
 	String name = upload.getParameter("name");
 	String content = upload.getParameter("content");
 	String password = upload.getParameter("password");
-	String upfile = (String)fileMap.get("upfile");
+	String upfile = StringUtils.trimToEmpty((String)fileMap.get("upfile"));
 	String mode = upload.getParameter("mode");
+	
 	
 	BoardDto dto = new BoardDto();
 	dto.setSeq(NumberUtils.toInt(seq));
 	dto.setEmail("savekorea@goodjobgolf.com");
 	dto.setName("관리자");
-	dto.setMem_id("");
+	dto.setMem_id(StringUtils.trim((String)session.getAttribute("admin_id")));
 	dto.setSubject(subject);
 	dto.setContent(content);
 	dto.setPassword("1111");
@@ -46,14 +48,12 @@
 	
 	if("modify".equals(mode)){
 		
-		dao.setUpdate("TB_NOTICE_BBS" , dto);
+		dao.setUpdate("tb_notice_bbs" , dto);
 		response.sendRedirect("./notice_view.jsp?seq="+seq);
 	}
 	else{
 		
-		//for(int i = 0 ; i < 500 ; i++)
-			dao.setInsert("TB_NOTICE_BBS" , dto);
-		
+		dao.setInsert("tb_notice_bbs" , dto);
 		
 		response.sendRedirect("./notice_list.jsp");
 	}

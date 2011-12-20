@@ -9,14 +9,15 @@
 
 	request.setCharacterEncoding("utf-8");
 	
-	String join_no = StringUtils.trimToEmpty(request.getParameter("join_no"));
+	String join_seq = StringUtils.trimToEmpty(request.getParameter("join_seq"));
 	String comment = StringUtils.trimToEmpty(request.getParameter("comment"));
 	
 	
 	JoinBoardDto jDto = new JoinBoardDto();
 	
-	jDto.setJoin_no(NumberUtils.toInt(join_no));
-	jDto.setCmt_name(StringUtils.defaultString((String)session.getAttribute("mem_name"),"관리자"));
+	jDto.setJoin_seq(NumberUtils.toInt(join_seq));
+	jDto.setCmt_name(StringUtils.defaultString((String)session.getAttribute("admin_name"),"관리자"));
+	jDto.setMem_id(StringUtils.trim((String)session.getAttribute("admin_id")));
 	jDto.setComment(comment);
 	
 	BoardDao dao = new BoardDao();

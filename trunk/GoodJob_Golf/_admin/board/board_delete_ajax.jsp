@@ -15,11 +15,11 @@
 	boolean isDel = false;
 	
 	if("notice".equals(tname)){
-		tname = "TB_NOTICE_BBS";
+		tname = "tb_notice_bbs";
 		isDel = dao.setDelete(tname , NumberUtils.toInt(seq));
 	}
 	else if("faq".equals(tname)){
-		tname = "TB_FAQ_BBS";
+		tname = "tb_faq_bbs";
 		isDel = dao.setDelete(tname , NumberUtils.toInt(seq));
 	}
 	else if("join".equals(tname)){

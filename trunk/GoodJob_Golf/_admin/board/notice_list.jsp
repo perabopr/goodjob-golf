@@ -21,9 +21,9 @@
 	params.put("field",field);
 	params.put("keyword",keyword);
 	
-	List<BoardDto> bbsList = bDao.getList("TB_NOTICE_BBS" , params);
+	List<BoardDto> bbsList = bDao.getList("tb_notice_bbs" , params);
 	
-	int totalCount = bDao.getTotalCount("TB_NOTICE_BBS" , params);
+	int totalCount = bDao.getTotalCount("tb_notice_bbs" , params);
 	
 	String strPage = paging.getPaging(totalCount, false);
 %>
@@ -106,7 +106,7 @@ function goPage(val){
                      <td width="437" class="list"><a href="./notice_view.jsp?seq=<%=dto.getSeq()%>"><%=dto.getSubject()%></a></a></td>
                      <td width="10">&nbsp;</td>
                      <td width="9"><img src="/_admin/images/board/bl.gif" width="10" height="22"></td>
-                     <td width="80" align="center"><%=dto.getWrite_date()%></td>
+                     <td width="80" align="center"><%=dto.getReg_dt()%></td>
                      <td width="14">&nbsp;</td>
                    </tr>
                    <tr>

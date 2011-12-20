@@ -179,7 +179,7 @@ public class BoardDao {
 		}
 	}
 	
-	public Long getMaxSeq(String tableName){
+	public int getMaxSeq(String tableName){
 		
 		BoardDto dto = null;
 		Connection conn = null;
@@ -198,7 +198,7 @@ public class BoardDao {
 			DbUtils.closeQuietly(conn);
 		}
 		
-		return map.get("seq");
+		return NumberUtils.toInt(map.get("seq")+"");
 	}
 	
 	/**
@@ -242,7 +242,7 @@ public class BoardDao {
 
 			conn = DBManager.getConnection();
 			
-			Long seq = this.getMaxSeq(tableName);
+			int seq = this.getMaxSeq(tableName);
 			
 			ArrayList<Object> params = new ArrayList<Object>();
 			params.add(seq);
@@ -257,13 +257,24 @@ public class BoardDao {
 			params.add(seq);
 			params.add(dto.getIshtml());
 			params.add(dto.getWriteip());
-			params.add(dto.getNotice());
-
+			params.add("N");
+			
+			System.out.println("getMem_id : " + dto.getMem_id());
+			System.out.println("getName : " + dto.getName());
+			System.out.println("getEmail : " + dto.getEmail());
+			System.out.println("getSubject : " + dto.getSubject());
+			System.out.println("getContent : " + dto.getContent());
+			System.out.println("getPassword : " + dto.getPassword());
+			System.out.println("getFilename : " + dto.getFilename());
+			System.out.println("getIshtml : " + dto.getIshtml());
+			System.out.println("getWriteip : " + dto.getWriteip());
+			System.out.println("seq : " + seq);
+			
 			QueryRunner queryRunner = new QueryRunner();
 			queryRunner.update(conn, String.format(BBS.insert,tableName) , params.toArray());
 
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
@@ -323,7 +334,7 @@ public class BoardDao {
 		String region = StringUtils.trimToEmpty(data.get("region"));
 		String sex = StringUtils.trimToEmpty(data.get("sex"));
 		String age = StringUtils.trimToEmpty(data.get("age"));
-		String join_no = StringUtils.trimToEmpty(data.get("join_no"));
+		String join_seq = StringUtils.trimToEmpty(data.get("join_seq"));
 		String keyword = StringUtils.trimToEmpty(data.get("keyword"));
 		
 		int npage = NumberUtils.toInt(data.get("npage"), 1);
@@ -355,9 +366,9 @@ public class BoardDao {
 				where.append("and age = ? ");
 				params.add(age);
 			}
-			if(join_no.length()>0){
-				where.append("and join_no < ? ");
-				params.add(join_no);
+			if(join_seq.length()>0){
+				where.append("and join_seq < ? ");
+				params.add(join_seq);
 			}
 			
 			//페이징
@@ -482,7 +493,7 @@ public class BoardDao {
 			params.add(jDto.getPrice_info2());
 			params.add(jDto.getPrice_info3());
 			params.add(jDto.getContent());
-			params.add(jDto.getJoin_no());
+			params.add(jDto.getJoin_seq());
 
 			QueryRunner queryRunner = new QueryRunner();
 			queryRunner.update(conn, BBS.join_update , params.toArray());
@@ -503,6 +514,7 @@ public class BoardDao {
 			
 			ArrayList<Object> params = new ArrayList<Object>();
 			params.add(jDto.getJoin_name());
+			params.add(jDto.getMem_id());
 			params.add(jDto.getTel1());
 			params.add(jDto.getTel2());
 			params.add(jDto.getTel3());
@@ -582,13 +594,13 @@ public class BoardDao {
 	 * @param join_no
 	 * @return
 	 */
-	public List<JoinBoardDto> getJoinCommentList(int join_no) {
+	public List<JoinBoardDto> getJoinCommentList(int join_seq) {
 		
 		Connection conn = null;
 		List<JoinBoardDto> list = null;
 		try {
 			
-			Object[] params = {join_no};
+			Object[] params = {join_seq};
 			
 			conn = DBManager.getConnection();
 			
@@ -618,14 +630,15 @@ public class BoardDao {
 			conn = DBManager.getConnection();
 
 			ArrayList<Object> params = new ArrayList<Object>();
-			params.add(jDto.getJoin_no());
+			params.add(jDto.getJoin_seq());
+			params.add(jDto.getMem_id());
 			params.add(jDto.getCmt_name());
 			params.add(jDto.getComment());
 			
 			QueryRunner queryRunner = new QueryRunner();
 			queryRunner.update(conn, BBS.join_cinsert , params.toArray());
 			
-			queryRunner.update(conn, BBS.join_apply , jDto.getJoin_no());
+			queryRunner.update(conn, BBS.join_apply , jDto.getJoin_seq());
 			
 
 		} catch (Exception e) {

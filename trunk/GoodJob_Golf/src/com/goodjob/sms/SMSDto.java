@@ -15,7 +15,7 @@ public class SMSDto implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -412964549270811844L;
-	private Integer idx;
+	private Long seq;
 	private String mem_id;
 	private String message;
 	private String rtel;
@@ -28,11 +28,12 @@ public class SMSDto implements Serializable{
 	private String auth_no;
 	private String send_date;
 	
-	public Integer getIdx() {
-		return idx;
+	
+	public Long getSeq() {
+		return seq;
 	}
-	public void setIdx(Integer idx) {
-		this.idx = idx;
+	public void setSeq(Long seq) {
+		this.seq = seq;
 	}
 	public String getMem_id() {
 		return mem_id;

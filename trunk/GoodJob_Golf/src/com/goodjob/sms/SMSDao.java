@@ -20,20 +20,14 @@ import java.util.Random;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
-import org.dom4j.tree.BaseElement;
 
-import com.goodjob.board.BoardDto;
 import com.goodjob.db.DBManager;
-import com.goodjob.sql.BBS;
 import com.goodjob.sql.SMS;
-import com.goodjob.util.Utils;
-import com.mysql.jdbc.Util;
 
 /**
  * @author gundallove@gmail.com
@@ -45,7 +39,7 @@ public class SMSDao {
 	
 	private final int port = 80;
 	private final String sms_url = "http://sslsms.cafe24.com/sms_sender.php"; // SMS 전송요청 URL
-	private final String strId = "savekorea2400";		// SMS아이디
+	private final String strId = "savesms";		// SMS아이디
 	private final String strAuthKey = "90c3ee898f3fa17524d98bb0ab1bccda";	//인증키
 	
 	public boolean send(Map<String,String> params) {
@@ -249,7 +243,7 @@ public class SMSDao {
 			conn = DBManager.getConnection();
 			
 			ArrayList<Object> bind = new ArrayList<Object>();
-			bind.add(params.get("sphone"));
+			bind.add(params.get("rphone"));
 			bind.add(params.get("authNum"));
 			
 			QueryRunner qr = new QueryRunner();

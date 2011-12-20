@@ -17,7 +17,7 @@ public class BoardDto implements Serializable{
 	private static final long serialVersionUID = 472777695132777620L;
 	
 	
-	private Integer seq;
+	private int seq;
 	private String mem_id;
 	private String name;
 	private String email;
@@ -25,18 +25,18 @@ public class BoardDto implements Serializable{
 	private String content;
 	private String password;
 	private String readcount;
-	private String write_date;
+	private String reg_dt;
 	private String filename;
 	private String position;
-	private Integer thread;
+	private int thread;
 	private String ishtml;
 	private String writeip;
 	private String notice;
 	
-	public Integer getSeq() {
+	public int getSeq() {
 		return seq;
 	}
-	public void setSeq(Integer seq) {
+	public void setSeq(int seq) {
 		this.seq = seq;
 	}
 	public String getMem_id() {
@@ -45,7 +45,6 @@ public class BoardDto implements Serializable{
 	public void setMem_id(String memId) {
 		mem_id = memId;
 	}
-	
 	public String getName() {
 		return name;
 	}
@@ -82,11 +81,11 @@ public class BoardDto implements Serializable{
 	public void setReadcount(String readcount) {
 		this.readcount = readcount;
 	}
-	public String getWrite_date() {
-		return write_date;
+	public String getReg_dt() {
+		return reg_dt;
 	}
-	public void setWrite_date(String writeDate) {
-		write_date = writeDate;
+	public void setReg_dt(String regDt) {
+		reg_dt = regDt;
 	}
 	public String getFilename() {
 		return filename;
@@ -100,10 +99,10 @@ public class BoardDto implements Serializable{
 	public void setPosition(String position) {
 		this.position = position;
 	}
-	public Integer getThread() {
+	public int getThread() {
 		return thread;
 	}
-	public void setThread(Integer thread) {
+	public void setThread(int thread) {
 		this.thread = thread;
 	}
 	public String getIshtml() {
@@ -124,6 +123,5 @@ public class BoardDto implements Serializable{
 	public void setNotice(String notice) {
 		this.notice = notice;
 	}
-	
 	
 }

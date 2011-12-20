@@ -16,7 +16,7 @@ public class MemberDto implements Serializable {
 	 */
 	private static final long serialVersionUID = 8799454796893112030L;
 	
-	private Long mem_no;
+	private int mem_seq;
 	private String mem_id;
 	private String mem_name;
 	private String mem_pwd;
@@ -33,11 +33,11 @@ public class MemberDto implements Serializable {
 	private String input_pwd;
 	private String memo;
 	
-	public Long getMem_no() {
-		return mem_no;
+	public int getMem_seq() {
+		return mem_seq;
 	}
-	public void setMem_no(Long mem_no) {
-		this.mem_no = mem_no;
+	public void setMem_seq(int memSeq) {
+		mem_seq = memSeq;
 	}
 	public String getMem_id() {
 		return mem_id;

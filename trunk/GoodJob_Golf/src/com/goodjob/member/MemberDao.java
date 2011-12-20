@@ -178,10 +178,9 @@ public class MemberDao {
 			bind.add(mDto.getEmail_yn());
 			
 			QueryRunner qr = new QueryRunner();
-			int result = qr.update(conn , MEMBER.insert , bind.toArray());
+			qr.update(conn , MEMBER.insert , bind.toArray());
 			
-			if(result != 0)
-				isSuccess = true;
+			isSuccess = true;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -361,14 +360,18 @@ public class MemberDao {
 		try {
 			conn = DBManager.getConnection();
 			String[] bind = {mem_id};
+			
 			ResultSetHandler rsh = new MapHandler();
 			QueryRunner qr = new QueryRunner();
 			
-			Map<String,Long> map = (Map)qr.query(conn , MEMBER.dup_id , rsh , bind);
-			long cnt = map.get("cnt");
+			Map<String,Integer> map = (Map)qr.query(conn , MEMBER.dup_id , rsh , bind);
+			
+			int cnt = map.get("cnt");
+			
 			if(cnt > 0) isDuplicate = true;
+			
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}

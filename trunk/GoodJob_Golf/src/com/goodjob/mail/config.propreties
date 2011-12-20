@@ -1,2 +1,1 @@
-#mail_server_settiong
-mail.host = smtp.goodjobgolf.com
+mail.host=smtp.goodjobgolf.com

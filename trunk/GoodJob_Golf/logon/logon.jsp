@@ -23,7 +23,6 @@
 %>
 	<script language="javascript" type="text/javascript">
 		alert("입력한 아이디가 존재 하지 않습니다.");
-		//history.go(-1);
 		location.href="/member/member_logon.jsp";
 	</script>
 <%

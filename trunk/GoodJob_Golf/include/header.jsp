@@ -8,6 +8,7 @@
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
 <title>Welcome to GoodJobGolf</title>
 <link rel="stylesheet" href="/css/common.css" type="text/css">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
 <script src="/js/jquery-1.5.2.min.js" type="text/javascript"></script>
 <script language="javascript" src="/js/flashObject.js"></script>
 <script language="javascript" type="text/javascript">
@@ -109,7 +110,7 @@
                                           <td><a href="#"><img src="/images/img_leftmenu/btn_user_guide.gif" width="235" height="86" border="0"></a></td>
                                       </tr>
                                       <tr>
-                                          <td><a href="sub/board/faq_list.html"><img src="/images/img_leftmenu/btn_faq.gif" width="235" height="86" border="0"></a></td>
+                                          <td><a href="/board/faq_list.jsp"><img src="/images/img_leftmenu/btn_faq.gif" width="235" height="86" border="0"></a></td>
                                       </tr>
                                       <tr>
                                           <td><a href="#"><img src="/images/img_leftmenu/btn_event.gif" width="235" height="86" border="0"></a></td>

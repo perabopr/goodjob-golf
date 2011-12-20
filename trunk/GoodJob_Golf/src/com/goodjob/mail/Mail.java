@@ -88,9 +88,10 @@ public class Mail {
 	public Mail() throws MailException{
 	    
 	    /* 메일 설정 파일들을 불러 온다. */
-	    ResourceBundle rbun = ResourceBundle.getBundle("com.goodjob.mail.config");
-	    this.host = rbun.getString("mail.host");				//메일서버
-	    
+	    //ResourceBundle rbun = ResourceBundle.getBundle("com.goodjob.mail.config");
+	    //this.host = rbun.getString("mail.host");				//메일서버
+		this.host = "mw-001.cafe24.com";
+		
 		//메일 서버(smtp)를 세팅한다.
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);

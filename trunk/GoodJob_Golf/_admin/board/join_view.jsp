@@ -16,6 +16,7 @@
 	}	
 %>
 <%
+
 	BoardDao dao = new BoardDao();
 
 	String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
@@ -59,7 +60,7 @@
 		$.ajax({
 			type: "POST",
 			url: "/_admin/board/join_end.jsp",
-			data: "join_no="+no,
+			data: "join_seq="+no,
 			success: function(msg){
 				if($.trim(msg) == '0'){
 					alert("완료처리가 되었습니다.");
@@ -90,12 +91,12 @@
 		frm.submit();
 	}
 	
-	function board_del(join_no){
+	function board_del(join_seq){
 
 		$.ajax({
 			type: "POST",
 			url: "/_admin/board/board_delete_ajax.jsp",
-			data: "tname=join&join_no="+join_no,
+			data: "tname=join&join_seq="+join_seq,
 			success: function(msg){
 				if($.trim(msg) == '0'){
 					alert("글이 정상적으로 삭제 되었습니다.");
@@ -126,7 +127,16 @@
   <tr>
     <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="669">
         <tr>
-          <td background="/_admin/images/board/img_main_title_bg.gif" height="31" align="right">본 게시물은 <span class="blue">진행중</span>입니다 또는 본게시물은 <span class="orange">완료</span>되었습니다</td>
+          <td background="/_admin/images/board/img_main_title_bg.gif" height="31" align="right">
+          <%
+          	if("I".equals(jDto.getJoin_status())){
+          		out.println("본 게시물은 <span class=\"blue\">진행중</span>입니다.");
+          	}
+          	else{
+          		out.println("본게시물은 <span class=\"orange\">완료</span>되었습니다.");
+          	}
+          %>
+          </td>
         </tr>
         <tr>
           <td>&nbsp;</td>
@@ -176,7 +186,7 @@
                 <td width="25" height="22">&nbsp;</td>
                 <td width="246" height="22"  class="normal_b">
                 <%
-                	if(jDto.getAge()==0) out.println("구분없음");
+                	if("".equals(jDto.getAge())) out.println("구분없음");
                 	else out.println(jDto.getAge()+"대");
                 %>
                 </td>
@@ -232,7 +242,8 @@
         <tr>
           <td height="50" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%">
               <tr>
-                <td width="88"><a href="join_write.jsp?mode=modify&join_no=<%=jDto.getJoin_seq()%>"><img src="/_admin/images/board/btn_edit.gif" width="71" height="24" border="0"></a></td>
+                <td width="88">
+                <a href="join_write.jsp?mode=modify&join_no=<%=jDto.getJoin_seq()%>"><img src="/_admin/images/board/btn_edit.gif" width="71" height="24" border="0"></a></td>
                 <td width="89"><a href="javascript:join_end(<%=jDto.getJoin_seq()%>);"><img src="/_admin/images/board/btn_end.gif" width="71" height="24" border="0"></a></td>
                 <td width="391"><a href="javascript:board_del(<%=jDto.getJoin_seq()%>);"><img align="texttop" src="/_admin/images/board/btn_del.gif" width="71" height="24" border="0"></a></td>
                 <td width="101" align="right"><a href="javascript:go_list();"><img src="/_admin/images/board/btn_list.gif" width="71" height="24" border="0" alt="목록"></a></td>

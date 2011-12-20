@@ -9,7 +9,7 @@
 
 	request.setCharacterEncoding("utf-8");
 	
-	String join_seq = StringUtils.trimToEmpty(request.getParameter("join_seq"));
+	String join_seq = StringUtils.defaultIfEmpty(request.getParameter("join_seq"),"0");
 	String join_name = StringUtils.trimToEmpty(request.getParameter("join_name"));
 	String tel1 = StringUtils.trimToEmpty(request.getParameter("tel1"));
 	String tel2 = StringUtils.trimToEmpty(request.getParameter("tel2"));
@@ -37,14 +37,14 @@
 	
 	jDto.setJoin_seq(NumberUtils.toInt(join_seq));
 	jDto.setJoin_name(join_name);
-	jDto.setMem_id(StringUtils.trim((String)session.getAttribute("admin_id")));
+	jDto.setMem_id(StringUtils.trim((String)session.getAttribute("mem_id")));
 	jDto.setTel1(tel1);
 	jDto.setTel2(tel2);
 	jDto.setTel3(tel3);
 	jDto.setRegion(region);
 	jDto.setGolflink_name(golflink_name);
 	jDto.setSex(sex);
-	jDto.setAge(NumberUtils.toInt(age));
+	jDto.setAge(age);
 	jDto.setJoin_person(NumberUtils.toInt(join_person));
 	jDto.setRounding_dt(Utils.getDate("yy")+"/"+rounding_dt1+"/"+rounding_dt2+"/"+rounding_dt3+"/"+rounding_dt4);
 	jDto.setPrice_info1(price_info1);

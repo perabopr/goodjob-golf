@@ -35,10 +35,6 @@
 	
 	String strPage = paging.getPaging(totalCount, false);
 	
-	//RegionDao regionDao = new RegionDao();
-	//List<RegionDto> arrRegions = regionDao.getRegionList("1");
-	
-	//out.println(StringUtils.trim((String)session.getAttribute("admin_id")));
 %>
 <html>
 <head>
@@ -50,12 +46,7 @@
 function on_search() {
 
 	var frm = document.frm;
-	if(!$('#keyword').val()) {
-		alert('검색어를 입력하시기 바랍니다.');
-		$('#keyword').focus();
-		return;
-	} 
-	frm.action="faq_list.jsp"
+	frm.action="join_list.jsp"
 	frm.submit();
 }
 
@@ -112,8 +103,8 @@ function go_view(val){
              <option value="50"<%=("50".equals(age)?" selected":"")%>>50대</option>
              <option value="60"<%=("60".equals(age)?" selected":"")%>>60대</option>
             </select>
-            <input class="input_01" type="text" size="20" name="day">
-            <input name="imagefield" type="image" src="/_admin/images/board/bt_search.gif" border="0" width="43" height="19" align="absmiddle"></td>
+            <input class="input_01" type="text" size="20" name="keyword" id="keyword" value="<%=keyword%>">
+            <a href="javascript:on_search();"><img src="/_admin/images/board/bt_search.gif" border="0" width="43" height="19" align="absmiddle"></a></td>
         </tr>
 </form>
         <tr>
@@ -164,7 +155,7 @@ function go_view(val){
                 <td width="51" align="center" class=normal_s><%=jDto.getAge()%>대</td>
                 <td width="49" align="center" class=normal_s><%=jDto.getApply_count()%>건</td>
                 <td align="center" width="48" class=normal_s><%=jDto.getReadcount()%></td>
-                <td align="center" width="60" class=blue_s><%=("I".equals(StringUtils.trimToEmpty(jDto.getJoin_status())) ? "진행중" : "완료")%></td>
+                <td align="center" width="60" class=blue_s><%=("I".equals(StringUtils.trimToEmpty(jDto.getJoin_status())) ? "진행중" : " <span class=\"orange\">완료</span>")%></td>
                 </tr>
                 <tr>
                 	<td height="1" colspan="10" bgcolor="#E5E5E5"></td>

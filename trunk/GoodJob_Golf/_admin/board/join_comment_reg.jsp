@@ -15,6 +15,7 @@
 	
 	JoinBoardDto jDto = new JoinBoardDto();
 	
+	
 	jDto.setJoin_seq(NumberUtils.toInt(join_seq));
 	jDto.setCmt_name(StringUtils.defaultString((String)session.getAttribute("admin_name"),"관리자"));
 	jDto.setMem_id(StringUtils.trim((String)session.getAttribute("admin_id")));

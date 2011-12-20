@@ -14,7 +14,7 @@
 	JoinBoardDto jDto = dao.getJoinView(NumberUtils.toInt(join_seq,0));
 	
 	String name = jDto.getJoin_name();
-	if(name == null) name = StringUtils.defaultString((String)session.getAttribute("mem_name"),"관리자"); 
+	if(name == null) name = StringUtils.defaultString((String)session.getAttribute("admin_name"),"관리자"); 
 	
 	
 %>
@@ -202,13 +202,13 @@
                 <td height="22" width="25">&nbsp;</td>
                 <td height="22" width="287">
                 <select id="age" name="age" size="1">
-                    <option value=""<%=(jDto.getAge()==0?" selected":"")%>>선택하세요</option>
-                    <option value="20"<%=(jDto.getAge()==20?" selected":"")%>>20대</option>
-		             <option value="30"<%=(jDto.getAge()==30?" selected":"")%>>30대</option>
-		             <option value="40"<%=(jDto.getAge()==40?" selected":"")%>>40대</option>
-		             <option value="50"<%=(jDto.getAge()==50?" selected":"")%>>50대</option>
-		             <option value="60"<%=(jDto.getAge()==60?" selected":"")%>>60대</option>
-                    <option value="99"<%=(jDto.getAge()==99?" selected":"")%>>구분없음</option>
+                    <option value=""<%=("".equals(jDto.getAge())?" selected":"")%>>선택하세요</option>
+                    <option value="20"<%=("20".equals(jDto.getAge())?" selected":"")%>>20대</option>
+		            <option value="30"<%=("30".equals(jDto.getAge())?" selected":"")%>>30대</option>
+		            <option value="40"<%=("40".equals(jDto.getAge())?" selected":"")%>>40대</option>
+		            <option value="50"<%=("50".equals(jDto.getAge())?" selected":"")%>>50대</option>
+		            <option value="60"<%=("60".equals(jDto.getAge())?" selected":"")%>>60대</option>
+                    <option value="99"<%=("99".equals(jDto.getAge())?" selected":"")%>>구분없음</option>
                   </select></td>
               </tr>
             </table></td>

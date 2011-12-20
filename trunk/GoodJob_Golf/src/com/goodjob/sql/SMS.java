@@ -21,5 +21,5 @@ public class SMS {
 	public static final String auth = "insert into tb_sms_auth(tel_no,auth_no,send_date) values (? , ? , UNIX_TIMESTAMP(now()))";
 	
 	//인증체크
-	public static final String check = "SELECT auth_no,UNIX_TIMESTAMP(now())-send_date as diff FROM tb_sms_auth where auth_no=? and tel_no=? order by idx limit 1 ";
+	public static final String check = "SELECT auth_no,UNIX_TIMESTAMP(now())-send_date as diff FROM tb_sms_auth where auth_no=? and tel_no=? order by seq limit 1 ";
 }

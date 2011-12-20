@@ -165,7 +165,7 @@ public class FileUpload {
 				if (fileName != null && !"".equals(fileName)) {
 					// 파일업로드시...
 					if (writeToFile) {
-						String updFilePath = uploadDir + "\\" + fileName;
+						String updFilePath = uploadDir + "/" + fileName;
 						String newFilePath = getNewFilePath(updFilePath); //동일한 파일명으로 업로드 될수 있기때문에  파일명이 같을경우 파일명  뒤에 '0'을 붙여 업로드한다.
 						File newFile = new File(newFilePath);
 						fileItemMap.put(item.getFieldName(), newFile.getName()); // 새로운  파일명을  리턴헤주기  위해  맵에  담는다.
@@ -219,7 +219,7 @@ public class FileUpload {
 				if (fileName != null && !"".equals(fileName)) {
 					// 파일업로드시...
 					if (writeToFile) {
-						String updFilePath = uploadDir + "\\" + fileName;
+						String updFilePath = uploadDir + "/" + fileName;
 						String newFilePath = getNewFilePath(updFilePath); //동일한 파일명으로 업로드 될수 있기때문에  파일명이 같을경우 파일명  뒤에 '0'을 붙여 업로드한다.
 						File newFile = new File(newFilePath);
 						

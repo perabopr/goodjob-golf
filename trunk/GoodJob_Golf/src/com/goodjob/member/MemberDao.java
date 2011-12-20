@@ -169,7 +169,6 @@ public class MemberDao {
 			conn = DBManager.getConnection();
 			
 			ArrayList<Object> bind = new ArrayList<Object>();
-			bind.add(0);
 			bind.add(mDto.getMem_id());
 			bind.add(mDto.getMem_name());
 			bind.add(mDto.getMem_pwd());
@@ -177,7 +176,6 @@ public class MemberDao {
 			bind.add(mDto.getMem_mtel());
 			bind.add(mDto.getSms_yn());
 			bind.add(mDto.getEmail_yn());
-			bind.add(mDto.getRecommend());
 			
 			QueryRunner qr = new QueryRunner();
 			int result = qr.update(conn , MEMBER.insert , bind.toArray());
@@ -186,7 +184,7 @@ public class MemberDao {
 				isSuccess = true;
 			
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}

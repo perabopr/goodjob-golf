@@ -54,14 +54,14 @@
                                   <td width="343" valign="top">
                                   
                                   <!-- 공지사항 -->
-                                  <jsp:include page="/common/main_notice_list.jsp" flush="true"/>
+                                  <jsp:include page="/board/main_notice_list.jsp" flush="true"/>
                                     
                                   </td>
                                   <td width="15">&nbsp;</td>
                                   <td width="393" valign="top">
                                   
                                   <!-- 조인 커뮤니티 -->
-                                  <jsp:include page="/common/main_join_list.jsp" flush="true"/>
+                                  <jsp:include page="/board/main_join_list.jsp" flush="true"/>
                                   
                                   </td>
                                 </tr>

@@ -39,7 +39,7 @@
 %>		  
         <tr>
            <td width="10" height="27"><img align="absmiddle" src="images/common/img_board_list_bullet.gif" width="3" height="3"></td>
-           <td width="262"><a href="/board/notice_view.jsp?seq=<%=jDto.getJoin_no()%>" class=board_list><%=jDto.getGolflink_name()%></a> <img align="absmiddle" src="images/common/icon_new.gif" width="14" height="11"></td>
+           <td width="262"><a href="/board/join_view.jsp?join_seq=<%=jDto.getJoin_seq()%>" class=board_list><%=jDto.getGolflink_name()%></a> <img align="absmiddle" src="images/common/icon_new.gif" width="14" height="11"></td>
            <td width="63" align="right"><span class=board_date><%=StringUtils.trimToEmpty(jDto.getReg_dt()).replaceAll("/",".")%></span></td>
          </tr>
          <tr>

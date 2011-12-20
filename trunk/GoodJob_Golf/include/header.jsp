@@ -16,13 +16,13 @@
 		
 		if(!$('#login_id').val()) {
 			alert('아이디를 입력하시기 바랍니다.');
-			$('#mem_id').focus();
+			$('#login_id').focus();
 			return;
 		}
 
 		if(!$('#login_pwd').val()) {
 			alert('비밀번호를 입력하시기 바랍니다.');
-			$('#mem_pwd').focus();
+			$('#login_pwd').focus();
 			return;
 		} 
 				

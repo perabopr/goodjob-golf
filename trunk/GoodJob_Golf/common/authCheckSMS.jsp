@@ -9,11 +9,11 @@
 
 	Map<String,String> params = new HashMap<String,String>();
 	
-	String sphone 		= StringUtils.defaultString(request.getParameter("sphone"), "");
+	String rphone 		= StringUtils.defaultString(request.getParameter("rphone"), "");
 	String auth_no 		= StringUtils.defaultString(request.getParameter("auth_no"), "");
 	
 	params.put("auth_no",auth_no);
-	params.put("sphone",sphone);
+	params.put("rphone",rphone);
 	
 	SMSDao sDao = new SMSDao();
 	int check = sDao.authCheck(params);

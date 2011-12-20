@@ -46,12 +46,12 @@
 	
 	if("modify".equals(mode)){
 		
-		dao.setUpdate("TB_FAQ_BBS" , dto);
+		dao.setUpdate("tb_faq_bbs" , dto);
 		response.sendRedirect("./faq_view.jsp?seq="+seq);
 	}
 	else{
 		
-		dao.setInsert("TB_FAQ_BBS" , dto);
+		dao.setInsert("tb_faq_bbs" , dto);
 		response.sendRedirect("./faq_list.jsp");
 	}
 %>

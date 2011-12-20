@@ -11,7 +11,7 @@
 	String thread = StringUtils.trimToEmpty(request.getParameter("thread"));
 	String mode = StringUtils.trimToEmpty(request.getParameter("mode"));
 	
-	BoardDto dto = dao.getView("TB_FAQ_BBS" , NumberUtils.toInt(seq,0));
+	BoardDto dto = dao.getView("tb_faq_bbs" , NumberUtils.toInt(seq,0));
 	
 %>
 <html>

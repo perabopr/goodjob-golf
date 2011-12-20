@@ -9,11 +9,11 @@
 
 	request.setCharacterEncoding("utf-8");
 	
-	String join_no = StringUtils.trimToEmpty(request.getParameter("join_no"));
+	String join_seq = StringUtils.trimToEmpty(request.getParameter("join_seq"));
 	
 	BoardDao dao = new BoardDao();
 	
-	boolean isUpdate = dao.setJoinStatus(NumberUtils.toInt(join_no));
+	boolean isUpdate = dao.setJoinStatus(NumberUtils.toInt(join_seq));
 	
 	if(isUpdate)
 		out.println("0");

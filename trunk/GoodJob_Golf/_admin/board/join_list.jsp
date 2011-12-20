@@ -38,6 +38,7 @@
 	//RegionDao regionDao = new RegionDao();
 	//List<RegionDto> arrRegions = regionDao.getRegionList("1");
 	
+	//out.println(StringUtils.trim((String)session.getAttribute("admin_id")));
 %>
 <html>
 <head>
@@ -67,7 +68,7 @@ function goPage(val){
 
 function go_view(val){
 	var frm = document.frm;
-	frm.join_no.value=val;
+	frm.join_seq.value=val;
 	frm.action="join_view.jsp"
 	frm.submit();
 }
@@ -84,7 +85,7 @@ function go_view(val){
   </tr>
 <form name="frm" method="post">
 <input type="hidden" name="npage" value="<%=npage%>"/>
-<input type="hidden" name="join_no" value=""/>
+<input type="hidden" name="join_seq" value=""/>
   <tr>
     <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="669">
         <tr>
@@ -154,10 +155,10 @@ function go_view(val){
 			
 %>		  
 				<tr>
-                     <td align="center" height="30" width="41" class=normal_s><%=jDto.getJoin_no()%></td>
+                     <td align="center" height="30" width="41" class=normal_s><%=jDto.getJoin_seq()%></td>
                 	<td align="center" width="62" class=normal_s><%=jDto.getReg_dt()%></td>
                 	<td width="62" align="center" class=normal_s><%=jDto.getJoin_name()%></td>
-                <td width="183" align="center"><a href="javascript:go_view(<%=jDto.getJoin_no()%>);" class=board_list><%=jDto.getGolflink_name()%></a></td>
+                <td width="183" align="center"><a href="javascript:go_view(<%=jDto.getJoin_seq()%>);" class=board_list><%=jDto.getGolflink_name()%></a></td>
                 <td width="57" align="center" class=normal_s><%=StringUtils.trimToEmpty(jDto.getRounding_dt()).substring(0,8)%></td>
                 <td width="56" align="center" class=normal_s><%=jDto.getJoin_person()%>명</td>
                 <td width="51" align="center" class=normal_s><%=jDto.getAge()%>대</td>

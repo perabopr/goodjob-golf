@@ -23,7 +23,7 @@
 	
 	List<MemberDto> mList = mDao.getMemberList(params);
 	
-	String strPage = paging.getPaging(100, true);
+	String strPage = paging.getPaging(1, true);
 
 %>
 <html>

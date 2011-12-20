@@ -15,6 +15,8 @@
 	params.put("auth_no",auth_no);
 	params.put("rphone",rphone);
 	
+	//System.out.println(rphone);
+	
 	SMSDao sDao = new SMSDao();
 	int check = sDao.authCheck(params);
 	out.println(check);

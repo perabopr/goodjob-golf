@@ -55,11 +55,11 @@
 			return;
 		}
 
-		var sphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
+		var rphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
 		$.ajax({
 			type: "POST",
 			url: "/common/authSMS.jsp",
-			data: "sphone="+sphone,
+			data: "rphone="+rphone,
 			success: function(msg){
 				if($.trim(msg) == '0'){
 					alert("인증 번호가 발송 되었습니다.");
@@ -90,12 +90,12 @@
 			return;
 		}
 
-		var sphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
+		var rphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
 		var auth_no = $('#auth_no').val();
 		$.ajax({
 			type: "POST",
 			url: "/common/authCheckSMS.jsp",
-			data: "sphone="+sphone+"&auth_no="+auth_no,
+			data: "rphone="+rphone+"&auth_no="+auth_no,
 			success: function(msg){
 			//0 : 인증 성공  , 1 : 일치하는 인증값 없음 , 2 : 인증번호 시간 초과 
 				if($.trim(msg) == '0'){

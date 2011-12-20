@@ -9,8 +9,8 @@
 	Map<String,String> params = new HashMap<String,String>();
 	
 	String msg 			= "[굳잡골프]인증번호는 %s 입니다.";
-	String rphone 		= "02-6670-0200";
-	String sphone 		= StringUtils.defaultString(request.getParameter("sphone"), "");
+	String sphone 		= "02-6670-0200";
+	String rphone 		= StringUtils.defaultString(request.getParameter("rphone"), "");
 	
 	String authNum = Utils.authNumber(5);
 	

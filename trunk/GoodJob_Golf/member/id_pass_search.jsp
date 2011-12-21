@@ -35,12 +35,12 @@
 			return;
 		}
 
-		var sphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
+		var rphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
 		var name = $('#mem_name').val();
 		$.ajax({
 			type: "POST",
 			url: "/member/search_result.jsp",
-			data: "type=id&mem_name="+name+"&mobile="+sphone,
+			data: "type=id&mem_name="+name+"&mobile="+rphone,
 			success: function(msg){
 				if($.trim(msg) == '0'){
 					alert("아이디가   핸드폰으로  발송 되었습니다.");
@@ -79,12 +79,12 @@
 			return;
 		}
 
-		var sphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
+		var rphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
 		var id = $('#mem_id').val();
 		$.ajax({
 			type: "POST",
 			url: "/member/search_result.jsp",
-			data: "type=pwd&mem_id="+id+"&mobile="+sphone,
+			data: "type=pwd&mem_id="+id+"&mobile="+rphone,
 			success: function(msg){
 				if($.trim(msg) == '0'){
 					alert("비밀번호가   핸드폰으로  발송 되었습니다.");
@@ -94,6 +94,46 @@
 				}
 				else{
 					alert("인증중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
+				}
+		}});
+	}
+
+   	function sms_auth(val){
+
+   		if(!$('#mobile0_'+val).val()) {
+			alert('이통사를 선택해 주세요.');
+			return;
+		}
+
+   		if(!$('#mobile1_'+val).val()) {
+			alert('핸드폰 앞자리를 선택해 주세요.');
+			$('#mobile1_'+val).focus();
+			return;
+		}
+
+   		if(!$('#mobile2_'+val).val()) {
+			alert('핸드폰 번호를 입력해 주세요.');
+			$('#mobile2_'+val).focus();
+			return;
+		}
+
+   		if(!$('#mobile3_'+val).val()) {
+   			alert('핸드폰 번호를 입력해 주세요.');
+			$('#mobile3_'+val).focus();
+			return;
+		}
+
+		var rphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
+		$.ajax({
+			type: "POST",
+			url: "/common/authSMS.jsp",
+			data: "rphone="+rphone,
+			success: function(msg){
+				if($.trim(msg) == '0'){
+					alert("인증 번호가 발송 되었습니다.");
+				}
+				else{
+					alert("인증 번호가 발송중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
 				}
 		}});
 	}
@@ -131,13 +171,13 @@
                                                                     </tr>
                                                                     <tr>
                                                                       <td height="40" align="center">
-                                                                      <select id="mobile0" name="mobile0" size="1">
+                                                                      <select id="mobile0_i" name="mobile0_i" size="1">
                                                                             <option value="">통신사선택</option>
                                                                             <option value="SKT">SKT</option>
                                                                             <option value="KT">KT</option>
                                                                             <option value="LG">LG</option>
                                                                           </select>
-                                                                        <select id="mobile1" name="mobile1" size="1">
+                                                                        <select id="mobile1_i" name="mobile1_i" size="1">
                                                                             <option value="010">010</option>
                                                                             <option value="011">011</option>
                                                                             <option value="016">016</option>
@@ -146,14 +186,14 @@
                                                                             <option value="019">019</option>
                                                                           </select>
                                                                           -
-                                                                          <input id="mobile2" class="mem_input" type="text" size="8" name="mobile2" maxlength="4">
+                                                                          <input id="mobile2_i" class="mem_input" type="text" size="8" name="mobile2_i" maxlength="4">
                                                                           -
-                                                                          <input id="mobile3" class="mem_input" type="text" size="8" name="mobile3" maxlength="4">
-                                                                        <img align="absmiddle" src="../../images/mem_join/btn_number_send.gif" width="75" height="19" border="0"></td>
+                                                                          <input id="mobile3_i" class="mem_input" type="text" size="8" name="mobile3_i" maxlength="4">
+                                                                        <a href="javascript:sms_auth('i');"><img align="absmiddle" src="../../images/mem_join/btn_number_send.gif" width="75" height="19" border="0"></a></td>
                                                                     </tr>
                                                                     <tr>
                                                                       <td height="40" align="center"><p><img align="absmiddle" src="../../images/mem_join/btn_send_title.gif" width="81" height="19" border="0">
-                                                                          <input class="mem_input" type="text" size="15" name="id">
+                                                                          <input id="auth_no1" class="mem_input" type="text" size="15" name="auth_no1"/>
                                                                           <img align="absmiddle" src="../../images/mem_join/btn_send_confirm.gif" width="42" height="19" border="0"></p></td>
                                                                     </tr>
                                                                   </table></td>
@@ -176,13 +216,13 @@
                                                                     </tr>
                                                                     <tr>
                                                                       <td height="40" align="center">
-                                                                      <select id="mobile00" name="mobile00" size="1">
+                                                                      <select id="mobile0_p" name="mobile0_p" size="1">
                                                                             <option value="">통신사선택</option>
                                                                             <option value="SKT">SKT</option>
                                                                             <option value="KT">KT</option>
                                                                             <option value="LG">LG</option>
                                                                           </select>
-                                                                        <select id="mobile01" name="mobile01" size="1">
+                                                                        <select id="mobile1_p" name="mobile1_p" size="1">
                                                                             <option value="010">010</option>
                                                                             <option value="011">011</option>
                                                                             <option value="016">016</option>
@@ -191,14 +231,15 @@
                                                                             <option value="019">019</option>
                                                                           </select>
                                                                           -
-                                                                          <input id="mobile02" class="mem_input" type="text" size="8" name="mobile02" maxlength="4">
+                                                                          <input id="mobile2_p" class="mem_input" type="text" size="8" name="mobile2_p" maxlength="4">
                                                                           -
-                                                                          <input id="mobile03" class="mem_input" type="text" size="8" name="mobile03" maxlength="4">
-                                                                        <img align="absmiddle" src="../../images/mem_join/btn_number_send.gif" width="75" height="19" border="0"></td>
+                                                                          <input id="mobile3_p" class="mem_input" type="text" size="8" name="mobile3_p" maxlength="4">
+                                                                        <a href="javascript:sms_auth('p');"><img align="absmiddle" src="../../images/mem_join/btn_number_send.gif" width="75" height="19" border="0"></a></td>
                                                                     </tr>
                                                                     <tr>
-                                                                      <td height="40" align="center"><p><img align="absmiddle" src="../../images/mem_join/btn_send_title.gif" width="81" height="19" border="0">
-                                                                          <input class="mem_input" type="text" size="15" name="id">
+                                                                      <td height="40" align="center"><p>
+                                                                      <a href="javascript:sms_auth(2);"><img align="absmiddle" src="../../images/mem_join/btn_send_title.gif" width="81" height="19" border="0"></a>
+                                                                          <input id="auth_no2" class="mem_input" type="text" size="15" name="auth_no2"/>
                                                                           <img align="absmiddle" src="../../images/mem_join/btn_send_confirm.gif" width="42" height="19" border="0"></p></td>
                                                                     </tr>
                                                                   </table></td>

@@ -298,25 +298,23 @@ public class MemberDao {
 	 */
 	public String idFind(String mem_name , String mobile){
 		
-		MemberDto mDto = null;
 		Connection conn = null;
-		
+		Map<String,String> map = null;
 		try {
 			
 			String[] bind = {mem_name , mobile};
 			conn = DBManager.getConnection();
 			
-			ResultSetHandler rsh = new BeanHandler(MemberDto.class);
+			ResultSetHandler rsh = new MapHandler();
 			QueryRunner qr = new QueryRunner();
-			mDto = (MemberDto)qr.query(conn , MEMBER.id_find , rsh , bind);
+			map = (Map)qr.query(conn , MEMBER.id_find , rsh , bind);
 			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
-		
-		return mDto.getMem_id();
+		return map.get("mem_id");
 	}
 
 	/**
@@ -325,7 +323,7 @@ public class MemberDao {
 	 */
 	public String pwdFind(String mem_id , String mobile){
 		
-		MemberDto mDto = null;
+		Map<String,String> map = null;
 		Connection conn = null;
 		
 		try {
@@ -333,9 +331,9 @@ public class MemberDao {
 			String[] bind = {mem_id , mobile};
 			conn = DBManager.getConnection();
 			
-			ResultSetHandler rsh = new BeanHandler(MemberDto.class);
+			ResultSetHandler rsh = new MapHandler();
 			QueryRunner qr = new QueryRunner();
-			mDto = (MemberDto)qr.query(conn , MEMBER.pwd_find , rsh , bind);
+			map = (Map)qr.query(conn , MEMBER.pwd_find , rsh , bind);
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -343,7 +341,7 @@ public class MemberDao {
 			DbUtils.closeQuietly(conn);
 		}
 		
-		return mDto.getMem_pwd();
+		return map.get("mem_pwd");
 	}
 	
 	/**

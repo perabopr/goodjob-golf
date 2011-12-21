@@ -188,7 +188,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                       <td height="40" align="center"><p><img align="absmiddle" src="/images/mem_join/btn_send_title.gif" width="81" height="19" border="0">
-                                                                          <input id="auth_no" class="mem_input" type="text" size="15" name="id">
+                                                                          <input id="auth_no" class="mem_input" type="text" size="15" name="auth_no">
                                                                           <img align="absmiddle" src="/images/mem_join/btn_send_confirm.gif" onclick="auth_check();" width="42" height="19" border="0"></p></td>
                                                                     </tr>
                                                                     

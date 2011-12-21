@@ -53,6 +53,7 @@ import java.util.ResourceBundle;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.mail.Authenticator;
 import javax.mail.IllegalWriteException;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -85,25 +86,51 @@ public class Mail {
 	 * 기본 세팅은 properties 파일에서 불러와 세팅한다.
 	 * @throws MailException
 	 */
-	public Mail() throws MailException{
+	public Mail(String host) throws MailException{
 	    
 	    /* 메일 설정 파일들을 불러 온다. */
 	    //ResourceBundle rbun = ResourceBundle.getBundle("com.goodjob.mail.config");
 	    //this.host = rbun.getString("mail.host");				//메일서버
-		this.host = "mw-001.cafe24.com";
+		//this.host = "webmail.goodjobgolf.com";
 		
 		//메일 서버(smtp)를 세팅한다.
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.auth", "true");
+		
+		//Authenticator auth = new MyAuthenticator("admin@savekorea2400.cafe24.com  ","pwsave7162");
 		
 		//메일 세션 생성
 		Session session = Session.getDefaultInstance(props, null);
+		//Session session = Session.getInstance(props, auth);
 		//메일 세션을 메일 메세지에 세팅
 		msg = new MimeMessage(session);
-			
+
 	}
 	
-	public Mail(String to , String from , String name) throws MailException{
+	public Mail(String host , String id , String pw) throws MailException{
+	    
+	    /* 메일 설정 파일들을 불러 온다. */
+	    //ResourceBundle rbun = ResourceBundle.getBundle("com.goodjob.mail.config");
+	    //this.host = rbun.getString("mail.host");				//메일서버
+		//this.host = "webmail.goodjobgolf.com";
+		
+		//메일 서버(smtp)를 세팅한다.
+		Properties props = new Properties();
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.auth", "true");
+		
+		Authenticator auth = new MyAuthenticator(id,pw);
+		
+		//메일 세션 생성
+		//Session session = Session.getDefaultInstance(props, auth);
+		Session session = Session.getInstance(props, auth);
+		//메일 세션을 메일 메세지에 세팅
+		msg = new MimeMessage(session);
+
+	}
+	
+	public Mail(String to , String from , String name , String etc) throws MailException{
 
 	    /* 메일 설정 파일들을 불러 온다. */
 	    ResourceBundle rbun = ResourceBundle.getBundle("com.mail.config");
@@ -487,6 +514,21 @@ public class Mail {
 
 	    public String getName() {
 	        return "dummy";
+	    }
+	}
+	
+	public final class MyAuthenticator extends javax.mail.Authenticator {
+
+	    private String id;
+	    private String pw;
+
+	    public MyAuthenticator(String id, String pw) {
+	        this.id = id;
+	        this.pw = pw;
+	    }
+	    
+	    protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+	        return new javax.mail.PasswordAuthentication(id, pw);
 	    }
 	}
 }

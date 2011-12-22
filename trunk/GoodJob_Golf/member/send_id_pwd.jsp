@@ -19,60 +19,48 @@
 	String mem_id 		= StringUtils.trimToEmpty(request.getParameter("mem_id"));
 	String auth_no 		= StringUtils.trimToEmpty(request.getParameter("auth_no"));
 	
+	System.out.println("mem_name : "+mem_name);
+	System.out.println("rphone : "+rphone);
+	
 	params.put("auth_no",auth_no);
 	params.put("rphone",rphone);
 	
 	SMSDao sDao = new SMSDao();
 	int check = sDao.authCheck(params);
 	
+	//check = 0;
 	if(check != 0){
-		%>
-		<script language="javascript" type="text/javascript">
-		alert("인증중 오류가 발생 했습니다. 인증번호를 다시 발송해 주세요!");
-		</script>
-		<%
+		out.println("3");
 	}
 	else{
-	MemberDao mDao = new MemberDao();
-	String result = "";
-	if("id".equals(type)){
-		result = StringUtils.trimToEmpty(mDao.idFind(mem_name , rphone));
-		params.put("msg",String.format("[굳잡골프]고객님의 아이디는 %s 입니다." , result));
 		
-	}
-	else{
-		result = StringUtils.trimToEmpty(mDao.idFind(mem_name , rphone));
-		params.put("msg",String.format("[굳잡골프]고객님의 비밀번호는 %s 입니다." , result));
-	}
-	
-	if(result.length() > 0){
-		
-		params.put("rphone",rphone);
-		params.put("sphone",sphone);
-		
-		boolean isSend = sDao.send(params);
-		
-		if(isSend){
-			%>
-			<script language="javascript" type="text/javascript">
-			alert("아이디가   핸드폰으로  발송 되었습니다.");
-			</script>
-			<%
+		MemberDao mDao = new MemberDao();
+		String result = "";
+		if("id".equals(type)){
+			result = StringUtils.trimToEmpty(mDao.idFind(mem_name , rphone));
+			params.put("msg",String.format("[굳잡골프]고객님의 아이디는 %s 입니다." , result));
 		}
 		else{
-			%>
-			<script language="javascript" type="text/javascript">
-			alert("SMS 발송 오류 입니다. 잠시후 다시 시도해 주세요!");
-			</script>
-			<%
+			result = StringUtils.trimToEmpty(mDao.pwdFind(mem_id , rphone));
+			params.put("msg",String.format("[굳잡골프]고객님의 비밀번호는 %s 입니다." , result));
 		}
-	}
-	else{
-		%>
-		<script language="javascript" type="text/javascript">
-		alert("일치하는  정보가 없습니다.");
-		</script>
-		<%
-	}
+		
+		if(result.length() > 0){
+			
+			params.put("rphone",rphone);
+			params.put("sphone",sphone);
+			
+			boolean isSend = sDao.send(params);
+			
+			if(isSend){
+				out.println("0");
+			}
+			else{
+				out.println("2");
+			}
+		}
+		else{
+			out.println("2");
+		}
 	}
 %>

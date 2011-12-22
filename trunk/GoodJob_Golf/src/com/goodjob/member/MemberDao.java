@@ -302,12 +302,14 @@ public class MemberDao {
 		Map<String,String> map = null;
 		try {
 			
-			String[] bind = {mem_name , mobile};
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(mem_name);
+			bind.add(mobile);
 			conn = DBManager.getConnection();
 			
 			ResultSetHandler rsh = new MapHandler();
 			QueryRunner qr = new QueryRunner();
-			map = (Map)qr.query(conn , MEMBER.id_find , rsh , bind);
+			map = (Map)qr.query(conn , MEMBER.id_find , rsh , bind.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);

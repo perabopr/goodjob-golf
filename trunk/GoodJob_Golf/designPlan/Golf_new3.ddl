@@ -341,6 +341,17 @@ CREATE TABLE tb_member(
 );
 
 /**********************************/
+/* Table Name: tb_logon_history */
+/**********************************/
+CREATE TABLE tb_logon_history(
+		seq                           		INT(15)		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		mem_id                        		VARCHAR(100)		 NULL ,
+		logon_type                    		CHAR(1)		 NULL ,
+		reg_dt                        		DATETIME		 NULL	,
+		KEY `tb_logon_history_idx` (`mem_id`)
+);
+
+/**********************************/
 /* Table Name: tb_join_bbs */
 /**********************************/
 CREATE TABLE tb_join_bbs(
@@ -508,4 +519,5 @@ ALTER TABLE tb_sms_auth ADD CONSTRAINT IDX_tb_sms_auth_PK PRIMARY KEY (seq);
 ALTER TABLE tb_sms_auth ADD CONSTRAINT IDX_tb_sms_auth_1 UNIQUE ();
 
 ALTER TABLE tb_sms_log ADD CONSTRAINT IDX_tb_sms_log_PK PRIMARY KEY (seq);
-
+ALTER TABLE tb_logon_history ADD CONSTRAINT IDX_tb_logon_history_PK PRIMARY KEY (seq);
+CREATE INDEX IDX_tb_logon_history_1 ON tb_logon_history ();

@@ -41,6 +41,9 @@
 			return;
 		}
 		
+		//로그온 히스토리 저장
+		mDao.logonHist(mDto.getMem_id() , "I");
+		
 		session.setAttribute("mem_id",mDto.getMem_id());
 		session.setAttribute("mem_mtel",mDto.getMem_mtel());
 		session.setAttribute("mem_name",mDto.getMem_name());

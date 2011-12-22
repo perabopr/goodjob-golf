@@ -178,8 +178,8 @@
                     <option value="1"<%=("1".equals(jDto.getRegion())?" selected":"")%>>수도권</option>
 	              	<option value="2"<%=("2".equals(jDto.getRegion())?" selected":"")%>>강원권</option>
 	              	<option value="3"<%=("3".equals(jDto.getRegion())?" selected":"")%>>충청권</option>
-	              	<option value="4"<%=("4".equals(jDto.getRegion())?" selected":"")%>>전라권</option>
-	              	<option value="5"<%=("5".equals(jDto.getRegion())?" selected":"")%>>경상권</option>
+	              	<option value="4"<%=("4".equals(jDto.getRegion())?" selected":"")%>>경상권</option>
+	              	<option value="5"<%=("5".equals(jDto.getRegion())?" selected":"")%>>전라권</option>
 	              	<option value="6"<%=("6".equals(jDto.getRegion())?" selected":"")%>>제주권</option>
                   </select></td>
                 <td width="109" align="center"><img align="absmiddle" src="/_admin/images/board/img_board_title_cc.gif" width="42" height="15" border="0"></td>

@@ -4,7 +4,6 @@
 <%@ page import="com.goodjob.common.*"%>
 <%@page import="com.goodjob.board.*"%>
 <%@page import="com.goodjob.conf.Config"%>
-
 <%@page import="org.apache.commons.lang.StringUtils"%><html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

@@ -32,7 +32,7 @@ public class MEMBER {
 										"values (? ,? ,?,? ,? ,? ,?,'F','N',now()) ";
 	
 	//아이디 찾기
-	public static final String id_find = " select mem_id where tb_member where mem_name = ? and mem_mtel = ? ";
+	public static final String id_find = " select mem_id from tb_member where mem_name = ? and mem_mtel = ? ";
 	
 	//비번 찾기
 	public static final String pwd_find = " select mem_pwd from tb_member where mem_id = ? and mem_mtel = ? ";

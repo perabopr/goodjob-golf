@@ -39,6 +39,7 @@
 		var name = $('#sh_name').val();
 		var auth_no = $('#auth_no1').val();
 
+		/*
 		$('#mobile').val(rphone);
 		$('#mem_name').val(name);
 		$('#auth_no').val(auth_no);
@@ -50,8 +51,8 @@
 		frm.target =  "ifr_hidden"; 
 		frm.action = "/member/send_id_pwd.jsp";
 		frm.submit();
-
-		/*
+		*/
+		
 		$.ajax({
 			type: "POST",
 			url: "/member/send_id_pwd.jsp",
@@ -67,7 +68,6 @@
 					alert("인증중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
 				}
 		}});
-		*/
 	}
 
    	function search_pwd(){
@@ -98,7 +98,7 @@
 		var rphone = $('#mobile1_p').val() + "-" + $('#mobile2_p').val() + "-" + $('#mobile3_p').val();
 		var id = $('#sh_id').val();
 		var auth_no = $('#auth_no2').val();
-
+/*
 		$('#mobile').val(rphone);
 		$('#mem_id').val(id);
 		$('#auth_no').val(auth_no);
@@ -108,8 +108,8 @@
 		frm.target =  "ifr_hidden"; 
 		frm.action = "/member/send_id_pwd.jsp";
 		frm.submit();
+	*/	
 		
-		/*
 		$.ajax({
 			type: "POST",
 			url: "/member/send_id_pwd.jsp",
@@ -125,7 +125,7 @@
 					alert("인증중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
 				}
 		}});
-		*/
+		
 	}
 
    	function sms_auth(val){

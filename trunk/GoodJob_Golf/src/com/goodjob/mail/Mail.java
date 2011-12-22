@@ -87,18 +87,11 @@ public class Mail {
 	 * @throws MailException
 	 */
 	public Mail(String host) throws MailException{
-	    
-	    /* 메일 설정 파일들을 불러 온다. */
-	    //ResourceBundle rbun = ResourceBundle.getBundle("com.goodjob.mail.config");
-	    //this.host = rbun.getString("mail.host");				//메일서버
-		//this.host = "webmail.goodjobgolf.com";
-		
+	  
 		//메일 서버(smtp)를 세팅한다.
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);
 		props.put("mail.smtp.auth", "true");
-		
-		//Authenticator auth = new MyAuthenticator("admin@savekorea2400.cafe24.com  ","pwsave7162");
 		
 		//메일 세션 생성
 		Session session = Session.getDefaultInstance(props, null);
@@ -110,11 +103,6 @@ public class Mail {
 	
 	public Mail(String host , String id , String pw) throws MailException{
 	    
-	    /* 메일 설정 파일들을 불러 온다. */
-	    //ResourceBundle rbun = ResourceBundle.getBundle("com.goodjob.mail.config");
-	    //this.host = rbun.getString("mail.host");				//메일서버
-		//this.host = "webmail.goodjobgolf.com";
-		
 		//메일 서버(smtp)를 세팅한다.
 		Properties props = new Properties();
 		props.put("mail.smtp.host", host);
@@ -123,19 +111,15 @@ public class Mail {
 		Authenticator auth = new MyAuthenticator(id,pw);
 		
 		//메일 세션 생성
-		//Session session = Session.getDefaultInstance(props, auth);
 		Session session = Session.getInstance(props, auth);
 		//메일 세션을 메일 메세지에 세팅
 		msg = new MimeMessage(session);
 
 	}
 	
-	public Mail(String to , String from , String name , String etc) throws MailException{
+	public Mail(String host , String to , String from , String name) throws MailException{
 
-	    /* 메일 설정 파일들을 불러 온다. */
-	    ResourceBundle rbun = ResourceBundle.getBundle("com.mail.config");
-	    this.host = rbun.getString("mail.host");					//메일서버
-	    this.to = to;					//받을메일
+		this.to = to;					//받을메일
 	    this.from = from;			//보낼메일
 	    this.name = name;		//보낼사람
 	    

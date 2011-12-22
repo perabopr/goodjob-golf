@@ -426,4 +426,20 @@ public class MemberDao {
 		
 		return mDto;
 	}
+	
+	public void logonHist(String mem_id , String log_type){
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			String[] bind = {mem_id , log_type};
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn , MEMBER.logon_hist , bind);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
 }

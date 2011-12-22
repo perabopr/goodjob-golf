@@ -47,4 +47,19 @@ public class MEMBER {
 	public static final String secession = " update tb_member set secession = 'Y' , secession_dt = now()  where mem_id= ? ";
 	
 	public static final String logon = " select mem_id , mem_pwd , mem_name , mem_mtel from tb_member where mem_id= ? ";
+	
+	public static final String logon_hist = "insert into tb_logon_history(mem_id,logon_type,reg_dt ) values( ? , ? , now())";
+	
+	public static final String sms_list = "SELECT a.mem_id , "+
+								"a.mem_name ,  "+
+								"date_format(a.reg_dt,'%Y-%m_%d') reg_dt , "+ 
+								"a.mem_mtel ,  "+
+								"a.sms_yn ,  "+
+								"count(b.mem_id) logon_cnt, "+ 
+								"date_format(max(b.reg_dt),'%Y-%m_d') last_dt , "+ 
+								"count(c.reserve_seq) reserve_cnt "+
+								"FROM tb_member a left outer join tb_logon_history b on a.mem_id=b.mem_id "+
+								"left outer join tb_golflink_reserve c on a.mem_id=c.reserve_uid" +
+								"GROUP BY a.mem_id, b.mem_id, c.reserve_uid " + 
+								"order by a.mem_seq desc limit ? , ?";
 }

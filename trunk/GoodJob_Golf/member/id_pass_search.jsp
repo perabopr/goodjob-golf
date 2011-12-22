@@ -12,35 +12,50 @@
 
    	function search_id(){
 
-   		if(!$('#mobile0').val()) {
+   		if(!$('#mobile0_i').val()) {
 			alert('이통사를 선택해 주세요.');
 			return;
 		}
 
-   		if(!$('#mobile1').val()) {
+   		if(!$('#mobile1_i').val()) {
 			alert('핸드폰 앞자리를 선택해 주세요.');
-			$('#mobile1').focus();
+			$('#mobile1_i').focus();
 			return;
 		}
 
-   		if(!$('#mobile2').val()) {
+   		if(!$('#mobile2_i').val()) {
 			alert('핸드폰 번호를 입력해 주세요.');
-			$('#mobile2').focus();
+			$('#mobile2_i').focus();
 			return;
 		}
 
-   		if(!$('#mobile3').val()) {
+   		if(!$('#mobile3_i').val()) {
    			alert('핸드폰 번호를 입력해 주세요.');
-			$('#mobile3').focus();
+			$('#mobile3_i').focus();
 			return;
 		}
 
-		var rphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
-		var name = $('#mem_name').val();
+		var rphone = $('#mobile1_i').val() + "-" + $('#mobile2_i').val() + "-" + $('#mobile3_i').val();
+		var name = $('#sh_name').val();
+		var auth_no = $('#auth_no1').val();
+
+		$('#mobile').val(rphone);
+		$('#mem_name').val(name);
+		$('#auth_no').val(auth_no);
+		$('#type').val('id');
+
+		alert($('#mem_name').val());
+		
+		var frm = document.shForm;
+		frm.target =  "ifr_hidden"; 
+		frm.action = "/member/send_id_pwd.jsp";
+		frm.submit();
+
+		/*
 		$.ajax({
 			type: "POST",
-			url: "/member/search_result.jsp",
-			data: "type=id&mem_name="+name+"&mobile="+rphone,
+			url: "/member/send_id_pwd.jsp",
+			data: "type=id&mem_name="+name+"&mobile="+rphone+"&auth_no="+auth_no,
 			success: function(msg){
 				if($.trim(msg) == '0'){
 					alert("아이디가   핸드폰으로  발송 되었습니다.");
@@ -52,39 +67,53 @@
 					alert("인증중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
 				}
 		}});
+		*/
 	}
 
    	function search_pwd(){
 		
-   		if(!$('#mobile00').val()) {
+   		if(!$('#mobile0_p').val()) {
 			alert('이통사를 선택해 주세요.');
 			return;
 		}
 
-   		if(!$('#mobile01').val()) {
+   		if(!$('#mobile1_p').val()) {
 			alert('핸드폰 앞자리를 선택해 주세요.');
 			$('#mobile01').focus();
 			return;
 		}
 
-   		if(!$('#mobile02').val()) {
+   		if(!$('#mobile2_p').val()) {
 			alert('핸드폰 번호를 입력해 주세요.');
 			$('#mobile02').focus();
 			return;
 		}
 
-   		if(!$('#mobile03').val()) {
+   		if(!$('#mobile3_p').val()) {
    			alert('핸드폰 번호를 입력해 주세요.');
 			$('#mobile03').focus();
 			return;
 		}
 
-		var rphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
-		var id = $('#mem_id').val();
+		var rphone = $('#mobile1_p').val() + "-" + $('#mobile2_p').val() + "-" + $('#mobile3_p').val();
+		var id = $('#sh_id').val();
+		var auth_no = $('#auth_no2').val();
+
+		$('#mobile').val(rphone);
+		$('#mem_id').val(id);
+		$('#auth_no').val(auth_no);
+		$('#type').val('pwd');
+		
+		var frm = document.shForm;
+		frm.target =  "ifr_hidden"; 
+		frm.action = "/member/send_id_pwd.jsp";
+		frm.submit();
+		
+		/*
 		$.ajax({
 			type: "POST",
-			url: "/member/search_result.jsp",
-			data: "type=pwd&mem_id="+id+"&mobile="+rphone,
+			url: "/member/send_id_pwd.jsp",
+			data: "type=pwd&mem_id="+id+"&mobile="+rphone+"&auth_no="+auth_no,
 			success: function(msg){
 				if($.trim(msg) == '0'){
 					alert("비밀번호가   핸드폰으로  발송 되었습니다.");
@@ -96,6 +125,7 @@
 					alert("인증중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
 				}
 		}});
+		*/
 	}
 
    	function sms_auth(val){
@@ -123,7 +153,7 @@
 			return;
 		}
 
-		var rphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
+		var rphone = $('#mobile1_'+val).val() + "-" + $('#mobile2_'+val).val() + "-" + $('#mobile3_'+val).val();
 		$.ajax({
 			type: "POST",
 			url: "/common/authSMS.jsp",
@@ -147,6 +177,13 @@
                                 <tr>
                                   <td width="751"><table border="0" cellpadding="2" cellspacing="1" width="751" bgcolor="#D2D2D2">
                                       <tr>
+<form name="shForm" method="post">
+<input type="hiddne" id="type" name="type" value=""/>
+<input type="hiddne" id="mem_name" name="mem_name" value=""/>
+<input type="hiddne" id="mobile" name="mobile" value=""/>
+<input type="hiddne" id="auth_no" name="auth_no" value=""/>
+<input type="hiddne" id="mem_id" name="mem_id" value=""/>
+</form>
                                         <td align="center" bgcolor="white" width="745" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="95%">
                                             <tr>
                                               <td align="right" class="location" height="30" width="95%"><a href="/index.html">HOME</a> &gt; 아이디/비밀번호찾기</td>
@@ -166,7 +203,7 @@
                                                               <tr>
                                                                 <td width="494" bgcolor="white" align="center" height="100"><table border="0" cellpadding="2" cellspacing="1" width="95%">
                                                                     <tr>
-                                                                      <td height="35" align="left" style="padding-left:55px;">이름&nbsp;&nbsp;:&nbsp;&nbsp;<input id="mem_name" class="mem_input" type="text" size="30" name="mem_name">
+                                                                      <td height="35" align="left" style="padding-left:55px;">이름&nbsp;&nbsp;:&nbsp;&nbsp;<input id="sh_name" class="mem_input" type="text" size="30" name="sh_name">
                                                                       </td>
                                                                     </tr>
                                                                     <tr>
@@ -194,7 +231,7 @@
                                                                     <tr>
                                                                       <td height="40" align="center"><p><img align="absmiddle" src="../../images/mem_join/btn_send_title.gif" width="81" height="19" border="0">
                                                                           <input id="auth_no1" class="mem_input" type="text" size="15" name="auth_no1"/>
-                                                                          <img align="absmiddle" src="../../images/mem_join/btn_send_confirm.gif" width="42" height="19" border="0"></p></td>
+                                                                          <a href="javascript:search_id();"><img align="absmiddle" src="../../images/mem_join/btn_send_confirm.gif" width="42" height="19" border="0"></a></p></td>
                                                                     </tr>
                                                                   </table></td>
                                                               </tr>
@@ -211,7 +248,7 @@
                                                               <tr>
                                                                 <td width="494" bgcolor="white" align="center" height="100"><table border="0" cellpadding="2" cellspacing="1" width="95%">
                                                                     <tr>
-                                                                      <td height="35" align="left" style="padding-left:55px;">아이디&nbsp;&nbsp;:&nbsp;&nbsp;<input id="mem_id" class="mem_input" type="text" size="30" name="mem_id">
+                                                                      <td height="35" align="left" style="padding-left:55px;">아이디&nbsp;&nbsp;:&nbsp;&nbsp;<input id="sh_id" class="mem_input" type="text" size="30" name="sh_id">
                                                                       </td>
                                                                     </tr>
                                                                     <tr>
@@ -240,7 +277,7 @@
                                                                       <td height="40" align="center"><p>
                                                                       <a href="javascript:sms_auth(2);"><img align="absmiddle" src="../../images/mem_join/btn_send_title.gif" width="81" height="19" border="0"></a>
                                                                           <input id="auth_no2" class="mem_input" type="text" size="15" name="auth_no2"/>
-                                                                          <img align="absmiddle" src="../../images/mem_join/btn_send_confirm.gif" width="42" height="19" border="0"></p></td>
+                                                                          <a href="javascript:search_pwd();"><img align="absmiddle" src="../../images/mem_join/btn_send_confirm.gif" width="42" height="19" border="0"></a></p></td>
                                                                     </tr>
                                                                   </table></td>
                                                               </tr>
@@ -263,7 +300,7 @@
                             <td>&nbsp;</td>
                           </tr>
                         </table>
-                        
+					<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe>
 					<!-- 하단  회사 소개 부분  -->
                     <%@ include file="/include/copyright.jsp" %>
                     <!-- 하단  회사 소개 부분  -->

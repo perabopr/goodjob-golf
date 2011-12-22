@@ -5,6 +5,8 @@
 <%@ page import="com.goodjob.member.*"%>
 <%@ page import="com.goodjob.mail.*"%>
 <%@ page import="com.goodjob.util.Utils"%>
+<%@page import="java.text.MessageFormat"%>
+<%@page import="com.goodjob.conf.Config"%>
 <%
 	
 	request.setCharacterEncoding("utf-8");
@@ -64,16 +66,20 @@ alert("가입하려는 주민번호가  존재 합니다.\n다른 주민번호�
 			
 			mDao.memberRegist(mDto);
 			
-			/*
+			
 			String content = MessageFormat.format(MailContent.join(),mDto.getMem_name(),Utils.getDate("yyyy년MM월dd일"));
 			
-			Mail mail = new Mail();
+			String host = Config.get("mail_host");
+			String m_id = Config.get("mail_id");
+			String m_pw = Config.get("mail_pw");
+			String from = Config.get("mail_fm");
+			
+			Mail mail = new Mail(host,m_id,m_pw);
 			mail.setTo(mDto.getMem_id());
-			mail.setFrom("savekorea@goodjobgolf.com" , "굳잡골프");
+			mail.setFrom(from , "굳잡골프");
 			mail.setSubject("[굳잡골프] 가입해 주셔서 감사합니다. ");
 			mail.setHtmlContent(content);
 			mail.send();
-			*/
 %>
 <script language="javascript" type="text/javascript">
 //alert("회원 가입이 정상적으로 이루어 졌습니다. 감사합니다.");

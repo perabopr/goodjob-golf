@@ -1,4 +1,4 @@
-1. DB 생성 : create database savekorea2400;
+1. DB 생성 : create database savekorea;
 
 2. DB , user 정보 등록 ;
 

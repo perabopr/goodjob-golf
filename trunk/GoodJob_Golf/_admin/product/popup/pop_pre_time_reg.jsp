@@ -8,18 +8,7 @@
 <%@ page import="com.goodjob.product.productDao"%>
 <%@ page import="com.goodjob.product.GolfLinkDao"%>
 <%
-	String menuSeq = StringUtils.trimToEmpty(request.getParameter("menuseq"));
-	String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));
-	
-	GolfLinkDao gfdao = new GolfLinkDao(); 
-	List<GolfLinkCourseDto> glcDto = gfdao.getGolfLinkCourseSelect(Integer.parseInt(glSeq));
-	
-	String ddlCourseHTML = "<select name='course_list'><option value='0' selected>선택하세요</option>";
-	for(int i = 0; i < glcDto.size();i++){
-		ddlCourseHTML += "<option value='" + glcDto.get(i).getGolflink_course_seq() +"'>" + glcDto.get(i).getCourse_name() + "</option>";
-	}
-	ddlCourseHTML += "</select>";
-
+String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));
 String nowDate = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date());
 int action = 0;  // incoming request for moving calendar up(1) down(0) for month
 int currYear = 0; // if it is not retrieved from incoming URL (month=) then it is set to current year
@@ -62,7 +51,7 @@ else
  * 선택달의 상품정보.
 */
 ProductDto prdtDto = new ProductDto();
-prdtDto.setMenu_seq(Integer.parseInt(menuSeq));
+prdtDto.setMenu_seq(2);
 prdtDto.setGolflink_seq(Integer.parseInt(glSeq));
 prdtDto.setProduct_year(Integer.toString(currYear));
 prdtDto.setProduct_month(Integer.toString(currMonth+1));
@@ -115,7 +104,7 @@ function selSetting(sDate){
 	//상품일련번호.
 	if(prdtseq == ""){
 		$.ajax({
-		  url: "/_admin/product/ajax/ajax_product_insert.jsp?mnseq=<%=menuSeq%>&glseq=<%=glSeq%>&date="+selDate,
+		  url: "/_admin/product/ajax/ajax_product_insert.jsp?mnseq=2&glseq=<%=glSeq%>&date="+selDate,
 		  cache: false,
 		  async: false,
 		  success: function(html){
@@ -142,47 +131,67 @@ function selSetting(sDate){
 
 	//ajax호출 - 입력값 확인.
 	$.ajax({
-	  url: "/_admin/product/ajax/ajax_datetimecost_list.jsp?mnseq=<%=menuSeq%>&glseq=<%=glSeq%>&date="+selDate,
+	  url: "/_admin/product/ajax/ajax_datetimecost_list.jsp?mnseq=2&glseq=<%=glSeq%>&date="+selDate,
 	  cache: false,
 	  async: false,
 	  success: function(html){
 		var evalData = eval("("+html+")");
 		for(var i=0;i<evalData.ProductSub.length;i++){
-			addTime(evalData.ProductSub[i].a,evalData.ProductSub[i].c,evalData.ProductSub[i].d.substring(0,2),evalData.ProductSub[i].d.substring(2,4),evalData.ProductSub[i].f,evalData.ProductSub[i].g,evalData.ProductSub[i].h);
+			addTime(evalData.ProductSub[i].a,evalData.ProductSub[i].c,evalData.ProductSub[i].d.substring(0,2),evalData.ProductSub[i].d.substring(2,4),evalData.ProductSub[i].e.substring(0,2),evalData.ProductSub[i].e.substring(2,4),evalData.ProductSub[i].f,evalData.ProductSub[i].g,evalData.ProductSub[i].h);
 		}
 		
 		//기본행
-		addTime('','0','0','0','','','0');
+		addTime('','0','0','0','0','0','','','0');
 	  }
 	});
 }
-function addTime(pdsubseq, vCourse, vTimeH, vTimeM, nPrice, sPrice, sStatus){
+function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, sPrice, sStatus){
 	var currMD = selDate.split('/');
 	var timecostHTML = "";
 	timecostHTML += "<tr><td bgcolor='white' align='center' width='40'><input type='hidden' name='pdsubseq' value='" + pdsubseq + "'>"+currMD[1]+"/"+currMD[2]+"</td>"
-		+"<td bgcolor='white' align='center'><%= ddlCourseHTML%>"
-		+"</td><td bgcolor='white' align='center'><select name='course_hour'>"
+		+"<td bgcolor='white' align='center'><select name='course_S_hour'>"
 	for(var i=0;i<24;i++){
 		var ih = LenChk(i, 2);
 		
-		if(ih == vTimeH){
+		if(ih == vTimeSH){
 			timecostHTML += "<option value='" + ih + "' selected>" + ih + "</option>";
 		}else{
 			timecostHTML += "<option value='" + ih + "'>" + ih + "</option>";
 		}		
 	}
 	timecostHTML += "</select>시";
-	timecostHTML += "<select name='course_minute'>";
+	timecostHTML += "<select name='course_S_minute'>";
 	for(var i=0;i<60;i++){
 		var im = LenChk(i, 2);
 		
-		if(im == vTimeM){
+		if(im == vTimeSM){
 			timecostHTML += "<option value='" + im + "' selected>" + im + "</option>";
 		}else{
 			timecostHTML += "<option value='" + im + "'>" + im + "</option>";
 		}	
 	}  
-	timecostHTML += "</select>분 </td>";
+	timecostHTML += "</select>분 ~ <select name='course_E_hour'>"
+		for(var i=0;i<24;i++){
+			var ih = LenChk(i, 2);
+			
+			if(ih == vTimeEH){
+				timecostHTML += "<option value='" + ih + "' selected>" + ih + "</option>";
+			}else{
+				timecostHTML += "<option value='" + ih + "'>" + ih + "</option>";
+			}		
+		}
+		timecostHTML += "</select>시";
+		timecostHTML += "<select name='course_E_minute'>";
+		for(var i=0;i<60;i++){
+			var im = LenChk(i, 2);
+			
+			if(im == vTimeEM){
+				timecostHTML += "<option value='" + im + "' selected>" + im + "</option>";
+			}else{
+				timecostHTML += "<option value='" + im + "'>" + im + "</option>";
+			}	
+		}  
+	timecostHTML += "</select>분</td>";
 	timecostHTML += "<td align='center' bgcolor='white'><input class='input_box' size='10' name='courseN' value='" + nPrice + "' ></td>";
 	timecostHTML += "<td align='center' bgcolor='white'><input class='input_box' size='10' name='courseS' value='" + sPrice + "' ></td>";
 	timecostHTML += "<td align='center' bgcolor='white'><input type='hidden' name='prdtStatus' value='" + sStatus + "' /><input type='checkbox' name='timeItems' /></td>";
@@ -247,7 +256,7 @@ String.prototype.trim = function(){
     <td align="center" width="760" class=title>★ 실시간 골프장 시간 및 가격입력 ★</td>
   </tr>
   <tr>
-    <td align="right" style="padding-right:20px;" height="35"><img src="../../images/inc/month_prev.gif" width="41" height="16" border="0" align="absmiddle" onclick="location.href='pop_real_time_reg.jsp?menuseq=<%=menuSeq %>&glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=0'"> &nbsp;<span class=month><%= (currYear) %>년 <%= (currMonth+1) %>월</span> &nbsp;<img align="absmiddle" src="../../images/inc/month_next.gif" width="41" height="16" border="0" onclick="location.href='pop_real_time_reg.jsp?menuseq=<%=menuSeq %>&glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=1'"></td>
+    <td align="right" style="padding-right:20px;" height="35"><img src="../../images/inc/month_prev.gif" width="41" height="16" border="0" align="absmiddle" onclick="location.href='pop_pre_time_reg.jsp?glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=0'"> &nbsp;<span class=month><%= (currYear) %>년 <%= (currMonth+1) %>월</span> &nbsp;<img align="absmiddle" src="../../images/inc/month_next.gif" width="41" height="16" border="0" onclick="location.href='pop_pre_time_reg.jsp?glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=1'"></td>
   </tr>
   <tr>
     <td align="center"><table border="0" width="740" cellpadding="2" cellspacing="1" bgcolor="#D1D3D4">
@@ -409,19 +418,17 @@ String.prototype.trim = function(){
   </tr>
   <tr>
     <td align="center">
-    <form NAME="frm2" METHOD="post" ACTION="pop_real_time_reg_ok.jsp">
+    <form NAME="frm2" METHOD="post" ACTION="pop_pre_time_reg_ok.jsp">
     	<table id="tbTimeCost" name="tbTimeCost" border="0" width="745" cellpadding="2" cellspacing="1" bgcolor="#D1D3D4">
         <tr>
           <td bgcolor="#F1F1F1" align="center" height="19" width="40">날짜</td>
-          <td bgcolor="#F1F1F1" align="center" height="19" width="161">코스선택 </td>
-          <td bgcolor="#F1F1F1" align="center" height="19" width="134">시간선택</td>
+          <td bgcolor="#F1F1F1" align="center" height="19" width="295">시간선택 </td>
           <td align="center" bgcolor="#F1F1F1" height="19" width="112">정상가</td>
           <td align="center" bgcolor="#F1F1F1" height="19" width="95">할인가</td>
           <td width="95" height="19" align="center" bgcolor="#F1F1F1">
-          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" width="32" height="16" border="0" onclick="addTime('','0','0','0','','','0');">
+          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" width="32" height="16" border="0" onclick="addTime('','0','0','0','0','0','','','0');">
           	<img src="../../images/inc/btn_del2.gif" width="32" height="16" border="0" align="absmiddle" onclick="removeTime();">
           	<!-- <img align="absmiddle" src="../../images/inc/btn_save.gif" width="32" height="16" border="0"> -->
-          	<input type="hidden" id="menuseq" name="menuseq" value="<%=menuSeq %>" />
           	<input type="hidden" id="prdtseq" name="prdtseq" value="" />
           	<input type="hidden" name="glseq" value="<%= glSeq%>" />
           	<input type="hidden" name="cpYear" value="<%= currYear%>" />

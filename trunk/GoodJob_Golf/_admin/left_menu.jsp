@@ -75,7 +75,7 @@
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>
-                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/real_list.jsp?menu=2" class=left_menu>사전예약</a></td>
+                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/pre_list.jsp?menu=2" class=left_menu>사전예약</a></td>
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>

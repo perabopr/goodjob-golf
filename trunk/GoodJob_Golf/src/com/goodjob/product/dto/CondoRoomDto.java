@@ -14,8 +14,8 @@ public class CondoRoomDto {
 	public int getCondoroom_seq() {
 		return condoroom_seq;
 	}
-	public void setCondoroom_seq(int condoterm_seq) {
-		this.condoroom_seq = condoterm_seq;
+	public void setCondoroom_seq(int condoroom_seq) {
+		this.condoroom_seq = condoroom_seq;
 	}
 	public int getCondo_seq() {
 		return condo_seq;

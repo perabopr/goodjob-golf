@@ -112,6 +112,6 @@
 	}
 
 	try{
-		response.sendRedirect("./condo_reg.jsp?condoSeq=" + fileUpload.getParameter("condoSeq"));
+		response.sendRedirect("./condo_list.jsp");
 	}catch(Exception e){}
 %>

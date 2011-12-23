@@ -137,17 +137,13 @@ function frmSubmit(){
                 <td colspan="2" height="2" width="572"></td>
               </tr>
               <tr>
-                <td width="495"><input class="input_box" size="80" id="address2" name="address2" value="<%= vPk.getAddress2()%>"></td>
-                <td width="77"><a href="../inc/zip.html" onClick="NewWindow(this.href,'name','420','400','yes');return false;"><img align="absmiddle" src="../images/inc/btn_search.gif" width="45" height="22" border="0"></a></td>
+                <td colspan="2" width="495"><input class="input_box" size="80" id="address2" name="address2" value="<%= vPk.getAddress2()%>"></td>                
               </tr>
               <tr>
                 <td colspan="2" width="572"></td>
               </tr>
               <tr>
-                <td colspan="2"><a href="../inc/naver_map.html" onClick="NewWindow(this.href,'name','420','400','yes');return false;"><img align="absmiddle" src="../images/inc/btn_search_xy.gif" width="65" height="22" border="0"></a> &nbsp;&nbsp;X&nbsp;
-                  <input class="input_box" size="20" id="pointx" name="pointx" value="<%= vPk.getPoint_x()%>">
-                  &nbsp;&nbsp;Y&nbsp;
-                  <input class="input_box" size="20" id="pointy" name="pointy" value="<%= vPk.getPoint_x()%>"></td>
+                <td colspan="2"></td>
               </tr>
             </table></td>
         </tr>

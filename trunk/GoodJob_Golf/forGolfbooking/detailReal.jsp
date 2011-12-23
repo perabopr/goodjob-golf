@@ -22,6 +22,30 @@ if(listGolf == null || listGolf.size() != 1){
 	response.sendRedirect("reserveReal.jsp?menu=1");
 }
 GolfLinkDto glDto = listGolf.get(0);
+String imgSubPath1 = glDto.getImg_sub1();
+if(imgSubPath1.length() != 0){
+	imgSubPath1 = "/upload/" + imgSubPath1;
+}else{
+	imgSubPath1 = "../../images/common/img_thumb_ready.jpg";
+}
+String imgSubPath2 = glDto.getImg_sub2();
+if(imgSubPath2.length() != 0){
+	imgSubPath2 = "/upload/" + imgSubPath2;
+}else{
+	imgSubPath2 = "../../images/common/img_thumb_ready.jpg";
+}
+String imgSubPath3 = glDto.getImg_sub3();
+if(imgSubPath3.length() != 0){
+	imgSubPath3 = "/upload/" + imgSubPath3;
+}else{
+	imgSubPath3 = "../../images/common/img_thumb_ready.jpg";
+}
+String imgSubPath4 = glDto.getImg_sub4();
+if(imgSubPath4.length() != 0){
+	imgSubPath4 = "/upload/" + imgSubPath4;
+}else{
+	imgSubPath4 = "../../images/common/img_thumb_ready.jpg";
+}
 
 //가격정보.
 List<GolfLinkPriceDto> listGolfPrice = glDao.getGolfLinkPrice(Integer.parseInt(golfSeq));
@@ -176,6 +200,7 @@ function nextResDate(cDate){
 	alert("다음날짜가 없습니다.");
 	return false;
 }
+
 function preResDate(cDate){
 	var resDate = "<%=arrDateStr%>";
 	resDate = resDate.split(",");
@@ -191,6 +216,10 @@ function preResDate(cDate){
 	}
 	alert("이전날짜가 없습니다.");
 	return false;	
+}
+
+function imgChange(objId){
+	$("#imgmain").attr("src", objId.src);
 }
 //--->
 </script>
@@ -226,7 +255,7 @@ function preResDate(cDate){
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=274 bgColor=silver>
 <TBODY>
 <TR>
-<TD bgColor=white width=270><IMG border=0 name=img1 src="../../images/common/img_thumb_ready.jpg" width=270 height=202></TD></TR></TBODY></TABLE></TD></TR>
+<TD bgColor=white width=270><IMG border=0 id="imgmain" name="imgmain" src="<%=imgSubPath1 %>" width=270 height=202></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD bgColor=white height=10></TD></TR>
 <TR>
@@ -238,22 +267,22 @@ function preResDate(cDate){
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
 <TBODY>
 <TR>
-<TD bgColor=white><IMG border=0 name=img1 src="<%=glDto.getImg_sub1()%>" width=63 height=47></TD></TR></TBODY></TABLE></TD>
+<TD bgColor=white><IMG border=0 name=img1 src="<%=imgSubPath1 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD></TR></TBODY></TABLE></TD>
 <TD width=62>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
 <TBODY>
 <TR>
-<TD bgColor=white><IMG border=0 name=img1 src="<%=glDto.getImg_sub2()%>" width=63 height=47></TD></TR></TBODY></TABLE></TD>
+<TD bgColor=white><IMG border=0 name=img2 src="<%=imgSubPath2 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD></TR></TBODY></TABLE></TD>
 <TD width=62>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
 <TBODY>
 <TR>
-<TD bgColor=white><IMG border=0 name=img1 src="<%=glDto.getImg_sub3()%>" width=63 height=47></TD></TR></TBODY></TABLE></TD>
+<TD bgColor=white><IMG border=0 name=img3 src="<%=imgSubPath3 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD></TR></TBODY></TABLE></TD>
 <TD width=62>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
 <TBODY>
 <TR>
-<TD bgColor=white><IMG border=0 name=img1 src="<%=glDto.getImg_sub4()%>" width=63 height=47></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD>
+<TD bgColor=white><IMG border=0 name=img4 src="<%=imgSubPath4 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD>
 <TD vAlign=top width=412>
 <TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
 <TBODY>

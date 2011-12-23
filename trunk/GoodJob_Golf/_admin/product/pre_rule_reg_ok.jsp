@@ -6,7 +6,6 @@
 <%@ page import="java.sql.*,java.util.*" %>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
 <%
-String menuSeq = StringUtils.trimToEmpty(request.getParameter("menuSeq"));
 String glSeq = StringUtils.trimToEmpty(request.getParameter("glSeq"));
 String p1 = StringUtils.trimToEmpty(request.getParameter("promise1"));
 String p1t = StringUtils.trimToEmpty(request.getParameter("promise1_type"));
@@ -40,6 +39,6 @@ glDao.setGolfLinkPromiseInsert(glpDto);
 
 out.print("<script type='text/javascript'>");
 out.print("alert('수정되었습니다.');");
-out.print("location.href='real_list.jsp?menu=" + menuSeq + "'");
+out.print("location.href='pre_list.jsp'");
 out.print("</script>");
 %>

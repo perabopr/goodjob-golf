@@ -9,24 +9,17 @@
 <%@ page import="com.goodjob.product.*" %>
 <%@ page import="com.goodjob.db.*" %>
 <%
-String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
+RegionDao regionDao = new RegionDao();
+List<RegionDto> arrRegions = regionDao.getRegionList("1");
+String mainTitle = "";
+String pageName = "";
 
-	RegionDao regionDao = new RegionDao();
-	List<RegionDto> arrRegions = regionDao.getRegionList("1");
-	String mainTitle = "";
-	String pageName = "";
+mainTitle = "★ 사전 골프장목록 ★";
+pageName = "사전";
 
-	if(menuSeq.startsWith("1")){
-		mainTitle = "★ 실시간 골프장목록 ★";
-		pageName = "실시간";
-	}else{
-		mainTitle = "★ 사전 골프장목록 ★";
-		pageName = "사전";
-	}
-	
-	GolfLinkDao dld = new GolfLinkDao();
-	List<GolfLinkDto> arrGolfLink = null;
-	arrGolfLink = dld.getGolfLinkList(Integer.parseInt(menuSeq));
+GolfLinkDao dld = new GolfLinkDao();
+List<GolfLinkDto> arrGolfLink = null;
+arrGolfLink = dld.getGolfLinkList(2);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -73,13 +66,6 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 	    <td bgcolor="#e6e7e8" align="center" width="236"><span class=list_title>골프장명</span></td>
 	    <td bgcolor="#e6e7e8" align="center" width="293"><span class=list_title>주소</span></td>
 	    <td bgcolor="#e6e7e8" align="center" width="159"><span class=list_title>운영방식</span></td>
-	<%
-		if(menuSeq.equals("1")){
-	%>
-	    <td width="249" align="center" bgcolor="#E6E7E8"><span class=list_title>코스입력</span></td>
-	<%
-		}
-	%>
 	    <td width="233" align="center" bgcolor="#E6E7E8"><span class=list_title>시간 및 가격입력</span></td>
 	    <td align="center" bgcolor="#E6E7E8" width="248"><span class=list_title>위약처리규정입력 및 수정</span></td>
 	    <td align="center" bgcolor="#E6E7E8" width="216"><span class=list_title>골프장 정보</span></td>
@@ -94,23 +80,9 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 		<td align="center" bgcolor="white"><span class=list_subject><%= arrGolfLink.get(i).getGolflink_name()%></span></td>
 		<td align="center" bgcolor="white"><%= arrGolfLink.get(i).getGolflink_address1()%></td>
 		<td align="center" bgcolor="white"><%= pageName %></td>
-	<%
-	if(menuSeq.equals("1")){
-	%>
-        <td align="center" bgcolor="white">
-        	<table border="0" cellpadding="0" cellspacing="0" width="90%">
-            <tr>
-            	<td width="50%" align="center"><a href="/_admin/product/popup/pop_course.jsp?glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','415','400','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
-                <td width="50%" align="center">코스없음<input type="checkbox" name="formcheckbox1"></td>
-            </tr>
-            </table>
-        </td>
-	<%
-		}
-	%>
-        <td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_real_time_reg.jsp?menuseq=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','820','520','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
-        <td align="center" bgcolor="white"><a href="real_rule_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
-        <td align="center" bgcolor="white"><a href="real_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></td>
+		<td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_pre_time_reg.jsp?glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','820','520','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
+        <td align="center" bgcolor="white"><a href="pre_rule_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
+        <td align="center" bgcolor="white"><a href="pre_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></td>
     </tr>
     <%
 		}
@@ -120,7 +92,7 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
     </td>
   </tr>
   <tr>
-    <td colspan="2" align="center" height="100"><a href="real_reg.jsp?menu=<%=menuSeq%>"><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0"></a></td>
+    <td colspan="2" align="center" height="100"><a href="pre_reg.jsp"><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0"></a></td>
   </tr>
 </table>
 </body>

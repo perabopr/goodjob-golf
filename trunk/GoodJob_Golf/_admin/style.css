@@ -17,9 +17,9 @@ A:hover  {color:#3192AC;text-decoration:underline;}
 
 .left_menu{font:12px "돋움","dotum"; color:#F4FC21; text-decoration:none;}
 a:link.left_menu{text-decoration:none; font-size: 9pt; color:#F4FC21;}
-a:visited.left_menu{text-decoration:none; font-size: 9pt; color:#F4FC21;}
-a:hover.left_menu{text-decoration:underline; font-size: 9pt; color:#F4FC21;}
-a:active.left_menu{text-decoration:none; font-size: 9pt; color:#F4FC21;}
+a:visited.left_menu{text-decoration:none; font-size: 9pt; color:F4FC21;}
+a:hover.left_menu{text-decoration:underline; font-size: 9pt; color:white;}
+a:active.left_menu{text-decoration:none; font-size: 9pt; color:white;}
 
 
 .list {font-size: 9pt; color: #666666; font-family: "굴림", "굴림체"}
@@ -80,6 +80,6 @@ Body {
 	scrollbar-highlight-color: #ffffff;
 	scrollbar-3dlight-color: #63655A;
 	scrollbar-darkshadow-color: #ffffff;
-	scrollbar-track-color: #666666;
+	scrollbar-track-color: #F1F1F1;
 	scrollbar-arrow-color: #258098;
 }

@@ -33,6 +33,11 @@ public class MemberDto implements Serializable {
 	private String input_pwd;
 	private String memo;
 	
+	//sms 관련
+	private int logon_cnt;
+	private String last_dt;
+	private int reserve_cnt;
+	
 	public int getMem_seq() {
 		return mem_seq;
 	}
@@ -130,5 +135,23 @@ public class MemberDto implements Serializable {
 	}
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+	public int getLogon_cnt() {
+		return logon_cnt;
+	}
+	public void setLogon_cnt(int logonCnt) {
+		logon_cnt = logonCnt;
+	}
+	public String getLast_dt() {
+		return last_dt;
+	}
+	public void setLast_dt(String lastDt) {
+		last_dt = lastDt;
+	}
+	public int getReserve_cnt() {
+		return reserve_cnt;
+	}
+	public void setReserve_cnt(int reserveCnt) {
+		reserve_cnt = reserveCnt;
 	}
 }

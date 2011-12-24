@@ -4,6 +4,7 @@
 package com.goodjob.member;
 
 import java.sql.Connection;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +15,6 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
-import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
@@ -51,19 +51,19 @@ public class MemberDao {
 			//검색조건
 			String where = "";
 			if("name".equals(field) && keyword.length() > 0){
-				where = " AND MEM_NAME LIKE concat('%',?,'%') " ;
+				where = " where mem_name LIKE concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
 			else if("id".equals(field) && keyword.length() > 0){
-				where = " AND MEM_ID = ? " ;
+				where = " where mem_id like concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
 			else if("type".equals(field) && keyword.length() > 0){
-				where = " AND MEM_TYPE = ? " ;
+				where = " where mem_type = ? " ;
 				bind.add(keyword);
 			}
 			else if("reg_dt".equals(field) && keyword.length() > 0){
-				where = " AND date_format(reg_dt,'%Y%m%d') = ? " ;
+				where = " where date_format(reg_dt,'%Y%m%d') = ? " ;
 				bind.add(keyword);
 			}
 			
@@ -71,7 +71,7 @@ public class MemberDao {
 			bind.add(((npage-1)* MEMBER.per_page));
 			bind.add((npage*MEMBER.per_page));
 			
-			list = (List<MemberDto>) qr.query(conn , String.format(MEMBER.list,where) , rsh , bind.toArray());
+			list = (List<MemberDto>) qr.query(conn , MessageFormat.format(MEMBER.list,where) , rsh , bind.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -92,11 +92,53 @@ public class MemberDao {
 		
 		try {
 			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			
+			//검색조건
+			String where = "";
+			if("name".equals(field) && keyword.length() > 0){
+				where = " where mem_name like concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("id".equals(field) && keyword.length() > 0){
+				where = " where mem_id like concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("type".equals(field) && keyword.length() > 0){
+				where = " where mem_type = ? " ;
+				bind.add(keyword);
+			}
+			else if("reg_dt".equals(field) && keyword.length() > 0){
+				where = " where date_format(reg_dt,'%Y%m%d') = ? " ;
+				bind.add(keyword);
+			}
 			
 			ResultSetHandler rsh = new MapHandler();
 			QueryRunner qr = new QueryRunner();
 			
-			map = (Map<String, Long>) qr.query(conn , MEMBER.mem_total , rsh);
+			map = (Map<String, Long>) qr.query(conn , MessageFormat.format(MEMBER.mem_total,where) , rsh);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return NumberUtils.toInt(map.get("total")+"");
+	}
+	
+	public int getTotalMember(){
+		
+		Connection conn = null;
+		Map<String, Long> map = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			
+			map = (Map<String, Long>) qr.query(conn , MessageFormat.format(MEMBER.mem_total,"") , rsh);
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -257,20 +299,23 @@ public class MemberDao {
 	 * 회원 탈퇴
 	 * @param mem_id
 	 */
-	public void MemberSeccesstion(String mem_id){
+	public boolean memberSeccesstion(String mem_id){
 		Connection conn = null;
-		
+		boolean isUpdate = false;
 		try {
 			conn = DBManager.getConnection();
 			String[] bind = {mem_id};
+			
 			QueryRunner qr = new QueryRunner();
 			qr.update(conn , MEMBER.secession , bind);
 			
+			isUpdate = true;
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
+		return isUpdate;
 	}
 	
 	/**
@@ -429,14 +474,17 @@ public class MemberDao {
 	 * @param params
 	 * @return
 	 */
-	public List<MemberDto> getSMSList(Map<String,String> params){
+	public List<MemberDto> getMemSubList(Map<String,String> params){
 		
 		List<MemberDto> list = null;
 		Connection conn = null;
 		
 		int npage = NumberUtils.toInt(params.get("npage"), 1);
-		String field = StringUtils.defaultIfEmpty(params.get("field"), "");
-		String keyword = StringUtils.defaultIfEmpty(params.get("keyword"), "");
+		String field = StringUtils.trimToEmpty(params.get("field"));
+		String keyword = StringUtils.trimToEmpty(params.get("keyword"));
+		String region = StringUtils.trimToEmpty(params.get("region"));
+		String reserve = StringUtils.trimToEmpty(params.get("keyword"));
+		
 		int per_page = NumberUtils.toInt(StringUtils.defaultIfEmpty(params.get("per_page"), MEMBER.per_page+""));
 		
 		try {
@@ -446,14 +494,28 @@ public class MemberDao {
 			ResultSetHandler rsh = new BeanListHandler(MemberDto.class);
 			QueryRunner qr = new QueryRunner();
 			
+			String where1 = "";
+			
 			//검색조건
-			String where = "";
+			String where2 = "";
+			if("name".equals(field) && keyword.length() > 0){
+				where2 = " where mem_name LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("id".equals(field) && keyword.length() > 0){
+				where2 = " where mem_id LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("mobile".equals(field) && keyword.length() > 0){
+				where2 = " where mem_mtel LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
 			
 			//페이징
 			bind.add(((npage-1)* per_page));
 			bind.add((npage*per_page));
 			
-			list = (List<MemberDto>) qr.query(conn , MEMBER.email_sms_list , rsh , bind.toArray());
+			list = (List<MemberDto>) qr.query(conn , MessageFormat.format(MEMBER.mem_sub_list,where1,where2) , rsh , bind.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -464,7 +526,7 @@ public class MemberDao {
 		return list;
 	}
 	
-	public int getTotalSMS(Map<String,String> params){
+	public int getMemSubTotal(Map<String,String> params){
 		
 		Connection conn = null;
 		Map<String, Long> map = null;
@@ -481,25 +543,21 @@ public class MemberDao {
 			QueryRunner qr = new QueryRunner();
 			
 			//검색조건
-			String where = "";
+			String where2 = "";
 			if("name".equals(field) && keyword.length() > 0){
-				where = "WHERE MEM_NAME LIKE concat('%',?,'%') " ;
+				where2 = " where mem_name like concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
 			else if("id".equals(field) && keyword.length() > 0){
-				where = "WHERE MEM_ID LIKE concat('%',?,'%') " ;
+				where2 = " where mem_id like concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
-			else if("type".equals(field) && keyword.length() > 0){
-				where = "WHERE MEM_TYPE = ? " ;
-				bind.add(keyword);
-			}
-			else if("reg_dt".equals(field) && keyword.length() > 0){
-				where = "WHERE date_format(reg_dt,'%Y%m%d') = ? " ;
+			else if("mobile".equals(field) && keyword.length() > 0){
+				where2 = " where mem_mtel like concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
 			
-			map = (Map<String, Long>) qr.query(conn , String.format(MEMBER.list,where) , rsh , bind.toArray());
+			map = (Map<String, Long>) qr.query(conn , MessageFormat.format(MEMBER.mem_total,where2) , rsh , bind.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -507,7 +565,7 @@ public class MemberDao {
 			DbUtils.closeQuietly(conn);
 		}
 
-		return NumberUtils.toInt(map.get("cnt")+"");
+		return NumberUtils.toInt(map.get("total")+"");
 	}
 	
 	public List<MemberDto> getMemTelList(String memSeq){
@@ -518,12 +576,9 @@ public class MemberDao {
 		try {
 			conn = DBManager.getConnection();
 			
-			//ArrayList<Object> bind = new ArrayList<Object>();
 			ResultSetHandler rsh = new BeanListHandler(MemberDto.class);
 			QueryRunner qr = new QueryRunner();
 			
-			//페이징
-			//bind.add(memSeq);
 			list = (List<MemberDto>) qr.query(conn , String.format(MEMBER.info_to_seq,memSeq) , rsh);
 			
 		} catch (Exception e) {

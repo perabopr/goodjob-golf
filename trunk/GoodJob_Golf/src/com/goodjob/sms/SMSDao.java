@@ -67,8 +67,6 @@ public class SMSDao {
 		    String rtime 		= base64Encode(StringUtils.defaultString(params.get("rtime"), ""));
 		    /*--------------------- 필수 값 -------------------*/
 		    
-		    
-		    
 		    String mode 		= base64Encode("1");
 		    String testflag 	= base64Encode(StringUtils.defaultString(params.get("testflag"), ""));
 		    String destination 	= base64Encode(StringUtils.defaultString(params.get("destination"), ""));

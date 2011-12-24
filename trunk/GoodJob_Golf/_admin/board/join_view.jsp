@@ -251,7 +251,32 @@
             </table></td>
         </tr>
         <tr>
-          <td><table border="0" cellpadding="0" cellspacing="0" width="666">
+          <td background="/_admin/images/board/img_board_ver.gif">&nbsp;</td>
+        </tr>
+        <tr>
+          <td style="padding-left:133px;">골프장 JOIN커뮤니티에 참여를 원하시는 회원분께서는 댓글을 남겨주시기 바랍니다.</td>
+        </tr>
+        <form name="cmtFrm" method="post">
+        <input type="hidden" name="join_seq" value="<%=jDto.getJoin_seq()%>"/>
+        <tr>
+          <td><table border="0" cellpadding="0" cellspacing="0" width="100%">
+              <tr>
+                <td align="center" width="107"><img src="/_admin/images/board/img_board_reply.gif" width="60" height="30" border="0"></td>
+                <td align="center" bgcolor="#D1D3D4" width="1"></td>
+                <td width="25">&nbsp;</td>
+                <td width="470" class=blue><textarea id="comment" name="comment" rows="4" cols="73" class="box03"></textarea></td>
+                <td width="66" class="blue" align="right"><a href="javascript:comment_submit();"><img src="/_admin/images/board/btn_confirm.gif" width="60" height="60" border="0"></a></td>
+              </tr>
+            </table></td>
+        </tr>
+        <tr>
+          <td height="40"></td>
+        </tr>
+        </form>
+        
+        <tr>
+          <td>
+          <table border="0" cellpadding="0" cellspacing="0" width="666">
               <tr>
                 <td height="2" width="666" colspan="7" bgcolor="#C8D290"></td>
               </tr>
@@ -297,31 +322,13 @@
 		}
 	}
 %>
-            </table></td>
+            </table>
+           </td>
         </tr>
         <tr>
           <td height="40"></td>
         </tr>
-        <tr>
-          <td style="padding-left:133px;">골프장 JOIN커뮤니티에 참여를 원하시는 회원분께서는 댓글을 남겨주시기 바랍니다.</td>
-        </tr>
-        <form name="cmtFrm" method="post">
-        <input type="hidden" name="join_seq" value="<%=jDto.getJoin_seq()%>"/>
-        <tr>
-          <td><table border="0" cellpadding="0" cellspacing="0" width="100%">
-              <tr>
-                <td align="center" width="107"><img src="/_admin/images/board/img_board_reply.gif" width="60" height="30" border="0"></td>
-                <td align="center" bgcolor="#D1D3D4" width="1"></td>
-                <td width="25">&nbsp;</td>
-                <td width="470" class=blue><textarea id="comment" name="comment" rows="4" cols="73" class="box03"></textarea></td>
-                <td width="66" class="blue" align="right"><a href="javascript:comment_submit();"><img src="/_admin/images/board/btn_confirm.gif" width="60" height="60" border="0"></a></td>
-              </tr>
-            </table></td>
-        </tr>
-        <tr>
-          <td height="40"></td>
-        </tr>
-        </form>
+        
         <tr>
           <td><table border="0" cellpadding="0" cellspacing="0" width="666">
               <tr>

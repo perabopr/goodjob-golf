@@ -53,7 +53,7 @@
 		if(confirm("회원가입상태를 변경할까요?")){
 			$.ajax({
 				type: "POST",
-				url: "/_admin/member/mem_type_update.jsp",
+				url: "/_admin/member/mem_update.jsp",
 				data: "mem_type="+selValue+"&mem_id="+id,
 				success: function(msg){
 					if($.trim(msg) == '0'){
@@ -85,6 +85,24 @@
 		frm.npage.value=val;
 		frm.action="mem_list.jsp"
 		frm.submit();
+	}
+
+	function secession(mem_id , mem_name){
+		if(confirm(mem_name + "회원 탈퇴 처리하시겠습니까?")){
+			$.ajax({
+				type: "POST",
+				url: "/_admin/member/mem_update.jsp",
+				data: "type=S&mem_id="+mem_id,
+				success: function(msg){
+					if($.trim(msg) == '0'){
+						alert("회원 탈퇴 처리 완료");
+						document.location.reload();
+					}
+					else{
+						alert("회원 탈퇴 처리 실패!");
+					}
+			}});
+		}
 	}
 	
 //--> 
@@ -127,7 +145,12 @@
               <option value="2"<%if("2".equals(mDto.getMem_type())) out.println(" selected");%>>유료회원(2년)</option>
             </select>
             <a href=""></a><a href="javascript:mem_type_update(<%=i%>,'<%=mDto.getMem_id()%>');"><img align="absmiddle" src="/_admin/images/common/btn_save2.gif" onclick="" width="32" height="16" border="0"></a></td>
-          <td align="center" bgcolor="white"><a href="mem_detail.jsp?mem_id=<%=mDto.getMem_id()%>" onClick="NewWindow(this.href,'name','760','600','yes');return false;"><img align="absmiddle" src="/_admin/images/common/btn_detail.gif" width="75" height="22" border="0"></a></td>
+          <td align="center" bgcolor="white">
+          <a href="mem_detail.jsp?mem_id=<%=mDto.getMem_id()%>" onClick="NewWindow(this.href,'name','760','600','yes');return false;">
+          <img align="absmiddle" src="/_admin/images/common/btn_detail.gif" width="75" height="22" border="0"></a>
+          &nbsp;
+          <input type="button" value="회원탈퇴" class="input_box" onclick="secession('<%=mDto.getMem_id()%>','<%=mDto.getMem_name()%>');"/>
+          </td>
         </tr>
 <%
 	}

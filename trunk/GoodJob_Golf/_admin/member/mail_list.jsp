@@ -7,10 +7,12 @@
 <%@page import="com.goodjob.util.PageNavigater"%>
 <%@page import="com.goodjob.sql.MEMBER"%>
 <%
-	
 	String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"), "1");
 	String field = StringUtils.defaultIfEmpty(request.getParameter("field"), "");
 	String keyword = StringUtils.defaultIfEmpty(request.getParameter("keyword"), "");
+	String region = StringUtils.defaultIfEmpty(request.getParameter("region"), "");
+	String reserve = StringUtils.defaultIfEmpty(request.getParameter("reserve"), "");
+	
 	String per_page = StringUtils.defaultIfEmpty(request.getParameter("per_page"), "10");
 	
 	PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , MEMBER.per_page );
@@ -24,12 +26,13 @@
 	params.put("per_page",per_page);
 	
 	
-	List<MemberDto> mList = mDao.getSMSList(params);
+	List<MemberDto> mList = mDao.getMemSubList(params);
 	
-	int totalCount = mDao.getTotalMember(params);
+	int totalMemCount = mDao.getTotalMember();
 	
-	String strPage = paging.getPaging(100, false);
-
+	int totalCount = mDao.getMemSubTotal(params);
+	
+	String strPage = paging.getPaging(totalCount, false);
 %>
 <html>
 <head>
@@ -59,9 +62,9 @@ function NewWindow(mypage, myname, w, h, scroll) {
 	winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'; 
 	sms = window.open('', "pop_sms_1", winprops); 
 	
-	document.smsFrm.target="pop_sms_1";
-	document.smsFrm.action=mypage;
-	document.smsFrm.submit();
+	document.mailFrmtarget="pop_sms_1";
+	document.mailFrmaction=mypage;
+	document.mailFrmsubmit();
 	 
 } 
 
@@ -85,13 +88,19 @@ function on_search() {
 		$('#keyword').focus();
 		return;
 	} 
-	frm.action="sms_list.jsp"
+	frm.action="mail_list.jsp"
 	frm.submit();
 }
 
 function goPage(val){
 	var frm = document.frm;
 	frm.npage.value=val;
+	frm.action="mail_list.jsp"
+	frm.submit();
+}
+
+function perPage(){
+	var frm = document.perFrm;
 	frm.action="mail_list.jsp"
 	frm.submit();
 }
@@ -103,58 +112,65 @@ function goPage(val){
   <tr>
     <td class=title>★ E-Mail 발송 ★</td>
   </tr>
+ <form name="frm" method="post">
+<input type="hidden" name="npage" value=""/>
+<input type="hidden" name="per_page" value="<%=per_page%>"/>
   <tr>
     <td align="center" style="padding-top:20px;"><p>
-        <select name="formselect1" size="1">
-          <option>선택하세요</option>
-          <option>전체</option>
-          <option>회원명</option>
-          <option>아이디</option>
-          <option>휴대폰</option>
+        <select name="field" size="1">
+          <option value=""<%=("".equals(field)?" selected":"")%>>선택하세요</option>
+          <option value="name"<%=("name".equals(field)?" selected":"")%>>회원명</option>
+          <option value="id"<%=("id".equals(field)?" selected":"")%>>아이디</option>
+          <option value="mobile"<%=("mobile".equals(field)?" selected":"")%>>휴대폰</option>
         </select>
-        <select name="formselect1" size="1">
-          <option>선택하세요</option>
-          <option>전체</option>
-          <option>수도권</option>
-          <option>강원권</option>
-          <option>충청권</option>
-          <option>전라권</option>
-          <option>제주권</option>
+        <!--select name="region" size="1">
+          <option value=""<%=("".equals(region)?" selected":"")%>>선택하세요</option>
+          <option value="1"<%=("1".equals(region)?" selected":"")%>>수도권</option>
+          <option value="2"<%=("2".equals(region)?" selected":"")%>>강원권</option>
+          <option value="3"<%=("3".equals(region)?" selected":"")%>>충청권</option>
+          <option value="4"<%=("4".equals(region)?" selected":"")%>>경상권</option>
+          <option value="5"<%=("5".equals(region)?" selected":"")%>>전라권</option>
+          <option value="6"<%=("6".equals(region)?" selected":"")%>>제주권</option>
         </select>
 
-        <select name="formselect1" size="1">
-          <option>선택하세요</option>
-          <option>전체</option>
-          <option>실시간부킹</option>
-          <option>사전예약</option>
-          <option>패키지</option>
-        </select>
+        <select name="reserve" size="1">
+          <option value=""<%=("".equals(reserve)?" selected":"")%>>선택하세요</option>
+          <option value="real"<%=("".equals(reserve)?" selected":"")%>>실시간부킹</option>
+          <option value="book"<%=("".equals(reserve)?" selected":"")%>>사전예약</option>
+          <option value="package"<%=("".equals(reserve)?" selected":"")%>>패키지</option>
+        </select>-->
         &nbsp;
-        <input name="key" type="text" size="20" class="input_box">
+        <input id="keyword" name="keyword" type="text" size="20" value="<%=keyword%>" class="input_box">
         <a href="javascript:on_search();"><img src="/_admin/images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle"></a>
       </p></td>
   </tr>
+</form>
   <tr>
     <td align="center">&nbsp;</td>
   </tr>
- <form name="smsFrm" method="post">
- <input type="hidden" id="mobile" name="mobile" value=""/>
    <tr>
-    <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <td align="center">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+<form name="perFrm" method="post" action="">
         <tr>
           <td height="25"  style="padding-left:5px;" width="112">
           <a href="javascript:CheckAll();"><img src="/_admin/images/inc/btn_select.gif" width="50" height="16" border="0"></a>
           </td>
-          <td width="1487" height="25">총 <span class=orange><%=totalCount%></span>명 회원중 <span class=blue><%=totalCount%></span>명 검색</td>
-          <td width="14%" align="right"><select name="formselect1" size="1">
-              <option>10개씩</option>
-              <option>30개씩</option>
-              <option>50개씩</option>
-              <option>100개씩</option>
+          <td width="1487" height="25">총 <span class=orange><%=totalMemCount%></span>명 회원중 <span class=blue><%=totalCount%></span>명 검색</td>
+          <td width="14%" align="right">
+          <select name="per_page" size="1" onchange="perPage();">
+              <option value="10"<%=("10".equals(per_page)?" selected":"")%>>10개씩</option>
+              <option value="30"<%=("30".equals(per_page)?" selected":"")%>>30개씩</option>
+              <option value="50"<%=("50".equals(per_page)?" selected":"")%>>50개씩</option>
+              <option value="100"<%=("100".equals(per_page)?" selected":"")%>>100개씩</option>
             </select></td>
         </tr>
+</form>
         <tr>
-          <td colspan="3" width="1856"><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
+          <td colspan="3" width="1856">
+          <table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
+ <form name="smsFrm" method="post">
+ <input type="hidden" id="mobile" name="mobile" value=""/>
               <tr>
                 <td bgcolor="#e6e7e8" height="25" align="center" width="70"><span class=normal_b>선택</span></td>
                 <td height="25" align="center" bgcolor="#E6E7E8" width="115"><span class=normal_b>회원명</span></td>

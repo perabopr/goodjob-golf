@@ -23,7 +23,9 @@
 	
 	List<MemberDto> mList = mDao.getMemberList(params);
 	
-	String strPage = paging.getPaging(1, true);
+	int totalCount = mDao.getTotalMember(params);
+	
+	String strPage = paging.getPaging(totalCount, false);
 
 %>
 <html>

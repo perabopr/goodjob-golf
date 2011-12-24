@@ -99,7 +99,7 @@ public class PageNavigater {
 		int prePage 	= ((blockCnt-2)*blockSize)+1; 	//이전블럭시작페이지
 		
 		
-		str.append("<div><span class=normal_b>\n");
+		str.append("<div>\n");
 		
 		//처음페이지
 		if(npage != 1){
@@ -112,10 +112,10 @@ public class PageNavigater {
 		
 		//이전페이지
 		if(prePage > 0){
-			str.append("<A HREF=\"javascript:goPage('"+prePage+"');\">"+prevImage+"</A>\n");
+			str.append("<A HREF=\"javascript:goPage('"+prePage+"');\">"+prevImage+"</A>&nbsp;\n");
 		} else{
 			if(!isDisable){
-				str.append("<A HREF=\"#\">"+prevImage+"</a> \n");
+				str.append("<A HREF=\"#\">"+prevImage+"</a>&nbsp;\n");
 			}
 		}
 		
@@ -127,30 +127,30 @@ public class PageNavigater {
 			}
 			
 			if(i == npage){
-				str.append(i+"&nbsp;");
+				str.append("<span class=normal_b>"+i+"</span>");
 			} else{
-				str.append("<a href=\"javascript:goPage('"+i+"');\">" + i + "</a>\n");
+				str.append("&nbsp; I &nbsp;<a href=\"javascript:goPage('"+i+"');\">" + i + "</a>\n");
 			}
 		}
 		
 		//다음페이지
 		if(nextPage <= totalPage){
-			str.append("<A HREF=\"javascript:goPage('"+nextPage+"');\">"+nextImage+"</A> \n");
+			str.append("&nbsp;<A HREF=\"javascript:goPage('"+nextPage+"');\">"+nextImage+"</A> \n");
 		} else{
 			if(!isDisable){
-				str.append("<A HREF=\"#\">"+nextImage+"</a> \n");
+				str.append("&nbsp;<A HREF=\"#\">"+nextImage+"</a> \n");
 			}
 		}
 		
 		//마지막페이지
 		if(npage != totalPage){
-			str.append("<A HREF=\"javascript:goPage('"+totalPage+"');\">"+lastImage+"</A> \n");
+			str.append("&nbsp;<A HREF=\"javascript:goPage('"+totalPage+"');\">"+lastImage+"</A> \n");
 		} else{
 			if(!isDisable){
-				str.append("<A HREF=\"#\">"+lastImage+"</a> \n");
+				str.append("&nbsp;<A HREF=\"#\">"+lastImage+"</a> \n");
 			}
 		}
-		str.append("</span></div>\n");
+		str.append("</div>\n");
 		
 		return str.toString();
 	}

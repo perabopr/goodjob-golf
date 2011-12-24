@@ -14,6 +14,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
@@ -92,30 +93,10 @@ public class MemberDao {
 		try {
 			conn = DBManager.getConnection();
 			
-			ArrayList<Object> bind = new ArrayList<Object>();
 			ResultSetHandler rsh = new MapHandler();
 			QueryRunner qr = new QueryRunner();
 			
-			//검색조건
-			String where = "";
-			if("name".equals(field) && keyword.length() > 0){
-				where = "WHERE MEM_NAME LIKE concat('%',?,'%') " ;
-				bind.add(keyword);
-			}
-			else if("id".equals(field) && keyword.length() > 0){
-				where = "WHERE MEM_ID LIKE concat('%',?,'%') " ;
-				bind.add(keyword);
-			}
-			else if("type".equals(field) && keyword.length() > 0){
-				where = "WHERE MEM_TYPE = ? " ;
-				bind.add(keyword);
-			}
-			else if("reg_dt".equals(field) && keyword.length() > 0){
-				where = "WHERE date_format(reg_dt,'%Y%m%d') = ? " ;
-				bind.add(keyword);
-			}
-			
-			map = (Map<String, Long>) qr.query(conn , String.format(MEMBER.list,where) , rsh , bind.toArray());
+			map = (Map<String, Long>) qr.query(conn , MEMBER.mem_total , rsh);
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -123,7 +104,7 @@ public class MemberDao {
 			DbUtils.closeQuietly(conn);
 		}
 
-		return NumberUtils.toInt(map.get("cnt")+"");
+		return NumberUtils.toInt(map.get("total")+"");
 	}
 	
 	/**
@@ -364,9 +345,9 @@ public class MemberDao {
 			ResultSetHandler rsh = new MapHandler();
 			QueryRunner qr = new QueryRunner();
 			
-			Map<String,Integer> map = (Map)qr.query(conn , MEMBER.dup_id , rsh , bind);
+			Map<String,Object> map = (Map)qr.query(conn , MEMBER.dup_id , rsh , bind);
 			
-			int cnt = map.get("cnt");
+			int cnt = NumberUtils.toInt(map.get("cnt")+"");
 			
 			if(cnt > 0) isDuplicate = true;
 			
@@ -441,5 +422,116 @@ public class MemberDao {
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
+	}
+	
+	/**
+	 * SMS 회원 리스트
+	 * @param params
+	 * @return
+	 */
+	public List<MemberDto> getSMSList(Map<String,String> params){
+		
+		List<MemberDto> list = null;
+		Connection conn = null;
+		
+		int npage = NumberUtils.toInt(params.get("npage"), 1);
+		String field = StringUtils.defaultIfEmpty(params.get("field"), "");
+		String keyword = StringUtils.defaultIfEmpty(params.get("keyword"), "");
+		int per_page = NumberUtils.toInt(StringUtils.defaultIfEmpty(params.get("per_page"), MEMBER.per_page+""));
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			ResultSetHandler rsh = new BeanListHandler(MemberDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			//검색조건
+			String where = "";
+			
+			//페이징
+			bind.add(((npage-1)* per_page));
+			bind.add((npage*per_page));
+			
+			list = (List<MemberDto>) qr.query(conn , MEMBER.email_sms_list , rsh , bind.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return list;
+	}
+	
+	public int getTotalSMS(Map<String,String> params){
+		
+		Connection conn = null;
+		Map<String, Long> map = null;
+		
+		String field = StringUtils.defaultIfEmpty(params.get("field"), "");
+		String keyword = StringUtils.defaultIfEmpty(params.get("keyword"), "");
+		
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			
+			//검색조건
+			String where = "";
+			if("name".equals(field) && keyword.length() > 0){
+				where = "WHERE MEM_NAME LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("id".equals(field) && keyword.length() > 0){
+				where = "WHERE MEM_ID LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("type".equals(field) && keyword.length() > 0){
+				where = "WHERE MEM_TYPE = ? " ;
+				bind.add(keyword);
+			}
+			else if("reg_dt".equals(field) && keyword.length() > 0){
+				where = "WHERE date_format(reg_dt,'%Y%m%d') = ? " ;
+				bind.add(keyword);
+			}
+			
+			map = (Map<String, Long>) qr.query(conn , String.format(MEMBER.list,where) , rsh , bind.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return NumberUtils.toInt(map.get("cnt")+"");
+	}
+	
+	public List<MemberDto> getMemTelList(String memSeq){
+		
+		List<MemberDto> list = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			//ArrayList<Object> bind = new ArrayList<Object>();
+			ResultSetHandler rsh = new BeanListHandler(MemberDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			//페이징
+			//bind.add(memSeq);
+			list = (List<MemberDto>) qr.query(conn , String.format(MEMBER.info_to_seq,memSeq) , rsh);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return list;
 	}
 }

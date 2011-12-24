@@ -142,11 +142,11 @@
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>SMS 보내기</a></td>
+                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/member/sms_list.jsp" class=left_menu>SMS 보내기</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>E-Mail 보내기</a></td>
+                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/member/mail_list.jsp" class=left_menu>E-Mail 보내기</a></td>
                 </tr>
             </table>
             <table width="100%" border="0" cellpadding="0" cellspacing="0">

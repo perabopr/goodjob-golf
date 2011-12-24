@@ -3,26 +3,53 @@
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@ page import="java.util.*" %>
-<%@ page import="com.goodjob.sms.*" %>
+<%@ page import="com.goodjob.mail.*"%>
+<%@ page import="com.goodjob.util.Utils"%>
+<%@page import="java.text.MessageFormat"%>
+<%@page import="com.goodjob.conf.Config"%>
+<%@page import="com.goodjob.member.*"%>
 <%
+	
+	String subject 		= StringUtils.trimToEmpty(request.getParameter("subject"));
+	String content 		= StringUtils.trimToEmpty(request.getParameter("content"));
+	String mem_seq 		= StringUtils.trimToEmpty(request.getParameter("mem_seq"));
 
-	Map<String,String> params = new HashMap<String,String>();
+	String host = Config.get("mail_host");
+	String m_id = Config.get("mail_id");
+	String m_pw = Config.get("mail_pw");
+	String from = Config.get("mail_fm");
 	
-	String msg 			= "[굳잡골프]인증번호는 %s 입니다.";
-	String rphone 		= "02-6670-0200";
-	String sphone 		= StringUtils.defaultString(request.getParameter("sphone"), "");
+	Mail mail = new Mail(host,m_id,m_pw);
 	
-	String authNum = Utils.authNumber(5);
+	MemberDao mDao = new MemberDao();
 	
-	params.put("msg",String.format(msg , authNum));
-	params.put("authNum",authNum);
-	params.put("rphone",rphone);
-	params.put("sphone",sphone);
+	List<MemberDto> mList = mDao.getMemTelList(mem_seq);
 	
-	SMSDao sDao = new SMSDao();
-	
-	boolean isSend = sDao.auth(params);
-	
-	if(isSend) out.println("0");
-	else  out.println("1");
+	MemberDto mDto;
+	int send_cnt = 0;
+	if(mList != null && !mList.isEmpty()){
+		
+		int size = mList.size();
+		for(int i = 0 ; i < size ; i++){
+			
+			mDto = mList.get(i);
+			
+			if("Y".equals(mDto.getEmail_yn())){
+				
+				try{
+					mail.setTo(mDto.getMem_id());
+					mail.setFrom(from , "굳잡골프");
+					mail.setSubject(subject);
+					mail.setHtmlContent(content);
+					mail.send();
+					send_cnt++;
+
+				}catch(Exception e){}
+			}
+		}
+	}
 %>
+<script language="javascript" type="text/javascript">
+alert("이메일 <%=send_cnt%>건이 발송 되었습니다.");
+//self.close();
+</script>

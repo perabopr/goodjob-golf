@@ -68,6 +68,7 @@ public class RESERVE {
 			",D.golflink_name" +
 			",B.product_date" +
 			",A.time_start" +
+			",A.time_end" +
 			",IFNULL(C.course_name, '') course_name" +
 			",D.holl_type" +
 			",A.product_status " +
@@ -99,6 +100,7 @@ public class RESERVE {
 			",D.golflink_name" +
 			",B.product_date" +
 			",A.time_start" +
+			",A.time_end" +
 			",IFNULL(C.course_name, '') course_name" +
 			",D.holl_type" +
 			",A.goodjob_price" +

@@ -36,6 +36,10 @@ function reSetDate(){
 
 function billok(){
 	var chkBool = true;
+	if($("#reserveName").val().length == 0){
+		alert("예약자명을 입력하세요");
+		return false;
+	}
 	if($("#phone1").val().length == 0){
 		chkBool = false;
 	}
@@ -56,11 +60,25 @@ function billok(){
 	$("#date").val('<%=request.getParameter("date")%>');
 	$("#cdate").val('<%=request.getParameter("cdate")%>');
 	
-	if($("#billCtype").attr("checked")){
-	}else{
-		frm.submit();
+	if($("#billBtype").attr("checked")){
+		if(window.confirm("예약을 완료하시려면 확인 버튼을 누르십시오 \r\n예약확인 SMS : "+$("#phone1").val()+$("#phone2").val()+$("#phone3").val())){
+			frm.submit();
+		}
 	}
 }
+
+$(function(){
+	$("#chkRealName").click(function(){
+		if(this.checked){
+			//$("#reserveName").val("누구겠지~");
+			$("#reserveName").attr("disabled","disabled");
+		}else{
+			$("#reserveName").attr("disabled","");
+			$("#reserveName").val("");
+			$("#reserveName").focus();
+		}
+	});
+});
 //-->
 </script>
 <FORM NAME="frm" METHOD="post" ACTION="result.jsp">
@@ -89,7 +107,7 @@ function billok(){
 <TBODY>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 width=170 align=right>예약자명</TD>
-<TD style="PADDING-LEFT: 10px" class=normal_b bgColor=white width=420>홍길동</TD></TR>
+<TD style="PADDING-LEFT: 10px" class=normal_b bgColor=white width=420><INPUT id="reserveName" name="reserveName" class=input_01 name=day size=14> <INPUT name="chkRealName" id="chkRealName" type=checkbox><SPAN class=mem_notice>실제이용자가 예약자와 동일한 경우 체크</SPAN></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>연락처</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white>
@@ -127,7 +145,7 @@ function billok(){
 <TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange><%=buyPrice %></SPAN>원</TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>결제방법선택</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><INPUT id="billCtype" name="billtype" value="C" type=radio disabled="disabled"> 신용카드결제 &nbsp;&nbsp; <INPUT id="billBtype" name="billtype" value="B" type=radio checked> 실시간계좌이체</TD></TR></TBODY></TABLE></TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white><INPUT id="billBtype" name="billtype" value="B" type=radio checked> 무통장입금</TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD style="PADDING-BOTTOM: 50px; PADDING-TOP: 30px" align=center><IMG border=0 src="/images/booking/btn_pay.gif" width=200 height=60 onclick="billok();"></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
 </FORM>

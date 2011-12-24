@@ -85,13 +85,26 @@ if(strDate == null || strDate.length() != 8){
 	vCalendar.set(tYear, tMonth-1, tDay);
 }
 
-vCalendar.add(vCalendar.DATE, 14);
+vCalendar.add(vCalendar.DATE, -14);
 
 String tmYear = Integer.toString(vCalendar.get(vCalendar.YEAR));
 String tmMonth = "0" + Integer.toString(vCalendar.get(vCalendar.MONTH)+1);
 String tmDay = "0" + Integer.toString(vCalendar.get(vCalendar.DATE));
 
+//이전날짜.
+String preDate = tmYear
+			+ tmMonth.substring(tmMonth.length()-2, tmMonth.length())
+			+ tmDay.substring(tmDay.length()-2, tmDay.length());
+
+vCalendar.add(vCalendar.DATE, 28);
+
+tmYear = Integer.toString(vCalendar.get(vCalendar.YEAR));
+tmMonth = "0" + Integer.toString(vCalendar.get(vCalendar.MONTH)+1);
+tmDay = "0" + Integer.toString(vCalendar.get(vCalendar.DATE));
+
+//현재날짜.
 String sDate = strDate;
+//다음날짜.
 String eDate = tmYear
 			+ tmMonth.substring(tmMonth.length()-2, tmMonth.length())
 			+ tmDay.substring(tmDay.length()-2, tmDay.length());
@@ -184,38 +197,13 @@ function reserveSubmit(gcId){
 	frm.submit();
 }
 
-function nextResDate(cDate){
-	var resDate = "<%=arrDateStr%>";
-	resDate = resDate.split(",");
-	var chkNext = false;
-	for(i = 0; i < resDate.length;i++){
-		if(chkNext){
-			location.href = "/forGolfbooking/detail.jsp?menu=1&golf=<%=golfSeq%>&date=<%=strDate%>&cdate="+resDate[i];
-			return false;
-		}
-		if(resDate[i] == cDate){
-			chkNext = true;
-		}
-	}
-	alert("다음날짜가 없습니다.");
+function nextResDate(){
+	location.href = "/forGolfbooking/detail.jsp?menu=1&golf=<%=golfSeq%>&date=<%=eDate%>&cdate=<%=curDate%>";
 	return false;
 }
 
-function preResDate(cDate){
-	var resDate = "<%=arrDateStr%>";
-	resDate = resDate.split(",");
-	var chkPre = false;
-	for(i = resDate.length - 1; i >= 0;i--){
-		if(chkPre){
-			location.href = "/forGolfbooking/detail.jsp?menu=1&golf=<%=golfSeq%>&date=<%=strDate%>&cdate="+resDate[i];
-			return false;
-		}
-		if(resDate[i] == cDate){
-			chkPre = true;
-		}
-	}
-	alert("이전날짜가 없습니다.");
-	return false;	
+function preResDate(){
+	location.href = "/forGolfbooking/detail.jsp?menu=1&golf=<%=golfSeq%>&date=<%=preDate%>&cdate=<%=curDate%>";
 }
 
 function imgChange(objId){
@@ -438,8 +426,8 @@ for (int i = 1; i < 15 ;i++){
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=150>
 <TBODY>
 <TR>
-<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_prev_day.gif" width=65 height=20 onclick="preResDate('<%=curDate%>');"></TD>
-<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_next_day.gif" width=65 height=20 onclick="nextResDate('<%=curDate%>');"></TD></TR></TBODY></TABLE></TD></TR>
+<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_prev_day.gif" width=65 height=20 onclick="preResDate();"></TD>
+<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_next_day.gif" width=65 height=20 onclick="nextResDate();"></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD vAlign=top width=707 colSpan=2 align=center>
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=704>

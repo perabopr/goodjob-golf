@@ -61,13 +61,26 @@ if(strDate == null || strDate.length() != 8){
 	vCalendar.set(tYear, tMonth-1, tDay);
 }
 
-vCalendar.add(vCalendar.DATE, 14);
+vCalendar.add(vCalendar.DATE, -14);
 
 String tmYear = Integer.toString(vCalendar.get(vCalendar.YEAR));
 String tmMonth = "0" + Integer.toString(vCalendar.get(vCalendar.MONTH)+1);
 String tmDay = "0" + Integer.toString(vCalendar.get(vCalendar.DATE));
 
+//이전날짜.
+String preDate = tmYear
+			+ tmMonth.substring(tmMonth.length()-2, tmMonth.length())
+			+ tmDay.substring(tmDay.length()-2, tmDay.length());
+
+vCalendar.add(vCalendar.DATE, 28);
+
+tmYear = Integer.toString(vCalendar.get(vCalendar.YEAR));
+tmMonth = "0" + Integer.toString(vCalendar.get(vCalendar.MONTH)+1);
+tmDay = "0" + Integer.toString(vCalendar.get(vCalendar.DATE));
+
+//현재날짜.
 String sDate = strDate;
+//다음날짜.
 String eDate = tmYear
 			+ tmMonth.substring(tmMonth.length()-2, tmMonth.length())
 			+ tmDay.substring(tmDay.length()-2, tmDay.length());
@@ -160,37 +173,13 @@ function reserveSubmit(gcId){
 	frm.submit();
 }
 
-function nextResDate(cDate){
-	var resDate = "<%=arrDateStr%>";
-	resDate = resDate.split(",");
-	var chkNext = false;
-	for(i = 0; i < resDate.length;i++){
-		if(chkNext){
-			location.href = "/forGolfbooking/detail.jsp?menu=1&golf=<%=golfSeq%>&date=<%=strDate%>&cdate="+resDate[i];
-			return false;
-		}
-		if(resDate[i] == cDate){
-			chkNext = true;
-		}
-	}
-	alert("다음날짜가 없습니다.");
+function nextResDate(){
+	location.href = "/forGolfbooking/detail.jsp?menu=2&golf=<%=golfSeq%>&date=<%=eDate%>&cdate=<%=curDate%>";
 	return false;
 }
-function preResDate(cDate){
-	var resDate = "<%=arrDateStr%>";
-	resDate = resDate.split(",");
-	var chkPre = false;
-	for(i = resDate.length - 1; i >= 0;i--){
-		if(chkPre){
-			location.href = "/forGolfbooking/detail.jsp?menu=1&golf=<%=golfSeq%>&date=<%=strDate%>&cdate="+resDate[i];
-			return false;
-		}
-		if(resDate[i] == cDate){
-			chkPre = true;
-		}
-	}
-	alert("이전날짜가 없습니다.");
-	return false;	
+
+function preResDate(){
+	location.href = "/forGolfbooking/detail.jsp?menu=2&golf=<%=golfSeq%>&date=<%=preDate%>&cdate=<%=curDate%>";
 }
 //--->
 </script>
@@ -409,8 +398,8 @@ for (int i = 1; i < 15 ;i++){
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=150>
 <TBODY>
 <TR>
-<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_prev_day.gif" width=65 height=20 onclick="preResDate('<%=curDate%>');"></TD>
-<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_next_day.gif" width=65 height=20 onclick="nextResDate('<%=curDate%>');"></TD></TR></TBODY></TABLE></TD></TR>
+<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_prev_day.gif" width=65 height=20 onclick="preResDate();"></TD>
+<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_next_day.gif" width=65 height=20 onclick="nextResDate();"></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD vAlign=top width=707 colSpan=2 align=center>
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=704>
@@ -441,50 +430,88 @@ for (int i = 1; i < 15 ;i++){
 <TBODY>
 <TR>
 <TD>
-<TABLE id="tbReserveList" border=0 cellSpacing=1 cellPadding=2 width=706 bgColor=#d1d3d4>
-<TR>
-<TD class=normal_b bgColor=#f1f1f1 height=25 width=120 align=center>부킹날짜</TD>
-<TD class=normal_b bgColor=#f1f1f1 height=25 width=120 align=center>부킹시간</TD>
-<TD class=normal_b bgColor=#f1f1f1 width=168 align=center>코스</TD>
-<TD class=normal_b bgColor=#f1f1f1 width=90 align=center>홀구분</TD>
-<TD class=normal_b bgColor=#f1f1f1 width=182 align=center>예약가능여부</TD></TR>
-<%
-	for(int i = 0; i < listPr.size();i++){
-		String tmpDate = listPr.get(i).getProduct_date();
-		String tmpTime = listPr.get(i).getTime_start();
-		tmpDate = tmpDate.substring(0,4) + "-" + tmpDate.substring(4,6) + "-" + tmpDate.substring(6,8);
-		if((Integer.parseInt(tmpTime.substring(0,2)) - 12) > 0){
-			tmpTime = "오후 " + (Integer.parseInt(tmpTime.substring(0,2))-12) + ":" + tmpTime.substring(2,4);
-		}else if(Integer.parseInt(tmpTime.substring(0,2)) == 12){
-			tmpTime = "오후 " + Integer.parseInt(tmpTime.substring(0,2)) + ":" + tmpTime.substring(2,4);
-		}else{
-			tmpTime = "오전 " + Integer.parseInt(tmpTime.substring(0,2)) + ":" + tmpTime.substring(2,4);			
+	<TABLE id="tbReserveList" border=0 cellSpacing=1 cellPadding=2 width=706 bgColor=#d1d3d4>
+	<TR>
+	<TD class=normal_b bgColor=#f1f1f1 height=25 width=192 align=center>골프장명</TD>
+	<TD class=normal_b bgColor=#f1f1f1 height=25 width=118 align=center>날짜</TD>
+	<TD class=normal_b bgColor=#f1f1f1 width=108 align=center>시간대</TD>
+	<TD class=normal_b bgColor=#f1f1f1 width=177 align=center>인원/팀</TD>
+	<TD class=normal_b bgColor=#f1f1f1 width=85 align=center>결제예상금액</TD></TR>
+	<%
+		for(int i = 0; i < listPr.size();i++){
+			String tmpGolfName = listPr.get(i).getGolflink_name();
+			String tmpDate = listPr.get(i).getProduct_date();
+			tmpDate = tmpDate.substring(0,4) + "-" + tmpDate.substring(4,6) + "-" + tmpDate.substring(6,8);
+			String tmpSTime = listPr.get(i).getTime_start();
+			String tmpETime = listPr.get(i).getTime_end();
+			int billGoodPrice = listPr.get(i).getGoodjob_price();
+			int billNHPrice = listPr.get(i).getNH_price();
+	%>
+	<TR>
+	<TD bgColor=white height=25 align=center><%=tmpGolfName%>
+		<input type="hidden" name="prdtsubSeq" value="<%=listPr.get(i).getProductsub_seq() %>">
+	</TD>
+	<TD bgColor=white align=center><%=tmpDate %></TD>
+	<TD bgColor=white align=center><SELECT size=1 id="timeterm<%=i%>">
+		<OPTION selected>선택하세요</OPTION>
+		<% 
+			for(int k = Integer.parseInt(tmpSTime.substring(0,2)); k <= Integer.parseInt(tmpETime.substring(0,2));k++){
+				String tTerm = "";
+		%>
+		<OPTION value="<%=k%>"><%=k%>시</OPTION>
+		<% 
+			} 
+		%>
+		</SELECT></TD>
+	<TD bgColor=white align=center>
+	<P><SELECT size=1 name=formselect1> 
+		<OPTION selected>선택</OPTION> 
+		<OPTION value="1">1</OPTION> 
+		<OPTION value="2">2</OPTION> 
+		<OPTION value="3">3</OPTION> 
+		<OPTION value="4">4</OPTION></SELECT> 명 /
+		<SELECT size=1 disabled="disabled"> 
+		<OPTION value="1" selected>1</OPTION> 
+		</SELECT> 팀 </P></TD>
+	<TD bgColor=white align=center><SPAN class=orange name="billExpPrice">0</SPAN>원</TD></TR>
+	<%
 		}
-		
-%>
-<TR>
-<TD bgColor=white height=25 align=center><%=tmpDate %></TD>
-<TD bgColor=white height=25 align=center><%=tmpTime %></TD>
-<TD bgColor=white align=center><%=listPr.get(i).getCourse_name()%></TD>
-<TD bgColor=white align=center><%=listPr.get(i).getHoll_type() %></TD>
-
-<%
-		if(listPr.get(i).getProduct_status().equals("0")){			
-%>
-<TD bgColor=white align=center><A href="javascript:;" onclick="reserveSubmit('<%=listPr.get(i).getProductsub_seq() %>')"><IMG border=0 align=absMiddle src="../../images/booking/btn_regist_ok.gif" width=112 height=20></A></TD>		
-<%
-		}else{
-%>
-<TD bgColor=white height=25 align=center><IMG border=0 align=absMiddle src="../../images/booking/btn_regist_no.gif" width=112 height=20></TD>
-<%			
-		}
-%>
-</TR>
-<%
-	}
-%>
-</TABLE>
+	%>
+	</TABLE>
 </TD></TR>
+<TR>
+<TD>&nbsp;</TD>
+</TR>
+<TR>
+<TD colspan="5">
+	<TABLE border=0 cellSpacing=1 cellPadding=2 width="100%" bgColor=#d1d3d4 align=center>
+	<TBODY>
+	<TR>
+	<TD bgColor=#aed247 width=700 colSpan=4></TD></TR>
+	<TR>
+	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=25 width=142 align=right>골프장</TD>
+	<TD style="PADDING-LEFT: 10px" bgColor=white width=537 colSpan=3><SPAN class=normal_b>골프장명</SPAN></TD></TR>
+	<TR>
+	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 width=142 align=right>인원</TD>
+	<TD style="PADDING-LEFT: 10px" bgColor=white width=211><INPUT class=mem_input name=id size=5> 인 &nbsp; <INPUT class=mem_input name=id size=5> 팀 </TD>
+	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 width=130 align=right>시간대</TD>
+	<TD style="PADDING-LEFT: 10px" bgColor=white width=170><SELECT size=1 name=formselect1> <OPTION selected>선택하세요</OPTION></SELECT></TD></TR>
+	<TR>
+	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 align=right>예약자이름</TD>
+	<TD style="PADDING-LEFT: 10px" bgColor=white height=27 colSpan=3><INPUT class=mem_input name=id size=15></TD></TR>
+	<TR>
+	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=25 align=right>핸드폰</TD>
+	<TD style="PADDING-LEFT: 10px" bgColor=white colSpan=3><SELECT size=1 name=formselect1> <OPTION selected>선택</OPTION> <OPTION>010</OPTION> <OPTION>011</OPTION> <OPTION>016</OPTION> <OPTION>017</OPTION> <OPTION>018</OPTION> <OPTION>019</OPTION></SELECT> - <INPUT class=mem_input name=id maxLength=4 size=8> - <INPUT class=mem_input name=id maxLength=4 size=8></TD></TR>
+	<TR>
+	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=25 align=right>E-Mail</TD>
+	<TD style="PADDING-LEFT: 10px" bgColor=white colSpan=3><INPUT class=mem_input name=id size=15> @ <INPUT class=mem_input name=id size=15> <SELECT size=1 name=formselect1> <OPTION selected>선택하세요</OPTION> <OPTION>naver.com</OPTION> <OPTION>hanmail.net</OPTION> <OPTION>dreamwiz.com</OPTION> <OPTION>empal.com</OPTION> <OPTION>hanmir.com</OPTION> <OPTION>hanafos.com</OPTION> <OPTION>nate.com</OPTION> <OPTION>paran.com</OPTION> <OPTION>yahoo.co.kr</OPTION> <OPTION>gmail.com</OPTION> <OPTION>직접입력하기</OPTION></SELECT></TD></TR>
+	<TR>
+	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 align=right>요청사항</TD>
+	<TD style="PADDING-LEFT: 10px" bgColor=white colSpan=3><TEXTAREA class=box_01 cols=80 rows=4 name=content></TEXTAREA></TD></TR>
+	<TR>
+	<TD bgColor=#aed247 width=700 colSpan=4></TD></TR></TBODY></TABLE>
+</TD>
+</TR>
 <TR>
 <TD height=50>&nbsp;</TD></TR></TBODY></TABLE>
 <div id="destap2" style="display:none;"><%=glDto.getUse_guide() %></div>

@@ -6,10 +6,11 @@ public class ProductReserveDto {
 	String product_date = "";
 	String golflink_name = "";
 	String time_start = "";
+	String time_end = "";
 	String course_name = "";
 	String holl_type = "";
-	String goodjob_price = "";
-	String NH_price = "";
+	int goodjob_price;
+	int NH_price;
 	String product_status = "";
 	
 	public int getGolflink_seq() {
@@ -42,6 +43,12 @@ public class ProductReserveDto {
 	public void setTime_start(String time_start) {
 		this.time_start = time_start;
 	}
+	public String getTime_end() {
+		return time_end;
+	}
+	public void setTime_end(String time_end) {
+		this.time_end = time_end;
+	}
 	public String getCourse_name() {
 		return course_name;
 	}
@@ -54,16 +61,16 @@ public class ProductReserveDto {
 	public void setHoll_type(String holl_type) {
 		this.holl_type = holl_type;
 	}
-	public String getGoodjob_price() {
+	public int getGoodjob_price() {
 		return goodjob_price;
 	}
-	public void setGoodjob_price(String goodjob_price) {
+	public void setGoodjob_price(int goodjob_price) {
 		this.goodjob_price = goodjob_price;
 	}
-	public String getNH_price() {
+	public int getNH_price() {
 		return NH_price;
 	}
-	public void setNH_price(String nH_price) {
+	public void setNH_price(int nH_price) {
 		NH_price = nH_price;
 	}
 	public String getProduct_status() {

@@ -8,6 +8,7 @@ String golf = request.getParameter("golf");
 String date = request.getParameter("date");
 String cdate = request.getParameter("cdate");
 
+String resName = request.getParameter("reserveName");
 String uPhone = "";
 uPhone += request.getParameter("phone1") + "-";
 uPhone += request.getParameter("phone2") + "-";
@@ -15,7 +16,7 @@ uPhone += request.getParameter("phone3");
 int perNum = 4;
 
 GolfLinkReserveDto glrDto = new GolfLinkReserveDto();
-glrDto.setReserve_name("테스트사용자");
+glrDto.setReserve_name(resName);
 glrDto.setReserve_uid("test@test.com");
 glrDto.setPer_num(Integer.toString(perNum));
 glrDto.setReserve_phone(uPhone);

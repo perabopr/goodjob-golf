@@ -44,14 +44,14 @@
 function on_search() {
 
 	var frm = document.frm;
-	frm.action="join_list.jsp"
+	frm.action="join_List.jsp";
 	frm.submit();
 }
 
 function goPage(val){
 	var frm = document.frm;
 	frm.npage.value=val;
-	frm.action="join_list.jsp"
+	frm.action="join_List.jsp";
 	frm.submit();
 }
 

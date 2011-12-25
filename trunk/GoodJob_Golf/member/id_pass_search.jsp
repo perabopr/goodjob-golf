@@ -59,7 +59,7 @@
 			data: "type=id&mem_name="+name+"&mobile="+rphone+"&auth_no="+auth_no,
 			success: function(msg){
 				if($.trim(msg) == '0'){
-					alert("아이디가   핸드폰으로  발송 되었습니다.");
+					alert("아이디가   핸드폰/이메일로  발송 되었습니다.");
 				}
 				else if($.trim(msg) == '1'){
 					alert("일치하는 회원 정보가 없습니다.");
@@ -116,7 +116,7 @@
 			data: "type=pwd&mem_id="+id+"&mobile="+rphone+"&auth_no="+auth_no,
 			success: function(msg){
 				if($.trim(msg) == '0'){
-					alert("비밀번호가   핸드폰으로  발송 되었습니다.");
+					alert("비밀번호가  핸드폰/이메일로  발송 되었습니다.");
 				}
 				else if($.trim(msg) == '1'){
 					alert("일치하는 회원 정보가 없습니다.");

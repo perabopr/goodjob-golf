@@ -38,21 +38,7 @@
 			params.put("sphone",mobile);
 			sDao.send(params);
 			
-			String content = MessageFormat.format(MailContent.memid(),result);
-			
-			String host = Config.get("mail_host");
-			String m_id = Config.get("mail_id");
-			String m_pw = Config.get("mail_pw");
-			String from = Config.get("mail_fm");
-			
-			Mail mail = new Mail(host,m_id,m_pw);
-			mail.setTo(result);
-			mail.setFrom(from , "굳잡골프");
-			mail.setSubject("[굳잡골프] 회원님의 아이디를 알려 드립니다. ");
-			mail.setHtmlContent(content);
-			mail.send();
-			
-			out.println("0");
+			sout.println("0");
 		}
 		else if(result == null){
 			out.println("1");
@@ -74,20 +60,6 @@
 			params.put("sphone",mobile);
 			
 			sDao.send(params);
-			
-			String content = MessageFormat.format(MailContent.password(),result);
-			
-			String host = Config.get("mail_host");
-			String m_id = Config.get("mail_id");
-			String m_pw = Config.get("mail_pw");
-			String from = Config.get("mail_fm");
-			
-			Mail mail = new Mail(host,m_id,m_pw);
-			mail.setTo(result);
-			mail.setFrom(from , "굳잡골프");
-			mail.setSubject("[굳잡골프] 회원님의 비밀번호를 알려 드립니다. ");
-			mail.setHtmlContent(content);
-			mail.send();
 			
 			out.println("0");
 		}

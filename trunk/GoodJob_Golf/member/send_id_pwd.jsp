@@ -1,11 +1,13 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.goodjob.sms.*" %>
-<%@page import="com.goodjob.util.Utils"%>
 <%@page import="com.goodjob.member.MemberDao"%>
+<%@ page import="com.goodjob.mail.*"%>
+<%@ page import="com.goodjob.util.Utils"%>
+<%@page import="java.text.MessageFormat"%>
+<%@page import="com.goodjob.conf.Config"%>
 <%
 	
 	request.setCharacterEncoding("utf-8");
@@ -54,6 +56,39 @@
 			
 			if(isSend){
 				out.println("0");
+				
+				if("id".equals(type)){
+
+					String content = MessageFormat.format(MailContent.memid(),result);
+					
+					String host = Config.get("mail_host");
+					String m_id = Config.get("mail_id");
+					String m_pw = Config.get("mail_pw");
+					String from = Config.get("mail_fm");
+					
+					Mail mail = new Mail(host,m_id,m_pw);
+					mail.setTo(result);
+					mail.setFrom(from , "굳잡골프");
+					mail.setSubject("[굳잡골프] 회원님의 아이디를 알려 드립니다. ");
+					mail.setHtmlContent(content);
+					mail.send();					
+				}
+				else{
+					String content = MessageFormat.format(MailContent.password(),result);
+					
+					String host = Config.get("mail_host");
+					String m_id = Config.get("mail_id");
+					String m_pw = Config.get("mail_pw");
+					String from = Config.get("mail_fm");
+					
+					Mail mail = new Mail(host,m_id,m_pw);
+					mail.setTo(result);
+					mail.setFrom(from , "굳잡골프");
+					mail.setSubject("[굳잡골프] 회원님의 비밀번호를 알려 드립니다. ");
+					mail.setHtmlContent(content);
+					mail.send();
+				}
+				
 			}
 			else{
 				out.println("2");

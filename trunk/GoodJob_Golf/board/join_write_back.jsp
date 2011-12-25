@@ -119,11 +119,6 @@
 			loc.focus();
 		}
 	}
-
-	$(function() {
-		$( "#rounding_dt1" ).datepicker({dateFormat:'yy-mm-dd'});
-	});
-	
 //-->
 </script>
 					<!--############### 중앙 컨텐츠 영역 #################-->
@@ -248,23 +243,84 @@
 												                <td width="1" bgcolor="#D1D3D4"></td>
 												                <td width="25">&nbsp;</td>
 												                <td width="287">
-											<%
+												                <select id="rounding_dt1" name="rounding_dt1" size="1">
+												<%
 													String[] rounding_dt = null;
 													if(jDto.getRounding_dt() == null)
-														rounding_dt = new String[4];
+														rounding_dt = new String[5];
 													else
 														rounding_dt = StringUtils.trimToEmpty(jDto.getRounding_dt()).split("/");
 												
 													int curr_month = NumberUtils.toInt(rounding_dt[1],NumberUtils.toInt(Utils.getDate("MM")));
-											%>
-												                <input type="text" class="input_01" size="13" id="rounding_dt1" name="rounding_dt1" value="<%=StringUtils.trimToEmpty(rounding_dt[0])%>" readonly/>
-												                <select id="rounding_dt2" name="rounding_dt2">
-                                                                      <option value="AM"<%=("AM".equals(rounding_dt[1])?" selected":"")%>>오전</option>
-                                                                      <option value="PM"<%=("PM".equals(rounding_dt[1])?" selected":"")%>>오후</option>
-                                                                    </select>
-                                                                    <input class="input_01" type="text" size="3" maxlength="2" id="rounding_dt3" value="<%=StringUtils.trimToEmpty(rounding_dt[2])%>" name="rounding_dt3">시
-                                                                    <input class="input_01" type="text" size="3" maxlength="2" id="rounding_dt4" value="<%=StringUtils.trimToEmpty(rounding_dt[3])%>" name="rounding_dt4">분
-												                </td>
+													
+													for(int i = 1 ; i < 13 ; i++){
+														
+														if(i == curr_month){
+												%>
+												                    <option value="<%=(i<10?""+i:i)%>" selected><%=i%>월</option>
+												<%
+														}
+														else{
+												%>
+												            		<option value="<%=(i<10?""+i:i)%>"><%=i%>월</option>
+												<%
+														}
+													}
+												%>
+												                  </select>
+												                  <select id="rounding_dt2" name="rounding_dt2" size="1">
+												<%
+													int curr_day = NumberUtils.toInt(rounding_dt[2],NumberUtils.toInt(Utils.getDate("dd")));
+												
+													for(int i = 1 ; i <= 31 ; i++){
+														
+														if(i == curr_day){
+												%>
+												                    <option value="<%=(i<10?"0"+i:i)%>" selected><%=i%>일</option>
+												<%
+														}
+														else{
+												%>
+												            		<option value="<%=(i<10?"0"+i:i)%>"><%=i%>일</option>
+												<%
+														}
+													}
+												%>
+												                  </select>
+												                  <select id="rounding_dt3" name="rounding_dt3" size="1">
+												<%
+													int rd_dt = NumberUtils.toInt(rounding_dt[3],0);
+													for(int i = 1 ; i <= 23 ; i++){
+														if(i == rd_dt){
+												%>
+												    				<option value="<%=(i<10?"0"+i:i)%>" selected><%=i%></option>
+												<%
+														}else{
+												%>
+												            		<option value="<%=(i<10?"0"+i:i)%>"><%=i%></option>
+												<%
+														}
+													}
+												%>
+												                  </select>시
+												                  
+												                  <select id="rounding_dt4" name="rounding_dt4" size="1">
+												<%
+													rd_dt =NumberUtils.toInt(rounding_dt[4],0);
+													for(int i = 0 ; i < 60 ; i+=10){
+														if(i == rd_dt){
+												%>
+																<option value="<%=(i<10?i+"0":i)%>" selected><%=(i<10?i+"0":i)%></option>
+												<%			
+														}
+														else{
+												%>
+																	<option value="<%=(i<10?i+"0":i)%>"><%=(i<10?i+"0":i)%></option>
+												<%
+														}
+													}
+												%>
+												                  </select>분</td>
 												              </tr>
 												              <tr>
 												                <td height="30" align="center"><img src="/_admin/images/board/img_board_title_price.gif" width="43" height="15" border="0"></td>

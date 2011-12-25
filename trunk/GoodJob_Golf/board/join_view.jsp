@@ -219,7 +219,11 @@
 													                <td width="246" class="normal_b">
 													                <%
 													                	String[] rounding_dt = StringUtils.trimToEmpty(jDto.getRounding_dt()).split("/");
-													                	out.println(rounding_dt[1]+"월 "+rounding_dt[2]+"일 "+rounding_dt[3]+"시" + rounding_dt[4]+"분");
+													                	//out.println(rounding_dt[1]+"월 "+rounding_dt[2]+"일 "+rounding_dt[3]+"시" + rounding_dt[4]+"분");
+													                	out.println(rounding_dt[0]+"&nbsp;");
+													                	out.println(("AM".equals(rounding_dt[1])?"오전":"오후")+"&nbsp;");
+													                	out.println(rounding_dt[2]+"시&nbsp;");
+													                	out.println(rounding_dt[3]+"분&nbsp;");
 													                %>
 													                </td>
 													              </tr>
@@ -251,7 +255,7 @@
                                                           <td height="50" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                               <tr>
                                                               	<%if(mem_id.equals(jDto.getMem_id())){%>
-               													<td width="88"><a href="join_write.jsp?mode=modify&join_no=<%=jDto.getJoin_seq()%>"><img src="../../images/board/btn_edit.gif" width="71" height="24" border="0"></a></td>
+               													<td width="88"><a href="join_write.jsp?mode=modify&join_seq=<%=jDto.getJoin_seq()%>"><img src="../../images/board/btn_edit.gif" width="71" height="24" border="0"></a></td>
                                                                 <td width="480"><a href="javascript:join_end(<%=jDto.getJoin_seq()%>);"><img src="/_admin/images/board/btn_end.gif" width="71" height="24" border="0"></a></a></td>
                                                                 <td width="99" align="right"><a href="javascript:go_list();"><img src="../../images/board/btn_list.gif" width="71" height="24" border="0" alt="목록"></a></td>
 												                <%}else{%>

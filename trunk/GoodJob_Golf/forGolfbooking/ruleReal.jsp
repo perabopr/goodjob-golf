@@ -41,7 +41,7 @@ function reserveAgree(){
 <TABLE border=0 cellSpacing=0 cellPadding=0 width="95%">
 <TBODY>
 <TR>
-<TD class=location height=30 width="95%" align=right><A href="/index.html">HOME</A> &gt; 골프장부킹 &gt; <SPAN class=location_b>실시간예약</SPAN></TD></TR>
+<TD class=location height=30 width="95%" align=right><A href="/main.jsp">HOME</A> &gt; 골프장부킹 &gt; <SPAN class=location_b>실시간예약</SPAN></TD></TR>
 <TR>
 <TD style="PADDING-LEFT: 15px; PADDING-TOP: 4px" class=sub_title bgColor=#d1d3d4 height=33>실시간예약</TD></TR>
 <TR>

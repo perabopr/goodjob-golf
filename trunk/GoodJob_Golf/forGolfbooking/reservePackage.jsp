@@ -1,5 +1,23 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="com.goodjob.reserve.dto.PackageDto"%>
+<%@page import="org.apache.commons.lang.StringUtils"%>
+<%@page import="com.goodjob.reserve.dto.RegionDto"%>
+<%@page import="java.util.List"%>
+<%@page import="com.goodjob.reserve.PackageDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+String pRegion = StringUtils.defaultIfEmpty(request.getParameter("region"), "1");
+PackageDao pkDao = new PackageDao();
+List<RegionDto> rList = pkDao.getRegionList("1");
+
+String strWhere = "AND a.region_seq = '" + pRegion + "'";
+List<PackageDto> pkList = pkDao.getPackageList(strWhere);
+%>
+<%!
+public String commify(int n) {
+	DecimalFormat formater = new DecimalFormat("###,###,###,###,###,###,###");
+	return formater.format(n);
+}
 
 %>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
@@ -23,13 +41,36 @@
 			<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
 			<TBODY>
 			<TR>
-			<TD style="PADDING-RIGHT: 18px" height=30 align=right><SPAN class=blue>수도권</SPAN> &nbsp;I &nbsp;<A class=area href="#">강원권</A> &nbsp;I &nbsp;<A class=area href="#">충청권</A> &nbsp;I &nbsp;<A class=area href="#">전라권</A> &nbsp;I &nbsp;<A class=area href="#">경상권</A> &nbsp;I &nbsp;<A class=area href="#">제주권</A></TD></TR>
+			<TD style="PADDING-RIGHT: 18px" height=30 align=right>
+			<% 
+				for(int i = 0; i < rList.size(); i++){ 
+					if(pRegion.equals(Integer.toString(rList.get(i).getRegion_seq()))){
+			%>
+					<SPAN class=blue><%=rList.get(i).getRegion_name()%></SPAN> &nbsp;I&nbsp;
+			<%
+					}else{
+			%>
+					<A class=area href="reserve.jsp?menu=3&region=<%=rList.get(i).getRegion_seq()%>"><%=rList.get(i).getRegion_name()%></A> &nbsp;I &nbsp;
+			<% 
+					}
+				} 
+			%>
+			</TD></TR>
+<%
+if(pkList.size() > 0){
+	int i = 0;
+	int j = (int)Math.round((double)pkList.size()/2);
+	for(int k = 0; k < j;k++){
+%>
 			<TR>
 			<TD align=center>
 				<TABLE border=0 cellSpacing=0 cellPadding=0 width=669>
 				<TBODY>
 				<TR>
 				<TD vAlign=top width=325>
+<%
+		if(i < pkList.size()){
+%>
 					<TABLE border=0 cellSpacing=0 cellPadding=0 width=325>
 					<TBODY>
 					<TR>
@@ -41,18 +82,27 @@
 							<TABLE cellSpacing=0 cellPadding=0 width=313>
 							<TBODY>
 							<TR>
-							<TD bgColor=#f1f1f1 height=110 width=313 align=center>313 x 110</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
+							<TD bgColor=#f1f1f1 height=110 width=313 align=center><img src="/upload/<%=pkList.get(i).getImg_sub() %>" width="313" height="110"></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
 					<TR>
 					<TD colSpan=2>&nbsp;</TD></TR>
 					<TR>
-					<TD class=cc_name colSpan=2>골프패키지명</TD></TR>
+					<TD class=cc_name colSpan=2><%=pkList.get(i).getPackage_name1() %></TD></TR>
 					<TR>
-					<TD width=225><SPAN class=normal_fee_b>정상가 : 300,001원</SPAN></TD>
-					<TD vAlign=bottom rowSpan=2 width=100 align=center><A href="domestic_regist.html"><IMG border=0 align=absMiddle src="../../images/common/btn_regist_booking.gif" width=89 height=34></A></TD></TR>
+					<TD width=225><SPAN class=normal_fee_b>정상가 : <%=commify(pkList.get(i).getOff_n_mon()) %>원</SPAN></TD>
+					<TD vAlign=bottom rowSpan=2 width=100 align=center><A href="detail.jsp?menu=3&pack=<%=pkList.get(i).getPackage_seq() %>"><IMG border=0 align=absMiddle src="../../images/common/btn_regist_booking.gif" width=89 height=34></A></TD></TR>
 					<TR>
-					<TD width=225><SPAN class=mem_fee_b>회원가 : 105,001원</SPAN></TD></TR></TBODY></TABLE></TD>
+					<TD width=225><SPAN class=mem_fee_b>회원가 : <%=commify(pkList.get(i).getOff_s_mon()) %>원</SPAN></TD></TR></TBODY>
+					</TABLE>
+<%
+			i++;
+		}
+%>
+				</TD>
 				<TD width=19>&nbsp;</TD>
 				<TD vAlign=top width=325>
+<%
+		if(i < pkList.size()){
+%>
 					<TABLE border=0 cellSpacing=0 cellPadding=0 width=325>
 					<TBODY>
 					<TR>
@@ -65,15 +115,24 @@
 					<TR>
 					<TD colSpan=2>&nbsp;</TD></TR>
 					<TR>
-					<TD class=cc_name colSpan=2>골프패키지명</TD></TR>
+					<TD class=cc_name colSpan=2><%=pkList.get(i).getPackage_name1() %></TD></TR>
 					<TR>
-					<TD width=225><SPAN class=normal_fee_b>정상가 : 300,002원</SPAN></TD>
+					<TD width=225><SPAN class=normal_fee_b>정상가 : <%=commify(pkList.get(i).getOff_n_mon()) %>원</SPAN></TD>
 					<TD vAlign=bottom rowSpan=2 width=100 align=center><A href="domestic_regist.html"><IMG border=0 align=absMiddle src="../../images/common/btn_regist_booking.gif" width=89 height=34></A></TD></TR>
 					<TR>
-					<TD width=225><SPAN class=mem_fee_b>회원가 : 105,002원</SPAN></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+					<TD width=225><SPAN class=mem_fee_b>회원가 : <%=commify(pkList.get(i).getOff_s_mon()) %>원</SPAN></TD></TR></TBODY>
+					</TABLE>
+<%
+			i++;
+		}
+%>
+				</TD></TR></TBODY></TABLE>
 			</TD></TR>
-			<TR>
-			<TD>&nbsp;</TD></TR>
+		<TR><TD>&nbsp;</TD></TR>
+<%
+	}
+}
+%>
 			</TBODY></TABLE></TD></TR>
 		<TR>
 		<TD align=center>&nbsp;</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>

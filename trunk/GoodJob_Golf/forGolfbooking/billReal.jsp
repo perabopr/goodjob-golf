@@ -21,7 +21,7 @@ String bookingDate = prDto.getProduct_date();
 String bookingTime = prDto.getTime_start();
 bookingDate = bookingDate.substring(0,4) + "-" + bookingDate.substring(4,6) + "-" + bookingDate.substring(6,8) + " ";
 bookingDate += bookingTime.substring(0,2) + ":" + bookingTime.substring(2,4); 
-String buyPrice = Integer.toString(Integer.parseInt(prDto.getGoodjob_price()) * 4);
+String buyPrice = Integer.toString(prDto.getGoodjob_price() * 4);
 
 String menu = "1";
 String golf = request.getParameter("golf");
@@ -93,7 +93,7 @@ $(function(){
 <TABLE border=0 cellSpacing=0 cellPadding=0 width="95%">
 <TBODY>
 <TR>
-<TD class=location height=30 width="95%" align=right><A href="/index.html">HOME</A> &gt; 골프장부킹 &gt; <SPAN class=location_b>예약확인 및 결제</SPAN></TD></TR>
+<TD class=location height=30 width="95%" align=right><A href="/main.jsp">HOME</A> &gt; 골프장부킹 &gt; <SPAN class=location_b>예약확인 및 결제</SPAN></TD></TR>
 <TR>
 <TD style="PADDING-LEFT: 15px; PADDING-TOP: 4px" class=sub_title bgColor=#d1d3d4 height=33>예약확인 및 결제</TD></TR>
 <TR>

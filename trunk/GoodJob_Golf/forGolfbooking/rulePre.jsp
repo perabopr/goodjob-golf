@@ -1,10 +1,15 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.reserve.dto.GolfLinkPromiseDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-String menuSeq = request.getParameter("menu");
-String productsubSeq = request.getParameter("gcId");
+String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
+String productsubSeq = StringUtils.trimToEmpty(request.getParameter("psId"));
+if(productsubSeq.length() == 0){
+	out.println("<script>location.href='reserve.jsp?menu=2'</script>");
+	out.close();
+}
 GolfLinkDao glDao = new GolfLinkDao();
 List<GolfLinkPromiseDto> listPromise = glDao.getGolfPromise(Integer.parseInt(productsubSeq));
 %>
@@ -21,19 +26,39 @@ function reserveAgree(){
 		return false;		
 	}
 	$("#menu").val("<%=menuSeq%>");
-	$("#gcId").val("<%=productsubSeq%>");
+	$("#psId").val("<%=productsubSeq%>");
 	$("#golf").val('<%=request.getParameter("golf")%>');
 	$("#date").val('<%=request.getParameter("date")%>');
 	$("#cdate").val('<%=request.getParameter("cdate")%>');
+	
+	$("#reserveCnt").val('<%=request.getParameter("reserveCnt")%>');
+	$("#reserveTeam").val('<%=request.getParameter("reserveTeam")%>');
+	$("#reserveDate").val('<%=request.getParameter("reserveDate")%>');
+	$("#reserveTime").val('<%=request.getParameter("reserveTime")%>');
+	
+	$("#reserveName").val('<%=request.getParameter("reserveName")%>');
+	$("#reservePhone").val('<%=request.getParameter("reservePhone")%>');
+	$("#reserveEmail").val('<%=request.getParameter("reserveEmail")%>');
+	$("#reserveRequest").val('<%=request.getParameter("reserveRequest")%>');
 	frm.submit();
 }
 </script>
 <FORM NAME="frm" METHOD="post" ACTION="bill.jsp">
-<input type="hidden" id="menu" name="menu" >
-<input type="hidden" id="gcId" name="gcId" >
+<input type="hidden" id="menu" name="menu" value="2" >
+<input type="hidden" id="psId" name="psId">
 <input type="hidden" id="golf" name="golf" >
 <input type="hidden" id="date" name="date" >
 <input type="hidden" id="cdate" name="cdate" >
+
+<input type="hidden" id="reserveCnt" name="reserveCnt">
+<input type="hidden" id="reserveTeam" name="reserveTeam">
+<input type="hidden" id="reserveDate" name="reserveDate">
+<input type="hidden" id="reserveTime" name="reserveTime">
+
+<input type="hidden" id="reserveName" name="reserveName">
+<input type="hidden" id="reservePhone" name="reservePhone">
+<input type="hidden" id="reserveEmail" name="reserveEmail">
+<input type="hidden" id="reserveRequest" name="reserveRequest">
 </FORM>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
 <TR>
@@ -41,7 +66,7 @@ function reserveAgree(){
 <TABLE border=0 cellSpacing=0 cellPadding=0 width="95%">
 <TBODY>
 <TR>
-<TD class=location height=30 width="95%" align=right><A href="/index.html">HOME</A> &gt; 골프장부킹 &gt; <SPAN class=location_b>사전예약</SPAN></TD></TR>
+<TD class=location height=30 width="95%" align=right><A href="/main.jsp">HOME</A> &gt; 골프장부킹 &gt; <SPAN class=location_b>사전예약</SPAN></TD></TR>
 <TR>
 <TD style="PADDING-LEFT: 15px; PADDING-TOP: 4px" class=sub_title bgColor=#d1d3d4 height=33>사전예약</TD></TR>
 <TR>

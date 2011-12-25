@@ -69,6 +69,8 @@ public class RESERVE {
 			",B.product_date" +
 			",A.time_start" +
 			",A.time_end" +
+			",A.goodjob_price" +
+			",A.NH_price" +
 			",IFNULL(C.course_name, '') course_name" +
 			",D.holl_type" +
 			",A.product_status " +
@@ -76,7 +78,8 @@ public class RESERVE {
 			"INNER JOIN tb_product B on(A.product_seq = B.product_seq) " +
 			"LEFT OUTER JOIN tb_golflink_course C on(C.golflink_course_seq = A.golflink_course_seq) " +
 			"INNER JOIN tb_golflink D on(B.golflink_seq = D.golflink_seq) " +
-		"WHERE B.golflink_seq = ? " +
+		"WHERE A.product_status = '0' " +
+			"AND B.golflink_seq = ? " +
 			"AND B.product_date = ?";
 	
 	public static final String getGolfPromise
@@ -110,7 +113,8 @@ public class RESERVE {
 			"INNER JOIN tb_product B on(A.product_seq = B.product_seq) " +
 			"LEFT OUTER JOIN tb_golflink_course C on(C.golflink_course_seq = A.golflink_course_seq) " +
 			"INNER JOIN tb_golflink D on(B.golflink_seq = D.golflink_seq) " +
-		"WHERE A.productsub_seq = ?";
+		"WHERE A.product_status = '0' " +
+			"AND A.productsub_seq = ?";
 	
 	public static final String setGolfLinkReserve_insert
 	=	"INSERT INTO tb_golflink_reserve(" +
@@ -149,4 +153,71 @@ public class RESERVE {
 	=	"UPDATE tb_product_sub " +
 			"SET product_status = ? " +
 		"WHERE productsub_seq = ?";
+	
+	public static final String getProduct_select
+	=	"SELECT " +
+			"product_seq" +
+			",menu_seq" +
+			",golflink_seq" +
+			",product_year" +
+			",product_month" +
+			",product_day" +
+			",product_date" +
+			",view_yn " +
+		"FROM tb_product " +
+			"WHERE golflink_seq = ?";
+	
+	public static final String getPackage_select
+	=	"SELECT " +
+			" a.package_seq " +
+			",a.package_name1 " +
+			",a.package_name2 " +
+			",a.region_seq " +
+			",a.package_type " +
+			",a.img_main " +
+			",a.img_sub " +
+			",a.img_sub1 " +
+			",a.img_sub2 " +
+			",a.img_sub3 " +
+			",a.img_sub4 " +
+			",a.address1 " +
+			",a.address2 " +
+			",a.point_x " +
+			",a.point_y " +
+			",a.view_yn " +
+			",a.package_guide " +
+			",a.use_guide " +
+			",a.golflink_guide " +
+			",a.way_map " +
+			",b.peak_n_mon " +
+			",b.peak_n_tue " +
+			",b.peak_n_wed " +
+			",b.peak_n_thu " +
+			",b.peak_n_fri " +
+			",b.peak_n_sat " +
+			",b.peak_n_sun " +
+			",b.peak_s_mon " +
+			",b.peak_s_tue " +
+			",b.peak_s_wed " +
+			",b.peak_s_thu " +
+			",b.peak_s_fri " +
+			",b.peak_s_sat " +
+			",b.peak_s_sun " +
+			",b.off_n_mon " +
+			",b.off_n_tue " +
+			",b.off_n_wed " +
+			",b.off_n_thu " +
+			",b.off_n_fri " +
+			",b.off_n_sat " +
+			",b.off_n_sun " +
+			",b.off_s_mon " +
+			",b.off_s_tue " +
+			",b.off_s_wed " +
+			",b.off_s_thu " +
+			",b.off_s_fri " +
+			",b.off_s_sat " +
+			",b.off_s_sun " +
+		"FROM tb_package a " +
+			"INNER JOIN tb_package_price b ON(a.package_seq = b.package_seq) " +
+		"WHERE 1=1 %s";
 }

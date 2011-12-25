@@ -222,4 +222,25 @@ public class GolfLinkDao {
 			DbUtils.closeQuietly(conn);
 		}
 	}
+	
+	public List<ProductDto> getProduct(int glSeq){
+		List<ProductDto> list = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(glSeq);
+			ResultSetHandler rsh = new BeanListHandler(ProductDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<ProductDto>) qr.query(conn , RESERVE.getProduct_select, rsh, bind.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		return list;		
+	}
 }

@@ -25,7 +25,7 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td align="center"><a href="/mypage/regist_index.html"><img src="/images/common/btn_regist_out.gif" width="184" height="26" border="0"></a></td>
+                    <td align="center"><a href="/mypage/regist_index.jsp"><img src="/images/common/btn_regist_out.gif" width="184" height="26" border="0"></a></td>
                 </tr>
                 <tr>
                     <td height="5"></td>

@@ -15,7 +15,7 @@
 	params.put("mem_id",StringUtils.trimToEmpty((String)session.getAttribute("mem_id")));
 	params.put("msg",msg);
 	params.put("rphone",mobile);
-	params.put("sphone","02-6670-0200");
+	params.put("sphone","02-6670-0210");
 	params.put("rdate",rdate);
 	params.put("rtime",rtime);
 	

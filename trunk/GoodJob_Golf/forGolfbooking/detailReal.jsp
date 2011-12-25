@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
 <%@page import="com.goodjob.reserve.dto.ProductDto"%>
 <%@page import="java.util.Calendar"%>
@@ -9,8 +10,8 @@
 <%
 int menuNum = Integer.parseInt(menuName);
 
-String golfSeq = request.getParameter("golf");
-String curDate = request.getParameter("cdate");
+String golfSeq = StringUtils.trimToEmpty(request.getParameter("golf"));
+String curDate = StringUtils.trimToEmpty(request.getParameter("cdate"));
 if(curDate == null || curDate.length() != 8){
 	response.sendRedirect("reserve.jsp?menu=1");
 }

@@ -450,7 +450,6 @@ CREATE TABLE tb_logon_history(
 		mem_id                        		VARCHAR(100)		 NULL ,
 		logon_type                    		CHAR(1)		 NULL ,
 		reg_dt                        		DATETIME		 NULL ,
-		mem_seq                       		INT(11)		 NULL ,
 		KEY `tb_logon_history_idx` (`mem_id`)
 );
 

@@ -1,16 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
-<%@page import="org.apache.commons.lang.math.NumberUtils"%>
+<%@ page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
-<%@ page import="com.goodjob.product.*" %>
-<%@page import="com.goodjob.product.dto.CondoDto"%>
-<%@page import="java.util.*"%>
+<%@ page import="com.goodjob.reserve.dto.RegionDto"%>
+<%@ page import="com.goodjob.reserve.PackageDao"%>
 <%
-
 	int region = NumberUtils.toInt(request.getParameter("region"),1);
 
+	//어드민쪽 DAO랑 사용자쪽 DAO가 틀려요 근데 왜 안되는지 몰겠네여;
+	PackageDao pkDao = new PackageDao();
+	List<RegionDto> arrRegions = pkDao.getRegionList("1");
+	/*
 	RegionDao regionDao = new RegionDao();
-	List<com.goodjob.product.dto.RegionDto> arrRegions = regionDao.getRegionList("1");
+	List<RegionDto> arrRegions = regionDao.getRegionList("1");
+	*/
 %>
 
 <table border="0" cellpadding="0" cellspacing="0" width="751">

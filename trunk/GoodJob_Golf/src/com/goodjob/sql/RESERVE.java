@@ -232,4 +232,37 @@ public class RESERVE {
 		"FROM tb_package_promise A " +
 			"INNER JOIN tb_package B on(A.package_seq = B.package_seq) " +
 		"WHERE A.package_seq = ?";
+	
+	public static final String setPackageReserve_insert
+	=	"INSERT INTO tb_package_reserve(" +
+			" menu_seq" +
+			",package_seq" +
+			",reserve_day" +
+			",reserve_name" +
+			",reserve_uid" +
+			",package_name1" +
+			",package_name2" +
+			",tour_date" +
+			",per_num" +
+			",reserve_phone" +
+			",package_price" +
+			",request_content" +
+			",process_status) " +
+		"SELECT " +
+			" ? " +
+			",a.package_seq " +
+			",curdate() " +
+			",? " +
+			",? " +
+			",a.package_name1 " +
+			",a.package_name2 " +
+			",? " +
+			",? " +
+			",? " +
+			",? " +
+			",? " +
+			",? " +
+		"FROM tb_package a " +
+			"INNER JOIN tb_package_price b on(a.package_seq = b.package_seq) " +
+		"WHERE a.package_seq = ?";
 }

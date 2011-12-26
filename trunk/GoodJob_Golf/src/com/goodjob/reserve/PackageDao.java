@@ -3,6 +3,8 @@ package com.goodjob.reserve;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.Statement;
+import java.sql.ResultSet;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
@@ -12,6 +14,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import com.goodjob.db.DBManager;
 import com.goodjob.reserve.dto.PackageDto;
 import com.goodjob.reserve.dto.PackagePromiseDto;
+import com.goodjob.reserve.dto.PackageReserveDto;
 import com.goodjob.reserve.dto.RegionDto;
 import com.goodjob.sql.PRODUCT;
 import com.goodjob.sql.RESERVE;
@@ -82,5 +85,32 @@ public class PackageDao{
 		}
 
 		return list;
+	}
+	
+	public void setPackageReserve(PackageReserveDto glrDto){
+		Connection conn = null;
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(glrDto.getMenu_seq());
+			bind.add(glrDto.getReserve_name());
+			bind.add(glrDto.getReserve_uid());
+			bind.add(glrDto.getTour_date());
+			bind.add(glrDto.getPer_num());
+			bind.add(glrDto.getReserve_phone());
+			bind.add(glrDto.getPackage_price());
+			bind.add(glrDto.getRequest_content());
+			bind.add(glrDto.getProcess_status());
+			bind.add(glrDto.getPackage_seq());
+			
+			QueryRunner qr = new QueryRunner();
+			
+			//예약
+			qr.update(conn, RESERVE.setPackageReserve_insert, bind.toArray());			
+		}catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
 	}
 }

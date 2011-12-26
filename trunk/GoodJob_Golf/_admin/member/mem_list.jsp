@@ -135,7 +135,7 @@
 %>
         <tr>
           <td bgcolor="white" align="center" height="25"><%=mDto.getReg_dt()%></td>
-          <td align="center" bgcolor="white"><%=mDto.getMem_name()%></td>
+          <td align="center" bgcolor="white"><div<%if("Y".equals(mDto.getSecession())){%> style="color:#CC0000;font-weight:bold;"<%}%>><%=mDto.getMem_name()%></div></td>
           <td align="center" bgcolor="white"><%=mDto.getMem_id()%></td>
           <td align="center" bgcolor="white"><%=mDto.getMem_mtel()%></td>
           <td align="center" bgcolor="white">

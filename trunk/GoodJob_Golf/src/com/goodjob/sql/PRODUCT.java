@@ -700,7 +700,7 @@ public class PRODUCT {
 				",price_s3 " +
 			"FROM tb_condo_room " +
 			"WHERE condo_seq = ? " +
-			"ORDER BY condoroom_seq";
+			"ORDER BY condoroom_seq ";
 	public static final String condo_room_insert
 		=	"INSERT INTO tb_condo_room( " +
 				" condo_seq " +

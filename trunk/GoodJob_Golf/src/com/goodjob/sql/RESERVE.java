@@ -220,7 +220,66 @@ public class RESERVE {
 		"FROM tb_package a " +
 			"INNER JOIN tb_package_price b ON(a.package_seq = b.package_seq) " +
 		"WHERE 1=1 %s";
-		
+	
+	//--------------------------------------------- condo
+	public static final String condo_select_list = " select a.condo_seq, " +
+				"a.condo_name, " +
+				"a.region_seq, " +
+				"a.img_main , " +
+				"min(b.price_n1) price_n1 , " +
+				"min(b.price_n1) price_n2 ,  " +
+				"min(b.price_n1) price_n3 ,   " +
+				"min(b.price_s1) price_s1 , " +
+				"min(b.price_s1) price_s2 ,  " +
+				"min(b.price_s1) price_s3  " +
+				"   from tb_condo a left outer join tb_condo_room b on(a.condo_seq=b.condo_seq) " +
+				"   where  region_seq = ? " +
+				"   group by b.condo_seq order by condo_seq desc ";
+	
+	public static final String condo_select = " select a.condo_seq, " +
+	" a.condo_name, " +
+	" a.region_seq, " +
+	" a.saledate_start, " +
+	" a.saledate_end, " +
+	" a.img_main, " +
+	" a.address1, " +
+	" a.address2, " +
+	" a.point_x, " +
+	" a.point_y, " +
+	" a.view_yn, " +
+	" a.reserve_start, " +
+	" a.reserve_end, " +
+	" a.condo_info, " +
+	" a.detail_info, " +
+	" a.way_map, " +
+	" a.edit_rule " +
+	" from tb_condo a where a.condo_seq = ? ";
+	
+	
+	public static final String condo_gallery_select
+	=	"SELECT " +
+			" condoimg_seq " +
+			",condo_seq " +
+			",condo_img " +
+		"FROM tb_condo_gallery " +
+		"WHERE condo_seq = ? " +
+		"ORDER BY condoimg_seq";
+	
+	public static final String condo_term_select
+	=	"SELECT " +
+			" condoterm_seq " +
+			",condo_seq " +
+			",roomtype " +
+			",price_n1 " +
+			",price_n2 " +
+			",price_n3 " +
+			",price_s1 " +
+			",price_s2 " +
+			",price_s3 " +
+		"FROM tb_condo_room " +
+		"WHERE condo_seq = ? " +
+		"ORDER BY condoterm_seq ";
+	
 	public static final String getPackagePromise
 	=	"SELECT " +
 			" A.promise1_type,A.promise1" +

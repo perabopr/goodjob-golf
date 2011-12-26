@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
 <%@page import="java.util.List"%>
@@ -5,10 +6,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
-String productsubSeq = StringUtils.trimToEmpty(request.getParameter("psId"));
+int productsubSeq = NumberUtils.toInt(request.getParameter("psId"),0);
 
 GolfLinkDao glDao = new GolfLinkDao();
-List<ProductReserveDto> listPr = glDao.getGolfProduct(Integer.parseInt(productsubSeq));
+List<ProductReserveDto> listPr = glDao.getGolfProduct(productsubSeq);
 
 ProductReserveDto prDto = null;
 if(listPr != null && listPr.size() == 1){

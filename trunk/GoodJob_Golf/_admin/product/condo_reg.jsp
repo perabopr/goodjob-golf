@@ -38,7 +38,6 @@ if(condoSeq.length() > 0){
 <script src="../js/jquery.ui.core.js"></script>
 <script src="../js/jquery.ui.widget.js"></script>
 <script src="../js/jquery.ui.datepicker.js"></script>
-<link rel="stylesheet" href="../css/demos.css">
 <title></title>
 <script language="JavaScript"> 
 <!-- 

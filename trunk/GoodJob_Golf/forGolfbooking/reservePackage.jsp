@@ -89,7 +89,7 @@ if(pkList.size() > 0){
 					<TD class=cc_name colSpan=2><%=pkList.get(i).getPackage_name1() %></TD></TR>
 					<TR>
 					<TD width=225><SPAN class=normal_fee_b>정상가 : <%=commify(pkList.get(i).getOff_n_mon()) %>원</SPAN></TD>
-					<TD vAlign=bottom rowSpan=2 width=100 align=center><A href="detail.jsp?menu=3&pack=<%=pkList.get(i).getPackage_seq() %>"><IMG border=0 align=absMiddle src="../../images/common/btn_regist_booking.gif" width=89 height=34></A></TD></TR>
+					<TD vAlign=bottom rowSpan=2 width=100 align=center><A href="detail.jsp?menu=3&pkSeq=<%=pkList.get(i).getPackage_seq() %>"><IMG border=0 align=absMiddle src="../../images/common/btn_regist_booking.gif" width=89 height=34></A></TD></TR>
 					<TR>
 					<TD width=225><SPAN class=mem_fee_b>회원가 : <%=commify(pkList.get(i).getOff_s_mon()) %>원</SPAN></TD></TR></TBODY>
 					</TABLE>

@@ -23,7 +23,7 @@
 	
 	String upfilemain = fileUpload.getParameter("txtimgmain");
 	if(fileMap.get("imgmain") != null){
-		upfilemain = (String)fileUpload.getParameter("imgmain");
+		upfilemain = fileMap.get("imgmain");
 	}
 	
 	int idSeq = 0;
@@ -36,7 +36,7 @@
 	cDto.setRegion_seq(Integer.parseInt(fileUpload.getParameter("ddl_region")));
 	cDto.setSaledate_start(fileUpload.getParameter("saleDateStart"));
 	cDto.setSaledate_end(fileUpload.getParameter("saleDateEnd"));
-	cDto.setImg_main(fileUpload.getParameter("upfilemain"));
+	cDto.setImg_main(upfilemain);
 	cDto.setAddress1(fileUpload.getParameter("address1"));
 	cDto.setAddress2(fileUpload.getParameter("address2"));
 	cDto.setPoint_x(fileUpload.getParameter("pointx"));

@@ -2,7 +2,12 @@
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
-<%@ page import="java.util.*" %><html>
+<%@ page import="java.util.*" %>
+<%
+	String curr_url = StringUtils.trimToEmpty(request.getRequestURI());
+	//out.println(curr_url);
+	
+%><html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
@@ -81,7 +86,6 @@
                           <tr>
                             <td background="/images/img_leftmenu/img_left_bg.jpg" width="235">
 <%
-	String curr_url = StringUtils.trimToEmpty(request.getRequestURI());
 	if(curr_url.indexOf("/member_logon.jsp") == -1){
 	
 %>

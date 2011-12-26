@@ -49,7 +49,7 @@ public class MEMBER {
 	//탈퇴
 	public static final String secession = " update tb_member set secession = 'Y' , secession_dt = now()  where mem_id= ? ";
 	
-	public static final String logon = " select mem_id , mem_pwd , mem_name , mem_mtel from tb_member where mem_id= ? ";
+	public static final String logon = "select mem_id , mem_pwd , mem_name , mem_mtel, secession from tb_member where mem_id= ? ";
 	
 	public static final String logon_hist = "insert into tb_logon_history(mem_id,logon_type,reg_dt ) values( ? , ? , now())";
 	

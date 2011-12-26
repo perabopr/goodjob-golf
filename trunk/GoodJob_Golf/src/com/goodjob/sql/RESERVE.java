@@ -220,4 +220,16 @@ public class RESERVE {
 		"FROM tb_package a " +
 			"INNER JOIN tb_package_price b ON(a.package_seq = b.package_seq) " +
 		"WHERE 1=1 %s";
+		
+	public static final String getPackagePromise
+	=	"SELECT " +
+			" A.promise1_type,A.promise1" +
+			",A.promise2_type,A.promise2" +
+			",A.promise3_type,A.promise3" + 
+			",A.promise4_type,A.promise4" +
+			",A.promise5_type,A.promise5" +
+			",IFNULL(A.cancelrule,'') 'cancelrule'" +
+		"FROM tb_package_promise A " +
+			"INNER JOIN tb_package B on(A.package_seq = B.package_seq) " +
+		"WHERE A.package_seq = ?";
 }

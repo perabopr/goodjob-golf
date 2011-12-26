@@ -249,6 +249,10 @@ function emaildomain(){
 	$("#email2").val($("#ddlEmail").val());
 }
 
+function imgChange(objId){
+	$("#imgmain").attr("src", objId.src);
+}
+
 function commify(n) {
   var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
   n += '';                          // 숫자를 문자열로 변환
@@ -303,7 +307,7 @@ function commify(n) {
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=274 bgColor=silver>
 <TBODY>
 <TR>
-<TD bgColor=white width=270><IMG border=0 name=img1 src="../../images/common/img_thumb_ready.jpg" width=270 height=202></TD></TR></TBODY></TABLE></TD></TR>
+<TD bgColor=white width=270><IMG border=0 id="imgmain" name="imgmain" src="/upload/<%=glDto.getImg_sub1()%>" width=270 height=202></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD bgColor=white height=10></TD></TR>
 <TR>
@@ -315,22 +319,22 @@ function commify(n) {
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
 <TBODY>
 <TR>
-<TD bgColor=white><IMG border=0 name=img1 src="<%=glDto.getImg_sub1()%>" width=63 height=47></TD></TR></TBODY></TABLE></TD>
+<TD bgColor=white><IMG border=0 name=img1 src="/upload/<%=glDto.getImg_sub1()%>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD></TR></TBODY></TABLE></TD>
 <TD width=62>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
 <TBODY>
 <TR>
-<TD bgColor=white><IMG border=0 name=img1 src="<%=glDto.getImg_sub2()%>" width=63 height=47></TD></TR></TBODY></TABLE></TD>
+<TD bgColor=white><IMG border=0 name=img1 src="/upload/<%=glDto.getImg_sub2()%>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD></TR></TBODY></TABLE></TD>
 <TD width=62>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
 <TBODY>
 <TR>
-<TD bgColor=white><IMG border=0 name=img1 src="<%=glDto.getImg_sub3()%>" width=63 height=47></TD></TR></TBODY></TABLE></TD>
+<TD bgColor=white><IMG border=0 name=img1 src="/upload/<%=glDto.getImg_sub3()%>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD></TR></TBODY></TABLE></TD>
 <TD width=62>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
 <TBODY>
 <TR>
-<TD bgColor=white><IMG border=0 name=img1 src="<%=glDto.getImg_sub4()%>" width=63 height=47></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD>
+<TD bgColor=white><IMG border=0 name=img1 src="/upload/<%=glDto.getImg_sub4()%>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD>
 <TD vAlign=top width=412>
 <TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
 <TBODY>

@@ -20,6 +20,7 @@ public class PackageReserveDto implements Serializable {
 	private String per_num;
 	private String reserve_phone;
 	private int package_price;
+	private String request_content;
 	private String process_status;
 	public int getReserve_seq() {
 		return reserve_seq;
@@ -92,6 +93,12 @@ public class PackageReserveDto implements Serializable {
 	}
 	public void setPackage_price(int packagePrice) {
 		package_price = packagePrice;
+	}
+	public String getRequest_content() {
+		return request_content;
+	}
+	public void setRequest_content(String request_content) {
+		this.request_content = request_content;
 	}
 	public String getProcess_status() {
 		return process_status;

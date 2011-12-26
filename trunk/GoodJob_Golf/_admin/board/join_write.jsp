@@ -23,10 +23,10 @@
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
 <link rel="stylesheet" href="/_admin/css/style.css" type="text/css">
 <script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
-<link rel="stylesheet" href="/_admin/css/jquery.ui.all.css">
-<script src="/_admin/js/jquery.ui.core.js"></script>
-<script src="/_admin/js/jquery.ui.widget.js"></script>
-<script src="/_admin/js/jquery.ui.datepicker.js"></script>
+<link rel="stylesheet" href="/css/jquery.ui.all.css">
+<script src="/js/jquery.ui.core.js"></script>
+<script src="/js/jquery.ui.widget.js"></script>
+<script src="/js/jquery.ui.datepicker.js"></script>
 <script language="javascript" type="text/javascript">
 
 	function on_submit() {

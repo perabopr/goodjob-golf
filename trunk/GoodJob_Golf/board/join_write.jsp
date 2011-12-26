@@ -21,10 +21,10 @@
 %>
 <!-- 상단 영역 -->
 <%@ include file="/include/header.jsp" %>
-<link rel="stylesheet" href="/_admin/css/jquery.ui.all.css">
-<script src="/_admin/js/jquery.ui.core.js"></script>
-<script src="/_admin/js/jquery.ui.widget.js"></script>
-<script src="/_admin/js/jquery.ui.datepicker.js"></script>
+<link rel="stylesheet" href="/css/jquery.ui.all.css">
+<script src="/js/jquery.ui.core.js"></script>
+<script src="/js/jquery.ui.widget.js"></script>
+<script src="/js/jquery.ui.datepicker.js"></script>
 <!-- 상단 영역 -->
 <script language="javascript" type="text/javascript">
 

@@ -70,7 +70,7 @@ function go_view(val){
                                 <tr>
                                   <td width="751"><table border="0" cellpadding="2" cellspacing="1" width="751" bgcolor="#D2D2D2">
                                       <tr>
-                                        <td align="center" bgcolor="white" width="745" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="95%">
+                                        <td align="center" bgcolor="white" width="745" height="650" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="95%">
                                             <tr>
                                               <td align="right" class="location" height="30" width="95%"><a href="/index.html">HOME</a> &gt; <span class=location_b>JOIN 커뮤니티</span></td>
                                             </tr>
@@ -181,9 +181,6 @@ function go_view(val){
                                                                 <td width="668" align="center"><p><%=strPage%></p></td>
                                                               </tr>
                                                             </table></td>
-                                                        </tr>
-                                                        <tr>
-                                                          <td height="250" align="center"></td>
                                                         </tr>
                                                       </table></td>
                                                   </tr>

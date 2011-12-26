@@ -3,7 +3,6 @@
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
 <%@ page import="com.goodjob.product.*" %>
-<%@ page import="com.goodjob.product.dto.RegionDto"%>
 <%@page import="com.goodjob.product.dto.CondoDto"%>
 <%@page import="java.util.*"%>
 <%
@@ -11,10 +10,8 @@
 	int region = NumberUtils.toInt(request.getParameter("region"),1);
 
 	RegionDao regionDao = new RegionDao();
-	List<RegionDto> arrRegions = regionDao.getRegionList("1");
+	List<com.goodjob.product.dto.RegionDto> arrRegions = regionDao.getRegionList("1");
 %>
-
-
 
 <table border="0" cellpadding="0" cellspacing="0" width="751">
                           <tr>
@@ -77,7 +74,7 @@
                                                               </tr>
                                                               <tr>
                                                                 <td width="225"><span class=normal_fee_b>정상가:주중 300,000원 / 주말 300,000원</span></td>
-                                                                <td width="100" rowspan="2" align="center" valign="bottom"><a href="condo_regist.html"><img align="absmiddle" src="../../images/common/btn_regist_booking.gif" width="89" height="34" border="0"></a></td>
+                                                                <td width="100" rowspan="2" align="center" valign="bottom"><a href="detail.jsp?menu=5"><img align="absmiddle" src="../../images/common/btn_regist_booking.gif" width="89" height="34" border="0"></a></td>
                                                               </tr>
                                                               <tr>
                                                                 <td width="225"><span class=mem_fee_b>회원가:주중 105,000원 / 주말 105,000원</span></td>
@@ -100,7 +97,7 @@
                                                               </tr>
                                                               <tr>
                                                                 <td width="225"><span class=normal_fee_b>정상가:주중 300,000원 / 주말 300,000원</span></td>
-                                                                <td width="100" rowspan="2" align="center" valign="bottom"><a href="condo_regist.html"><img align="absmiddle" src="../../images/common/btn_regist_booking.gif" width="89" height="34" border="0"></a></td>
+                                                                <td width="100" rowspan="2" align="center" valign="bottom"><a href="detail.jsp?menu=5"><img align="absmiddle" src="../../images/common/btn_regist_booking.gif" width="89" height="34" border="0"></a></td>
                                                               </tr>
                                                               <tr>
                                                                 <td width="225"><span class=mem_fee_b>회원가:주중 105,000원 / 주말 105,000원</span></td>
@@ -131,7 +128,7 @@
                                                               </tr>
                                                               <tr>
                                                                 <td width="225"><p><span class=normal_fee_b>정상가:주중 300,000원 / 주말 300,000원</span></p></td>
-                                                                <td width="100" rowspan="2" align="center" valign="bottom"><a href="condo_regist.html"><img align="absmiddle" src="../../images/common/btn_regist_booking.gif" width="89" height="34" border="0"></a></td>
+                                                                <td width="100" rowspan="2" align="center" valign="bottom"><a href="detail.jsp?menu=5"><img align="absmiddle" src="../../images/common/btn_regist_booking.gif" width="89" height="34" border="0"></a></td>
                                                               </tr>
                                                               <tr>
                                                                 <td width="225"><p><span class=mem_fee_b>회원가:주중 105,000원 / 주말 105,000원</span></p></td>
@@ -154,7 +151,7 @@
                                                               </tr>
                                                               <tr>
                                                                 <td width="225"><p><span class=normal_fee_b>정상가:주중 300,000원 / 주말 300,000원</span></p></td>
-                                                                <td width="100" rowspan="2" align="center" valign="bottom"><a href="condo_regist.html"><img align="absmiddle" src="../../images/common/btn_regist_booking.gif" width="89" height="34" border="0"></a></td>
+                                                                <td width="100" rowspan="2" align="center" valign="bottom"><a href="detail.jsp?menu=5"><img align="absmiddle" src="../../images/common/btn_regist_booking.gif" width="89" height="34" border="0"></a></td>
                                                               </tr>
                                                               <tr>
                                                                 <td width="225"><p><span class=mem_fee_b>회원가:주중 105,000원 / 주말 105,000원</span></p></td>

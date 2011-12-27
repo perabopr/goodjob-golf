@@ -200,21 +200,7 @@ public class FileUpload {
 				
 				String filePath = item.getName();
 				File file = new File(filePath);
-				
 				String fileName = file.getName();
-
-				/*
-				 String[] values = (String[])paramMap.get(name);
-               if (values == null) {
-                   values = new String[] { value };
-               } else {
-                   String[] tempValues = new String[values.length + 1];
-                   System.arraycopy(values, 0, tempValues, 0, 1);
-                   tempValues[tempValues.length - 1] = value;
-                   values = tempValues;
-               }
-                
-				 */
 				
 				if (fileName != null && !"".equals(fileName)) {
 					// 파일업로드시...
@@ -225,13 +211,13 @@ public class FileUpload {
 						
 						String[] values = (String[])fileArrayMap.get(item.getFieldName());
 						if (values == null) {
-			                   values = new String[] { newFile.getName() };
-			               } else {
-			                   String[] tempValues = new String[values.length + 1];
-			                   System.arraycopy(values, 0, tempValues, 0, 1);
-			                   tempValues[tempValues.length - 1] = newFile.getName();
-			                   values = tempValues;
-			               }
+							values = new String[]{newFile.getName()};
+						} else {
+							String[] tempValues = new String[values.length + 1];
+							System.arraycopy(values, 0, tempValues, 0, 1);
+							tempValues[tempValues.length - 1] = newFile.getName();
+							values = tempValues;
+						}
 						
 						fileArrayMap.put(item.getFieldName(), values); // 새로운  파일명을  리턴헤주기  위해  맵에  담는다.
 						item.write(newFile); // 파일을 쓴다.

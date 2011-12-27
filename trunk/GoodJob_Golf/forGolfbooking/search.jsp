@@ -3,15 +3,7 @@
 					<table border="0" cellpadding="0" cellspacing="0" width="751">
 						<tr>
 						<td>
-						<% if(menuName.equals("1")){ %>
-						<%@ include file="billReal.jsp" %>
-						<% }else if(menuName.equals("2")){ %>
-						<%@ include file="billPre.jsp" %>
-						<% }else if(menuName.equals("3")){ %>
-						<%@ include file="billPackage.jsp" %>
-						<% }else if(menuName.equals("5")){ %>
-						<%@ include file="billCondo.jsp" %>
-						<% } %>
+						<%@ include file="searchList.jsp" %>
 						</td>
 						</tr>
 					</table>					

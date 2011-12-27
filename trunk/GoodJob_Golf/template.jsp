@@ -11,7 +11,7 @@
 
 					<!--############### 중앙 컨텐츠 영역 #################-->
 					<table border="0" cellpadding="0" cellspacing="0" width="751">
-						<tr><td>중앙 컨텐츠 </td></tr>
+						<tr><td></td></tr>
 					</table>
 					
 					<!-- 하단  회사 소개 부분  -->

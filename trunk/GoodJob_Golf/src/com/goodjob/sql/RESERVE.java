@@ -227,11 +227,11 @@ public class RESERVE {
 				"a.region_seq, " +
 				"a.img_main , " +
 				"min(b.price_n1) price_n1 , " +
-				"min(b.price_n1) price_n2 ,  " +
-				"min(b.price_n1) price_n3 ,   " +
+				"min(b.price_n2) price_n2 ,  " +
+				"min(b.price_n3) price_n3 ,   " +
 				"min(b.price_s1) price_s1 , " +
-				"min(b.price_s1) price_s2 ,  " +
-				"min(b.price_s1) price_s3  " +
+				"min(b.price_s2) price_s2 ,  " +
+				"min(b.price_s3) price_s3  " +
 				"   from tb_condo a left outer join tb_condo_room b on(a.condo_seq=b.condo_seq) " +
 				"   where  region_seq = ? " +
 				"   group by b.condo_seq order by condo_seq desc ";
@@ -252,9 +252,15 @@ public class RESERVE {
 	" a.condo_info, " +
 	" a.detail_info, " +
 	" a.way_map, " +
-	" a.edit_rule " +
-	" from tb_condo a where a.condo_seq = ? ";
-	
+	" a.edit_rule, " +
+	" min(b.price_n1) price_n1 , " +
+	" min(b.price_n2) price_n2 ,  " +
+	" min(b.price_n3) price_n3 ,   " +
+	" min(b.price_s1) price_s1 , " +
+	" min(b.price_s2) price_s2 ,  " +
+	" min(b.price_s3) price_s3  " +
+	" from tb_condo a left outer join tb_condo_room b on(a.condo_seq=b.condo_seq)  " +
+	" where a.condo_seq = ? group by b.condo_seq ";
 	
 	public static final String condo_gallery_select
 	=	"SELECT " +
@@ -265,20 +271,20 @@ public class RESERVE {
 		"WHERE condo_seq = ? " +
 		"ORDER BY condoimg_seq";
 	
-	public static final String condo_term_select
-	=	"SELECT " +
-			" condoterm_seq " +
-			",condo_seq " +
-			",roomtype " +
-			",price_n1 " +
-			",price_n2 " +
-			",price_n3 " +
-			",price_s1 " +
-			",price_s2 " +
-			",price_s3 " +
-		"FROM tb_condo_room " +
-		"WHERE condo_seq = ? " +
-		"ORDER BY condoterm_seq ";
+	public static final String condo_room_select = " SELECT  " +
+	"  a.condoroom_seq  " +
+	" ,a.condo_seq  " +
+	" ,a.roomtype  " +
+	" ,a.price_n1  " +
+	" ,a.price_n2  " +
+	" ,a.price_n3  " +
+	" ,a.price_s1  " +
+	" ,a.price_s2  " +
+	" ,a.price_s3  " +
+	" ,ifnull(b.condoroom_seq,0)  reserve_room_seq " +
+	" FROM tb_condo_room a left outer join tb_condo_reserve b on (a.condoroom_seq=b.condoroom_seq)   " +
+	" WHERE a.condo_seq = ?  ORDER BY a.condoroom_seq";
+	
 	
 	public static final String getPackagePromise
 	=	"SELECT " +

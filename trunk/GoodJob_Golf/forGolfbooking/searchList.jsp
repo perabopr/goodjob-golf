@@ -1,5 +1,19 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="com.goodjob.reserve.dto.SearchDto"%>
+<%@page import="java.util.List"%>
+<%@page import="com.goodjob.reserve.SearchDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+String ddlSearchRegion_tmp = StringUtils.trimToEmpty(request.getParameter("ddlSearchRegion"));
+String ddlSearchMenu_tmp = StringUtils.trimToEmpty(request.getParameter("ddlSearchMenu"));
+String txtSearchStartDate_tmp = StringUtils.trimToEmpty(request.getParameter("txtSearchStartDate"));
+txtSearchStartDate_tmp = txtSearchStartDate_tmp.replace("-","");
+String txtSearchEndDate_tmp = StringUtils.trimToEmpty(request.getParameter("txtSearchEndDate"));
+txtSearchEndDate_tmp = txtSearchEndDate_tmp.replace("-","");
+SearchDao sDao = new SearchDao();
+List<SearchDto> listSearch = sDao.getSearch(ddlSearchRegion_tmp, ddlSearchMenu_tmp, txtSearchStartDate_tmp, txtSearchEndDate_tmp);
 
 %>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>

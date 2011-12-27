@@ -139,9 +139,9 @@ location.href="/main.jsp";
                                 <tr>
                                   <td width="751"><table border="0" cellpadding="2" cellspacing="1" width="751" bgcolor="#D2D2D2">
                                       <tr>
-                                        <td align="center" bgcolor="white" width="745" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="95%">
+                                        <td align="center" bgcolor="white" width="745" height="600" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="95%">
                                             <tr>
-                                              <td align="right" class="location" height="30" width="95%"><a href="/index.html">HOME</a> &gt; <span class=location_b>회원정보수정</span></td>
+                                              <td align="right" class="location" height="30" width="95%"><a href="/">HOME</a> &gt; <span class=location_b>회원정보수정</span></td>
                                             </tr>
                                             <tr>
                                               <td bgcolor="#D1D3D4" height="33" class="sub_title" style="padding-left:15px;padding-top:4px">회원정보수정</td>
@@ -151,14 +151,14 @@ location.href="/main.jsp";
                                                   <tr>
                                                     <td width="94%" align="center"><table align="center" border="0" cellpadding="0" cellspacing="0" width="640">
                                                         <tr>
-                                                          <td width="640" style="padding-top:15px;"><img src="../../images/mem_join/img_edit_title.gif" width="640" height="80" border="0"></td>
+                                                          <td width="640" style="padding-top:15px;"><img src="/images/mem_join/img_edit_title.gif" width="640" height="89" border="0" usemap="#ImageMap1"></td>
                                                         </tr>
                                                         <tr>
                                                           <td>&nbsp;</td>
                                                         </tr>
 <form name="joinForm" method="post">
                                                         <tr>
-                                                          <td><img src="../../images/mem_join/img_edit_message.gif" width="560" height="33" border="0"></td>
+                                                          <td><img src="/images/mem_join/img_edit_message.gif" width="560" height="33" border="0"></td>
                                                         </tr>
                                                         <tr>
                                                           <td align="center"><table align="center" border="0" cellpadding="2" cellspacing="1" width="600" bgcolor="#D1D3D4">
@@ -250,6 +250,9 @@ location.href="/main.jsp";
                             <td>&nbsp;</td>
                           </tr>
                         </table>
+<map name="ImageMap1">
+<area shape="rect" coords="515, 54, 572, 77" href="mem_out.jsp">
+</map>
 					<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"/>
 					<!-- 하단  회사 소개 부분  -->
                     <%@ include file="/include/copyright.jsp" %>

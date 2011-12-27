@@ -38,7 +38,7 @@ for(int i = 0; i < listGolfPrice.size();i++){
 	}else if(listGolfPrice.get(i).getPrice_type().equals("3")){
 		sp = listGolfPrice.get(i).getGolflink_price();		
 	}else if(listGolfPrice.get(i).getPrice_type().equals("4")){
-		np = listGolfPrice.get(i).getGolflink_price();		
+		sw = listGolfPrice.get(i).getGolflink_price();		
 	}
 }
 
@@ -381,10 +381,10 @@ function commify(n) {
 <TD class=sunday bgColor=white align=center><%=sp %></TD>
 <TD class=red_s bgColor=white align=center><%=sp*4 %></TD></TR>
 <TR>
-<TD class=sunday bgColor=white height=25 align=center>주밀</TD>
+<TD class=sunday bgColor=white height=25 align=center>주말</TD>
 <TD class=normal_s bgColor=white align=center><%=nw %></TD>
-<TD class=sunday bgColor=white align=center><%=sp %></TD>
-<TD class=red_s bgColor=white align=center><%=sp*4 %></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
+<TD class=sunday bgColor=white align=center><%=sw %></TD>
+<TD class=red_s bgColor=white align=center><%=sw*4 %></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD>&nbsp;</TD></TR>
 <TR>

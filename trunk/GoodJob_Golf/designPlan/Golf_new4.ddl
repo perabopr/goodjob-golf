@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS tb_sms_auth;
 DROP TABLE IF EXISTS tb_sms_log;
 
 /**********************************/
-/* Table Name: Áö¿ªÁ¤º¸ */
+/* Table Name: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 /**********************************/
 CREATE TABLE TB_REGION(
 		region_seq                    		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -34,7 +34,7 @@ CREATE TABLE TB_REGION(
 );
 
 /**********************************/
-/* Table Name: ¸Þ´ºÁ¤º¸ */
+/* Table Name: ï¿½Þ´ï¿½ï¿½ï¿½ï¿½ï¿½ */
 /**********************************/
 CREATE TABLE TB_MENU(
 		menu_seq                      		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -42,7 +42,7 @@ CREATE TABLE TB_MENU(
 );
 
 /**********************************/
-/* Table Name: °ñÇÁÀåÁ¤º¸ */
+/* Table Name: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 /**********************************/
 CREATE TABLE TB_GOLFLINK(
 		golflink_seq                  		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -70,7 +70,7 @@ CREATE TABLE TB_GOLFLINK(
 );
 
 /**********************************/
-/* Table Name: »óÇ°¸ÞÀÎÁ¤º¸ */
+/* Table Name: ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 /**********************************/
 CREATE TABLE TB_PRODUCT(
 		product_seq                   		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -84,7 +84,7 @@ CREATE TABLE TB_PRODUCT(
 );
 
 /**********************************/
-/* Table Name: ÀÏº°»óÇ°»ó¼¼Á¤º¸ */
+/* Table Name: ï¿½Ïºï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 /**********************************/
 CREATE TABLE TB_PRODUCT_SUB(
 		productsub_seq                		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -98,7 +98,7 @@ CREATE TABLE TB_PRODUCT_SUB(
 );
 
 /**********************************/
-/* Table Name: °ñÇÁÀåÄÚ½º */
+/* Table Name: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú½ï¿½ */
 /**********************************/
 CREATE TABLE TB_GOLFLINK_COURSE(
 		golflink_course_seq           		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -107,7 +107,7 @@ CREATE TABLE TB_GOLFLINK_COURSE(
 );
 
 /**********************************/
-/* Table Name: °ñÇÁÆÐÅ°Áö */
+/* Table Name: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å°ï¿½ï¿½ */
 /**********************************/
 CREATE TABLE TB_PACKAGE(
 		package_seq                   		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -133,7 +133,7 @@ CREATE TABLE TB_PACKAGE(
 );
 
 /**********************************/
-/* Table Name: ÆÐÅ°Áö±Ý¾× */
+/* Table Name: ï¿½ï¿½Å°ï¿½ï¿½ï¿½Ý¾ï¿½ */
 /**********************************/
 CREATE TABLE TB_PACKAGE_PRICE(
 		package_seq                   		INT		 NOT NULL,
@@ -168,7 +168,7 @@ CREATE TABLE TB_PACKAGE_PRICE(
 );
 
 /**********************************/
-/* Table Name: ¿¹¾àÇöÈ² */
+/* Table Name: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È² */
 /**********************************/
 CREATE TABLE TB_GOLFLINK_RESERVE(
 		reserve_seq                   		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -192,7 +192,7 @@ CREATE TABLE TB_GOLFLINK_RESERVE(
 );
 
 /**********************************/
-/* Table Name: ÄÜµµ¿¹¾à */
+/* Table Name: ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ */
 /**********************************/
 CREATE TABLE TB_CONDO(
 		condo_seq                     		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -215,7 +215,7 @@ CREATE TABLE TB_CONDO(
 );
 
 /**********************************/
-/* Table Name: ÄÜµµÀÌ¹ÌÁö°¶·¯¸® */
+/* Table Name: ï¿½Üµï¿½ï¿½Ì¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 /**********************************/
 CREATE TABLE TB_CONDO_GALLERY(
 		condoimg_seq                  		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -224,7 +224,7 @@ CREATE TABLE TB_CONDO_GALLERY(
 );
 
 /**********************************/
-/* Table Name: ÄÜµµ¿¹¾à°´½Ç */
+/* Table Name: ï¿½Üµï¿½ï¿½ï¿½ï¿½à°´ï¿½ï¿½ */
 /**********************************/
 CREATE TABLE TB_CONDO_ROOM(
 		condoroom_seq                 		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -239,7 +239,7 @@ CREATE TABLE TB_CONDO_ROOM(
 );
 
 /**********************************/
-/* Table Name: °ñÇÁÀå_°¡°Ý */
+/* Table Name: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ */
 /**********************************/
 CREATE TABLE TB_GOLFLINK_PRICE(
 		golflink_seq                  		INT		 NOT NULL,
@@ -248,7 +248,7 @@ CREATE TABLE TB_GOLFLINK_PRICE(
 );
 
 /**********************************/
-/* Table Name: À§¾àÃ³¸®±ÔÁ¤ */
+/* Table Name: ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 /**********************************/
 CREATE TABLE TB_GOLFLINK_PROMISE(
 		golflink_seq                  		INT		 NOT NULL,
@@ -266,7 +266,7 @@ CREATE TABLE TB_GOLFLINK_PROMISE(
 );
 
 /**********************************/
-/* Table Name: ÆÐÅ°Áö_À§¾àÃ³¸®±ÔÁ¤ */
+/* Table Name: ï¿½ï¿½Å°ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 /**********************************/
 CREATE TABLE TB_PACKAGE_PROMISE(
 		package_seq                   		INT		 NOT NULL,
@@ -284,7 +284,7 @@ CREATE TABLE TB_PACKAGE_PROMISE(
 );
 
 /**********************************/
-/* Table Name: ÆÐÅ°Áö¿¹¾àÇöÈ² */
+/* Table Name: ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È² */
 /**********************************/
 CREATE TABLE TB_PACKAGE_RESERVE(
 		reserve_seq                   		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -303,7 +303,7 @@ CREATE TABLE TB_PACKAGE_RESERVE(
 );
 
 /**********************************/
-/* Table Name: ÄÜµµ¿¹¾àÇöÈ¯ */
+/* Table Name: ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¯ */
 /**********************************/
 CREATE TABLE TB_CONDO_RESERVE(
 		reserve_seq                   		INT		 NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -314,6 +314,7 @@ CREATE TABLE TB_CONDO_RESERVE(
 		reserve_uid                   		VARCHAR(100)		 NULL ,
 		condo_name                    		VARCHAR(50)		 NOT NULL,
 		roomtype                      		VARCHAR(50)		 NOT NULL,
+		condoroom_seq						int(11) NOT NULL , 
 		in_date                       		VARCHAR(8)		 NOT NULL,
 		out_date                      		VARCHAR(8)		 NOT NULL,
 		reserve_phone                 		VARCHAR(13)		 NOT NULL,
@@ -322,7 +323,7 @@ CREATE TABLE TB_CONDO_RESERVE(
 );
 
 /**********************************/
-/* Table Name: È¸¿ø Å×ÀÌºí */
+/* Table Name: È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ */
 /**********************************/
 CREATE TABLE tb_member(
 		mem_seq                       		INT(11)		 NOT NULL AUTO_INCREMENT PRIMARY KEY,

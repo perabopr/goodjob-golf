@@ -71,11 +71,12 @@
 	function on_search() {
 
 		var frm = document.frm;
+		/*
 		if(!$('#keyword').val()) {
 			alert('검색어를 입력하시기 바랍니다.');
 			$('#keyword').focus();
 			return;
-		} 
+		}*/
 		frm.action="mem_list.jsp"
 		frm.submit();
 	}
@@ -135,7 +136,15 @@
 %>
         <tr>
           <td bgcolor="white" align="center" height="25"><%=mDto.getReg_dt()%></td>
-          <td align="center" bgcolor="white"><div<%if("Y".equals(mDto.getSecession())){%> style="color:#CC0000;font-weight:bold;"<%}%>><%=mDto.getMem_name()%></div></td>
+          <td bgcolor="white">
+          <%if("Y".equals(mDto.getSecession())){%>
+          <div style="padding-left:20px;color:#CC0000;font-weight:bold;"><%=mDto.getMem_name()%> [탈퇴]</div>
+          <%} else if("H".equals(mDto.getSecession())){%>
+          <div style="padding-left:20px;color:#0066CC;font-weight:bold;"><%=mDto.getMem_name()%> [탈퇴요청]</div>
+          <%}else{%>
+          <div style="padding-left:20px;font-weight:bold;"><%=mDto.getMem_name()%></div>
+          <%}%>
+          </td>
           <td align="center" bgcolor="white"><%=mDto.getMem_id()%></td>
           <td align="center" bgcolor="white"><%=mDto.getMem_mtel()%></td>
           <td align="center" bgcolor="white">
@@ -176,6 +185,7 @@
               <option value="name"<%=("name".equals(field)?" selected":"")%>>회원명</option>
               <option value="id"<%=("id".equals(field)?" selected":"")%>>아이디</option>
               <option value="type"<%=("type".equals(field)?" selected":"")%>>회원가입상태</option>
+              <option value="secession"<%=("secession".equals(field)?" selected":"")%>>탈퇴요청</option>
             </select>
             <input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="30" class="input_box">
            <a href="javascript:on_search();"><img src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle"></a></td>

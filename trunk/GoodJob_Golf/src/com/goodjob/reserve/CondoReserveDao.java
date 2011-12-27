@@ -109,7 +109,7 @@ public class CondoReserveDao {
 			QueryRunner qr = new QueryRunner();
 			ResultSetHandler rsh = new BeanListHandler(CondoRoomDto.class);
 			
-			list = (List<CondoRoomDto>)qr.query(conn , RESERVE.condo_term_select, rsh, bind.toArray());
+			list = (List<CondoRoomDto>)qr.query(conn , RESERVE.condo_room_select, rsh, bind.toArray());
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

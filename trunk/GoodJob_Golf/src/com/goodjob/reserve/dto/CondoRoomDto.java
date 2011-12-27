@@ -10,6 +10,7 @@ public class CondoRoomDto {
 	private int price_s1;
 	private int price_s2;
 	private int price_s3;
+	private int reserve_room_seq;
 	
 	public int getCondoroom_seq() {
 		return condoroom_seq;
@@ -64,5 +65,11 @@ public class CondoRoomDto {
 	}
 	public void setPrice_s3(int price_s3) {
 		this.price_s3 = price_s3;
+	}
+	public int getReserve_room_seq() {
+		return reserve_room_seq;
+	}
+	public void setReserve_room_seq(int reserve_room_seq) {
+		this.reserve_room_seq = reserve_room_seq;
 	}
 }

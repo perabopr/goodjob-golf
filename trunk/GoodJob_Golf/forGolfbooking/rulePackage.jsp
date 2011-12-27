@@ -70,7 +70,7 @@ function reserveAgree(){
 <TD class=normal_b bgColor=#f1f1f1 width="50%" align=center>위약처리규정</TD>
 </TR>
 <%
-	if(listPromise != null){
+	if(listPromise != null && listPromise.size() == 1){
 		if(listPromise.get(0).getPromise1_type().length() > 0){
 %>
 <TR>
@@ -114,16 +114,16 @@ function reserveAgree(){
 	}
 %>
 </TBODY></TABLE></TD>
-<TR><TD>&nbsp;</TD></TR>
-<%
-	if(listPromise != null){
-%>	
+<TR><TD>&nbsp;</TD></TR>	
 <TR>
-<TD style="PADDING-LEFT: 40px; PADDING-RIGHT: 40px"><%=listPromise.get(0).getCancelrule() %></TD>
-</TR>
+<TD style="PADDING-LEFT: 40px; PADDING-RIGHT: 40px">
 <%
+	if(listPromise != null && listPromise.size() == 1){	
+ 		out.print(listPromise.get(0).getCancelrule());
 	}
 %>
+</TD>
+</TR>
 <TR>
 <TD style="PADDING-RIGHT: 40px" align=right><INPUT id="chkAgree1" value="" type=checkbox> 위약처리규정에 동의합니다 </TD>
 </TR>

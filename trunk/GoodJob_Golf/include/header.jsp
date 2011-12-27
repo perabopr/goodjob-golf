@@ -1,4 +1,7 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="com.goodjob.reserve.dto.RegionDto"%>
+<%@page import="java.util.List"%>
+<%@page import="com.goodjob.reserve.PackageDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%
 	String curr_url = StringUtils.trimToEmpty(request.getRequestURI());
@@ -21,6 +24,9 @@
 			swf_param = "pageNum=3&sub=1";
 		}
 	}
+	
+	PackageDao listRegionDao = new PackageDao();
+	List<RegionDto> listRegion = listRegionDao.getRegionList("1");
 %><html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
@@ -28,10 +34,17 @@
 <title>Welcome to GoodJobGolf</title>
 <link rel="stylesheet" href="/css/common.css" type="text/css">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
-<script src="/js/jquery-1.5.2.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="/css/jquery.ui.all.css">
+<script src="/js/jquery-1.6.2.min.js"></script>
+<script src="/js/jquery.ui.core.js"></script>
+<script src="/js/jquery.ui.widget.js"></script>
+<script src="/js/jquery.ui.datepicker.js"></script>
 <script language="javascript" src="/js/flashObject.js"></script>
 <script language="javascript" type="text/javascript">
-
+$(function() {
+	$( "#txtSearchStartDate" ).datepicker({dateFormat:'yy-mm-dd'});
+	$( "#txtSearchEndDate" ).datepicker({dateFormat:'yy-mm-dd'});
+});
 	function logon_ok() {
 		
 		if(!$('#login_id').val()) {
@@ -68,30 +81,32 @@
                 <table border="0" width="100%" cellpadding="0" cellspacing="0">
                     <tr>
                       <td colspan="3" background="/images/common/img_top_bg.jpg" height="50" valign="top" width="1000" align="right">
-                      	<table cellpadding="0" cellspacing="0" width="749" bgcolor="#052B48">
-                          <tr>
-                            <td width="120"><img src="/images/common/img_search_title.gif" width="120" height="40" alt="골프장 빠른검색"></td>
-                            <td align="center" width="180"><select name="number"  onchange="f_select(this.selectedIndex);">
-                                <option value="">지역선택------------</option>
-                                <option value="1">전체보기</option>
-                                <option value="2">수도권</option>
-                                <option value="3">강원권</option>
-                                <option value="4">충청권</option>
-                                <option value="5">전라권</option>
-                                <option value="6">제주권</option>
-                              </select></td>
-                            <td width="175"><select name="number"  onchange="f_select(this.selectedIndex);">
-                                <option value="">항목선택-------------</option>
-                                <option value="1">전체보기</option>
-                                <option value="2">실시간부킹 골프장</option>
-                                <option value="3">사전신청 골프장</option>
-                                <option value="4">국내패키지</option>
-                                <option value="5">해외패키지</option>
-                              </select></td>
-                            <td width="198"><input class="input_01" type="text" size="28" name="day">
-                            <td width="76"><input type="image" name="formimage1" src="/images/common/btn_top_search.gif" width="52" height="22"></td>
-                          </tr>
-                        </table>
+                      	<FORM NAME="frmSearch" METHOD="post" ACTION="search.jsp">
+						<TABLE cellSpacing=0 cellPadding=0 width=751 bgColor=#052b48>
+						<TBODY>
+						<TR>
+						<TD width=105><IMG alt="골프장 빠른검색" src="/images/common/img_search_title.gif" width=120 height=40></TD>
+						<TD width=143 align=center><SELECT id="ddlSearchRegion" name="ddlSearchRegion">
+						<OPTION selected value="">지역선택-------</OPTION> 
+						<%
+							for(int i = 0; i < listRegion.size();i++){
+						%>
+						<OPTION value="<%=listRegion.get(i).getRegion_seq() %>"><%=listRegion.get(i).getRegion_name() %></OPTION>
+						<%
+							}
+						%></SELECT></TD>
+						<TD width=175><SELECT id="ddlSearchMenu" name="ddlSearchMenu"> 
+						<OPTION value="">항목선택-------------</OPTION> 
+						<OPTION value="1">실시간부킹골프장</OPTION> 
+						<OPTION value="2">사전신청골프장</OPTION></SELECT></TD>
+						<TD width=30 align=right><A href="#"><IMG src="/images/common/btn_calendar_left.gif" width=22 height=21></A></TD>
+						<TD width=106 align=center><INPUT class=input_01 id="txtSearchStartDate" name="txtSearchStartDate" size=13></TD>
+						<TD width=9><IMG src="/images/common/img_search_blank.gif" width=9 height=6></TD>
+						<TD width=30 align=right><A href="#"><IMG src="/images/common/btn_calendar_right.gif" width=22 height=21></A></TD>
+						<TD width=106 align=center><INPUT class=input_01 id="txtSearchEndDate" name="txtSearchEndDate" size=13></TD>
+						<TD width=75><A href="javascript:;" onclick="frmSearch.submit();"><IMG border=0 src="/images/common/btn_top_search.gif"></A></TD></TR></TBODY>
+						</TABLE>
+						</FORM>
                       </td>
                     </tr>
                     <tr>

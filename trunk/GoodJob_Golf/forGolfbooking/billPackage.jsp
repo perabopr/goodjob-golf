@@ -16,11 +16,6 @@ if(pkList != null && pkList.size() == 1){
 	pkDto = pkList.get(0);
 }
 %>
-<link rel="stylesheet" href="../css/jquery.ui.all.css">
-<script src="../js/jquery-1.6.2.min.js"></script>
-<script src="../js/jquery.ui.core.js"></script>
-<script src="../js/jquery.ui.widget.js"></script>
-<script src="../js/jquery.ui.datepicker.js"></script>
 <script type="text/javascript">
 <!--
 $(function() {

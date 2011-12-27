@@ -1,4 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ page import="org.apache.commons.lang.StringUtils"%>
+<%@ page import="org.apache.commons.lang.math.NumberUtils"%>
+<%@ page import="org.apache.commons.dbutils.handlers.*" %>
+<%@ page import="com.goodjob.reserve.dto.RegionDto"%>
+<%@ page import="com.goodjob.reserve.PackageDao"%>
+<%@page import="com.goodjob.reserve.CondoReserveDao"%>
+<%@page import="com.goodjob.reserve.dto.*"%>
+<%@page import="com.goodjob.conf.Config"%>
+<%@page import="com.goodjob.util.Utils"%>
+<%
+	int region = NumberUtils.toInt(request.getParameter("region"),1);
+
+	int condo_seq = NumberUtils.toInt(request.getParameter("condo_seq"),1);
+	
+	//어드민쪽 DAO랑 사용자쪽 DAO가 틀려요 근데 왜 안되는지 몰겠네여;
+	PackageDao pkDao = new PackageDao();
+	List<RegionDto> arrRegions = pkDao.getRegionList("1");
+	
+	CondoReserveDao cdDao = new CondoReserveDao();
+	
+	CondoDto cdDto = cdDao.getCondo(condo_seq);
+	
+	List<CondoGalleryDto> galleryList = cdDao.getCondoGallerySelect(condo_seq);
+	
+	List<CondoRoomDto> roomList = cdDao.getCondoRoomSelect(condo_seq);
+	
+%>
 <table border="0" cellpadding="0" cellspacing="0" width="751">
       <tr>
         <td><table border="0" cellpadding="0" cellspacing="0" width="751">
@@ -31,7 +59,7 @@
                                     <tr>
                                       <td class=cc_name valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%">
                                           <tr>
-                                            <td class="cc_name">콘도명</td>
+                                            <td class="cc_name"><%=cdDto.getCondo_name()%></td>
                                           </tr>
                                           <tr>
                                             <td height="10"></td>
@@ -41,22 +69,22 @@
                                                 <tr>
                                                   <td height="30" width="60" class=normal_b>위치 </td>
                                                   <td width="10">:</td>
-                                                  <td width="347">여기다 주소를</td>
+                                                  <td width="347"><%=cdDto.getAddress1()%> <%=cdDto.getAddress2()%></td>
                                                 </tr>
                                                 <tr>
                                                   <td height="30" class="normal_b" width="60">할인기간</td>
                                                   <td height="23">:</td>
-                                                  <td height="23">기간</td>
+                                                  <td height="23"><%=cdDto.getSaledate_start()%> ~ <%=cdDto.getSaledate_end()%></td>
                                                 </tr>
                                                 <tr>
                                                   <td height="30" class=normal_b width="60">정상가</td>
                                                   <td>:</td>
-                                                  <td><p><span class=blue>주중:300,000원</span> / <span class=blue>주말:400,000원</span> / <span class=blue>휴일:400,000원</span></p></td>
+                                                  <td><p><span class=blue>주중:<%=Utils.numberFormat(cdDto.getPrice_n1())%>원</span> / <span class=blue>주말:<%=Utils.numberFormat(cdDto.getPrice_n2())%>원</span> / <span class=blue>휴일:<%=Utils.numberFormat(cdDto.getPrice_n3())%>원</span></p></td>
                                                 </tr>
                                                 <tr>
                                                   <td height="30" class=normal_b width="60">할인가</td>
                                                   <td>:</td>
-                                                  <td><p><span class=orange>주중:300,000원</span> / <span class=orange>주말:400,000원</span> / <span class=orange>휴일:400,000원</span></p></td>
+                                                  <td><p><span class=orange>주중:<%=Utils.numberFormat(cdDto.getPrice_s1())%>원</span> / <span class=orange>주말:<%=Utils.numberFormat(cdDto.getPrice_s2())%>원</span> / <span class=orange>휴일:<%=Utils.numberFormat(cdDto.getPrice_s3())%>원</span></p></td>
                                                 </tr>
                                               </table></td>
                                           </tr>
@@ -86,21 +114,32 @@
                                     </tr>
                                     <tr>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" width="130" height="25">이용일자</td>
-                                      <td colspan="3" bgcolor="white" style="padding-left:10px;" width="550"><input class="mem_input" type="text" size="14" name="id">
+                                      <td colspan="3" bgcolor="white" style="padding-left:10px;" width="550"><input class="mem_input" value="<%=cdDto.getReserve_start()%>" onclick="blur();" type="text" size="14" name="id" readonly>
                                         <img align="absmiddle" src="/images/common/img_calendar.gif" width="15" height="16" border="0"> ~
-                                        <input class="mem_input" type="text" size="14" name="id">
+                                        <input class="mem_input" value="<%=cdDto.getReserve_end()%>" type="text" size="14" name="id" onclick="blur();">
                                         <img align="absmiddle" src="/images/common/img_calendar.gif" width="15" height="16" border="0"></td>
                                     </tr>
                                     <tr>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;">객실선택</td>
-                                      <td colspan="3" bgcolor="white" style="padding-left:10px;padding-bottom:5px;" class=red_ss><input type="radio" name="formradio1">
-                                        스탠다드 (20평형, 방1개) 4인기준 (1박 100,000원)<br>
-                                        <input type="radio" name="formradio1">
-                                        스탠다드 (20평형, 방1개) 4인기준 (1박 100,000원)<br>
-                                        <input type="radio" name="formradio1">
-                                        스탠다드 (20평형, 방1개) 4인기준 (1박 100,000원)<br>
-                                        <input type="radio" name="formradio1">
-                                        스탠다드 (20평형, 방1개) 4인기준 (1박 100,000원) </td>
+                                      <td colspan="3" bgcolor="white" style="padding-left:10px;padding-bottom:5px;" class=red_ss>
+		<%
+				if(roomList != null && !roomList.isEmpty()){
+					
+					int size = roomList.size();
+					CondoRoomDto roomDto;
+					for(int i = 0 ; i < size ; i++){
+						
+						roomDto = roomList.get(i);
+						
+						if(roomDto.getReserve_room_seq()==0){
+		%>
+                                      <input type="radio" name="condoroom_seq" value="<%=roomDto.getCondoroom_seq()%>"><%=roomDto.getRoomtype()%> 4인기준 (1박 100,000원)<br>
+		<%
+						}
+					}
+				}
+		%>
+                                      </td>
                                     </tr>
                                     <tr>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" width="130">객실수량</td>

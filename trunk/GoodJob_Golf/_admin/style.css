@@ -1,13 +1,15 @@
-BODY,TD,SELECT,input,DIV,form,TEXTAREA,center,option,pre,blockquote{font-size:9pt;font-family:±º∏≤;color:#333333;letter-spacing:0;line-height:20px}
+@charset "utf-8";
 
-.normal{font:12px "µ∏øÚ","dotum"; color:#58595B; text-decoration:none;}
-.normal_s{font:11px "µ∏øÚ","dotum"; color:#58595B; text-decoration:none;}
-.normal_b{font:12px "µ∏øÚ","dotum"; color:#58595B; text-decoration:none; font-weight:bold;}
-.orange{font:12px "µ∏øÚ","dotum"; color:#F96F0A; text-decoration:none; font-weight:bold;}
-.orange_s{font:11px "µ∏øÚ","dotum"; color:#F96F0A; text-decoration:none;font-weight:bold;}
-.blue{font:12px "µ∏øÚ","dotum"; color:#2860C7; text-decoration:none; font-weight:bold;}
-.red{font:12px "µ∏øÚ","dotum"; color:#E42F1D; text-decoration:none; font-weight:bold;}
-.red_s{font:11px "µ∏øÚ","dotum"; color:#E42F1D; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+BODY,TD,SELECT,input,DIV,form,TEXTAREA,center,option,pre,blockquote{font-size:9pt;font-family:Íµ¥Î¶º;color:#333333;letter-spacing:0;line-height:20px}
+
+.normal{font:12px "ÎèãÏõÄ","dotum"; color:#58595B; text-decoration:none;}
+.normal_s{font:11px "ÎèãÏõÄ","dotum"; color:#58595B; text-decoration:none;}
+.normal_b{font:12px "ÎèãÏõÄ","dotum"; color:#58595B; text-decoration:none; font-weight:bold;}
+.orange{font:12px "ÎèãÏõÄ","dotum"; color:#F96F0A; text-decoration:none; font-weight:bold;}
+.orange_s{font:11px "ÎèãÏõÄ","dotum"; color:#F96F0A; text-decoration:none;font-weight:bold;}
+.blue{font:12px "ÎèãÏõÄ","dotum"; color:#2860C7; text-decoration:none; font-weight:bold;}
+.red{font:12px "ÎèãÏõÄ","dotum"; color:#E42F1D; text-decoration:none; font-weight:bold;}
+.red_s{font:11px "ÎèãÏõÄ","dotum"; color:#E42F1D; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
 
 
 A:link    {color:#666666;text-decoration:none;}
@@ -15,14 +17,14 @@ A:visited {color:#666666;text-decoration:none;}
 A:active  {color:#666666;text-decoration:none;}
 A:hover  {color:#3192AC;text-decoration:underline;}
 
-.left_menu{font:12px "µ∏øÚ","dotum"; color:#F4FC21; text-decoration:none;}
+.left_menu{font:12px "ÎèãÏõÄ","dotum"; color:#F4FC21; text-decoration:none;}
 a:link.left_menu{text-decoration:none; font-size: 9pt; color:#F4FC21;}
-a:visited.left_menu{text-decoration:none; font-size: 9pt; color:F4FC21;}
-a:hover.left_menu{text-decoration:underline; font-size: 9pt; color:white;}
-a:active.left_menu{text-decoration:none; font-size: 9pt; color:white;}
+a:visited.left_menu{text-decoration:none; font-size: 9pt; color:#F4FC21;}
+a:hover.left_menu{text-decoration:underline; font-size: 9pt; color:#F4FC21;}
+a:active.left_menu{text-decoration:none; font-size: 9pt; color:#F4FC21;}
 
 
-.list {font-size: 9pt; color: #666666; font-family: "±º∏≤", "±º∏≤√º"}
+.list {font-size: 9pt; color: #666666; font-family: "Íµ¥Î¶º", "Íµ¥Î¶ºÏ≤¥"}
 .list a:link {color: #666666; text-decoration: none}
 .list a:visited {color: #666666; text-decoration: none}
 .list a:hover {color:#000000;  background-color: #F5F5F5; text-decoration:none}
@@ -32,27 +34,27 @@ a:active.left_menu{text-decoration:none; font-size: 9pt; color:white;}
 .textarea {border:solid 1;font-size:9pt;color:#666666;background-color:white;}
 .input {border:solid 1;font-size:9pt;color:#666666;background-color:white;}
 .submit {border:solid 0;font-size:9pt;color:white;background-color:#666666;height:19px}
-.input2, select{background-color:FFFFFF;font-family:±º∏≤,Gulim;font-size:12px;color:#636163;border: 1 solid #B0B0B0}
+.input2, select{background-color:FFFFFF;font-family:Íµ¥Î¶º,Gulim;font-size:12px;color:#636163;border: 1 solid #B0B0B0}
 
-/*º≠∫Í_∫ªπÆ*/
+/*ÏÑúÎ∏å_Î≥∏Î¨∏*/
 
-.title{font:14px "±º∏≤","gulim"; color:#339999; text-decoration:none; font-weight:bold;}
-.list_title{font:12px "µ∏øÚ","dotum"; color:#052B48; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
-.list_subject{font:12px "µ∏øÚ","dotum"; color:#497FBB; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
-.upload, select{background-color:ffffff;font-family:±º∏≤,gulim;font-size:12px;color:#636163;height:15pt;border:1 solid #bcbec0}
+.title{font:14px "Íµ¥Î¶º","gulim"; color:#339999; text-decoration:none; font-weight:bold;}
+.list_title{font:12px "ÎèãÏõÄ","dotum"; color:#052B48; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.list_subject{font:12px "ÎèãÏõÄ","dotum"; color:#497FBB; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
+.upload, select{background-color:ffffff;font-family:Íµ¥Î¶º,gulim;font-size:12px;color:#636163;height:15pt;border:1 solid #bcbec0}
 
-/*¥ﬁ∑¬*/
-.sunday{font:11px "µ∏øÚ","dotum"; color:#F33117; text-decoration:none;}
-.saturday{font:11px "µ∏øÚ","dotum"; color:#1953D8; text-decoration:none;}
-.day{font:11px "µ∏øÚ","dotum"; color:#58595B; text-decoration:none;}
-.month{font:13px "±º∏≤","gulim"; color:#F33117; text-decoration:none;font-weight:bold; }
-.regist_no{font:11px "µ∏øÚ","dotum"; color:#F33117; text-decoration:none;}
-.regist_yes{font:11px "µ∏øÚ","dotum"; color:#1953D8; text-decoration:none;}
+/*Îã¨Î†•*/
+.sunday{font:11px "ÎèãÏõÄ","dotum"; color:#F33117; text-decoration:none;}
+.saturday{font:11px "ÎèãÏõÄ","dotum"; color:#1953D8; text-decoration:none;}
+.day{font:11px "ÎèãÏõÄ","dotum"; color:#58595B; text-decoration:none;}
+.month{font:13px "Íµ¥Î¶º","gulim"; color:#F33117; text-decoration:none;font-weight:bold; }
+.regist_no{font:11px "ÎèãÏõÄ","dotum"; color:#F33117; text-decoration:none;}
+.regist_yes{font:11px "ÎèãÏõÄ","dotum"; color:#1953D8; text-decoration:none;}
 
 
 /*form*/
 .select {font-size:9pt;}
-.input_box, select{background-color:ffffff;font-family:µ∏øÚ,dotum;font-size:12px;color:#636163;height:15pt;border:1 solid #bcbec0;}
+.input_box, select{background-color:ffffff;font-family:ÎèãÏõÄ,dotum;font-size:12px;color:#636163;height:15pt;border:1 solid #bcbec0;}
 .textarea {border:solid 1 #999999;background-color:#ffffff;font-family:"","u","verdana"; font-size:9pt; overflow-x:hidden; overflow-y:auto}
 .textarea1 {border:solid 1 #009999;font-family:"","u","verdana"; font-size:9pt; overflow-x:hidden; overflow-y:auto}
 .button {border:solid 1 #000000; cursor: "hand"; font-family:"verdana", ""; font-size: 9pt; color: #FFFFFF; background-color: #3366CC; height=22px;}
@@ -65,13 +67,13 @@ a:active.left_menu{text-decoration:none; font-size: 9pt; color:white;}
 
 .input_tright {border:solid 1 #009999;font-family:"verdana","","u";color:#333333; font-size:8pt; height=20px;text-align : right;}
 
-/* input box Ω∫≈∏¿œ */
+/* input box Ïä§ÌÉÄÏùº */
 
-.box01, select{background-color:ffffff;font-family:±º∏≤,gulim;font-size:12px;color:#636163;height:15pt;border:1 solid #bcbec0}
+.box01, select{background-color:ffffff;font-family:Íµ¥Î¶º,gulim;font-size:12px;color:#636163;height:15pt;border:1 solid #bcbec0}
 
-.box02, select{background-color:f1f1f1;font-family:±º∏≤,gulim;font-size:12px;color:#636163;height:15pt;border:1 solid #bcbec0}
+.box02, select{background-color:f1f1f1;font-family:Íµ¥Î¶º,gulim;font-size:12px;color:#636163;height:15pt;border:1 solid #bcbec0}
 
-.box03, textarea, select{background-color:FFFFFF;font-family:±º∏≤,gulim;font-size:12px;color:#636163;border:1 solid #bcbec0}
+.box03, textarea, select{background-color:FFFFFF;font-family:Íµ¥Î¶º,gulim;font-size:12px;color:#636163;border:1 solid #bcbec0}
 
 Body {
 

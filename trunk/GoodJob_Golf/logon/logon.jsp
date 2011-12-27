@@ -42,6 +42,16 @@
 			return;
 		}
 		
+		if("H".equals(mDto.getSecession())){
+%>
+			<script language="javascript" type="text/javascript">
+				alert("탈퇴를 요청한 회원입니다. 고객센터로 문의 바랍니다.");
+				location.href="/member/member_logon.jsp";
+			</script>
+<%		
+			return;
+		}
+		
 		if(!mDto.getMem_pwd().equals(mem_pwd)){
 %>
 	<script language="javascript" type="text/javascript">

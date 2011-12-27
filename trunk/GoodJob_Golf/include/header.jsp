@@ -1,12 +1,26 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
-<%@ page import="org.apache.commons.lang.math.NumberUtils"%>
-<%@ page import="java.util.*" %>
 <%
 	String curr_url = StringUtils.trimToEmpty(request.getRequestURI());
-	//out.println(curr_url);
-	
+
+	String swf_param = "";
+	if(curr_url.indexOf("/board/join_List.jsp")>-1){
+		swf_param = "pageNum=5&sub=1";
+	}
+	else if(curr_url.indexOf("/forGolfbooking/")>-1){
+		if(request.getParameter("menu")==null || "1".equals(request.getParameter("menu"))){
+			swf_param = "pageNum=1&sub=1";
+		}
+		else if("2".equals(request.getParameter("menu"))){
+			swf_param = "pageNum=1&sub=3";
+		}
+		else if("3".equals(request.getParameter("menu"))){
+			swf_param = "pageNum=2&sub=1";
+		}
+		else if("5".equals(request.getParameter("menu"))){
+			swf_param = "pageNum=3&sub=1";
+		}
+	}
 %><html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
@@ -47,7 +61,7 @@
           <td width="100%">
           <table border="0" width="100%" cellpadding="0" cellspacing="0">
               <tr>
-                <td height="146"><script>flashObject("/images/swf/navigation.swf","","1000","146")</script></td>
+                <td height="146"><script>flashObject("/images/swf/navigation.swf","<%=swf_param%>","1000","146")</script></td>
               </tr>
               <tr>
                 <td>

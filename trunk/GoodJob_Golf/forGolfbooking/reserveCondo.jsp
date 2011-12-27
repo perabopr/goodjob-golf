@@ -7,6 +7,8 @@
 <%@ page import="com.goodjob.reserve.PackageDao"%>
 <%@page import="com.goodjob.reserve.CondoReserveDao"%>
 <%@page import="com.goodjob.reserve.dto.*"%>
+<%@page import="com.goodjob.conf.Config"%>
+<%@page import="com.goodjob.util.Utils"%>
 <%
 	int region = NumberUtils.toInt(request.getParameter("region"),1);
 
@@ -19,10 +21,7 @@
 	List<CondoDto> condoList = cdDao.getCondoList(region+"");
 	
 %>
-
-
-<%@page import="com.goodjob.conf.Config"%>
-<%@page import="com.goodjob.util.Utils"%><table border="0" cellpadding="0" cellspacing="0" width="751">
+<table border="0" cellpadding="0" cellspacing="0" width="751">
                           <tr>
                             <td><table border="0" cellpadding="0" cellspacing="0" width="751">
                                 <tr>
@@ -62,11 +61,14 @@
                                                   </tr>
                                                   <tr>
                                                     <td align="center">
+                                                    <table border="0" width="669" cellpadding="0" cellspacing="0">
+                                                      <tr>
 					<%
 										if(condoList != null && !condoList.isEmpty()){
 											
 											String img_dir = Config.get("reserve_img");
 											int size = condoList.size();
+											
 											int remainder = size%2;
 											
 											CondoDto cdDto;
@@ -76,12 +78,9 @@
 												
 												if(i!=0 && i%2==0){
 					%>                                    
-                                                        </tr>
-                                                      </table>
-					<%
-																				}
-												if(i%2==0 && i < (size-1)){
-					%>
+                                                     </tr>
+                                                  </table>
+                                                  <div style="height:20px;"></div>
                                                   <table border="0" width="669" cellpadding="0" cellspacing="0">
                                                       <tr>
                                                         
@@ -109,7 +108,7 @@
                                                               </tr>
                                                               <tr>
                                                                 <td width="225"><span class=normal_fee_b>정상가:주중<%=Utils.numberFormat(cdDto.getPrice_n1())%>원 / 주말<%=Utils.numberFormat(cdDto.getPrice_n1())%>원</span></td>
-                                                                <td width="100" rowspan="2" align="center" valign="bottom"><a href="detail.jsp?menu=5"><img align="absmiddle" src="../../images/common/btn_regist_booking.gif" width="89" height="34" border="0"></a></td>
+                                                                <td width="100" rowspan="2" align="center" valign="bottom"><a href="detail.jsp?menu=5&condo_seq=<%=cdDto.getCondo_seq()%>"><img align="absmiddle" src="../../images/common/btn_regist_booking.gif" width="89" height="34" border="0"></a></td>
                                                               </tr>
                                                               <tr>
                                                                 <td width="225"><span class=mem_fee_b>회원가:주중 <%=Utils.numberFormat(cdDto.getPrice_s1())%>원 / 주말 <%=Utils.numberFormat(cdDto.getPrice_s1())%>원</span></td>
@@ -120,7 +119,8 @@
 					<%
 											}
 										}
-					%>                                                  
+					%>                                   </tr>
+                                                      </table>
                                                 	</td>
                                                   </tr>
                                                   <tr>

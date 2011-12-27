@@ -66,6 +66,9 @@ public class MemberDao {
 				where = " where date_format(reg_dt,'%Y%m%d') = ? " ;
 				bind.add(keyword);
 			}
+			else if("secession".equals(field)){
+				where = " where secession = 'H'" ;
+			}
 			
 			//페이징
 			bind.add(((npage-1)* MEMBER.per_page));
@@ -308,6 +311,29 @@ public class MemberDao {
 			
 			QueryRunner qr = new QueryRunner();
 			qr.update(conn , MEMBER.secession , bind);
+			
+			isUpdate = true;
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		return isUpdate;
+	}
+	
+	/**
+	 * 회원 탈퇴
+	 * @param mem_id
+	 */
+	public boolean userSeccesstion(String mem_id , String memo){
+		Connection conn = null;
+		boolean isUpdate = false;
+		try {
+			conn = DBManager.getConnection();
+			String[] bind = {memo,mem_id};
+			
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn , MEMBER.user_secession , bind);
 			
 			isUpdate = true;
 		} catch (Exception e) {

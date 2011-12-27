@@ -27,6 +27,12 @@
 	
 	PackageDao listRegionDao = new PackageDao();
 	List<RegionDto> listRegion = listRegionDao.getRegionList("1");
+
+	String ddlSearchRegion = StringUtils.trimToEmpty(request.getParameter("ddlSearchRegion"));
+	String ddlSearchMenu = StringUtils.trimToEmpty(request.getParameter("ddlSearchMenu"));
+	String txtSearchStartDate = StringUtils.trimToEmpty(request.getParameter("txtSearchStartDate"));
+	String txtSearchEndDate = StringUtils.trimToEmpty(request.getParameter("txtSearchEndDate"));
+	
 %><html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
@@ -90,20 +96,32 @@ $(function() {
 						<OPTION selected value="">지역선택-------</OPTION> 
 						<%
 							for(int i = 0; i < listRegion.size();i++){
+								String selected = "";
+								if(ddlSearchRegion.equals(Integer.toString(listRegion.get(i).getRegion_seq()))){
+									selected = "selected";
+								}
 						%>
-						<OPTION value="<%=listRegion.get(i).getRegion_seq() %>"><%=listRegion.get(i).getRegion_name() %></OPTION>
+						<OPTION value="<%=listRegion.get(i).getRegion_seq() %>" <%=selected %>><%=listRegion.get(i).getRegion_name() %></OPTION>
 						<%
 							}
 						%></SELECT></TD>
 						<TD width=175><SELECT id="ddlSearchMenu" name="ddlSearchMenu"> 
 						<OPTION value="">항목선택-------------</OPTION> 
-						<OPTION value="1">실시간부킹골프장</OPTION> 
+						<% if(ddlSearchMenu.equals("1")){ %>
+						<OPTION value="1" selected>실시간부킹골프장</OPTION>
+						<% }else{ %>
+						<OPTION value="1">실시간부킹골프장</OPTION>
+						<% } %> 
+						<% if(ddlSearchMenu.equals("2")){ %>
+						<OPTION value="2" selected>사전신청골프장</OPTION></SELECT></TD>
+						<% }else{ %>
 						<OPTION value="2">사전신청골프장</OPTION></SELECT></TD>
+						<% } %> 
 						<TD width=30 align=right><A href="#"><IMG src="/images/common/btn_calendar_left.gif" width=22 height=21></A></TD>
-						<TD width=106 align=center><INPUT class=input_01 id="txtSearchStartDate" name="txtSearchStartDate" size=13></TD>
+						<TD width=106 align=center><INPUT class=input_01 id="txtSearchStartDate" name="txtSearchStartDate" size=13 value="<%=txtSearchStartDate%>"></TD>
 						<TD width=9><IMG src="/images/common/img_search_blank.gif" width=9 height=6></TD>
 						<TD width=30 align=right><A href="#"><IMG src="/images/common/btn_calendar_right.gif" width=22 height=21></A></TD>
-						<TD width=106 align=center><INPUT class=input_01 id="txtSearchEndDate" name="txtSearchEndDate" size=13></TD>
+						<TD width=106 align=center><INPUT class=input_01 id="txtSearchEndDate" name="txtSearchEndDate" size=13 value="<%=txtSearchEndDate%>"></TD>
 						<TD width=75><A href="javascript:;" onclick="frmSearch.submit();"><IMG border=0 src="/images/common/btn_top_search.gif"></A></TD></TR></TBODY>
 						</TABLE>
 						</FORM>

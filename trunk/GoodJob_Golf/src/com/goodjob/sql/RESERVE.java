@@ -330,4 +330,18 @@ public class RESERVE {
 		"FROM tb_package a " +
 			"INNER JOIN tb_package_price b on(a.package_seq = b.package_seq) " +
 		"WHERE a.package_seq = ?";
+	
+	public static final String getSearch
+	=	"SELECT " +
+			" b.product_date " +
+			",a.golflink_name " +
+			",c.time_start " +
+			",d.course_name " +
+		"FROM tb_golflink a " +
+			"INNER JOIN tb_product b ON(a.golflink_seq = b.golflink_seq) " +
+		    "INNER JOIN tb_product_sub c ON(b.product_seq = c.product_seq) " +
+			"LEFT OUTER JOIN tb_golflink_course d ON(a.golflink_seq = d.golflink_seq) " +
+		"WHERE c.product_status = '0' " +
+			"AND b.product_date >= ? %s " +
+		"ORDER BY a.menu_seq, a.golflink_seq, b.product_date, c.time_start";	
 }

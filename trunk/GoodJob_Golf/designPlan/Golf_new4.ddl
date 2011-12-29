@@ -314,9 +314,11 @@ CREATE TABLE TB_CONDO_RESERVE(
 		reserve_uid                   		VARCHAR(100)		 NULL ,
 		condo_name                    		VARCHAR(50)		 NOT NULL,
 		roomtype                      		VARCHAR(50)		 NOT NULL,
-		condoroom_seq						int(11) NOT NULL , 
+		condoroom_seq                 		INT(11)		 NOT NULL,
 		in_date                       		VARCHAR(8)		 NOT NULL,
 		out_date                      		VARCHAR(8)		 NOT NULL,
+		room_num                      		INT(2)		 NULL ,
+		per_num                       		INT(2)		 NULL ,
 		reserve_phone                 		VARCHAR(13)		 NOT NULL,
 		condo_price                   		INT		 NOT NULL,
 		process_status                		CHAR(1)		 DEFAULT 0		 NOT NULL

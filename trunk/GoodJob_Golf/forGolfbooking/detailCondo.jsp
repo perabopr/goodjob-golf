@@ -33,29 +33,38 @@
 <script language="javascript" type="text/javascript">
 
 	function reserve_condo(){
-		in_date
-
+		
 		if(!$("#in_date").val() || !$("#out_date").val()){
 			alert("이용 일자를 입력하세요!");
-			
-			return false;		
+			return ;		
 		}
 		
-		if(!$("#chkAgree2").attr("checked")){
-			alert("이용약관에 동의하세요.");
-			$("#chkAgree2").select();
-			return false;		
+		if(!$("input[name=condoroom_seq][checked]").val()){
+			alert("객실을 선택 하세요.");
+			$("#condoroom_seq").focus();
+			return ;		
+		}
+		
+		if(!$("#room_num").val()){
+			alert("객실수량을 선택 하세요.");
+			$("#room_num").focus();
+			return ;
+		}
+
+		if(!$("#per_num").val()){
+			alert("이용인원을 입력 입력하세요!");
+			return ;		
 		}
 		
 		document.frm.submit();
 	}
 
 	$(function() {
-		$( "#in_date" ).datepicker({dateFormat:'yy-mm-dd'});
+		$("#in_date").datepicker({dateFormat:'yy-mm-dd'});
 	});
 
 	$(function() {
-		$( "#out_date" ).datepicker({dateFormat:'yy-mm-dd'});
+		$("#out_date").datepicker({dateFormat:'yy-mm-dd'});
 	});
 
 	
@@ -90,6 +99,12 @@
                         <tr>
                           <td><p>&nbsp;</p></td>
                         </tr>
+
+<form name="frm" method="post" action="rule.jsp">
+<input type="hidden" name="menu" value="<%=menu%>"/>
+<input type="hidden" name="condo_seq" value="<%=condo_seq%>"/>
+<input type="hidden" name="condo_name" value="<%=cdDto.getCondo_name()%>"/>
+
                         <tr>
                           <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="707">
                               <tr>
@@ -187,8 +202,7 @@
                               <tr>
                                 <td colspan="2" valign="top" width="707"></td>
                               </tr>
-<form name="frm" method="post" action="rule.jsp">
-<input type="hidden" name="menu" value="<%=menu%>"/>
+
                               <tr>
                                 <td colspan="2" width="707">&nbsp;</td>
                               </tr>
@@ -216,11 +230,12 @@
 						
 						roomDto = roomList.get(i);
 						
-						if(roomDto.getReserve_room_seq()==0){
+						//if(roomDto.getReserve_room_seq()==0){
 		%>
-                                      <input type="radio" name="condoroom_seq" value="<%=roomDto.getCondoroom_seq()%>"><%=roomDto.getRoomtype()%> (1박 <%=Utils.numberFormat(roomDto.getPrice_s3())%>원)<br>
+                                      <input type="radio" id="condoroom_seq" name="condoroom_seq" value="<%=roomDto.getCondoroom_seq()%>"><%=roomDto.getRoomtype()%> (1박 <%=Utils.numberFormat(roomDto.getPrice_s3())%>원)<br>
+                                      <input type="hidden" name="roomtype" value="<%=roomDto.getRoomtype()%>"/>
 		<%
-						}
+						//}
 					}
 				}
 		%>
@@ -228,7 +243,8 @@
                                     </tr>
                                     <tr>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" width="130">객실수량</td>
-                                      <td bgcolor="white" class="red_ss" style="padding-left:10px;" width="164"><select name="formselect1" size="1">
+                                      <td bgcolor="white" class="red_ss" style="padding-left:10px;" width="164">
+                                      <select id="room_num" name="room_num" size="1">
                                           <option value="">선택</option>
                                           <option value="1">1실</option>
                                           <option value="2">2실</option>
@@ -242,7 +258,7 @@
                                           <option value="10">10실</option>
                                         </select></td>
                                       <td width="117" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" align="right">이용인원</td>
-                                      <td width="243" bgcolor="white" style="padding-left:10px;"><input class="mem_input" type="text" maxlength="2" size="5" name="id">
+                                      <td width="243" bgcolor="white" style="padding-left:10px;"><input class="mem_input" type="text" maxlength="2" size="5" id="per_num" name="per_num">
                                         인 </td>
                                     </tr>
                                     <tr>
@@ -250,7 +266,8 @@
                                       <td bgcolor="white" style="padding-left:10px;">
                                       <input class="mem_input" type="text" size="15" id="reserve_name"name="reserve_name" value="<%=StringUtils.trimToEmpty((String)session.getAttribute("mem_name"))%>"></td>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;">핸드폰</td>
-                                      <td bgcolor="white" style="padding-left:10px;"><select name="formselect1" size="1">
+                                      <td bgcolor="white" style="padding-left:10px;">
+                                      <select name="mobile1" size="1">
                                           <option value="">선택</option>
                                           <option value="010">010</option>
                                           <option value="011">011</option>
@@ -260,9 +277,9 @@
                                           <option value="019">019</option>
                                         </select>
                                         -
-                                        <input class="mem_input" type="text" size="8" name="id" maxlength="4">
+                                        <input class="mem_input" type="text" size="8" name="mobile2" maxlength="4">
                                         -
-                                        <input class="mem_input" type="text" size="8" name="id" maxlength="4"></td>
+                                        <input class="mem_input" type="text" size="8" name="mobile3" maxlength="4"></td>
                                     </tr>
                                     <!--tr>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">이용요금</td>
@@ -270,7 +287,8 @@
                                     </tr>-->
                                     <tr>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;">요청사항</td>
-                                      <td bgcolor="white" style="padding-left:10px;" colspan="3"><textarea class="box_01" rows="4" cols="85" name="content"></textarea></td>
+                                      <td bgcolor="white" style="padding-left:10px;" colspan="3">
+                                      <textarea class="box_01" rows="4" cols="85" name="reserve_memo"></textarea></td>
                                     </tr>
                                     <tr>
                                       <td bgcolor="#AED247" colspan="4" width="701"></td>
@@ -308,7 +326,7 @@
                                             <tr>
                                               <td bgcolor="white" align="center"><table border="0" width="100%" cellpadding="0" cellspacing="0">
                                                   <tr>
-                                                    <td>콘도안내</td>
+                                                    <td><%=cdDto.getCondo_info()%></td>
                                                   </tr>
                                                 </table></td>
                                             </tr>
@@ -333,7 +351,7 @@
                                               <td height="10"></td>
                                             </tr>
                                             <tr>
-                                              <td bgcolor="white">상세정보</td>
+                                              <td bgcolor="white"><%=cdDto.getDetail_info()%></td>
                                             </tr>
                                           </table>
                                         </div>
@@ -356,7 +374,45 @@
                                               <td height="10"></td>
                                             </tr>
                                             <tr>
-                                              <td bgcolor="white">사진갤러리</td>
+                                              <td bgcolor="white" align="center">
+<%
+
+		if(galleryList != null && !galleryList.isEmpty()){
+			
+			int size = galleryList.size();
+			String[]  gallery_img = new String[4];
+			
+			for(int i = 0 ; i < 4; i++){
+				gallery_img[i] = galleryList.get(i).getCondo_img();
+			}
+%>
+                                             	 	<table border="0" width="669" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                          <td width="325" valign="top">
+                                                          <img src="<%=img_dir%><%=StringUtils.trimToEmpty(gallery_img[0])%>" width="313" height="150"/>
+                                                          </td>
+                                                          <td width="19">&nbsp;</td>
+                                                           <td width="325" valign="top">
+                                                          <img src="<%=img_dir%><%=StringUtils.trimToEmpty(gallery_img[1])%>" width="313" height="150"/>
+                                                          </td>
+                                                        </tr>
+                                                    </table>
+                                                    
+                                                    <table border="0" width="669" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                           <td width="325" valign="top">
+                                                          <img src="<%=img_dir%><%=StringUtils.trimToEmpty(gallery_img[2])%>" width="313" height="150"/>
+                                                          </td>
+                                                          <td width="19">&nbsp;</td>
+                                                           <td width="325" valign="top">
+                                                          <img src="<%=img_dir%><%=StringUtils.trimToEmpty(gallery_img[3])%>" width="313" height="150"/>
+                                                          </td>
+                                                        </tr>
+                                                    </table>
+<%
+		}
+%>
+												</td>
                                             </tr>
                                           </table>
                                         </div>

@@ -3,6 +3,19 @@
 <%
 
 	String menu = StringUtils.trimToEmpty(request.getParameter("menu"));
+	String condo_seq = StringUtils.trimToEmpty(request.getParameter("condo_seq"));
+	String condo_name = StringUtils.trimToEmpty(request.getParameter("condo_name"));
+	
+	String in_date = StringUtils.trimToEmpty(request.getParameter("in_date"));
+	String out_date = StringUtils.trimToEmpty(request.getParameter("out_date"));
+	String condoroom_seq = StringUtils.trimToEmpty(request.getParameter("condoroom_seq"));
+	String roomtype = StringUtils.trimToEmpty(request.getParameter("roomtype"));
+	String room_num = StringUtils.trimToEmpty(request.getParameter("room_num"));
+	String per_num = StringUtils.trimToEmpty(request.getParameter("per_num"));
+	String reserve_name = StringUtils.trimToEmpty(request.getParameter("reserve_name"));
+	String mobile = StringUtils.trimToEmpty(request.getParameter("mobile1"))+"-"+StringUtils.trimToEmpty(request.getParameter("mobile2"))+"-"+StringUtils.trimToEmpty(request.getParameter("mobile3"));
+	String reserve_memo = StringUtils.trimToEmpty(request.getParameter("reserve_memo"));
+
 %>
 <script type="text/javascript">
 function reserveAgree(){
@@ -38,6 +51,17 @@ function reserveAgree(){
                                             </tr>
 <form name="frm" method="post" action="result.jsp">
 <input type="hidden" name="menu" value="<%=menu%>"/>
+<input type="hidden" name="condo_seq" value="<%=condo_seq%>"/>
+<input type="hidden" name="condo_name" value="<%=condo_name%>"/>
+<input type="hidden" name="in_date" value="<%=in_date%>"/>
+<input type="hidden" name="out_date" value="<%=out_date%>"/>
+<input type="hidden" name="condoroom_seq" value="<%=condoroom_seq%>"/>
+<input type="hidden" name="roomtype" value="<%=roomtype%>"/>
+<input type="hidden" name="room_num" value="<%=room_num%>"/>
+<input type="hidden" name="per_num" value="<%=per_num%>"/>
+<input type="hidden" name="reserve_name" value="<%=reserve_name%>"/>
+<input type="hidden" name="mobile" value="<%=mobile%>"/>
+<input type="hidden" name="reserve_memo" value="<%=reserve_memo%>"/>
                                             <tr>
                                               <td valign="top" align="center"><table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                   <tr>

@@ -1,6 +1,8 @@
 package com.goodjob.reserve;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,9 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import com.goodjob.db.DBManager;
 import com.goodjob.reserve.dto.CondoDto;
 import com.goodjob.reserve.dto.CondoGalleryDto;
+import com.goodjob.reserve.dto.CondoReserveDto;
 import com.goodjob.reserve.dto.CondoRoomDto;
+import com.goodjob.sql.PRODUCT;
 import com.goodjob.sql.RESERVE;
 
 public class CondoReserveDao {
@@ -117,5 +121,37 @@ public class CondoReserveDao {
 		}
 
 		return list;		
+	}
+	
+	public void setCondoReserve(CondoReserveDto cdDto){
+		
+		Connection conn = null;
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(5);
+			bind.add(cdDto.getCondo_seq());
+			bind.add(cdDto.getReserve_name());
+			bind.add(cdDto.getReserve_uid());
+			bind.add(cdDto.getCondo_name());
+			bind.add(cdDto.getRoomtype());
+			bind.add(cdDto.getCondoroom_seq());
+			bind.add(cdDto.getIn_date().replaceAll("-", ""));
+			bind.add(cdDto.getOut_date().replaceAll("-", ""));
+			bind.add(cdDto.getRoom_num());
+			bind.add(cdDto.getPer_num());
+			bind.add(cdDto.getReserve_phone());
+			bind.add(0);
+			bind.add(cdDto.getReserve_memo());
+			
+			QueryRunner qr = new QueryRunner();
+			
+			qr.update(conn, RESERVE.condo_reserve_insert, bind.toArray());
+						
+		}catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
 	}
 }

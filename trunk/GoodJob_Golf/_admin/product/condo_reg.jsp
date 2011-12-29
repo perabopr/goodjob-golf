@@ -142,7 +142,7 @@ function condoReg(){
               </tr>
               <tr>
                 <td width="495"><input class="input_box" size="80" id="address2" name="address2" value="<%= vcDto.getAddress2()%>"></td>
-                <td width="77"><a href="../inc/zip.html" onClick="NewWindow(this.href,'name','420','400','yes');return false;"><img align="absmiddle" src="../images/inc/btn_search.gif" width="45" height="22" border="0"></a></td>
+                <td width="77"><a href="zip_code.jsp" onClick="NewWindow(this.href,'name','420','400','yes');return false;"><img align="absmiddle" src="../images/inc/btn_search.gif" width="45" height="22" border="0"></a></td>
               </tr>
               <tr>
                 <td colspan="2" height="2" width="572"></td>
@@ -183,17 +183,18 @@ function condoReg(){
     <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="900">
         <tr>
           <td width="50%" height="30"><span class=list_title>가격입력</span></td>
-          <td width="50%" align="right"><img align="absmiddle" src="../images/inc/btn_plus.gif" width="32" height="16" border="0"></td>
+          <td width="50%" align="right"><!--<img align="absmiddle" src="../images/inc/btn_plus.gif" width="32" height="16" border="0">--></td>
         </tr>
       </table></td>
   </tr>
   <tr>
     <td align="center"><table width="900" cellpadding="2" cellspacing="1" bgcolor="silver">
         <tr>
-          <td bgcolor="#FCF9EB" align=middle width="340"><p><img align="absmiddle" src="../images/common/img_calendar.gif" width="15" height="16" border="0">
+          <td bgcolor="#FCF9EB" align=middle width="340"><p>
+          <!--<img align="absmiddle" src="../images/common/img_calendar.gif" width="15" height="16" border="0">
               <input class="input_box" size="13" id="ReserveDateStart" name="ReserveDateStart" readonly value="<%= vcDto.getReserve_start()%>">
               ~ <img align="absmiddle" src="../images/common/img_calendar.gif" width="15" height="16" border="0">
-              <input class="input_box" size="13" id="ReserveDateEnd" name="ReserveDateEnd" readonly value="<%= vcDto.getReserve_end()%>">
+              <input class="input_box" size="13" id="ReserveDateEnd" name="ReserveDateEnd" readonly value="<%= vcDto.getReserve_end()%>">-->
             </p></td>
           <td width="307" align="center" bgcolor="#FCF9EB" colspan="3"><b>정상가</b></td>
           <td bgcolor=#fcf9eb colspan="3" align=middle  할인요금 width="271"><b>할인가</b></td>
@@ -208,7 +209,7 @@ function condoReg(){
           <td bgcolor=#fcf9eb align=middle 주말 width="84">휴일</td>
         </tr>
 	<% 
-		for(int i = 1; i < 11;i++){
+		for(int i = 1; i < 5;i++){
 			if(arrlist3 != null && arrlist3.size() >= i){
 	%>
 		<tr>

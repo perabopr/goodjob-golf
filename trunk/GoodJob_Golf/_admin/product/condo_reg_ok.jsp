@@ -56,7 +56,7 @@
 	}
 	
 	//** 객실
-	for(int i = 1;i < 11;i++){
+	for(int i = 1;i < 5;i++){
 		String condoroomseq = StringUtils.trimToEmpty(fileUpload.getParameter("condoroomseq" +i));
 		String roomtype = StringUtils.trimToEmpty(fileUpload.getParameter("roomtype" +i));
 		String price1N = StringUtils.trimToEmpty(fileUpload.getParameter("price1N" +i));

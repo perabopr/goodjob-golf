@@ -27,6 +27,14 @@ public class CondoReserveDto implements Serializable{
 	private String reserve_phone;
 	private int condo_price;
 	private String process_status;
+	
+	private String reserve_uid;
+	private int condoroom_seq;
+	private int room_num;
+	private int per_num;
+	private String reserve_memo;
+	
+	
 	public int getReserve_seq() {
 		return reserve_seq;
 	}
@@ -99,6 +107,34 @@ public class CondoReserveDto implements Serializable{
 	public void setProcess_status(String processStatus) {
 		process_status = processStatus;
 	}
-	
-	
+	public String getReserve_uid() {
+		return reserve_uid;
+	}
+	public void setReserve_uid(String reserveUid) {
+		reserve_uid = reserveUid;
+	}
+	public int getCondoroom_seq() {
+		return condoroom_seq;
+	}
+	public void setCondoroom_seq(int condoroomSeq) {
+		condoroom_seq = condoroomSeq;
+	}
+	public int getRoom_num() {
+		return room_num;
+	}
+	public void setRoom_num(int roomNum) {
+		room_num = roomNum;
+	}
+	public int getPer_num() {
+		return per_num;
+	}
+	public void setPer_num(int perNum) {
+		per_num = perNum;
+	}
+	public String getReserve_memo() {
+		return reserve_memo;
+	}
+	public void setReserve_memo(String reserveMemo) {
+		reserve_memo = reserveMemo;
+	}
 }

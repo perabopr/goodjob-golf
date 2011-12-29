@@ -321,6 +321,7 @@ CREATE TABLE TB_CONDO_RESERVE(
 		per_num                       		INT(2)		 NULL ,
 		reserve_phone                 		VARCHAR(13)		 NOT NULL,
 		condo_price                   		INT		 NOT NULL,
+		reserve_memo                       		TEXT		 NULL ,
 		process_status                		CHAR(1)		 DEFAULT 0		 NOT NULL
 );
 

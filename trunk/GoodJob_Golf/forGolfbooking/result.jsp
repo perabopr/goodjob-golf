@@ -14,6 +14,9 @@
 						<% } %>
 						</td>
 						</tr>
+						<tr>
+                            <td>&nbsp;</td>
+                          </tr>
 					</table>					
                     <%@ include file="/include/copyright.jsp" %>					
 <%@ include file="/include/footer.jsp" %>

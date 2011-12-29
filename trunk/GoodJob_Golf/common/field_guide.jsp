@@ -8,7 +8,21 @@
 <!-- 상단 영역 -->
 <%@ include file="/include/header.jsp" %>
 <!-- 상단 영역 -->
-
+<script language="javascript">
+//<!--
+function DisplayMenu(index) {
+        for (i=1; i<=4; i++)
+        if (index == i) {
+        thisMenu = eval("menu" + index + ".style");
+        thisMenu.display = "";
+        } 
+        else {
+        otherMenu = eval("menu" + i + ".style"); 
+        otherMenu.display = "none"; 
+        }
+        }
+//-->
+</script>
 					<!--############### 중앙 컨텐츠 영역 #################-->
 					<table border="0" cellpadding="0" cellspacing="0" width="751">
                           <tr>

@@ -31,15 +31,18 @@ public class ZipCodeDao {
 		try {
 			
 			
-			Object[] params = new Object[1];
-			params[0] = dong;
+			Object[] params = {dong};
+			
 			
           	conn = DBManager.getConnection();
 			
 			ResultSetHandler rsh = new BeanListHandler(ZipCodeDto.class);
 			QueryRunner qr = new QueryRunner();
-			list = (List<ZipCodeDto>)qr.query(conn, ZIPCODE.address, rsh , params);
-           
+			
+			if(dong != null && dong.length() > 0)
+				list = (List<ZipCodeDto>)qr.query(conn, ZIPCODE.address, rsh , params);
+			else
+				list = new ArrayList<ZipCodeDto>();
 			
 		} catch (Exception e) {
 			logger.debug(e.getMessage());

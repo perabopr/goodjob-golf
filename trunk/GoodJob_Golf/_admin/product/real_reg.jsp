@@ -215,7 +215,7 @@ function getFileExtension(filePath)
               </tr>
               <tr>
                 <td width="495"><input id="address2" name="address2" class="input_box" size="80" value="<%= gldto.getGolflink_address2()%>"></td>
-                <td width="77"><a href="../inc/zip.html" onClick="NewWindow(this.href,'name','420','400','yes');return false;"><img align="absmiddle" src="../images/inc/btn_search.gif" width="45" height="22" border="0"></a></td>
+                <td width="77"><a href="zip_code.jsp" onClick="NewWindow(this.href,'name','420','400','yes');return false;"><img align="absmiddle" src="../images/inc/btn_search.gif" width="45" height="22" border="0"></a></td>
               </tr>
               <tr>
                 <td colspan="2" height="2" width="572"></td>

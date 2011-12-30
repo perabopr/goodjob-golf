@@ -284,6 +284,21 @@ public class PRODUCT {
 			"FROM tb_product " +
 			"WHERE product_seq = ?";
 	
+	public static final String product_select_date
+		=	"SELECT" +
+				" product_seq" +
+				",menu_seq" +
+				",golflink_seq" +
+				",product_year" +
+				",product_month" +
+				",product_day" +
+				",product_date" +
+				",view_yn " +
+			"FROM tb_product " +
+			"WHERE menu_seq = ? " +
+			"AND golflink_seq = ? " +
+			"AND product_date = ? ";
+	
 	public static final String product_select_where
 		=	"SELECT" +
 				" product_seq" +

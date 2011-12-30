@@ -107,6 +107,32 @@ List<ProductDto> arrPrdt = prdtDao.getProductSelect(prdtDto);
 <script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
 <script type="text/javascript">
 var selDate = "<%= nowDate%>";
+function StatusModify(sDate, status){
+	var splitDate = sDate.split('/');
+	selDate = splitDate[0] + "/" + LenChk(splitDate[1], 2) + "/" + LenChk(splitDate[2], 2);
+	
+	var prdtseq = $("#date"+sDate.replace('/','').replace('/','')).val();
+
+	$.ajax({
+	  url: "/_admin/product/ajax/ajax_product_update.jsp?prdtseq="+prdtseq+"&mnseq=<%=menuSeq%>&glseq=<%=glSeq%>&date="+selDate+"&status="+status,
+	  cache: false,
+	  async: false,
+	  success: function(html){
+		var evalData = eval("("+html+")");
+		if(evalData.Product.length == 1){
+			var msgStr = "";
+			if(evalData.Product[0].c == "1"){
+				alert("마감 되었습니다.");
+				$("#date"+evalData.Product[0].b).prev().html("예약마감");
+			}else if(evalData.Product[0].c == "2"){
+				alert("휴장 되었습니다.");
+				$("#date"+evalData.Product[0].b).prev().html("휴장");
+			}			
+		}
+	  }
+	});
+}
+
 function selSetting(sDate){	
 	var splitDate = sDate.split('/');
 	selDate = splitDate[0] + "/" + LenChk(splitDate[1], 2) + "/" + LenChk(splitDate[2], 2);
@@ -247,7 +273,7 @@ String.prototype.trim = function(){
     <td align="center" width="760" class=title>★ 실시간 골프장 시간 및 가격입력 ★</td>
   </tr>
   <tr>
-    <td align="right" style="padding-right:20px;" height="35"><img src="../../images/inc/month_prev.gif" width="41" height="16" border="0" align="absmiddle" onclick="location.href='pop_real_time_reg.jsp?menuseq=<%=menuSeq %>&glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=0'"> &nbsp;<span class=month><%= (currYear) %>년 <%= (currMonth+1) %>월</span> &nbsp;<img align="absmiddle" src="../../images/inc/month_next.gif" width="41" height="16" border="0" onclick="location.href='pop_real_time_reg.jsp?menuseq=<%=menuSeq %>&glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=1'"></td>
+    <td align="right" style="padding-right:20px;" height="35"><img src="../../images/inc/month_prev.gif"  style="cursor:pointer;" width="41" height="16" border="0" align="absmiddle" onclick="location.href='pop_real_time_reg.jsp?menuseq=<%=menuSeq %>&glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=0'"> &nbsp;<span class=month><%= (currYear) %>년 <%= (currMonth+1) %>월</span> &nbsp;<img align="absmiddle" src="../../images/inc/month_next.gif" width="41" height="16" style="cursor:pointer;" border="0" onclick="location.href='pop_real_time_reg.jsp?menuseq=<%=menuSeq %>&glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=1'"></td>
   </tr>
   <tr>
     <td align="center"><table border="0" width="740" cellpadding="2" cellspacing="1" bgcolor="#D1D3D4">
@@ -357,9 +383,9 @@ String.prototype.trim = function(){
             <td align="center" colspan="2">
             	<table border="0" width="97%" cellpadding="0" cellspacing="0">
 	            <tr>
-	            <td align="center" height="20"><img align="absmiddle" src="../../images/inc/btn_day_close.gif" width="28" height="16" border="0"></td>
-	            <td align="center"><img align="absmiddle" src="../../images/inc/btn_day_rest.gif" width="28" height="16" border="0"></td>
-	            <td align="center"><img src="../../images/inc/btn_edit3.gif" width="28" height="16" border="0" align="absmiddle" onclick="selSetting('<%=currYear + "/" + (currMonth+1) + "/" + dispDay%>');"></td>
+	            <td align="center" height="20"><img align="absmiddle" src="../../images/inc/btn_day_close.gif" width="28" height="16" border="0" style="cursor:pointer;" onclick="StatusModify('<%=currYear + "/" + (currMonth+1) + "/" + dispDay%>', '1')"></td>
+	            <td align="center"><img align="absmiddle" src="../../images/inc/btn_day_rest.gif" width="28" height="16" border="0" style="cursor:pointer;" onclick="StatusModify('<%=currYear + "/" + (currMonth+1) + "/" + dispDay%>', '2')"></td>
+	            <td align="center"><img src="../../images/inc/btn_edit3.gif" width="28" height="16" border="0" align="absmiddle" onclick="selSetting('<%=currYear + "/" + (currMonth+1) + "/" + dispDay%>');" style="cursor:pointer;"></td>
 	            </tr>
 	            </table>
 	        </td>
@@ -418,8 +444,8 @@ String.prototype.trim = function(){
           <td align="center" bgcolor="#F1F1F1" height="19" width="112">정상가</td>
           <td align="center" bgcolor="#F1F1F1" height="19" width="95">할인가</td>
           <td width="95" height="19" align="center" bgcolor="#F1F1F1">
-          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" width="32" height="16" border="0" onclick="addTime('','0','0','0','','','0');">
-          	<img src="../../images/inc/btn_del2.gif" width="32" height="16" border="0" align="absmiddle" onclick="removeTime();">
+          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" style="cursor:pointer;" width="32" height="16" border="0" onclick="addTime('','0','0','0','','','0');">
+          	<img src="../../images/inc/btn_del2.gif" style="cursor:pointer;" width="32" height="16" border="0" align="absmiddle" onclick="removeTime();">
           	<!-- <img align="absmiddle" src="../../images/inc/btn_save.gif" width="32" height="16" border="0"> -->
           	<input type="hidden" id="menuseq" name="menuseq" value="<%=menuSeq %>" />
           	<input type="hidden" id="prdtseq" name="prdtseq" value="" />
@@ -436,7 +462,7 @@ String.prototype.trim = function(){
     <td align="center">&nbsp;</td>
   </tr>
   <tr>
-    <td align="center"><img align="absmiddle" src="../../images/inc/btn_regist2.gif" width="74" height="26" border="0" onclick="saveTime();"></td>
+    <td align="center"><img align="absmiddle" src="../../images/inc/btn_regist2.gif" style="cursor:pointer;" width="74" height="26" border="0" onclick="saveTime();"></td>
   </tr>
   <tr>
     <td height="25" align="right" valign="bottom"><a href="javascript:self.close();"><img align="absmiddle" src="../../images/inc/btn_del.gif" width="13" height="14" border="0"></a></td>

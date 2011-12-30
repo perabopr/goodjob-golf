@@ -70,6 +70,33 @@ public class productDao {
 		}
 		return idSeq;
 	}
+	
+	public List<ProductDto> getProductSelectDate(ProductDto prdtDto){
+		Connection conn = null;
+		List<ProductDto> list = null;
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(prdtDto.getMenu_seq());
+			bind.add(prdtDto.getGolflink_seq());
+			prdtDto.setProduct_date(prdtDto.getProduct_year()
+					+prdtDto.getProduct_month()
+					+prdtDto.getProduct_day());
+			bind.add(prdtDto.getProduct_date());
+			
+			ResultSetHandler rsh = new BeanListHandler(ProductDto.class);
+					
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<ProductDto>)qr.query(conn, PRODUCT.product_select_date, rsh, bind.toArray());			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return list;
+	}
 
 	public List<ProductDto> getProductSelect(ProductDto prdtDto){
 		Connection conn = null;

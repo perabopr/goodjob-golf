@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
@@ -120,6 +121,7 @@ prDto.setGolflink_seq(Integer.parseInt(golfSeq));
 prDto.setProduct_date(curDate);
 List<ProductReserveDto> listPr = glDao.getGolfProduct(prDto);
 %>
+
 <style type="text/css">
 
 #dhtmltooltip{
@@ -368,7 +370,7 @@ function commify(n) {
 <TR>
 <TD class=normal_b height=23>&nbsp;</TD>
 <TD>&nbsp;</TD>
-<TD><IMG border=0 src="../../images/booking/btn_golfcourse.gif" width=70 height=19 onMouseover="ddrivetip('<%=glDto.getCourse_guide() %>');" onMouseout="hideddrivetip()"></TD></TR></TBODY></TABLE></TD></TR>
+<TD><IMG border=0 src="../../images/booking/btn_golfcourse.gif" width=70 height=19 onMouseover="ddrivetip('<%=glDto.getCourse_guide() %>');" onMouseout="hideddrivetip()" style="cursor:hand"></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD>&nbsp;</TD></TR>
 <TR>
@@ -384,14 +386,14 @@ function commify(n) {
 <TD class=red_s bgColor=#f1f1f1 width=150 align=center>4인그린피할인가 합계</TD></TR>
 <TR>
 <TD class=saturday bgColor=white height=25 align=center>주중</TD>
-<TD class=normal_s bgColor=white align=center><%=np %></TD>
-<TD class=sunday bgColor=white align=center><%=sp %></TD>
-<TD class=red_s bgColor=white align=center><%=sp*4 %></TD></TR>
+<TD class=normal_s bgColor=white align=center><%=commify(np) %></TD>
+<TD class=sunday bgColor=white align=center><%=commify(sp) %></TD>
+<TD class=red_s bgColor=white align=center><%=commify(sp*4) %></TD></TR>
 <TR>
 <TD class=sunday bgColor=white height=25 align=center>주말</TD>
-<TD class=normal_s bgColor=white align=center><%=nw %></TD>
-<TD class=sunday bgColor=white align=center><%=sw %></TD>
-<TD class=red_s bgColor=white align=center><%=sw*4 %></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
+<TD class=normal_s bgColor=white align=center><%=commify(nw) %></TD>
+<TD class=sunday bgColor=white align=center><%=commify(sw) %></TD>
+<TD class=red_s bgColor=white align=center><%=commify(sw*4) %></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD>&nbsp;</TD></TR>
 <TR>
@@ -497,8 +499,8 @@ for (int i = 1; i < 15 ;i++){
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=150>
 <TBODY>
 <TR>
-<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_prev_day.gif" width=65 height=20 onclick="preResDate();"></TD>
-<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_next_day.gif" width=65 height=20 onclick="nextResDate();"></TD></TR></TBODY></TABLE></TD></TR>
+<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_prev_day.gif" width=65 height=20 onclick="preResDate();" style="cursor:hand"></TD>
+<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_next_day.gif" width=65 height=20 onclick="nextResDate();" style="cursor:hand"></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD vAlign=top width=707 colSpan=2 align=center>
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=704>
@@ -587,7 +589,7 @@ for (int i = 1; i < 15 ;i++){
 	</TD></TR>
 	<TR>
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 align=right>예약자이름</TD>
-	<TD style="PADDING-LEFT: 10px" bgColor=white height=27 colSpan=3><INPUT class=mem_input id="reserveUName" name="reserveUName" size=15></TD></TR>
+	<TD style="PADDING-LEFT: 10px" bgColor=white height=27 colSpan=3><INPUT class=mem_input id="reserveUName" name="reserveUName" size=15 value="<%=user_Name %>"></TD></TR>
 	<TR>
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=25 align=right>핸드폰</TD>
 	<TD style="PADDING-LEFT: 10px" bgColor=white colSpan=3><SELECT size=1 id="phone1" name="phone1"> 

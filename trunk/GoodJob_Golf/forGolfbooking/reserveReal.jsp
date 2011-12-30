@@ -164,7 +164,7 @@ for(int i = 0; i < listGolf.size(); i++){
 	List<ProductDto> listPrdt = glDao.getGolfProductList(pDto);
 %>
 <TR>
-<TD style="PADDING-LEFT: 5px" bgColor=white height=30><SPAN class=normal_s><%=listGolf.get(i).getGolflink_name()%></SPAN></TD>
+<TD style="PADDING-LEFT: 5px" bgColor=white height=30><SPAN class=normal_s style="color:red;font-weight:bold">(<%=listGolf.get(i).getRegion_name() %>)<%=listGolf.get(i).getGolflink_name()%></SPAN></TD>
 <%
 	incDate.set(tYear, tMonth-1, tDay);
 	for (int k = 1; k < 15 ;k++){

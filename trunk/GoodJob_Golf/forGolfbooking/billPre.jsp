@@ -37,7 +37,7 @@ String rPhone = StringUtils.trimToEmpty(request.getParameter("reservePhone"));
 String rEmail = StringUtils.trimToEmpty(request.getParameter("reserveEmail"));
 String rRequest = StringUtils.trimToEmpty(request.getParameter("reserveRequest"));
 
-String buyPrice = Integer.toString(prDto.getGoodjob_price() * Integer.parseInt(rCnt));
+int buyPrice = prDto.getGoodjob_price() * Integer.parseInt(rCnt);
 %>
 <script type="text/javascript">
 <!--
@@ -99,18 +99,18 @@ function billok(){
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=prDto.getGolflink_name() %></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>시간대</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><%=rDate %> &nbsp;<%=rTime %> &nbsp;<IMG border=0 align=absMiddle src="../../images/booking/btn_back.gif" width=67 height=16 onclick="reSetDate();"></TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white><%=rDate %> &nbsp;<%=rTime %> &nbsp;<IMG border=0 align=absMiddle src="../../images/booking/btn_back.gif" width=67 height=16 onclick="reSetDate();" style="cursor:hand"></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>인원</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=rCnt %>인 <%=rTeam %>팀</TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>결제예상금액</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange><%=buyPrice %></SPAN>원</TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange><%=commify(buyPrice) %></SPAN>원</TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>요청사항</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=rRequest %></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
-<TD style="PADDING-BOTTOM: 50px; PADDING-TOP: 30px" align=center><IMG border=0 src="/images/booking/btn_pay.gif" width=200 height=60 onclick="billok();"></TD></TR>
+<TD style="PADDING-BOTTOM: 50px; PADDING-TOP: 30px" align=center><IMG border=0 src="/images/booking/btn_pay.gif" width=200 height=60 onclick="billok();" style="cursor:hand"></TD></TR>
 <TR>
 <TD height=100>&nbsp;</TD></TR>
 </TBODY></TABLE></TD></TR></TBODY></TABLE>

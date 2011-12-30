@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
@@ -21,12 +22,13 @@ String bookingDate = prDto.getProduct_date();
 String bookingTime = prDto.getTime_start();
 bookingDate = bookingDate.substring(0,4) + "-" + bookingDate.substring(4,6) + "-" + bookingDate.substring(6,8) + " ";
 bookingDate += bookingTime.substring(0,2) + ":" + bookingTime.substring(2,4); 
-String buyPrice = Integer.toString(prDto.getGoodjob_price() * 4);
+int buyPrice = prDto.getGoodjob_price() * 4;
 
 String menu = "1";
 String golf = request.getParameter("golf");
 String date = request.getParameter("date");
 String cdate = request.getParameter("cdate");
+
 %>
 <script type="text/javascript">
 <!--
@@ -70,10 +72,10 @@ function billok(){
 $(function(){
 	$("#chkRealName").click(function(){
 		if(this.checked){
-			//$("#reserveName").val("누구겠지~");
-			$("#reserveName").attr("disabled","disabled");
+			$("#reserveName").val("<%=user_Name%>");
+			$("#reserveName").attr("readonly","readonly");
 		}else{
-			$("#reserveName").attr("disabled","");
+			$("#reserveName").removeAttr("readonly");
 			$("#reserveName").val("");
 			$("#reserveName").focus();
 		}
@@ -107,7 +109,7 @@ $(function(){
 <TBODY>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 width=170 align=right>예약자명</TD>
-<TD style="PADDING-LEFT: 10px" class=normal_b bgColor=white width=420><INPUT id="reserveName" name="reserveName" class=input_01 name=day size=14> <INPUT name="chkRealName" id="chkRealName" type=checkbox><SPAN class=mem_notice>실제이용자가 예약자와 동일한 경우 체크</SPAN></TD></TR>
+<TD style="PADDING-LEFT: 10px" class=normal_b bgColor=white width=420><INPUT id="reserveName" name="reserveName" class=input_01 name=day size=14 value=""> <INPUT name="chkRealName" id="chkRealName" type=checkbox><SPAN class=mem_notice>실제이용자가 예약자와 동일한 경우 체크</SPAN></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>연락처</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white>
@@ -130,7 +132,7 @@ $(function(){
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=prDto.getGolflink_name() %></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>부킹일시</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><%=bookingDate %> &nbsp;<IMG border=0 align=absMiddle src="/images/booking/btn_back.gif" width=67 height=16 onclick="reSetDate();"></TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white><%=bookingDate %> &nbsp;<IMG border=0 align=absMiddle src="/images/booking/btn_back.gif" width=67 height=16 onclick="reSetDate();" style="cursor:hand"></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>코스명</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=prDto.getCourse_name() %></TD></TR>
@@ -142,10 +144,10 @@ $(function(){
 <TD style="PADDING-LEFT: 10px" bgColor=white height=25><SELECT size=1 name=formselect1> <OPTION selected>선택하세요</OPTION></SELECT></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>결제금액</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange><%=buyPrice %></SPAN>원</TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange><%=commify(buyPrice) %></SPAN>원</TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>결제방법선택</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><INPUT id="billBtype" name="billtype" value="B" type=radio checked> 무통장입금</TD></TR></TBODY></TABLE></TD></TR>
 <TR>
-<TD style="PADDING-BOTTOM: 50px; PADDING-TOP: 30px" align=center><IMG border=0 src="/images/booking/btn_pay.gif" width=200 height=60 onclick="billok();"></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<TD style="PADDING-BOTTOM: 50px; PADDING-TOP: 30px" align=center><IMG border=0 src="/images/booking/btn_pay.gif" width=200 height=60 onclick="billok();" style="cursor:hand"></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
 </FORM>

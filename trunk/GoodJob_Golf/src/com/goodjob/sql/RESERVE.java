@@ -5,8 +5,11 @@ public class RESERVE {
 	=	"SELECT " +
 			" A.golflink_seq " +
 			",A.golflink_name " +
+			",B.region_name " +
 		"FROM tb_golflink A " +
-		"WHERE A.view_yn = 'Y' %s";
+			"INNER JOIN tb_region B on(A.region_seq = B.region_seq) " +
+		"WHERE A.view_yn = 'Y' %s " +
+		"ORDER BY B.region_name";
 		/*
 			"AND A.region_seq = 1 "
 			"AND A.menu_seq = 1 " +

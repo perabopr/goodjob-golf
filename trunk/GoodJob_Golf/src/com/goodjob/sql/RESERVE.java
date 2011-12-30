@@ -346,6 +346,7 @@ public class RESERVE {
 			",a.golflink_seq " +
 			",a.golflink_name " +
 			",c.time_start " +
+			",c.time_end " +
 			",d.course_name " +
 		"FROM tb_golflink a " +
 			"INNER JOIN tb_product b ON(a.golflink_seq = b.golflink_seq) " +

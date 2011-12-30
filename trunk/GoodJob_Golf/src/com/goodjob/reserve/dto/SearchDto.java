@@ -5,6 +5,7 @@ public class SearchDto {
 	private int golflink_seq = 0; 
 	private String golflink_name = "";
 	private String time_start = "";
+	private String time_end = "";
 	private String course_name = "";
 	private String product_status = "";
 	
@@ -31,6 +32,12 @@ public class SearchDto {
 	}
 	public void setTime_start(String time_start) {
 		this.time_start = time_start;
+	}
+	public String getTime_end() {
+		return time_end;
+	}
+	public void setTime_end(String time_end) {
+		this.time_end = time_end;
 	}
 	public String getCourse_name() {
 		return course_name;

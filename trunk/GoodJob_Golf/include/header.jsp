@@ -1,4 +1,5 @@
-﻿<%@page import="com.goodjob.reserve.dto.RegionDto"%>
+﻿<%@page import="java.util.Calendar"%>
+<%@page import="com.goodjob.reserve.dto.RegionDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.PackageDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -32,6 +33,28 @@
 	String ddlSearchMenu = StringUtils.trimToEmpty(request.getParameter("ddlSearchMenu"));
 	String txtSearchStartDate = StringUtils.trimToEmpty(request.getParameter("txtSearchStartDate"));
 	String txtSearchEndDate = StringUtils.trimToEmpty(request.getParameter("txtSearchEndDate"));
+
+	Calendar nowCalendarSearch = Calendar.getInstance();
+	String headYear_now = Integer.toString(nowCalendarSearch.get(nowCalendarSearch.YEAR));
+	String headMonth_now = "0" + Integer.toString(nowCalendarSearch.get(nowCalendarSearch.MONTH)+1);
+	String headDay_now = "0" + Integer.toString(nowCalendarSearch.get(nowCalendarSearch.DATE));
+	String headDate_now = headYear_now
+						+ "-" + headMonth_now.substring(headMonth_now.length()-2, headMonth_now.length())
+						+ "-" + headDay_now.substring(headDay_now.length()-2, headDay_now.length());
+	nowCalendarSearch.add(nowCalendarSearch.DATE, 14);
+	String headYear_2week = Integer.toString(nowCalendarSearch.get(nowCalendarSearch.YEAR));
+	String headMonth_2week = "0" + Integer.toString(nowCalendarSearch.get(nowCalendarSearch.MONTH)+1);
+	String headDay_2week = "0" + Integer.toString(nowCalendarSearch.get(nowCalendarSearch.DATE));
+	String headDate_2week = headYear_2week
+						+ "-" + headMonth_2week.substring(headMonth_2week.length()-2, headMonth_2week.length())
+						+ "-" + headDay_2week.substring(headDay_2week.length()-2, headDay_2week.length());
+	
+	if(txtSearchStartDate.equals("")){	
+		txtSearchStartDate = headDate_now;
+	}
+	if(txtSearchEndDate.equals("")){
+		txtSearchEndDate = headDate_2week;
+	}
 	
 %><html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -45,11 +68,35 @@
 <script src="/js/jquery.ui.core.js"></script>
 <script src="/js/jquery.ui.widget.js"></script>
 <script src="/js/jquery.ui.datepicker.js"></script>
+<script src="/js/jquery.ui.datepicker.kr.js"></script>
 <script language="javascript" src="/js/flashObject.js"></script>
 <script language="javascript" type="text/javascript">
 $(function() {
 	$( "#txtSearchStartDate" ).datepicker({dateFormat:'yy-mm-dd'});
 	$( "#txtSearchEndDate" ).datepicker({dateFormat:'yy-mm-dd'});
+	$( "#txtSearchStartDate" ).change(
+		function(){
+			var nowDate = ("<%=headDate_now%>").replace('-','').replace('-','');
+			var arrDate = this.value.split("-");
+			if(nowDate > arrDate){
+				alert("오늘보다 이전날짜를 선택할 수 없습니다.");
+				$( "#txtSearchStartDate" ).val("<%=headDate_now%>");
+				return;
+			}
+		}
+	);
+	$( "#txtSearchEndDate" ).change(
+		function(){
+			var startDate = $( "#txtSearchStartDate" ).val().replace('-','').replace('-','');
+			var arrDate = this.value.split("-");
+			arrDate = arrDate[0] + arrDate[1] + arrDate[2];
+			if(startDate > arrDate){
+				alert("시작날짜보다 이전날짜를 선택할 수 없습니다.");
+				$( "#txtSearchEndDate" ).val("<%=headDate_2week%>");
+				return;
+			}
+		}
+	);
 });
 	function logon_ok() {
 		
@@ -68,6 +115,11 @@ $(function() {
 		var frm = document.forms["logonFrm"];
 		frm.action = "/logon/logon.jsp";
 		frm.submit();
+   	}
+
+   	function golflinkSearch(){
+   	   	
+   		frmSearch.submit();
    	}
 //-->
 </script>
@@ -118,11 +170,11 @@ $(function() {
 						<OPTION value="2">사전신청골프장</OPTION></SELECT></TD>
 						<% } %> 
 						<TD width=30 align=right><A href="#"><IMG src="/images/common/btn_calendar_left.gif" width=22 height=21></A></TD>
-						<TD width=106 align=center><INPUT class=input_01 id="txtSearchStartDate" name="txtSearchStartDate" size=13 value="<%=txtSearchStartDate%>"></TD>
+						<TD width=106 align=center><INPUT class=input_01 id="txtSearchStartDate" name="txtSearchStartDate" size=13 maxlength="10" readonly value="<%=txtSearchStartDate%>"></TD>
 						<TD width=9><IMG src="/images/common/img_search_blank.gif" width=9 height=6></TD>
 						<TD width=30 align=right><A href="#"><IMG src="/images/common/btn_calendar_right.gif" width=22 height=21></A></TD>
-						<TD width=106 align=center><INPUT class=input_01 id="txtSearchEndDate" name="txtSearchEndDate" size=13 value="<%=txtSearchEndDate%>"></TD>
-						<TD width=75><A href="javascript:;" onclick="frmSearch.submit();"><IMG border=0 src="/images/common/btn_top_search.gif"></A></TD></TR></TBODY>
+						<TD width=106 align=center><INPUT class=input_01 id="txtSearchEndDate" name="txtSearchEndDate" size=13 maxlength="10" readonly value="<%=txtSearchEndDate%>"></TD>
+						<TD width=75><A href="javascript:;" onclick="golflinkSearch()"><IMG border=0 src="/images/common/btn_top_search.gif"></A></TD></TR></TBODY>
 						</TABLE>
 						</FORM>
                       </td>

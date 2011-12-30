@@ -1,3 +1,5 @@
+<%@page import="com.goodjob.reserve.dto.RegionDto"%>
+<%@page import="com.goodjob.reserve.PackageDao"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Calendar"%>
@@ -27,7 +29,23 @@ if(ddlSearchMenu_tmp.equals("") || ddlSearchMenu_tmp.equals("2")){
 	totalCnt += listSearch2.size();
 }
 
+PackageDao listRegionDao2 = new PackageDao();
+List<RegionDto> listRegion2 = listRegionDao2.getRegionList("1");
 
+String searchWheres = "";
+
+if(!ddlSearchRegion_tmp.equals("")){
+	for(int i = 0; i < listRegion2.size();i++){	
+		if(listRegion2.get(i).getRegion_seq() == Integer.parseInt(ddlSearchRegion_tmp)){
+			searchWheres += "<span class=blue>" + listRegion2.get(i).getRegion_name() + "</span> ";
+		}
+	}
+}
+if(ddlSearchMenu_tmp.equals("1")){
+	searchWheres += "<span class=blue>실시간 골프장</span> ";
+}else if(ddlSearchMenu_tmp.equals("2")){
+	searchWheres += "<span class=blue>사전 골프장</span> ";
+}
 %>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
 <TR>
@@ -49,52 +67,80 @@ if(ddlSearchMenu_tmp.equals("") || ddlSearchMenu_tmp.equals("2")){
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=707>
 <TBODY>
 <TR>
-<TD style="PADDING-LEFT: 10px">총 검색수 : <SPAN class=orange><%=totalCnt %></SPAN>건</TD></TR></TBODY></TABLE></TD></TR>
+<TD style="PADDING-LEFT: 10px">
+<%=searchWheres %>예약가능한타임 총 검색수 : <SPAN class=orange><%=totalCnt %></SPAN>건
+</TD></TR></TBODY></TABLE></TD></TR>
 <% if(listSearch1 != null && listSearch1.size() > 0){ %>
 <TR>
 <TD align=center>&nbsp;</TD></TR>
+<TR>
+<TR>
+<TD align="left">실시간</TD></TR>
 <TR>
 <TD align=center>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=706 bgColor=#d1d3d4>
 <TBODY>
 <TR>
 <TD class=normal_b bgColor=#f1f1f1 height=25 width=90 align=center>부킹날짜</TD>
-<TD class=normal_b bgColor=#f1f1f1 height=25 width=177 align=center>골프장명</TD>
-<TD class=normal_b bgColor=#f1f1f1 height=25 width=54 align=center>번호</TD>
-<TD class=normal_b bgColor=#f1f1f1 width=62 align=center>부킹시간</TD>
-<TD class=normal_b bgColor=#f1f1f1 width=150 align=center>코스</TD>
+<TD class=normal_b bgColor=#f1f1f1 height=25 width=253 align=center>골프장명</TD>
+<TD class=normal_b bgColor=#f1f1f1 height=25 width=100 align=center>부킹시간</TD>
+<TD class=normal_b bgColor=#f1f1f1 height=25 width=100 align=center>코스</TD>
 <TD class=normal_b bgColor=#f1f1f1 width=142 align=center>예약가능여부</TD></TR>
+<%
+	for(int i = 0;i < listSearch1.size();i++){
+		String bookingDate = listSearch1.get(i).getProduct_date();
+		bookingDate = bookingDate.substring(0,4)
+				+ "-" + bookingDate.substring(4,6)
+				+ "-" + bookingDate.substring(6,8);
+		
+		String bookingTime = listSearch1.get(i).getTime_start();
+		bookingTime = bookingTime.substring(0,2) + ":" + bookingTime.substring(2,4);
+%>
 <TR>
-<TD bgColor=white height=25 rowSpan=2 align=center>2011-12-31</TD>
-<TD bgColor=white height=25 rowSpan=2 align=center>골프장명</TD>
-<TD bgColor=white height=25 width=54 align=center>1</TD>
-<TD bgColor=white align=center>08:00</TD>
-<TD bgColor=white align=center>Lunar</TD>
-<TD bgColor=white align=center><A href="/sub/booking/booking_realtime.html"><IMG border=0 align=absMiddle src="../../images/booking/btn_detail.gif" width=112 height=20></A></TD></TR>
-<TR>
-<TD bgColor=white height=25 width=54 align=center>2</TD>
-<TD bgColor=white height=12 align=center>11:00</TD>
-<TD bgColor=white height=25 align=center>Stella</TD>
-<TD bgColor=white height=25 align=center><A href="/sub/booking/booking_realtime.html"><IMG border=0 align=absMiddle src="../../images/booking/btn_detail.gif" width=112 height=20></A></TD></TR></TBODY></TABLE></TD></TR>
+<TD bgColor=white height=25 align=center><%=bookingDate %></TD>
+<TD bgColor=white height=25 align=center><%=listSearch1.get(i).getGolflink_name() %></TD>
+<TD bgColor=white height=25 align=center><%=bookingTime %></TD>
+<TD bgColor=white height=25 align=center><%=listSearch1.get(i).getCourse_name() %></TD>
+<TD bgColor=white align=center><A href="/forGolfbooking/detail.jsp?menu=1&golf=<%=listSearch1.get(i).getGolflink_seq() %>&date=<%=listSearch1.get(i).getProduct_date() %>&cdate=<%=listSearch1.get(i).getProduct_date() %>"><IMG border=0 align=absMiddle src="../../images/booking/btn_detail.gif" width=112 height=20></A></TD></TR>
+<% 
+	} 
+%>
+</TBODY></TABLE></TD></TR>
 <% } %>
 <% if(listSearch2 != null && listSearch2.size() > 0){ %>
 <TR>
 <TD align=center>&nbsp;</TD></TR>
 <TR>
+<TR>
+<TD align="left">사전</TD></TR>
+<TR>
 <TD align=center>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=706 bgColor=#d1d3d4>
 <TBODY>
 <TR>
 <TD class=normal_b bgColor=#f1f1f1 height=25 width=90 align=center>부킹날짜</TD>
-<TD class=normal_b bgColor=#f1f1f1 height=25 width=303 align=center>골프장명</TD>
-<TD class=normal_b bgColor=#f1f1f1 height=25 width=150 align=center>가능팀수</TD>
+<TD class=normal_b bgColor=#f1f1f1 height=25 width=253 align=center>골프장명</TD>
+<TD class=normal_b bgColor=#f1f1f1 height=25 width=100 align=center>부킹시간</TD>
+<TD class=normal_b bgColor=#f1f1f1 height=25 width=100 align=center>가능팀수</TD>
 <TD class=normal_b bgColor=#f1f1f1 width=142 align=center>예약가능여부</TD></TR>
 <%
 	for(int i = 0;i < listSearch2.size();i++){
+		String bookingDate = listSearch2.get(i).getProduct_date();
+		bookingDate = bookingDate.substring(0,4)
+				+ "-" + bookingDate.substring(4,6)
+				+ "-" + bookingDate.substring(6,8);
+		
+		String bookingTime = "";
+		String bookingSTime = listSearch2.get(i).getTime_start();
+		String bookingETime = listSearch2.get(i).getTime_end();
+		bookingTime = bookingSTime.substring(0,2) + ":" + bookingSTime.substring(2,4)
+				+ " ~ "
+				+ bookingETime.substring(0,2) + ":" + bookingETime.substring(2,4);
 %>
 <TR>
-<TD bgColor=white height=25 align=center><%=listSearch2.get(i).getProduct_date() %></TD>
+<TD bgColor=white height=25 align=center><%=bookingDate %></TD>
 <TD bgColor=white height=25 align=center><%=listSearch2.get(i).getGolflink_name() %></TD>
+<TD bgColor=white height=25 align=center><%=bookingTime %></TD>
 <TD bgColor=white height=25 align=center>1타임</TD>
 <TD bgColor=white align=center><A href="/forGolfbooking/detail.jsp?menu=2&golf=<%=listSearch2.get(i).getGolflink_seq() %>&date=<%=listSearch2.get(i).getProduct_date() %>&cdate=<%=listSearch2.get(i).getProduct_date() %>"><IMG border=0 align=absMiddle src="../../images/booking/btn_detail.gif" width=112 height=20></A></TD></TR>
 <%

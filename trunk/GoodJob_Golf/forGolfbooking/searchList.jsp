@@ -75,7 +75,7 @@ if(ddlSearchMenu_tmp.equals("1")){
 <TD align=center>&nbsp;</TD></TR>
 <TR>
 <TR>
-<TD align="left">실시간</TD></TR>
+<TD align="left"><b>- 실시간</b></TD></TR>
 <TR>
 <TD align=center>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=706 bgColor=#d1d3d4>
@@ -112,7 +112,7 @@ if(ddlSearchMenu_tmp.equals("1")){
 <TD align=center>&nbsp;</TD></TR>
 <TR>
 <TR>
-<TD align="left">사전</TD></TR>
+<TD align="left"><b>- 사전</b></TD></TR>
 <TR>
 <TD align=center>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=706 bgColor=#d1d3d4>

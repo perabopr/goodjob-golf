@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
 <%@page import="com.goodjob.reserve.dto.ProductDto"%>
@@ -8,19 +9,25 @@
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-int menuNum = Integer.parseInt(menuName);
+int menuNum = NumberUtils.toInt(request.getParameter("menu"),1);
 
-String golfSeq = StringUtils.trimToEmpty(request.getParameter("golf"));
-String curDate = StringUtils.trimToEmpty(request.getParameter("cdate"));
+String golfSeq = Integer.toString(NumberUtils.toInt(request.getParameter("golf"),0));
+String curDate = Integer.toString(NumberUtils.toInt(request.getParameter("cdate"),0));
 if(curDate == null || curDate.length() != 8){
-	response.sendRedirect("reserve.jsp?menu=2");
+	out.print("<script>");
+	out.print("location.href='reserve.jsp?menu=2';");
+	out.print("</script>");
+	return;
 }
 
 //골프장상세정보.
 GolfLinkDao glDao = new GolfLinkDao();
 List<GolfLinkDto> listGolf = glDao.getGolfLinkDetail(Integer.parseInt(golfSeq));
 if(listGolf == null || listGolf.size() != 1){
-	response.sendRedirect("reserveReal.jsp?menu=2");
+	out.print("<script>");
+	out.print("location.href='reserve.jsp?menu=2';");
+	out.print("</script>");
+	return;
 }
 GolfLinkDto glDto = listGolf.get(0);
 

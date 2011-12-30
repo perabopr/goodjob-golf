@@ -2,6 +2,7 @@ package com.goodjob.reserve.dto;
 
 public class SearchDto {
 	private String product_date = "";
+	private int golflink_seq = 0; 
 	private String golflink_name = "";
 	private String time_start = "";
 	private String course_name = "";
@@ -12,6 +13,12 @@ public class SearchDto {
 	}
 	public void setProduct_date(String product_date) {
 		this.product_date = product_date;
+	}
+	public int getGolflink_seq() {
+		return golflink_seq;
+	}
+	public void setGolflink_seq(int golflink_seq) {
+		this.golflink_seq = golflink_seq;
 	}
 	public String getGolflink_name() {
 		return golflink_name;

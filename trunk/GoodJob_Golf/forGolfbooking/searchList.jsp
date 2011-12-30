@@ -12,8 +12,21 @@ String txtSearchStartDate_tmp = StringUtils.trimToEmpty(request.getParameter("tx
 txtSearchStartDate_tmp = txtSearchStartDate_tmp.replace("-","");
 String txtSearchEndDate_tmp = StringUtils.trimToEmpty(request.getParameter("txtSearchEndDate"));
 txtSearchEndDate_tmp = txtSearchEndDate_tmp.replace("-","");
+
+int totalCnt = 0;
+
 SearchDao sDao = new SearchDao();
-List<SearchDto> listSearch = sDao.getSearch(ddlSearchRegion_tmp, ddlSearchMenu_tmp, txtSearchStartDate_tmp, txtSearchEndDate_tmp);
+List<SearchDto> listSearch1 = null;
+List<SearchDto> listSearch2 = null;
+if(ddlSearchMenu_tmp.equals("") || ddlSearchMenu_tmp.equals("1")){
+	listSearch1 = sDao.getSearch(ddlSearchRegion_tmp, "1", txtSearchStartDate_tmp, txtSearchEndDate_tmp);
+	totalCnt += listSearch1.size(); 
+}
+if(ddlSearchMenu_tmp.equals("") || ddlSearchMenu_tmp.equals("2")){
+	listSearch2 = sDao.getSearch(ddlSearchRegion_tmp, "2", txtSearchStartDate_tmp, txtSearchEndDate_tmp);
+	totalCnt += listSearch2.size();
+}
+
 
 %>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
@@ -36,7 +49,8 @@ List<SearchDto> listSearch = sDao.getSearch(ddlSearchRegion_tmp, ddlSearchMenu_t
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=707>
 <TBODY>
 <TR>
-<TD style="PADDING-LEFT: 10px"><SPAN class=blue>수도권</SPAN> 골프장 예약가능타임 총 검색수 : <SPAN class=orange>2</SPAN>건</TD></TR></TBODY></TABLE></TD></TR>
+<TD style="PADDING-LEFT: 10px">총 검색수 : <SPAN class=orange><%=totalCnt %></SPAN>건</TD></TR></TBODY></TABLE></TD></TR>
+<% if(listSearch1 != null && listSearch1.size() > 0){ %>
 <TR>
 <TD align=center>&nbsp;</TD></TR>
 <TR>
@@ -62,6 +76,8 @@ List<SearchDto> listSearch = sDao.getSearch(ddlSearchRegion_tmp, ddlSearchMenu_t
 <TD bgColor=white height=12 align=center>11:00</TD>
 <TD bgColor=white height=25 align=center>Stella</TD>
 <TD bgColor=white height=25 align=center><A href="/sub/booking/booking_realtime.html"><IMG border=0 align=absMiddle src="../../images/booking/btn_detail.gif" width=112 height=20></A></TD></TR></TBODY></TABLE></TD></TR>
+<% } %>
+<% if(listSearch2 != null && listSearch2.size() > 0){ %>
 <TR>
 <TD align=center>&nbsp;</TD></TR>
 <TR>
@@ -73,15 +89,18 @@ List<SearchDto> listSearch = sDao.getSearch(ddlSearchRegion_tmp, ddlSearchMenu_t
 <TD class=normal_b bgColor=#f1f1f1 height=25 width=303 align=center>골프장명</TD>
 <TD class=normal_b bgColor=#f1f1f1 height=25 width=150 align=center>가능팀수</TD>
 <TD class=normal_b bgColor=#f1f1f1 width=142 align=center>예약가능여부</TD></TR>
+<%
+	for(int i = 0;i < listSearch2.size();i++){
+%>
 <TR>
-<TD bgColor=white height=25 align=center>2011-12-31</TD>
-<TD bgColor=white height=25 align=center>골프장명</TD>
+<TD bgColor=white height=25 align=center><%=listSearch2.get(i).getProduct_date() %></TD>
+<TD bgColor=white height=25 align=center><%=listSearch2.get(i).getGolflink_name() %></TD>
 <TD bgColor=white height=25 align=center>1타임</TD>
-<TD bgColor=white align=center><A href="/sub/booking/booking_before.html"><IMG border=0 align=absMiddle src="../../images/booking/btn_detail.gif" width=112 height=20></A></TD></TR>
-<TR>
-<TD bgColor=white height=25 align=center>2011-12-31</TD>
-<TD bgColor=white height=25 align=center>골프장명</TD>
-<TD bgColor=white height=25 align=center>1타임</TD>
-<TD bgColor=white height=25 align=center><A href="/sub/booking/booking_before.html"><IMG border=0 align=absMiddle src="../../images/booking/btn_detail.gif" width=112 height=20></A></TD></TR></TBODY></TABLE></TD></TR>
+<TD bgColor=white align=center><A href="/forGolfbooking/detail.jsp?menu=2&golf=<%=listSearch2.get(i).getGolflink_seq() %>&date=<%=listSearch2.get(i).getProduct_date() %>&cdate=<%=listSearch2.get(i).getProduct_date() %>"><IMG border=0 align=absMiddle src="../../images/booking/btn_detail.gif" width=112 height=20></A></TD></TR>
+<%
+	}
+%>
+</TBODY></TABLE></TD></TR>
+<% } %>
 <TR>
 <TD align=center>&nbsp;</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>

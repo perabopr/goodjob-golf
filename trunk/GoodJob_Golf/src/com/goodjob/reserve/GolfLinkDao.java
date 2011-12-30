@@ -53,7 +53,10 @@ public class GolfLinkDao {
 		try {
 			conn = DBManager.getConnection();
 			
+			String strNowDate = new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
+			
 			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(strNowDate);
 			bind.add(pDto.getGolflink_seq());
 			bind.add(pDto.getProduct_startDate());
 			bind.add(pDto.getProduct_endDate());

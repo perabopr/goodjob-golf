@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="com.goodjob.reserve.dto.ProductDto"%>
 <%@page import="com.goodjob.reserve.dto.GolfLinkDto"%>
 <%@page import="java.util.List"%>
@@ -6,20 +7,25 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-int menuNum = Integer.parseInt(menuName);
+int menuNum = NumberUtils.toInt(request.getParameter("menu"),1);
 
 //String nowDate = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date());
 Calendar vCalendar = Calendar.getInstance();
-String strDate = request.getParameter("date");
+String strDate = Integer.toString(NumberUtils.toInt(request.getParameter("date"),0));
 int tYear;
 int tMonth;
 int tDay;
 if(strDate == null || strDate.length() != 8){
 	strDate = new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
-
+	out.print("<script>");
+	out.print("location.href='/forGolfbooking/reserve.jsp?menu=2&date="+strDate+"';");
+	out.print("</script>");
+	return;
+	/*
 	tYear = Integer.parseInt(strDate.substring(0,4));
 	tMonth = Integer.parseInt(strDate.substring(4,6));
 	tDay = Integer.parseInt(strDate.substring(6,8));
+	*/
 }else{
 	tYear = Integer.parseInt(strDate.substring(0,4));
 	tMonth = Integer.parseInt(strDate.substring(4,6));

@@ -87,7 +87,7 @@ $(function() {
                 <table border="0" width="100%" cellpadding="0" cellspacing="0">
                     <tr>
                       <td colspan="3" background="/images/common/img_top_bg.jpg" height="50" valign="top" width="1000" align="right">
-                      	<FORM NAME="frmSearch" METHOD="post" ACTION="search.jsp">
+                      	<FORM NAME="frmSearch" METHOD="post" ACTION="/forGolfbooking/search.jsp">
 						<TABLE cellSpacing=0 cellPadding=0 width=751 bgColor=#052b48>
 						<TBODY>
 						<TR>

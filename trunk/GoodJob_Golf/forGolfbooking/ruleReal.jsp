@@ -1,10 +1,11 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.reserve.dto.GolfLinkPromiseDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-String menuSeq = request.getParameter("menu");
-String productsubSeq = request.getParameter("gcId");
+String menuSeq = StringUtils.defaultIfEmpty(request.getParameter("menu"),"1");
+String productsubSeq = StringUtils.defaultIfEmpty(request.getParameter("gcId"),"0");
 GolfLinkDao glDao = new GolfLinkDao();
 List<GolfLinkPromiseDto> listPromise = glDao.getGolfPromise(Integer.parseInt(productsubSeq));
 %>

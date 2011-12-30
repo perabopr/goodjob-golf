@@ -23,6 +23,7 @@ public class RESERVE {
 			"INNER JOIN tb_product_sub B on(A.product_seq = B.product_seq) " +
 		"WHERE A.view_yn = 'Y' " +
 			"AND B.product_status = '0' " +
+			"AND A.product_date >= ? " +
 			"AND A.golflink_seq = ? " +
 			"AND A.product_date >= ? AND A.product_date <= ? " +
 		"GROUP BY A.product_year, A.product_month, A.product_day ";	
@@ -342,13 +343,14 @@ public class RESERVE {
 	public static final String getSearch
 	=	"SELECT " +
 			" b.product_date " +
+			",a.golflink_seq " +
 			",a.golflink_name " +
 			",c.time_start " +
 			",d.course_name " +
 		"FROM tb_golflink a " +
 			"INNER JOIN tb_product b ON(a.golflink_seq = b.golflink_seq) " +
 		    "INNER JOIN tb_product_sub c ON(b.product_seq = c.product_seq) " +
-			"LEFT OUTER JOIN tb_golflink_course d ON(a.golflink_seq = d.golflink_seq) " +
+			"LEFT OUTER JOIN tb_golflink_course d ON(c.golflink_course_seq = d.golflink_course_seq) " +
 		"WHERE c.product_status = '0' " +
 			"AND b.product_date >= ? %s " +
 		"ORDER BY a.menu_seq, a.golflink_seq, b.product_date, c.time_start";	

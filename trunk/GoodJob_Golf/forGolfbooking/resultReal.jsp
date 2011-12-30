@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%@page import="com.goodjob.reserve.dto.GolfLinkReserveDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -17,7 +18,7 @@ int perNum = 4;
 
 GolfLinkReserveDto glrDto = new GolfLinkReserveDto();
 glrDto.setReserve_name(resName);
-glrDto.setReserve_uid("test@test.com");
+glrDto.setReserve_uid(user_Id);
 glrDto.setPer_num(Integer.toString(perNum));
 glrDto.setReserve_phone(uPhone);
 glrDto.setProduct_price(100);

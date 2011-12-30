@@ -20,7 +20,7 @@ public class SearchDao {
 		
 		try {
 			String strQuery = "";
-			if(region_seq.length() > 0){
+			if(region_seq.length() > 0 && region_seq != "0"){
 				strQuery += "AND a.region_seq = '" + region_seq + "' ";
 			}
 			if(menu_seq.length() > 0){

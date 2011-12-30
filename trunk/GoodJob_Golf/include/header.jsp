@@ -1,10 +1,15 @@
-﻿<%@page import="java.util.Calendar"%>
+﻿<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.util.Calendar"%>
 <%@page import="com.goodjob.reserve.dto.RegionDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.PackageDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%
+//사용자정보.
+String user_Name = StringUtils.trimToEmpty((String)session.getAttribute("mem_name"));
+String user_Id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"));
+
 	String curr_url = StringUtils.trimToEmpty(request.getRequestURI());
 
 	String swf_param = "";
@@ -56,6 +61,12 @@
 		txtSearchEndDate = headDate_2week;
 	}
 	
+%>
+<%!
+public String commify(int n) {
+	DecimalFormat formater = new DecimalFormat("###,###,###,###,###,###,###");
+	return formater.format(n);
+}
 %><html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
@@ -158,6 +169,11 @@ $(function() {
 						<TD width=105><IMG alt="골프장 빠른검색" src="/images/common/img_search_title.gif" width=120 height=40></TD>
 						<TD width=143 align=center><SELECT id="ddlSearchRegion" name="ddlSearchRegion">
 						<OPTION selected value="">지역선택-------</OPTION> 
+						<% if(ddlSearchRegion.equals("0")){ %>
+						<OPTION value="0" selected>전체보기</OPTION> 
+						<% }else{ %>
+						<OPTION value="0">전체보기</OPTION>
+						<% } %> 
 						<%
 							for(int i = 0; i < listRegion.size();i++){
 								String selected = "";

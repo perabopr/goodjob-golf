@@ -13,13 +13,6 @@ List<RegionDto> rList = pkDao.getRegionList("1");
 String strWhere = "AND a.region_seq = '" + pRegion + "'";
 List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 %>
-<%!
-public String commify(int n) {
-	DecimalFormat formater = new DecimalFormat("###,###,###,###,###,###,###");
-	return formater.format(n);
-}
-
-%>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
 <TR>
 <TD bgColor=white vAlign=top width=745 align=center>

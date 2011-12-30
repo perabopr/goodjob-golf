@@ -19,13 +19,30 @@ if(pkList != null && pkList.size() == 1){
 <script type="text/javascript">
 <!--
 $(function() {
-	$( "#reserveDate" ).datepicker({dateFormat:'yy-mm-dd'});
+	$( "#reserveDate" ).datepicker({
+		dateFormat:'yy-mm-dd',
+		onSelect : function(dateText, inst){		
+			var nowDate = ("<%=headDate_now%>").replace('-','').replace('-','');
+			var arrDate = dateText.split("-");
+			arrDate = arrDate[0] + arrDate[1] + arrDate[2];
+			if(nowDate > arrDate){
+				alert("오늘보다 이전날짜를 선택할 수 없습니다.");
+				$( "#reserveDate" ).val("<%=headDate_now%>");
+				return;
+		}
+	}
+	});
 	$( "#reserveDate" ).change(
 		function(){
 			var arrDate = this.value.split("-");
 			var week = new Array('일', '월', '화', '수', '목', '금', '토');
 			var rDate = new Date(arrDate[1]+"/"+arrDate[2]+"/"+arrDate[0]);
 			$("#weekname").text(week[rDate.getDay()] + "요일");
+		}
+	);
+	$("#btnReserveDate").click(
+		function(){
+			$( "#reserveDate" ).datepicker("show");
 		}
 	);
 });
@@ -114,7 +131,7 @@ function billok(){
 	<OPTION value="gmail.com">gmail.com</OPTION></SELECT></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=12 width=122 align=right>출발일</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white width=451><IMG border=0 align=absMiddle src="../../images/package/img_calendar.gif" width=15 height=16> <INPUT class=input_01 id="reserveDate" name="reserveDate" size=10 /> <span id="weekname" name="weekname"></span></TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white width=451><IMG id="btnReserveDate" name="btnReserveDate" border=0 align=absMiddle src="../../images/package/img_calendar.gif" width=15 height=16  style="cursor:hand"> <INPUT class=input_01 id="reserveDate" name="reserveDate" size=10 maxlength="10" readonly /> <span id="weekname" name="weekname"></span></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=12 width=122 align=right>인원</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white height=25 width=451><INPUT class=input_01 id="reserveTeam" name="reserveTeam" size=4 value="1" readonly="readonly"> 팀 <INPUT class=input_01 id="reservePerson" name="reservePerson" size=4 maxlength="2"> 인 </TD></TR>

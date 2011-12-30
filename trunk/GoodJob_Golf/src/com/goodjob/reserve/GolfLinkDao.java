@@ -16,6 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.db.DBManager;
+import com.goodjob.product.dto.ProductSubDto;
 import com.goodjob.reserve.dto.GolfLinkDto;
 import com.goodjob.reserve.dto.GolfLinkPriceDto;
 import com.goodjob.reserve.dto.GolfLinkPromiseDto;
@@ -188,36 +189,45 @@ public class GolfLinkDao {
 	public void setGolfReserve(GolfLinkReserveDto glrDto){
 		int idSeq = 0;
 		Connection conn = null;
+		List<ProductSubDto> list = null;
 		try{
 			conn = DBManager.getConnection();
 			ArrayList<Object> bind = new ArrayList<Object>();
-			bind.add(glrDto.getReserve_name());
-			bind.add(glrDto.getReserve_uid());
-			bind.add(glrDto.getPer_num());
-			bind.add(glrDto.getReserve_phone());
-			bind.add(glrDto.getProduct_price());
-			bind.add(glrDto.getCoupon_price());
-			bind.add(glrDto.getProcess_status());
-			bind.add(glrDto.getCard_bill_num());
 			bind.add(glrDto.getProductsub_seq());
 			
 			QueryRunner qr = new QueryRunner();
+			ResultSetHandler rsh = new BeanListHandler(ProductDto.class);
+			list = (List<ProductSubDto>)qr.query(conn , RESERVE.getProductReserve2, rsh, bind.toArray());
 			
-			//예약
-			qr.update(conn, RESERVE.setGolfLinkReserve_insert, bind.toArray());
-			
-			//생성키 반환.
-			Statement stmt = conn.createStatement();
-			ResultSet rst = stmt.executeQuery(PRODUCT.getSequenceId);
-			if(rst.next()){
-				idSeq = rst.getInt(1);
+			// 상품이 예약가능할때만...
+			if(list.size() > 0 && list.get(0).getProduct_status().equals("0")){
+				bind = new ArrayList<Object>();
+				bind.add(glrDto.getReserve_name());
+				bind.add(glrDto.getReserve_uid());
+				bind.add(glrDto.getPer_num());
+				bind.add(glrDto.getReserve_phone());
+				bind.add(glrDto.getProduct_price());
+				bind.add(glrDto.getCoupon_price());
+				bind.add(glrDto.getProcess_status());
+				bind.add(glrDto.getCard_bill_num());
+				bind.add(glrDto.getProductsub_seq());
+				
+				//예약
+				qr.update(conn, RESERVE.setGolfLinkReserve_insert, bind.toArray());
+				
+				//생성키 반환.
+				Statement stmt = conn.createStatement();
+				ResultSet rst = stmt.executeQuery(PRODUCT.getSequenceId);
+				if(rst.next()){
+					idSeq = rst.getInt(1);
+				}
+				
+				//상품상세 "예약중"상태로 변경.
+				bind = new ArrayList<Object>();
+				bind.add("1");
+				bind.add(glrDto.getProductsub_seq());
+				qr.update(conn, RESERVE.setProductSub_update, bind.toArray());
 			}
-			
-			//상품상세 "예약중"상태로 변경.
-			bind = new ArrayList<Object>();
-			bind.add("1");
-			bind.add(glrDto.getProductsub_seq());
-			qr.update(conn, RESERVE.setProductSub_update, bind.toArray());
 			
 		}catch (Exception e) {
 			System.out.println(e);

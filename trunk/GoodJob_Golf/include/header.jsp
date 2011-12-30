@@ -72,29 +72,41 @@
 <script language="javascript" src="/js/flashObject.js"></script>
 <script language="javascript" type="text/javascript">
 $(function() {
-	$( "#txtSearchStartDate" ).datepicker({dateFormat:'yy-mm-dd'});
-	$( "#txtSearchEndDate" ).datepicker({dateFormat:'yy-mm-dd'});
-	$( "#txtSearchStartDate" ).change(
-		function(){
+	$( "#txtSearchStartDate" ).datepicker({
+		dateFormat:'yy-mm-dd',
+		onSelect : function(dateText, inst){
+			
 			var nowDate = ("<%=headDate_now%>").replace('-','').replace('-','');
-			var arrDate = this.value.split("-");
+			var arrDate = dateText.split("-");
+			arrDate = arrDate[0] + arrDate[1] + arrDate[2];
 			if(nowDate > arrDate){
 				alert("오늘보다 이전날짜를 선택할 수 없습니다.");
 				$( "#txtSearchStartDate" ).val("<%=headDate_now%>");
 				return;
 			}
 		}
-	);
-	$( "#txtSearchEndDate" ).change(
-		function(){
+	});
+	$( "#txtSearchEndDate" ).datepicker({
+		dateFormat:'yy-mm-dd',
+		onSelect : function(dateText, inst){
 			var startDate = $( "#txtSearchStartDate" ).val().replace('-','').replace('-','');
-			var arrDate = this.value.split("-");
+			var arrDate = dateText.split("-");
 			arrDate = arrDate[0] + arrDate[1] + arrDate[2];
 			if(startDate > arrDate){
 				alert("시작날짜보다 이전날짜를 선택할 수 없습니다.");
 				$( "#txtSearchEndDate" ).val("<%=headDate_2week%>");
 				return;
 			}
+		}
+	});
+	$("#btnSearchStartDate").click(
+		function(){
+			$( "#txtSearchStartDate" ).datepicker("show");
+		}
+	);
+	$("#btnSearchEndDate").click(
+		function(){
+			$( "#txtSearchEndDate" ).datepicker("show");
 		}
 	);
 });
@@ -169,10 +181,10 @@ $(function() {
 						<% }else{ %>
 						<OPTION value="2">사전신청골프장</OPTION></SELECT></TD>
 						<% } %> 
-						<TD width=30 align=right><A href="#"><IMG src="/images/common/btn_calendar_left.gif" width=22 height=21></A></TD>
+						<TD width=30 align=right><A href="#"><IMG id="btnSearchStartDate" src="/images/common/btn_calendar_left.gif" width=22 height=21></A></TD>
 						<TD width=106 align=center><INPUT class=input_01 id="txtSearchStartDate" name="txtSearchStartDate" size=13 maxlength="10" readonly value="<%=txtSearchStartDate%>"></TD>
 						<TD width=9><IMG src="/images/common/img_search_blank.gif" width=9 height=6></TD>
-						<TD width=30 align=right><A href="#"><IMG src="/images/common/btn_calendar_right.gif" width=22 height=21></A></TD>
+						<TD width=30 align=right><A href="#"><IMG id="btnSearchEndDate" src="/images/common/btn_calendar_right.gif" width=22 height=21></A></TD>
 						<TD width=106 align=center><INPUT class=input_01 id="txtSearchEndDate" name="txtSearchEndDate" size=13 maxlength="10" readonly value="<%=txtSearchEndDate%>"></TD>
 						<TD width=75><A href="javascript:;" onclick="golflinkSearch()"><IMG border=0 src="/images/common/btn_top_search.gif"></A></TD></TR></TBODY>
 						</TABLE>

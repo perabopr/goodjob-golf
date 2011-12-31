@@ -106,15 +106,15 @@
             <table id="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/realtime_list.html" class=left_menu>실시간예약</a></td>
+                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="order/real_list.jsp" class=left_menu>실시간예약</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/before_list.html" class=left_menu>사전예약</a></td>
+                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="order/pre_list.jsp" class=left_menu>사전예약</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/domestic_list.html"" class=left_menu>국내패키지</a></td>
+                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="order/package_list.jsp"" class=left_menu>국내패키지</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
@@ -122,7 +122,7 @@
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/condo_list.html" class=left_menu>콘도</a></td>
+                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="order/condo_list.jsp" class=left_menu>콘도</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>

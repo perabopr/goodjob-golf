@@ -51,7 +51,7 @@
      <tr>
        <td><img src="/images/img_leftmenu/img_login_title.gif" width="235" height="49" border="0"></td>
      </tr>
-  <form name="logonFrm" method="post">
+  <form name="logonFrm" method="post" onsubmit="return logon_ok();">
      <tr>
        <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="207">
            <tr>
@@ -64,7 +64,7 @@
            </tr>
            <tr>
              <td><input id="login_pwd" class="input_01" type="password" size="20" name="login_pwd" value=""></td>
-             <td height="24" align="right"><a href="javascript:logon_ok();"><img src="/images/img_leftmenu/btn_login_confirm.jpg" width="70" height="22" border="0"></a></td>
+             <td height="24" align="right"><input type="image" src="/images/img_leftmenu/btn_login_confirm.jpg" width="70" height="22" border="0"/></td>
            </tr>
 	</form>
            <tr>

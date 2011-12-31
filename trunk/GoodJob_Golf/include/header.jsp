@@ -64,10 +64,10 @@ String user_Id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"))
 %>
 <%!
 public String commify(int n) {
-	DecimalFormat formater = new DecimalFormat("###,###,###,###,###,###,###");
-	return formater.format(n);
+	return com.goodjob.util.Utils.numberFormat(n);
 }
-%><html>
+%>
+<html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
@@ -126,13 +126,13 @@ $(function() {
 		if(!$('#login_id').val()) {
 			alert('아이디를 입력하시기 바랍니다.');
 			$('#login_id').focus();
-			return;
+			return false;
 		}
 
 		if(!$('#login_pwd').val()) {
 			alert('비밀번호를 입력하시기 바랍니다.');
 			$('#login_pwd').focus();
-			return;
+			return false;
 		} 
 				
 		var frm = document.forms["logonFrm"];

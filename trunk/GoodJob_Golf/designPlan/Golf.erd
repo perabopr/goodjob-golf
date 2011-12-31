@@ -302,8 +302,8 @@
       <constraint>
         <height>-1</height>
         <width>-1</width>
-        <x>358</x>
-        <y>58</y>
+        <x>359</x>
+        <y>44</y>
       </constraint>
       <sourceConnections>
         <net.java.amateras.db.visual.model.ForeignKeyModel>
@@ -932,13 +932,29 @@ Y : 예약가능&#x0D;
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>per_num</columnName>
                                   <logicalName>인원</logicalName>
-                                  <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../../../../../../../../../../../../columns/net.java.amateras.db.visual.model.ColumnModel[3]/columnType"/>
-                                  <size>2</size>
+                                  <columnType class="net.java.amateras.db.dialect.ColumnType">
+                                    <name>INT</name>
+                                    <logicalName>Integer</logicalName>
+                                    <supportSize>true</supportSize>
+                                    <type>4</type>
+                                  </columnType>
+                                  <size></size>
                                   <notNull>true</notNull>
                                   <primaryKey>false</primaryKey>
                                   <description></description>
                                   <autoIncrement>false</autoIncrement>
                                   <defaultValue></defaultValue>
+                                </net.java.amateras.db.visual.model.ColumnModel>
+                                <net.java.amateras.db.visual.model.ColumnModel>
+                                  <columnName>per_team</columnName>
+                                  <logicalName>팀</logicalName>
+                                  <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[13]/columnType"/>
+                                  <size></size>
+                                  <notNull>false</notNull>
+                                  <primaryKey>false</primaryKey>
+                                  <description></description>
+                                  <autoIncrement>false</autoIncrement>
+                                  <defaultValue>1</defaultValue>
                                 </net.java.amateras.db.visual.model.ColumnModel>
                                 <net.java.amateras.db.visual.model.ColumnModel>
                                   <columnName>reserve_phone</columnName>
@@ -988,7 +1004,7 @@ Y : 예약가능&#x0D;
                                   <description>예약대기:0&#x0D;
 예약완료:1&#x0D;
 취소불가:2&#x0D;
-취소:3&#x0D;
+예약취소:3&#x0D;
 </description>
                                   <autoIncrement>false</autoIncrement>
                                   <defaultValue>0</defaultValue>
@@ -1021,7 +1037,7 @@ Y : 예약가능&#x0D;
                                 <height>-1</height>
                                 <width>-1</width>
                                 <x>357</x>
-                                <y>464</y>
+                                <y>442</y>
                               </constraint>
                               <sourceConnections>
                                 <net.java.amateras.db.visual.model.ForeignKeyModel reference="../../.."/>
@@ -2356,7 +2372,7 @@ Y : 예약가능&#x0D;
         <height>30</height>
         <width>922</width>
         <x>25</x>
-        <y>21</y>
+        <y>7</y>
       </constraint>
       <sourceConnections/>
       <targetConnections/>
@@ -3069,7 +3085,12 @@ Y : 예약가능&#x0D;
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>process_status</columnName>
           <logicalName>처리상태</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../net.java.amateras.db.visual.model.TableModel/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[17]/columnType"/>
+          <columnType class="net.java.amateras.db.dialect.ColumnType">
+            <name>CHAR</name>
+            <logicalName>Character</logicalName>
+            <supportSize>true</supportSize>
+            <type>1</type>
+          </columnType>
           <size>1</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
@@ -3333,7 +3354,7 @@ Y : 예약가능&#x0D;
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>process_status</columnName>
           <logicalName>처리상태</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../net.java.amateras.db.visual.model.TableModel/sourceConnections/net.java.amateras.db.visual.model.ForeignKeyModel[2]/target/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/targetConnections/net.java.amateras.db.visual.model.ForeignKeyModel/source/columns/net.java.amateras.db.visual.model.ColumnModel[17]/columnType"/>
+          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../net.java.amateras.db.visual.model.TableModel[16]/columns/net.java.amateras.db.visual.model.ColumnModel[14]/columnType"/>
           <size>1</size>
           <notNull>true</notNull>
           <primaryKey>false</primaryKey>

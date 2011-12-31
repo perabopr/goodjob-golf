@@ -144,7 +144,7 @@ public class RESERVE {
 			",A.golflink_seq" +
 			",B.product_seq" +
 			",C.productsub_seq" +
-			",curdate(),?,?" +
+			",NOW(),?,?" +
 			",A.golflink_name, B.product_date, C.time_start, IFNULL(D.course_name, '')" +
 			",?,?,?,?,?,? " +
 		"FROM tb_golflink A " +
@@ -328,7 +328,7 @@ public class RESERVE {
 		"SELECT " +
 			" ? " +
 			",a.package_seq " +
-			",curdate() " +
+			",NOW() " +
 			",? " +
 			",? " +
 			",a.package_name1 " +

@@ -32,7 +32,7 @@
                                                         <tr>
                                                           <td align="center" width="600"><img src="../../images/mem_join/img_login_title.gif" width="600" height="132" border="0"></td>
                                                         </tr>
-                                                    <form name="logonFrm" method="post" action="">
+                                                    <form name="logonFrm" method="post" onsubmit="return logon_ok();">
                                                         <tr>
                                                           <td height="30">&nbsp;</td>
                                                         </tr>
@@ -43,7 +43,7 @@
                                                                 <td width="215">
                                                                     <input id="login_id" class="mem_login" type="text" size="33" name="login_id" value="<%=com.goodjob.util.Utils.getCookie(request,"golf.mem_id")%>">
                                                                   </td>
-                                                                <td width="160" rowspan="2"><a href="javascript:logon_ok();"><img src="/images/mem_join/btn_login.gif" width="59" height="47" border="0"></a></td>
+                                                                <td width="160" rowspan="2"><input type="image" src="/images/mem_join/btn_login.gif" width="59" height="47" border="0"></a></td>
                                                               </tr>
                                                               <tr>
                                                                 <td width="116" align="right" style="padding-right:10px;" height="2"><span class=normal_b>비밀번호</span></td>
@@ -62,7 +62,7 @@
                                                         <tr>
                                                           <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="500">
                                                               <tr>
-                                                                <td width="500" colspan="3" height="35">&nbsp;</td>
+                                                                <td width="500" colspan="3" height="20">&nbsp;</td>
                                                               </tr>
                                                               <tr>
                                                                 <td height="25" width="122">&nbsp;</td>

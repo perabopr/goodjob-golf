@@ -23,7 +23,7 @@
 		return;
 	}
 	
-	if(!"admin".equals(mem_pwd)){
+	if(!"66700110".equals(mem_pwd)){
 %>
 		<script language="javascript" type="text/javascript">
 			alert("비밀번호가 일치하지 않습니다.");

@@ -16,18 +16,19 @@
 		if(!$('#admin_id').val()) {
 			alert('아이디를 입력하시기 바랍니다.');
 			$('#admin_id').focus();
-			return;
+			return false;
 		}
 
 		if(!$('#admin_pwd').val()) {
 			alert('비밀번호를 입력하시기 바랍니다.');
 			$('#admin_pwd').focus();
-			return;
+			return false;
 		} 
 				
 		var frm = document.forms["logonFrm"];
 		frm.action = "/_admin/admin_login.jsp";
 		frm.submit();
+		return true;
    	}
 //-->
 </script>
@@ -37,7 +38,7 @@
   <tr>
     <td width="100%" align="center"><p><img src="/_admin/images/common/img_login_top.gif" width="601" height="141" border="0"></p></td>
   </tr>
-  <form name="logonFrm" method="post">
+  <form name="logonFrm" method="post" onsubmit="return logon_ok();">
   <tr>
     <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="601">
         <tr>
@@ -60,12 +61,11 @@
         </tr>
       </table></td>
   </tr>
- 	</form>
   <tr>
     <td align="right" background="/_admin/images/common/img_login_bg.gif" height="120"  style="padding-right:100"><p>
-        <a href="javascript:logon_ok();"><img src="/_admin/images/common/btn_login.gif" width="185" height="45" onclick="" border="0" name="a11"></a>
-        &gt;</p></td>
+        <input type="image" src="/_admin/images/common/btn_login.gif" width="185" height="45" border="0" name="a11"></p></td>
   </tr>
+</form>
   <tr>
     <td align="center"><p><img src="/_admin/images/common/img_login_bottom.gif" width="601" height="44" border="0"></p></td>
   </tr>

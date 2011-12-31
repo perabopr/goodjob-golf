@@ -20,10 +20,10 @@
 <p>&nbsp;</p>
 </td>
 <td width="66" valign="bottom">
-<p><a href="booking/regist_list.asp" target="main"><font color="white">메인</font></a></p>
+<p><a href="/_admin/Main.jsp" target="main"><font color="white">메인</font></a></p>
 </td>
 <td width="152" valign="bottom">
-<p><a href="#" target="main"><font color="white">로그아웃</font></a></p>
+<p><a href="/_admin/admin_logout.jsp" target="main"><font color="white">로그아웃</font></a></p>
 </td>
 </tr>
 </table>

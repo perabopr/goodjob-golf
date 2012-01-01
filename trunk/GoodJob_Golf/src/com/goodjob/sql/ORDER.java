@@ -67,7 +67,7 @@ public class ORDER {
 		"FROM {0}" +
 		" {1} ORDER BY reserve_seq desc LIMIT ? , ? ";
 	
-	public static final String totalcnt = "SELECT COUNT(*) AS CNT FROM {0} {1} ";
+	public static final String totalcnt = "SELECT COUNT(*) AS cnt FROM {0} {1} ";
 	
 	public static final String max = " SELECT IFNULL(MAX(seq),0)+1 as seq FROM %s ";
 	

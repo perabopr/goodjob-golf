@@ -15,7 +15,7 @@ List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 %>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
 <TR>
-<TD bgColor=white vAlign=top width=745 align=center>
+<TD bgColor=white vAlign=top width=745 height="650" align=center>
 	<TABLE border=0 cellSpacing=0 cellPadding=0 width="95%">
 	<TBODY>
 	<TR>

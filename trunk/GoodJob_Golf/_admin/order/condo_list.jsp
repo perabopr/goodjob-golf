@@ -23,9 +23,9 @@ params.put("field",field);
 params.put("keyword",keyword);
 
 CondoDao cdDao = new CondoDao();
-List<CondoDto> list = cdDao.getList("tb_Condo_reserve", params);
+List<CondoDto> list = cdDao.getList("tb_condo_reserve", params);
 
-int totalCount = cdDao.getTotalCount("tb_Condo_reserve", params);
+int totalCount = cdDao.getTotalCount("tb_condo_reserve", params);
 
 String strPage = paging.getPaging(totalCount, false);
 %>

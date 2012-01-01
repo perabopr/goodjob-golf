@@ -61,7 +61,7 @@ function goPage(val){
                                       <tr>
                                         <td align="center" bgcolor="white" width="745" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="95%">
                                             <tr>
-                                              <td align="right" class="location" height="30" width="95%"><a href="/index.html">HOME</a> &gt; <span class=location_b>자주묻는 질문(FAQ)</span></td>
+                                              <td align="right" class="location" height="30" width="95%"><a href="/">HOME</a> &gt; <span class=location_b>자주묻는 질문(FAQ)</span></td>
                                             </tr>
                                             <tr>
                                               <td bgcolor="#D1D3D4" height="33" class="sub_title" style="padding-left:15px;padding-top:4px">자주묻는 질문(FAQ)</td>

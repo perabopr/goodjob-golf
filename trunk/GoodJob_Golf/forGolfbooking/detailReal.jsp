@@ -306,7 +306,7 @@ function imgChange(objId){
 <TR>
 <TD class=normal_b height=23>&nbsp;</TD>
 <TD>&nbsp;</TD>
-<TD><IMG border=0 src="../../images/booking/btn_golfcourse.gif" width=70 height=19 onMouseover="ddrivetip('<%=glDto.getCourse_guide() %>');" onMouseout="hideddrivetip()" style="cursor:hand"></TD></TR></TBODY></TABLE></TD></TR>
+<TD><a href="<%=glDto.getCourse_guide() %>" target="_blank"><IMG border=0 src="../../images/booking/btn_golfcourse.gif" width=70 height=19 style="cursor:hand"></a></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD>&nbsp;</TD></TR>
 <TR>

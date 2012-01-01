@@ -122,6 +122,7 @@ function perPage(){
           <option value="name"<%=("name".equals(field)?" selected":"")%>>회원명</option>
           <option value="id"<%=("id".equals(field)?" selected":"")%>>아이디</option>
           <option value="mobile"<%=("mobile".equals(field)?" selected":"")%>>휴대폰</option>
+          <option value="reserve"<%=("reserve".equals(field)?" selected":"")%>>예약횟수</option>
         </select>
         <!--select name="region" size="1">
           <option value=""<%=("".equals(region)?" selected":"")%>>선택하세요</option>

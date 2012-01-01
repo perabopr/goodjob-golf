@@ -16,12 +16,13 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.db.DBManager;
-import com.goodjob.order.dto.GolfLinkDto;
+
+import com.goodjob.order.dto.PackageDto;
 import com.goodjob.sql.ORDER;
 
-public class GolfLinkDao {
-	public List<GolfLinkDto> getList(String tableName , Map<String,String> data){
-		List<GolfLinkDto> list = null;
+public class PackageDao {
+	public List<PackageDto> getList(String tableName , Map<String,String> data){
+		List<PackageDto> list = null;
 		Connection conn = null;
 		
 		String field = StringUtils.defaultIfEmpty(data.get("field"), "");
@@ -34,7 +35,7 @@ public class GolfLinkDao {
 
 			ArrayList<Object> params = new ArrayList<Object>();
 			
-			ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
+			ResultSetHandler rsh = new BeanListHandler(PackageDto.class);
 			QueryRunner qr = new QueryRunner();
 			
 			//검색조건
@@ -45,7 +46,9 @@ public class GolfLinkDao {
 			params.add(data.get("menu_seq"));
 			
 			if("golflink_name".equals(field) && keyword.length()>0){
-				where += "AND golflink_name LIKE concat('%',?,'%') " ;
+				where += "AND package_name1 LIKE concat('%',?,'%') "
+						+"AND package_name2 LIKE concat('%',?,'%') ";
+				params.add(keyword);
 				params.add(keyword);
 			}else if("reserve_day".equals(field) && keyword.length()>0){
 				where += "AND reserve_day LIKE concat('%',?,'%') " ;
@@ -65,7 +68,7 @@ public class GolfLinkDao {
 			params.add(((npage-1)* per_page));
 			params.add(per_page);
 			
-			list = (List<GolfLinkDto>)qr.query(conn , MessageFormat.format(ORDER.listRealPre, tableName, where), rsh , params.toArray());
+			list = (List<PackageDto>)qr.query(conn , MessageFormat.format(ORDER.listPackage, tableName, where), rsh , params.toArray());
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -99,7 +102,9 @@ public class GolfLinkDao {
 			params.add(data.get("menu_seq"));
 			
 			if("golflink_name".equals(field) && keyword.length()>0){
-				where += "AND golflink_name LIKE concat('%',?,'%') " ;
+				where += "AND package_name1 LIKE concat('%',?,'%') "
+						+"AND package_name2 LIKE concat('%',?,'%') ";
+				params.add(keyword);
 				params.add(keyword);
 			}else if("reserve_day".equals(field) && keyword.length()>0){
 				where += "AND reserve_day LIKE concat('%',?,'%') " ;
@@ -123,68 +128,5 @@ public class GolfLinkDao {
 		}
 
 		return NumberUtils.toInt(map.get("cnt")+"");
-	}
-	
-	public void setStatusUpdate(String tableName, Map<String,String> data){
-		Connection conn = null;
-		
-		try{
-			conn = DBManager.getConnection();
-
-			String reserve_seq = StringUtils.defaultIfEmpty(data.get("reserve_seq"), "");
-			String booking_day = StringUtils.defaultIfEmpty(data.get("booking_day"), "");
-			String booking_time = StringUtils.defaultIfEmpty(data.get("booking_time"), "");
-			String per_num = StringUtils.defaultIfEmpty(data.get("per_num"), "");
-			String product_price = StringUtils.defaultIfEmpty(data.get("product_price"), "");
-			String process_status = StringUtils.defaultIfEmpty(data.get("process_status"), "");
-			String package_price = StringUtils.defaultIfEmpty(data.get("package_price"), "");
-			String condo_price = StringUtils.defaultIfEmpty(data.get("condo_price"), "");
-			
-			ArrayList<Object> bind = new ArrayList<Object>();
-			
-			String setQuery = "";
-			if(booking_day.length() > 0){
-				setQuery += ",booking_day = ? " ;
-				bind.add(booking_day);
-			}
-			if(booking_time.length() > 0){
-				setQuery += ",booking_time = ? " ;
-				bind.add(booking_time);
-			}
-			if(product_price.length() > 0){
-				setQuery += ",product_price = ? " ;
-				bind.add(product_price);
-			}
-			if(per_num.length() > 0){
-				setQuery += ",per_num = ? " ;
-				bind.add(per_num);
-			}
-			if(process_status.length() > 0){
-				setQuery += ",process_status = ? " ;
-				bind.add(process_status);
-			}
-			if(package_price.length() > 0){
-				setQuery += ",package_price = ? " ;
-				bind.add(package_price);
-			}
-			if(condo_price.length() > 0){
-				setQuery += ",condo_price = ? " ;
-				bind.add(condo_price);
-			}
-			if(setQuery.length() > 0){
-				setQuery = setQuery.substring(1);
-			}
-			
-			bind.add(reserve_seq);
-			
-			QueryRunner qr = new QueryRunner();
-			qr.update(conn, MessageFormat.format(ORDER.update, tableName, setQuery), bind.toArray());
-		}
-		catch(Exception e){
-			System.out.println(e);
-		}
-		finally{
-			DbUtils.closeQuietly(conn);
-		}
 	}
 }

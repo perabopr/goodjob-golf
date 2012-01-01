@@ -15,20 +15,26 @@ String resultText = "실패";
 Map<String,String> params = new HashMap<String,String>();
 params.put("reserve_seq", reserveseq);
 if(colname.equals("product_price")){
-	params.put("product_price",status);
+	params.put("product_price",status.replace(",",""));
 }else if(colname.equals("process_status")){
 	params.put("process_status",status);
+}else if(colname.equals("per_num")){
+	params.put("per_num",status);
 }else if(colname.equals("booking_date")){
-	String[] arrDates = status.split("/");
-	params.put("booking_day",arrDates[0]);
-	params.put("booking_time",arrDates[1]);
+	String[] arrDates = status.split(" ");
+	params.put("booking_day",arrDates[0].replace("-",""));
+	params.put("booking_time",arrDates[1].replace(":",""));
+}else if(colname.equals("package_price")){
+	params.put("package_price",status);
+}else if(colname.equals("condo_price")){
+	params.put("condo_price",status);
 }
 
 GolfLinkDao glDao = new GolfLinkDao();
 try{
 	glDao.setStatusUpdate(tablename, params);
 	resultCode = "1";
-	resultText = tablename+"/"+reserveseq+"/"+status;
+	resultText = "성공";
 }
 catch(Exception e){
 		

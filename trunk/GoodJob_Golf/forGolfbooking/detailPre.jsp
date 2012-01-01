@@ -352,7 +352,7 @@ function commify(n) {
 <TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
 <TBODY>
 <TR>
-<TD class=cc_name>골프장명</TD></TR>
+<TD class=cc_name><%=glDto.getGolflink_name()%></TD></TR>
 <TR>
 <TD height=10></TD></TR>
 <TR>

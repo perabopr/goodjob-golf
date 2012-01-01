@@ -25,7 +25,7 @@ prDto.setPer_num(reservePerson);
 prDto.setReserve_phone(reservePhone);
 prDto.setPackage_price(0);
 prDto.setRequest_content(content);
-prDto.setProcess_status("1");
+prDto.setProcess_status("0");
 prDto.setPackage_seq(pkSeq);
 
 PackageDao pkDao = new PackageDao();

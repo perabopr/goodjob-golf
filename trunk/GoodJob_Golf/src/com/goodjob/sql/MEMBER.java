@@ -68,12 +68,16 @@ public class MEMBER {
 								"count(c.reserve_seq) reserve_cnt "+
 								"FROM tb_member a left outer join tb_logon_history b on a.mem_id=b.mem_id "+
 								"left outer join tb_golflink_reserve c on a.mem_id=c.reserve_uid " +
-								" {0} \n {1} " +
-								"GROUP BY a.mem_id, b.mem_id, c.reserve_uid " + 
+								" {0} " +
+								"GROUP BY a.mem_id, b.mem_id, c.reserve_uid {1} " + 
 								"order by a.mem_seq desc limit ? , ? ";
+	
 	public static final String mem_sub_total = "SELECT count(*) total "+
 								"FROM tb_member a left outer join tb_logon_history b on a.mem_id=b.mem_id "+
 								"left outer join tb_golflink_reserve c on a.mem_id=c.reserve_uid " +
-								" {0} \n {1} " +
+								" {0} " +
 								"GROUP BY a.mem_id, b.mem_id, c.reserve_uid ";
+	
+	public static final String mem_sub_total2 = " SELECT ifnull(COUNT(mem_id),0) total FROM tb_member a left outer join tb_golflink_reserve c on a.mem_id=c.reserve_uid "+
+								" GROUP BY reserve_uid having count(reserve_seq) = ? ";   
 }

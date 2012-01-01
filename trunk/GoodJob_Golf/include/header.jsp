@@ -140,6 +140,12 @@ $(function() {
 		frm.submit();
    	}
 
+	function onClick_id(){
+		if($('#login_id').val()=="아이디@메일주소"){
+			$('#login_id').val("");
+		}
+	}
+	
    	function golflinkSearch(){
    	   	
    		frmSearch.submit();

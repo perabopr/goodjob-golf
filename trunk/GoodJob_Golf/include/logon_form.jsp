@@ -55,7 +55,7 @@
      <tr>
        <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="207">
            <tr>
-             <td width="103"><input id="login_id" class="input_01" type="text" size="20" name="login_id" value="<%=com.goodjob.util.Utils.getCookie(request,"golf.mem_id")%>"></td>
+             <td width="103"><input id="login_id" class="input_01" type="text" size="20" name="login_id" onclick="onClick_id();" value="<%=StringUtils.defaultIfEmpty(com.goodjob.util.Utils.getCookie(request,"golf.mem_id"),"아이디@메일주소")%>"></td>
              <td align="right"><input type="checkbox" name="id_cookie" value="Y"/>
                <span class="white_s">아이디저장</span></td>
            </tr>

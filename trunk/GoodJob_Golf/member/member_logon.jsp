@@ -8,13 +8,6 @@
 <!-- 상단 영역 -->
 <%@ include file="/include/header.jsp" %>
 <!-- 상단 영역 -->
-<script type="text/javascript">
-	function onClick_id(){
-		if($('#login_id').val()=="아이디@메일주소"){
-			$('#login_id').val("");
-		}
-	}
-</script>
 					<!--############### 중앙 컨텐츠 영역 #################-->
 					
 					<table border="0" cellpadding="0" cellspacing="0" width="751">

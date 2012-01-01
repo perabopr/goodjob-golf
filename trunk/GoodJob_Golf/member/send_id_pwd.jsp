@@ -40,11 +40,11 @@
 		String result = "";
 		if("id".equals(type)){
 			result = StringUtils.trimToEmpty(mDao.idFind(mem_name , rphone));
-			params.put("msg",String.format("[굳잡골프]고객님의 아이디는 %s 입니다." , result));
+			params.put("msg",String.format("[goodjobgolf]고객님의 아이디는 %s 입니다." , result));
 		}
 		else{
 			result = StringUtils.trimToEmpty(mDao.pwdFind(mem_id , rphone));
-			params.put("msg",String.format("[굳잡골프]고객님의 비밀번호는 %s 입니다." , result));
+			params.put("msg",String.format("[goodjobgolf]고객님의 비밀번호는 %s 입니다." , result));
 		}
 		
 		if(result.length() > 0){
@@ -68,8 +68,8 @@
 					
 					Mail mail = new Mail(host,m_id,m_pw);
 					mail.setTo(result);
-					mail.setFrom(from , "굳잡골프");
-					mail.setSubject("[굳잡골프] 회원님의 아이디를 알려 드립니다. ");
+					mail.setFrom(from , "goodjobgolf");
+					mail.setSubject("[goodjobgolf] 회원님의 아이디를 알려 드립니다. ");
 					mail.setHtmlContent(content);
 					mail.send();					
 				}
@@ -83,8 +83,8 @@
 					
 					Mail mail = new Mail(host,m_id,m_pw);
 					mail.setTo(result);
-					mail.setFrom(from , "굳잡골프");
-					mail.setSubject("[굳잡골프] 회원님의 비밀번호를 알려 드립니다. ");
+					mail.setFrom(from , "goodjobgolf");
+					mail.setSubject("[goodjobgolf] 회원님의 비밀번호를 알려 드립니다. ");
 					mail.setHtmlContent(content);
 					mail.send();
 				}

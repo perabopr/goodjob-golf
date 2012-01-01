@@ -81,7 +81,6 @@ function updatePrice(reserveseq){
 	  async: false,
 	  success: function(html){
 		var evalData = eval("("+html+")");
-		alert(html);
 		if(evalData.reserveResult.length == 1){
 			if(evalData.reserveResult[0].a == "1"){
 				alert("수정 되었습니다.");

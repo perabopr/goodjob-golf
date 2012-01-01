@@ -6,6 +6,7 @@ package com.goodjob.member;
 import java.sql.Connection;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -520,20 +521,23 @@ public class MemberDao {
 			ResultSetHandler rsh = new BeanListHandler(MemberDto.class);
 			QueryRunner qr = new QueryRunner();
 			
-			String where1 = "";
-			
 			//검색조건
-			String where2 = "";
+			String where = "";
+			String having = "";
 			if("name".equals(field) && keyword.length() > 0){
-				where2 = " where mem_name LIKE concat('%',?,'%') " ;
+				where = " where mem_name LIKE concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
 			else if("id".equals(field) && keyword.length() > 0){
-				where2 = " where mem_id LIKE concat('%',?,'%') " ;
+				where = " where mem_id LIKE concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
 			else if("mobile".equals(field) && keyword.length() > 0){
-				where2 = " where mem_mtel LIKE concat('%',?,'%') " ;
+				where = " where mem_mtel LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("reserve".equals(field) && keyword.length() > 0){
+				having = " having reserve_cnt = ? " ;
 				bind.add(keyword);
 			}
 			
@@ -541,7 +545,7 @@ public class MemberDao {
 			bind.add(((npage-1)* per_page));
 			bind.add((npage*per_page));
 			
-			list = (List<MemberDto>) qr.query(conn , MessageFormat.format(MEMBER.mem_sub_list,where1,where2) , rsh , bind.toArray());
+			list = (List<MemberDto>) qr.query(conn , MessageFormat.format(MEMBER.mem_sub_list,where,having) , rsh , bind.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -569,21 +573,35 @@ public class MemberDao {
 			QueryRunner qr = new QueryRunner();
 			
 			//검색조건
-			String where2 = "";
-			if("name".equals(field) && keyword.length() > 0){
-				where2 = " where mem_name like concat('%',?,'%') " ;
+			String where = "";
+			if("reserve".equals(field) && keyword.length() > 0){
 				bind.add(keyword);
+				map = (Map<String, Long>) qr.query(conn , MEMBER.mem_sub_total2 , rsh , bind.toArray());
+				
+				if(map == null){
+					map = new HashMap<String, Long>();
+					map.put("total", 0l);
+				}
 			}
-			else if("id".equals(field) && keyword.length() > 0){
-				where2 = " where mem_id like concat('%',?,'%') " ;
-				bind.add(keyword);
-			}
-			else if("mobile".equals(field) && keyword.length() > 0){
-				where2 = " where mem_mtel like concat('%',?,'%') " ;
-				bind.add(keyword);
+			else{
+				
+				if("name".equals(field) && keyword.length() > 0){
+					where = " where mem_name like concat('%',?,'%') " ;
+					bind.add(keyword);
+				}
+				else if("id".equals(field) && keyword.length() > 0){
+					where = " where mem_id like concat('%',?,'%') " ;
+					bind.add(keyword);
+				}
+				else if("mobile".equals(field) && keyword.length() > 0){
+					where = " where mem_mtel like concat('%',?,'%') " ;
+					bind.add(keyword);
+				}
+				
+				map = (Map<String, Long>) qr.query(conn , MessageFormat.format(MEMBER.mem_sub_total,where) , rsh , bind.toArray());
 			}
 			
-			map = (Map<String, Long>) qr.query(conn , MessageFormat.format(MEMBER.mem_total,where2) , rsh , bind.toArray());
+			
 			
 		} catch (Exception e) {
 			System.out.println(e);

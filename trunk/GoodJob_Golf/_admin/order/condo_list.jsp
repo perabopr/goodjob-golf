@@ -17,7 +17,7 @@ String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
 PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , ORDER.per_page );
 
 Map<String,String> params = new HashMap<String,String>();
-params.put("menu_seq", "3");
+params.put("menu_seq", "5");
 params.put("npage",npage);
 params.put("field",field);
 params.put("keyword",keyword);
@@ -81,7 +81,6 @@ function updatePrice(reserveseq){
 	  async: false,
 	  success: function(html){
 		var evalData = eval("("+html+")");
-		alert(html);
 		if(evalData.reserveResult.length == 1){
 			if(evalData.reserveResult[0].a == "1"){
 				alert("수정 되었습니다.");
@@ -121,14 +120,14 @@ function on_search() {
 		$('#keyword').focus();
 		return;
 	} 
-	frm.action="package_list.jsp"
+	frm.action="condo_list.jsp"
 	frm.submit();
 }
 
 function goPage(val){
 	var frm = document.frm;
 	frm.npage.value=val;
-	frm.action="package_list.jsp"
+	frm.action="condo_list.jsp"
 	frm.submit();
 }
 //--> 
@@ -161,6 +160,14 @@ function goPage(val){
 <%
 if(list != null){
 	for(int i = 0; i < list.size();i++){	 
+		String inDate = list.get(i).getIn_date();
+		String outDate = list.get(i).getIn_date();
+		inDate = inDate.substring(0,4)
+			+ "-" + inDate.substring(4,6)
+			+ "-" + inDate.substring(6,8);
+		outDate = outDate.substring(0,4)
+			+ "-" + outDate.substring(4,6)
+			+ "-" + outDate.substring(6,8);
 %>
           <tr>
           <td bgcolor="white" align="center" height="45"><%=list.get(i).getReserve_day() %></td>
@@ -168,15 +175,13 @@ if(list != null){
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_uid() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getCondo_name() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getRoomtype() %></td>
-          <td align="center" bgcolor="white"><%=list.get(i).getIn_date() %></td>
-          <td align="center" bgcolor="white"><%=list.get(i).getOut_date() %></td>
+          <td align="center" bgcolor="white"><%=inDate %></td>
+          <td align="center" bgcolor="white"><%=outDate %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
           <td align="center" bgcolor="white"><a href="condo_detail.html" onClick="NewWindow(this.href,'name','740','450','yes');return false;"><img align="absmiddle" src="../images/common/btn_detail.gif" width="75" height="22" border="0" onMouseover="ddrivetip('<%=list.get(i).getReserve_memo() %>');" onMouseout="hideddrivetip()"></a></td>
           <td align="center" bgcolor="white">
-			<input id="Price" name="price" type="text" size="10" value="<%=list.get(i).getCondo_price()%>" class="input_box">
+			<input id="Price" name="price" type="text" size="10" value="<%=commify(list.get(i).getCondo_price())%>" class="input_box">
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePrice('<%=list.get(i).getReserve_seq()%>');">
-          </td>
-          </tr>
           </td>
           <td align="center" bgcolor="white">
               <select id="ddlStatus" name="ddlStatus" size="1">
@@ -202,7 +207,7 @@ if(list != null){
         <tr>
           <td height="4" align="center">&nbsp;</td>
         </tr>
-        <form name="frm" method="post" action="package_list.jsp">
+        <form name="frm" method="post" action="condo_list.jsp">
 		<input type="hidden" name="npage" value="<%=npage%>"/>
         <tr>
           <td height="4" align="center"><select id="field" name="field" size="1">

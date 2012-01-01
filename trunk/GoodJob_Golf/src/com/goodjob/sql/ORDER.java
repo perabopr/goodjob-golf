@@ -51,13 +51,18 @@ public class ORDER {
 			",menu_seq " +
 			",condo_seq " +
 			",reserve_day " +
+			",reserve_uid " +
 			",reserve_name " +
 			",condo_name " +
 			",roomtype " +
+			",condoroom_seq " +
 			",in_date " +
 			",out_date " +
+			",per_num " +
+			",room_num " +
 			",reserve_phone " +
 			",condo_price " +
+			",reserve_memo " +
 			",process_status " +
 		"FROM {0}" +
 		" {1} ORDER BY reserve_seq desc LIMIT ? , ? ";

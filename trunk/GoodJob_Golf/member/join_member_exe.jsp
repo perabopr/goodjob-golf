@@ -80,6 +80,8 @@ alert("가입하려는 주민번호가  존재 합니다.\n다른 주민번호�
 			mail.setSubject("[굳잡골프] 가입해 주셔서 감사합니다. ");
 			mail.setHtmlContent(content);
 			mail.send();
+			
+			session.setAttribute("joinAuth","");
 %>
 <script language="javascript" type="text/javascript">
 //alert("회원 가입이 정상적으로 이루어 졌습니다. 감사합니다.");

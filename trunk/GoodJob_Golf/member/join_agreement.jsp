@@ -3,7 +3,7 @@
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
 <%
-	
+	session.setAttribute("joinAuth","Y");
 %>
 <!-- 상단 영역 -->
 <%@ include file="/include/header.jsp" %>
@@ -26,8 +26,10 @@
 			alert('휴대폰 인증을 하지 않았습니다.');
 			return;
 		}
-		
-		location.href="/member/join_member_form.jsp";
+
+		var frm = document.joinFrm;
+		frm.action="/member/join_member_form.jsp";
+		frm.submit();
    	}
 
    	function sms_auth(){
@@ -125,6 +127,9 @@
                                             <tr>
                                               <td bgcolor="#D1D3D4" height="33" class="sub_title" style="padding-left:15px;padding-top:4px">회원가입</td>
                                             </tr>
+<form name="joinFrm" method="post">
+<input type="hidden" name="joinAuth" value="Y"/>
+</form>
                                             <tr>
                                               <td valign="top" style="padding-left:20px;padding-right:20px;padding-top:10px;padding-bottom:10px;"><table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                   <tr>
@@ -184,12 +189,12 @@
                                                                           <input id="mobile2" class="mem_input" type="text" size="8" name="mobile2" maxlength="4">
                                                                           -
                                                                           <input id="mobile3" class="mem_input" type="text" size="8" name="mobile3" maxlength="4">
-                                                                          <img align="absmiddle" src="/images/mem_join/btn_number_send.gif" onclick="sms_auth();" width="75" height="19" border="0"></p></td>
+                                                                          <a href="javascript:sms_auth();"><img align="absmiddle" src="/images/mem_join/btn_number_send.gif" width="75" height="19" border="0"></a></p></td>
                                                                     </tr>
                                                                     <tr>
                                                                       <td height="40" align="center"><p><img align="absmiddle" src="/images/mem_join/btn_send_title.gif" width="81" height="19" border="0">
                                                                           <input id="auth_no" class="mem_input" type="text" size="15" name="auth_no">
-                                                                          <img align="absmiddle" src="/images/mem_join/btn_send_confirm.gif" onclick="auth_check();" width="42" height="19" border="0"></p></td>
+                                                                          <a href="javascript:auth_check();"><img align="absmiddle" src="/images/mem_join/btn_send_confirm.gif" width="42" height="19" border="0"></a></p></td>
                                                                     </tr>
                                                                     
                                                                   </table></td>

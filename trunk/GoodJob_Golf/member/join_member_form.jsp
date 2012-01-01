@@ -3,11 +3,27 @@
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="com.goodjob.member.*"%>
+<%
+
+	String ses_joinAuth = StringUtils.trimToEmpty((String)session.getAttribute("joinAuth"));
+	String joinAuth 	= StringUtils.trimToEmpty(request.getParameter("joinAuth"));
+	//session.setAttribute("joinAuth","");
+	
+	if(ses_joinAuth.length()==0 || joinAuth.length()==0){
+		
+%>
+<script language="javascript" type="text/javascript">
+alert("인증없이는 회원 가입을 하실 수 없습니다.");
+location.href="/member/join_agreement.jsp";
+</script>
+<%
+		return;
+	}
+%>
 <!-- 상단 영역 -->
 <%@ include file="/include/header.jsp" %>
 <!-- 상단 영역 -->
 <script language="javascript" type="text/javascript">
-
 	function on_submit() {
 
 		if(!$('#mem_name').val()) {
@@ -189,9 +205,9 @@
                                                                       <td height="27"><input id="mem_id" class="mem_input" type="text" size="15" name="mem_id"/>
                                                                         @
                                                                         <input id="mem_domain" class="mem_input" type="text" size="15" name="mem_domain" readonly>
-                                                                        <select id="domain_sel" name="formselect1" size="1" onchange="domainChange(this.value);">
-                                                                          
-                                                                          <option value="naver.com" selected>naver.com</option>
+                                                                        <select id="domain_sel" name="domain_sel" size="1" onchange="domainChange(this.value);">
+                                                                          <option value="" selected>선택하세요</option>
+                                                                          <option value="naver.com">naver.com</option>
                                                                           <option value="hanmail.net">hanmail.net</option>
                                                                           <option value="dreamwiz.com">dreamwiz.com</option>
                                                                           <option value="empal.com">empal.com</option>

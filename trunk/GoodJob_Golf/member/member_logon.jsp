@@ -8,7 +8,13 @@
 <!-- 상단 영역 -->
 <%@ include file="/include/header.jsp" %>
 <!-- 상단 영역 -->
-
+<script type="text/javascript">
+	function onClick_id(){
+		if($('#login_id').val()=="아이디@메일주소"){
+			$('#login_id').val("");
+		}
+	}
+</script>
 					<!--############### 중앙 컨텐츠 영역 #################-->
 					
 					<table border="0" cellpadding="0" cellspacing="0" width="751">
@@ -19,7 +25,7 @@
                                       <tr>
                                         <td align="center" bgcolor="white" width="745" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="95%">
                                             <tr>
-                                              <td align="right" class="location" height="30" width="95%"><a href="/index.html">HOME</a> &gt; <span class=location_b>회원로그인</span></td>
+                                              <td align="right" class="location" height="30" width="95%"><a href="/">HOME</a> &gt; <span class=location_b>회원로그인</span></td>
                                             </tr>
                                             <tr>
                                               <td bgcolor="#D1D3D4" height="33" class="sub_title" style="padding-left:15px;padding-top:4px">회원로그인</td>
@@ -30,7 +36,7 @@
                                                   <tr>
                                                     <td width="94%" align="center"><table border="0" cellpadding="0" cellspacing="0" width="600">
                                                         <tr>
-                                                          <td align="center" width="600"><img src="../../images/mem_join/img_login_title.gif" width="600" height="132" border="0"></td>
+                                                          <td align="center" width="600"><img src="/images/mem_join/img_login_title.gif" width="600" height="132" border="0"></td>
                                                         </tr>
                                                     <form name="logonFrm" method="post" onsubmit="return logon_ok();">
                                                         <tr>
@@ -41,7 +47,7 @@
                                                               <tr>
                                                                 <td width="116" align="right" style="padding-right:10px;" height="2"><span class=normal_b>아이디</span></td>
                                                                 <td width="215">
-                                                                    <input id="login_id" class="mem_login" type="text" size="33" name="login_id" value="<%=com.goodjob.util.Utils.getCookie(request,"golf.mem_id")%>">
+                                                                    <input id="login_id" class="mem_login" type="text" size="33" name="login_id" onclick="onClick_id();" value="<%=StringUtils.defaultIfEmpty(com.goodjob.util.Utils.getCookie(request,"golf.mem_id"),"아이디@메일주소")%>">
                                                                   </td>
                                                                 <td width="160" rowspan="2"><input type="image" src="/images/mem_join/btn_login.gif" width="59" height="47" border="0"></a></td>
                                                               </tr>

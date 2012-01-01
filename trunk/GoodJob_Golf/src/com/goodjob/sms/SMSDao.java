@@ -159,6 +159,21 @@ public class SMSDao {
 	    return isResult;
 	}
 	
+	/**
+	 * sms 즉시 발송
+	 * @param mobile
+	 * @param message
+	 * @return
+	 */
+	public boolean send(String mobile , String message) {
+		
+		Map<String,String> param = new HashMap<String, String>();
+		param.put("rphone",mobile);
+		param.put("msg",message);
+		
+		return this.send(param);
+	}
+	
 	public void log(Map<String,String> params){
 		
 		Connection conn = null;

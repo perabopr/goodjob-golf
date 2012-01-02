@@ -9,7 +9,7 @@
 	Map<String,String> params = new HashMap<String,String>();
 	
 	String msg 			= "[goodjobgolf]인증번호는 %s 입니다.";
-	String sphone 		= "02-6670-0210";
+	String sphone 		= "02-6670-0202";
 	String rphone 		= StringUtils.defaultString(request.getParameter("rphone"), "");
 	
 	String authNum = Utils.authNumber(5);

@@ -353,6 +353,7 @@ public class MemberDao {
 		
 		Connection conn = null;
 		Map<String,String> map = null;
+		String mem_id = "";
 		try {
 			
 			ArrayList<Object> bind = new ArrayList<Object>();
@@ -364,12 +365,14 @@ public class MemberDao {
 			QueryRunner qr = new QueryRunner();
 			map = (Map)qr.query(conn , MEMBER.id_find , rsh , bind.toArray());
 			
+			if(map != null) mem_id = map.get("mem_id");
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
-		return map.get("mem_id");
+		return mem_id;
 	}
 
 	/**
@@ -380,7 +383,7 @@ public class MemberDao {
 		
 		Map<String,String> map = null;
 		Connection conn = null;
-		
+		String mem_pwd = "";
 		try {
 			
 			String[] bind = {mem_id , mobile};
@@ -390,13 +393,15 @@ public class MemberDao {
 			QueryRunner qr = new QueryRunner();
 			map = (Map)qr.query(conn , MEMBER.pwd_find , rsh , bind);
 			
+			if(map != null) mem_pwd = map.get("mem_pwd");
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
 		
-		return map.get("mem_pwd");
+		return mem_pwd;
 	}
 	
 	/**

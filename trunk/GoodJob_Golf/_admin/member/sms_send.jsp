@@ -11,7 +11,7 @@
 	Map<String,String> params = new HashMap<String,String>();
 	
 	
-	String rphone 		= "02-6670-0200";
+	String rphone 		= "02-6670-0202";
 	String message 		= StringUtils.trimToEmpty(request.getParameter("message"));
 	String sphone 		= StringUtils.trimToEmpty(request.getParameter("sphone"));
 	String mem_seq 		= StringUtils.trimToEmpty(request.getParameter("mem_seq"));

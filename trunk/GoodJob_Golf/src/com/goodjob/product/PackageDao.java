@@ -76,6 +76,7 @@ public class PackageDao {
 			bind.add(pkDto.getView_yn());
 			bind.add(pkDto.getPackage_guide());
 			bind.add(pkDto.getUse_guide());
+			bind.add(pkDto.getUse_rule());
 			bind.add(pkDto.getGolflink_guide());
 			bind.add(pkDto.getWay_map());			
 			
@@ -129,6 +130,7 @@ public class PackageDao {
 			bind.add(pkDto.getPackage_guide());
 			bind.add(pkDto.getUse_guide());
 			bind.add(pkDto.getGolflink_guide());
+			bind.add(pkDto.getUse_rule());
 			bind.add(pkDto.getWay_map());	
 			bind.add(pkDto.getPackage_seq());
 			

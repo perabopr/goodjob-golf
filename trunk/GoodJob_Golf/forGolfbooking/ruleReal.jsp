@@ -126,7 +126,7 @@ function reserveAgree(){
 </TR>
 <TR height="130px" valign="top">
 <TD align=center>
-<div style="overflow-x:hidden; overflow-y:auto; height:130px; width:630px">
+<div style="overflow-x:hidden; overflow-y:auto; height:130px; width:630px;text-align:left;border: 1px solid; border-color:#D1D3D4;" >
 <%
 	if(listPromise != null && listPromise.size() == 1){	
 		out.print(listPromise.get(0).getUse_rule());

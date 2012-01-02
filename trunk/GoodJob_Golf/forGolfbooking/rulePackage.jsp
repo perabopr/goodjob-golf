@@ -11,14 +11,14 @@ String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
 int pkSeq = NumberUtils.toInt(request.getParameter("pkSeq"),0);
 if(pkSeq==0){
 	out.println("<script>location.href='reserve.jsp?menu=3'</script>");
-	out.close();
+	return;
 }
 PackageDao pkDao = new PackageDao();
 List<PackagePromiseDto> listPromise = pkDao.getPackagePromise(pkSeq);
 
 if(listPromise.size() != 1){
 	out.println("<script>alert('취소 규정이 없습니다.');location.href='reserve.jsp?menu=3'</script>");
-	out.close();
+	return;
 }
 %>
 <script type="text/javascript">
@@ -50,7 +50,7 @@ function reserveAgree(){
 <TR>
 <TD class=location height=30 width="95%" align=right><A href="/main.jsp">HOME</A> &gt; 골프장부킹 &gt; <SPAN class=location_b>사전예약</SPAN></TD></TR>
 <TR>
-<TD style="PADDING-LEFT: 15px; PADDING-TOP: 4px" class=sub_title bgColor=#d1d3d4 height=33>사전예약</TD></TR>
+<TD style="PADDING-LEFT: 15px; PADDING-TOP: 4px" class=sub_title bgColor=#d1d3d4 height=33>국내골프패키지</TD></TR>
 <TR>
 <TD vAlign=top>
 <P>&nbsp;</P></TD></TR>
@@ -132,8 +132,12 @@ function reserveAgree(){
 </TR>
 <TR height="130px" valign="top">
 <TD align=center>
-<div style="overflow-x:hidden; overflow-y:auto; height:130px; width:630px">
-
+<div style="overflow-x:hidden; overflow-y:auto; height:130px; width:630px;text-align:left;border: 1px solid; border-color:#D1D3D4">
+<%
+	if(listPromise != null && listPromise.size() == 1){	
+		out.print(listPromise.get(0).getUse_rule());
+	}
+%>
 </div>
 </TD>
 </TR>

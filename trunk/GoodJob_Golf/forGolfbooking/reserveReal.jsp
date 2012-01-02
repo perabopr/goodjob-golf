@@ -18,7 +18,7 @@ int tDay;
 if(strDate == null || strDate.length() != 8){
 	strDate = new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
 	out.print("<script>");
-	out.print("location.href='/forGolfbooking/reserve.jsp?menu=2&date="+strDate+"';");
+	out.print("location.href='/forGolfbooking/reserve.jsp?menu=1&date="+strDate+"';");
 	out.print("</script>");
 	return;
 	/*
@@ -34,11 +34,19 @@ if(strDate == null || strDate.length() != 8){
 	vCalendar.set(tYear, tMonth-1, tDay);
 }
 
-vCalendar.add(vCalendar.DATE, 14);
-
+vCalendar.add(vCalendar.DATE, -14);
 String tmYear = Integer.toString(vCalendar.get(vCalendar.YEAR));
 String tmMonth = "0" + Integer.toString(vCalendar.get(vCalendar.MONTH)+1);
 String tmDay = "0" + Integer.toString(vCalendar.get(vCalendar.DATE));
+
+String preDate = tmYear
+			+ tmMonth.substring(tmMonth.length()-2, tmMonth.length())
+			+ tmDay.substring(tmDay.length()-2, tmDay.length());
+
+vCalendar.add(vCalendar.DATE, 28);
+tmYear = Integer.toString(vCalendar.get(vCalendar.YEAR));
+tmMonth = "0" + Integer.toString(vCalendar.get(vCalendar.MONTH)+1);
+tmDay = "0" + Integer.toString(vCalendar.get(vCalendar.DATE));
 
 String sDate = strDate;
 String eDate = tmYear
@@ -102,7 +110,13 @@ visibility: hidden;
 <TBODY>
 <TR>
 <TD height=40 align=right>
-<P><A href="/forGolfbooking/reserve.jsp?menu=<%=menuNum%>&date=<%=eDate%>"><IMG border=0 align=absMiddle src="../../images/booking/btn_2week_later.gif" width=100 height=22></A></P></TD></TR>
+<table border="0" cellpadding="0" cellspacing="0" width="150">
+  <tr>
+    <td width="75" align="center"><p><a href="/forGolfbooking/reserve.jsp?menu=<%=menuNum%>&date=<%=preDate%>"><img align="absmiddle" src="../../images/booking/btn_2week_pre.gif" width="62" height="22" border="0"></a></p></td>
+    <td width="75" align="center"><p><a href="/forGolfbooking/reserve.jsp?menu=<%=menuNum%>&date=<%=eDate%>"><img align="absmiddle" src="../../images/booking/btn_2week_later.gif" width="62" height="22" border="0"></a></p></td>
+  </tr>
+</table>
+</TD></TR>
 <TR>
 <TD align=center>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=707 bgColor=#d1d3d4>

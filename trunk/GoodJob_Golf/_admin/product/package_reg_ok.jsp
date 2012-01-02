@@ -68,7 +68,8 @@
 	pkDto.setPackage_guide(fileUpload.getParameter("content1"));
 	pkDto.setUse_guide(fileUpload.getParameter("content2"));
 	pkDto.setGolflink_guide(fileUpload.getParameter("content3"));
-	pkDto.setWay_map(fileUpload.getParameter("content4"));
+	pkDto.setUse_rule(fileUpload.getParameter("content4"));
+	pkDto.setWay_map(fileUpload.getParameter("content5"));
 	
 	PackagePriceDto pkpDto = new PackagePriceDto();
 	if(fileUpload.getParameter("pkSeq").length() > 0){

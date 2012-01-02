@@ -407,6 +407,7 @@ public class PRODUCT {
 				",a.view_yn" +
 				",a.package_guide" +
 				",a.use_guide" +
+				",a.use_rule" +
 				",a.golflink_guide" +
 				",a.way_map " +
 			"FROM tb_package a " +
@@ -431,9 +432,10 @@ public class PRODUCT {
 				",view_yn" +
 				",package_guide" +
 				",use_guide" +
+				",use_rule" +
 				",golflink_guide" +
 				",way_map" +
-			")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public static final String package_update
 		=	"UPDATE tb_package " +
 			"SET " +
@@ -455,6 +457,7 @@ public class PRODUCT {
 				",package_guide = ?" +
 				",use_guide = ?" +
 				",golflink_guide = ?" +
+				",use_rule = ? " +
 				",way_map = ? " +
 			"WHERE package_seq = ?";
 	public static final String package_delete

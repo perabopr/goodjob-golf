@@ -35,6 +35,8 @@ if(pkSeq.length() > 0){
 <head>
 <link rel="stylesheet" href="../style.css">
 <title></title>
+<script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="/js/highgardenEditor.js"></script>
 <script language="JavaScript"> 
 <!-- 
 function NewWindow(mypage, myname, w, h, scroll) { 
@@ -261,25 +263,31 @@ function frmSubmit(){
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;" width="162"><span class=list_title>상품안내</span></td>
           <td bgcolor="white" style="padding-left:10px;" width="710">
-          	<textarea class="box03" rows="6" cols="113" name="content1"><%= vPk.getPackage_guide() %></textarea>
+          	<textarea class="box03" rows="10" cols="113" id="content1" name="content1" title="higheditor_simple"><%= vPk.getPackage_guide() %></textarea>
           </td>
         </tr>
         <tr>
           <td width="162" align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이용안내</span></td>
           <td width="710" bgcolor="white" style="padding-left:10px;">
-          	<textarea class="box03" rows="6" cols="113" name="content2"><%= vPk.getUse_guide() %></textarea>
+          	<textarea class="box03" rows="10" cols="113" id="content2" name="content2" title="higheditor_simple"><%= vPk.getUse_guide() %></textarea>
           </td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>골프장소개</span></td>
           <td bgcolor="white" style="padding-left:10px;">
-          	<textarea class="box03" rows="6" cols="113" name="content3"><%= vPk.getGolflink_guide() %></textarea>
+          	<textarea class="box03" rows="10" cols="113" id="content3" name="content3" title="higheditor_simple"><%= vPk.getGolflink_guide() %></textarea>
+          </td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이용약관</span></td>
+          <td bgcolor="white" style="padding-left:10px;">
+          	<textarea class="box03" rows="10" cols="113" id="content4" name="content4" title="higheditor_simple"><%= vPk.getUse_rule() %></textarea>
           </td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>오시는길</span></td>
           <td bgcolor="white" style="padding-left:10px;">
-              <textarea class="box03" rows="6" cols="113" name="content4"><%= vPk.getWay_map() %></textarea>
+              <textarea class="box03" rows="10" cols="113" id="content5" name="content5" title="higheditor_simple"><%= vPk.getWay_map() %></textarea>
           </td>
         </tr>
       </table></td>

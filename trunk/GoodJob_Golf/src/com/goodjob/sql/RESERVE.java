@@ -54,6 +54,7 @@ public class RESERVE {
 			",promise_rule" +
 			",use_guide" +
 			",golflink_guide " +	
+			",use_rule " +
 		"FROM tb_golflink " +
 		"WHERE view_yn = 'Y' " +
 			"AND golflink_seq = ?";	
@@ -191,6 +192,7 @@ public class RESERVE {
 			",a.view_yn " +
 			",a.package_guide " +
 			",a.use_guide " +
+			",a.use_rule " +
 			",a.golflink_guide " +
 			",a.way_map " +
 			",b.peak_n_mon " +
@@ -306,6 +308,7 @@ public class RESERVE {
 			",A.promise4_type,A.promise4" +
 			",A.promise5_type,A.promise5" +
 			",IFNULL(A.cancelrule,'') 'cancelrule'" +
+			",B.use_rule "+
 		"FROM tb_package_promise A " +
 			"INNER JOIN tb_package B on(A.package_seq = B.package_seq) " +
 		"WHERE A.package_seq = ?";

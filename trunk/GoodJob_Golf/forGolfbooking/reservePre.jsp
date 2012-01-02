@@ -7,7 +7,7 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-int menuNum = NumberUtils.toInt(request.getParameter("menu"),1);
+int menuNum = NumberUtils.toInt(request.getParameter("menu"),2);
 
 //String nowDate = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date());
 Calendar vCalendar = Calendar.getInstance();
@@ -34,11 +34,19 @@ if(strDate == null || strDate.length() != 8){
 	vCalendar.set(tYear, tMonth-1, tDay);
 }
 
-vCalendar.add(vCalendar.DATE, 14);
-
+vCalendar.add(vCalendar.DATE, -14);
 String tmYear = Integer.toString(vCalendar.get(vCalendar.YEAR));
 String tmMonth = "0" + Integer.toString(vCalendar.get(vCalendar.MONTH)+1);
 String tmDay = "0" + Integer.toString(vCalendar.get(vCalendar.DATE));
+
+String preDate = tmYear
+			+ tmMonth.substring(tmMonth.length()-2, tmMonth.length())
+			+ tmDay.substring(tmDay.length()-2, tmDay.length());
+
+vCalendar.add(vCalendar.DATE, 28);
+tmYear = Integer.toString(vCalendar.get(vCalendar.YEAR));
+tmMonth = "0" + Integer.toString(vCalendar.get(vCalendar.MONTH)+1);
+tmDay = "0" + Integer.toString(vCalendar.get(vCalendar.DATE));
 
 String sDate = strDate;
 String eDate = tmYear
@@ -102,13 +110,19 @@ visibility: hidden;
 <TBODY>
 <TR>
 <TD height=40 align=right>
-<P><A href="/forGolfbooking/reserve.jsp?menu=<%=menuNum%>&date=<%=eDate%>"><IMG border=0 align=absMiddle src="../../images/booking/btn_2week_later.gif" width=100 height=22></A></P></TD></TR>
+<table border="0" cellpadding="0" cellspacing="0" width="150">
+  <tr>
+    <td width="75" align="center"><p><a href="/forGolfbooking/reserve.jsp?menu=<%=menuNum%>&date=<%=preDate%>"><img align="absmiddle" src="../../images/booking/btn_2week_pre.gif" width="62" height="22" border="0"></a></p></td>
+    <td width="75" align="center"><p><a href="/forGolfbooking/reserve.jsp?menu=<%=menuNum%>&date=<%=eDate%>"><img align="absmiddle" src="../../images/booking/btn_2week_later.gif" width="62" height="22" border="0"></a></p></td>
+  </tr>
+</table>
+</TD></TR>
 <TR>
 <TD align=center>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=707 bgColor=#d1d3d4>
 <TBODY>
 <TR>
-<TD bgColor=#f1f1f1 height=35 width=212 align=center><SPAN class=normal_s>실시간예약 골프장명</SPAN></TD>
+<TD bgColor=#f1f1f1 height=35 width=212 align=center><SPAN class=normal_s>사전신청예약 골프장명</SPAN></TD>
 <% 
 for (int i = 1; i < 15 ;i++){
 	int incYear = incDate.get(incDate.YEAR);

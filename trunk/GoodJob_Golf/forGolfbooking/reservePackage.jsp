@@ -6,11 +6,14 @@
 <%@page import="com.goodjob.reserve.PackageDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-String pRegion = StringUtils.defaultIfEmpty(request.getParameter("region"), "1");
+String pRegion = StringUtils.defaultIfEmpty(request.getParameter("region"), "0");
 PackageDao pkDao = new PackageDao();
 List<RegionDto> rList = pkDao.getRegionList("1");
 
-String strWhere = "AND a.region_seq = '" + pRegion + "'";
+String strWhere = "";
+if(pRegion != "0"){
+	strWhere = "AND a.region_seq = '" + pRegion + "'";
+}
 List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 %>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
@@ -35,7 +38,17 @@ List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 			<TBODY>
 			<TR>
 			<TD style="PADDING-RIGHT: 18px" height=30 align=right>
-			<% 
+			<%
+				if(pRegion == "0"){
+			%>
+				<SPAN class=blue>전체보기</SPAN> &nbsp;I&nbsp;
+			<%		
+				}else{
+			%>
+				<a class=area href="reserve.jsp?menu=3">전체보기</a> &nbsp;I&nbsp;
+			<%		
+				}
+					
 				for(int i = 0; i < rList.size(); i++){ 
 					if(pRegion.equals(Integer.toString(rList.get(i).getRegion_seq()))){
 			%>
@@ -104,14 +117,14 @@ if(pkList.size() > 0){
 						<TBODY>
 						<TR>
 						<TD bgColor=white height=120 align=center>
-						<P>&nbsp;</P></TD></TR></TBODY></TABLE></TD></TR>
+						<img src="/upload/<%=pkList.get(i).getImg_sub() %>" width="313" height="110"></TD></TR></TBODY></TABLE></TD></TR>
 					<TR>
 					<TD colSpan=2>&nbsp;</TD></TR>
 					<TR>
 					<TD class=cc_name colSpan=2><%=pkList.get(i).getPackage_name1() %></TD></TR>
 					<TR>
 					<TD width=225><SPAN class=normal_fee_b>정상가 : <%=commify(pkList.get(i).getOff_n_mon()) %>원</SPAN></TD>
-					<TD vAlign=bottom rowSpan=2 width=100 align=center><A href="domestic_regist.html"><IMG border=0 align=absMiddle src="../../images/common/btn_regist_booking.gif" width=89 height=34></A></TD></TR>
+					<TD vAlign=bottom rowSpan=2 width=100 align=center><A href="detail.jsp?menu=3&pkSeq=<%=pkList.get(i).getPackage_seq() %>"><IMG border=0 align=absMiddle src="../../images/common/btn_regist_booking.gif" width=89 height=34></A></TD></TR>
 					<TR>
 					<TD width=225><SPAN class=mem_fee_b>회원가 : <%=commify(pkList.get(i).getOff_s_mon()) %>원</SPAN></TD></TR></TBODY>
 					</TABLE>

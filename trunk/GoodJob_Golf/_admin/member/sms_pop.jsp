@@ -1,5 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
+<%@page import="com.goodjob.sms.SMSDao"%>
 <%
 	
 	String[] memSeq = request.getParameterValues("memSeq");
@@ -15,6 +16,8 @@
 			buff.append(memSeq[i]);
 		}
 	}
+	
+	SMSDao sDao = new SMSDao();
 %>
 <html>
 <head>
@@ -118,7 +121,7 @@
                 <td><table border="0" cellpadding="2" cellspacing="1" width="95%" bgcolor="silver">
                     <tr>
                       <td height="25" align="right" bgcolor="#E6E7E8" style="padding-right:10px;" width="147"><span class=normal_b>남은 SMS 포인트</span></td>
-                      <td height="25" bgcolor="white" style="padding-left:10px;" width="306"><span class=blue>100 </span>건</td>
+                      <td height="25" bgcolor="white" style="padding-left:10px;" width="306"><span class=blue><%=sDao.getRemainCount()%> </span>건</td>
                     </tr>
                     <tr>
                       <td align="right" bgcolor="#E6E7E8" height="25" style="padding-right:10px;"><span class=normal_b>보내는사람</span></td>

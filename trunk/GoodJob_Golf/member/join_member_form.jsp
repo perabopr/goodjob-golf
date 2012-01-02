@@ -139,12 +139,12 @@ location.href="/member/join_agreement.jsp";
 	}
 	
 	function domainChange(val){
-		if(val == ''){
-			$("input[name=mem_domain]").attr("readonly",false);
+		if(val == 'self'){
+			document.getElementById("mem_domain").readOnly = false;
 			$('#mem_domain').val("");
 		}
 		else{
-			$("input[name=mem_domain]").attr("readonly",true);
+			document.getElementById("mem_domain").readOnly = true;
 			$('#mem_domain').val(val);
 		}
 	}
@@ -204,7 +204,7 @@ location.href="/member/join_agreement.jsp";
                                                                     <tr>
                                                                       <td height="27"><input id="mem_id" class="mem_input" type="text" size="15" name="mem_id"/>
                                                                         @
-                                                                        <input id="mem_domain" class="mem_input" type="text" size="15" name="mem_domain" readonly>
+                                                                        <input id="mem_domain" class="mem_input" type="text" size="15" name="mem_domain" readonly/>
                                                                         <select id="domain_sel" name="domain_sel" size="1" onchange="domainChange(this.value);">
                                                                           <option value="" selected>선택하세요</option>
                                                                           <option value="naver.com">naver.com</option>
@@ -217,7 +217,7 @@ location.href="/member/join_agreement.jsp";
                                                                           <option value="paran.com">paran.com</option>
                                                                           <option value="yahoo.co.kr">yahoo.co.kr</option>
                                                                           <option value="gmail.com">gmail.com</option>
-                                                                          <option value="">직접입력하기</option>
+                                                                          <option value="self">직접입력하기</option>
                                                                         </select></td>
                                                                     </tr>
                                                                     <tr>

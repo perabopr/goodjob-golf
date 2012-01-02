@@ -12,6 +12,11 @@
 
    	function search_id(){
 
+   		if(!$('#auth_no1').val()) {
+			alert('인증번호를 입력해 주세요.');
+			return;
+		}
+		
    		if(!$('#mobile0_i').val()) {
 			alert('이통사를 선택해 주세요.');
 			return;
@@ -38,20 +43,6 @@
 		var rphone = $('#mobile1_i').val() + "-" + $('#mobile2_i').val() + "-" + $('#mobile3_i').val();
 		var name = $('#sh_name').val();
 		var auth_no = $('#auth_no1').val();
-
-		/*
-		$('#mobile').val(rphone);
-		$('#mem_name').val(name);
-		$('#auth_no').val(auth_no);
-		$('#type').val('id');
-
-		alert($('#mem_name').val());
-		
-		var frm = document.shForm;
-		frm.target =  "ifr_hidden"; 
-		frm.action = "/member/send_id_pwd.jsp";
-		frm.submit();
-		*/
 		
 		$.ajax({
 			type: "POST",
@@ -62,7 +53,10 @@
 					alert("아이디가   핸드폰/이메일로  발송 되었습니다.");
 				}
 				else if($.trim(msg) == '1'){
-					alert("일치하는 회원 정보가 없습니다.");
+					alert("인증 번호가 일치하지 않습니다.다시 인증을 시도해 주세요.");
+				}
+				else if($.trim(msg) == '2'){
+					alert("요청한 이름과 핸드폰 정보가 고객님의 정보와 일치 하지 않습니다.");
 				}
 				else{
 					alert("인증중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
@@ -71,6 +65,11 @@
 	}
 
    	function search_pwd(){
+
+   		if(!$('#auth_no2').val()) {
+			alert('인증번호를 입력해 주세요.');
+			return;
+		}
 		
    		if(!$('#mobile0_p').val()) {
 			alert('이통사를 선택해 주세요.');
@@ -98,17 +97,6 @@
 		var rphone = $('#mobile1_p').val() + "-" + $('#mobile2_p').val() + "-" + $('#mobile3_p').val();
 		var id = $('#sh_id').val();
 		var auth_no = $('#auth_no2').val();
-/*
-		$('#mobile').val(rphone);
-		$('#mem_id').val(id);
-		$('#auth_no').val(auth_no);
-		$('#type').val('pwd');
-		
-		var frm = document.shForm;
-		frm.target =  "ifr_hidden"; 
-		frm.action = "/member/send_id_pwd.jsp";
-		frm.submit();
-	*/	
 		
 		$.ajax({
 			type: "POST",
@@ -119,7 +107,10 @@
 					alert("비밀번호가  핸드폰/이메일로  발송 되었습니다.");
 				}
 				else if($.trim(msg) == '1'){
-					alert("일치하는 회원 정보가 없습니다.");
+					alert("인증 번호가 일치하지 않습니다.다시 인증을 시도해 주세요.");
+				}
+				else if($.trim(msg) == '2'){
+					alert("요청한 아이디와 핸드폰 정보가 고객님의 정보와 일치 하지 않습니다.");
 				}
 				else{
 					alert("인증중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");

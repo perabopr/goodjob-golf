@@ -10,7 +10,7 @@
 <%@page import="com.goodjob.conf.Config"%>
 <%@page import="com.goodjob.util.Utils"%>
 <%
-	int region = NumberUtils.toInt(request.getParameter("region"),1);
+	int region = NumberUtils.toInt(request.getParameter("region"),0);
 
 	//어드민쪽 DAO랑 사용자쪽 DAO가 틀려요 근데 왜 안되는지 몰겠네여;
 	PackageDao pkDao = new PackageDao();
@@ -18,7 +18,7 @@
 	
 	CondoReserveDao cdDao = new CondoReserveDao();
 	
-	List<CondoDto> condoList = cdDao.getCondoList(region+"");
+	List<CondoDto> condoList = cdDao.getCondoList(region);
 	
 %>
 <table border="0" cellpadding="0" cellspacing="0" width="751">
@@ -42,6 +42,14 @@
                                                   <tr>
                                                     <td height="30" align="right" style="padding-right:18px;">
                                                     <% 
+                                                    	if(region == 0){
+    												%>
+    															<span class=blue>전체보기</span> &nbsp;I &nbsp;
+    												<%}else{%>
+    															<a href="/forGolfbooking/reserve.jsp?menu=5&region=0" class=area>전체보기</a> &nbsp;I &nbsp;
+    												<%
+    													}
+                                                    
 														if (arrRegions != null && !arrRegions.isEmpty()){
 															for(int i = 0; i < arrRegions.size();i++){
 																if(region == arrRegions.get(i).getRegion_seq()){

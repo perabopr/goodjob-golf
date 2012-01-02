@@ -55,6 +55,24 @@
 			alert("이용인원을 입력 입력하세요!");
 			return ;		
 		}
+
+		if(!$('#mobile1').val()) {
+			alert('핸드폰 앞자리를 선택해 주세요.');
+			$('#mobile1').focus();
+			return;
+		}
+
+   		if(!$('#mobile2').val()) {
+			alert('핸드폰 번호를 입력해 주세요.');
+			$('#mobile2').focus();
+			return;
+		}
+
+   		if(!$('#mobile3').val()) {
+   			alert('핸드폰 번호를 입력해 주세요.');
+			$('#mobile3').focus();
+			return;
+		}
 		
 		document.frm.submit();
 	}

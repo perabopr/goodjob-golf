@@ -32,7 +32,7 @@
 	
 	//check = 0;
 	if(check != 0){
-		out.println("3");
+		out.println("1");
 	}
 	else{
 		
@@ -40,11 +40,11 @@
 		String result = "";
 		if("id".equals(type)){
 			result = StringUtils.trimToEmpty(mDao.idFind(mem_name , rphone));
-			params.put("msg",String.format("[goodjobgolf]고객님의 아이디는 %s 입니다." , result));
+			params.put("msg",String.format("[goodjobgolf] 고객님의 아이디는 %s 입니다." , result));
 		}
 		else{
 			result = StringUtils.trimToEmpty(mDao.pwdFind(mem_id , rphone));
-			params.put("msg",String.format("[goodjobgolf]고객님의 비밀번호는 %s 입니다." , result));
+			params.put("msg",String.format("[goodjobgolf] 고객님의 비밀번호는 %s 입니다." , result));
 		}
 		
 		if(result.length() > 0){
@@ -91,7 +91,7 @@
 				
 			}
 			else{
-				out.println("2");
+				out.println("9");
 			}
 		}
 		else{

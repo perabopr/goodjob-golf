@@ -7,7 +7,7 @@
 
 
 	String seq = StringUtils.trimToEmpty(request.getParameter("seq"));
-	String join_no = StringUtils.trimToEmpty(request.getParameter("join_no"));
+	String join_seq = StringUtils.trimToEmpty(request.getParameter("join_seq"));
 	String tname = StringUtils.trimToEmpty(request.getParameter("tname"));
 	
 	BoardDao dao = new BoardDao();
@@ -23,7 +23,7 @@
 		isDel = dao.setDelete(tname , NumberUtils.toInt(seq));
 	}
 	else if("join".equals(tname)){
-		isDel = dao.setJoinDelete(NumberUtils.toInt(join_no));
+		isDel = dao.setJoinDelete(NumberUtils.toInt(join_seq));
 	}
 	
 	if(isDel)

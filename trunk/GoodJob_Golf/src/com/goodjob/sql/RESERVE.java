@@ -236,9 +236,9 @@ public class RESERVE {
 				"min(b.price_s1) price_s1 , " +
 				"min(b.price_s2) price_s2 ,  " +
 				"min(b.price_s3) price_s3  " +
-				"   from tb_condo a left outer join tb_condo_room b on(a.condo_seq=b.condo_seq) " +
-				"   where  region_seq = ? " +
-				"   group by b.condo_seq order by condo_seq desc ";
+				"from tb_condo a left outer join tb_condo_room b on(a.condo_seq=b.condo_seq) " +
+				" {0} " +
+				"group by b.condo_seq order by condo_seq desc ";
 	
 	public static final String condo_select = " select a.condo_seq, " +
 	" a.condo_name, " +

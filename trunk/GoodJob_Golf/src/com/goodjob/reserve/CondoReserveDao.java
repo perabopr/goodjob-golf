@@ -1,8 +1,7 @@
 package com.goodjob.reserve;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +16,11 @@ import com.goodjob.reserve.dto.CondoDto;
 import com.goodjob.reserve.dto.CondoGalleryDto;
 import com.goodjob.reserve.dto.CondoReserveDto;
 import com.goodjob.reserve.dto.CondoRoomDto;
-import com.goodjob.sql.PRODUCT;
 import com.goodjob.sql.RESERVE;
 
 public class CondoReserveDao {
 
-	public List<CondoDto> getCondoList(String region){
+	public List<CondoDto> getCondoList(int region){
 		
 		List<CondoDto> list = null;
 		Connection conn = null;
@@ -31,12 +29,18 @@ public class CondoReserveDao {
 			conn = DBManager.getConnection();
 			
 			ArrayList<Object> bind = new ArrayList<Object>();
-			bind.add(region);
+			
 			
 			ResultSetHandler rsh = new BeanListHandler(CondoDto.class);
 			QueryRunner qr = new QueryRunner();
 			
-			list = (List<CondoDto>) qr.query(conn , RESERVE.condo_select_list, rsh , bind.toArray());
+			String where = "";
+			if(region > 0){
+				where = " where  region_seq = ? ";
+				bind.add(region);
+			}
+			
+			list = (List<CondoDto>) qr.query(conn , MessageFormat.format(RESERVE.condo_select_list,where), rsh , bind.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);

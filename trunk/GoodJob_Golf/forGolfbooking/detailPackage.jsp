@@ -144,12 +144,12 @@ function imgChange(objId){
 <TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getOff_n_fri()) %>원/인</TD></TR>
 <TR>
 <TD class=saturday bgColor=#f1f1f1 height=18 align=center>토요일</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_n_sat()) %>원/인</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getOff_n_sat()) %>원/인</TD></TR>
+<TD class=saturday bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_n_sat()) %>원/인</TD>
+<TD class=saturday bgColor=white align=center><%=myUtil.commify(pkDto.getOff_n_sat()) %>원/인</TD></TR>
 <TR>
 <TD class=sunday bgColor=#f1f1f1 height=18 align=center>일요일</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_n_sun()) %>원/인</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getOff_n_sun()) %>원/인</TD></TR></TBODY></TABLE></TD></TR>
+<TD class=sunday bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_n_sun()) %>원/인</TD>
+<TD class=sunday bgColor=white align=center><%=myUtil.commify(pkDto.getOff_n_sun()) %>원/인</TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD style="PADDING-TOP: 17px"><A href="rule.jsp?menu=3&pkSeq=<%=packSeq %>"><IMG border=0 src="../../images/package/btn_domestic_regist.gif" width=407 height=39></A></TD></TR>
 <TR>
@@ -174,10 +174,10 @@ function imgChange(objId){
 	<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
 	<TBODY>
 	<TR>
-	<TD style="CURSOR: hand" onclick=DisplayMenu(1) width=176><IMG alt=상품안내 src="../../images/package/btn_tab_on_01.gif" width=173 height=25></TD>
-	<TD style="CURSOR: hand" onclick=DisplayMenu(2) width=176><IMG alt=이용안내 src="../../images/package/btn_tab_off_02.gif" width=173 height=25></TD>
-	<TD style="CURSOR: hand" onclick=DisplayMenu(3) width=176><IMG alt=골프장소개 src="../../images/package/btn_tab_off_03.gif" width=173 height=25></TD>
-	<TD style="CURSOR: hand" onclick=DisplayMenu(4) width=176><IMG alt=오시는길 src="../../images/package/btn_tab_off_04.gif" width=173 height=25></TD></TR>
+	<TD style="CURSOR: hand" onclick=DisplayMenu(1) width=176><IMG id="imgtap1" alt=상품안내 src="../../images/package/btn_tab_on_01.gif" width=173 height=25></TD>
+	<TD style="CURSOR: hand" onclick=DisplayMenu(2) width=176><IMG id="imgtap2" alt=이용안내 src="../../images/package/btn_tab_off_02.gif" width=173 height=25></TD>
+	<TD style="CURSOR: hand" onclick=DisplayMenu(3) width=176><IMG id="imgtap3" alt=골프장소개 src="../../images/package/btn_tab_off_03.gif" width=173 height=25></TD>
+	<TD style="CURSOR: hand" onclick=DisplayMenu(4) width=176><IMG id="imgtap4" alt=오시는길 src="../../images/package/btn_tab_off_04.gif" width=173 height=25></TD></TR>
 	<TR>
 	<TD bgColor=#91b500 height=1 width=704 colSpan=4></TD></TR></TBODY></TABLE></TD></TR>
 <TR><TD height=10></TD></TR>

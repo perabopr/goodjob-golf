@@ -70,14 +70,13 @@ function billok(){
 }
 
 $(function(){
-	$("#chkRealName").click(function(){
+	$("#chkRealName").click(function(){		
 		if(this.checked){
+			document.getElementById("reserveName").readOnly = true;
 			$("#reserveName").val("<%=user_Name%>");
-			$("#reserveName").attr("readonly","readonly");
 		}else{
-			$("#reserveName").removeAttr("readonly");
+			document.getElementById("reserveName").readOnly = false;
 			$("#reserveName").val("");
-			$("#reserveName").focus();
 		}
 	});
 });

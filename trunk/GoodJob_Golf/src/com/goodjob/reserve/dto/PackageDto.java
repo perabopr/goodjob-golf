@@ -20,6 +20,7 @@ public class PackageDto {
 	private String view_yn = "";
 	private String package_guide = "";
 	private String use_guide = "";
+	private String use_rule = "";
 	private String golflink_guide = "";
 	private String way_map = "";
 

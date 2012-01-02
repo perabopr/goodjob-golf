@@ -231,7 +231,7 @@ function reserveSubmit(){
 		return false;
 	}
 	var rPhone = $("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val();
-	if($("#phone1").val().length == 0 && $("#phone2").val().length == 0 && $("#phone3").val().length){
+	if($("#phone1").val().length == 0 || $("#phone2").val().length < 3 || $("#phone3").val().length != 4){
 		alert("핸드폰을 입력하세요.");
 		return false;
 	}
@@ -593,10 +593,13 @@ for (int i = 1; i < 15 ;i++){
 	<TR>
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=25 align=right>핸드폰</TD>
 	<TD style="PADDING-LEFT: 10px" bgColor=white colSpan=3><SELECT size=1 id="phone1" name="phone1"> 
-	<OPTION selected>선택</OPTION> 
-	<OPTION>010</OPTION> <OPTION>011</OPTION> 
-	<OPTION>016</OPTION> <OPTION>017</OPTION> 
-	<OPTION>018</OPTION> <OPTION>019</OPTION></SELECT> 
+	<OPTION value="" selected>선택</OPTION> 
+	<OPTION value="010">010</OPTION> 
+	<OPTION value="011">011</OPTION> 
+	<OPTION value="016">016</OPTION>
+	<OPTION value="017">017</OPTION> 
+	<OPTION value="018">018</OPTION>
+	<OPTION value="019">019</OPTION></SELECT> 
 	- <INPUT class=mem_input id="phone2" name="phone2" maxLength=4 size=8> 
 	- <INPUT class=mem_input id="phone3" name="phone3" maxLength=4 size=8></TD></TR>
 	<TR>

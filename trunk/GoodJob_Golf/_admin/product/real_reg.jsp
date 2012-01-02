@@ -61,7 +61,8 @@ if(glSeq.length() > 0){
 <head>
 <link rel="stylesheet" href="../style.css">
 <title></title>
-<script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
+<script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="/js/highgardenEditor.js"></script>
 <script language="javascript" type="text/javascript">
 <!-- 
 function NewWindow(mypage, myname, w, h, scroll) { 
@@ -306,23 +307,33 @@ function getFileExtension(filePath)
     <td colspan="2" align="center"><table border="0" width="899" cellpadding="2" cellspacing="1" bgcolor="#CCCCCC">
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;" width="162"><span class=list_title>취소규정</span></td>
-          <td bgcolor="white" style="padding-left:10px;" width="710"><textarea class="box03" rows="3" cols="113" id="content1" name="content1"><%= gldto.getCancel_rule()%></textarea></td>
+          <td bgcolor="white" style="padding-left:10px;" width="710">
+          <textarea class="box03" rows="10" cols="113" id="content1" name="content1" title="higheditor_simple"><%= gldto.getCancel_rule()%></textarea>
+          </td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>위약처리규정</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="6" cols="113" id="content2" name="content2"><%= gldto.getPromise_rule()%></textarea></td>
+          <td bgcolor="white" style="padding-left:10px;">
+          <textarea class="box03" rows="10" cols="113" id="content2" name="content2" title="higheditor_simple"><%= gldto.getPromise_rule()%></textarea>
+          </td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이용안내</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="6" cols="113" id="content3" name="content3"><%= gldto.getUse_guide()%></textarea></td>
+          <td bgcolor="white" style="padding-left:10px;">
+          <textarea class="box03" rows="10" cols="113" id="content3" name="content3" title="higheditor_simple"><%= gldto.getUse_guide()%></textarea>
+          </td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>골프장안내</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="6" cols="113" id="content4" name="content4"><%= gldto.getGolflink_guide()%></textarea></td>
+          <td bgcolor="white" style="padding-left:10px;">
+          <textarea class="box03" rows="10" cols="113" id="content4" name="content4" title="higheditor_simple"><%= gldto.getGolflink_guide()%></textarea>
+          </td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이용약관</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="6" cols="113" id="content5" name="content5"><%= gldto.getUse_rule()%></textarea></td>
+          <td bgcolor="white" style="padding-left:10px;">
+          <textarea class="box03" rows="10" cols="113" id="content5" name="content5" title="higheditor_simple"><%= gldto.getUse_rule()%></textarea>
+          </td>
         </tr>
       </table></td>
   </tr>

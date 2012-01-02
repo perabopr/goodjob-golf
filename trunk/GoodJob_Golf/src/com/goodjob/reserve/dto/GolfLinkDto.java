@@ -23,6 +23,7 @@ public class GolfLinkDto {
 	private String promise_rule = "";
 	private String use_guide = "";
 	private String golflink_guide = "";
+	private String use_rule = "";
 	
 	public int getGolflink_seq() {
 		return golflink_seq;
@@ -156,5 +157,10 @@ public class GolfLinkDto {
 	public void setGolflink_guide(String golflink_guide) {
 		this.golflink_guide = golflink_guide;
 	}
-
+	public String getUse_rule() {
+		return use_rule;
+	}
+	public void setUse_rule(String use_rule) {
+		this.use_rule = use_rule;
+	}
 }

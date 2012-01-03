@@ -547,7 +547,7 @@ for (int i = 1; i < 15 ;i++){
 	for(int i = 0; i < listPr.size();i++){
 		int tPrdtSeq = listPr.get(i).getProductsub_seq();
 		String tTerm = listPr.get(i).getTime_start().substring(0,2) + "시 ~ " + listPr.get(i).getTime_end().substring(0,2) + "시";
-		int tPrice = listPr.get(i).getGoodjob_price();
+		int tPrice = listPr.get(i).getNH_price();
 %>
 		<OPTION value="<%=tPrdtSeq+"/"+tPrice%>"><%=tTerm%></OPTION>
 <% 

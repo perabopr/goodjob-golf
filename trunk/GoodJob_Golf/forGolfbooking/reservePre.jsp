@@ -1,3 +1,6 @@
+<%@page import="com.goodjob.reserve.dto.RegionDto"%>
+<%@page import="com.goodjob.reserve.PackageDao"%>
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="com.goodjob.reserve.dto.ProductDto"%>
 <%@page import="com.goodjob.reserve.dto.GolfLinkDto"%>
@@ -9,6 +12,10 @@
 <%
 int menuNum = NumberUtils.toInt(request.getParameter("menu"),2);
 
+String pRegion = StringUtils.defaultIfEmpty(request.getParameter("region"), "0");
+PackageDao pkDao = new PackageDao();
+List<RegionDto> rList = pkDao.getRegionList("1");
+
 //String nowDate = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date());
 Calendar vCalendar = Calendar.getInstance();
 String strDate = Integer.toString(NumberUtils.toInt(request.getParameter("date"),0));
@@ -18,7 +25,7 @@ int tDay;
 if(strDate == null || strDate.length() != 8){
 	strDate = new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
 	out.print("<script>");
-	out.print("location.href='/forGolfbooking/reserve.jsp?menu=2&date="+strDate+"';");
+	out.print("location.href='/forGolfbooking/reserve.jsp?menu=2&region="+pRegion+"&date="+strDate+"';");
 	out.print("</script>");
 	return;
 	/*
@@ -54,6 +61,12 @@ String eDate = tmYear
 			+ tmDay.substring(tmDay.length()-2, tmDay.length());
 
 String strWhere = "AND A.menu_seq = " + Integer.toString(menuNum) + " ";
+if(pRegion.equals("1") || pRegion.equals("2") 
+		|| pRegion.equals("3") || pRegion.equals("4")
+		|| pRegion.equals("5") || pRegion.equals("6")){
+	strWhere += "AND A.region_seq = " + pRegion;
+}
+/*
 String strRegion = request.getParameter("region");
 if(strRegion != null){
 	if(strRegion.equals("1") || strRegion.equals("2") 
@@ -62,6 +75,7 @@ if(strRegion != null){
 		strWhere += "AND A.region_seq = " + strRegion;
 	}
 }
+*/
 GolfLinkDao glDao = new GolfLinkDao();
 List<GolfLinkDto> listGolf = glDao.getGolfLinkList(strWhere);
 
@@ -108,6 +122,36 @@ visibility: hidden;
 <TD vAlign=top>
 <TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
 <TBODY>
+<tr>
+<td>&nbsp;</td>
+</tr>
+<tr>
+<td align="right">
+<%
+	if(pRegion.equals("0")){
+%>
+	<SPAN class=blue>전체보기</SPAN> &nbsp;I&nbsp;
+<%		
+	}else{
+%>
+	<a class=area href="reserve.jsp?menu=1&date=<%=strDate %>">전체보기</a> &nbsp;I&nbsp;
+<%		
+	}
+		
+	for(int i = 0; i < rList.size(); i++){ 
+		if(pRegion.equals(Integer.toString(rList.get(i).getRegion_seq()))){
+%>
+		<SPAN class=blue><%=rList.get(i).getRegion_name()%></SPAN> &nbsp;I&nbsp;
+<%
+		}else{
+%>
+		<A class=area href="reserve.jsp?menu=2&region=<%=rList.get(i).getRegion_seq()%>&date=<%=strDate %>"><%=rList.get(i).getRegion_name()%></A> &nbsp;I &nbsp;
+<% 
+		}
+	} 
+%>
+</td>
+</tr>
 <TR>
 <TD height=40 align=right>
 <table border="0" cellpadding="0" cellspacing="0" width="150">

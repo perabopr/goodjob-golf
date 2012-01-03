@@ -491,9 +491,8 @@ for (int i = 1; i < 15 ;i++){
 <TR>
 <TD bgColor=white height=25 align=center><%=tmpDate %></TD>
 <TD bgColor=white height=25 align=center><%=tmpTime %></TD>
-<TD bgColor=white align=center><%=listPr.get(i).getCourse_name()%></TD>
+<TD bgColor=white align=center><%=StringUtils.defaultIfEmpty(listPr.get(i).getCourse_name(), "없음")%></TD>
 <TD bgColor=white align=center><%=listPr.get(i).getHoll_type() %></TD>
-
 <%
 		if(listPr.get(i).getProduct_status().equals("0")){			
 %>

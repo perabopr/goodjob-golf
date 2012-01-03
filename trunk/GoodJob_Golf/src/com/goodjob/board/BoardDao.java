@@ -495,8 +495,8 @@ public class BoardDao {
 			params.add(jDto.getContent());
 			params.add(jDto.getJoin_seq());
 
-			QueryRunner queryRunner = new QueryRunner();
-			queryRunner.update(conn, BBS.join_update , params.toArray());
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn, BBS.join_update , params.toArray());
 
 		} catch (Exception e) {
 			System.out.println(e);
@@ -529,8 +529,8 @@ public class BoardDao {
 			params.add(jDto.getPrice_info3());
 			params.add(jDto.getContent());
 			
-			QueryRunner queryRunner = new QueryRunner();
-			queryRunner.update(conn, BBS.join_insert , params.toArray());
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn, BBS.join_insert , params.toArray());
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -548,8 +548,8 @@ public class BoardDao {
 
 			conn = DBManager.getConnection();
 
-			QueryRunner queryRunner = new QueryRunner();
-			queryRunner.update(conn, BBS.join_status , join_no);
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn, BBS.join_status , join_no);
 			
 			isUpdate = true;
 		} catch (Exception e) {
@@ -574,10 +574,10 @@ public class BoardDao {
 
 			conn = DBManager.getConnection();
 
-			QueryRunner queryRunner = new QueryRunner();
+			QueryRunner qr = new QueryRunner();
 			
-			queryRunner.update(conn, BBS.join_delete , join_no);
-			queryRunner.update(conn, BBS.join_cdelete , join_no);
+			qr.update(conn, BBS.join_delete , join_no);
+			qr.update(conn, BBS.join_cdelete , join_no);
 			
 			isDel = true;
 			
@@ -635,10 +635,10 @@ public class BoardDao {
 			params.add(jDto.getCmt_name());
 			params.add(jDto.getComment());
 			
-			QueryRunner queryRunner = new QueryRunner();
-			queryRunner.update(conn, BBS.join_cinsert , params.toArray());
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn, BBS.join_cinsert , params.toArray());
 			
-			queryRunner.update(conn, BBS.join_apply , jDto.getJoin_seq());
+			qr.update(conn, BBS.join_apply , jDto.getJoin_seq());
 			
 
 		} catch (Exception e) {
@@ -661,8 +661,8 @@ public class BoardDao {
 
 			conn = DBManager.getConnection();
 
-			QueryRunner queryRunner = new QueryRunner();
-			queryRunner.update(conn, BBS.join_cdelete , cmt_no);
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn, BBS.join_cdelete , cmt_no);
 			
 			isDel = true;
 			
@@ -672,5 +672,73 @@ public class BoardDao {
 			DbUtils.closeQuietly(conn);
 		}
 		return isDel;
+	}
+	
+	public List<PartnershipDto> getPartnershipList(Map<String,String> data){
+		
+		Connection conn = null;
+		List<PartnershipDto> list = null;
+		
+		String field = StringUtils.defaultIfEmpty(data.get("field"), "");
+		String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
+		int npage = NumberUtils.toInt(data.get("npage"), 1);
+		int per_page = NumberUtils.toInt(data.get("per_page"), BBS.per_page);
+		
+		try {
+			
+			List<Object> params = new ArrayList<Object>();
+			//params.add("");
+			
+			//검색조건
+			String where = "";
+			if(keyword.length()>0){
+				where = " where subject like concat('%',?,'%') " ;
+				params.add(keyword);
+			}
+			
+			//페이징
+			params.add(((npage-1)* per_page));
+			params.add(per_page);
+			
+			conn = DBManager.getConnection();
+			
+			ResultSetHandler rsh = new BeanListHandler(PartnershipDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<PartnershipDto>) qr.query(conn , MessageFormat.format(BBS.partnership_list,where), rsh , params.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return list;
+	}
+	
+	public void setInsertPartnership(PartnershipDto pDto){
+		
+		Connection conn = null;
+		try {
+			
+			conn = DBManager.getConnection();
+
+			ArrayList<Object> params = new ArrayList<Object>();
+			params.add(pDto.getName());
+			params.add(pDto.getEmail());
+			params.add(pDto.getSubject());
+			params.add(pDto.getMobile());
+			params.add(pDto.getContent());
+			params.add(pDto.getFilename());
+			params.add(pDto.getWriteip());
+			
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn, BBS.partnership_insert , params.toArray());
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
 	}
 }

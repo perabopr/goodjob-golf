@@ -60,11 +60,11 @@ function NewWindow(mypage, myname, w, h, scroll) {
 	var winl = (screen.width - w) / 2; 
 	var wint = (screen.height - h) / 2; 
 	winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable'; 
-	sms = window.open('', "pop_sms_1", winprops); 
+	sms = window.open('', "pop_mail_1", winprops); 
 	
-	document.mailFrmtarget="pop_sms_1";
-	document.mailFrmaction=mypage;
-	document.mailFrmsubmit();
+	document.mailFrm.target="pop_mail_1";
+	document.mailFrm.action=mypage;
+	document.mailFrm.submit();
 	 
 } 
 
@@ -170,7 +170,7 @@ function perPage(){
         <tr>
           <td colspan="3" width="1856">
           <table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
- <form name="smsFrm" method="post">
+ <form name="mailFrm" method="post">
  <input type="hidden" id="mobile" name="mobile" value=""/>
               <tr>
                 <td bgcolor="#e6e7e8" height="25" align="center" width="70"><span class=normal_b>선택</span></td>

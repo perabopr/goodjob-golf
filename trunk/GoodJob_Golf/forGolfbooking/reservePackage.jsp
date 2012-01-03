@@ -39,7 +39,7 @@ List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 			<TR>
 			<TD style="PADDING-RIGHT: 18px" height=30 align=right>
 			<%
-				if(pRegion == "0"){
+				if(pRegion.equals("0")){
 			%>
 				<SPAN class=blue>전체보기</SPAN> &nbsp;I&nbsp;
 			<%		

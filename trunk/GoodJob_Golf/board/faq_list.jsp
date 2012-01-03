@@ -50,6 +50,14 @@ function goPage(val){
 	frm.action="faq_list.jsp"
 	frm.submit();
 }
+
+var faq_seq = "";
+function show_faq(val){
+	$('#faq_'+val).show();
+	if(val != faq_seq)
+		$('#faq_'+faq_seq).hide();
+	faq_seq = val;
+}
 //-->
 </script>
 					<!--############### 중앙 컨텐츠 영역 #################-->
@@ -84,7 +92,7 @@ function goPage(val){
                                                                 <td height="1" colspan="3" bgcolor="#C8D290" width="666"></td>
                                                               </tr>
                                                             </table>
-                                                            <table border="0" cellpadding="0" cellspacing="0" width="669">
+                                                            
 <%
 	if(bbsList != null && !bbsList.isEmpty()){
 		
@@ -95,30 +103,32 @@ function goPage(val){
 			dto = bbsList.get(i);
 			
 %>
+                                                             <table border="0" cellpadding="0" cellspacing="0" width="669">
                                                               <tr>
                                                                 <td align="center" height="30" width="65"><%=dto.getSeq()%></td>
                                                                 <td align="center" width="10"></td>
-                                                                <td width="594"><a href="#l" class=b_list><a href="./faq_view.jsp?seq=<%=dto.getSeq()%>"><%=dto.getSubject()%></a></a></td>
+                                                                <td width="594"><a href="javascript:show_faq(<%=dto.getSeq()%>);" class=b_list><%=dto.getSubject()%></a></td>
                                                               </tr>
                                                               <tr>
                                                                 <td height="1" colspan="3" bgcolor="#E5E5E5" width="669"></td>
                                                               </tr>
+                                                             </table>
+                                                            <div id="faq_<%=dto.getSeq()%>" style="display:none;">
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="669">
+                                                              <tr>
+                                                                <td align="center" height="30" width="75">&nbsp;</td>
+                                                                <td align="center" width="30" valign="top"  style="padding-top:8px;"><img src="/images/board/img_qna_arrow.gif" width="15" height="14" border="0"></td>
+                                                                <td width="564"   style="padding-top:10px;padding-bottom:10px;"><%=StringUtils.trimToEmpty(dto.getContent())%></td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td height="1" colspan="3" bgcolor="#E5E5E5" width="669"></td>
+                                                              </tr>
+                                                            </table>
+                                                            </div>
 <%
 		}
 	}
 %>
-                                                            </table>
-                                                            <!--table border="0" cellpadding="0" cellspacing="0" width="669">
-                                                              <tr>
-                                                                <td align="center" height="30" width="75">&nbsp;</td>
-                                                                <td align="center" width="30" valign="top"  style="padding-top:8px;"><img src="../../images/board/img_qna_arrow.gif" width="15" height="14" border="0"></td>
-                                                                <td width="564"   style="padding-top:10px;padding-bottom:10px;">
-															FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다FAQ답변입니다</td>
-                                                              </tr>
-                                                              <tr>
-                                                                <td height="1" colspan="3" bgcolor="#E5E5E5" width="669"></td>
-                                                              </tr>
-                                                            </table>-->
                                                           </td>
                                                         </tr>
                                                         <tr>

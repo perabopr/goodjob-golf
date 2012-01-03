@@ -128,6 +128,7 @@ CREATE TABLE TB_PACKAGE(
 		view_yn                       		CHAR(1)		 NULL ,
 		package_guide                 		TEXT		 NULL ,
 		use_guide                     		TEXT		 NULL ,
+		use_rule                     		TEXT		 NULL ,
 		golflink_guide                		TEXT		 NULL ,
 		way_map                       		TEXT		 NULL 
 );

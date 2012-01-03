@@ -5,6 +5,7 @@ package com.goodjob.util;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -30,6 +31,18 @@ public class Utils {
 		try{
 			SimpleDateFormat formater = new SimpleDateFormat(format);
 			date = formater.format(new Date());
+		}catch(Exception e){}
+		return date;
+	}
+	
+	public static String getDate(String format , int day){
+		String date = "";
+		try{
+			Calendar cal = Calendar.getInstance();
+			cal.add(cal.DATE, day);
+			SimpleDateFormat formater = new SimpleDateFormat(format);
+			date = formater.format(cal.getTimeInMillis());
+			
 		}catch(Exception e){}
 		return date;
 	}

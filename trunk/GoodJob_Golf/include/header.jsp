@@ -34,32 +34,13 @@ String user_Id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"))
 	PackageDao listRegionDao = new PackageDao();
 	List<RegionDto> listRegion = listRegionDao.getRegionList("1");
 
+	String headDate_now = Utils.getDate("yyyy-MM-dd");
+	String headDate_2week = Utils.getDate("yyyy-MM-dd" , 14);
+	
 	String ddlSearchRegion = StringUtils.trimToEmpty(request.getParameter("ddlSearchRegion"));
 	String ddlSearchMenu = StringUtils.trimToEmpty(request.getParameter("ddlSearchMenu"));
-	String txtSearchStartDate = StringUtils.trimToEmpty(request.getParameter("txtSearchStartDate"));
-	String txtSearchEndDate = StringUtils.trimToEmpty(request.getParameter("txtSearchEndDate"));
-
-	Calendar nowCalendarSearch = Calendar.getInstance();
-	String headYear_now = Integer.toString(nowCalendarSearch.get(nowCalendarSearch.YEAR));
-	String headMonth_now = "0" + Integer.toString(nowCalendarSearch.get(nowCalendarSearch.MONTH)+1);
-	String headDay_now = "0" + Integer.toString(nowCalendarSearch.get(nowCalendarSearch.DATE));
-	String headDate_now = headYear_now
-						+ "-" + headMonth_now.substring(headMonth_now.length()-2, headMonth_now.length())
-						+ "-" + headDay_now.substring(headDay_now.length()-2, headDay_now.length());
-	nowCalendarSearch.add(nowCalendarSearch.DATE, 14);
-	String headYear_2week = Integer.toString(nowCalendarSearch.get(nowCalendarSearch.YEAR));
-	String headMonth_2week = "0" + Integer.toString(nowCalendarSearch.get(nowCalendarSearch.MONTH)+1);
-	String headDay_2week = "0" + Integer.toString(nowCalendarSearch.get(nowCalendarSearch.DATE));
-	String headDate_2week = headYear_2week
-						+ "-" + headMonth_2week.substring(headMonth_2week.length()-2, headMonth_2week.length())
-						+ "-" + headDay_2week.substring(headDay_2week.length()-2, headDay_2week.length());
-	
-	if(txtSearchStartDate.equals("")){	
-		txtSearchStartDate = headDate_now;
-	}
-	if(txtSearchEndDate.equals("")){
-		txtSearchEndDate = headDate_2week;
-	}
+	String txtSearchStartDate = StringUtils.defaultString(request.getParameter("txtSearchStartDate"),headDate_now);
+	String txtSearchEndDate = StringUtils.defaultString(request.getParameter("txtSearchEndDate"),headDate_2week);
 	
 %>
 <%!
@@ -67,11 +48,12 @@ public String commify(int n) {
 	return com.goodjob.util.Utils.numberFormat(n);
 }
 %>
-<html>
+
+<%@page import="com.goodjob.util.Utils"%><html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
-<title>Welcome to GoodJobGolf</title>
+<title>대한민국 넘버원 골프부킹 할인서비스 굿잡골프</title>
 <link rel="stylesheet" href="/css/common.css" type="text/css">
 <link rel="stylesheet" href="/css/style.css" type="text/css">
 <link rel="stylesheet" href="/css/jquery.ui.all.css">

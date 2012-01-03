@@ -3,6 +3,7 @@
 <%
 	String ses_mem_id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"));
 	String ses_mem_name = StringUtils.trimToEmpty((String)session.getAttribute("mem_name"));
+	String cookie_id = StringUtils.trimToEmpty(com.goodjob.util.Utils.getCookie(request,"golf.mem_id"));
 	
 	if(ses_mem_id.length() > 0){
 %>
@@ -55,8 +56,8 @@
      <tr>
        <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="207">
            <tr>
-             <td width="103"><input id="login_id" class="input_01" type="text" size="20" name="login_id" onclick="onClick_id();" value="<%=StringUtils.defaultIfEmpty(com.goodjob.util.Utils.getCookie(request,"golf.mem_id"),"아이디@메일주소")%>"></td>
-             <td align="right"><input type="checkbox" name="id_cookie" value="Y"/>
+             <td width="103"><input id="login_id" class="input_01" type="text" size="20" name="login_id" onclick="onClick_id();" value="<%=(cookie_id.length()>0?cookie_id:"아이디@메일주소")%>"></td>
+             <td align="right"><input type="checkbox" name="id_cookie" value="Y"<%=(cookie_id.length()>0?" checked":"")%>/>
                <span class="white_s">아이디저장</span></td>
            </tr>
            <tr>

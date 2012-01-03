@@ -70,10 +70,16 @@
 		session.setAttribute("mem_mtel",mDto.getMem_mtel());
 		session.setAttribute("mem_name",mDto.getMem_name());
 		
+		Date now = new Date();
+	    String timestamp = now.toString();
 		if("Y".equals(id_cookie)){
-			Date now = new Date();
-		    String timestamp = now.toString();
-		    Cookie cookie = new Cookie ("golf.mem_id", mDto.getMem_id());
+			Cookie cookie = new Cookie ("golf.mem_id", mDto.getMem_id());
+		    cookie.setMaxAge(365 * 24 * 60 * 60);
+		    cookie.setPath("/");
+		    response.addCookie(cookie);
+		}
+		else{
+			Cookie cookie = new Cookie ("golf.mem_id", "");
 		    cookie.setMaxAge(365 * 24 * 60 * 60);
 		    cookie.setPath("/");
 		    response.addCookie(cookie);

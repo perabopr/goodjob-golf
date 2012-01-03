@@ -169,11 +169,11 @@
                                   <td width="751"><table border="0" cellpadding="2" cellspacing="1" width="751" bgcolor="#D2D2D2">
                                       <tr>
 <form name="shForm" method="post">
-<input type="hiddne" id="type" name="type" value=""/>
-<input type="hiddne" id="mem_name" name="mem_name" value=""/>
-<input type="hiddne" id="mobile" name="mobile" value=""/>
-<input type="hiddne" id="auth_no" name="auth_no" value=""/>
-<input type="hiddne" id="mem_id" name="mem_id" value=""/>
+<input type="hidden" id="type" name="type" value=""/>
+<input type="hidden" id="mem_name" name="mem_name" value=""/>
+<input type="hidden" id="mobile" name="mobile" value=""/>
+<input type="hidden" id="auth_no" name="auth_no" value=""/>
+<input type="hidden" id="mem_id" name="mem_id" value=""/>
 </form>
                                         <td align="center" bgcolor="white" width="745" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="95%">
                                             <tr>

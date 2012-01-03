@@ -118,7 +118,7 @@ function show_faq(val){
                                                               <tr>
                                                                 <td align="center" height="30" width="75">&nbsp;</td>
                                                                 <td align="center" width="30" valign="top"  style="padding-top:8px;"><img src="/images/board/img_qna_arrow.gif" width="15" height="14" border="0"></td>
-                                                                <td width="564"   style="padding-top:10px;padding-bottom:10px;"><%=StringUtils.trimToEmpty(dto.getContent())%></td>
+                                                                <td width="564" style="padding-top:10px;padding-bottom:10px;" class=b_list><%=StringUtils.trimToEmpty(dto.getContent())%></td>
                                                               </tr>
                                                               <tr>
                                                                 <td height="1" colspan="3" bgcolor="#E5E5E5" width="669"></td>

@@ -141,7 +141,7 @@ public class SMSDao {
 		    String[] rMsg = tmpMsg.split(",");
 		    String result= rMsg[0]; //발송결과
 		    
-		    System.out.println("result : "+ result);
+		    //System.out.println("result : "+ result);
 		    
 		    if("success".equals(result)){
 		    	//발송 성공시 로그저장
@@ -165,11 +165,12 @@ public class SMSDao {
 	 * @param message
 	 * @return
 	 */
-	public boolean send(String mobile , String message) {
+	public boolean send(String mem_id , String mobile , String message) {
 		
 		Map<String,String> param = new HashMap<String, String>();
 		param.put("rphone",mobile);
 		param.put("msg",message);
+		param.put("mem_id",mem_id);
 		
 		return this.send(param);
 	}

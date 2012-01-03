@@ -285,7 +285,7 @@
                                       <input class="mem_input" type="text" size="15" id="reserve_name"name="reserve_name" value="<%=StringUtils.trimToEmpty((String)session.getAttribute("mem_name"))%>"></td>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;">핸드폰</td>
                                       <td bgcolor="white" style="padding-left:10px;">
-                                      <select name="mobile1" size="1">
+                                      <select id="mobile1" name="mobile1" size="1">
                                           <option value="">선택</option>
                                           <option value="010">010</option>
                                           <option value="011">011</option>
@@ -295,9 +295,9 @@
                                           <option value="019">019</option>
                                         </select>
                                         -
-                                        <input class="mem_input" type="text" size="8" name="mobile2" maxlength="4">
+                                        <input class="mem_input" type="text" size="8" id="mobile2" name="mobile2" maxlength="4">
                                         -
-                                        <input class="mem_input" type="text" size="8" name="mobile3" maxlength="4"></td>
+                                        <input class="mem_input" type="text" size="8" id="mobile3" name="mobile3" maxlength="4"></td>
                                     </tr>
                                     <!--tr>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">이용요금</td>

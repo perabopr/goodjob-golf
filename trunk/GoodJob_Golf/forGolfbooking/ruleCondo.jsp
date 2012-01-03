@@ -44,7 +44,7 @@ function reserveAgree(){
                                               <td align="right" class="location" height="30" width="95%"><a href="/index.html">HOME</a> &gt; 골프장부킹 &gt; <span class=location_b>실시간예약</span></td>
                                             </tr>
                                             <tr>
-                                              <td bgcolor="#D1D3D4" height="33" class="sub_title" style="padding-left:15px;padding-top:4px">실시간예약</td>
+                                              <td bgcolor="#D1D3D4" height="33" class="sub_title" style="padding-left:15px;padding-top:4px">콘도예약</td>
                                             </tr>
                                             <tr>
                                               <td valign="top"><p>&nbsp;</p></td>

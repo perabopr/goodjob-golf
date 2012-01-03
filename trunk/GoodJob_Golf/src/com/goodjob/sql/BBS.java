@@ -11,7 +11,7 @@ public class BBS {
 
 	public static final int per_page = 20;
 	
-	public static final String list = "SELECT seq , name , email , subject , readcount , date_format(reg_dt,''%Y-%m-%d'') reg_dt , filename , position, thread FROM {0} " +
+	public static final String list = " SELECT seq , name , email , subject , content, readcount , date_format(reg_dt,''%Y-%m-%d'') reg_dt , filename , position, thread FROM {0} " +
 										" {1} ORDER BY thread desc , position LIMIT ? , ? ";
 	
 	public static final String totalcnt = "SELECT COUNT(*) AS CNT FROM {0} {1} ";
@@ -104,4 +104,20 @@ public class BBS {
 	"values(? ,? ,? ,? ,now()) ";
 	
 	public static final String join_cdelete = "DELETE FROM tb_join_comment WHERE join_seq = ? ";
+	
+	//-------------------- tb_partnership -----------------------------
+	public static final String partnership_list = "select a.seq, " +
+			"a.name, " +
+			"a.email, " +
+			"a.subject, " +
+			"a.mobile, " +
+			"a.content, " +
+			"a.filename, " +
+			"a.writeip, " +
+			"date_format(a.reg_dt,''%Y-%m-%d'') reg_dt " +
+			"from tb_partnership a {0} limit ? , ?  ";
+	
+	public static final String partnership_insert = "insert into tb_partnership( name,email,subject,mobile,content,filename,writeip,reg_dt ) "+
+		" values( ?, ?, ?, ?, ?, ?, ?, now() ) ";
+	
 }

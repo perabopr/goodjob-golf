@@ -3,7 +3,7 @@
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
 <%
-	
+	String cookie_id = StringUtils.trimToEmpty(com.goodjob.util.Utils.getCookie(request,"golf.mem_id"));
 %>
 <!-- 상단 영역 -->
 <%@ include file="/include/header.jsp" %>
@@ -40,7 +40,7 @@
                                                               <tr>
                                                                 <td width="116" align="right" style="padding-right:10px;" height="2"><span class=normal_b>아이디</span></td>
                                                                 <td width="215">
-                                                                    <input id="login_id" class="mem_login" type="text" size="33" name="login_id" onclick="onClick_id();" value="<%=StringUtils.defaultIfEmpty(com.goodjob.util.Utils.getCookie(request,"golf.mem_id"),"아이디@메일주소")%>">
+                                                                    <input id="login_id" class="mem_login" type="text" size="33" name="login_id" onclick="onClick_id();" value="<%=(cookie_id.length()>0?cookie_id:"아이디@메일주소")%>">
                                                                   </td>
                                                                 <td width="160" rowspan="2"><input type="image" src="/images/mem_join/btn_login.gif" width="59" height="47" border="0"></a></td>
                                                               </tr>
@@ -53,7 +53,7 @@
                                                               <tr>
                                                                 <td width="116" align="right" style="padding-right:10px;">&nbsp;</td>
                                                                 <td width="376" colspan="2">
-                                                                    <input type="checkbox" name="id_cookie" value="Y"/>
+                                                                    <input type="checkbox" name="id_cookie" value="Y"<%=(cookie_id.length()>0?" checked":"")%>/>
                                                                     아이디 기억하기</td>
                                                               </tr>
                                                             </table></td>

@@ -22,11 +22,12 @@
 			return;
 		}
 
+		/*
 		if($('#auth_yn').val() != 'Y') {
 			alert('휴대폰 인증을 하지 않았습니다.');
 			return;
 		}
-
+		*/
 		var frm = document.joinFrm;
 		frm.action="/member/join_member_form.jsp";
 		frm.submit();
@@ -159,7 +160,7 @@
                                                         <tr>
                                                           <td>&nbsp;</td>
                                                         </tr>
-                                                        <tr>
+                                                        <!--tr>
                                                           <td><img src="/images/mem_join/img_handphone_title.gif" width="350" height="50" border="0"></td>
                                                         </tr>
                                                         <tr>
@@ -199,14 +200,15 @@
                                                                     
                                                                   </table></td>
                                                               </tr>
-                                                              </form>
+                                                              
                                                             </table></td>
-                                                        </tr>
+                                                        </tr-->
+                                                        </form>
                                                         <tr>
                                                           <td align="center" style="padding-top:30px;padding-bottom:30px;"><table border="0" cellpadding="0" cellspacing="0" width="60%">
                                                               <tr>
                                                                 <td width="30%" align="center"><a href="javascript:member_join();"><img src="/images/mem_join/btn_join_mem.gif" width="130" height="39" border="0"></a></td>
-                                                                <td width="30%" align="center"><img src="/images/mem_join/btn_join_cancel.gif" width="130" height="39" border="0"></td>
+                                                                <td width="30%" align="center"><a href="javascript:history.go(-1);"><img src="/images/mem_join/btn_join_cancel.gif" width="130" height="39" border="0"></td>
                                                               </tr>
                                                             </table></td>
                                                         </tr>

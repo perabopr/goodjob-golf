@@ -29,6 +29,8 @@
 	List<CondoRoomDto> roomList = cdDao.getCondoRoomSelect(condo_seq);
 	
 	String img_dir = Config.get("reserve_img");
+	
+	String now_date = Utils.getDate("yyyy-MM-dd");
 %>
 <script language="javascript" type="text/javascript">
 
@@ -78,13 +80,37 @@
 	}
 
 	$(function() {
-		$("#in_date").datepicker({dateFormat:'yy-mm-dd'});
+		$( "#in_date" ).datepicker({
+			dateFormat:'yy-mm-dd',
+			onSelect : function(dateText, inst){
+				
+				var nowDate = ("<%=now_date%>").replace('-','').replace('-','');
+				var arrDate = dateText.split("-");
+				arrDate = arrDate[0] + arrDate[1] + arrDate[2];
+				if(nowDate > arrDate){
+					alert("오늘보다 이전날짜를 선택할 수 없습니다.");
+					$( "#in_date" ).val("<%=now_date%>");
+					return;
+				}
+			}
+		});
 	});
 
 	$(function() {
-		$("#out_date").datepicker({dateFormat:'yy-mm-dd'});
+		$( "#out_date" ).datepicker({
+			dateFormat:'yy-mm-dd',
+			onSelect : function(dateText, inst){
+				var nowDate = ("<%=now_date%>").replace('-','').replace('-','');
+				var arrDate = dateText.split("-");
+				arrDate = arrDate[0] + arrDate[1] + arrDate[2];
+				if(nowDate > arrDate){
+					alert("오늘보다 이전날짜를 선택할 수 없습니다.");
+					$( "#out_date" ).val("<%=now_date%>");
+					return;
+				}
+			}
+		});
 	});
-
 	
 	function DisplayMenu(index) {
         for (i=1; i<=4; i++)
@@ -250,7 +276,7 @@
 						
 						//if(roomDto.getReserve_room_seq()==0){
 		%>
-                                      <input type="radio" id="condoroom_seq" name="condoroom_seq" value="<%=roomDto.getCondoroom_seq()%>"><%=roomDto.getRoomtype()%> (1박 <%=Utils.numberFormat(roomDto.getPrice_s3())%>원)<br>
+                                      <input type="radio" id="condoroom_seq" name="condoroom_seq" value="<%=roomDto.getCondoroom_seq()%>"><%=roomDto.getRoomtype()%> (1박  주중 : <%=Utils.numberFormat(roomDto.getPrice_s1())%>원 / 주말 : <%=Utils.numberFormat(roomDto.getPrice_s2())%>원)<br>
                                       <input type="hidden" name="roomtype" value="<%=roomDto.getRoomtype()%>"/>
 		<%
 						//}

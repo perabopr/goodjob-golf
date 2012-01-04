@@ -54,7 +54,8 @@ List<CondoDto> arrCondo = cDao.getCondoSelect("");
         <td bgcolor="#e6e7e8" align="center" width="237"><span class=list_title>주중가</span></td>
         <td align="center" bgcolor="#E6E7E8" width="260"><span class=list_title>주말가</span></td>
         -->
-        <td align="center" bgcolor="#E6E7E8" width="268"></td>
+	    <td width="259" align="center" bgcolor="#E6E7E8"><span class=list_title>위약처리규정입력 및 수정</span></td>
+        <td align="center" bgcolor="#E6E7E8" width="268"><span class=list_title>콘도수정</span></td>
       </tr>
 <%
 	for(int i = 0; i < arrCondo.size(); i++){
@@ -67,6 +68,9 @@ List<CondoDto> arrCondo = cDao.getCondoSelect("");
         <td align="center" bgcolor="white">100,000원</td>
         <td align="center" bgcolor="white" span class=red>80,000원</td>
          -->
+         <td align="center" bgcolor="white">
+			<a href="condo_rule_reg.jsp?condoSeq=<%= arrCondo.get(i).getCondo_seq()%>""><img align="absmiddle" src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a>
+		</td>
         <td align="center" bgcolor="white"><a href="condo_reg.jsp?condoSeq=<%= arrCondo.get(i).getCondo_seq() %>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></td>
       </tr>
 <%

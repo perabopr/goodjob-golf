@@ -47,6 +47,7 @@
 	cDto.setCondo_info(fileUpload.getParameter("content1"));
 	cDto.setDetail_info(fileUpload.getParameter("content2"));
 	cDto.setWay_map(fileUpload.getParameter("content3"));
+	cDto.setUse_rule(fileUpload.getParameter("content4"));
 	
 	CondoDao cDao = new CondoDao();
 	if(idSeq > 0){//수정

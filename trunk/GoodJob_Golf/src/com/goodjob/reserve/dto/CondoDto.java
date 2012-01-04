@@ -18,7 +18,7 @@ public class CondoDto {
 	private String condo_info = "";
 	private String detail_info = "";
 	private String way_map = "";
-	private String edit_rule = "";
+	private String use_rule = "";
 	private int price_n1;
 	private int price_n2;
 	private int price_n3;
@@ -128,11 +128,11 @@ public class CondoDto {
 	public void setWay_map(String way_map) {
 		this.way_map = way_map;
 	}
-	public String getEdit_rule() {
-		return edit_rule;
+	public String getUse_rule() {
+		return use_rule;
 	}
-	public void setEdit_rule(String edit_rule) {
-		this.edit_rule = edit_rule;
+	public void setUse_rule(String use_rule) {
+		this.use_rule = use_rule;
 	}
 	public int getPrice_n1() {
 		return price_n1;

@@ -35,6 +35,7 @@
 	
 	String strPage = paging.getPaging(totalCount, false);
 	
+	//String queryString = "npage=&join_seq=&region=";
 %>
 <html>
 <head>
@@ -74,7 +75,7 @@ function go_view(val){
   <tr>
     <td>&nbsp;</td>
   </tr>
-<form name="frm" method="post">
+<form name="frm" method="get">
 <input type="hidden" name="npage" value="<%=npage%>"/>
 <input type="hidden" name="join_seq" value=""/>
   <tr>

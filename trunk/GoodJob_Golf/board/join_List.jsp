@@ -77,7 +77,7 @@ function go_view(val){
                                             <tr>
                                               <td bgcolor="#D1D3D4" height="33" class="sub_title" style="padding-left:15px;padding-top:4px">JOIN 커뮤니티</td>
                                             </tr>
-                                            <form name="frm" method="post">
+                                            <form name="frm" method="get">
 											<input type="hidden" name="npage" value="<%=npage%>"/>
 											<input type="hidden" name="join_seq" value=""/>
                                             <tr>

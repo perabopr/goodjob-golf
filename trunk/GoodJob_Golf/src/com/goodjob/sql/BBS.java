@@ -117,6 +117,17 @@ public class BBS {
 			"date_format(a.reg_dt,''%Y-%m-%d'') reg_dt " +
 			"from tb_partnership a {0} limit ? , ?  ";
 	
+	public static final String partnership = "select a.seq, " +
+			"a.name, " +
+			"a.email, " +
+			"a.subject, " +
+			"a.mobile, " +
+			"a.content, " +
+			"a.filename, " +
+			"a.writeip, " +
+			"date_format(a.reg_dt,''%Y-%m-%d'') reg_dt " +
+			"from tb_partnership a where seq = ?  ";
+	
 	public static final String partnership_insert = "insert into tb_partnership( name,email,subject,mobile,content,filename,writeip,reg_dt ) "+
 		" values( ?, ?, ?, ?, ?, ?, ?, now() ) ";
 	

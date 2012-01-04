@@ -1,4 +1,4 @@
-package com.goodjob.product.dto;
+package com.goodjob.reserve.dto;
 
 import java.io.Serializable;
 

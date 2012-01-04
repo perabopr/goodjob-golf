@@ -287,8 +287,19 @@ public class RESERVE {
 	" ,a.price_s1  " +
 	" ,a.price_s2  " +
 	" ,a.price_s3  " +
-	" FROM tb_condo_room a left " +
+	" FROM tb_condo_room a " +
 	" WHERE a.condo_seq = ?  ORDER BY a.condoroom_seq ";
+	
+	public static final String condo_promise = "SELECT " +
+			" A.promise1_type,A.promise1" +
+			",A.promise2_type,A.promise2" +
+			",A.promise3_type,A.promise3" + 
+			",A.promise4_type,A.promise4" +
+			",A.promise5_type,A.promise5" +
+			",IFNULL(A.cancelrule,'') 'cancelrule'" +
+			",B.use_rule "+
+		"FROM tb_condo_promise A INNER JOIN tb_condo B on(A.condo_seq= B.condo_seq) " +
+		"WHERE A.condo_seq = ?";
 	
 	public static final String condo_reserve_insert = 
 	"insert into tb_condo_reserve(menu_seq,condo_seq,reserve_day,reserve_name, "+

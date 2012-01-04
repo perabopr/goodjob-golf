@@ -716,6 +716,31 @@ public class BoardDao {
 		return list;
 	}
 	
+	public PartnershipDto getPartnership(int seq){
+		
+		Connection conn = null;
+		PartnershipDto pDto = null;
+		try {
+			
+			List<Object> params = new ArrayList<Object>();
+			params.add(seq);
+			
+			conn = DBManager.getConnection();
+			
+			ResultSetHandler rsh = new BeanHandler(PartnershipDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			pDto = (PartnershipDto)qr.query(conn , BBS.partnership, rsh , params.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return pDto;
+	}
+
 	public void setInsertPartnership(PartnershipDto pDto){
 		
 		Connection conn = null;

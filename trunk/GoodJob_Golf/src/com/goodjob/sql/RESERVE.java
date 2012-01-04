@@ -287,9 +287,8 @@ public class RESERVE {
 	" ,a.price_s1  " +
 	" ,a.price_s2  " +
 	" ,a.price_s3  " +
-	" ,ifnull(b.condoroom_seq,0)  reserve_room_seq " +
-	" FROM tb_condo_room a left outer join tb_condo_reserve b on (a.condoroom_seq=b.condoroom_seq)   " +
-	" WHERE a.condo_seq = ?  ORDER BY a.condoroom_seq";
+	" FROM tb_condo_room a left " +
+	" WHERE a.condo_seq = ?  ORDER BY a.condoroom_seq ";
 	
 	public static final String condo_reserve_insert = 
 	"insert into tb_condo_reserve(menu_seq,condo_seq,reserve_day,reserve_name, "+

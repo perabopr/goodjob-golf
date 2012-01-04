@@ -65,7 +65,8 @@ ProductDto prdtDto = new ProductDto();
 prdtDto.setMenu_seq(Integer.parseInt(menuSeq));
 prdtDto.setGolflink_seq(Integer.parseInt(glSeq));
 prdtDto.setProduct_year(Integer.toString(currYear));
-prdtDto.setProduct_month(Integer.toString(currMonth+1));
+String selectMonth = "0" + Integer.toString(currMonth+1);
+prdtDto.setProduct_month(selectMonth.substring(selectMonth.length()-2));
 productDao prdtDao = new productDao();
 List<ProductDto> arrPrdt = prdtDao.getProductSelect(prdtDto);
 %>
@@ -136,7 +137,6 @@ function StatusModify(sDate, status){
 function selSetting(sDate){	
 	var splitDate = sDate.split('/');
 	selDate = splitDate[0] + "/" + LenChk(splitDate[1], 2) + "/" + LenChk(splitDate[2], 2);
-	
 	var prdtseq = $("#date"+sDate.replace('/','').replace('/','')).val();
 	//상품일련번호.
 	if(prdtseq == ""){
@@ -145,10 +145,10 @@ function selSetting(sDate){
 		  cache: false,
 		  async: false,
 		  success: function(html){
+			alert(html);
 			var evalData = eval("("+html+")");
 			if(evalData.Product.length == 1){
 				$("#prdtseq").val(evalData.Product[0].a);
-				
 			}
 		  }
 		});
@@ -242,6 +242,7 @@ function saveTime(){
 			blVali = true;
 		} 
 	}
+
 	if(blVali){
 		frm2.submit();
 	}else{
@@ -354,19 +355,19 @@ String.prototype.trim = function(){
             <%
             	}else{
             		prdtSeq_day = Integer.toString(prdtdto_day.getProduct_seq());
-            		if (prdtdto_day.getView_yn().startsWith("N")){
+            		if (prdtdto_day.getView_yn().equals("N")){
             %>
                        	<span class=regist_no>예약불가</span>
             <%
-                    }else if (prdtdto_day.getView_yn().startsWith("Y")){
+                    }else if (prdtdto_day.getView_yn().equals("Y")){
             %>
                        	<span class=regist_yes>예약가능</span>
            	<%
-                    }else if (prdtdto_day.getView_yn().startsWith("1")){
+                    }else if (prdtdto_day.getView_yn().equals("1")){
             %>
                        	<span class=regist_yes>예약마감</span>
            	<%
-                    }else if (prdtdto_day.getView_yn().startsWith("2")){
+                    }else if (prdtdto_day.getView_yn().equals("2")){
             %>
                        	<span class=regist_yes>휴장</span>
             <%            
@@ -374,18 +375,23 @@ String.prototype.trim = function(){
             	}
             %>
             <%
-            	
+            	String ttYear = Integer.toString(currYear);
+				String ttMonth = "0" + Integer.toString(currMonth+1);
+				ttMonth = ttMonth.substring(ttMonth.length()-2);
+				String ttDay = "0" + Integer.toString(dispDay);
+				ttDay = ttDay.substring(ttDay.length()-2);
+				String ttDate = ttYear + ttMonth + ttDay;
             %>
-            	<input type="hidden" id="date<%=currYear%><%=(currMonth+1)%><%=dispDay%>" value="<%=prdtSeq_day%>" />
+            	<input type="hidden" id="date<%=ttDate%>" value="<%=prdtSeq_day%>" />
             </td>
            	</tr>
            	<tr>
             <td align="center" colspan="2">
             	<table border="0" width="97%" cellpadding="0" cellspacing="0">
 	            <tr>
-	            <td align="center" height="20"><img align="absmiddle" src="../../images/inc/btn_day_close.gif" width="28" height="16" border="0" style="cursor:pointer;" onclick="StatusModify('<%=currYear + "/" + (currMonth+1) + "/" + dispDay%>', '1')"></td>
-	            <td align="center"><img align="absmiddle" src="../../images/inc/btn_day_rest.gif" width="28" height="16" border="0" style="cursor:pointer;" onclick="StatusModify('<%=currYear + "/" + (currMonth+1) + "/" + dispDay%>', '2')"></td>
-	            <td align="center"><img src="../../images/inc/btn_edit3.gif" width="28" height="16" border="0" align="absmiddle" onclick="selSetting('<%=currYear + "/" + (currMonth+1) + "/" + dispDay%>');" style="cursor:pointer;"></td>
+	            <td align="center" height="20"><img align="absmiddle" src="../../images/inc/btn_day_close.gif" width="28" height="16" border="0" style="cursor:pointer;" onclick="StatusModify('<%=ttYear + "/" + ttMonth + "/" + ttDay%>', '1')"></td>
+	            <td align="center"><img align="absmiddle" src="../../images/inc/btn_day_rest.gif" width="28" height="16" border="0" style="cursor:pointer;" onclick="StatusModify('<%=ttYear + "/" + ttMonth + "/" + ttDay%>', '2')"></td>
+	            <td align="center"><img src="../../images/inc/btn_edit3.gif" width="28" height="16" border="0" align="absmiddle" onclick="selSetting('<%=ttYear + "/" + ttMonth + "/" + ttDay%>');" style="cursor:pointer;"></td>
 	            </tr>
 	            </table>
 	        </td>

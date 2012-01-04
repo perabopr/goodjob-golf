@@ -75,8 +75,10 @@ if(request.getParameterValues("pdsubseq") != null && request.getParameterValues(
 }else{
 	
 }
+
 out.print("<script type='text/javascript'>");
 out.print("alert('등록했습니다.');");
 out.print("location.href='pop_real_time_reg.jsp?menuseq=" + menuSeq + "&glseq=" + glSeq + "&month=" + backMonth + "&year=" + backYear + "&action=0'");
 out.print("</script>");
+
 %>

@@ -189,15 +189,15 @@ public class GolfLinkDao {
 	public void setGolfReserve(GolfLinkReserveDto glrDto){
 		int idSeq = 0;
 		Connection conn = null;
-		List<ProductSubDto> list = null;
+		List<ProductReserveDto> list = null;
 		try{
 			conn = DBManager.getConnection();
 			ArrayList<Object> bind = new ArrayList<Object>();
 			bind.add(glrDto.getProductsub_seq());
 			
 			QueryRunner qr = new QueryRunner();
-			ResultSetHandler rsh = new BeanListHandler(ProductDto.class);
-			list = (List<ProductSubDto>)qr.query(conn , RESERVE.getProductReserve2, rsh, bind.toArray());
+			ResultSetHandler rsh = new BeanListHandler(ProductReserveDto.class);
+			list = (List<ProductReserveDto>)qr.query(conn , RESERVE.getProductReserve2, rsh, bind.toArray());
 			
 			// 상품이 예약가능할때만...
 			if(list.size() > 0 && list.get(0).getProduct_status().equals("0")){

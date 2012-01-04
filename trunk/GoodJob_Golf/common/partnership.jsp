@@ -24,14 +24,8 @@
 			return;
 		}
 
-		if(!$('#email').val() || $('#email_domain').val()) {
+		if(!$('#email').val() || !$('#email_domain').val()) {
 			alert('이메일을  입력하시기 바랍니다.');
-			return;
-		}
-		
-		if(!$('#content').val()) {
-			alert('내용을 입력하시기 바랍니다.');
-			$('#content').focus();
 			return;
 		}
 		
@@ -52,8 +46,14 @@
 			$('#mobile3').focus();
 			return;
 		}
+
+   		if(!$('#content').val()) {
+			alert('내용을 입력하시기 바랍니다.');
+			$('#content').focus();
+			return;
+		}
  	      
-		var frm = document.joinForm;
+		var frm = document.frm;
 		frm.target =  "ifr_hidden"; 
 		frm.action = "partnership_reg.jsp";
 		frm.submit();
@@ -61,12 +61,12 @@
 	
 	function domainChange(val){
 		if(val == 'self'){
-			document.getElementById("mem_domain").readOnly = false;
-			$('#mem_domain').val("");
+			document.getElementById("email_domain").readOnly = false;
+			$('#email_domain').val("");
 		}
 		else{
-			document.getElementById("mem_domain").readOnly = true;
-			$('#mem_domain').val(val);
+			document.getElementById("email_domain").readOnly = true;
+			$('#email_domain').val(val);
 		}
 	}
 
@@ -106,6 +106,7 @@
                                                         <tr>
                                                           <td bgcolor="#AED247" colspan="2" width="593"></td>
                                                         </tr>
+<form name="frm" method="post" enctype="multipart/form-data">
                                                         <tr>
                                                           <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject width="162">제목</td>
                                                           <td bgcolor="white" style="padding-left:10px;" width="410"><input class="input_01" type="text" size="60" id="subject" name="subject"></td>
@@ -118,7 +119,7 @@
                                                           <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">E-Mail</td>
                                                           <td bgcolor="white" style="padding-left:10px;"><input class="input_01" type="text" size="15" id="email" name="email">
                                                             @
-                                                            <input class="input_01" type="text" size="15" id="email_domain" name="email_domain">
+                                                            <input class="input_01" type="text" size="15" id="email_domain" name="email_domain" readonly />
                                                             <select id="domain_sel" name="domain_sel" size="1" onchange="domainChange(this.value);">
                                                                <option value="" selected>선택하세요</option>
                                                                <option value="naver.com">naver.com</option>
@@ -147,9 +148,9 @@
                                                                <option value="019">019</option>
                                                              </select>
                                                              -
-                                                             <input id="mobile2" class="mem_input" type="text" size="8" name="mobile2" maxlength="4">
+                                                             <input id="mobile2" class="mem_input" type="text" size="8" name="mobile2" maxlength="4" onkeyup="onlyNumber2(this.form.mobile2)">
                                                              -
-                                                             <input id="mobile3" class="mem_input" type="text" size="8" name="mobile3" maxlength="4"></td>
+                                                             <input id="mobile3" class="mem_input" type="text" size="8" name="mobile3" maxlength="4" onkeyup="onlyNumber2(this.form.mobile3)"></td>
                                                         </tr>
                                                         <tr>
                                                           <td bgcolor="#F1F1F1" align="right" style="padding-right:10px;" class=mem_subject>전달사항</td>
@@ -171,6 +172,7 @@
                                                 </table></td>
                                             </tr>
                                           </table></td>
+</form>
                                       </tr>
                                     </table></td>
                                 </tr>

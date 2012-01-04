@@ -38,6 +38,7 @@ if(condoSeq.length() > 0){
 <script src="../js/jquery.ui.widget.js"></script>
 <script src="../js/jquery.ui.datepicker.js"></script>
 <title></title>
+<script type="text/javascript" src="/js/highgardenEditor.js"></script>
 <script language="JavaScript"> 
 <!-- 
 function NewWindow(mypage, myname, w, h, scroll) { 
@@ -276,11 +277,11 @@ function condoReg(){
     <td align="center"><table border="0" width="899" cellpadding="2" cellspacing="1" bgcolor="#CCCCCC">
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;" width="162"><span class=list_title>콘도안내</span></td>
-          <td bgcolor="white" style="padding-left:10px;" width="710"><textarea class="box03" rows="6" cols="113" id="content1" name="content1"><%= vcDto.getCondo_info()%></textarea></td>
+          <td bgcolor="white" style="padding-left:10px;" width="710"><textarea class="box03" rows="10" cols="113" id="content1" name="content1" title="higheditor_simple"><%= vcDto.getCondo_info()%></textarea></td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>상세정보</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="6" cols="113" id="content2" name="content2"><%= vcDto.getDetail_info()%></textarea></td>
+          <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="10" cols="113" id="content2" name="content2" title="higheditor_simple"><%= vcDto.getDetail_info()%></textarea></td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>사진갤러리</span></td>
@@ -341,8 +342,14 @@ function condoReg(){
           </td>
         </tr>
         <tr>
+          <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이용약관</span></td>
+          <td bgcolor="white" style="padding-left:10px;">
+          	<textarea class="box03" rows="10" cols="113" id="content3" name="content3" title="higheditor_simple"><%= vcDto.getUse_rule() %></textarea>
+          </td>
+        </tr>
+        <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>오시는길</span></td>
-          <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="8" cols="113" id="content3" name="content3"><%= vcDto.getWay_map()%></textarea></td>
+          <td bgcolor="white" style="padding-left:10px;"><textarea class="box03" rows="10" cols="113" id="content4" name="content4" title="higheditor_simple"><%= vcDto.getWay_map()%></textarea></td>
         </tr>
       </table></td>
   </tr>

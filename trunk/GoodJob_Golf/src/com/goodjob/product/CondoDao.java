@@ -19,6 +19,7 @@ import com.goodjob.db.DBManager;
 import com.goodjob.sql.PRODUCT;
 import com.goodjob.product.dto.CondoDto;
 import com.goodjob.product.dto.CondoGalleryDto;
+import com.goodjob.product.dto.CondoPromiseDto;
 import com.goodjob.product.dto.CondoRoomDto;
 
 public class CondoDao {
@@ -73,8 +74,8 @@ public class CondoDao {
 			bind.add(cDto.getReserve_end());
 			bind.add(cDto.getCondo_info());
 			bind.add(cDto.getDetail_info());
+			bind.add(cDto.getUse_rule());
 			bind.add(cDto.getWay_map());
-			bind.add(cDto.getEdit_rule());
 			
 			QueryRunner qr = new QueryRunner();
 			
@@ -117,8 +118,8 @@ public class CondoDao {
 			bind.add(cDto.getReserve_end());
 			bind.add(cDto.getCondo_info());
 			bind.add(cDto.getDetail_info());
+			bind.add(cDto.getUse_rule());
 			bind.add(cDto.getWay_map());
-			bind.add(cDto.getEdit_rule());
 			bind.add(cDto.getCondo_seq());
 			
 			QueryRunner qr = new QueryRunner();
@@ -340,6 +341,121 @@ public class CondoDao {
 			
 			qr.update(conn, String.format(PRODUCT.condo_room_delete, strWhere), bind.toArray());
 		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}		
+	}
+	
+	/**
+	 * 콘도 위약처리규정 - 가져오기.
+	 * @param cdSeq
+	 * @return
+	 */
+	public List<CondoPromiseDto> getCondoPromiseSelect(int cdSeq){
+		List<CondoPromiseDto> list = null;
+		Connection conn = null;
+		
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(cdSeq);
+			
+			ResultSetHandler rsh = new BeanListHandler(CondoPromiseDto.class);
+			
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<CondoPromiseDto>)qr.query(conn, PRODUCT.condo_promise_select, rsh, bind.toArray());	
+		}catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return list;
+	}
+	
+	/**
+	 * 콘도위약 - 추가
+	 * @param glpDto
+	 */
+	public void setCondoPromiseInsert(CondoPromiseDto cdpDto){
+		Connection conn = null;
+		
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(cdpDto.getCondo_seq());
+			bind.add(cdpDto.getPromise1_type());
+			bind.add(cdpDto.getPromise1());
+			bind.add(cdpDto.getPromise2_type());
+			bind.add(cdpDto.getPromise2());
+			bind.add(cdpDto.getPromise3_type());
+			bind.add(cdpDto.getPromise3());
+			bind.add(cdpDto.getPromise4_type());
+			bind.add(cdpDto.getPromise4());
+			bind.add(cdpDto.getPromise5_type());
+			bind.add(cdpDto.getPromise5());
+			bind.add(cdpDto.getCancelrule());
+			
+			QueryRunner qr = new QueryRunner();
+			
+			qr.update(conn, PRODUCT.condo_promise_insert, bind.toArray());
+		}catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
+	
+	/**
+	 * 콘도위약 - 수정
+	 * @param glpDto
+	 */
+	public void setCondoPromiseUpdate(CondoPromiseDto cdpDto){
+		Connection conn = null;
+		
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(cdpDto.getPromise1_type());
+			bind.add(cdpDto.getPromise1());
+			bind.add(cdpDto.getPromise2_type());
+			bind.add(cdpDto.getPromise2());
+			bind.add(cdpDto.getPromise3_type());
+			bind.add(cdpDto.getPromise3());
+			bind.add(cdpDto.getPromise4_type());
+			bind.add(cdpDto.getPromise4());
+			bind.add(cdpDto.getPromise5_type());
+			bind.add(cdpDto.getPromise5());
+			bind.add(cdpDto.getCondo_seq());
+			
+			QueryRunner qr = new QueryRunner();
+			
+			qr.update(conn, PRODUCT.condo_promise_update, bind.toArray());
+		}catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
+	
+	/**
+	 * 콘도위약 - 삭제
+	 * @param idSeq
+	 */
+	public void setCondoPromiseDelete(int idSeq){
+		Connection conn = null;
+		
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(idSeq);
+			
+			QueryRunner qr = new QueryRunner();
+			
+			qr.update(conn, PRODUCT.condo_promise_delete, bind.toArray());
+		}catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			DbUtils.closeQuietly(conn);

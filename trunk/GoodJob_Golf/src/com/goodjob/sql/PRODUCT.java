@@ -633,8 +633,8 @@ public class PRODUCT {
 				",a.reserve_end" +
 				",a.condo_info" +
 				",a.detail_info" +
-				",a.way_map" +
-				",a.edit_rule " +
+				",a.use_rule " +
+				",a.way_map " +
 			"FROM tb_condo a " +
 			"INNER JOIN tb_region b on(a.region_seq = b.region_seq) " +
 			"WHERE 1=1 %s";
@@ -654,8 +654,8 @@ public class PRODUCT {
 				",reserve_end" +
 				",condo_info" +
 				",detail_info" +
-				",way_map" +
-				",edit_rule) " +
+				",use_rule" +
+				",way_map) " +
 			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public static final String condo_update
 		=	"UPDATE tb_condo " +
@@ -675,7 +675,7 @@ public class PRODUCT {
 				",condo_info = ?" +
 				",detail_info = ?" +
 				",way_map = ?" +
-				",edit_rule = ? " +
+				",use_rule = ? " +
 			"WHERE condo_seq = ?";
 	public static final String condo_delete
 		=	"DELETE FROM tb_condo " +
@@ -745,4 +745,55 @@ public class PRODUCT {
 		=	"DELETE FROM tb_condo_room " +
 			"WHERE condo_seq = ? " +
 			"AND condoroom_seq NOT IN (%s)";
+
+	/*----------------------------------------------------------------- tb_condo_promise*/
+	public static final String condo_promise_select
+		=	"SELECT " +
+				" condo_seq" +
+				",promise1_type" + 
+				",promise1" +
+				",promise2_type" +
+				",promise2" +
+				",promise3_type" +
+				",promise3" + 
+				",promise4_type" +
+				",promise4" + 
+				",promise5_type" +
+				",promise5" +
+				",cancelrule " +
+			"FROM tb_condo_promise " +
+			"WHERE condo_seq = ?";
+	public static final String condo_promise_insert
+		=	"INSERT INTO tb_condo_promise(" +
+			" condo_seq" +
+			",promise1_type" +
+			",promise1" +
+			",promise2_type" +
+			",promise2" +
+			",promise3_type" +
+			",promise3" +
+			",promise4_type" +
+			",promise4" +
+			",promise5_type" +
+			",promise5" +
+			",cancelrule" +
+			")VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+	public static final String condo_promise_update
+		=	"UPDATE tb_condo_promise" +
+				"SET " +
+				" promise1_type = ?" +
+				",promise1 = ?" +
+				",promise2_type = ?" +
+				",promise2 = ?" +
+				",promise3_type = ?" +
+				",promise3 = ?" +
+				",promise4_type = ?" +
+				",promise4 = ?" +
+				",promise5_type = ?" +
+				",promise5 = ?" +
+				",cancelrule = ? " +
+			"WHERE condo_seq = ?";
+	public static final String condo_promise_delete
+		=	"DELETE FROM tb_condo_promise " +	
+			"WHERE condo_seq = ?";
 }

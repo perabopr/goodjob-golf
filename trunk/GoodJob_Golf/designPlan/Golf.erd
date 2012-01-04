@@ -2594,7 +2594,12 @@ Y : 예약가능&#x0D;
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>condo_info</columnName>
           <logicalName>콘도_안내</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../net.java.amateras.db.visual.model.TableModel/columns/net.java.amateras.db.visual.model.ColumnModel[3]/columnType"/>
+          <columnType class="net.java.amateras.db.dialect.ColumnType">
+            <name>TEXT</name>
+            <logicalName>String</logicalName>
+            <supportSize>false</supportSize>
+            <type>12</type>
+          </columnType>
           <size>50</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
@@ -2605,7 +2610,7 @@ Y : 예약가능&#x0D;
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>detail_info</columnName>
           <logicalName>상세_정보</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../net.java.amateras.db.visual.model.TableModel/columns/net.java.amateras.db.visual.model.ColumnModel[3]/columnType"/>
+          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[14]/columnType"/>
           <size>50</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
@@ -2616,7 +2621,7 @@ Y : 예약가능&#x0D;
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>way_map</columnName>
           <logicalName>오시는길</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../net.java.amateras.db.visual.model.TableModel/columns/net.java.amateras.db.visual.model.ColumnModel[3]/columnType"/>
+          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[14]/columnType"/>
           <size>50</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
@@ -2625,14 +2630,9 @@ Y : 예약가능&#x0D;
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>edit_rule</columnName>
-          <logicalName>예약취소_변경_환불규정</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType">
-            <name>TEXT</name>
-            <logicalName>String</logicalName>
-            <supportSize>false</supportSize>
-            <type>12</type>
-          </columnType>
+          <columnName>use_rule</columnName>
+          <logicalName>이용약관</logicalName>
+          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[14]/columnType"/>
           <size>10</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>

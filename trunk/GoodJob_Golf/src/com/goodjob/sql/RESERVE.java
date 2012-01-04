@@ -258,7 +258,7 @@ public class RESERVE {
 	" a.condo_info, " +
 	" a.detail_info, " +
 	" a.way_map, " +
-	" a.edit_rule, " +
+	" a.use_rule, " +
 	" min(b.price_n1) price_n1 , " +
 	" min(b.price_n2) price_n2 ,  " +
 	" min(b.price_n3) price_n3 ,   " +

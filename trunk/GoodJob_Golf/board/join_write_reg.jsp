@@ -58,8 +58,12 @@
 	if("modify".equals(mode)){
 		
 		dao.setJoinUpdate(jDto);
-		
-		response.sendRedirect("./join_view.jsp?join_seq="+join_seq);
+%>
+<script language="javascript" type="text/javascript">
+alert("글이 수정 되었습니다.");
+top.document.viewFrm.submit();
+</script>
+<%
 	}
 	else{
 		

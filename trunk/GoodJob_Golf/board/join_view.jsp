@@ -90,7 +90,7 @@
 	}
 
 	function go_list(){
-		var frm = document.listFrm;
+		var frm = document.wFrm;
 		frm.action = "join_List.jsp";
 		frm.submit();
 	}
@@ -111,6 +111,11 @@
 				}
 		}});
 	}
+
+	function modify(join_seq){
+		$('#join_seq').val(join_seq);
+		document.wFrm.submit();
+	}
 </script>
 					<!--############### 중앙 컨텐츠 영역 #################-->
 					<table border="0" cellpadding="0" cellspacing="0" width="751">
@@ -123,7 +128,9 @@
                                             <tr>
                                               <td align="right" class="location" height="30" width="95%"><a href="/index.html">HOME</a> &gt; <span class=location_b>JOIN 커뮤니티</span></td>
                                             </tr>
-<form name="listFrm" method="post">
+<form name="wFrm" method="post" action="join_write.jsp">
+<input type="hidden" id="join_seq" name="join_seq" value=""/>
+<input type="hidden" id="mode" name="mode" value="modify"/>
 <input type="hidden" name="npage" value="<%=npage%>"/>
 <input type="hidden" name="keyword" value="<%=keyword%>"/>
 <input type="hidden" name="region" value="<%=region%>"/>
@@ -255,7 +262,7 @@
                                                           <td height="50" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                               <tr>
                                                               	<%if(mem_id.equals(jDto.getMem_id())){%>
-               													<td width="88"><a href="join_write.jsp?mode=modify&join_seq=<%=jDto.getJoin_seq()%>"><img src="../../images/board/btn_edit.gif" width="71" height="24" border="0"></a></td>
+               													<td width="88"><a href="javascript:modify(<%=jDto.getJoin_seq()%>);"><img src="../../images/board/btn_edit.gif" width="71" height="24" border="0"></a></td>
                                                                 <td width="480"><a href="javascript:join_end(<%=jDto.getJoin_seq()%>);"><img src="/_admin/images/board/btn_end.gif" width="71" height="24" border="0"></a></a></td>
                                                                 <td width="99" align="right"><a href="javascript:go_list();"><img src="../../images/board/btn_list.gif" width="71" height="24" border="0" alt="목록"></a></td>
 												                <%}else{%>

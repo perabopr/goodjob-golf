@@ -11,6 +11,11 @@
 	 
 	String join_seq = StringUtils.trimToEmpty(request.getParameter("join_seq"));
 	String mode = StringUtils.trimToEmpty(request.getParameter("mode"));
+	String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
+	String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
+	String region = StringUtils.trimToEmpty(request.getParameter("region"));
+	String sex = StringUtils.trimToEmpty(request.getParameter("sex"));
+	String age = StringUtils.trimToEmpty(request.getParameter("age"));
 	
 	JoinBoardDto jDto = dao.getJoinView(NumberUtils.toInt(join_seq,0));
 	
@@ -108,8 +113,13 @@
 			$('#content').focus();
 			return;
 		}
-		
+		<%if("modify".equals(mode)){%>
+		var frm = document.frm;
+		frm.target =  "ifr_hidden";
+		frm.submit();
+		<%}else{%>
 		document.frm.submit();
+		<%}%>
 	}
 
 	function onlyNumber(loc) {
@@ -137,6 +147,14 @@
                                             <tr>
                                               <td align="right" class="location" height="30" width="95%"><a href="/index.html">HOME</a> &gt; <span class=location_b>JOIN 커뮤니티</span></td>
                                             </tr>
+<form name="viewFrm" method="get" ACTION="join_view.jsp">
+<input type="hidden" id="join_seq" name="join_seq" value="<%=join_seq%>"/>
+<input type="hidden" name="npage" value="<%=npage%>"/>
+<input type="hidden" name="keyword" value="<%=keyword%>"/>
+<input type="hidden" name="region" value="<%=region%>"/>
+<input type="hidden" name="sex" value="<%=sex%>"/>
+<input type="hidden" name="age" value="<%=age%>"/>
+</form>
                                             <tr>
                                               <td bgcolor="#D1D3D4" height="33" class="sub_title" style="padding-left:15px;padding-top:4px">JOIN 커뮤니티</td>
                                             </tr>
@@ -151,7 +169,7 @@
                                                           <td>&nbsp;</td>
                                                         </tr>
 <FORM NAME="frm" METHOD="post" ACTION="join_write_reg.jsp">
-<input type="hidden" id="join_no" name="join_no" value="<%=join_seq%>"/>
+<input type="hidden" id="join_no" name="join_seq" value="<%=join_seq%>"/>
 <input type="hidden" id="mode" name="mode" value="<%=mode%>"/>
                                                         <tr>
                                                           <td><table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -303,7 +321,13 @@
                                                           <td><table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                               <tr>
                                                                 <td width="88"><a href="join_List.jsp"><img src="/images/board/btn_list.gif" width="71" height="24" border="0" alt="목록"></a></td>
-                                                                <td width="480" align="right"><a href="javascript:on_submit();"><img align="absmiddle" src="/images/board/btn_input.gif" width="71" height="24" border="0" alt="등록"></a></td>
+                                                                <td width="480" align="right"><a href="javascript:on_submit();">
+                                                                <%if("modify".equals(mode)){%>
+                                                                <img align="absmiddle" src="/images/board/btn_edit.gif" border="0" alt="수정">
+                                                                <%}else{%>
+                                                                <img align="absmiddle" src="/images/board/btn_input.gif" border="0" alt="등록">
+                                                                <%}%>
+                                                                </a></td>
                                                                 <td width="99" align="right"><a href="javascript:document.frm.reset();"><img src="/images/board/btn_cancel.gif" width="71" height="24" border="0" align="absmiddle"></a></td>
                                                               </tr>
                                                             </table></td>
@@ -325,7 +349,7 @@
                             <td>&nbsp;</td>
                           </tr>
                         </table>
-					
+					<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe> 
 					<!-- 하단  회사 소개 부분  -->
                     <%@ include file="/include/copyright.jsp" %>
                     <!-- 하단  회사 소개 부분  -->

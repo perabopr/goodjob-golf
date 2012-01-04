@@ -12,6 +12,7 @@ import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.goodjob.db.DBManager;
+import com.goodjob.reserve.dto.CondoPromiseDto;
 import com.goodjob.reserve.dto.CondoDto;
 import com.goodjob.reserve.dto.CondoGalleryDto;
 import com.goodjob.reserve.dto.CondoReserveDto;
@@ -125,6 +126,28 @@ public class CondoReserveDao {
 		}
 
 		return list;		
+	}
+	
+	public List<CondoPromiseDto> getCondoPromise(int condoSeq){
+		List<CondoPromiseDto> list = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(condoSeq);
+			ResultSetHandler rsh = new BeanListHandler(CondoPromiseDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<CondoPromiseDto>) qr.query(conn , RESERVE.condo_promise, rsh, bind.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return list;
 	}
 	
 	public void setCondoReserve(CondoReserveDto cdDto){

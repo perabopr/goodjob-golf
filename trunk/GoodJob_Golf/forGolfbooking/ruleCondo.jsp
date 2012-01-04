@@ -24,7 +24,7 @@
 	
 	List<CondoPromiseDto> listPromise = reserveDao.getCondoPromise(NumberUtils.toInt(condo_seq));
 	if(listPromise.size() != 1){
-		out.println("<script>alert('취소 규정이 없습니다.');location.href='reserve.jsp?menu=3'</script>");
+		out.println("<script>alert('취소 규정이 없습니다.');location.href='reserve.jsp?menu=5'</script>");
 		return;
 	}
 %>

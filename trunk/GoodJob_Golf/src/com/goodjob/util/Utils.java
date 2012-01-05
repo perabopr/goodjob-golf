@@ -3,6 +3,8 @@
  */
 package com.goodjob.util;
 
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -123,5 +125,31 @@ public class Utils {
 		Cookie cookie=new Cookie(name,value);		//쿠키 세팅
 		cookie.setMaxAge(60*time);							//쿠키 시간 세팅
 		response.addCookie(cookie);						//실제 쿠키
+	}
+	
+	/**
+	 * 인코딩
+	 * @param str
+	 * @return String
+	 */
+	public static String getEncoder(String str){
+		try{
+			str = URLEncoder.encode(str, "utf-8");
+		}catch(Exception e){}
+
+		return str;
+	}
+
+	/**
+	 * 디코딩
+	 * @param str
+	 * @return String
+	 */
+	public static String getDecoder(String str){
+		try{
+			str = URLDecoder.decode(str, "utf-8");
+		}catch(Exception e){}
+
+		return str;
 	}
 }

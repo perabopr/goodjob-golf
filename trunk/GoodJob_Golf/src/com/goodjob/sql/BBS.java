@@ -114,8 +114,10 @@ public class BBS {
 			"a.content, " +
 			"a.filename, " +
 			"a.writeip, " +
-			"date_format(a.reg_dt,''%Y-%m-%d'') reg_dt " +
+			"date_format(a.reg_dt,''%Y-%m-%d %H:%i'') reg_dt " +
 			"from tb_partnership a {0} limit ? , ?  ";
+	
+	public static final String partnership_total = "select count(*) cnt from tb_partnership a {0}";
 	
 	public static final String partnership = "select a.seq, " +
 			"a.name, " +
@@ -125,7 +127,7 @@ public class BBS {
 			"a.content, " +
 			"a.filename, " +
 			"a.writeip, " +
-			"date_format(a.reg_dt,''%Y-%m-%d'') reg_dt " +
+			"date_format(a.reg_dt,'%Y-%m-%d %H:%i') reg_dt " +
 			"from tb_partnership a where seq = ?  ";
 	
 	public static final String partnership_insert = "insert into tb_partnership( name,email,subject,mobile,content,filename,writeip,reg_dt ) "+

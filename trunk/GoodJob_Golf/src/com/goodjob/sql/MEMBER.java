@@ -85,4 +85,6 @@ public class MEMBER {
 	
 	//인증
 	public static final String auth = "insert into tb_email_auth(email,auth_no,send_date) values (? , ? , UNIX_TIMESTAMP(now()))";
+	
+	public static final String auth_update = "update tb_email_auth set use_yn='Y' where email = ? ";
 }

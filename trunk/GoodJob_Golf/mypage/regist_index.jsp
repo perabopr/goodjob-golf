@@ -6,6 +6,7 @@
 <%@page import="com.goodjob.mypage.*"%>
 <%@page import="com.goodjob.reserve.dto.*"%>
 <%@ page import="com.goodjob.util.Utils" %>
+<%@include file="/include/loginCheck.jsp" %>
 <%
 	
 	String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");

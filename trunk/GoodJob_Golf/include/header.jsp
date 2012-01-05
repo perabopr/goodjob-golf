@@ -1,9 +1,10 @@
-﻿<%@page import="java.text.DecimalFormat"%>
-<%@page import="java.util.Calendar"%>
-<%@page import="com.goodjob.reserve.dto.RegionDto"%>
-<%@page import="java.util.List"%>
-<%@page import="com.goodjob.reserve.PackageDao"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.text.DecimalFormat"%>
+<%@ page import="java.util.Calendar"%>
+<%@ page import="com.goodjob.reserve.dto.RegionDto"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.goodjob.reserve.PackageDao"%>
+<%@ page import="com.goodjob.util.Utils"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%
 //사용자정보.
@@ -48,8 +49,7 @@ public String commify(int n) {
 	return com.goodjob.util.Utils.numberFormat(n);
 }
 %>
-
-<%@page import="com.goodjob.util.Utils"%><html>
+<html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">

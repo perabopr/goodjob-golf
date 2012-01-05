@@ -254,10 +254,11 @@ location.href="/member/join_agreement.jsp";
 			data: "type=check&email="+email,
 			success: function(msg){
 				if($.trim(msg) == '0'){
-					$('#idcheck_yn').val("Y");
-					alert("중복되는 아이디가 없습니다.");
+					$('#idcheck_yn').val("N");
+					alert("중복되는 이메일이  없습니다.");
 				}
 				else{
+					$('#idcheck_yn').val("Y");
 					alert("중복되는 이메일이 존재 합니다.");
 				}
 		}});
@@ -290,12 +291,12 @@ location.href="/member/join_agreement.jsp";
                                                         </tr>
 		<form name="joinForm" method="post">
 		<input type="hidden" id="auth_yn" name="auth_yn" value="N"/>
-		<input type="hidden" id="idcheck_yn" name="idcheck_yn" value="N"/>
+		<input type="hidden" id="idcheck_yn" name="idcheck_yn" value="Y"/>
                                                         <tr>
                                                           <td><img src="../../images/mem_join/img_join_message.gif" width="560" height="50" border="0"></td>
                                                         </tr>
                                                         <tr>
-                                                          <td align="center"><table align="center" border="0" cellpadding="2" cellspacing="1" width="600" bgcolor="#D1D3D4">
+                                                          <td align="center"><table align="center" border="0" cellpadding="2" cellspacing="1" width="610" bgcolor="#D1D3D4">
                                                               <tr>
                                                                 <td bgcolor="#AED247" colspan="2" width="593"></td>
                                                               </tr>
@@ -329,10 +330,10 @@ location.href="/member/join_agreement.jsp";
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
-                                                                      <td height="20"><span class=mem_notice>자주 사용하시는 E-mail계정을 입력하시기 바랍니다.</span></td>
+                                                                      <td height="25"><span class=mem_notice>자주 사용하시는 E-mail계정을 입력하시기 바랍니다.</span></td>
                                                                     </tr>
                                                                     <tr>
-                                                                      <td height="20">
+                                                                      <td height="30">
                                                                       <a href="javascript:email_auth();"><img align="absmiddle" src="/images/mem_join/btn_number_send.gif" width="75" height="19" border="0"></a>
                                                                       <img align="absmiddle" src="/images/mem_join/btn_send_title.gif" width="81" height="19" border="0">
                                                                       		<input id="auth_no" class="mem_input" type="text" size="15" name="auth_no">

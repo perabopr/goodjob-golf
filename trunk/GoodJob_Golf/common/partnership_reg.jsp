@@ -12,7 +12,7 @@
 	
 	String up_dir = Config.get("bbs_dir");
 	
-	FileUpload upload = new FileUpload(request, up_dir, 1024*1024*5);
+	FileUpload upload = new FileUpload(request, up_dir, 1024*1024*20);
 	
 	Map<String,String> fileMap = upload.getParamAfterUpload();
 	

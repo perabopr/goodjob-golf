@@ -173,6 +173,7 @@ function reserveAgree(){
 <TD style="PADDING-BOTTOM: 30px; PADDING-TOP: 30px" align=center><A href="javascript:;" onclick="reserveAgree();"><IMG border=0 src="../../images/common/btn_regist_booking2.gif"></A></TD>
 </TR>
 </TBODY>
+</TABLE>
                                               </td>
                                             </tr>
                                           </table></td>

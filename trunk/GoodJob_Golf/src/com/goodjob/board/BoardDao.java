@@ -716,6 +716,37 @@ public class BoardDao {
 		return list;
 	}
 	
+	public int getPartnershipTotal(Map<String,String> data){
+		
+		Connection conn = null;
+		String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
+		Map<String, Long> map = null;
+		try {
+			
+			List<Object> params = new ArrayList<Object>();
+			
+			//검색조건
+			String where = "";
+			if(keyword.length()>0){
+				where = " where subject like concat('%',?,'%') " ;
+				params.add(keyword);
+			}
+			conn = DBManager.getConnection();
+			
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			
+			map = (Map<String, Long>)qr.query(conn , MessageFormat.format(BBS.partnership_total,where), rsh , params.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return NumberUtils.toInt(map.get("cnt")+"");
+	}
+
 	public PartnershipDto getPartnership(int seq){
 		
 		Connection conn = null;

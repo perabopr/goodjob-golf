@@ -10,22 +10,10 @@
 	//통합 게시판 
 	BoardDao bDao = new BoardDao();
 	
-	String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
-	String field = StringUtils.trimToEmpty(request.getParameter("field"));
-	String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
+	String seq = StringUtils.defaultIfEmpty(request.getParameter("seq"),"1");
+
+	PartnershipDto pDto = bDao.getPartnership(NumberUtils.toInt(seq));
 	
-	PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , BBS.per_page );
-	
-	Map<String,String> params = new HashMap<String,String>();
-	params.put("npage",npage);
-	params.put("field",field);
-	params.put("keyword",keyword);
-	
-	List<PartnershipDto> bbsList = bDao.getPartnershipList(params);
-	
-	int totalCount = bDao.getTotalCount("tb_notice_bbs" , params);
-	
-	String strPage = paging.getPaging(totalCount, false);
 %>
 <html>
 <head>
@@ -73,8 +61,8 @@ function goPage(val){
   </tr>
   <tr>
     <td colspan="2" height="250" valign="top" style="padding-left:10px;padding-right:10px;">
-     제휴 및 광고문의 전달사항은 여기에 기록하세요
-</td>
+	<%=StringUtils.replace(pDto.getContent(),"\n","<br/>")%>
+	</td>
   </tr>
 </table>
 </body>

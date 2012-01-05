@@ -6,10 +6,11 @@
 <%@ page import="com.goodjob.board.*" %>
 <%@page import="com.goodjob.util.PageNavigater"%>
 <%@page import="com.goodjob.sql.BBS"%>
+<%@page import="com.goodjob.util.Utils"%>
 <%
 	//통합 게시판 
 	BoardDao bDao = new BoardDao();
-	
+
 	String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
 	String field = StringUtils.trimToEmpty(request.getParameter("field"));
 	String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
@@ -23,9 +24,10 @@
 	
 	List<PartnershipDto> bbsList = bDao.getPartnershipList(params);
 	
-	int totalCount = bDao.getTotalCount("tb_notice_bbs" , params);
+	int totalCount = bDao.getPartnershipTotal(params);
 	
 	String strPage = paging.getPaging(totalCount, false);
+	
 %>
 <html>
 <head>
@@ -49,14 +51,14 @@ function on_search() {
 		$('#keyword').focus();
 		return;
 	} 
-	frm.action="notice_list.jsp"
+	frm.action="partnership_list.jsp"
 	frm.submit();
 }
 
 function goPage(val){
 	var frm = document.frm;
 	frm.npage.value=val;
-	frm.action="notice_list.jsp"
+	frm.action="partnership_list.jsp"
 	frm.submit();
 }
 //-->
@@ -80,31 +82,46 @@ function goPage(val){
           <td bgcolor="#e6e7e8" align="center" width="246"><span class=normal_b>전달사항</span></td>
           <td bgcolor="#e6e7e8" align="center" width="218"><span class=normal_b>첨부파일</span></td>
         </tr>
+<%
+	if(bbsList != null && !bbsList.isEmpty()){
+		
+		int size = bbsList.size();
+		PartnershipDto dto;
+		for(int i = 0 ; i < size ; i++){
+			
+			dto = bbsList.get(i);
+			
+%>
         <tr>
-          <td bgcolor="white" align="center" height="25">2011-12-31 12:30</td>
-          <td align="center" bgcolor="white">홍길동</td>
-          <td align="center" bgcolor="white">abc@naver.com</td>
-          <td align="center" bgcolor="white">010-123-4567 </td>
-          <td align="center" bgcolor="white"><a href="partner_detail.jsp" onClick="NewWindow(this.href,'name','740','450','yes');return false;"><img align="absmiddle" src="/_admin/images/common/btn_detail.gif" width="75" height="22" border="0"></a></td>
-          <td align="center" bgcolor="white"><img src="/_admin/images/common/btn_download.gif" width="75" height="22" border="0"></td>
+          <td bgcolor="white" align="center" height="25"><%=dto.getReg_dt()%></td>
+          <td align="center" bgcolor="white"><%=dto.getName()%></td>
+          <td align="center" bgcolor="white"><%=dto.getEmail()%></td>
+          <td align="center" bgcolor="white"><%=dto.getMobile()%></td>
+          <td align="center" bgcolor="white"><a href="partnership_detail.jsp?seq=<%=dto.getSeq()%>" onClick="NewWindow(this.href,'name','740','450','yes');return false;"><img align="absmiddle" src="/_admin/images/common/btn_detail.gif" width="75" height="22" border="0"></a></td>
+          <td align="center" bgcolor="white"><a href="/Download?fileName=<%=Utils.getEncoder("/bbs_upload/"+dto.getFilename())%>"><img src="/_admin/images/common/btn_download.gif" width="75" height="22" border="0"></a></td>
         </tr>
+<%
+		}
+	}
+%>
       </table></td>
   </tr>
   <tr>
     <td align="center" style="padding-top:50px;padding-bottom:40px;"><table border="0" cellpadding="0" cellspacing="0" width="50%">
         <tr>
-          <td align="center"><p><img align="absmiddle" src="/_admin/images/board/btn_prev_dual.gif" width="16" height="15" border="0"> <img align="absmiddle" src="/_admin/images/board/btn_prev.gif" width="16" height="15" border="0"> <span class=normal_b>1 &nbsp;</span>I &nbsp;2 &nbsp;I &nbsp;3 &nbsp;I &nbsp;4 &nbsp;I &nbsp;5 &nbsp;I &nbsp;6 &nbsp;I &nbsp;7 &nbsp;I &nbsp;8 &nbsp;I &nbsp;9 &nbsp;I &nbsp;10 <img align="absmiddle" src="/_admin/images/board/btn_next.gif" width="16" height="15" border="0"> <img align="absmiddle"
-src="/_admin/images/board/btn_next_dual.gif"
-width="16" height="15" border="0"></p></td>
+          <td height="50" align="center"><p><span class=normal_b><%=strPage%></span></p></td>
         </tr>
         <tr>
           <td height="4" align="center">&nbsp;</td>
         </tr>
+<form name="frm" method="post">
+<input type="hidden" name="npage" value="<%=npage%>"/>
         <tr>
           <td height="4" align="center">
-            <input name="key" type="text" size="30" class="input_box">
-            <input name="imagefield" type="image" src="/_admin/images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle"></td>
+            <input nid="keyword" name="keyword" value="<%=keyword%>" type="text" size="30" class="input_box">
+            <a href="javascript:on_search();"><img src="/_admin/images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle"></a></td>
         </tr>
+</form>
       </table></td>
   </tr>
 </table>

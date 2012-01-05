@@ -209,6 +209,10 @@
                                 <td height="25" width="20">&nbsp;</td>
                                 <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/board/join_list.jsp" class=left_menu>JOIN 커뮤니티</a></td>
                             </tr>
+                            <tr>
+                                <td height="25" width="20">&nbsp;</td>
+                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/board/partnership_list.jsp" class=left_menu>제휴 및 관고문의</a></td>
+                            </tr>
                         </table>
                     </td>
                 </tr>

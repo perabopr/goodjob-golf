@@ -79,5 +79,10 @@ public class MEMBER {
 								"GROUP BY a.mem_id, b.mem_id, c.reserve_uid ";
 	
 	public static final String mem_sub_total2 = " SELECT ifnull(COUNT(mem_id),0) total FROM tb_member a left outer join tb_golflink_reserve c on a.mem_id=c.reserve_uid "+
-								" GROUP BY reserve_uid having count(reserve_seq) = ? ";   
+								" GROUP BY reserve_uid having count(reserve_seq) = ? "; 
+	
+	public static final String check = "SELECT auth_no,UNIX_TIMESTAMP(now())-send_date as diff FROM tb_email_auth where auth_no=? and email=? and use_yn='N' order by seq limit 1 ";
+	
+	//인증
+	public static final String auth = "insert into tb_email_auth(email,auth_no,send_date) values (? , ? , UNIX_TIMESTAMP(now()))";
 }

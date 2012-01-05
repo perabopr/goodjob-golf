@@ -16,6 +16,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
+import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
@@ -637,5 +638,75 @@ public class MemberDao {
 		}
 
 		return list;
+	}
+	
+	/**
+	 * 인증
+	 * @param params
+	 */
+	public boolean auth(Map<String,String> params){
+		
+		boolean isSend = false;
+		Connection conn = null;
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(params.get("email"));
+			bind.add(params.get("auth_no"));
+			
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn, MEMBER.auth , bind.toArray());
+			
+			isSend = true;
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		return isSend;
+	}
+	
+	/**
+	 * 인증체크
+	 * @param params
+	 * @return 0 : 인증 성공  , 1 : 일치하는 인증값 없음 , 2 : 인증번호 시간 초과 
+	 */
+	public int authCheck(Map<String,String> params){
+		
+		int check = 0;
+		Connection conn = null;
+		Map<String,Object> result = null;
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(params.get("auth_no"));
+			bind.add(params.get("email"));
+			
+			QueryRunner queryRunner = new QueryRunner();
+			ResultSetHandler rsh = new MapHandler();
+			
+			result = (Map)queryRunner.query(conn, MEMBER.check , rsh , bind.toArray());
+			
+			if(result == null){
+				check = 1;
+			}
+			else{
+				int diff = NumberUtils.toInt(ObjectUtils.toString(result.get("diff")));
+				//sms 발송후 10분
+				if(diff >= 300){
+					check = 2;
+				}
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return check;
 	}
 }

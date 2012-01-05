@@ -6,6 +6,7 @@
 <%@ page import="com.goodjob.board.*" %>
 <%@page import="com.goodjob.util.PageNavigater"%>
 <%@page import="com.goodjob.sql.BBS"%>
+<%@include file="/include/loginCheck.jsp" %>
 <%
 	//통합 게시판 
 	BoardDao bDao = new BoardDao();

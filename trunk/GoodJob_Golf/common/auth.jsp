@@ -26,7 +26,7 @@
 	
 	if("send".equals(type)){
 		
-		auth_no = Utils.authNumber(5);
+		auth_no = Utils.authNumber(8);
 		
 		params.put("email",email);
 		params.put("auth_no",auth_no);
@@ -34,13 +34,13 @@
 		
 		boolean isSend = false;
 		
-		content = MessageFormat.format(MailContent.join(),auth_no);
+		content = MessageFormat.format(MailContent.auth(),auth_no);
 		
 		try{
 			Mail mail = new Mail(host,m_id,m_pw);
 			mail.setTo(email);
-			mail.setFrom(from , "goodjobgolf");
-			mail.setSubject("[goodjobgolf] 가입해 주셔서 감사합니다. ");
+			mail.setFrom(from , "Goodjobgolf");
+			mail.setSubject("[Goodjobgolf] 인증 번호 입니다.");
 			mail.setHtmlContent(content);
 			mail.send();
 			isSend = true;
@@ -51,7 +51,10 @@
 	}
 	else if("auth".equals(type)){
 		
-		out.println("0");
+		params.put("email",email);
+		params.put("auth_no",auth_no);
+		int check = mDao.authCheck(params); //0 : 인증 성공  , 1 : 일치하는 인증값 없음 , 2 : 인증번호 시간 초과 
+		out.println(check);
 	}
 	else if("check".equals(type)){
 		

@@ -7,9 +7,8 @@
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
 int pkSeq = NumberUtils.toInt(request.getParameter("pkSeq"),0);
-if(pkSeq==0){
+if(pkSeq == 0){
 	out.println("<script>location.href='reserve.jsp?menu=3'</script>");
 	return;
 }
@@ -33,7 +32,7 @@ function reserveAgree(){
 		$("#chkAgree2").select();
 		return false;		
 	}
-	$("#menu").val("<%=menuSeq%>");
+	$("#menu").val("3");
 	$("#pkSeq").val("<%=pkSeq%>");
 	frm.submit();
 }

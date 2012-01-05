@@ -12,7 +12,7 @@
 <%
 int menuNum = NumberUtils.toInt(request.getParameter("menu"),2);
 
-String pRegion = StringUtils.defaultIfEmpty(request.getParameter("region"), "0");
+int pRegion = NumberUtils.toInt(request.getParameter("region"), 0);
 PackageDao pkDao = new PackageDao();
 List<RegionDto> rList = pkDao.getRegionList("1");
 
@@ -61,9 +61,7 @@ String eDate = tmYear
 			+ tmDay.substring(tmDay.length()-2, tmDay.length());
 
 String strWhere = "AND A.menu_seq = " + Integer.toString(menuNum) + " ";
-if(pRegion.equals("1") || pRegion.equals("2") 
-		|| pRegion.equals("3") || pRegion.equals("4")
-		|| pRegion.equals("5") || pRegion.equals("6")){
+if(pRegion >= 1 && pRegion <= 6){
 	strWhere += "AND A.region_seq = " + pRegion;
 }
 /*
@@ -128,7 +126,7 @@ visibility: hidden;
 <tr>
 <td align="right">
 <%
-	if(pRegion.equals("0")){
+	if(pRegion == 0){
 %>
 	<SPAN class=blue>전체보기</SPAN> &nbsp;I&nbsp;
 <%		
@@ -139,7 +137,7 @@ visibility: hidden;
 	}
 		
 	for(int i = 0; i < rList.size(); i++){ 
-		if(pRegion.equals(Integer.toString(rList.get(i).getRegion_seq()))){
+		if(pRegion == rList.get(i).getRegion_seq()){
 %>
 		<SPAN class=blue><%=rList.get(i).getRegion_name()%></SPAN> &nbsp;I&nbsp;
 <%

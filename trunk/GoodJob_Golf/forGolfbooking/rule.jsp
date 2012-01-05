@@ -4,17 +4,17 @@ page import="org.apache.commons.lang.StringUtils"%><%@
 page import="org.apache.commons.lang.math.NumberUtils"%><%@ 
 include file="/include/loginCheck.jsp" %><%@ 
 include file="/include/header.jsp" %>
-<%String menuName = StringUtils.defaultIfEmpty(request.getParameter("menu"),"1");%>
+<%int menuName = NumberUtils.toInt(request.getParameter("menu"),1);%>
 					<table border="0" cellpadding="0" cellspacing="0" width="751">
 						<tr>
 						<td>
-						<% if(menuName.equals("1")){ %>
+						<% if(menuName == 1){ %>
 						<%@ include file="ruleReal.jsp" %>
-						<% }else if(menuName.equals("2")){ %>
+						<% }else if(menuName == 2){ %>
 						<%@ include file="rulePre.jsp" %>
-						<% }else if(menuName.equals("3")){ %>
+						<% }else if(menuName == 3){ %>
 						<%@ include file="rulePackage.jsp" %>
-						<% }else if(menuName.equals("5")){ %>
+						<% }else if(menuName == 5){ %>
 						<%@ include file="ruleCondo.jsp" %>
 						<% } %>
 						</td>

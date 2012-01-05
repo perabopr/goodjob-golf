@@ -1,39 +1,41 @@
+<%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-String menuSeq = request.getParameter("menu");
-String productsubSeq = request.getParameter("gcId");
+String menu = "1";
+int productsubSeq = NumberUtils.toInt(request.getParameter("gcId"), 0);
+int golf = NumberUtils.toInt(request.getParameter("golf"), 0);
+int date = NumberUtils.toInt(request.getParameter("date"), 0);
+int cdate = NumberUtils.toInt(request.getParameter("cdate"), 0);
+
+if(productsubSeq == 0 || golf == 0 || date == 0 || cdate == 0){
+	out.println("<script>location.href='reserve.jsp?menu=1'</script>");
+	return;
+}
 
 GolfLinkDao glDao = new GolfLinkDao();
-List<ProductReserveDto> listPr = glDao.getGolfProduct(Integer.parseInt(productsubSeq));
+List<ProductReserveDto> listPr = glDao.getGolfProduct(productsubSeq);
 
 ProductReserveDto prDto = null;
-if(listPr != null){
-	prDto = listPr.get(0); 
-}else{
-	//초기페이지 이동.....
-	out.close();
+if(listPr == null || listPr.size() != 1){
+	out.println("<script>location.href='reserve.jsp?menu=1'</script>");
+	return;
 }
+prDto = listPr.get(0);
 
 String bookingDate = prDto.getProduct_date();
 String bookingTime = prDto.getTime_start();
 bookingDate = bookingDate.substring(0,4) + "-" + bookingDate.substring(4,6) + "-" + bookingDate.substring(6,8) + " ";
 bookingDate += bookingTime.substring(0,2) + ":" + bookingTime.substring(2,4); 
 int buyPrice = prDto.getGoodjob_price() * 4;
-
-String menu = "1";
-String golf = request.getParameter("golf");
-String date = request.getParameter("date");
-String cdate = request.getParameter("cdate");
-
 %>
 <script type="text/javascript">
 <!--
 function reSetDate(){
-	location.href = "/forGolfbooking/detail.jsp?menu=<%=menu%>&golf=<%=golf%>&date=<%=date%>&cdate=<%=cdate%>";
+	location.href = "/forGolfbooking/detail.jsp?menu=1&golf=<%=golf%>&date=<%=date%>&cdate=<%=cdate%>";
 }
 
 function billok(){
@@ -56,11 +58,11 @@ function billok(){
 		return false;
 	}
 	
-	$("#menu").val("<%=request.getParameter("menu")%>");
-	$("#gcId").val("<%=request.getParameter("gcId")%>");
-	$("#golf").val('<%=request.getParameter("golf")%>');
-	$("#date").val('<%=request.getParameter("date")%>');
-	$("#cdate").val('<%=request.getParameter("cdate")%>');
+	$("#menu").val("<%=menu%>");
+	$("#gcId").val("<%=productsubSeq%>");
+	$("#golf").val('<%=golf%>');
+	$("#date").val('<%=date%>');
+	$("#cdate").val('<%=cdate%>');
 	
 	if($("#billBtype").attr("checked")){
 		if(window.confirm("예약을 완료하시려면 확인 버튼을 누르십시오 \r\n예약확인 SMS : "+$("#phone1").val()+$("#phone2").val()+$("#phone3").val())){
@@ -83,7 +85,7 @@ $(function(){
 //-->
 </script>
 <FORM NAME="frm" METHOD="post" ACTION="result.jsp">
-<input type="hidden" id="menu" name="menu" >
+<input type="hidden" id="menu" name="menu" value="1">
 <input type="hidden" id="gcId" name="gcId" >
 <input type="hidden" id="golf" name="golf" >
 <input type="hidden" id="date" name="date" >

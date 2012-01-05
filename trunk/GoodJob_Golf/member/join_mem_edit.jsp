@@ -250,10 +250,9 @@ location.href="/main.jsp";
                             <td>&nbsp;</td>
                           </tr>
                         </table>
-<map name="ImageMap1">
-<area shape="rect" coords="515, 54, 572, 77" href="mem_out.jsp">
-</map>
-					<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"/>
+                        
+					<map name="ImageMap1"><area shape="rect" coords="515,54,572,77" href="mem_out.jsp"></map>
+					<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe>
 					<!-- 하단  회사 소개 부분  -->
                     <%@ include file="/include/copyright.jsp" %>
                     <!-- 하단  회사 소개 부분  -->

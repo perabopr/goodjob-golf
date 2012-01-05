@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.goodjob.reserve.dto.PackageDto"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
@@ -6,13 +7,14 @@
 <%@page import="com.goodjob.reserve.PackageDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-String pRegion = StringUtils.defaultIfEmpty(request.getParameter("region"), "0");
+int pRegion = NumberUtils.toInt(request.getParameter("region"), 0);
+//String pRegion = StringUtils.defaultIfEmpty(request.getParameter("region"), "0");
 PackageDao pkDao = new PackageDao();
 List<RegionDto> rList = pkDao.getRegionList("1");
 
 String strWhere = "";
-if(pRegion != "0"){
-	strWhere = "AND a.region_seq = '" + pRegion + "'";
+if(pRegion != 0){
+	strWhere = "AND a.region_seq = " + pRegion;
 }
 List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 %>
@@ -39,7 +41,7 @@ List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 			<TR>
 			<TD style="PADDING-RIGHT: 18px" height=30 align=right>
 			<%
-				if(pRegion.equals("0")){
+				if(pRegion == 0){
 			%>
 				<SPAN class=blue>전체보기</SPAN> &nbsp;I&nbsp;
 			<%		
@@ -50,7 +52,7 @@ List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 				}
 					
 				for(int i = 0; i < rList.size(); i++){ 
-					if(pRegion.equals(Integer.toString(rList.get(i).getRegion_seq()))){
+					if(pRegion == rList.get(i).getRegion_seq()){
 			%>
 					<SPAN class=blue><%=rList.get(i).getRegion_name()%></SPAN> &nbsp;I&nbsp;
 			<%

@@ -9,11 +9,16 @@
 int packSeq = NumberUtils.toInt(request.getParameter("pkSeq"),1);
 
 PackageDao pkDao = new PackageDao();
-String strWhere = "AND a.package_seq = '" + packSeq + "'";
+String strWhere = "AND a.package_seq = " + packSeq;
 List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 PackageDto pkDto = new PackageDto();
 if(pkList != null && pkList.size() == 1){
 	pkDto = pkList.get(0);
+}
+else{
+	out.print("<script>");
+	out.print("location.href='/forGolfbooking/reserve.jsp?menu=3'");
+	out.print("</script>");
 }
 
 Utillity myUtil = new Utillity();

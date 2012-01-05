@@ -1,17 +1,22 @@
+<%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.reserve.dto.GolfLinkPromiseDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
-String productsubSeq = StringUtils.trimToEmpty(request.getParameter("psId"));
-if(productsubSeq.length() == 0){
+int productsubSeq = NumberUtils.toInt(request.getParameter("psId"), 0);
+if(productsubSeq == 0){
 	out.println("<script>location.href='reserve.jsp?menu=2'</script>");
-	out.close();
+	return;
 }
 GolfLinkDao glDao = new GolfLinkDao();
-List<GolfLinkPromiseDto> listPromise = glDao.getGolfPromise(Integer.parseInt(productsubSeq));
+List<GolfLinkPromiseDto> listPromise = glDao.getGolfPromise(productsubSeq);
+
+if(listPromise == null || listPromise.size() == 0){
+	out.println("<script>location.href='reserve.jsp?menu=2'</script>");
+	return;
+}
 %>
 <script type="text/javascript">
 function reserveAgree(){
@@ -25,7 +30,7 @@ function reserveAgree(){
 		$("#chkAgree2").select();
 		return false;		
 	}
-	$("#menu").val("<%=menuSeq%>");
+	$("#menu").val("2");
 	$("#psId").val("<%=productsubSeq%>");
 	$("#golf").val('<%=request.getParameter("golf")%>');
 	$("#date").val('<%=request.getParameter("date")%>');

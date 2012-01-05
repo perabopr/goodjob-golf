@@ -5,31 +5,13 @@
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
-int productsubSeq = NumberUtils.toInt(request.getParameter("psId"),0);
-
-GolfLinkDao glDao = new GolfLinkDao();
-List<ProductReserveDto> listPr = glDao.getGolfProduct(productsubSeq);
-
-ProductReserveDto prDto = null;
-if(listPr != null && listPr.size() == 1){
-	prDto = listPr.get(0); 
-}else{
-	//초기페이지 이동.....
-	out.close();
-}
-
-String bookingDate = prDto.getProduct_date();
-String bookingTime = prDto.getTime_start();
-bookingDate = bookingDate.substring(0,4) + "-" + bookingDate.substring(4,6) + "-" + bookingDate.substring(6,8) + " ";
-bookingDate += bookingTime.substring(0,2) + ":" + bookingTime.substring(2,4); 
-
 String menu = "2";
-String golf = StringUtils.trimToEmpty(request.getParameter("golf"));
-String date = StringUtils.trimToEmpty(request.getParameter("date"));
-String cdate = StringUtils.trimToEmpty(request.getParameter("cdate"));
-String rCnt = StringUtils.trimToEmpty(request.getParameter("reserveCnt"));
-String rTeam = StringUtils.trimToEmpty(request.getParameter("reserveTeam"));
+int productsubSeq = NumberUtils.toInt(request.getParameter("psId"),0);
+int golf = NumberUtils.toInt(request.getParameter("golf"), 0);
+int date = NumberUtils.toInt(request.getParameter("date"), 0);
+int cdate = NumberUtils.toInt(request.getParameter("cdate"), 0);
+int rCnt = NumberUtils.toInt(request.getParameter("reserveCnt"), 0);
+int rTeam = NumberUtils.toInt(request.getParameter("reserveTeam"), 0);
 String rDate = StringUtils.trimToEmpty(request.getParameter("reserveDate"));
 String rTime = StringUtils.trimToEmpty(request.getParameter("reserveTime"));
 String rName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
@@ -37,12 +19,33 @@ String rPhone = StringUtils.trimToEmpty(request.getParameter("reservePhone"));
 String rEmail = StringUtils.trimToEmpty(request.getParameter("reserveEmail"));
 String rRequest = StringUtils.trimToEmpty(request.getParameter("reserveRequest"));
 
-int buyPrice = prDto.getGoodjob_price() * Integer.parseInt(rCnt);
+if(productsubSeq == 0 || golf == 0 || date == 0
+		|| cdate == 0 || rCnt == 0 || rTeam == 0){
+	out.println("<script>location.href='reserve.jsp?menu=2'</script>");
+	return;
+}
+
+GolfLinkDao glDao = new GolfLinkDao();
+List<ProductReserveDto> listPr = glDao.getGolfProduct(productsubSeq);
+
+ProductReserveDto prDto = null;
+if(listPr == null || listPr.size() != 1){
+	out.println("<script>location.href='reserve.jsp?menu=2'</script>");
+	return;
+}
+prDto = listPr.get(0);
+
+String bookingDate = prDto.getProduct_date();
+String bookingTime = prDto.getTime_start();
+bookingDate = bookingDate.substring(0,4) + "-" + bookingDate.substring(4,6) + "-" + bookingDate.substring(6,8) + " ";
+bookingDate += bookingTime.substring(0,2) + ":" + bookingTime.substring(2,4); 
+
+int buyPrice = prDto.getGoodjob_price() * rCnt;
 %>
 <script type="text/javascript">
 <!--
 function reSetDate(){
-	location.href = "/forGolfbooking/detail.jsp?menu=<%=menu%>&golf=<%=golf%>&date=<%=date%>&cdate=<%=cdate%>";
+	location.href = "/forGolfbooking/detail.jsp?menu=2&golf=<%=golf%>&date=<%=date%>&cdate=<%=cdate%>";
 }
 
 function billok(){

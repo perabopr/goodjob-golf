@@ -99,7 +99,17 @@ location.href="/member/join_agreement.jsp";
 			$('#mobile3').focus();
 			return;
 		}
- 	      
+
+   		if($('#auth_yn').val() != 'Y') {
+			alert('휴대폰 인증을 하지 않았습니다.');
+			return;
+		}
+		
+   		if($('#idcheck_yn').val() != 'Y') {
+			alert('아이디 중복체크를 하지 않았습니다.');
+			return;
+		}
+		
 		var frm = document.joinForm;
 		frm.target =  "ifr_hidden"; 
 		frm.action = "join_member_exe.jsp";
@@ -176,46 +186,41 @@ location.href="/member/join_agreement.jsp";
 		var email = $('#mem_id').val() + "@" + $('#mem_domain').val();
 		$.ajax({
 			type: "POST",
-			url: "/common/authEmail.jsp",
-			data: "email="+email,
+			url: "/common/auth.jsp",
+			data: "type=send&email="+email,
 			success: function(msg){
 				if($.trim(msg) == '0'){
-					alert("인증 번호가 입력한 아이디로 발송 되었습니다.");
+					alert("인증 번호가 입력한 이메일로 발송 되었습니다.");
 				}
 				else{
-					alert("인증 번호가 발송중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
+					alert("발송중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
 				}
 		}});
 	}
 
    	function auth_check(){
    	   	
-   		if(!$('#mobile1').val()) {
-			alert('핸드폰 앞자리를 선택해 주세요.');
-			$('#mobile1').focus();
+   		if(!$('#mem_id').val()) {
+			alert('아이디를 입력해 주세요');
+			$('#mem_id').focus();
 			return;
 		}
 
-   		if(!$('#mobile2').val()) {
-			alert('핸드폰 번호를 입력해 주세요.');
-			$('#mobile2').focus();
+		if(!$('#mem_domain').val()) {
+			alert('도메인을 입력해 주세요');
+			$('#mem_domain').focus();
 			return;
 		}
-
-   		if(!$('#mobile3').val()) {
-   			alert('핸드폰 번호를 입력해 주세요.');
-			$('#mobile3').focus();
-			return;
-		}
-
-		var rphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
+		
+		var email = $('#mem_id').val() + "@" + $('#mem_domain').val();
 		var auth_no = $('#auth_no').val();
+		
 		$.ajax({
 			type: "POST",
-			url: "/common/authCheckSMS.jsp",
-			data: "rphone="+rphone+"&auth_no="+auth_no,
+			url: "/common/auth.jsp",
+			data: "type=auth&email="+email+"&auth_no="+auth_no,
 			success: function(msg){
-			//0 : 인증 성공  , 1 : 일치하는 인증값 없음 , 2 : 인증번호 시간 초과 
+				//0 : 인증 성공  , 1 : 일치하는 인증값 없음 , 2 : 인증번호 시간 초과 
 				if($.trim(msg) == '0'){
 					$('#auth_yn').val("Y");
 					alert("인증이 정상적으로 완료 되었습니다.");
@@ -224,7 +229,36 @@ location.href="/member/join_agreement.jsp";
 					alert("일치하는 인증값 없습니다. 잠시후 다시 시도해 주세요!");
 				}
 				else if($.trim(msg) == '2'){
-					alert("입력하신 인증번호는 시간이 초과되었습니다. 잠시후 다시 시도해 주세요!");
+					alert("입력하신 인증번호는 시간이 초과되었습니다.잠시후 다시 시도해 주세요!");
+				}
+		}});
+	}
+
+	function idcheck(){
+		if(!$('#mem_id').val()) {
+			alert('아이디를 입력해 주세요');
+			$('#mem_id').focus();
+			return;
+		}
+
+		if(!$('#mem_domain').val()) {
+			alert('도메인을 입력해 주세요');
+			$('#mem_domain').focus();
+			return;
+		}
+		
+		var email = $('#mem_id').val() + "@" + $('#mem_domain').val();
+		$.ajax({
+			type: "POST",
+			url: "/common/auth.jsp",
+			data: "type=check&email="+email,
+			success: function(msg){
+				if($.trim(msg) == '0'){
+					$('#idcheck_yn').val("Y");
+					alert("중복되는 아이디가 없습니다.");
+				}
+				else{
+					alert("중복되는 이메일이 존재 합니다.");
 				}
 		}});
 	}
@@ -255,6 +289,8 @@ location.href="/member/join_agreement.jsp";
                                                           <td>&nbsp;</td>
                                                         </tr>
 		<form name="joinForm" method="post">
+		<input type="hidden" id="auth_yn" name="auth_yn" value="N"/>
+		<input type="hidden" id="idcheck_yn" name="idcheck_yn" value="N"/>
                                                         <tr>
                                                           <td><img src="../../images/mem_join/img_join_message.gif" width="560" height="50" border="0"></td>
                                                         </tr>
@@ -288,7 +324,9 @@ location.href="/member/join_agreement.jsp";
                                                                           <option value="yahoo.co.kr">yahoo.co.kr</option>
                                                                           <option value="gmail.com">gmail.com</option>
                                                                           <option value="self">직접입력하기</option>
-                                                                        </select></td>
+                                                                        </select>
+                                                                        <a href="javascript:idcheck();"><img align="absmiddle" src="/images/mem_join/btn_idcheck.gif" border="0"></a>
+                                                                        </td>
                                                                     </tr>
                                                                     <tr>
                                                                       <td height="20"><span class=mem_notice>자주 사용하시는 E-mail계정을 입력하시기 바랍니다.</span></td>

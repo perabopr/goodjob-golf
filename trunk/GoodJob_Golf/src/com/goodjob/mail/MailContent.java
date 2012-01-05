@@ -159,4 +159,41 @@ public class MailContent {
 		
 		return builder.toString();
 	}
+	
+	public static String auth(){
+		
+		StringBuilder builder = new StringBuilder();
+		builder.append("<html>\n");
+		builder.append("<head>\n");
+		builder.append("<meta http-equiv='content-type' content='text/html; charset=euc-kr'>\n");
+		builder.append("<title>Welcome to GoodJobGolf</title>\n");
+		builder.append("<link rel='stylesheet' href='http://www.goodjobgolf.com/css/common.css' type='text/css'>\n");
+		builder.append("<link rel='stylesheet' href='http://www.goodjobgolf.com/css/style.css' type='text/css'>\n");
+		builder.append("</head>\n");
+		builder.append("<body>\n");
+		builder.append("<table border='0' cellpadding='0' cellspacing='0' width='700' align='center'>\n");
+		builder.append("<tr>\n");
+		builder.append("<td width='700'>&nbsp;</td>\n");
+		builder.append("</tr>\n");
+		builder.append("<tr>\n");
+		builder.append("<td height='94' background='http://www.goodjobgolf.com/images/common/img_mail_top.gif'>&nbsp;</td>\n");
+		builder.append("</tr>\n");
+		builder.append("<tr>\n");
+		builder.append("<td align='center'><table border='0' cellpadding='0' cellspacing='0' width='650'>\n");
+		builder.append("<tr>\n");
+		builder.append("<td width='650' height='200' background='http://www.goodjobgolf.com/images/common/img_mail_join.gif'>\n");
+		builder.append("</td>\n");
+		builder.append("</tr>\n");
+		builder.append("</table></td>\n");
+		builder.append("</tr>\n");
+		builder.append("<tr>\n");
+		builder.append("<td bgcolor='#58595B' height='70' style='padding-left:8px;padding-right:5px;'><span class='font:12px;color:#FFFFFF;text-decoration:none;'>인증 번호 : </span><span style='font:12px;color:#FFF450; text-decoration:none;font-weight:bold;'>{0}</span>\n");
+		builder.append("</td>\n");
+		builder.append("</tr>\n");
+		builder.append("</table>\n");
+		builder.append("</body>\n");
+		builder.append("</html>\n");
+		
+		return builder.toString();
+	}
 }

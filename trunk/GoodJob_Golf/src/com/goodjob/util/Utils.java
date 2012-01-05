@@ -61,14 +61,19 @@ public class Utils {
 	public static String authNumber(int length)
 	{
 	     Random rnd = new Random();
-	     String numTemp[] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
-	     String auth = "";
+	     String num[] = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+	     String abcd[] = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+	     
+	     StringBuffer auth = new StringBuffer();
 
 	     for(int i=0; i<length; i++)
 	     {
-	           auth = auth+numTemp[rnd.nextInt(10)];
+	    	 if(i%4==0)
+	    		 auth.append(abcd[rnd.nextInt(25)]);
+	    	 else
+	    		 auth.append(num[rnd.nextInt(10)]);
 	      }
-	      return auth;
+	      return auth.toString();
 	}
 	
 	/**

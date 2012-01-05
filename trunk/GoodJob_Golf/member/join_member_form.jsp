@@ -101,11 +101,11 @@ location.href="/member/join_agreement.jsp";
 		}
 
    		if($('#auth_yn').val() != 'Y') {
-			alert('휴대폰 인증을 하지 않았습니다.');
+			alert('이메일 인증을 하지 않았습니다.');
 			return;
 		}
 		
-   		if($('#idcheck_yn').val() != 'Y') {
+   		if($('#idcheck_yn').val() == 'Y') {
 			alert('아이디 중복체크를 하지 않았습니다.');
 			return;
 		}
@@ -159,6 +159,7 @@ location.href="/member/join_agreement.jsp";
 			document.getElementById("mem_domain").readOnly = true;
 			$('#mem_domain').val(val);
 		}
+		$('#auth_yn').val("N");
 	}
 
 	function onlyNumber2(loc) {

@@ -685,10 +685,10 @@ public class MemberDao {
 			bind.add(params.get("auth_no"));
 			bind.add(params.get("email"));
 			
-			QueryRunner queryRunner = new QueryRunner();
+			QueryRunner qr = new QueryRunner();
 			ResultSetHandler rsh = new MapHandler();
 			
-			result = (Map)queryRunner.query(conn, MEMBER.check , rsh , bind.toArray());
+			result = (Map)qr.query(conn, MEMBER.check , rsh , bind.toArray());
 			
 			if(result == null){
 				check = 1;
@@ -696,8 +696,11 @@ public class MemberDao {
 			else{
 				int diff = NumberUtils.toInt(ObjectUtils.toString(result.get("diff")));
 				//sms 발송후 10분
-				if(diff >= 300){
+				if(diff > 1000){
 					check = 2;
+				}
+				else{
+					qr.update(conn, MEMBER.auth_update ,params.get("email"));
 				}
 			}
 			

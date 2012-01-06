@@ -9,11 +9,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 String ddlSearchRegion_tmp = StringUtils.trimToEmpty(request.getParameter("ddlSearchRegion"));
+if(ddlSearchRegion_tmp.equals("0")){
+	ddlSearchRegion_tmp = "";
+}
 String ddlSearchMenu_tmp = StringUtils.trimToEmpty(request.getParameter("ddlSearchMenu"));
 String txtSearchStartDate_tmp = StringUtils.trimToEmpty(request.getParameter("txtSearchStartDate"));
 txtSearchStartDate_tmp = txtSearchStartDate_tmp.replace("-","");
 String txtSearchEndDate_tmp = StringUtils.trimToEmpty(request.getParameter("txtSearchEndDate"));
-txtSearchEndDate_tmp = txtSearchEndDate_tmp.replace("-","");
+Calendar vCalendar = Calendar.getInstance();
+int tYear = Integer.parseInt(txtSearchEndDate_tmp.substring(0,4));
+int tMonth = Integer.parseInt(txtSearchEndDate_tmp.substring(5,7));
+int tDay = Integer.parseInt(txtSearchEndDate_tmp.substring(8,10));
+vCalendar.set(tYear, tMonth-1, tDay);
+vCalendar.add(vCalendar.DATE, 1);
+String tmYear = Integer.toString(vCalendar.get(vCalendar.YEAR));
+String tmMonth = "0" + Integer.toString(vCalendar.get(vCalendar.MONTH)+1);
+String tmDay = "0" + Integer.toString(vCalendar.get(vCalendar.DATE));
+txtSearchEndDate_tmp = tmYear
+					+ tmMonth.substring(tmMonth.length()-2, tmMonth.length())
+					+ tmDay.substring(tmDay.length()-2, tmDay.length());
 
 int totalCnt = 0;
 
@@ -50,7 +64,7 @@ if(ddlSearchMenu_tmp.equals("1")){
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
 <TR>
 <TD bgColor=white vAlign=top width=745 align=center>
-<TABLE border=0 cellSpacing=0 cellPadding=0 width="95%">
+<TABLE border=0 cellSpacing=0 cellPadding=0 width="95%" height=550>
 <TBODY>
 <TR>
 <TD class=location height=30 width="95%" align=right><A href="/main.jsp">HOME</A> &gt; <SPAN class=location_b>골프장 빠른검색</SPAN></TD></TR>

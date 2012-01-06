@@ -149,6 +149,7 @@ function goPage(val){
           <td bgcolor="#e6e7e8" align="center" width="195"><span class=normal_b>아이디</span></td>
           <td width="254" align="center" bgcolor="#E6E7E8"><span class=normal_b>콘도명</span></td>
           <td bgcolor="#e6e7e8" align="center" width="196"><span class=normal_b>객실타입</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="196"><span class=normal_b>숙박일수</span></td>
           <td bgcolor="#e6e7e8" align="center" width="101"><span class=normal_b>입실일</span></td>
                     <td width="103" align="center" bgcolor="#E6E7E8"><span class=normal_b>퇴실일</span></td>
           <td bgcolor="#e6e7e8" align="center" width="109"><span class=normal_b>연락처</span></td>
@@ -161,7 +162,7 @@ function goPage(val){
 if(list != null){
 	for(int i = 0; i < list.size();i++){	 
 		String inDate = list.get(i).getIn_date();
-		String outDate = list.get(i).getIn_date();
+		String outDate = list.get(i).getOut_date();
 		inDate = inDate.substring(0,4)
 			+ "-" + inDate.substring(4,6)
 			+ "-" + inDate.substring(6,8);
@@ -175,10 +176,11 @@ if(list != null){
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_uid() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getCondo_name() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getRoomtype() %></td>
+          <td align="center" bgcolor="white"><%=list.get(i).getRoom_num() > 1? list.get(i).getRoom_num()-1+"박"+list.get(i).getRoom_num()+"일":list.get(i).getRoom_num()+"일" %></td>
           <td align="center" bgcolor="white"><%=inDate %></td>
           <td align="center" bgcolor="white"><%=outDate %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
-          <td align="center" bgcolor="white"><a href="condo_detail.html" onClick="NewWindow(this.href,'name','740','450','yes');return false;"><img align="absmiddle" src="../images/common/btn_detail.gif" width="75" height="22" border="0" onMouseover="ddrivetip('<%=list.get(i).getReserve_memo() %>');" onMouseout="hideddrivetip()"></a></td>
+          <td align="center" bgcolor="white"><a href="javascript:;" ><img align="absmiddle" src="../images/common/btn_detail.gif" width="75" height="22" border="0" onMouseover="ddrivetip('<%=list.get(i).getReserve_memo() %>');" onMouseout="hideddrivetip()"></a></td>
           <td align="center" bgcolor="white">
 			<input id="Price" name="price" type="text" size="10" value="<%=commify(list.get(i).getCondo_price())%>" class="input_box">
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePrice('<%=list.get(i).getReserve_seq()%>');">

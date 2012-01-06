@@ -147,7 +147,7 @@ visibility: hidden;
 <script type="text/javascript">
 <!---//
 function DisplayMenu(vIdx){
-	$("#imgtap1").attr("src", "../../images/booking/btn_tab_off_01.gif");
+	$("#imgtap1").attr("src", "../../images/booking/btn_tab_off_05.gif");
 	$("#imgtap2").attr("src", "../../images/booking/btn_tab_off_02.gif");
 	$("#imgtap3").attr("src", "../../images/booking/btn_tab_off_03.gif");
 	$("#imgtap4").attr("src", "../../images/booking/btn_tab_off_04.gif"); 
@@ -158,7 +158,7 @@ function DisplayMenu(vIdx){
 	
 	switch(vIdx){
 		case 1:
-			$("#imgtap1").attr("src", "../../images/booking/btn_tab_on_01.gif"); 
+			$("#imgtap1").attr("src", "../../images/booking/btn_tab_on_05.gif"); 
 			$("#destap1").show();
 			break;
 		case 2:
@@ -517,7 +517,7 @@ for (int i = 1; i < 15 ;i++){
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=704>
 <TBODY>
 <TR>
-<TD style="CURSOR: hand" onclick=DisplayMenu(1) width=176><IMG id="imgtap1" alt="실시간 예약하기" src="../../images/booking/btn_tab_on_01.gif" width=173 height=25></TD>
+<TD style="CURSOR: hand" onclick=DisplayMenu(1) width=176><IMG id="imgtap1" alt="사전 예약하기" src="../../images/booking/btn_tab_on_05.gif" width=173 height=25></TD>
 <TD style="CURSOR: hand" onclick=DisplayMenu(2) width=176><IMG id="imgtap2" alt=이용안내 src="../../images/booking/btn_tab_off_02.gif" width=173 height=25></TD>
 <TD style="CURSOR: hand" onclick=DisplayMenu(3) width=176><IMG id="imgtap3" alt=골프장소개 src="../../images/booking/btn_tab_off_03.gif" width=173 height=25></TD>
 <TD style="CURSOR: hand" onclick=DisplayMenu(4) width=176><IMG id="imgtap4" alt=오시는길 src="../../images/booking/btn_tab_off_04.gif" width=173 height=25></TD></TR>

@@ -26,10 +26,10 @@ Utillity myUtil = new Utillity();
 %>
 <script type="text/javascript">
 function DisplayMenu(vIdx){
-	$("#imgtap1").attr("src", "../../images/booking/btn_tab_off_01.gif");
-	$("#imgtap2").attr("src", "../../images/booking/btn_tab_off_02.gif");
-	$("#imgtap3").attr("src", "../../images/booking/btn_tab_off_03.gif");
-	$("#imgtap4").attr("src", "../../images/booking/btn_tab_off_04.gif"); 
+	$("#imgtap1").attr("src", "../../images/package/btn_tab_off_01.gif");
+	$("#imgtap2").attr("src", "../../images/package/btn_tab_off_02.gif");
+	$("#imgtap3").attr("src", "../../images/package/btn_tab_off_03.gif");
+	$("#imgtap4").attr("src", "../../images/package/btn_tab_off_04.gif"); 
 	$("#destap1").hide();
 	$("#destap2").hide();
 	$("#destap3").hide();
@@ -37,19 +37,19 @@ function DisplayMenu(vIdx){
 	
 	switch(vIdx){
 		case 1:
-			$("#imgtap1").attr("src", "../../images/booking/btn_tab_on_01.gif"); 
+			$("#imgtap1").attr("src", "../../images/package/btn_tab_on_01.gif"); 
 			$("#destap1").show();
 			break;
 		case 2:
-			$("#imgtap2").attr("src", "../../images/booking/btn_tab_on_02.gif");
+			$("#imgtap2").attr("src", "../../images/package/btn_tab_on_02.gif");
 			$("#destap2").show(); 
 			break;
 		case 3:
-			$("#imgtap3").attr("src", "../../images/booking/btn_tab_on_03.gif");
+			$("#imgtap3").attr("src", "../../images/package/btn_tab_on_03.gif");
 			$("#destap3").show(); 
 			break;
 		case 4:
-			$("#imgtap4").attr("src", "../../images/booking/btn_tab_on_04.gif");
+			$("#imgtap4").attr("src", "../../images/package/btn_tab_on_04.gif");
 			$("#destap4").show(); 
 			break;
 	}
@@ -116,7 +116,15 @@ function imgChange(objId){
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=407>
 <TBODY>
 <TR>
-<TD class=cc_name height=25><%=pkDto.getPackage_name1() + " + " + pkDto.getPackage_name2() %></TD></TR>
+<% 
+	String packName = "";
+	if(pkDto.getPackage_name1().trim().length() > 0 && pkDto.getPackage_name2().trim().length() > 0){
+		packName = pkDto.getPackage_name1() + " + " + pkDto.getPackage_name2();
+	}else{
+		packName = pkDto.getPackage_name1() + pkDto.getPackage_name2();
+	}
+%>
+<TD class=cc_name height=25><%=packName %></TD></TR>
 <TR>
 <TD><%=pkDto.getGolflink_guide() %></TD></TR>
 <TR>

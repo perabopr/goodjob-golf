@@ -181,7 +181,7 @@ if(list != null){
 				+ "-" + vbookingDate.substring(4,6)
 				+ "-" + vbookingDate.substring(6,8)
 				+ " " + vbookingDate.substring(8,10)
-				+ ":" + vbookingDate.substring(10,12);				 
+				+ "~" + vbookingDate.substring(10,12);				 
 %>
         <tr>
           <td bgcolor="white" align="center" height="45"><%=list.get(i).getReserve_day() %></td>

@@ -113,7 +113,7 @@ function billok(){
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>요청사항</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=rRequest %></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
-<TD style="PADDING-BOTTOM: 50px; PADDING-TOP: 30px" align=center><IMG border=0 src="/images/booking/btn_pay.gif" width=200 height=60 onclick="billok();" style="cursor:hand"></TD></TR>
+<TD style="PADDING-BOTTOM: 50px; PADDING-TOP: 30px" align=center><IMG border=0 src="/images/booking/btn_before_01.gif" onclick="billok();" style="cursor:hand"></TD></TR>
 <TR>
 <TD height=100>&nbsp;</TD></TR>
 </TBODY></TABLE></TD></TR></TBODY></TABLE>

@@ -94,7 +94,15 @@ if(pkList.size() > 0){
 					<TR>
 					<TD colSpan=2>&nbsp;</TD></TR>
 					<TR>
-					<TD class=cc_name colSpan=2><%=pkList.get(i).getPackage_name1() %></TD></TR>
+					<% 
+						String packName1 = "";
+						if(pkList.get(i).getPackage_name1().trim().length() > 0 && pkList.get(i).getPackage_name2().trim().length() > 0){
+							packName1 = pkList.get(i).getPackage_name1() + " + " + pkList.get(i).getPackage_name2();
+						}else{
+							packName1 = pkList.get(i).getPackage_name1() + pkList.get(i).getPackage_name2();
+						}
+					%>
+					<TD class=cc_name colSpan=2><%=packName1 %></TD></TR>
 					<TR>
 					<TD width=225><SPAN class=normal_fee_b>정상가 : <%=commify(pkList.get(i).getOff_n_mon()) %>원</SPAN></TD>
 					<TD vAlign=bottom rowSpan=2 width=100 align=center><A href="detail.jsp?menu=3&pkSeq=<%=pkList.get(i).getPackage_seq() %>"><IMG border=0 align=absMiddle src="../../images/common/btn_regist_booking.gif" width=89 height=34></A></TD></TR>
@@ -123,7 +131,15 @@ if(pkList.size() > 0){
 					<TR>
 					<TD colSpan=2>&nbsp;</TD></TR>
 					<TR>
-					<TD class=cc_name colSpan=2><%=pkList.get(i).getPackage_name1() %></TD></TR>
+					<% 
+						String packName2 = "";
+						if(pkList.get(i).getPackage_name1().trim().length() > 0 && pkList.get(i).getPackage_name2().trim().length() > 0){
+							packName2 = pkList.get(i).getPackage_name1() + " + " + pkList.get(i).getPackage_name2();
+						}else{
+							packName2 = pkList.get(i).getPackage_name1() + pkList.get(i).getPackage_name2();
+						}
+					%>
+					<TD class=cc_name colSpan=2><%=packName2 %></TD></TR>
 					<TR>
 					<TD width=225><SPAN class=normal_fee_b>정상가 : <%=commify(pkList.get(i).getOff_n_mon()) %>원</SPAN></TD>
 					<TD vAlign=bottom rowSpan=2 width=100 align=center><A href="detail.jsp?menu=3&pkSeq=<%=pkList.get(i).getPackage_seq() %>"><IMG border=0 align=absMiddle src="../../images/common/btn_regist_booking.gif" width=89 height=34></A></TD></TR>

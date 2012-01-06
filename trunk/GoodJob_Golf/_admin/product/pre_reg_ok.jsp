@@ -87,14 +87,16 @@
 		if(fileUpload.getParameter("priceN" + Integer.toString(i)).length() > 0){
 			GolfLinkPriceDto glpDto1 = new GolfLinkPriceDto();
 			glpDto1.setGolflink_seq(idSeq);
-			glpDto1.setPrice_type(Integer.toString(i*2-1));
+			glpDto1.setPrice_type(Integer.toString(i));
 			glpDto1.setGolflink_price(Integer.parseInt(fileUpload.getParameter("priceN" + Integer.toString(i))));
 			glDao.setGolfLinkPriceInsert(glpDto1);
 		}
+	}
+	for(int i = 1; i <= 2;i++){
 		if(fileUpload.getParameter("priceS" + Integer.toString(i)).length() > 0){
 			GolfLinkPriceDto glpDto2 = new GolfLinkPriceDto();
 			glpDto2.setGolflink_seq(idSeq);
-			glpDto2.setPrice_type(Integer.toString(i*2));
+			glpDto2.setPrice_type(Integer.toString(i+2));
 			glpDto2.setGolflink_price(Integer.parseInt(fileUpload.getParameter("priceS" + Integer.toString(i))));
 			glDao.setGolfLinkPriceInsert(glpDto2);
 		}

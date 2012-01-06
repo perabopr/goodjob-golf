@@ -167,8 +167,7 @@ function goPage(val){
           <td bgcolor="#e6e7e8" height="25" align="center" width="125"><span class=normal_b>예약신청일</span></td>
           <td bgcolor="#e6e7e8" align="center" width="61"><span class=normal_b>예약자</span></td>
           <td bgcolor="#e6e7e8" align="center" width="184"><span class=normal_b>아이디</span></td>
-          <td width="197" align="center" bgcolor="#E6E7E8"><span class=normal_b>골프장(1순위)</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="191"><span class=normal_b>골프장(2순위)</span></td>
+          <td width="197" align="center" bgcolor="#E6E7E8"><span class=normal_b>패키지명</span></td>
           <td bgcolor="#e6e7e8" align="center" width="56"><span class=normal_b>인원</span></td>
           <td width="95" align="center" bgcolor="#E6E7E8"><span class=normal_b>투어예정일</span></td>
           <td bgcolor="#e6e7e8" align="center" width="106"><span class=normal_b>연락처</span></td>
@@ -180,14 +179,19 @@ function goPage(val){
         </tr>
 <%
 if(list != null){
-	for(int i = 0; i < list.size();i++){	 
+	for(int i = 0; i < list.size();i++){
+		String packName = "";
+		if(list.get(i).getPackage_name1().trim().length() > 0 && list.get(i).getPackage_name2().trim().length() > 0){
+			packName = list.get(i).getPackage_name1() + " + " + list.get(i).getPackage_name2();
+		}else{
+			packName = list.get(i).getPackage_name1() + list.get(i).getPackage_name2();
+		}
 %>
         <tr>
           <td bgcolor="white" align="center" height="45"><%=list.get(i).getReserve_day() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_name() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_uid() %></td>
-          <td align="center" bgcolor="white"><%=list.get(i).getPackage_name1() %></td>
-          <td align="center" bgcolor="white"><%=list.get(i).getPackage_name2() %></td>
+          <td align="center" bgcolor="white"><%=packName %></td>
           <td align="center" bgcolor="white">
           	<input type="text" id="perCnt" name="perCnt" size="1" maxlength="2" value="<%=list.get(i).getPer_num() %>" class="input_box">명
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePerCnt('<%=list.get(i).getReserve_seq()%>');">

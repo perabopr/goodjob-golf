@@ -30,7 +30,7 @@ String bookingDate = prDto.getProduct_date();
 String bookingTime = prDto.getTime_start();
 bookingDate = bookingDate.substring(0,4) + "-" + bookingDate.substring(4,6) + "-" + bookingDate.substring(6,8) + " ";
 bookingDate += bookingTime.substring(0,2) + ":" + bookingTime.substring(2,4); 
-int buyPrice = prDto.getGoodjob_price() * 4;
+int buyPrice = prDto.getNH_price() * 4;
 %>
 <script type="text/javascript">
 <!--
@@ -136,7 +136,7 @@ $(function(){
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=bookingDate %> &nbsp;<IMG border=0 align=absMiddle src="/images/booking/btn_back.gif" width=67 height=16 onclick="reSetDate();" style="cursor:hand"></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>코스명</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><%=prDto.getCourse_name() %></TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white><%=StringUtils.defaultIfEmpty(prDto.getCourse_name(), "<div class=red_s>없음</div>") %></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>인원</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white>4명</TD></TR>

@@ -11,7 +11,8 @@ public class GolfLinkDto {
 	private String reserve_uid = "";
 	private String golflink_name = "";
 	private String booking_day = "";
-	private String booking_time = "";
+	private String booking_time_s = "";
+	private String booking_time_e = "";
 	private String golflink_course = "";
 	private String per_num = "";
 	private String reserve_phone = "";
@@ -80,11 +81,17 @@ public class GolfLinkDto {
 	public void setBooking_day(String booking_day) {
 		this.booking_day = booking_day;
 	}
-	public String getBooking_time() {
-		return booking_time;
+	public String getBooking_time_s() {
+		return booking_time_s;
 	}
-	public void setBooking_time(String booking_time) {
-		this.booking_time = booking_time;
+	public void setBooking_time_s(String booking_time_s) {
+		this.booking_time_s = booking_time_s;
+	}
+	public String getBooking_time_e() {
+		return booking_time_e;
+	}
+	public void setBooking_time_e(String booking_time_e) {
+		this.booking_time_e = booking_time_e;
 	}
 	public String getGolflink_course() {
 		return golflink_course;

@@ -129,7 +129,11 @@ $(function() {
 	}
 	
    	function golflinkSearch(){
-   	   	
+   	   	if($("#ddlSearchRegion").val() == "" || $("#ddlSearchRegion").val() == "0" 
+   	   	   	&& $("#ddlSearchMenu").val() == ""){
+   	   	   	alert("검색하려면 '지역'이나 '항목'을 선택해주세요.");
+   	   	   	return;
+   	   	}
    		frmSearch.submit();
    	}
 //-->

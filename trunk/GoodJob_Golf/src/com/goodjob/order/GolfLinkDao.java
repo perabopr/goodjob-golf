@@ -134,6 +134,8 @@ public class GolfLinkDao {
 			String reserve_seq = StringUtils.defaultIfEmpty(data.get("reserve_seq"), "");
 			String booking_day = StringUtils.defaultIfEmpty(data.get("booking_day"), "");
 			String booking_time = StringUtils.defaultIfEmpty(data.get("booking_time"), "");
+			String booking_time_s = StringUtils.defaultIfEmpty(data.get("booking_time_s"), "");
+			String booking_time_e = StringUtils.defaultIfEmpty(data.get("booking_time_e"), "");
 			String per_num = StringUtils.defaultIfEmpty(data.get("per_num"), "");
 			String product_price = StringUtils.defaultIfEmpty(data.get("product_price"), "");
 			String process_status = StringUtils.defaultIfEmpty(data.get("process_status"), "");
@@ -141,7 +143,7 @@ public class GolfLinkDao {
 			String condo_price = StringUtils.defaultIfEmpty(data.get("condo_price"), "");
 			
 			ArrayList<Object> bind = new ArrayList<Object>();
-			
+						
 			String setQuery = "";
 			if(booking_day.length() > 0){
 				setQuery += ",booking_day = ? " ;
@@ -150,6 +152,14 @@ public class GolfLinkDao {
 			if(booking_time.length() > 0){
 				setQuery += ",booking_time = ? " ;
 				bind.add(booking_time);
+			}
+			if(booking_time_s.length() > 0){
+				setQuery += ",booking_time_s = ? " ;
+				bind.add(booking_time_s);				
+			}
+			if(booking_time_e.length() > 0){
+				setQuery += ",booking_time_e = ? " ;
+				bind.add(booking_time_e);				
 			}
 			if(product_price.length() > 0){
 				setQuery += ",product_price = ? " ;

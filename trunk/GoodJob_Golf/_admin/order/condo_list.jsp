@@ -73,7 +73,7 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 } 
 
 function updatePrice(reserveseq){
-	var status = $("#Price").val();
+	var status = $("#Price"+reserveseq).val();
 
 	$.ajax({
 	  url: "/_admin/order/ajax/ajax_status_update.jsp?tablename=tb_condo_reserve&reserveseq="+reserveseq+"&colname=condo_price&status="+status,
@@ -93,7 +93,7 @@ function updatePrice(reserveseq){
 }
 
 function updateStatus(reserveseq){
-	var status = $("#ddlStatus").val();
+	var status = $("#ddlStatus"+reserveseq).val();
 
 	$.ajax({
 	  url: "/_admin/order/ajax/ajax_status_update.jsp?tablename=tb_condo_reserve&reserveseq="+reserveseq+"&colname=process_status&status="+status,
@@ -182,11 +182,11 @@ if(list != null){
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
           <td align="center" bgcolor="white"><a href="javascript:;" ><img align="absmiddle" src="../images/common/btn_detail.gif" width="75" height="22" border="0" onMouseover="ddrivetip('<%=list.get(i).getReserve_memo() %>');" onMouseout="hideddrivetip()"></a></td>
           <td align="center" bgcolor="white">
-			<input id="Price" name="price" type="text" size="10" value="<%=commify(list.get(i).getCondo_price())%>" class="input_box">
+			<input id="Price<%=list.get(i).getReserve_seq()%>" name="price" type="text" size="10" value="<%=commify(list.get(i).getCondo_price())%>" class="input_box">
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePrice('<%=list.get(i).getReserve_seq()%>');">
           </td>
           <td align="center" bgcolor="white">
-              <select id="ddlStatus" name="ddlStatus" size="1">
+              <select id="ddlStatus<%=list.get(i).getReserve_seq()%>" name="ddlStatus" size="1">
 				<option value="0" <%=("0".equals(list.get(i).getProcess_status())?" selected":"")%>>예약대기</option>
 				<option value="1" <%=("1".equals(list.get(i).getProcess_status())?" selected":"")%>>예약완료</option>
 				<option value="2" <%=("2".equals(list.get(i).getProcess_status())?" selected":"")%>>취소불가</option>

@@ -20,10 +20,10 @@ if(colname.equals("product_price")){
 	params.put("process_status",status);
 }else if(colname.equals("per_num")){
 	params.put("per_num",status);
-}else if(colname.equals("booking_date")){
-	String[] arrDates = status.split(" ");
-	params.put("booking_day",arrDates[0].replace("-",""));
-	params.put("booking_time",arrDates[1].replace(":",""));
+}else if(colname.equals("booking_time")){
+	String[] arrDates = status.split(":");
+	params.put("booking_time_s",arrDates[0]);
+	params.put("booking_time_e",arrDates[1]);
 }else if(colname.equals("package_price")){
 	params.put("package_price",status);
 }else if(colname.equals("condo_price")){

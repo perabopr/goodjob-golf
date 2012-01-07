@@ -27,6 +27,29 @@ public class ORDER {
 		"FROM {0}" +
 		" {1} ORDER BY reserve_seq desc LIMIT ? , ? ";
 	
+	public static final String RealPre
+	=	"SELECT " +
+			" reserve_seq " +
+			",menu_seq " +
+			",golflink_seq "+
+			",product_seq "+
+			",productsub_seq "+
+			",reserve_day "+
+			",reserve_name "+
+			",reserve_uid "+
+			",golflink_name "+
+			",booking_day "+
+			",booking_time_s "+
+			",booking_time_e "+
+			",golflink_course "+
+			",per_num "+
+			",reserve_phone "+
+			",product_price "+
+			",coupon_price "+
+			",process_status "+
+		"FROM tb_golflink_reserve " +
+		"WHERE reserve_seq = ?";
+	
 	public static final String listPackage
 	=	"SELECT " +
 			" reserve_seq" +
@@ -45,6 +68,25 @@ public class ORDER {
 			",process_status " +
 		"FROM {0}" +
 		" {1} ORDER BY reserve_seq desc LIMIT ? , ? ";
+	
+	public static final String Package
+	=	"SELECT " +
+			" reserve_seq" +
+			",menu_seq " +
+			",package_seq " +
+			",reserve_day " +
+			",reserve_name " +
+			",reserve_uid " +
+			",package_name1 " +
+			",package_name2 " +
+			",tour_date " +
+			",per_num " +
+			",reserve_phone " +
+			",package_price " +
+			",IFNULL(request_content, '''') request_content " +
+			",process_status " +
+		"FROM tb_package_reserve " +
+		"WHERE reserve_seq = ?";
 	
 	public static final String listCondo
 	=	"SELECT " +
@@ -67,6 +109,28 @@ public class ORDER {
 			",process_status " +
 		"FROM {0}" +
 		" {1} ORDER BY reserve_seq desc LIMIT ? , ? ";
+	
+	public static final String Condo
+	=	"SELECT " +
+			" reserve_seq " +
+			",menu_seq " +
+			",condo_seq " +
+			",reserve_day " +
+			",reserve_uid " +
+			",reserve_name " +
+			",condo_name " +
+			",roomtype " +
+			",condoroom_seq " +
+			",in_date " +
+			",out_date " +
+			",per_num " +
+			",room_num " +
+			",reserve_phone " +
+			",condo_price " +
+			",reserve_memo " +
+			",process_status " +
+		"FROM tb_condo_reserve " +
+		"WHERE reserve_seq = ?";
 	
 	public static final String totalcnt = "SELECT COUNT(*) AS cnt FROM {0} {1} ";
 	

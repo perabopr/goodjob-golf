@@ -76,6 +76,29 @@ public class CondoDao {
 		return list;
 	}
 	
+	public List<CondoDto> getCondoReserve(int seq){
+		List<CondoDto> list = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+
+			ArrayList<Object> params = new ArrayList<Object>();
+			params.add(seq);
+			
+			ResultSetHandler rsh = new BeanListHandler(CondoDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<CondoDto>)qr.query(conn , ORDER.Condo, rsh , params.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return list;
+	}
+	
 	public int getTotalCount(String tableName , Map<String,String> data) {
 		Connection conn = null;
 		Map<String, Long> map = null;

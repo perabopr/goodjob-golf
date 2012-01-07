@@ -44,7 +44,6 @@ function reserveAgree(){
 	$("#reserveName").val('<%=request.getParameter("reserveName")%>');
 	$("#reservePhone").val('<%=request.getParameter("reservePhone")%>');
 	$("#reserveEmail").val('<%=request.getParameter("reserveEmail")%>');
-	$("#reserveRequest").val('<%=request.getParameter("reserveRequest")%>');
 	frm.submit();
 }
 </script>
@@ -63,7 +62,7 @@ function reserveAgree(){
 <input type="hidden" id="reserveName" name="reserveName">
 <input type="hidden" id="reservePhone" name="reservePhone">
 <input type="hidden" id="reserveEmail" name="reserveEmail">
-<input type="hidden" id="reserveRequest" name="reserveRequest">
+<textarea id="reserveRequest" name="reserveRequest" style="display:none"><%=request.getParameter("reserveRequest")%></textarea>
 </FORM>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
 <TR>

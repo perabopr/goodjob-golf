@@ -18,6 +18,7 @@ String rName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
 String rPhone = StringUtils.trimToEmpty(request.getParameter("reservePhone"));
 String rEmail = StringUtils.trimToEmpty(request.getParameter("reserveEmail"));
 String rRequest = StringUtils.trimToEmpty(request.getParameter("reserveRequest"));
+rRequest = rRequest.replaceAll("\r\n","</br>");
 
 if(productsubSeq == 0 || golf == 0 || date == 0
 		|| cdate == 0 || rCnt == 0 || rTeam == 0){
@@ -68,7 +69,7 @@ function billok(){
 <input type="hidden" id="reserveName" name="reserveName" value="<%=rName %>">
 <input type="hidden" id="reservePhone" name="reservePhone" value="<%=rPhone %>">
 <input type="hidden" id="reserveEmail" name="reserveEmail" value="<%=rEmail %>">
-<input type="hidden" id="reserveRequest" name="reserveRequest" value="<%=rRequest %>">
+<textarea id="reserveRequest" name="reserveRequest" style="display:none"><%=rRequest%></textarea>
 
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
 <TR>

@@ -132,7 +132,8 @@ public class RESERVE {
 			",reserve_uid" +
 			",golflink_name" +
 			",booking_day" +
-			",booking_time" +
+			",booking_time_s" +
+			",booking_time_e" +
 			",golflink_course" +
 			",per_num" +
 			",reserve_phone" +
@@ -146,7 +147,11 @@ public class RESERVE {
 			",B.product_seq" +
 			",C.productsub_seq" +
 			",NOW(),?,?" +
-			",A.golflink_name, B.product_date, C.time_start, IFNULL(D.course_name, '')" +
+			",A.golflink_name" +
+			",B.product_date" +
+			",C.time_start" +
+			",C.time_end" +
+			",IFNULL(D.course_name, '')" +
 			",?,?,?,?,?,? " +
 		"FROM tb_golflink A " +
 			"INNER JOIN tb_product B on(A.golflink_seq = B.golflink_seq) " +

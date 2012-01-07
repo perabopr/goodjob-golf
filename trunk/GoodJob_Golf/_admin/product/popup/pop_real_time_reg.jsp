@@ -145,7 +145,6 @@ function selSetting(sDate){
 		  cache: false,
 		  async: false,
 		  success: function(html){
-			alert(html);
 			var evalData = eval("("+html+")");
 			if(evalData.Product.length == 1){
 				$("#prdtseq").val(evalData.Product[0].a);

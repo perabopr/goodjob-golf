@@ -35,7 +35,7 @@ if(prList.size() != 1){
 		GolfLinkReserveDto glrDto = new GolfLinkReserveDto();
 		glrDto.setReserve_name(rName);
 		glrDto.setReserve_uid(rEmail);
-		glrDto.setPer_num(rCnt);
+		glrDto.setPer_num(Integer.toString(rCnt));
 		glrDto.setReserve_phone(rPhone);
 		glrDto.setProduct_price(prList.get(0).getGoodjob_price() * rCnt);
 		glrDto.setCoupon_price(0);

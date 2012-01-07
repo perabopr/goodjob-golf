@@ -51,7 +51,7 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 } 
 
 function updateStatus(reserveseq){
-	var status = $("#ddlStatus").val();
+	var status = $("#ddlStatus"+reserveseq).val();
 
 	$.ajax({
 	  url: "/_admin/order/ajax/ajax_status_update.jsp?tablename=tb_golflink_reserve&reserveseq="+reserveseq+"&colname=process_status&status="+status,
@@ -116,7 +116,7 @@ function goPage(val){
 <%
 if(list != null){
 	for(int i = 0; i < list.size();i++){
-		String vbookingDate = list.get(i).getBooking_day() + list.get(i).getBooking_time();
+		String vbookingDate = list.get(i).getBooking_day() + list.get(i).getBooking_time_s();
 		vbookingDate = vbookingDate.substring(0,4)
 				+ "-" + vbookingDate.substring(4,6)
 				+ "-" + vbookingDate.substring(6,8)
@@ -133,7 +133,7 @@ if(list != null){
           <td align="center" bgcolor="white"><%=list.get(i).getGolflink_course() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
           <td align="right" bgcolor="white"><span class=orange><%=commify(list.get(i).getProduct_price()) %> 원</span></td>
-          <td align="center" bgcolor="white"><select id="ddlStatus" name="ddlStatus" size="1">
+          <td align="center" bgcolor="white"><select id="ddlStatus<%=list.get(i).getReserve_seq()%>" name="ddlStatus" size="1">
               <option value="0" <%=("0".equals(list.get(i).getProcess_status())?" selected":"")%>>예약대기</option>
               <option value="1" <%=("1".equals(list.get(i).getProcess_status())?" selected":"")%>>예약완료</option>
               <option value="2" <%=("2".equals(list.get(i).getProcess_status())?" selected":"")%>>취소불가</option>

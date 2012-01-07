@@ -11,12 +11,13 @@ public class ORDER {
 			",golflink_seq "+
 			",product_seq "+
 			",productsub_seq "+
-			",reserve_day "+
+			",date_format(reserve_day,''%Y-%m-%d %H:%i'') reserve_day "+
 			",reserve_name "+
 			",reserve_uid "+
 			",golflink_name "+
 			",booking_day "+
-			",booking_time "+
+			",booking_time_s "+
+			",booking_time_e "+
 			",golflink_course "+
 			",per_num "+
 			",reserve_phone "+
@@ -31,7 +32,7 @@ public class ORDER {
 			" reserve_seq" +
 			",menu_seq " +
 			",package_seq " +
-			",reserve_day " +
+			",date_format(reserve_day,''%Y-%m-%d %H:%i'') reserve_day " +
 			",reserve_name " +
 			",reserve_uid " +
 			",package_name1 " +
@@ -50,7 +51,7 @@ public class ORDER {
 			" reserve_seq " +
 			",menu_seq " +
 			",condo_seq " +
-			",reserve_day " +
+			",date_format(reserve_day,''%Y-%m-%d %H:%i'') reserve_day " +
 			",reserve_uid " +
 			",reserve_name " +
 			",condo_name " +

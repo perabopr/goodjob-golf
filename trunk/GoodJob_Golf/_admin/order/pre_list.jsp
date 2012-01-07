@@ -51,10 +51,11 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 } 
 
 function updateBookingDate(reserveseq){
-	var status = $("#bookingDate").val();
+	var status = $("#bookingTime_s_h"+reserveseq).val() + $("#bookingTime_s_t"+reserveseq).val()
+			+":"+$("#bookingTime_e_h"+reserveseq).val()+$("#bookingTime_e_t"+reserveseq).val();
 
 	$.ajax({
-	  url: "/_admin/order/ajax/ajax_status_update.jsp?tablename=tb_golflink_reserve&reserveseq="+reserveseq+"&colname=booking_date&status="+status,
+	  url: "/_admin/order/ajax/ajax_status_update.jsp?tablename=tb_golflink_reserve&reserveseq="+reserveseq+"&colname=booking_time&status="+status,
 	  cache: false,
 	  async: false,
 	  success: function(html){
@@ -71,7 +72,7 @@ function updateBookingDate(reserveseq){
 }
 
 function updatePerCnt(reserveseq){
-	var status = $("#perCnt").val();
+	var status = $("#perCnt"+reserveseq).val();
 
 	$.ajax({
 	  url: "/_admin/order/ajax/ajax_status_update.jsp?tablename=tb_golflink_reserve&reserveseq="+reserveseq+"&colname=per_num&status="+status,
@@ -91,7 +92,7 @@ function updatePerCnt(reserveseq){
 }
 
 function updatePrice(reserveseq){
-	var status = $("#Price").val();
+	var status = $("#Price"+reserveseq).val();
 
 	$.ajax({
 	  url: "/_admin/order/ajax/ajax_status_update.jsp?tablename=tb_golflink_reserve&reserveseq="+reserveseq+"&colname=product_price&status="+status,
@@ -111,7 +112,7 @@ function updatePrice(reserveseq){
 }
 
 function updateStatus(reserveseq){
-	var status = $("#ddlStatus").val();
+	var status = $("#ddlStatus"+reserveseq).val();
 
 	$.ajax({
 	  url: "/_admin/order/ajax/ajax_status_update.jsp?tablename=tb_golflink_reserve&reserveseq="+reserveseq+"&colname=process_status&status="+status,
@@ -164,9 +165,9 @@ function goPage(val){
         <tr>
           <td bgcolor="#e6e7e8" align="center" width="120" height="25"><span class=normal_b>예약신청일</span></td>
           <td bgcolor="#e6e7e8" align="center" width="100"><span class=normal_b>예약자</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="195"><span class=normal_b>아이디</span></td>
-          <td bgcolor="#E6E7E8" align="center" width="223"><span class=normal_b>골프장명</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="200"><span class=normal_b>부킹일시</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="190"><span class=normal_b>아이디</span></td>
+          <td bgcolor="#E6E7E8" align="center" width="220"><span class=normal_b>골프장명</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="208"><span class=normal_b>부킹일시</span></td>
           <td bgcolor="#E6E7E8" align="center" width="130"><span class=normal_b>인원/팀</span></td>
           <td bgcolor="#e6e7e8" align="center" width="103"><span class=normal_b>연락처</span></td>
           <td bgcolor="#e6e7e8" align="center" width="150"><span class=normal_b>금액</span></td>
@@ -176,12 +177,32 @@ function goPage(val){
 <%
 if(list != null){
 	for(int i = 0; i < list.size();i++){
-		String vbookingDate = list.get(i).getBooking_day() + list.get(i).getBooking_time();
+		String vbookingDate = list.get(i).getBooking_day();
 		vbookingDate = vbookingDate.substring(0,4)
 				+ "-" + vbookingDate.substring(4,6)
-				+ "-" + vbookingDate.substring(6,8)
-				+ " " + vbookingDate.substring(8,10)
-				+ "~" + vbookingDate.substring(10,12);				 
+				+ "-" + vbookingDate.substring(6,8);	
+		
+		String vbookingTime_s = "";
+		String vbookingTime_s_1 = "";
+		String vbookingTime_s_2 = "";
+		if(list.get(i).getBooking_time_s() != null) {
+			vbookingTime_s = list.get(i).getBooking_time_s();
+			if(vbookingTime_s.length() > 0){
+				vbookingTime_s_1 = vbookingTime_s.substring(0,2);
+				vbookingTime_s_2 = vbookingTime_s.substring(2,4);
+			}
+		}
+		
+		String vbookingTime_e = "";
+		String vbookingTime_e_1 = "";
+		String vbookingTime_e_2 = "";
+		if(list.get(i).getBooking_time_e() != null){
+			vbookingTime_e = list.get(i).getBooking_time_e();
+			if(vbookingTime_e.length() > 0){
+				vbookingTime_e_1 = vbookingTime_e.substring(0,2);
+				vbookingTime_e_2 = vbookingTime_e.substring(2,4);
+			}
+		}
 %>
         <tr>
           <td bgcolor="white" align="center" height="45"><%=list.get(i).getReserve_day() %></td>
@@ -189,20 +210,37 @@ if(list != null){
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_uid() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getGolflink_name() %></td>
           <td align="center" bgcolor="white">
-          	<input id="bookingDate" name="bookingDate" type="text" size="16" value="<%=vbookingDate %>" class="input_box">
-          	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateBookingDate('<%=list.get(i).getReserve_seq()%>');">
+          	<table width="100%">
+          	<tr>
+          	<td>
+          		<input id="bookingDate<%=list.get(i).getReserve_seq()%>" name="bookingDate" type="text" size="16" value="<%=vbookingDate %>" class="input_box" readonly>
+          	</td>
+          	<td>
+          		<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateBookingDate('<%=list.get(i).getReserve_seq()%>');">
+          	</td>
+          	</tr>          	
+          	<td colspan="2">
+          		<input id="bookingTime_s_h<%=list.get(i).getReserve_seq()%>" name="bookingTime_s_h" type="text" size="2" value="<%=vbookingTime_s_1 %>" class="input_box" maxlength="2">시
+          		<input id="bookingTime_s_t<%=list.get(i).getReserve_seq()%>" name="bookingTime_s_t" type="text" size="2" value="<%=vbookingTime_s_1 %>" class="input_box" maxlength="2">분
+          		~
+          		<input id="bookingTime_e_h<%=list.get(i).getReserve_seq()%>" name="bookingTime_s_h" type="text" size="2" value="<%=vbookingTime_e_1 %>" class="input_box" maxlength="2">시
+          		<input id="bookingTime_e_t<%=list.get(i).getReserve_seq()%>" name="bookingTime_e_t" type="text" size="2" value="<%=vbookingTime_e_2 %>" class="input_box" maxlength="2">분
+          	</td>
+          	<tr>
+          	</tr>
+          	</table>
           </td>
           <td align="center" bgcolor="white">
-          	<input type="text" id="perCnt" name="perCnt" size="1" maxlength="2" value="<%=list.get(i).getPer_num() %>" class="input_box">명/<input type="text" id="perTeam" name="perTeam" size="1" maxlength="2" readonly value="1" class="input_box">팀
+          	<input type="text" id="perCnt<%=list.get(i).getReserve_seq()%>" name="perCnt" size="1" maxlength="2" value="<%=list.get(i).getPer_num() %>" class="input_box">명/<input type="text" id="perTeam" name="perTeam" size="1" maxlength="2" readonly value="1" class="input_box">팀
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePerCnt('<%=list.get(i).getReserve_seq()%>');">
           </td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
           <td align="center" bgcolor="white">
-          	<input id="Price" name="Price" type="text" size="10" value="<%=commify(list.get(i).getProduct_price()) %>" class="input_box">
+          	<input id="Price<%=list.get(i).getReserve_seq()%>" name="Price" type="text" size="10" value="<%=commify(list.get(i).getProduct_price()) %>" class="input_box">
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePrice('<%=list.get(i).getReserve_seq()%>');">
           </td>
           <td align="center" bgcolor="white">
-              <select id="ddlStatus" name="ddlStatus" size="1">
+              <select id="ddlStatus<%=list.get(i).getReserve_seq()%>" name="ddlStatus" size="1">
 				<option value="0" <%=("0".equals(list.get(i).getProcess_status())?" selected":"")%>>예약대기</option>
 				<option value="1" <%=("1".equals(list.get(i).getProcess_status())?" selected":"")%>>예약완료</option>
 				<option value="2" <%=("2".equals(list.get(i).getProcess_status())?" selected":"")%>>취소불가</option>

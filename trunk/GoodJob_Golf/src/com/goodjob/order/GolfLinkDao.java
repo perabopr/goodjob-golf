@@ -75,6 +75,29 @@ public class GolfLinkDao {
 		return list;
 	}
 	
+	public List<GolfLinkDto> getGolfLinkReserve(int seq){
+		List<GolfLinkDto> list = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+
+			ArrayList<Object> params = new ArrayList<Object>();
+			params.add(seq);
+			
+			ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<GolfLinkDto>)qr.query(conn , ORDER.RealPre, rsh , params.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return list;
+	}
+	
 	public int getTotalCount(String tableName , Map<String,String> data) {
 		Connection conn = null;
 		Map<String, Long> map = null;

@@ -103,15 +103,15 @@ function goPage(val){
     <td align="center" width="1851"><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
         <tr>
           <td bgcolor="#e6e7e8" height="25" align="center" width="156"><span class=normal_b>예약신청일</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="107"><span class=normal_b>예약자</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="157"><span class=normal_b>예약자</span></td>
           <td bgcolor="#e6e7e8" align="center" width="234"><span class=normal_b>아이디</span></td>
           <td width="235" align="center" bgcolor="#E6E7E8"><span class=normal_b>골프장명</span></td>
           <td bgcolor="#e6e7e8" align="center" width="209"><span class=normal_b>부킹일시</span></td>
           <td bgcolor="#e6e7e8" align="center" width="216"><span class=normal_b>코스</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="141"><span class=normal_b>연락처</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="167"><span class=normal_b>연락처</span></td>
           <td align="center" bgcolor="#e6e7e8" width="114"><span class=normal_b>입금액</span></td>
-          <td width="163" align="center" bgcolor="#E6E7E8"><span class=normal_b>처리상태</span></td>
-          <td width="226" align="center" bgcolor="#E6E7E8"><span class=normal_b>SMS</span></td>
+          <td align="center" bgcolor="#E6E7E8" width="163"><span class=normal_b>처리상태</span></td>
+          <td align="center" bgcolor="#E6E7E8" width="150"><span class=normal_b>SMS</span></td>
         </tr>
 <%
 if(list != null){
@@ -140,7 +140,9 @@ if(list != null){
               <option value="3" <%=("3".equals(list.get(i).getProcess_status())?" selected":"")%>>예약취소</option>
             </select>
             <img src="../images/common/btn_save2.gif" width="32" height="16" border="0" align="absmiddle" style="cursor:pointer" onclick="updateStatus('<%=list.get(i).getReserve_seq()%>');"></td>
-          <td align="center" bgcolor="white"><img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0"> &nbsp;<img align="absmiddle" src="../images/common/btn_cancel.gif" width="34" height="16" border="0"> &nbsp;<img align="absmiddle" src="../images/common/btn_oneday.gif" width="59" height="16" border="0"></td>
+          <td align="center" bgcolor="white">
+	          <img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=1&seq=<%=list.get(i).getReserve_seq()%>','name','740','350','yes');return false;">
+          </td>
         </tr>
 <%
 	}

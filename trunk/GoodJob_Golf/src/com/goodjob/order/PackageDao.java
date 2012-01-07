@@ -78,6 +78,29 @@ public class PackageDao {
 		return list;
 	}
 	
+	public List<PackageDto> getPackageReserve(int seq){
+		List<PackageDto> list = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+
+			ArrayList<Object> params = new ArrayList<Object>();
+			params.add(seq);
+			
+			ResultSetHandler rsh = new BeanListHandler(PackageDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<PackageDto>)qr.query(conn , ORDER.Package, rsh , params.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return list;
+	}
+	
 	public int getTotalCount(String tableName , Map<String,String> data) {
 		Connection conn = null;
 		Map<String, Long> map = null;

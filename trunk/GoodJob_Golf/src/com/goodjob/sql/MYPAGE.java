@@ -42,7 +42,7 @@ public class MYPAGE {
 							"       date_format(a.reserve_day,''%Y.%m.%d'') reserve_day, " +
 							"       a.reserve_name, " +
 							"       a.condo_name, " +
-							"       a.roomtype, " +
+							"       a.roomtype,a.room_num, " +
 							"       a.in_date, " +
 							"       a.out_date, " +
 							"       a.reserve_phone, " +

@@ -327,19 +327,27 @@ location.href="/member/join_agreement.jsp";
                                                                           <option value="gmail.com">gmail.com</option>
                                                                           <option value="self">직접입력하기</option>
                                                                         </select>
-                                                                        <a href="javascript:idcheck();"><img align="absmiddle" src="/images/mem_join/btn_idcheck.gif" border="0"></a>
+                                                                        <a href="javascript:idcheck();"><img align="absmiddle" src="/images/mem_join/btn_mail_dup.gif" width="47" height="19" border="0"></a>
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                       <td height="25"><span class=mem_notice>자주 사용하시는 E-mail계정을 입력하시기 바랍니다.</span></td>
                                                                     </tr>
+                                                                  </table></td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;">E-Mail 회원인증</td>
+                                                                <td bgcolor="white" style="padding-left:10px;"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                     <tr>
                                                                       <td height="30">
-                                                                      <a href="javascript:email_auth();"><img align="absmiddle" src="/images/mem_join/btn_number_send.gif" width="75" height="19" border="0"></a>
-                                                                      <img align="absmiddle" src="/images/mem_join/btn_send_title.gif" width="81" height="19" border="0">
+                                                                      <a href="javascript:email_auth();"><img align="absmiddle" src="/images/mem_join/btn_mail_send.gif" border="0"></a>
+                                                                      <img align="absmiddle" src="/images/mem_join/btn_send_title.gif" border="0">
                                                                       		<input id="auth_no" class="mem_input" type="text" size="15" name="auth_no">
                                                                           <a href="javascript:auth_check();"><img align="absmiddle" src="/images/mem_join/btn_send_confirm.gif" width="42" height="19" border="0"></a>
 																		</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                      <td height="20" colspan="2" width="411"><span class=mem_notice>아이디로 입력하신 E-Mail로 인증번호를 전송해 드립니다.</span></td>
                                                                     </tr>
                                                                   </table></td>
                                                               </tr>

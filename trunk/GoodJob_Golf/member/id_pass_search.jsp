@@ -12,44 +12,45 @@
 
    	function search_id(){
 
-   		if(!$('#auth_no1').val()) {
-			alert('인증번호를 입력해 주세요.');
+   		if(!$('#user_name1').val()) {
+			alert('회원명을 입력해 주세요.');
 			return;
 		}
 		
-   		if(!$('#mobile0_i').val()) {
+   		if(!$('#mobile0').val()) {
 			alert('이통사를 선택해 주세요.');
 			return;
 		}
 
-   		if(!$('#mobile1_i').val()) {
+   		if(!$('#mobile1').val()) {
 			alert('핸드폰 앞자리를 선택해 주세요.');
-			$('#mobile1_i').focus();
+			$('#mobile1').focus();
 			return;
 		}
 
-   		if(!$('#mobile2_i').val()) {
+   		if(!$('#mobile2').val()) {
 			alert('핸드폰 번호를 입력해 주세요.');
-			$('#mobile2_i').focus();
+			$('#mobile2').focus();
 			return;
 		}
 
-   		if(!$('#mobile3_i').val()) {
+   		if(!$('#mobile3').val()) {
    			alert('핸드폰 번호를 입력해 주세요.');
-			$('#mobile3_i').focus();
+			$('#mobile3').focus();
 			return;
 		}
 
-		var rphone = $('#mobile1_i').val() + "-" + $('#mobile2_i').val() + "-" + $('#mobile3_i').val();
-		var name = $('#sh_name').val();
-		var auth_no = $('#auth_no1').val();
+		var mobile = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
+		var name = $('#user_name1').val();
+		//var auth_no = $('#auth_no1').val();
 		
 		$.ajax({
 			type: "POST",
-			url: "/member/send_id_pwd.jsp",
-			data: "type=id&mem_name="+name+"&mobile="+rphone+"&auth_no="+auth_no,
+			url: "/member/search_result.jsp",
+			data: "type=id&mem_name="+name+"&mobile="+mobile,
 			success: function(msg){
-				if($.trim(msg) == '0'){
+				$('#request_id').html($.trim(msg));
+				/*if($.trim(msg) == '0'){
 					alert("아이디가   핸드폰/이메일로  발송 되었습니다.");
 				}
 				else if($.trim(msg) == '1'){
@@ -60,101 +61,98 @@
 				}
 				else{
 					alert("인증중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
-				}
+				}*/
 		}});
 	}
 
    	function search_pwd(){
 
-   		if(!$('#auth_no2').val()) {
-			alert('인증번호를 입력해 주세요.');
+   		if(!$('#user_name2').val()) {
+			alert('회원명을 입력해 주세요.');
+			return;
+		}
+
+   		if(!$('#mem_id').val()) {
+			alert('아이디를 입력해 주세요');
+			$('#mem_id').focus();
+			return;
+		}
+
+		if(!$('#mem_domain').val()) {
+			alert('도메인을 입력해 주세요');
+			$('#mem_domain').focus();
 			return;
 		}
 		
-   		if(!$('#mobile0_p').val()) {
-			alert('이통사를 선택해 주세요.');
-			return;
-		}
-
-   		if(!$('#mobile1_p').val()) {
-			alert('핸드폰 앞자리를 선택해 주세요.');
-			$('#mobile01').focus();
-			return;
-		}
-
-   		if(!$('#mobile2_p').val()) {
-			alert('핸드폰 번호를 입력해 주세요.');
-			$('#mobile02').focus();
-			return;
-		}
-
-   		if(!$('#mobile3_p').val()) {
-   			alert('핸드폰 번호를 입력해 주세요.');
-			$('#mobile03').focus();
-			return;
-		}
-
-		var rphone = $('#mobile1_p').val() + "-" + $('#mobile2_p').val() + "-" + $('#mobile3_p').val();
-		var id = $('#sh_id').val();
-		var auth_no = $('#auth_no2').val();
+		var id = $('#mem_id').val() + "@" + $('#mem_domain').val();
+		var name = $('#user_name2').val();
 		
 		$.ajax({
 			type: "POST",
-			url: "/member/send_id_pwd.jsp",
-			data: "type=pwd&mem_id="+id+"&mobile="+rphone+"&auth_no="+auth_no,
+			url: "/member/search_result.jsp",
+			data: "type=pwd&mem_name="+name+"&mem_id="+id,
 			success: function(msg){
+				//$('#request_pwd').html($.trim(msg));
 				if($.trim(msg) == '0'){
-					alert("비밀번호가  핸드폰/이메일로  발송 되었습니다.");
+					alert("비밀번호가  이메일로  발송 되었습니다.");
 				}
 				else if($.trim(msg) == '1'){
 					alert("인증 번호가 일치하지 않습니다.다시 인증을 시도해 주세요.");
 				}
 				else if($.trim(msg) == '2'){
-					alert("요청한 아이디와 핸드폰 정보가 고객님의 정보와 일치 하지 않습니다.");
+					alert("요청한 회원명과 아이디  정보가 고객님의 정보와 일치 하지 않습니다.");
 				}
 				else{
-					alert("인증중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
+					alert("메일 발송중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
 				}
 		}});
 		
 	}
 
-   	function sms_auth(val){
+	function domainChange(val){
+		if(val == 'self'){
+			document.getElementById("mem_domain").readOnly = false;
+			$('#mem_domain').val("");
+		}
+		else{
+			document.getElementById("mem_domain").readOnly = true;
+			$('#mem_domain').val(val);
+		}
+		$('#auth_yn').val("N");
+	}
+	
+   	function send_email(){
 
-   		if(!$('#mobile0_'+val).val()) {
-			alert('이통사를 선택해 주세요.');
+   		if(!$('#user_name2').val()) {
+			alert('회원명을 입력해 주세요.');
 			return;
 		}
 
-   		if(!$('#mobile1_'+val).val()) {
-			alert('핸드폰 앞자리를 선택해 주세요.');
-			$('#mobile1_'+val).focus();
+   		if(!$('#mem_id').val()) {
+			alert('아이디를 입력해 주세요');
+			$('#mem_id').focus();
 			return;
 		}
 
-   		if(!$('#mobile2_'+val).val()) {
-			alert('핸드폰 번호를 입력해 주세요.');
-			$('#mobile2_'+val).focus();
+		if(!$('#mem_domain').val()) {
+			alert('도메인을 입력해 주세요');
+			$('#mem_domain').focus();
 			return;
 		}
-
-   		if(!$('#mobile3_'+val).val()) {
-   			alert('핸드폰 번호를 입력해 주세요.');
-			$('#mobile3_'+val).focus();
-			return;
-		}
-
-		var rphone = $('#mobile1_'+val).val() + "-" + $('#mobile2_'+val).val() + "-" + $('#mobile3_'+val).val();
+		
+		var id = $('#mem_id').val() + "@" + $('#mem_domain').val();
+		var name = $('#user_name2').val();
+		
 		$.ajax({
 			type: "POST",
-			url: "/common/authSMS.jsp",
-			data: "rphone="+rphone,
+			url: "/member/search_result.jsp",
+			data: "type=send&mem_name="+name+"&mem_id="+id,
 			success: function(msg){
 				if($.trim(msg) == '0'){
-					alert("인증 번호가 발송 되었습니다.");
+					alert("비밀번호가 이메일로 발송 되었습니다.");
 				}
 				else{
-					alert("인증 번호가 발송중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
+					alert("메일 발송중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
 				}
 		}});
 	}
@@ -171,9 +169,7 @@
 <form name="shForm" method="post">
 <input type="hidden" id="type" name="type" value=""/>
 <input type="hidden" id="mem_name" name="mem_name" value=""/>
-<input type="hidden" id="mobile" name="mobile" value=""/>
 <input type="hidden" id="auth_no" name="auth_no" value=""/>
-<input type="hidden" id="mem_id" name="mem_id" value=""/>
 </form>
                                         <td align="center" bgcolor="white" width="745" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="95%">
                                             <tr>
@@ -190,22 +186,26 @@
                                                           <td align="center" width="640"><img src="../../images/mem_join/img_id_search_title.gif" width="640" height="100" border="0"></td>
                                                         </tr>
                                                         <tr>
-                                                          <td align="center"><table border="0" cellpadding="2" cellspacing="1" width="500" bgcolor="#D1D3D4">
+                                                          <td align="center">
+                                                          
+                                                          <table align="center" border="0" cellpadding="2" cellspacing="1" width="600" bgcolor="#D1D3D4">
                                                               <tr>
-                                                                <td width="494" bgcolor="white" align="center" height="100"><table border="0" cellpadding="2" cellspacing="1" width="95%">
-                                                                    <tr>
-                                                                      <td height="35" align="left" style="padding-left:55px;">이름&nbsp;&nbsp;:&nbsp;&nbsp;<input id="sh_name" class="mem_input" type="text" size="30" name="sh_name">
-                                                                      </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                      <td height="40" align="center">
-                                                                      <select id="mobile0_i" name="mobile0_i" size="1">
+                                                                <td bgcolor="#AED247" colspan="2" width="594"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject width="142">회원명</td>
+                                                                <td bgcolor="white" style="padding-left:10px;" width="431"><input id="user_name1" class="mem_input" type="text" size="30" name="user_name1"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" width="142" height="25">핸드폰번호</td>
+                                                                <td bgcolor="white" style="padding-left:10px;">
+                                                                <select id="mobile0" name="mobile0" size="1">
                                                                             <option value="">통신사선택</option>
                                                                             <option value="SKT">SKT</option>
                                                                             <option value="KT">KT</option>
                                                                             <option value="LG">LG</option>
                                                                           </select>
-                                                                        <select id="mobile1_i" name="mobile1_i" size="1">
+                                                                        <select id="mobile1" name="mobile1" size="1">
                                                                             <option value="010">010</option>
                                                                             <option value="011">011</option>
                                                                             <option value="016">016</option>
@@ -214,19 +214,20 @@
                                                                             <option value="019">019</option>
                                                                           </select>
                                                                           -
-                                                                          <input id="mobile2_i" class="mem_input" type="text" size="8" name="mobile2_i" maxlength="4">
+                                                                          <input id="mobile2" class="mem_input" type="text" size="8" name="mobile2" maxlength="4">
                                                                           -
-                                                                          <input id="mobile3_i" class="mem_input" type="text" size="8" name="mobile3_i" maxlength="4">
-                                                                        <a href="javascript:sms_auth('i');"><img align="absmiddle" src="../../images/mem_join/btn_number_send.gif" width="75" height="19" border="0"></a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                      <td height="40" align="center"><p><img align="absmiddle" src="../../images/mem_join/btn_send_title.gif" width="81" height="19" border="0">
-                                                                          <input id="auth_no1" class="mem_input" type="text" size="15" name="auth_no1"/>
-                                                                          <a href="javascript:search_id();"><img align="absmiddle" src="../../images/mem_join/btn_send_confirm.gif" width="42" height="19" border="0"></a></p></td>
-                                                                    </tr>
-                                                                  </table></td>
+                                                                          <input id="mobile3" class="mem_input" type="text" size="8" name="mobile3" maxlength="4">
+                                                                  <a href="javascript:search_id();"><img align="absmiddle" src="../../images/mem_join/btn_send_confirm.gif" border="0"></a></td>
                                                               </tr>
-                                                            </table></td>
+                                                              <tr>
+                                                                <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" width="142" height="30">아이디확인</td>
+                                                                <td bgcolor="white" style="padding-left:10px;"><p id="request_id"></p></td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td bgcolor="#AED247" colspan="2" width="594"></td>
+                                                              </tr>
+                                                            </table>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                           <td><p>&nbsp;</p></td>
@@ -235,44 +236,51 @@
                                                           <td><img src="../../images/mem_join/img_pw_search_title.gif" width="640" height="115" border="0"></td>
                                                         </tr>
                                                         <tr>
-                                                          <td align="center"><table border="0" cellpadding="2" cellspacing="1" width="500" bgcolor="#D1D3D4">
+                                                          <td align="center">
+                                                          
+                                                          <table align="center" border="0" cellpadding="2" cellspacing="1" width="600" bgcolor="#D1D3D4">
                                                               <tr>
-                                                                <td width="494" bgcolor="white" align="center" height="100"><table border="0" cellpadding="2" cellspacing="1" width="95%">
+                                                                <td bgcolor="#AED247" colspan="2" width="594"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject width="142">회원명</td>
+                                                                <td bgcolor="white" style="padding-left:10px;" width="431"><input id="user_name2" class="mem_input" type="text" size="30" name="user_name2"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">아이디</td>
+                                                                <td bgcolor="white" style="padding-left:10px;"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                     <tr>
-                                                                      <td height="35" align="left" style="padding-left:55px;">아이디&nbsp;&nbsp;:&nbsp;&nbsp;<input id="sh_id" class="mem_input" type="text" size="30" name="sh_id">
-                                                                      </td>
+                                                                      <td height="27"><p>
+                                                                          <input id="mem_id" class="mem_input" type="text" size="15" name="mem_id"/>
+                                                                        @
+                                                                        <input id="mem_domain" class="mem_input" type="text" size="15" name="mem_domain" readonly/>
+                                                                        <select id="domain_sel" name="domain_sel" size="1" onchange="domainChange(this.value);">
+                                                                          <option value="" selected>선택하세요</option>
+                                                                          <option value="naver.com">naver.com</option>
+                                                                          <option value="hanmail.net">hanmail.net</option>
+                                                                          <option value="dreamwiz.com">dreamwiz.com</option>
+                                                                          <option value="empal.com">empal.com</option>
+                                                                          <option value="hanmir.com">hanmir.com</option>
+                                                                          <option value="hanafos.com">hanafos.com</option>
+                                                                          <option value="nate.com">nate.com</option>
+                                                                          <option value="paran.com">paran.com</option>
+                                                                          <option value="yahoo.co.kr">yahoo.co.kr</option>
+                                                                          <option value="gmail.com">gmail.com</option>
+                                                                          <option value="self">직접입력하기</option>
+                                                                        </select>
+                                                                        <a href="javascript:search_pwd();"><img align="absmiddle" src="../../images/mem_join/btn_send_confirm.gif" width="42" height="19" border="0"></a></p></td>
                                                                     </tr>
                                                                     <tr>
-                                                                      <td height="40" align="center">
-                                                                      <select id="mobile0_p" name="mobile0_p" size="1">
-                                                                            <option value="">통신사선택</option>
-                                                                            <option value="SKT">SKT</option>
-                                                                            <option value="KT">KT</option>
-                                                                            <option value="LG">LG</option>
-                                                                          </select>
-                                                                        <select id="mobile1_p" name="mobile1_p" size="1">
-                                                                            <option value="010">010</option>
-                                                                            <option value="011">011</option>
-                                                                            <option value="016">016</option>
-                                                                            <option value="017">017</option>
-                                                                            <option value="018">018</option>
-                                                                            <option value="019">019</option>
-                                                                          </select>
-                                                                          -
-                                                                          <input id="mobile2_p" class="mem_input" type="text" size="8" name="mobile2_p" maxlength="4">
-                                                                          -
-                                                                          <input id="mobile3_p" class="mem_input" type="text" size="8" name="mobile3_p" maxlength="4">
-                                                                        <a href="javascript:sms_auth('p');"><img align="absmiddle" src="../../images/mem_join/btn_number_send.gif" width="75" height="19" border="0"></a></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                      <td height="40" align="center"><p>
-                                                                      <a href="javascript:sms_auth(2);"><img align="absmiddle" src="../../images/mem_join/btn_send_title.gif" width="81" height="19" border="0"></a>
-                                                                          <input id="auth_no2" class="mem_input" type="text" size="15" name="auth_no2"/>
-                                                                          <a href="javascript:search_pwd();"><img align="absmiddle" src="../../images/mem_join/btn_send_confirm.gif" width="42" height="19" border="0"></a></p></td>
+                                                                      <td height="20"><span class=mem_notice>아이디를 입력하시면 회원님의 비밀번호를 메일로 전송해 드립니다..</span></td>
                                                                     </tr>
                                                                   </table></td>
                                                               </tr>
-                                                            </table></td>
+                                                              <tr>
+                                                                <td bgcolor="#AED247" colspan="2" width="594"></td>
+                                                              </tr>
+                                                            </table>
+                                                            
+                                                          </td>
                                                         </tr>
                                                       </table></td>
                                                   </tr>

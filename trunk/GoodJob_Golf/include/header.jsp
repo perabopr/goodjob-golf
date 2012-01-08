@@ -49,7 +49,6 @@ public String commify(int n) {
 	return com.goodjob.util.Utils.numberFormat(n);
 }
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
@@ -227,7 +226,7 @@ $(function() {
                               <td bgcolor="#F7F5F6">
                                   <table border="0" width="235" cellpadding="0" cellspacing="0">
                                       <tr>
-                                          <td width="235"><a href="#"><img src="/images/img_leftmenu/img_customer_center.gif" width="235" height="139" border="0"></a></td>
+                                          <td width="235"><a href="/common/counsel.jsp"><img src="/images/img_leftmenu/img_customer_center.gif" width="235" height="139" border="0"></a></td>
                                       </tr>
                                       <tr>
                                           <td><a href="/common/field_guide.jsp"><img src="/images/img_leftmenu/btn_user_guide.gif" width="235" height="86" border="0"></a></td>

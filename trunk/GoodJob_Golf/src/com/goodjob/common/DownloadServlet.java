@@ -32,10 +32,16 @@ public class DownloadServlet extends HttpServlet {
 			// String rootPath = request.getRealPath("/");
 			String filePath = rootPath + File.separator + fileName;
 			java.io.File tempFile = new java.io.File(filePath);
-
+			
+			
+			
 			fileName = fileName.substring(fileName.lastIndexOf("/") + 1);
 			//fileName = BoardUtils.kscToasc(fileName);
 
+			System.out.println("rootPath : "+rootPath);
+			System.out.println("filePath : "+filePath);
+			System.out.println("fileName : "+fileName);
+			
 			int filesize = (int) tempFile.length();
 			String filetype = "application/x-zip-compressed";
 			// String fileExt = fileName.substring(fileName.lastIndexOf(".")+1);

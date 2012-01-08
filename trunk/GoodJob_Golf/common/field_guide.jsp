@@ -2,9 +2,6 @@
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
-<%
-	
-%>
 <!-- 상단 영역 -->
 <%@ include file="/include/header.jsp" %>
 <!-- 상단 영역 -->

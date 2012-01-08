@@ -68,6 +68,25 @@ win = window.open(mypage, myname, winprops)
 if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); } 
 } 
 
+function newWindowPop(mypage, myname, w, h, scroll){
+	mypage = "/_admin/product/popup/pop_map.jsp";
+	var winl = (screen.width - w) / 2; 
+	var wint = (screen.height - h) / 2; 
+	winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable';
+
+	
+	mypage += "?t=1";
+	if($("#pointx").val().length > 0){
+		mypage += "&x=" + $("#pointx").val();
+	}
+	if($("#pointy").val().length > 0){
+		mypage += "&y=" + $("#pointy").val();
+	}  
+	
+	win = window.open(mypage, myname, winprops); 
+	if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); } 
+}
+
 function real_submit() {
 	
 	if(!$('#golflinkName').val()) {
@@ -216,7 +235,7 @@ function getFileExtension(filePath)
                 <td colspan="2" height="2" width="572"></td>
               </tr>
               <tr>
-                <td colspan="2" width="572"><a href="../inc/naver_map.html" onClick="NewWindow(this.href,'name','420','400','yes');return false;"><img align="absmiddle" src="../images/inc/btn_search_xy.gif" width="65" height="22" border="0"></a> &nbsp;&nbsp;X&nbsp;
+                <td colspan="2" width="572"><a href="javascript:;" onClick="newWindowPop(this.href,'name','450','500','yes');return false;"><img align="absmiddle" src="../images/inc/btn_search_xy.gif" width="65" height="22" border="0"></a> &nbsp;&nbsp;X&nbsp;
                   <input id="pointx" name="pointx" class="input_box" size="20" value="<%= gldto.getPoint_x()%>">
                   &nbsp;&nbsp;Y&nbsp;
                   <input id="pointy" name="pointy" class="input_box" size="20" value="<%= gldto.getPoint_y()%>"></td>

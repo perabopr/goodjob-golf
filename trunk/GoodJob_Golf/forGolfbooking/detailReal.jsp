@@ -192,6 +192,7 @@ function DisplayMenu(vIdx){
 			break;
 		case 4:
 			$("#imgtap4").attr("src", "../../images/booking/btn_tab_on_04.gif");
+			$("#ifrmMap").attr("src", "/forGolfbooking/ifrm_map.jsp?x=<%=glDto.getPoint_x()%>&y=<%=glDto.getPoint_y()%>");
 			$("#destap4").show(); 
 			break;
 	}
@@ -227,122 +228,181 @@ function imgChange(objId){
 <input type="hidden" id="date" name="date" >
 <input type="hidden" id="cdate" name="cdate" >
 </FORM>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
+<TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2>
+<TBODY>
 <TR>
 <TD bgColor=white vAlign=top width=745 align=center>
-<TABLE border=0 cellSpacing=0 cellPadding=0 width="95%">
-<TBODY>
-<TR>
-<TD class=location height=30 width="95%" align=right><A href="/main.jsp">HOME</A> &gt; 골프장부킹 &gt; <SPAN class=location_b>실시간예약</SPAN></TD></TR>
-<TR>
-<TD style="PADDING-LEFT: 15px; PADDING-TOP: 4px" class=sub_title bgColor=#d1d3d4 height=33>실시간예약</TD></TR>
-<TR>
-<TD vAlign=top>
-<P>&nbsp;</P></TD></TR>
-<TR>
-<TD vAlign=top align=center>
-<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
-<TBODY>
-<TR>
-<TD vAlign=top width=295>
-<TABLE border=0 cellSpacing=0 cellPadding=0 width=274 bgColor=white>
-<TBODY>
-<TR>
-<TD bgColor=white>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width=274 bgColor=silver>
-<TBODY>
-<TR>
-<TD bgColor=white width=270><IMG border=0 id="imgmain" name="imgmain" src="<%=imgSubPath1 %>" width=270 height=202></TD></TR></TBODY></TABLE></TD></TR>
-<TR>
-<TD bgColor=white height=10></TD></TR>
-<TR>
-<TD bgColor=white width=272>
-<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
-<TBODY>
-<TR>
-<TD width=62>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
-<TBODY>
-<TR>
-<TD bgColor=white><IMG border=0 name=img1 src="<%=imgSubPath1 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD></TR></TBODY></TABLE></TD>
-<TD width=62>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
-<TBODY>
-<TR>
-<TD bgColor=white><IMG border=0 name=img2 src="<%=imgSubPath2 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD></TR></TBODY></TABLE></TD>
-<TD width=62>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
-<TBODY>
-<TR>
-<TD bgColor=white><IMG border=0 name=img3 src="<%=imgSubPath3 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD></TR></TBODY></TABLE></TD>
-<TD width=62>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
-<TBODY>
-<TR>
-<TD bgColor=white><IMG border=0 name=img4 src="<%=imgSubPath4 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD>
-<TD vAlign=top width=412>
-<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
-<TBODY>
-<TR>
-<TD class=cc_name vAlign=top>
-<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
-<TBODY>
-<TR>
-<TD class=cc_name><%=glDto.getGolflink_name()%></TD></TR>
-<TR>
-<TD height=10></TD></TR>
-<TR>
-<TD>
-<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
-<TBODY>
-<TR>
-<TD class=normal_b height=23 width=47>주소 </TD>
-<TD width=12>:</TD>
-<TD width=320><%=glDto.getGolflink_address1() + " " + glDto.getGolflink_address2() %></TD></TR>
-<TR>
-<TD class=normal_b height=23>홀구분</TD>
-<TD>:</TD>
-<TD class=orange><%=glDto.getHoll_type()%></TD></TR>
-<TR>
-<TD class=normal_b height=23>&nbsp;</TD>
-<TD>&nbsp;</TD>
-<TD><a href="<%=glDto.getCourse_guide() %>" target="_blank"><IMG border=0 src="../../images/booking/btn_golfcourse.gif" width=70 height=19 style="cursor:hand"></a></TD></TR></TBODY></TABLE></TD></TR>
-<TR>
-<TD>&nbsp;</TD></TR>
-<TR>
-<TD class=normal_b>가격정보 </TD></TR>
-<TR>
-<TD>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width="100%" bgColor=#d1d3d4>
-<TBODY>
-<TR>
-<TD bgColor=#f1f1f1 height=25 width=45 align=center>&nbsp;</TD>
-<TD class=normal_s bgColor=#f1f1f1 height=22 width=95 align=center>그린피정상가</TD>
-<TD class=sunday bgColor=#f1f1f1 width=90 align=center>그린피할인가</TD>
-<TD class=red_s bgColor=#f1f1f1 width=150 align=center>4인그린피할인가 합계</TD></TR>
-<TR>
-<TD class=saturday bgColor=white height=25 align=center>주중</TD>
-<TD class=normal_s bgColor=white align=center><%=commify(np) %></TD>
-<TD class=sunday bgColor=white align=center><%=commify(sp) %></TD>
-<TD class=red_s bgColor=white align=center><%=commify(sp*4) %></TD></TR>
-<TR>
-<TD class=sunday bgColor=white height=25 align=center>주말</TD>
-<TD class=normal_s bgColor=white align=center><%=commify(nw) %></TD>
-<TD class=sunday bgColor=white align=center><%=commify(sw) %></TD>
-<TD class=red_s bgColor=white align=center><%=commify(sw*4) %></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
-<TR>
-<TD>&nbsp;</TD></TR>
-<TR>
-<TD class=red_s><%=glDto.getCancel_rule() %></TD></TR></TBODY></TABLE>
-<P>&nbsp;</P></TD></TR>
-<TR>
-<TD width=707 colSpan=2>&nbsp;</TD></TR>
-<TR>
-<TD width=707 colSpan=2>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width=707 bgColor=#d1d3d4>
-<TBODY>
-<TR>
-<TD bgColor=#f1f1f1 height=35 width=212 align=center><SPAN class=normal_s>실시간예약 골프장명</SPAN></TD>
+	<TABLE border=0 cellSpacing=0 cellPadding=0 width="95%">
+	<TBODY>
+	<TR>
+	<TD class=location height=30 width="95%" align=right><A href="/main.jsp">HOME</A> &gt; 골프장부킹 &gt; <SPAN class=location_b>실시간예약</SPAN></TD>
+	</TR>
+	<TR>
+	<TD style="PADDING-LEFT: 15px; PADDING-TOP: 4px" class=sub_title bgColor=#d1d3d4 height=33>실시간예약</TD>
+	</TR>
+	<TR>
+	<TD vAlign=top><P>&nbsp;</P></TD>
+	</TR>
+	<TR>
+	<TD vAlign=top align=center>
+		<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+		<TBODY>
+		<TR>
+		<TD vAlign=top width=295>
+			<TABLE border=0 cellSpacing=0 cellPadding=0 width=274 bgColor=white>
+			<TBODY>
+			<TR>
+			<TD bgColor=white>
+				<TABLE border=0 cellSpacing=1 cellPadding=2 width=274 bgColor=silver>
+				<TBODY>
+				<TR>
+				<TD bgColor=white width=270><IMG border=0 id="imgmain" name="imgmain" src="<%=imgSubPath1 %>" width=270 height=202></TD>
+				</TR>
+				</TBODY>
+				</TABLE>
+			</TD>
+			</TR>
+			<TR>
+			<TD bgColor=white height=10></TD></TR>
+			<TR>
+			<TD bgColor=white width=272>
+				<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+				<TBODY>
+				<TR>
+				<TD width=62>
+					<TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
+					<TBODY>
+					<TR>
+					<TD bgColor=white><IMG border=0 name=img1 src="<%=imgSubPath1 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD>
+					</TR>
+					</TBODY>
+					</TABLE>
+				</TD>
+				<TD width=62>
+					<TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
+					<TBODY>
+					<TR>
+					<TD bgColor=white><IMG border=0 name=img2 src="<%=imgSubPath2 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD>
+					</TR>
+					</TBODY>
+					</TABLE>
+				</TD>
+				<TD width=62>
+					<TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
+					<TBODY>
+					<TR>
+					<TD bgColor=white><IMG border=0 name=img3 src="<%=imgSubPath3 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD>
+					</TR>
+					</TBODY>
+					</TABLE>
+				</TD>
+				<TD width=62>
+					<TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
+					<TBODY>
+					<TR>
+					<TD bgColor=white><IMG border=0 name=img4 src="<%=imgSubPath4 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD>
+					</TR>
+					</TBODY>
+					</TABLE>
+				</TD>
+				</TR>
+				</TBODY>
+				</TABLE>
+			</TD>
+			</TR>
+			</TBODY>
+			</TABLE>
+		</TD>
+		<TD vAlign=top width=412>
+			<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+			<TBODY>
+			<TR>
+			<TD class=cc_name vAlign=top>
+				<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+				<TBODY>
+				<TR>
+				<TD class=cc_name><%=glDto.getGolflink_name()%></TD>
+				</TR>
+				<TR>
+				<TD height=10></TD>
+				</TR>
+				<TR>
+				<TD>
+					<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+					<TBODY>
+					<TR>
+					<TD class=normal_b height=23 width=47>주소 </TD>
+					<TD width=12>:</TD>
+					<TD width=320><%=glDto.getGolflink_address1() + " " + glDto.getGolflink_address2() %></TD>
+					</TR>
+					<TR>
+					<TD class=normal_b height=23>홀구분</TD>
+					<TD>:</TD>
+					<TD class=orange><%=glDto.getHoll_type()%></TD>
+					</TR>
+					<TR>
+					<TD class=normal_b height=23>&nbsp;</TD>
+					<TD>&nbsp;</TD>
+					<TD><a href="<%=glDto.getCourse_guide() %>" target="_blank"><IMG border=0 src="../../images/booking/btn_golfcourse.gif" width=70 height=19 style="cursor:hand"></a></TD>
+					</TR>
+					</TBODY>
+					</TABLE>
+				</TD>
+				</TR>
+				<TR>
+				<TD>&nbsp;</TD></TR>
+				<TR>
+				<TD class=normal_b>가격정보 </TD>
+				</TR>
+				<TR>
+				<TD>
+					<TABLE border=0 cellSpacing=1 cellPadding=2 width="100%" bgColor=#d1d3d4>
+					<TBODY>
+					<TR>
+					<TD bgColor=#f1f1f1 height=25 width=45 align=center>&nbsp;</TD>
+					<TD class=normal_s bgColor=#f1f1f1 height=22 width=95 align=center>그린피정상가</TD>
+					<TD class=sunday bgColor=#f1f1f1 width=90 align=center>그린피할인가</TD>
+					<TD class=red_s bgColor=#f1f1f1 width=150 align=center>4인그린피할인가 합계</TD>
+					</TR>
+					<TR>
+					<TD class=saturday bgColor=white height=25 align=center>주중</TD>
+					<TD class=normal_s bgColor=white align=center><%=commify(np) %></TD>
+					<TD class=sunday bgColor=white align=center><%=commify(sp) %></TD>
+					<TD class=red_s bgColor=white align=center><%=commify(sp*4) %></TD>
+					</TR>
+					<TR>
+					<TD class=sunday bgColor=white height=25 align=center>주말</TD>
+					<TD class=normal_s bgColor=white align=center><%=commify(nw) %></TD>
+					<TD class=sunday bgColor=white align=center><%=commify(sw) %></TD>
+					<TD class=red_s bgColor=white align=center><%=commify(sw*4) %></TD>
+					</TR>
+					</TBODY>
+					</TABLE>
+				</TD>
+				</TR>
+				</TBODY>
+				</TABLE>
+			</TD>
+			</TR>
+			<TR>
+			<TD>&nbsp;</TD></TR>
+			<TR>
+			<TD class=red_s><%=glDto.getCancel_rule() %></TD>
+			</TR>
+			</TBODY>
+			</TABLE>
+			<P>&nbsp;</P>
+		</TD>
+		</TR>
+		<TR>
+		<TD width=707 colSpan=2>&nbsp;</TD>
+		</TR>
+		<TR>
+		<TD width=707 colSpan=2>
+			<TABLE border=0 cellSpacing=1 cellPadding=2 width=707 bgColor=#d1d3d4>
+			<TBODY>
+			<TR>
+			<TD bgColor=#f1f1f1 height=35 width=212 align=center><SPAN class=normal_s>실시간예약 골프장명</SPAN></TD>
 <% 
 for (int i = 1; i < 15 ;i++){
 	int incYear = incDate.get(incDate.YEAR);
@@ -382,15 +442,16 @@ for (int i = 1; i < 15 ;i++){
 	}
 	incDate.add(incDate.DATE, 1);
 %>
-<TD bgColor=#f1f1f1 width=30 align=center>
-<SPAN class="<%=weekClass%>"><%=Integer.toString(incMonth)+"/"+Integer.toString(incDay)%><BR></SPAN>
-<IMG border=0 align=absMiddle src="../../images/booking/<%=weekImg%>" width=20 height=16>
-</TD>
+			<TD bgColor=#f1f1f1 width=30 align=center>
+			<SPAN class="<%=weekClass%>"><%=Integer.toString(incMonth)+"/"+Integer.toString(incDay)%><BR></SPAN>
+			<IMG border=0 align=absMiddle src="../../images/booking/<%=weekImg%>" width=20 height=16>
+			</TD>
 <% 
 } 
 %>
-<TR>
-<TD style="PADDING-LEFT: 5px" bgColor=white height=30><SPAN class=normal_s><%=glDto.getGolflink_name()%></SPAN></TD>
+			</TR>
+			<TR>
+			<TD style="PADDING-LEFT: 5px" bgColor=white height=30><SPAN class=normal_s><%=glDto.getGolflink_name()%></SPAN></TD>
 <%
 	incDate.set(tYear, tMonth-1, tDay);
 	for (int k = 1; k < 15 ;k++){
@@ -417,63 +478,76 @@ for (int i = 1; i < 15 ;i++){
 		}		
 		if(pDate.equals("")){
 %>
-		<TD bgColor=white height=30 align=center>&nbsp;</TD>
+			<TD bgColor=white height=30 align=center>&nbsp;</TD>
 <%
 		}else{
 %>
-		<TD bgColor=white height=30 align=center>
-		<a href="/forGolfbooking/detail.jsp?menu=<%=menuNum%>&golf=<%=glDto.getGolflink_seq()%>&date=<%=sDate %>&cdate=<%=cDate%>"><IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate %></br>--------------------</br>예약가능팀 : <%=rCnt %>팀');" onMouseout="hideddrivetip()"></a>
-		</TD>
+			<TD bgColor=white height=30 align=center>
+			<a href="/forGolfbooking/detail.jsp?menu=<%=menuNum%>&golf=<%=glDto.getGolflink_seq()%>&date=<%=sDate %>&cdate=<%=cDate%>"><IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate %></br>--------------------</br>예약가능팀 : <%=rCnt %>팀');" onMouseout="hideddrivetip()"></a>
+			</TD>
 <%
 		}
 	}
 %>
-</TR>
-</TBODY></TABLE></TD></TR>
-<TR>
-<TD height=50 width=707 colSpan=2 align=right>
-<TABLE border=0 cellSpacing=0 cellPadding=0 width=150>
-<TBODY>
-<TR>
-<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_prev_day.gif" width=65 height=20 onclick="preResDate();" style="cursor:hand"></TD>
-<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_next_day.gif" width=65 height=20 onclick="nextResDate();" style="cursor:hand"></TD></TR></TBODY></TABLE></TD></TR>
-<TR>
-<TD vAlign=top width=707 colSpan=2 align=center>
-<TABLE border=0 cellSpacing=0 cellPadding=0 width=704>
-<TBODY>
-<TR>
-<TD width=426></TD></TR>
-<TR>
-<TD vAlign=top width="100%">
-<DIV style="DISPLAY: block" id=menu1>
-<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
-<TBODY>
-<TR>
-<TD width="100%">
-<TABLE border=0 cellSpacing=0 cellPadding=0 width=704>
-<TBODY>
-<TR>
-<TD style="CURSOR: hand" onclick=DisplayMenu(1) width=176><IMG id="imgtap1" alt="실시간 예약하기" src="../../images/booking/btn_tab_on_01.gif" width=173 height=25></TD>
-<TD style="CURSOR: hand" onclick=DisplayMenu(2) width=176><IMG id="imgtap2" alt=이용안내 src="../../images/booking/btn_tab_off_02.gif" width=173 height=25></TD>
-<TD style="CURSOR: hand" onclick=DisplayMenu(3) width=176><IMG id="imgtap3" alt=골프장소개 src="../../images/booking/btn_tab_off_03.gif" width=173 height=25></TD>
-<TD style="CURSOR: hand" onclick=DisplayMenu(4) width=176><IMG id="imgtap4" alt=오시는길 src="../../images/booking/btn_tab_off_04.gif" width=173 height=25></TD></TR>
-<TR>
-<TD bgColor=#91b500 height=1 width=704 colSpan=4></TD></TR></TBODY></TABLE></TD></TR>
-<TR>
-<TD height=10></TD></TR>
-<TR>
-<TD bgColor=white align=center>
-<TABLE id="destap1" border=0 cellSpacing=0 cellPadding=0 width="100%">
-<TBODY>
-<TR>
-<TD>
-<TABLE id="tbReserveList" border=0 cellSpacing=1 cellPadding=2 width=706 bgColor=#d1d3d4>
-<TR>
-<TD class=normal_b bgColor=#f1f1f1 height=25 width=120 align=center>부킹날짜</TD>
-<TD class=normal_b bgColor=#f1f1f1 height=25 width=120 align=center>부킹시간</TD>
-<TD class=normal_b bgColor=#f1f1f1 width=168 align=center>코스</TD>
-<TD class=normal_b bgColor=#f1f1f1 width=90 align=center>홀구분</TD>
-<TD class=normal_b bgColor=#f1f1f1 width=182 align=center>예약가능여부</TD></TR>
+			</TR>
+			</TBODY>
+			</TABLE>
+		</TD>
+		</TR>
+		<TR>
+		<TD height=50 width=707 colSpan=2 align=right>
+			<TABLE border=0 cellSpacing=0 cellPadding=0 width=150>
+			<TBODY>
+			<TR>
+			<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_prev_day.gif" width=65 height=20 onclick="preResDate();" style="cursor:hand"></TD>
+			<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_next_day.gif" width=65 height=20 onclick="nextResDate();" style="cursor:hand"></TD>
+			</TR>
+			</TBODY>
+			</TABLE>
+		</TD>
+		</TR>
+		<TR>
+		<TD vAlign=top width=707 colSpan=2 align=center>
+			<TABLE border=0 cellSpacing=0 cellPadding=0 width=704>
+			<TBODY>
+			<TR><TD width=426></TD></TR>
+			<TR>
+			<TD vAlign=top width="100%">
+				<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+				<TBODY>
+				<TR>
+				<TD width="100%">
+					<TABLE border=0 cellSpacing=0 cellPadding=0 width=704>
+					<TBODY>
+					<TR>
+					<TD style="CURSOR: hand" onclick=DisplayMenu(1) width=176><IMG id="imgtap1" alt="실시간 예약하기" src="../../images/booking/btn_tab_on_01.gif" width=173 height=25></TD>
+					<TD style="CURSOR: hand" onclick=DisplayMenu(2) width=176><IMG id="imgtap2" alt=이용안내 src="../../images/booking/btn_tab_off_02.gif" width=173 height=25></TD>
+					<TD style="CURSOR: hand" onclick=DisplayMenu(3) width=176><IMG id="imgtap3" alt=골프장소개 src="../../images/booking/btn_tab_off_03.gif" width=173 height=25></TD>
+					<TD style="CURSOR: hand" onclick=DisplayMenu(4) width=176><IMG id="imgtap4" alt=오시는길 src="../../images/booking/btn_tab_off_04.gif" width=173 height=25></TD>
+					</TR>
+					<TR>
+					<TD bgColor=#91b500 height=1 width=704 colSpan=4></TD>
+					</TR>
+					</TBODY>
+					</TABLE>
+				</TD>
+				</TR>
+				<TR><TD height=10></TD></TR>
+				<TR>
+				<TD bgColor=white align=center>
+					<DIV style="DISPLAY: block" id=destap1>
+					<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+					<TBODY>
+					<TR>
+					<TD>
+						<TABLE id="tbReserveList" border=0 cellSpacing=1 cellPadding=2 width=706 bgColor=#d1d3d4>
+						<TR>
+						<TD class=normal_b bgColor=#f1f1f1 height=25 width=120 align=center>부킹날짜</TD>
+						<TD class=normal_b bgColor=#f1f1f1 height=25 width=120 align=center>부킹시간</TD>
+						<TD class=normal_b bgColor=#f1f1f1 width=168 align=center>코스</TD>
+						<TD class=normal_b bgColor=#f1f1f1 width=90 align=center>홀구분</TD>
+						<TD class=normal_b bgColor=#f1f1f1 width=182 align=center>예약가능여부</TD>
+						</TR>
 <%
 	for(int i = 0; i < listPr.size();i++){
 		String tmpDate = listPr.get(i).getProduct_date();
@@ -488,37 +562,62 @@ for (int i = 1; i < 15 ;i++){
 		}
 		
 %>
-<TR>
-<TD bgColor=white height=25 align=center><%=tmpDate %></TD>
-<TD bgColor=white height=25 align=center><%=tmpTime %></TD>
-<TD bgColor=white align=center><%=StringUtils.defaultIfEmpty(listPr.get(i).getCourse_name(), "<div class=red_s>없음</div>")%></TD>
-<TD bgColor=white align=center><%=listPr.get(i).getHoll_type() %></TD>
+						<TR>
+						<TD bgColor=white height=25 align=center><%=tmpDate %></TD>
+						<TD bgColor=white height=25 align=center><%=tmpTime %></TD>
+						<TD bgColor=white align=center><%=StringUtils.defaultIfEmpty(listPr.get(i).getCourse_name(), "<div class=red_s>없음</div>")%></TD>
+						<TD bgColor=white align=center><%=listPr.get(i).getHoll_type() %></TD>
 <%
 		if(listPr.get(i).getProduct_status().equals("0")){			
 %>
-<TD bgColor=white align=center><A href="javascript:;" onclick="reserveSubmit('<%=listPr.get(i).getProductsub_seq() %>')"><IMG border=0 align=absMiddle src="../../images/booking/btn_regist_ok.gif" width=112 height=20></A></TD>		
+						<TD bgColor=white align=center><A href="javascript:;" onclick="reserveSubmit('<%=listPr.get(i).getProductsub_seq() %>')"><IMG border=0 align=absMiddle src="../../images/booking/btn_regist_ok.gif" width=112 height=20></A></TD>		
 <%
 		}else{
 %>
-<TD bgColor=white height=25 align=center><IMG border=0 align=absMiddle src="../../images/booking/btn_regist_no.gif" width=112 height=20></TD>
+						<TD bgColor=white height=25 align=center><IMG border=0 align=absMiddle src="../../images/booking/btn_regist_no.gif" width=112 height=20></TD>
 <%			
 		}
 %>
-</TR>
+						</TR>
 <%
 	}
 %>
+						</TABLE>
+					</TD>
+					</TR>
+					<TR><TD height=50>&nbsp;</TD></TR>
+					</TBODY>
+					</TABLE>
+					</DIV>
+					<div id="destap2" style="display:none;"><%=glDto.getUse_guide() %></div>
+					<div id="destap3" style="display:none;"><%=glDto.getGolflink_guide() %></div>
+					<div id="destap4" style="display:none;">					
+					<iframe id="ifrmMap" src="" width=402 height=402 frameborder="0" border="0" marginheight="0" marginwidth="0" scrolling="no" noresize></iframe>
+					</div>
+				</TD>
+				</TR>
+				</TBODY>
+				</TABLE>
+				</DIV>
+			</TD>
+			</TR>
+			</TBODY>
+			</TABLE>
+		</TD>
+		</TR>
+		<TR>
+		<TD vAlign=top width=707 colSpan=2 align=center>&nbsp;</TD>
+		</TR>
+		</TBODY>
+		</TABLE>
+	</TD>
+	</TR>
+	</TBODY>
+	</TABLE>
+</TD>
+</TR>
+</TBODY>
 </TABLE>
-</TD></TR>
-<TR>
-<TD height=50>&nbsp;</TD></TR></TBODY></TABLE>
-<div id="destap2" style="display:none;"><%=glDto.getUse_guide() %></div>
-<div id="destap3" style="display:none;"><%=glDto.getGolflink_guide() %></div>
-<div id="destap4" style="display:none;"><%=glDto.getPoint_x() +"/" +glDto.getPoint_y() %></div>
-</TD></TR></TBODY></TABLE></DIV>
-</TD></TR></TBODY></TABLE></TD></TR>
-<TR>
-<TD vAlign=top width=707 colSpan=2 align=center>&nbsp;</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
 <script type="text/javascript">
 <!---//
 var offsetfromcursorX=12 // 커서의 x 축 

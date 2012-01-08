@@ -189,7 +189,7 @@ function mypage_search() {
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=Utils.dateFormat(golfDto.getBooking_day(),".")%> <%=booking_time%></td>
                                                                                     <td height="22" bgcolor="white" align="center" class=blue><%=golfDto.getGolflink_name()%></td>
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=(StringUtils.defaultIfEmpty(golfDto.getGolflink_course(),"없음"))%></td>
-                                                                                    <td height="22" bgcolor="white" align="center" class=normal><%=golfDto.getProduct_price()%></td>
+                                                                                    <td height="22" bgcolor="white" align="center" class=normal><%=Utils.numberFormat(golfDto.getProduct_price())%></td>
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=golfDto.getPer_num()%>명/1팀</td>
                                                                                     <td height="22" bgcolor="white" align="center" class=orange>
                                                                                     <%=(golfDto.getMenu_seq()==1?"실시간예약":"사전예약")%></td>

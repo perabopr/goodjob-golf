@@ -98,7 +98,7 @@ function goPage(val){
           <td align="center" bgcolor="white"><%=dto.getEmail()%></td>
           <td align="center" bgcolor="white"><%=dto.getMobile()%></td>
           <td align="center" bgcolor="white"><a href="partnership_detail.jsp?seq=<%=dto.getSeq()%>" onClick="NewWindow(this.href,'name','740','450','yes');return false;"><img align="absmiddle" src="/_admin/images/common/btn_detail.gif" width="75" height="22" border="0"></a></td>
-          <td align="center" bgcolor="white"><a href="/Download?fileName=<%=Utils.getEncoder("/bbs_upload/"+dto.getFilename())%>"><img src="/_admin/images/common/btn_download.gif" width="75" height="22" border="0"></a></td>
+          <td align="center" bgcolor="white"><a href="/Download?fileName=<%=Utils.getEncoder("/bbs_upload/"+dto.getFilename())%>" target="_blank"><img src="/_admin/images/common/btn_download.gif" width="75" height="22" border="0"></a></td>
         </tr>
 <%
 		}

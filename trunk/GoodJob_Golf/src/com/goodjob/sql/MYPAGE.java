@@ -13,8 +13,8 @@ public class MYPAGE {
 								"a.reserve_uid," +
 								"a.golflink_name," +
 								"a.booking_day," +
-								"a.booking_time," +
-								"a.golflink_course," +
+								"a.booking_time_s," +
+								"a.golflink_course,a.product_price,a.coupon_price," +
 								"a.per_num , " +
 								"a.golflink_course " +
 							"from tb_golflink_reserve a " +
@@ -23,7 +23,7 @@ public class MYPAGE {
 	public static final String my_package_reserve = "select a.reserve_seq, " +
 							"       a.menu_seq, " +
 							"       a.package_seq, " +
-							"       date_format(a.reserve_day,''%Y.%m.%d'') reserve_day, " +
+							"       date_format(a.reserve_day,''%Y.%m.%d %H:%i'') reserve_day, " +
 							"       a.reserve_name, " +
 							"       a.package_name1, " +
 							"       a.package_name2,"+

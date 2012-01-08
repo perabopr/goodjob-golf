@@ -115,12 +115,15 @@
 	function DisplayMenu(index) {
         for (i=1; i<=4; i++)
         if (index == i) {
-        thisMenu = eval("menu" + index + ".style");
-        thisMenu.display = "";
+	        thisMenu = eval("menu" + index + ".style");
+	        thisMenu.display = "";
+        	if(index == 4){
+        		$("#ifrmMap").attr("src", "/forGolfbooking/ifrm_map.jsp?x=<%=cdDto.getPoint_x()%>&y=<%=cdDto.getPoint_y()%>");
+        	}
         } 
         else {
-        otherMenu = eval("menu" + i + ".style"); 
-        otherMenu.display = "none"; 
+	        otherMenu = eval("menu" + i + ".style"); 
+	        otherMenu.display = "none"; 
         }
        }
 	
@@ -479,7 +482,7 @@
                                               <td height="10"></td>
                                             </tr>
                                             <tr>
-                                              <td bgcolor="white">오시는길</td>
+                                              <td bgcolor="white" align="center"><iframe id="ifrmMap" src="" width=402 height=402 frameborder="0" border="0" marginheight="0" marginwidth="0" scrolling="no" noresize></iframe></td>
                                             </tr>
                                           </table>
                                         </div></td>

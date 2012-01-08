@@ -92,6 +92,7 @@
 					$( "#in_date" ).val("<%=now_date%>");
 					return;
 				}
+				calDateRange($("#in_date").val(),$("#out_date").val());
 			}
 		});
 	});
@@ -108,10 +109,41 @@
 					$( "#out_date" ).val("<%=now_date%>");
 					return;
 				}
+
+				calDateRange($("#in_date").val(),$("#out_date").val());
 			}
 		});
 	});
 	
+	function calDateRange(val1, val2){
+	        var FORMAT = "-";
+	        // FORMAT을 포함한 길이 체크
+	        if (val1.length != 10 || val2.length != 10)
+	            return 0;
+
+	        // FORMAT이 있는지 체크
+	        if (val1.indexOf(FORMAT) < 0 || val2.indexOf(FORMAT) < 0)
+	            return 0;
+
+	        // 년도, 월, 일로 분리
+	        var start_dt = val1.split(FORMAT);
+	        var end_dt = val2.split(FORMAT);
+
+	        // 월 - 1(자바스크립트는 월이 0부터 시작하기 때문에...)
+	        // Number()를 이용하여 08, 09월을 10진수로 인식하게 함.
+	        start_dt[1] = (Number(start_dt[1]) - 1) + "";
+	        end_dt[1] = (Number(end_dt[1]) - 1) + "";
+
+	        var from_dt = new Date(start_dt[0], start_dt[1], start_dt[2]);
+	        var to_dt = new Date(end_dt[0], end_dt[1], end_dt[2]);
+
+	        var day = ((to_dt.getTime() - from_dt.getTime()) / 1000 / 60 / 60 / 24)+1;
+	        var night = day - 1;
+	        var night_day = (night==0?"":night+"박 ")+day+"일";
+	        $("#room_num").val(day);
+	        $("#room_show").val(night_day);
+	        
+	    }
 	function DisplayMenu(index) {
         for (i=1; i<=4; i++)
         if (index == i) {
@@ -126,8 +158,6 @@
 	        otherMenu.display = "none"; 
         }
        }
-	
-	
 //-->
 </script>
 <table border="0" cellpadding="0" cellspacing="0" width="751">
@@ -204,7 +234,7 @@
 								
 								roomDto = roomList.get(i);
 				%>
-								<span class=blue style="width:100px;height:15px;">주중:<%=Utils.numberFormat(roomDto.getPrice_n1())%>원</span><span style="height:20px;">/&nbsp;&nbsp;</span><span class=blue style="height:15px;">주말:<%=Utils.numberFormat(roomDto.getPrice_n2())%>원</span><br/>
+								<span class=blue style="width:180px;height:15px;"><%=roomDto.getRoomtype()%>&nbsp;주중:<%=Utils.numberFormat(roomDto.getPrice_n1())%>원</span><span style="width:30px;height:20px;text-align:center;">/</span><span class=blue style="height:15px;">주말:<%=Utils.numberFormat(roomDto.getPrice_n2())%>원</span><br/>
 				<%
 							}
 						}
@@ -224,7 +254,7 @@
 								
 								roomDto = roomList.get(i);
 				%>
-								<span class=orange style="width:100px;height:15px;">주중:<%=Utils.numberFormat(roomDto.getPrice_s1())%>원</span><span style="height:20px;">/&nbsp;&nbsp;</span><span class=orange style="height:15px;">주말:<%=Utils.numberFormat(roomDto.getPrice_s2())%>원</span><br/>
+								<span class=orange style="width:180px;height:15px;"><%=roomDto.getRoomtype()%>&nbsp;주중:<%=Utils.numberFormat(roomDto.getPrice_s1())%>원</span><span style="width:30px;height:20px;text-align:center;">/</span><span class=orange style="height:15px;">주말:<%=Utils.numberFormat(roomDto.getPrice_s2())%>원</span><br/>
 				<%
 							}
 						}
@@ -291,7 +321,9 @@
                                     <tr>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" width="130">객실수량</td>
                                       <td bgcolor="white" class="red_ss" style="padding-left:10px;" width="164">
-                                      <select id="room_num" name="room_num" size="1">
+                                      <input class="mem_input" type="text" maxlength="2" size="8" id="room_show" name="room_show"/>
+                                      <input class="mem_input" type="hidden" maxlength="2" id="room_num" name="room_num"/>
+                                      <!--select id="room_num" name="room_num" size="1">
                                           <option value="">선택</option>
                                           <option value="1">1실</option>
                                           <option value="2">2실</option>
@@ -303,7 +335,7 @@
                                           <option value="8">8실</option>
                                           <option value="9">9실</option>
                                           <option value="10">10실</option>
-                                        </select></td>
+                                        </select--></td>
                                       <td width="117" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" align="right">이용인원</td>
                                       <td width="243" bgcolor="white" style="padding-left:10px;"><input class="mem_input" type="text" maxlength="2" size="5" id="per_num" name="per_num">
                                         인 </td>

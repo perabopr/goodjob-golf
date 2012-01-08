@@ -34,12 +34,12 @@
 		
 		boolean isSend = false;
 		
-		content = MessageFormat.format(MailContent.auth(),auth_no);
+		content = String.format(MailContent.auth(),auth_no);
 		
 		try{
 			Mail mail = new Mail(host,m_id,m_pw);
 			mail.setTo(email);
-			mail.setFrom(from , "Goodjobgolf");
+			mail.setFrom(from , "굿잡골프");
 			mail.setSubject("[Goodjobgolf] 인증 번호 입니다.");
 			mail.setHtmlContent(content);
 			mail.send();

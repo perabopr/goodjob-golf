@@ -17,6 +17,8 @@
 	String mem_id 		= StringUtils.trimToEmpty(request.getParameter("mem_id"));
 	String mem_domain 	= StringUtils.trimToEmpty(request.getParameter("mem_domain"));
 	String mem_pwd 		= StringUtils.trimToEmpty(request.getParameter("mem_pwd"));
+	String org_pwd 		= StringUtils.trimToEmpty(request.getParameter("org_pwd"));
+	
 	String mobile1 	= StringUtils.trimToEmpty(request.getParameter("mobile1"));
 	String mobile2 	= StringUtils.trimToEmpty(request.getParameter("mobile2"));
 	String mobile3 	= StringUtils.trimToEmpty(request.getParameter("mobile3"));
@@ -26,7 +28,6 @@
 	
 	String sms_yn 	= StringUtils.trimToEmpty(request.getParameter("sms_yn"));
 	String email_yn 	= StringUtils.trimToEmpty(request.getParameter("email_yn"));
-
 
 	MemberDao mDao = new MemberDao();
 	
@@ -92,6 +93,22 @@ top.document.location.href="/member/join_finished.jsp";
 	}
 	else{
 		
+		MemberDto tmpDto = mDao.getMember(ses_mem_id);
+		
+		if(org_pwd.length() > 0){
+			
+			if(!org_pwd.equals(tmpDto.getMem_pwd())){
+%>
+			<script language="javascript" type="text/javascript">
+			alert("기존 비밀빈호가 일치하지 않아 비밀번호 변경을 할 수 없습니다.");
+			</script>
+<%
+				return;
+			}
+		}
+		else{
+			mem_pwd = tmpDto.getMem_pwd();
+		}
 		MemberDto mDto = new MemberDto();
 		mDto.setMem_id(ses_mem_id);
 		//mDto.setMem_jumin(mem_jumin1+"-"+mem_jumin2);

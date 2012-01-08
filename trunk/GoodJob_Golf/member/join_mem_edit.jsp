@@ -28,30 +28,32 @@ location.href="/main.jsp";
 
 	function on_submit() {
 		
-		if(!$('#mem_pwd').val()) {
-			alert('비밀번호를 입력해 주세요');
-			$('#mem_pwd').focus();
-			return;
-		}
+		if($('#org_pwd').val().length > 0) {
 
-		if($('#mem_pwd').val().length < 4) {
-			alert('비밀번호가 너무 짧습니다.');
-			$('#mem_pwd').focus();
-			return;
+			if(!$('#mem_pwd').val()) {
+				alert('비밀번호를 입력해 주세요');
+				$('#mem_pwd').focus();
+				return;
+			}
+			
+			if($('#mem_pwd').val().length < 4) {
+				alert('비밀번호가 너무 짧습니다.');
+				$('#mem_pwd').focus();
+				return;
+			}
+	
+			if(!$('#mem_pwd_re').val()) {
+				alert('비밀번호 확인을 입력해 주세요');
+				$('#mem_pwd_re').focus();
+				return;
+			}
+	
+			if($('#mem_pwd').val() != $('#mem_pwd_re').val()) {
+				alert('두개의 비밀번호가 일치하지 않습니다.');
+				$('#mem_pwd_re').focus();
+				return;
+			}
 		}
-
-		if(!$('#mem_pwd_re').val()) {
-			alert('비밀번호 확인을 입력해 주세요');
-			$('#mem_pwd_re').focus();
-			return;
-		}
-
-		if($('#mem_pwd').val() != $('#mem_pwd_re').val()) {
-			alert('두개의 비밀번호가 일치하지 않습니다.');
-			$('#mem_pwd_re').focus();
-			return;
-		}
-
 		if(!$('#mobile1').val()) {
 			alert('핸드폰 앞자리를 선택해 주세요.');
 			$('#mobile1').focus();
@@ -174,12 +176,16 @@ location.href="/main.jsp";
                                                                 <td bgcolor="white" style="padding-left:10px;" class=blue><%=mDto.getMem_id()%></td>
                                                               </tr>
                                                               <tr>
-                                                                <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>비밀번호</td>
+                                                                <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>기존 비밀번호 입력</td>
+                                                                <td bgcolor="white" style="padding-left:10px;"><input class="mem_input" type="password" size="20" id="org_pwd" name="org_pwd"> </td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>변경할 비밀번호</td>
                                                                 <td bgcolor="white" style="padding-left:10px;"><input class="mem_input" type="password" size="20" id="mem_pwd" name="mem_pwd">
                                                                   4~12자리의 영문이나 숫자 </td>
                                                               </tr>
                                                               <tr>
-                                                                <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>비밀번호확인</td>
+                                                                <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>변경할 비밀번호확인</td>
                                                                 <td bgcolor="white" style="padding-left:10px;"><input class="mem_input" type="password" size="20" id="mem_pwd_re" name="mem_pwd_re"></td>
                                                               </tr>
                                                               <tr>

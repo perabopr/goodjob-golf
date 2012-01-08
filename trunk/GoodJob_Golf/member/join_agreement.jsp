@@ -143,8 +143,11 @@
 						border-bottom: dotted #6D6E71 1px;" width="640" height="100" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0"></iframe></td>
                                                         </tr>
                                                         <tr>
-                                                          <td align="right"> 위 사항을 확인하였으며 동의합니다 &nbsp;&nbsp;
-                                                            <input id="agreemnt" type="checkbox" name="formradio1">
+                                                        <td align="right"> 위 사항을 확인하였으며 동의합니다 &nbsp;&nbsp;
+                                                            <input type="radio" id="agreemnt" name="agreemnt" checked>
+                                                            예 &nbsp;&nbsp;
+                                                            <input type="radio" id="agreemnt" name="agreemnt" >
+                                                            아니오 </td>
                                                         </tr>
                                                         <tr>
                                                           <td><img src="/images/mem_join/img_provacy_title.gif" width="350" height="50" border="0"></td>
@@ -154,8 +157,11 @@
 						border-bottom: dotted #6D6E71 1px;" width="640" height="100" frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0"></iframe></td>
                                                         </tr>
                                                         <tr>
-                                                          <td align="right"> 위 사항을 확인하였으며 동의합니다 &nbsp;&nbsp;
-                                                            <input id="privacy" type="checkbox" name="formradio2">
+                                                        <td align="right"> 위 사항을 확인하였으며 동의합니다 &nbsp;&nbsp;
+                                                            <input type="radio" id="privacy" name="privacy" checked>
+                                                            예 &nbsp;&nbsp;
+                                                            <input type="radio" id="privacy" name="privacy">
+                                                            아니오 </td>
                                                         </tr>
                                                         <tr>
                                                           <td>&nbsp;</td>

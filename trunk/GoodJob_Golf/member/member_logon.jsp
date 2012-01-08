@@ -86,8 +86,11 @@
                                       </tr>
                                     </table></td>
                                 </tr>
-                              </table>
-					
+                              </table></td>
+					   		<tr>
+                            <td>&nbsp;</td>
+                          </tr>
+                        </table>
 					<!-- 하단  회사 소개 부분  -->
                     <%@ include file="/include/copyright.jsp" %>
                     <!-- 하단  회사 소개 부분  -->

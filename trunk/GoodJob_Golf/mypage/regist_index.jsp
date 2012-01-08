@@ -14,6 +14,7 @@
 	String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
 	
 	String mem_id = StringUtils.defaultString((String)session.getAttribute("mem_id"),"");
+	String tab = StringUtils.defaultString(request.getParameter("tab"),"1");
 	
 	String startDt = StringUtils.trimToEmpty(request.getParameter("startDt"));
 	String endDt = StringUtils.trimToEmpty(request.getParameter("endDt"));
@@ -40,13 +41,11 @@
 <!-- 상단 영역 -->
 <%@ include file="/include/header.jsp" %>
 <!-- 상단 영역 -->
-<link rel="stylesheet" href="/css/jquery.ui.all.css">
-<script src="/js/jquery.ui.core.js"></script>
-<script src="/js/jquery.ui.widget.js"></script>
-<script src="/js/jquery.ui.datepicker.js"></script>
 <script language="javascript">
 
 function DisplayMenu(index) {
+
+	$('#tab').val(index);
 	for (i=1; i<=4; i++){
 		if (index == i) {
 			thisMenu = eval("menu" + index + ".style");
@@ -63,9 +62,8 @@ function DisplayMenu(index) {
 
 $(function() {
 	$( "#startDt" ).datepicker({dateFormat:'yy-mm-dd'});
-});
-$(function() {
 	$( "#endDt" ).datepicker({dateFormat:'yy-mm-dd'});
+	DisplayMenu(<%=tab%>);
 });
 
 function mypage_search() {
@@ -81,7 +79,7 @@ function mypage_search() {
 		$('#endDt').focus();
 		return;
 	}
-	
+
 	var frm = document.frm;
 	frm.action="regist_index.jsp"
 	frm.submit();
@@ -132,6 +130,7 @@ function mypage_search() {
                                                                         <td height="20"></td>
                                                                       </tr>
 														<form name="frm" method="post">
+														<input type="hidden" id="tab" name="tab" value="<%=tab%>"/>
                                                                       <tr>
                                                                         <td bgcolor="white" align="center">
                                                                         <table border="0" width="100%" cellpadding="0" cellspacing="0">
@@ -165,12 +164,12 @@ function mypage_search() {
                                                                               <td><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="#CCCCCC">
                                                                                   <tr>
                                                                                     <td bgcolor="#F1F1F1" align="center" height="25" class=normal_b width="74">신청일</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="70">부킹일</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="90">부킹일</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="184">골프장명</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="39">시간</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="154">코스</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="64">코스</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="109">금액</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="57">인원/팀</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="90">예약구분</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="90">처리상태</td>
                                                                                   </tr>
 																		<%
 																			
@@ -178,19 +177,19 @@ function mypage_search() {
 																			if(golfList != null && !golfList.isEmpty()){
 																				
 																				int size = golfList.size();
-																				
+																				String booking_time = "";
 																				for(int i = 0 ; i < size ; i++){
 																					
 																					golfDto = golfList.get(i);
-																				
 																					
+																					booking_time = golfDto.getBooking_time_s().substring(0,2)+":"+golfDto.getBooking_time_s().substring(2,4);
 																		%>
                                                                                   <tr>
                                                                                     <td height="25" bgcolor="white" align="center" class=normal><%=golfDto.getReserve_day()%></td>
-                                                                                    <td height="22" bgcolor="white" align="center" class=normal><%=golfDto.getBooking_day()%></td>
+                                                                                    <td height="22" bgcolor="white" align="center" class=normal><%=Utils.dateFormat(golfDto.getBooking_day(),".")%> <%=booking_time%></td>
                                                                                     <td height="22" bgcolor="white" align="center" class=blue><%=golfDto.getGolflink_name()%></td>
-                                                                                    <td height="22" bgcolor="white" align="center" class=normal><%=golfDto.getBooking_time()%></td>
-                                                                                    <td height="22" bgcolor="white" align="center" class=normal><%=golfDto.getGolflink_course()%></td>
+                                                                                    <td height="22" bgcolor="white" align="center" class=normal><%=(StringUtils.defaultIfEmpty(golfDto.getGolflink_course(),"없음"))%></td>
+                                                                                    <td height="22" bgcolor="white" align="center" class=normal><%=golfDto.getProduct_price()%></td>
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=golfDto.getPer_num()%>명/1팀</td>
                                                                                     <td height="22" bgcolor="white" align="center" class=orange>
                                                                                     <%=(golfDto.getMenu_seq()==1?"실시간예약":"사전예약")%></td>
@@ -211,11 +210,13 @@ function mypage_search() {
                                                                   <div id="menu2" style="display:none;">
                                                                     <table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="#CCCCCC">
 														                <tr>
-														                    <td width="116" bgcolor="#F1F1F1" align="center" height="25" class=normal_b>신청일자</td>
-														                    <td width="115" bgcolor="#F1F1F1" align="center" class=normal_b>예약일자</td>
-														                    <td width="189" bgcolor="#F1F1F1" align="center" class=normal_b>골프패키지명</td>
-														                    <td width="82" bgcolor="#F1F1F1" align="center" class=normal_b>인원/팀</td>
-														                    <td width="122" bgcolor="#F1F1F1" align="center" class=normal_b>진행여부</td>
+														                    <td width="100" bgcolor="#F1F1F1" align="center" height="25" class=normal_b>예약신청일</td>
+														                    <td width="150" bgcolor="#F1F1F1" align="center" class=normal_b>패키지명</td>
+														                    <td width="100" bgcolor="#F1F1F1" align="center" class=normal_b>투어예정일</td>
+														                    <td width="80" bgcolor="#F1F1F1" align="center" class=normal_b>예약금</td>
+														                    <td width="80" bgcolor="#F1F1F1" align="center" class=normal_b>잔액금 </td>
+														                    <td width="80" bgcolor="#F1F1F1" align="center" class=normal_b>인원</td>
+														                    <td width="100" bgcolor="#F1F1F1" align="center" class=normal_b>처리상태 </td>
 														                </tr>
 																	<%
 																		PackageReserveDto pkDto;
@@ -229,8 +230,10 @@ function mypage_search() {
 																	%>
 														                <tr>
                                                                            <td height="25" bgcolor="white" align="center" class=normal><%=pkDto.getReserve_day()%></td>
-                                                                           <td height="22" bgcolor="white" align="center" class=normal><%=pkDto.getTour_date()%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=blue><%=pkDto.getPackage_name1()%></td>
+                                                                           <td height="22" bgcolor="white" align="center" class=normal><%=pkDto.getTour_date().replaceAll("-",".")%></td>
+                                                                           <td height="22" bgcolor="white" align="center" class=blue><%=Utils.numberFormat(pkDto.getPackage_price())%></td>
+                                                                           <td height="22" bgcolor="white" align="center" class=normal><%=Utils.authNumber(0)%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=normal><%=pkDto.getPer_num()%>명/1팀</td>
                                                                            <td height="22" bgcolor="white" align="center" class=orange>
                                                                            <%=("0".equals(pkDto.getProcess_status())?"예약대기":"예약완료")%></td>
@@ -244,10 +247,10 @@ function mypage_search() {
                                                                   <div id="menu3" style="display:none;">
                                                                     <table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="#CCCCCC">
 														                <tr>
-														                    <td bgcolor="#F1F1F1" align="center" height="25" class=normal_b width="67">신청일자</td>
-														                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="153">콘도명</td>
+														                    <td bgcolor="#F1F1F1" align="center" height="25" class=normal_b width="67">예약신청일</td>
+														                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="142">콘도명</td>
 														                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="63">평형/타입</td>
-														                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="29">객실</td>
+														                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="40">숙박일</td>
 														                    <td align="center" bgcolor="#F1F1F1" class="normal_b" width="91">입실일</td>
 														                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="85">퇴실일</td>
 														                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="65">결제금액</td>
@@ -259,18 +262,22 @@ function mypage_search() {
 																		if(condoList != null && !condoList.isEmpty()){
 																			
 																			int size = condoList.size();
-																			
+																			String night_day = "";
+																			int night = 0;
 																			for(int i = 0 ; i < size ; i++){
 																				
 																				cdDto = condoList.get(i);
+																				
+																				night = cdDto.getRoom_num() - 1;
+																				night_day = (night<=0?"":night+"박 ")+cdDto.getRoom_num()+"일";
 																	%>
 																		<tr>
 														                    <td height="35" bgcolor="white" align="center" class=normal><%=cdDto.getReserve_day()%></td>
 														                    <td height="22" bgcolor="white" align="center" class=normal><%=cdDto.getCondo_name()%></td>
 														                    <td height="22" bgcolor="white" align="center" class=normal><%=cdDto.getRoomtype()%>평형<br>패밀리</td>
-														                    <td height="22" bgcolor="white" align="center" class=normal>1</td>
-														                    <td height="22" align="center" bgcolor="white" class="normal"><%=cdDto.getIn_date()%></td>
-														                    <td height="22" bgcolor="white" align="center" class=normal><%=cdDto.getOut_date()%></td>
+														                    <td height="22" bgcolor="white" align="center" class=normal><%=night_day%></td>
+														                    <td height="22" align="center" bgcolor="white" class="normal"><%=Utils.dateFormat(cdDto.getIn_date(),".")%></td>
+														                    <td height="22" bgcolor="white" align="center" class=normal><%=Utils.dateFormat(cdDto.getOut_date(),".")%></td>
 														                    <td height="22" bgcolor="white" align="center" class=orange><%=Utils.numberFormat(cdDto.getCondo_price())%>원</td>
 														                    <td height="22" bgcolor="white" align="center" class=blue>
 														                    <%=("0".equals(cdDto.getProcess_status())?"예약대기":"예약완료")%></td>

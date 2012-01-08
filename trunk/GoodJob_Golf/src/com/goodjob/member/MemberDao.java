@@ -121,7 +121,7 @@ public class MemberDao {
 			ResultSetHandler rsh = new MapHandler();
 			QueryRunner qr = new QueryRunner();
 			
-			map = (Map<String, Long>) qr.query(conn , MessageFormat.format(MEMBER.mem_total,where) , rsh);
+			map = (Map<String, Long>) qr.query(conn , MessageFormat.format(MEMBER.mem_total,where) , rsh , bind.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -228,15 +228,15 @@ public class MemberDao {
 		try {
 			
 			conn = DBManager.getConnection();
+			String pwd = StringUtils.trimToEmpty(mDto.getMem_pwd());
 			
+			QueryRunner qr = new QueryRunner();
 			ArrayList<Object> bind = new ArrayList<Object>();
 			bind.add(mDto.getMem_pwd());
 			bind.add(mDto.getMem_mtel());
 			bind.add(mDto.getSms_yn());
 			bind.add(mDto.getEmail_yn());
 			bind.add(mDto.getMem_id());
-			
-			QueryRunner qr = new QueryRunner();
 			qr.update(conn , MEMBER.update , bind.toArray());
 			
 		} catch (Exception e) {
@@ -380,14 +380,14 @@ public class MemberDao {
 	 * 비번 찾기
 	 * @return
 	 */
-	public String pwdFind(String mem_id , String mobile){
+	public String pwdFind(String mem_name , String mem_id){
 		
 		Map<String,String> map = null;
 		Connection conn = null;
 		String mem_pwd = "";
 		try {
 			
-			String[] bind = {mem_id , mobile};
+			String[] bind = {mem_name , mem_id};
 			conn = DBManager.getConnection();
 			
 			ResultSetHandler rsh = new MapHandler();
@@ -531,15 +531,15 @@ public class MemberDao {
 			String where = "";
 			String having = "";
 			if("name".equals(field) && keyword.length() > 0){
-				where = " where mem_name LIKE concat('%',?,'%') " ;
+				where = " where a.mem_name LIKE concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
 			else if("id".equals(field) && keyword.length() > 0){
-				where = " where mem_id LIKE concat('%',?,'%') " ;
+				where = " where a.mem_id LIKE concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
 			else if("mobile".equals(field) && keyword.length() > 0){
-				where = " where mem_mtel LIKE concat('%',?,'%') " ;
+				where = " where a.mem_mtel LIKE concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
 			else if("reserve".equals(field) && keyword.length() > 0){
@@ -592,15 +592,15 @@ public class MemberDao {
 			else{
 				
 				if("name".equals(field) && keyword.length() > 0){
-					where = " where mem_name like concat('%',?,'%') " ;
+					where = " where a.mem_name like concat('%',?,'%') " ;
 					bind.add(keyword);
 				}
 				else if("id".equals(field) && keyword.length() > 0){
-					where = " where mem_id like concat('%',?,'%') " ;
+					where = " where a.mem_id like concat('%',?,'%') " ;
 					bind.add(keyword);
 				}
 				else if("mobile".equals(field) && keyword.length() > 0){
-					where = " where mem_mtel like concat('%',?,'%') " ;
+					where = " where a.mem_mtel like concat('%',?,'%') " ;
 					bind.add(keyword);
 				}
 				

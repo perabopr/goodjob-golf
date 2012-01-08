@@ -22,12 +22,15 @@ public class MEMBER {
 	public static final String view = " select * from tb_member where mem_id = ? ";
 	
 	//업데이트
-	public static final String update = " update tb_member "+
-										" set mem_pwd = ?, mem_mtel = ?, sms_yn = ?, email_yn = ? where mem_id = ?";
+	public static final String update = " update tb_member set mem_pwd = ? ,mem_mtel = ?, sms_yn = ?, email_yn = ? where mem_id = ?";
+	
+	//업데이트
+	public static final String passwd_update = " update tb_member set mem_pwd = ? where mem_id = ?";
 	
 	//업데이트
 	public static final String type_update = " update tb_member set MEM_TYPE = ? where MEM_ID = ?";
 	
+	//비번 업데이트
 	public static final String memo_update = " update tb_member set memo = ? where MEM_ID = ?";
 	
 	//회원등록
@@ -38,7 +41,7 @@ public class MEMBER {
 	public static final String id_find = " select mem_id from tb_member where mem_name = ? and mem_mtel = ? ";
 	
 	//비번 찾기
-	public static final String pwd_find = " select mem_pwd from tb_member where mem_id = ? and mem_mtel = ? ";
+	public static final String pwd_find = " select mem_pwd from tb_member where mem_name = ? and mem_id = ? ";
 	
 	//아이디 중복
 	public static final String dup_id = " select count(*) as cnt from tb_member where mem_id= ? ";

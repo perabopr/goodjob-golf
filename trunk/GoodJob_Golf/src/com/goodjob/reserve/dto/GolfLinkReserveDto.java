@@ -21,6 +21,9 @@ public class GolfLinkReserveDto {
 	private String card_bill_num;
 	private String product_status;
 	
+	private String booking_time_s;
+	private String booking_time_e;
+	
 	public int getReserve_seq() {
 		return reserve_seq;
 	}
@@ -134,5 +137,17 @@ public class GolfLinkReserveDto {
 	}
 	public void setProduct_status(String product_status) {
 		this.product_status = product_status;
+	}
+	public String getBooking_time_s() {
+		return booking_time_s;
+	}
+	public void setBooking_time_s(String bookingTimeS) {
+		booking_time_s = bookingTimeS;
+	}
+	public String getBooking_time_e() {
+		return booking_time_e;
+	}
+	public void setBooking_time_e(String bookingTimeE) {
+		booking_time_e = bookingTimeE;
 	}	
 }

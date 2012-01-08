@@ -4,6 +4,10 @@
 <%
 String x = StringUtils.defaultString(request.getParameter("x"), "37.5675451");
 String y = StringUtils.defaultString(request.getParameter("y"), "126.9773356");
+if(x.length() == 0  || y.length() == 0){
+	x = "37.5675451";
+	y = "126.9773356";
+}
 String mapkey = Config.get("mapkeyUser");
 %>
 <html lang="ko" xmlns:v="urn:schemas-microsoft-com:vml">

@@ -30,7 +30,7 @@ public class DownloadServlet extends HttpServlet {
 			String rootPath = getServletConfig().getServletContext()
 					.getRealPath("/");
 			// String rootPath = request.getRealPath("/");
-			String filePath = rootPath + "tmp" + File.separator + fileName;
+			String filePath = rootPath + File.separator + fileName;
 			java.io.File tempFile = new java.io.File(filePath);
 
 			fileName = fileName.substring(fileName.lastIndexOf("/") + 1);

@@ -46,6 +46,7 @@ winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scr
 win = window.open(mypage, myname, winprops) 
 if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); } 
 } 
+
 function frmSubmit(){
 	frm.submit();
 	return false;

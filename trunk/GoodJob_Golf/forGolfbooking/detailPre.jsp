@@ -171,6 +171,7 @@ function DisplayMenu(vIdx){
 			break;
 		case 4:
 			$("#imgtap4").attr("src", "../../images/booking/btn_tab_on_04.gif");
+			$("#ifrmMap").attr("src", "/forGolfbooking/ifrm_map.jsp?x=<%=glDto.getPoint_x()%>&y=<%=glDto.getPoint_y()%>");
 			$("#destap4").show(); 
 			break;
 	}
@@ -509,7 +510,6 @@ for (int i = 1; i < 15 ;i++){
 <TD width=426></TD></TR>
 <TR>
 <TD vAlign=top width="100%">
-<DIV style="DISPLAY: block" id=menu1>
 <TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
 <TBODY>
 <TR>
@@ -527,7 +527,8 @@ for (int i = 1; i < 15 ;i++){
 <TD height=10></TD></TR>
 <TR>
 <TD bgColor=white align=center>
-<TABLE id="destap1" border=0 cellSpacing=0 cellPadding=0 width="100%">
+<DIV style="DISPLAY: block" id="destap1">
+<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
 <TBODY>
 <TR>
 <TD>
@@ -628,10 +629,13 @@ for (int i = 1; i < 15 ;i++){
 <TD height=50>&nbsp;</TD></TR>
 <TR><TD style="PADDING-BOTTOM: 40px; PADDING-TOP: 40px" align=center><A href="javascript:;" onclick="reserveSubmit();"><IMG border=0 align=textTop src="../../images/booking/btn_next_page2.gif" width=150 height=39></A></TD></TR>
 </TBODY></TABLE>
+</DIV>
 <div id="destap2" style="display:none;"><%=glDto.getUse_guide() %></div>
 <div id="destap3" style="display:none;"><%=glDto.getGolflink_guide() %></div>
-<div id="destap4" style="display:none;"><%=glDto.getPoint_x() +"/" +glDto.getPoint_y() %></div>
-</TD></TR></TBODY></TABLE></DIV>
+<div id="destap4" style="display:none;">
+<iframe id="ifrmMap" src="" width=402 height=402 frameborder="0" border="0" marginheight="0" marginwidth="0" scrolling="no" noresize></iframe>
+</div>
+</TD></TR></TBODY></TABLE>
 </TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD vAlign=top width=707 colSpan=2 align=center>&nbsp;</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>

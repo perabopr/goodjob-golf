@@ -11,3 +11,5 @@
     <td height="198" background="/images/common/img_copyright_bg.jpg">&nbsp;</td>
   </tr>
 </table>
+</body>
+</html>

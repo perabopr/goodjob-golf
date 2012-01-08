@@ -49,8 +49,8 @@ public String commify(int n) {
 	return com.goodjob.util.Utils.numberFormat(n);
 }
 %>
-<html>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
 <title>대한민국 넘버원 골프부킹 할인서비스 굿잡골프</title>

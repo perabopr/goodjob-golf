@@ -159,7 +159,7 @@ function go_view(val){
 												                <td width="57" align="center" class=normal_s><%=StringUtils.trimToEmpty(jDto.getRounding_dt()).substring(0,8)%></td>
 												                <td width="56" align="center" class=normal_s><%=jDto.getJoin_person()%>명</td>
 												                <td width="51" align="center" class=normal_s><%=jDto.getAge()%>대</td>
-												                <td width="49" align="center" class=normal_s><%=jDto.getApply_count()%>건</td>
+												                <td width="49" align="center" class=normal_s><%=jDto.getApply_count()%></td>
 												                <td align="center" width="48" class=normal_s><%=jDto.getReadcount()%></td>
 												                <td align="center" width="60" class=blue_s><%=("I".equals(StringUtils.trimToEmpty(jDto.getJoin_status())) ? "진행중" : " <span class=\"orange\">완료</span>")%></td>
 												             </tr>

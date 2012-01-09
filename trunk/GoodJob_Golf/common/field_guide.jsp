@@ -50,10 +50,10 @@ function DisplayMenu(index) {
                                                                 <tr>
                                                                   <td width="100%"><table border="0" cellpadding="0" cellspacing="0" width="704">
                                                                       <tr>
-                                                                        <td onClick="DisplayMenu(1)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_on_01.gif" width="173" height="25" alt="서비스 이용안내"></td>
-                                                                        <td onClick="DisplayMenu(2)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_off_02.gif" width="173" height="25" alt="예약 및 위약규정"></td>
-                                                                        <td onClick="DisplayMenu(3)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_off_03.gif" width="173" height="25" alt="골프장 취소시한 및 위약금 안내"></td>
-                                                                        <td onClick="DisplayMenu(4)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_off_04.gif" width="173" height="25" alt="콘도 이용안내"></td>
+                                                                        <td onClick="DisplayMenu(1)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_on_01.gif" width="173" height="25" alt="서비스 이용안내"></td>
+                                                                        <td onClick="DisplayMenu(2)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_off_02.gif" width="173" height="25" alt="예약 및 위약규정"></td>
+                                                                        <td onClick="DisplayMenu(3)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_off_03.gif" width="173" height="25" alt="골프장 취소시한 및 위약금 안내"></td>
+                                                                        <td onClick="DisplayMenu(4)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_off_04.gif" width="173" height="25" alt="콘도 이용안내"></td>
                                                                       </tr>
                                                                       <tr>
                                                                         <td height="1" colspan="4" bgcolor="#91B500" width="704"></td>
@@ -66,7 +66,7 @@ function DisplayMenu(index) {
                                                                 <tr>
                                                                   <td bgcolor="white" align="center"><table border="0" width="100%" cellpadding="0" cellspacing="0">
                                                                       <tr>
-                                                                        <td align="center"><p><img src="/images/common/img_process.gif" width="700" height="590" border="0"></p></td>
+                                                                        <td align="center"><p><img src="../../images/common/img_process.gif" width="700" height="590" border="0"></p></td>
                                                                       </tr>
                                                                       <tr>
                                                                         <td>&nbsp;</td>
@@ -80,10 +80,10 @@ function DisplayMenu(index) {
                                                                 <tr>
                                                                   <td width="426" background="/renewal/images/inc/img_board_bg.gif"><table border="0" cellpadding="0" cellspacing="0" width="704">
                                                                       <tr>
-                                                                        <td onClick="DisplayMenu(1)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_off_01.gif" width="173" height="25" alt="서비스 이용안내"></td>
-                                                                        <td onClick="DisplayMenu(2)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_on_02.gif" width="173" height="25" alt="예약 및 위약규정"></td>
-                                                                        <td onClick="DisplayMenu(3)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_off_03.gif" width="173" height="25" alt="골프장 취소시한 및 위약금 안내"></td>
-                                                                        <td onClick="DisplayMenu(4)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_off_04.gif" width="173" height="25" alt="콘도 이용안내"></td>
+                                                                        <td onClick="DisplayMenu(1)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_off_01.gif" width="173" height="25" alt="서비스 이용안내"></td>
+                                                                        <td onClick="DisplayMenu(2)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_on_02.gif" width="173" height="25" alt="예약 및 위약규정"></td>
+                                                                        <td onClick="DisplayMenu(3)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_off_03.gif" width="173" height="25" alt="골프장 취소시한 및 위약금 안내"></td>
+                                                                        <td onClick="DisplayMenu(4)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_off_04.gif" width="173" height="25" alt="콘도 이용안내"></td>
                                                                       </tr>
                                                                       <tr>
                                                                         <td height="1" colspan="4" bgcolor="#91B500" width="704"></td>
@@ -128,20 +128,20 @@ function DisplayMenu(index) {
                                                                               <td bgcolor="white" align="center">패널티 없음</td>
                                                                             </tr>
                                                                             <tr>
-                                                                              <td bgcolor="white" align="center" height="25">부킹당일 제외 5일전 ~ 3일전 취소</td>
-                                                                              <td bgcolor="white" align="center">1개월 예약정지(결제금액 1/2 환불 불가)</td>
+                                                                              <td bgcolor="white" align="center" height="25">부킹당일 제외 7일전 ~ 3일전 취소</td>
+                                                                              <td bgcolor="white" align="center">1개월 예약정지</td>
                                                                             </tr>
                                                                             <tr>
                                                                               <td height="25" bgcolor="white" align="center">부킹당일 제외 2일전 취소</td>
-                                                                              <td height="22" bgcolor="white" align="center">1개월 예약정지(결제금액 1/2 환불 불가)</td>
+                                                                              <td height="22" bgcolor="white" align="center">2개월 예약정지</td>
                                                                             </tr>
                                                                             <tr>
                                                                               <td height="25" bgcolor="white" align="center">부킹당일 제외 1일전 취소</td>
-                                                                              <td height="22" bgcolor="white" align="center">1개월 예약정지(결제금액 1/2 환불 불가)</td>
+                                                                              <td height="22" bgcolor="white" align="center">3개월 예약정지</td>
                                                                             </tr>
                                                                             <tr>
                                                                               <td height="25" bgcolor="white" align="center">당일 취소 및 미내장</td>
-                                                                              <td height="22" bgcolor="white" align="center">영구예약정지(결제금액 전액&nbsp;환불 불가)</td>
+                                                                              <td height="22" bgcolor="white" align="center">영구예약정지</td>
                                                                             </tr>
                                                                             <tr>
                                                                               <td height="25" bgcolor="white" align="center">임박취소 2회 시</td>
@@ -161,7 +161,8 @@ function DisplayMenu(index) {
                                                                           </table></td>
                                                                       </tr>
                                                                       <tr>
-                                                                        <td height="25" class="orange">※ 단, 취소시한은 17:00 까지 인정되며, 이후는 익일로 처리됩니다.</td>
+                                                                        <td height="40" class="orange"><p>※ 단, 취소시한은 17:00 까지 인정되며, 이후는 익일로 처리됩니다.<br>
+                                                                            ※ 골프장별로 취소시한이 차이가 있으니 골프장별 위약처리규정을 참고해 주시기 바랍니다.</p></td>
                                                                       </tr>
                                                                       <tr>
                                                                         <td height="70">&nbsp;</td>
@@ -175,10 +176,10 @@ function DisplayMenu(index) {
                                                                 <tr>
                                                                   <td width="426" background="/renewal/images/inc/img_board_bg.gif"><table border="0" cellpadding="0" cellspacing="0" width="704">
                                                                       <tr>
-                                                                        <td onClick="DisplayMenu(1)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_off_01.gif" width="173" height="25" alt="서비스 이용안내"></td>
-                                                                        <td onClick="DisplayMenu(2)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_off_02.gif" width="173" height="25" alt="예약 및 위약규정"></td>
-                                                                        <td onClick="DisplayMenu(3)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_on_03.gif" width="173" height="25" alt="골프장 취소시한 및 위약금 안내"></td>
-                                                                        <td onClick="DisplayMenu(4)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_off_04.gif" width="173" height="25" alt="콘도 이용안내"></td>
+                                                                        <td onClick="DisplayMenu(1)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_off_01.gif" width="173" height="25" alt="서비스 이용안내"></td>
+                                                                        <td onClick="DisplayMenu(2)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_off_02.gif" width="173" height="25" alt="예약 및 위약규정"></td>
+                                                                        <td onClick="DisplayMenu(3)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_on_03.gif" width="173" height="25" alt="골프장 취소시한 및 위약금 안내"></td>
+                                                                        <td onClick="DisplayMenu(4)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_off_04.gif" width="173" height="25" alt="콘도 이용안내"></td>
                                                                       </tr>
                                                                       <tr>
                                                                         <td height="1" colspan="4" bgcolor="#91B500" width="704"></td>
@@ -237,6 +238,159 @@ function DisplayMenu(index) {
                                                                           </table></td>
                                                                       </tr>
                                                                       <tr>
+                                                                        <td>&nbsp;</td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                        <td><table border="0" cellpadding="2" cellspacing="1" width="704" bgcolor="#D1D3D4">
+                                                                            <tr>
+                                                                              <td width="116" bgcolor="#F1F1F1" rowspan="2" align="center" class=blue>지역</td>
+                                                                              <td width="168" bgcolor="#F1F1F1" rowspan="2" align="center" class=blue>골프장명</td>
+                                                                              <td width="171" bgcolor="#F1F1F1" align="center" height="25" class=blue>취소기한</td>
+                                                                              <td width="228" bgcolor="#F1F1F1" align="center" colspan="2" class=blue>위약금(만원)</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td width="171" bgcolor="#F1F1F1" align="center" height="25" class=blue>주중/주말</td>
+                                                                              <td width="112" bgcolor="#F1F1F1" align="center" class=blue>주중</td>
+                                                                              <td width="111" align="center" bgcolor="#F1F1F1" class=blue>주말</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td bgcolor="white" align="center" width="0" height="23"><p>충북 </p></td>
+                                                                              <td bgcolor="white" align="center"><p>대영베이스</p></td>
+                                                                              <td bgcolor="white" align="center"><p>6일전 17:00까지</p></td>
+                                                                              <td bgcolor="white" align="center">20</td>
+                                                                              <td align="center" bgcolor="white">30</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td bgcolor="white" align="center" width="0" height="23"><p>충북</p></td>
+                                                                              <td bgcolor="white" align="center"><p>대영힐스</p></td>
+                                                                              <td bgcolor="white" align="center"><p>6일전 17:00까지</p></td>
+                                                                              <td bgcolor="white" align="center">20</td>
+                                                                              <td align="center" bgcolor="white">30</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>강원</p></td>
+                                                                              <td align="center" bgcolor="white"><p>홍천CC</p></td>
+                                                                              <td align="center" bgcolor="white"><p>7일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">20</td>
+                                                                              <td align="center" bgcolor="white">30</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>충남</p></td>
+                                                                              <td align="center" bgcolor="white"><p>태안비치CC </p></td>
+                                                                              <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">30</td>
+                                                                              <td align="center" bgcolor="white">40</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>경북</p></td>
+                                                                              <td align="center" bgcolor="white"><p>한맥CC </p></td>
+                                                                              <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">25</td>
+                                                                              <td align="center" bgcolor="white">35</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>경기</p></td>
+                                                                              <td align="center" bgcolor="white"><p>포레스트힐CC </p></td>
+                                                                              <td align="center" bgcolor="white"><p>8일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">25</td>
+                                                                              <td align="center" bgcolor="white">35</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>경기</p></td>
+                                                                              <td align="center" bgcolor="white"><p>양평 TPC </p></td>
+                                                                              <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">25</td>
+                                                                              <td align="center" bgcolor="white">35</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>경남</p></td>
+                                                                              <td align="center" bgcolor="white"><p>에덴밸리CC </p></td>
+                                                                              <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">15</td>
+                                                                              <td align="center" bgcolor="white">20</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>강원</p></td>
+                                                                              <td align="center" bgcolor="white"><p>동강시스타 </p></td>
+                                                                              <td align="center" bgcolor="white"><p>4일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">10</td>
+                                                                              <td align="center" bgcolor="white">15</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>강원</p></td>
+                                                                              <td align="center" bgcolor="white"><p>옥스필드CC </p></td>
+                                                                              <td align="center" bgcolor="white"><p>7일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">10</td>
+                                                                              <td align="center" bgcolor="white">20</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>전북</p></td>
+                                                                              <td align="center" bgcolor="white"><p>스파힐스 CC </p></td>
+                                                                              <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">10</td>
+                                                                              <td align="center" bgcolor="white">20</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>경북</p></td>
+                                                                              <td align="center" bgcolor="white"><p>세븐밸리 CC </p></td>
+                                                                              <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">15</td>
+                                                                              <td align="center" bgcolor="white">25</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>경기</p></td>
+                                                                              <td align="center" bgcolor="white"><p>레이크힐스 안성 </p></td>
+                                                                              <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">15</td>
+                                                                              <td align="center" bgcolor="white">15</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>경북</p></td>
+                                                                              <td align="center" bgcolor="white"><p>베네치아CC </p></td>
+                                                                              <td align="center" bgcolor="white"><p>7일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">30</td>
+                                                                              <td align="center" bgcolor="white">40</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>경기</p></td>
+                                                                              <td align="center" bgcolor="white"><p>남양주 CC </p></td>
+                                                                              <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">25</td>
+                                                                              <td align="center" bgcolor="white">25</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>강원</p></td>
+                                                                              <td align="center" bgcolor="white"><p>보광 휘닉스파크 </p></td>
+                                                                              <td align="center" bgcolor="white"><p>4일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">5</td>
+                                                                              <td align="center" bgcolor="white">10</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>강원</p></td>
+                                                                              <td align="center" bgcolor="white"><p>대명리조트(홍천,설악)</p></td>
+                                                                              <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">20</td>
+                                                                              <td align="center" bgcolor="white">30</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>경기</p></td>
+                                                                              <td align="center" bgcolor="white"><p>루이힐스 GC </p></td>
+                                                                              <td align="center" bgcolor="white"><p>3일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white">5</td>
+                                                                              <td align="center" bgcolor="white">10</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                              <td align="center" bgcolor="white" width="0" height="23"><p>제주</p></td>
+                                                                              <td align="center" bgcolor="white"><p>제주 골프장 </p></td>
+                                                                              <td align="center" bgcolor="white"><p>7일전 17:00까지</p></td>
+                                                                              <td align="center" bgcolor="white" colspan="2">골프장별 차이있음</td>
+                                                                            </tr>
+                                                                          </table></td>
+                                                                      </tr>
+                                                                      <tr>
+                                                                        <td>&nbsp;</td>
+                                                                      </tr>
+                                                                      <tr>
                                                                         <td height="25" class=orange>※ 단, 시기별(성수기, 비수기)로 홀별 요금 정산이 차이가 있사오니 골프장별 이용안내 확인 요망</td>
                                                                       </tr>
                                                                       <tr>
@@ -251,10 +405,10 @@ function DisplayMenu(index) {
                                                                 <tr>
                                                                   <td width="426" background="/renewal/images/inc/img_board_bg.gif"><table border="0" cellpadding="0" cellspacing="0" width="704">
                                                                       <tr>
-                                                                        <td onClick="DisplayMenu(1)" style="cursor:hand" width="177"><img src="/images/common/btn_field_guide_off_01.gif" width="173" height="25" alt="서비스 이용안내"></td>
-                                                                        <td onClick="DisplayMenu(2)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_off_02.gif" width="173" height="25" alt="예약 및 위약규정"></td>
-                                                                        <td onClick="DisplayMenu(3)" style="cursor:hand" width="176"><img src="/images/common/btn_field_guide_off_03.gif" width="173" height="25" alt="골프장 취소시한 및 위약금 안내"></td>
-                                                                        <td onClick="DisplayMenu(4)" style="cursor:hand" width="175"><img src="/images/common/btn_field_guide_on_04.gif" width="173" height="25" alt="콘도 이용안내"></td>
+                                                                        <td onClick="DisplayMenu(1)" style="cursor:hand" width="177"><img src="../../images/common/btn_field_guide_off_01.gif" width="173" height="25" alt="서비스 이용안내"></td>
+                                                                        <td onClick="DisplayMenu(2)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_off_02.gif" width="173" height="25" alt="예약 및 위약규정"></td>
+                                                                        <td onClick="DisplayMenu(3)" style="cursor:hand" width="176"><img src="../../images/common/btn_field_guide_off_03.gif" width="173" height="25" alt="골프장 취소시한 및 위약금 안내"></td>
+                                                                        <td onClick="DisplayMenu(4)" style="cursor:hand" width="175"><img src="../../images/common/btn_field_guide_on_04.gif" width="173" height="25" alt="콘도 이용안내"></td>
                                                                       </tr>
                                                                       <tr>
                                                                         <td height="1" colspan="4" bgcolor="#91B500" width="704"></td>
@@ -263,156 +417,6 @@ function DisplayMenu(index) {
                                                                 </tr>
                                                                 <tr>
                                                                   <td height="10">&nbsp;</td>
-                                                                </tr>
-                                                                <tr>
-                                                                  <td bgcolor="white"><table border="0" cellpadding="2" cellspacing="1" width="704" bgcolor="#D1D3D4">
-                                                                      <tr>
-                                                                        <td width="116" bgcolor="#F1F1F1" rowspan="2" align="center" class=blue>지역</td>
-                                                                        <td width="168" bgcolor="#F1F1F1" rowspan="2" align="center" class=blue>골프장명</td>
-                                                                        <td width="171" bgcolor="#F1F1F1" align="center" height="25" class=blue>취소기한</td>
-                                                                        <td width="228" bgcolor="#F1F1F1" align="center" colspan="2" class=blue>위약금(만원)</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td width="171" bgcolor="#F1F1F1" align="center" height="25" class=blue>주중/주말</td>
-                                                                        <td width="112" bgcolor="#F1F1F1" align="center" class=blue>주중</td>
-                                                                        <td width="111" align="center" bgcolor="#F1F1F1" class=blue>주말</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td bgcolor="white" align="center" width="0" height="23"><p>충북 </p></td>
-                                                                        <td bgcolor="white" align="center"><p>대영베이스</p></td>
-                                                                        <td bgcolor="white" align="center"><p>6일전 17:00까지</p></td>
-                                                                        <td bgcolor="white" align="center">20</td>
-                                                                        <td align="center" bgcolor="white">30</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td bgcolor="white" align="center" width="0" height="23"><p>충북</p></td>
-                                                                        <td bgcolor="white" align="center"><p>대영힐스</p></td>
-                                                                        <td bgcolor="white" align="center"><p>6일전 17:00까지</p></td>
-                                                                        <td bgcolor="white" align="center">20</td>
-                                                                        <td align="center" bgcolor="white">30</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>강원</p></td>
-                                                                        <td align="center" bgcolor="white"><p>홍천CC</p></td>
-                                                                        <td align="center" bgcolor="white"><p>7일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">20</td>
-                                                                        <td align="center" bgcolor="white">30</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>충남</p></td>
-                                                                        <td align="center" bgcolor="white"><p>태안비치CC </p></td>
-                                                                        <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">30</td>
-                                                                        <td align="center" bgcolor="white">40</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>경북</p></td>
-                                                                        <td align="center" bgcolor="white"><p>한맥CC </p></td>
-                                                                        <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">25</td>
-                                                                        <td align="center" bgcolor="white">35</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>경기</p></td>
-                                                                        <td align="center" bgcolor="white"><p>포레스트힐CC </p></td>
-                                                                        <td align="center" bgcolor="white"><p>8일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">25</td>
-                                                                        <td align="center" bgcolor="white">35</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>경기</p></td>
-                                                                        <td align="center" bgcolor="white"><p>양평 TPC </p></td>
-                                                                        <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">25</td>
-                                                                        <td align="center" bgcolor="white">35</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>경남</p></td>
-                                                                        <td align="center" bgcolor="white"><p>에덴밸리CC </p></td>
-                                                                        <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">15</td>
-                                                                        <td align="center" bgcolor="white">20</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>강원</p></td>
-                                                                        <td align="center" bgcolor="white"><p>동강시스타 </p></td>
-                                                                        <td align="center" bgcolor="white"><p>4일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">10</td>
-                                                                        <td align="center" bgcolor="white">15</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>강원</p></td>
-                                                                        <td align="center" bgcolor="white"><p>옥스필드CC </p></td>
-                                                                        <td align="center" bgcolor="white"><p>7일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">10</td>
-                                                                        <td align="center" bgcolor="white">20</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>전북</p></td>
-                                                                        <td align="center" bgcolor="white"><p>스파힐스 CC </p></td>
-                                                                        <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">10</td>
-                                                                        <td align="center" bgcolor="white">20</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>경북</p></td>
-                                                                        <td align="center" bgcolor="white"><p>세븐밸리 CC </p></td>
-                                                                        <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">15</td>
-                                                                        <td align="center" bgcolor="white">25</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>경기</p></td>
-                                                                        <td align="center" bgcolor="white"><p>레이크힐스 안성 </p></td>
-                                                                        <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">15</td>
-                                                                        <td align="center" bgcolor="white">15</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>경북</p></td>
-                                                                        <td align="center" bgcolor="white"><p>베네치아CC </p></td>
-                                                                        <td align="center" bgcolor="white"><p>7일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">30</td>
-                                                                        <td align="center" bgcolor="white">40</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>경기</p></td>
-                                                                        <td align="center" bgcolor="white"><p>남양주 CC </p></td>
-                                                                        <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">25</td>
-                                                                        <td align="center" bgcolor="white">25</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>강원</p></td>
-                                                                        <td align="center" bgcolor="white"><p>보광 휘닉스파크 </p></td>
-                                                                        <td align="center" bgcolor="white"><p>4일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">5</td>
-                                                                        <td align="center" bgcolor="white">10</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>강원</p></td>
-                                                                        <td align="center" bgcolor="white"><p>대명리조트(홍천,설악)</p></td>
-                                                                        <td align="center" bgcolor="white"><p>5일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">20</td>
-                                                                        <td align="center" bgcolor="white">30</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>경기</p></td>
-                                                                        <td align="center" bgcolor="white"><p>루이힐스 GC </p></td>
-                                                                        <td align="center" bgcolor="white"><p>3일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white">5</td>
-                                                                        <td align="center" bgcolor="white">10</td>
-                                                                      </tr>
-                                                                      <tr>
-                                                                        <td align="center" bgcolor="white" width="0" height="23"><p>제주</p></td>
-                                                                        <td align="center" bgcolor="white"><p>제주 골프장 </p></td>
-                                                                        <td align="center" bgcolor="white"><p>7일전 17:00까지</p></td>
-                                                                        <td align="center" bgcolor="white" colspan="2">골프장별 차이있음</td>
-                                                                      </tr>
-                                                                    </table></td>
-                                                                </tr>
-                                                                <tr>
-                                                                  <td bgcolor="white">&nbsp;</td>
                                                                 </tr>
                                                                 <tr>
                                                                   <td bgcolor="white"><table border="0" cellpadding="2" cellspacing="1" width="704" bgcolor="#D1D3D4">
@@ -530,7 +534,7 @@ function DisplayMenu(index) {
                                                                 </tr>
                                                                 <tr>
                                                                   <td bgcolor="white" height="40" class=orange>※ 단, 제주지역은 취소시한, 패널티 내용이 차이가 있사오니, 골프장 별로 확인 요망<br>
-                                                                      ※ 성수기 시기는 콘도 별로 기간 차이가 있을 수 있사오니, 콘도 상세정보 확인 요망</td>
+                                                                    ※ 성수기 시기는 콘도 별로 기간 차이가 있을 수 있사오니, 콘도 상세정보 확인 요망</td>
                                                                 </tr>
                                                               </table>
                                                             </div></td>
@@ -538,7 +542,7 @@ function DisplayMenu(index) {
                                                       </table></td>
                                                   </tr>
                                                   <tr>
-                                                    <td align="center">&nbsp;</td>
+                                                    <td height="50">&nbsp;</td>
                                                   </tr>
                                                 </table></td>
                                             </tr>

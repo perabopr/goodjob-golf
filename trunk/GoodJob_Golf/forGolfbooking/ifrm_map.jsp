@@ -9,6 +9,8 @@ if(x.length() == 0  || y.length() == 0){
 	y = "126.9773356";
 }
 String mapkey = Config.get("mapkeyUser");
+
+System.out.println("mapkey : "+mapkey);
 %>
 <html lang="ko" xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
@@ -18,7 +20,7 @@ String mapkey = Config.get("mapkeyUser");
 </head>
 <body>
 <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
-<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=<%=mapkey %>"></script>
+<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=<%=mapkey%>"></script>
 <div id="map" style="border:1px solid #000;"></div>
 <script type="text/javascript">
 		var oSeoulCityPoint = new nhn.api.map.LatLng(<%=x%>, <%=y%>);

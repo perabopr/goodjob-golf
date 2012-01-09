@@ -34,7 +34,8 @@ if(prList.size() != 1){
 	if(prList.get(0).getProduct_status().equals("0")){
 		GolfLinkReserveDto glrDto = new GolfLinkReserveDto();
 		glrDto.setReserve_name(rName);
-		glrDto.setReserve_uid(rEmail);
+		glrDto.setReserve_uid(StringUtils.trimToEmpty((String)session.getAttribute("mem_id")));
+		//glrDto.setReserve_uid(rEmail);
 		glrDto.setPer_num(Integer.toString(rCnt));
 		glrDto.setReserve_phone(rPhone);
 		glrDto.setProduct_price(prList.get(0).getGoodjob_price() * rCnt);

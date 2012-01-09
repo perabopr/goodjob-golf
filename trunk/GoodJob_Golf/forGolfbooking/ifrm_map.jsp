@@ -35,7 +35,7 @@ System.out.println("mapkey : "+mapkey);
 						activateTrafficMap : false,
 						activateBicycleMap : false,
 						minMaxLevel : [ 1, 14 ],
-						size : new nhn.api.map.Size(400, 400)		});
+						size : new nhn.api.map.Size(600, 400)		});
 		var oSlider = new nhn.api.map.ZoomControl();
 		oMap.addControl(oSlider);
 		oSlider.setPosition({

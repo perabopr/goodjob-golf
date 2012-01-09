@@ -16,7 +16,7 @@ include file="/include/header.jsp" %>
 						<%@ include file="resultPackage.jsp" %>
 						<% }else if(menuName.equals("5")){ %>
 						<%@ include file="resultCondo.jsp" %>
-						<% } %>
+						<% }%>
 						</td>
 						</tr>
 						<tr>

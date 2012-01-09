@@ -55,7 +55,7 @@ pkDao.setPackageReserve(prDto);
 <TD align=center><IMG border=0 src="../images/package/img_domestic_regist_finishe.gif" width=640 height=108></TD></TR>
 <TR>
 <TD align=center>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width=600 bgColor=white align=center>
+<TABLE border=0 cellSpacing=1 cellPadding=2 width=600 bgColor="#d1d3d4" align=center>
 <TBODY>
 <TR>
 <TD bgColor=#aed247 width=594 colSpan=2></TD></TR>

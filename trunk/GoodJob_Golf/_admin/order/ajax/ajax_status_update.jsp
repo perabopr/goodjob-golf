@@ -26,6 +26,8 @@ if(colname.equals("product_price")){
 	params.put("booking_time_e",arrDates[1]);
 }else if(colname.equals("package_price")){
 	params.put("package_price",status);
+}else if(colname.equals("balance_price")){
+	params.put("balance_price",status);
 }else if(colname.equals("condo_price")){
 	params.put("condo_price",status);
 }

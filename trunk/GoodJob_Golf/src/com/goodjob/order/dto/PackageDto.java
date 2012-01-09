@@ -13,6 +13,7 @@ public class PackageDto {
 	private String per_num;
 	private String reserve_phone;
 	private int package_price;
+	private int balance_price;
 	private String request_content;
 	private String process_status;
 	
@@ -87,6 +88,12 @@ public class PackageDto {
 	}
 	public void setPackage_price(int package_price) {
 		this.package_price = package_price;
+	}
+	public int getBalance_price() {
+		return balance_price;
+	}
+	public void setBalance_price(int balance_price) {
+		this.balance_price = balance_price;
 	}
 	public String getRequest_content() {
 		return request_content;

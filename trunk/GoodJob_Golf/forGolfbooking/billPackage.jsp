@@ -15,6 +15,14 @@ PackageDto pkDto = new PackageDto();
 if(pkList != null && pkList.size() == 1){
 	pkDto = pkList.get(0);
 }
+
+String[] eMail = (user_Id!=null)? user_Id.split("@") : null;
+String eMail1 = "";
+String eMail2 = "";
+if(eMail != null && eMail.length == 2){
+	eMail1 = eMail[0];
+	eMail2 = eMail[1];
+}
 %>
 <script type="text/javascript">
 <!--
@@ -94,7 +102,7 @@ function billok(){
 <P><IMG border=0 src="../../images/package/img_domestic_regist_title.gif" width=640 height=108></P></TD></TR>
 <TR>
 <TD align=center>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width=600 bgColor=white align=center>
+<TABLE border=0 cellSpacing=1 cellPadding=2 width=600 bgColor="#d1d3d4" align=center>
 <TBODY>
 <TR>
 <TD bgColor=#aed247 width=594 colSpan=2></TD></TR>
@@ -126,8 +134,8 @@ function billok(){
 <OPTION value="019">019</OPTION></SELECT> - <INPUT class=input_01 id="phone2" name="phone2" size=8 maxlength="4"> - <INPUT class=input_01 id="phone3" name="phone3" size=8 maxlength="4"></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=25 width=122 align=right>E-Mail</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white width=451><INPUT class=input_01 id="eMail1" name="eMail1" size=15> @ <INPUT class=input_01 id="eMail2" name="eMail2" size=15> 
-<SELECT size=1 id="ddlEmail" name="ddlEmail" onchange="emaildomain();"> 
+<TD style="PADDING-LEFT: 10px" bgColor=white width=451><INPUT class=input_01 id="eMail1" name="eMail1" size=15 readonly value="<%=eMail1 %>"> @ <INPUT class=input_01 id="eMail2" name="eMail2" size=15 readonly value="<%=eMail2 %>"> 
+<SELECT size=1 id="ddlEmail" name="ddlEmail" onchange="emaildomain();" disabled> 
 	<OPTION value="" SELECTED>직접입력하기</OPTION> 
 	<OPTION value="naver.com">naver.com</OPTION> 
 	<OPTION value="hanmail.net">hanmail.net</OPTION>

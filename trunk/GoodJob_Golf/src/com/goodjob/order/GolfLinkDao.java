@@ -161,6 +161,7 @@ public class GolfLinkDao {
 			String booking_time_e = StringUtils.defaultIfEmpty(data.get("booking_time_e"), "");
 			String per_num = StringUtils.defaultIfEmpty(data.get("per_num"), "");
 			String product_price = StringUtils.defaultIfEmpty(data.get("product_price"), "");
+			String balance_price = StringUtils.defaultIfEmpty(data.get("balance_price"), "");
 			String process_status = StringUtils.defaultIfEmpty(data.get("process_status"), "");
 			String package_price = StringUtils.defaultIfEmpty(data.get("package_price"), "");
 			String condo_price = StringUtils.defaultIfEmpty(data.get("condo_price"), "");
@@ -187,6 +188,10 @@ public class GolfLinkDao {
 			if(product_price.length() > 0){
 				setQuery += ",product_price = ? " ;
 				bind.add(product_price);
+			}
+			if(balance_price.length() > 0){
+				setQuery += ",balance_price = ? " ;
+				bind.add(balance_price);
 			}
 			if(per_num.length() > 0){
 				setQuery += ",per_num = ? " ;

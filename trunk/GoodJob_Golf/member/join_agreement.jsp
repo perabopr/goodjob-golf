@@ -12,22 +12,16 @@
 
 	function member_join() {
 
-		if(!$('#agreemnt').is(':checked')) {
+		if($(":input:radio[name=agreemnt]:checked").val()=='N') {
 			alert("이용약관에 동의를 해야 합니다.");
 			return;
 		}
 		
-		if(!$('#privacy').is(':checked')) {
+		if($(":input:radio[name=privacy]:checked").val()=='N') {
 			alert("개인정보 취급 방침에 동의를 해야 합니다.");
 			return;
 		}
-
-		/*
-		if($('#auth_yn').val() != 'Y') {
-			alert('휴대폰 인증을 하지 않았습니다.');
-			return;
-		}
-		*/
+		
 		var frm = document.joinFrm;
 		frm.action="/member/join_member_form.jsp";
 		frm.submit();
@@ -144,9 +138,9 @@
                                                         </tr>
                                                         <tr>
                                                         <td align="right"> 위 사항을 확인하였으며 동의합니다 &nbsp;&nbsp;
-                                                            <input type="radio" id="agreemnt" name="agreemnt" checked>
+                                                            <input type="radio" id="agreemnt" name="agreemnt" value="Y" checked>
                                                             예 &nbsp;&nbsp;
-                                                            <input type="radio" id="agreemnt" name="agreemnt" >
+                                                            <input type="radio" id="agreemnt" name="agreemnt"  value="N">
                                                             아니오 </td>
                                                         </tr>
                                                         <tr>
@@ -158,9 +152,9 @@
                                                         </tr>
                                                         <tr>
                                                         <td align="right"> 위 사항을 확인하였으며 동의합니다 &nbsp;&nbsp;
-                                                            <input type="radio" id="privacy" name="privacy" checked>
+                                                            <input type="radio" id="privacy" name="privacy" value="Y" checked>
                                                             예 &nbsp;&nbsp;
-                                                            <input type="radio" id="privacy" name="privacy">
+                                                            <input type="radio" id="privacy" name="privacy" value="N">
                                                             아니오 </td>
                                                         </tr>
                                                         <tr>

@@ -120,6 +120,15 @@ ProductReserveDto prDto = new ProductReserveDto();
 prDto.setGolflink_seq(Integer.parseInt(golfSeq));
 prDto.setProduct_date(curDate);
 List<ProductReserveDto> listPr = glDao.getGolfProduct(prDto);
+
+String[] eMail = (user_Id!=null)? user_Id.split("@") : null;
+String eMail1 = "";
+String eMail2 = "";
+if(eMail != null && eMail.length == 2){
+	eMail1 = eMail[0];
+	eMail2 = eMail[1];
+}
+
 %>
 
 <style type="text/css">
@@ -605,8 +614,8 @@ for (int i = 1; i < 15 ;i++){
 	- <INPUT class=mem_input id="phone3" name="phone3" maxLength=4 size=8></TD></TR>
 	<TR>
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=25 align=right>E-Mail</TD>
-	<TD style="PADDING-LEFT: 10px" bgColor=white colSpan=3><INPUT class=mem_input id="email1" name="email1" size=15> @ <INPUT class=mem_input ID="email2" name="email2" size=15> 
-	<SELECT size=1 id="ddlEmail" name="ddlEmail" onchange="emaildomain();"> 
+	<TD style="PADDING-LEFT: 10px" bgColor=white colSpan=3><INPUT class=mem_input id="email1" name="email1" size=15 readonly value="<%=eMail1 %>"> @ <INPUT class=mem_input ID="email2" name="email2" size=15 readonly value="<%=eMail2 %>"> 
+	<SELECT size=1 id="ddlEmail" name="ddlEmail" onchange="emaildomain();" disabled> 
 	<OPTION value="" SELECTED>직접입력하기</OPTION> 
 	<OPTION value="naver.com">naver.com</OPTION> 
 	<OPTION value="hanmail.net">hanmail.net</OPTION>
@@ -633,7 +642,7 @@ for (int i = 1; i < 15 ;i++){
 <div id="destap2" style="display:none;"><%=glDto.getUse_guide() %></div>
 <div id="destap3" style="display:none;"><%=glDto.getGolflink_guide() %></div>
 <div id="destap4" style="display:none;">
-<iframe id="ifrmMap" src="" width=402 height=402 frameborder="0" border="0" marginheight="0" marginwidth="0" scrolling="no" noresize></iframe>
+<iframe id="ifrmMap" src="" width=602 height=402 frameborder="0" border="0" marginheight="0" marginwidth="0" scrolling="no" noresize></iframe>
 </div>
 </TD></TR></TBODY></TABLE>
 </TD></TR></TBODY></TABLE></TD></TR>

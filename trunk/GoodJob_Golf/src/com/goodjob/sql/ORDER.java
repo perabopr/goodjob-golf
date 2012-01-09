@@ -64,6 +64,7 @@ public class ORDER {
 			",per_num " +
 			",reserve_phone " +
 			",package_price " +
+			",balance_price " +
 			",IFNULL(request_content, '''') request_content " +
 			",process_status " +
 		"FROM {0}" +

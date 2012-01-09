@@ -180,7 +180,7 @@ if(list != null){
           <td align="center" bgcolor="white"><%=inDate %></td>
           <td align="center" bgcolor="white"><%=outDate %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
-          <td align="center" bgcolor="white"><a href="javascript:;" ><img align="absmiddle" src="../images/common/btn_detail.gif" width="75" height="22" border="0" onMouseover="ddrivetip('<%=list.get(i).getReserve_memo() %>');" onMouseout="hideddrivetip()"></a></td>
+          <td align="center" bgcolor="white"><a href="javascript:;" ><img align="absmiddle" src="../images/common/btn_detail.gif" width="75" height="22" border="0" onMouseover="ddrivetip('<%=list.get(i).getReserve_memo().replace("\r\n","</br>") %>');" onMouseout="hideddrivetip()"></a></td>
           <td align="center" bgcolor="white">
 			<input id="Price<%=list.get(i).getReserve_seq()%>" name="price" type="text" size="10" value="<%=commify(list.get(i).getCondo_price())%>" class="input_box">
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePrice('<%=list.get(i).getReserve_seq()%>');">

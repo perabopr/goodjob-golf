@@ -592,7 +592,7 @@ for (int i = 1; i < 15 ;i++){
 					<div id="destap2" style="display:none;"><%=glDto.getUse_guide() %></div>
 					<div id="destap3" style="display:none;"><%=glDto.getGolflink_guide() %></div>
 					<div id="destap4" style="display:none;">					
-					<iframe id="ifrmMap" src="" width=402 height=402 frameborder="0" border="0" marginheight="0" marginwidth="0" scrolling="no" noresize></iframe>
+					<iframe id="ifrmMap" src="" width=602 height=402 frameborder="0" border="0" marginheight="0" marginwidth="0" scrolling="no" noresize></iframe>
 					</div>
 				</TD>
 				</TR>

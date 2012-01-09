@@ -30,7 +30,7 @@
 	}
 	else{
 		
-		System.out.println("Secession : "+mDto.getSecession());
+		//System.out.println("Secession : "+mDto.getSecession());
 		
 		if("Y".equals(mDto.getSecession())){
 %>

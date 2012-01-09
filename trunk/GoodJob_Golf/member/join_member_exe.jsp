@@ -77,8 +77,8 @@ alert("가입하려는 주민번호가  존재 합니다.\n다른 주민번호�
 			
 			Mail mail = new Mail(host,m_id,m_pw);
 			mail.setTo(mDto.getMem_id());
-			mail.setFrom(from , "goodjobgolf");
-			mail.setSubject("[goodjobgolf] 가입해 주셔서 감사합니다. ");
+			mail.setFrom(from , "굿잡골프");
+			mail.setSubject("[Goodjobgolf] 가입해 주셔서 감사합니다. ");
 			mail.setHtmlContent(content);
 			mail.send();
 			

@@ -155,8 +155,8 @@ function go_view(val){
 												                     <td align="center" height="30" width="41" class=normal_s><%=jDto.getJoin_seq()%></td>
 												                	<td align="center" width="62" class=normal_s><%=jDto.getReg_dt()%></td>
 												                	<td width="62" align="center" class=normal_s><%=jDto.getJoin_name()%></td>
-												                <td width="183" align="center"><a href="javascript:go_view(<%=jDto.getJoin_seq()%>);" class=board_list><%=jDto.getGolflink_name()%></a></td>
-												                <td width="57" align="center" class=normal_s><%=StringUtils.trimToEmpty(jDto.getRounding_dt()).substring(0,8)%></td>
+												                <td width="180" align="center"><a href="javascript:go_view(<%=jDto.getJoin_seq()%>);" class=board_list><%=jDto.getGolflink_name()%></a></td>
+												                <td width="60" align="center" class=normal_s><%=StringUtils.trimToEmpty(jDto.getRounding_dt()).substring(0,10)%></td>
 												                <td width="56" align="center" class=normal_s><%=jDto.getJoin_person()%>명</td>
 												                <td width="51" align="center" class=normal_s><%=jDto.getAge()%>대</td>
 												                <td width="49" align="center" class=normal_s><%=jDto.getApply_count()%></td>

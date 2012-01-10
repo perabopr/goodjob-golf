@@ -30,7 +30,7 @@ public class MYPAGE {
 							"       a.tour_date, " +
 							"       a.per_num, " +
 							"       a.reserve_phone, " +
-							"       a.package_price, " +
+							"       a.package_price,a.balance_price , " +
 							"       a.process_status, " +
 							"       a.reserve_uid " +
 							"  from tb_package_reserve a " +

@@ -189,7 +189,7 @@ function mypage_search() {
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=Utils.dateFormat(golfDto.getBooking_day(),".")%> <%=booking_time%></td>
                                                                                     <td height="22" bgcolor="white" align="center" class=blue><%=golfDto.getGolflink_name()%></td>
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=(StringUtils.defaultIfEmpty(golfDto.getGolflink_course(),"없음"))%></td>
-                                                                                    <td height="22" bgcolor="white" align="center" class=normal><%=Utils.numberFormat(golfDto.getProduct_price())%></td>
+                                                                                    <td height="22" bgcolor="white" align="center" class=normal><%=Utils.numberFormat(golfDto.getProduct_price())%>원</td>
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=golfDto.getPer_num()%>명/1팀</td>
                                                                                     <td height="22" bgcolor="white" align="center" class=orange>
                                                                                     <%=(golfDto.getMenu_seq()==1?"실시간예약":"사전예약")%></td>
@@ -232,8 +232,8 @@ function mypage_search() {
                                                                            <td height="25" bgcolor="white" align="center" class=normal><%=pkDto.getReserve_day()%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=blue><%=pkDto.getPackage_name1()%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=normal><%=pkDto.getTour_date().replaceAll("-",".")%></td>
-                                                                           <td height="22" bgcolor="white" align="center" class=blue><%=Utils.numberFormat(pkDto.getPackage_price())%></td>
-                                                                           <td height="22" bgcolor="white" align="center" class=normal><%=Utils.authNumber(0)%></td>
+                                                                           <td height="22" bgcolor="white" align="center" class=blue><%=(pkDto.getPackage_price()==0?"":Utils.numberFormat(pkDto.getPackage_price())+"원")%></td>
+                                                                           <td height="22" bgcolor="white" align="center" class=normal><%=(pkDto.getBalance_price()==0?"":Utils.numberFormat(pkDto.getBalance_price())+"원")%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=normal><%=pkDto.getPer_num()%>명/1팀</td>
                                                                            <td height="22" bgcolor="white" align="center" class=orange>
                                                                            <%=("0".equals(pkDto.getProcess_status())?"예약대기":"예약완료")%></td>
@@ -278,7 +278,7 @@ function mypage_search() {
 														                    <td height="22" bgcolor="white" align="center" class=normal><%=night_day%></td>
 														                    <td height="22" align="center" bgcolor="white" class="normal"><%=Utils.dateFormat(cdDto.getIn_date(),".")%></td>
 														                    <td height="22" bgcolor="white" align="center" class=normal><%=Utils.dateFormat(cdDto.getOut_date(),".")%></td>
-														                    <td height="22" bgcolor="white" align="center" class=orange><%=Utils.numberFormat(cdDto.getCondo_price())%>원</td>
+														                    <td height="22" bgcolor="white" align="center" class=orange><%=(cdDto.getCondo_price()==0?"":Utils.numberFormat(cdDto.getCondo_price())+"원")%></td>
 														                    <td height="22" bgcolor="white" align="center" class=blue>
 														                    <%=("0".equals(cdDto.getProcess_status())?"예약대기":"예약완료")%></td>
 														                </tr>

@@ -113,6 +113,7 @@ a:active.area{text-decoration:none; font-size: 9pt; color:#FF7E00;}
 .input_01, select{background-color:ffffff;font-family:µ¸¿ò,gulim;font-size:12px;color:#636163;height:16pt;border:1 solid #bcbec0;}
 .input_02{background-color:FFFFFF;font-family:µ¸¿ò,dotum;font-size:12px;color:#636163;height:14pt;border:1 solid #bcbec1;}
 .box_01, textarea, select, input{font-family:µ¸¿ò,dotum;font-size:12px;color:#636163;border:0 solid #BCBEC1}
+.box_02, textarea{font-family:µ¸¿ò,dotum;font-size:12px;color:#636163;border:1 solid #BCBEC1}
 
 
 

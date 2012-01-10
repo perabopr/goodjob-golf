@@ -170,7 +170,18 @@ if(list != null){
               <option value="process_status"<%=("process_status".equals(field)?" selected":"")%>>처리상태</option>
             </select>
             <input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="15" class="input_box">
-            <input id="searchOk" name="searchOk" type="image" src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle" onclick="on_search();"></td>
+            <input id="searchOk" name="searchOk" type="image" src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle" onclick="on_search();">
+          </td>
+        </tr>
+        <tr>
+        <td height="4" >
+        	부킹일 ("~2012-01-01" 2012년 1월 1일 까지 검색) </br>
+        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;("2012-01-01~" 2012년 1월 1일 부터 검색) </br>
+        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;("2011-01-01~2011-12-31" 2011년 전체 검색) </br>
+        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;("2011-01-01" 당일 하루 검색) </br>
+        	처리상태 (예약대기:0, 예약완료:1, 취소불가:2, 예약취소:3) </br>
+        	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ex)예약취소건 조회시 => 3
+        </td>
         </tr>
         </form>
       </table></td>

@@ -553,13 +553,7 @@ for (int i = 1; i < 15 ;i++){
 		String tmpDate = listPr.get(i).getProduct_date();
 		String tmpTime = listPr.get(i).getTime_start();
 		tmpDate = tmpDate.substring(0,4) + "-" + tmpDate.substring(4,6) + "-" + tmpDate.substring(6,8);
-		if((Integer.parseInt(tmpTime.substring(0,2)) - 12) > 0){
-			tmpTime = "오후 " + (Integer.parseInt(tmpTime.substring(0,2))-12) + ":" + tmpTime.substring(2,4);
-		}else if(Integer.parseInt(tmpTime.substring(0,2)) == 12){
-			tmpTime = "오후 " + Integer.parseInt(tmpTime.substring(0,2)) + ":" + tmpTime.substring(2,4);
-		}else{
-			tmpTime = "오전 " + Integer.parseInt(tmpTime.substring(0,2)) + ":" + tmpTime.substring(2,4);			
-		}
+		tmpTime = tmpTime.substring(0,2) + ":" + tmpTime.substring(2,4);
 		
 %>
 						<TR>

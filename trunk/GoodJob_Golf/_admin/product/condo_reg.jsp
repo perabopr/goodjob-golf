@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
@@ -10,7 +11,7 @@
 <%@ page import="com.goodjob.product.dto.CondoGalleryDto"%>
 <%@ page import="com.goodjob.product.dto.CondoDto"%>
 <%
-String condoSeq = StringUtils.trimToEmpty(request.getParameter("condoSeq"));
+int condoSeq = NumberUtils.toInt(request.getParameter("condoSeq"), 0);
 
 RegionDao regionDao = new RegionDao();
 List<RegionDto> arrRegions = regionDao.getRegionList("1");
@@ -20,8 +21,8 @@ List<CondoDto> arrlist = null;
 CondoDto vcDto = new CondoDto();
 List<CondoGalleryDto> arrlist2 = null;
 List<CondoRoomDto> arrlist3 = null;
-if(condoSeq.length() > 0){
-	arrlist = cDao.getCondoSelect("AND a.condo_seq = '" + condoSeq + "'");
+if(condoSeq > 0){
+	arrlist = cDao.getCondoSelect(0, condoSeq);
 	if(arrlist.size() == 1){
 		vcDto = arrlist.get(0); 
 		arrlist2 = cDao.getCondoGallerySelect(vcDto.getCondo_seq());		

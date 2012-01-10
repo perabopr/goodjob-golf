@@ -154,8 +154,8 @@ visibility: hidden;
 <TD height=40 align=right>
 <table border="0" cellpadding="0" cellspacing="0" width="150">
   <tr>
-    <td width="75" align="center"><p><a href="/forGolfbooking/reserve.jsp?menu=<%=menuNum%>&date=<%=preDate%>"><img align="absmiddle" src="../../images/booking/btn_2week_pre.gif" width="62" height="22" border="0"></a></p></td>
-    <td width="75" align="center"><p><a href="/forGolfbooking/reserve.jsp?menu=<%=menuNum%>&date=<%=eDate%>"><img align="absmiddle" src="../../images/booking/btn_2week_later.gif" width="62" height="22" border="0"></a></p></td>
+    <td width="75" align="center"><p><a href="/forGolfbooking/reserve.jsp?menu=<%=menuNum%>&region=<%=pRegion %>&date=<%=preDate%>"><img align="absmiddle" src="../../images/booking/btn_2week_pre.gif" width="62" height="22" border="0"></a></p></td>
+    <td width="75" align="center"><p><a href="/forGolfbooking/reserve.jsp?menu=<%=menuNum%>&region=<%=pRegion %>&date=<%=eDate%>"><img align="absmiddle" src="../../images/booking/btn_2week_later.gif" width="62" height="22" border="0"></a></p></td>
   </tr>
 </table>
 </TD></TR>

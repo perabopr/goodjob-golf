@@ -62,8 +62,9 @@ public class PRODUCT {
 			",a.golflink_guide" +
 			",a.use_rule " +	
 		"FROM tb_golflink a " +
-		"INNER JOIN tb_region b on(a.region_seq = b.region_seq)" +
-		"WHERE a.menu_seq = ?";	
+		"INNER JOIN tb_region b on(a.region_seq = b.region_seq) " +
+		"WHERE a.menu_seq = ? {0} " +
+		"ORDER BY a.region_seq";	
 	public static final String golflink_select
 		=	"SELECT " +
 				" golflink_seq " +
@@ -412,7 +413,8 @@ public class PRODUCT {
 				",a.way_map " +
 			"FROM tb_package a " +
 			"	INNER JOIN tb_region b on(a.region_seq = b.region_seq) " +
-			"WHERE 1=1 " + "%s";
+			"WHERE 1=1 {0} " +
+			"ORDER BY a.region_seq";
 	public static final String package_insert
 		=	"INSERT INTO tb_package(" +
 				" package_name1" +
@@ -637,7 +639,8 @@ public class PRODUCT {
 				",a.way_map " +
 			"FROM tb_condo a " +
 			"INNER JOIN tb_region b on(a.region_seq = b.region_seq) " +
-			"WHERE 1=1 %s";
+			"WHERE 1=1 {0} " +
+			"ORDER BY a.region_seq";
 	public static final String condo_insert
 		=	"INSERT INTO tb_condo(" +
 				"condo_name" +

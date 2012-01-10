@@ -3,6 +3,7 @@ package com.goodjob.product;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -28,18 +29,31 @@ public class PackageDao {
 	 * @param strWhere
 	 * @return
 	 */
-	public List<PackageDto> getPackageSelect(String strWhere){
+	public List<PackageDto> getPackageSelect(int region_seq, int pkSeq){
 		Connection conn = null;
 		List<PackageDto> list = null;
 		
 		try{
 			conn = DBManager.getConnection();
 			
+			String strQuery = "";
+			ArrayList<Object> bind = new ArrayList<Object>();
+			if(region_seq > 0)
+			{				
+				strQuery += " AND a.region_seq = ? ";
+				bind.add(region_seq);
+			}
+			if(pkSeq > 0)
+			{
+				strQuery += " AND a.package_seq = ? ";
+				bind.add(pkSeq);		
+			}
+			
 			ResultSetHandler rsh = new BeanListHandler(PackageDto.class);
 			
 			QueryRunner qr = new QueryRunner();
 			
-			list = (List<PackageDto>)qr.query(conn, String.format(PRODUCT.package_select, strWhere), rsh);	
+			list = (List<PackageDto>)qr.query(conn, MessageFormat.format(PRODUCT.package_select, strQuery), rsh, bind.toArray());	
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

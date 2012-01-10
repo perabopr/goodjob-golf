@@ -50,7 +50,9 @@ function reSetDate(){
 }
 
 function billok(){
-	frm.submit();
+	if(window.confirm("사전예약신청 내역입니다.\r\n예약신청내역이 맞으시면 사전신청예약버튼을 누르십시오 \r\n예약신청확인 SMS : <%=rPhone %>")){
+		frm.submit();
+	}
 }
 //-->
 </script>

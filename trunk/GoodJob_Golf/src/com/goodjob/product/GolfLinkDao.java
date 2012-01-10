@@ -3,6 +3,7 @@ package com.goodjob.product;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -27,19 +28,27 @@ public class GolfLinkDao {
 	 * 골프장 - 메뉴별_전체가져오기.
 	 * @return
 	 */
-	public List<GolfLinkDto> getGolfLinkList(int menu_seq){
+	public List<GolfLinkDto> getGolfLinkList(int menu_seq, int region_seq){
 		List<GolfLinkDto> list = null;
 		Connection conn = null;
 		
 		try {
 			conn = DBManager.getConnection();
 			
+			String strQuery = "";
 			ArrayList<Object> bind = new ArrayList<Object>();
 			bind.add(menu_seq);
+			if(region_seq > 0)
+			{				
+				strQuery = " AND a.region_seq = ?";
+				bind.add(region_seq);
+			}
+			
 			ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
+			
 			QueryRunner qr = new QueryRunner();
 						
-			list = (List<GolfLinkDto>) qr.query(conn , PRODUCT.golflink_select_full, rsh , bind.toArray());
+			list = (List<GolfLinkDto>) qr.query(conn , MessageFormat.format(PRODUCT.golflink_select_full, strQuery), rsh , bind.toArray());
 			
 		} catch (Exception e) {
 			System.out.println(e);

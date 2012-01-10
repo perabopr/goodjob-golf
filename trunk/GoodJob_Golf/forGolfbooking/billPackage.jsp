@@ -77,7 +77,10 @@ function billok(){
 		alert('인원을 입력하시기 바랍니다.');
 		return;
 	} 
-	frm.submit();
+
+	if(window.confirm("국내패키지 예약신청 내역입니다.\r\n예약내역이 맞으시면 예약신청 버튼을 누르십시오 \r\n예약신청확인 SMS : "+$("#phone1").val()+$("#phone2").val()+$("#phone3").val())){
+		frm.submit();
+	}
 }
 //-->
 </script>

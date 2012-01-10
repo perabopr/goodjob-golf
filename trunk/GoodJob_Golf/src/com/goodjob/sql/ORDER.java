@@ -140,4 +140,10 @@ public class ORDER {
 	public static final String view = "SELECT * FROM %s WHERE seq = ? ";
 	
 	public static final String update = "UPDATE {0} SET {1} WHERE reserve_seq = ?";
+		
+	public static final String product_sub_status_update
+	=	"UPDATE tb_product_sub " +
+		"SET product_status = ? " +
+		"WHERE productsub_seq IN " +
+		"(SELECT productsub_seq FROM tb_golflink_reserve WHERE reserve_seq = ?)";
 }

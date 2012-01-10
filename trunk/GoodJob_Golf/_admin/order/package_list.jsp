@@ -226,7 +226,7 @@ if(list != null){
           	<input id="userPrice<%=list.get(i).getReserve_seq()%>" name="userPrice" type="text" size="10" value="<%=list.get(i).getBalance_price() %>" class="input_box">
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateUserPrice('<%=list.get(i).getReserve_seq()%>')">
           </td>
-          <td align="center" bgcolor="white"><a href="domestic_detail.html" onClick="NewWindow(this.href,'name','740','450','yes');return false;"><img align="absmiddle" src="../images/common/btn_detail.gif" width="75" height="22" border="0" onMouseover="ddrivetip('<%=list.get(i).getRequest_content().replace("\r\n","</br>") %>');" onMouseout="hideddrivetip()"></a></td>
+          <td align="center" bgcolor="white"><a href="javascript:;"><img align="absmiddle" src="../images/common/btn_detail.gif" width="75" height="22" border="0" onMouseover="ddrivetip('<%=list.get(i).getRequest_content().replace("\r\n","</br>") %>');" onMouseout="hideddrivetip()"></a></td>
           <td align="center" bgcolor="white">
           	<select id="ddlStatus<%=list.get(i).getReserve_seq()%>" name="ddlStatus" size="1">
 				<option value="0" <%=("0".equals(list.get(i).getProcess_status())?" selected":"")%>>예약대기</option>

@@ -195,7 +195,7 @@ function imgChange(objId){
 	<TD bgColor=#91b500 height=1 width=704 colSpan=4></TD></TR></TBODY></TABLE></TD></TR>
 <TR><TD height=10></TD></TR>
 <TR><TD bgColor=white align=center>
-<div id="destap1"><%=pkDto.getGolflink_guide() %></div>
+<div id="destap1"><%=pkDto.getPackage_guide() %></div>
 <div id="destap2" style="display:none;"><%=pkDto.getUse_guide() %></div>
 <div id="destap3" style="display:none;"><%=pkDto.getGolflink_guide() %></div>
 <div id="destap4" style="display:none;"><%=pkDto.getWay_map() %></div>

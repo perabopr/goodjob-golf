@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
@@ -10,6 +11,7 @@
 <%@ page import="com.goodjob.db.*" %>
 <%
 String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
+int regionseq = NumberUtils.toInt(request.getParameter("region"),0);
 
 	RegionDao regionDao = new RegionDao();
 	List<RegionDto> arrRegions = regionDao.getRegionList("1");
@@ -26,13 +28,14 @@ String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
 	
 	GolfLinkDao dld = new GolfLinkDao();
 	List<GolfLinkDto> arrGolfLink = null;
-	arrGolfLink = dld.getGolfLinkList(Integer.parseInt(menuSeq));
+	arrGolfLink = dld.getGolfLinkList(Integer.parseInt(menuSeq), regionseq);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <link rel="stylesheet" href="../style.css">
 <title></title>
+<script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
 <script language="JavaScript"> 
 <!-- 
 function NewWindow(mypage, myname, w, h, scroll) { 
@@ -41,6 +44,10 @@ var wint = (screen.height - h) / 2;
 winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable' 
 win = window.open(mypage, myname, winprops) 
 if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); } 
+}
+
+function searchRegion(){
+	location.href = "/_admin/product/real_list.jsp?menu=1&region=" + $("#ddl_region").val();
 } 
 //--> 
 </script>
@@ -49,18 +56,18 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
     <td class=title><%= mainTitle%></td>
-    <td align="right" style="padding-right:30px;"><select name=""ddl_region"" size="1">
-        <option>전체지역보기</option>
+    <td align="right" style="padding-right:30px;"><select id="ddl_region" name="ddl_region" size="1">
+        <option value="0">전체지역보기</option>
 <% 
 	if (arrRegions != null && !arrRegions.isEmpty()){
 		for(int i = 0; i < arrRegions.size();i++){
 %>
-        <option value="<%=arrRegions.get(i).getRegion_seq() %>"><%=arrRegions.get(i).getRegion_name() %></option>
+        <option value="<%=arrRegions.get(i).getRegion_seq() %>" <%= regionseq == arrRegions.get(i).getRegion_seq()? "SELECTED":"" %>><%=arrRegions.get(i).getRegion_name() %></option>
 <%
 		}
 	}
 %>
-      </select> <img align="absmiddle" src="../images/inc/btn_search2.gif" width="45" height="22" border="0"></td>
+      </select> <img align="absmiddle" src="../images/inc/btn_search2.gif" width="45" height="22" border="0" onclick="searchRegion();return false;" style="cursor:pointer"></td>
   </tr>
   <tr>
     <td align="center" colspan="2">&nbsp;</td>

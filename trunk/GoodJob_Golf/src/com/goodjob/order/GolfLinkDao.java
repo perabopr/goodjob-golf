@@ -18,6 +18,7 @@ import org.apache.commons.lang.math.NumberUtils;
 import com.goodjob.db.DBManager;
 import com.goodjob.order.dto.GolfLinkDto;
 import com.goodjob.sql.ORDER;
+import com.goodjob.sql.PRODUCT;
 
 public class GolfLinkDao {
 	public List<GolfLinkDto> getList(String tableName , Map<String,String> data){
@@ -48,8 +49,38 @@ public class GolfLinkDao {
 				where += "AND golflink_name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}else if("reserve_day".equals(field) && keyword.length()>0){
-				where += "AND reserve_day LIKE concat('%',?,'%') " ;
-				params.add(keyword);
+				String[] keywords = keyword.split("~");
+				if(keywords.length == 2)
+				{
+					if(keywords[0].trim().length() > 0)
+					{
+						where += "AND booking_day >= ? " ;
+						params.add(keywords[0].trim().replace("-", ""));						
+					}
+					if(keywords[1].trim().length() > 0)
+					{
+						where += "AND booking_day <= ? " ;
+						params.add(keywords[1].trim().replace("-", ""));	
+					}
+				}
+				else
+				{
+					if(keyword.startsWith("~"))
+					{
+						where += "AND booking_day <= ? " ;
+						params.add(keyword.substring(1).trim().replace("-", ""));
+					}
+					else if(keyword.endsWith("~"))
+					{
+						where += "AND booking_day >= ? " ;
+						params.add(keyword.substring(0,keyword.length()-1).trim().replace("-", ""));
+					}
+					else
+					{
+						where += "AND booking_day = ? " ;
+						params.add(keyword.trim().replace("-", ""));
+					}
+				}
 			}else if("reserve_name".equals(field) && keyword.length()>0){
 				where += "AND reserve_name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
@@ -57,7 +88,7 @@ public class GolfLinkDao {
 				where += "AND product_price LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}else if("process_status".equals(field) && keyword.length()>0){
-				where += "AND process_status LIKE concat('%',?,'%') " ;
+				where += "AND process_status = ? " ;
 				params.add(keyword);
 			}
 			
@@ -217,6 +248,23 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			qr.update(conn, MessageFormat.format(ORDER.update, tableName, setQuery), bind.toArray());
+			
+			if(process_status.equals("3") && tableName.equals("tb_golflink_reserve"))
+			{
+				ArrayList<Object> bind2 = new ArrayList<Object>();
+				bind2.add("0");
+				bind2.add(reserve_seq);
+				
+				qr.update(conn, ORDER.product_sub_status_update, bind2.toArray());
+			}
+			if(process_status.equals("2") && tableName.equals("tb_golflink_reserve"))
+			{
+				ArrayList<Object> bind2 = new ArrayList<Object>();
+				bind2.add("2");
+				bind2.add(reserve_seq);
+				
+				qr.update(conn, ORDER.product_sub_status_update, bind2.toArray());
+			}
 		}
 		catch(Exception e){
 			System.out.println(e);

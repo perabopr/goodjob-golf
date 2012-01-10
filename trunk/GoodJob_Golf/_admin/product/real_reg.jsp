@@ -1,3 +1,4 @@
+<%@page import="com.goodjob.conf.Config"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
@@ -56,6 +57,8 @@ if(glSeq.length() > 0){
 }else{
 	pageTitle += "골프장 등록 ★";
 }
+
+String up_dir = Config.get("reserve_dir");
 %>
 <html>
 <head>
@@ -201,28 +204,32 @@ function getFileExtension(filePath)
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이미지업로드1</span></td>
           <td bgcolor="white" style="padding-left:10px;">          
           <input type="hidden" id="txtimg1" name="txtimg1" value="<%= gldto.getImg_sub1() %>">
-          <input id="img1" name="img1" class="upload" type="file" size="55">(270x202)
+          <input id="img1" name="img1" class="upload" type="file" size="55">(270x202) </br>
+          <%= gldto.getImg_sub1().length() > 0 ? up_dir + "/" + gldto.getImg_sub1() : "" %>
 		  </td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이미지업로드2</span></td>
           <td bgcolor="white" style="padding-left:10px;">
           <input type="hidden" id="txtimg2" name="txtimg2" value="<%= gldto.getImg_sub2() %>">
-          <input id="img2" name="img2" class="upload" type="file" size="55">(270x202)
+          <input id="img2" name="img2" class="upload" type="file" size="55">(270x202) </br>
+          <%= gldto.getImg_sub2().length() > 0 ? up_dir + "/" + gldto.getImg_sub2() : "" %>
           </td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이미지업로드3</span></td>
           <td bgcolor="white" style="padding-left:10px;">
           <input type="hidden" id="txtimg3" name="txtimg3" value="<%= gldto.getImg_sub3() %>">
-          <input id="img3" name="img3" class="upload" type="file" size="55">(270x202)
+          <input id="img3" name="img3" class="upload" type="file" size="55">(270x202) </br>
+          <%= gldto.getImg_sub3().length() > 0 ? up_dir + "/" + gldto.getImg_sub3() : "" %>
           </td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이미지업로드4</span></td>
           <td bgcolor="white" style="padding-left:10px;">
           <input type="hidden" id="txtimg4" name="txtimg4" value="<%= gldto.getImg_sub4() %>">
-          <input id="img4" name="img4" class="upload" type="file" size="55">(270x202)
+          <input id="img4" name="img4" class="upload" type="file" size="55">(270x202) </br>
+          <%= gldto.getImg_sub4().length() > 0 ? up_dir + "/" + gldto.getImg_sub4() : "" %>
           </td>
         </tr>
         <tr>

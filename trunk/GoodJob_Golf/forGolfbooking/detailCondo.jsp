@@ -309,7 +309,7 @@
 						
 						//if(roomDto.getReserve_room_seq()==0){
 		%>
-                                      <input type="radio" id="condoroom_seq" name="condoroom_seq" value="<%=roomDto.getCondoroom_seq()%>"><%=roomDto.getRoomtype()%> (&nbsp;<%=Utils.numberFormat(roomDto.getPrice_s1())%>원 ~ 주말 : <%=Utils.numberFormat(roomDto.getPrice_s2())%>원&nbs)<br>
+                                      <input type="radio" id="condoroom_seq" name="condoroom_seq" value="<%=roomDto.getCondoroom_seq()%>"><%=roomDto.getRoomtype()%> (&nbsp;<%=Utils.numberFormat(roomDto.getPrice_s1())%>&nbsp;원 ~ 주말 : <%=Utils.numberFormat(roomDto.getPrice_s2())%>&nbsp;원&nbsp;)<br>
                                       <input type="hidden" name="roomtype" value="<%=roomDto.getRoomtype()%>"/>
 		<%
 						//}
@@ -319,7 +319,7 @@
                                       </td>
                                     </tr>
                                     <tr>
-                                      <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" width="130">객실수량</td>
+                                      <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" width="130">숙박일</td>
                                       <td bgcolor="white" class="red_ss" style="padding-left:10px;" width="164">
                                       <input class="mem_input" type="text" maxlength="2" size="8" id="room_show" name="room_show"/>
                                       <input class="mem_input" type="hidden" maxlength="2" id="room_num" name="room_num"/>

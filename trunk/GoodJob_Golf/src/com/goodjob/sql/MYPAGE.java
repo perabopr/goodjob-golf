@@ -15,7 +15,7 @@ public class MYPAGE {
 								"a.booking_day," +
 								"a.booking_time_s," +
 								"a.golflink_course,a.product_price,a.coupon_price," +
-								"a.per_num , " +
+								"a.per_num ,a.process_status, " +
 								"a.golflink_course " +
 							"from tb_golflink_reserve a " +
 							"where reserve_uid = ? {0} order by menu_seq , a.reserve_seq desc ";

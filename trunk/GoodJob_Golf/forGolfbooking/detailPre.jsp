@@ -629,7 +629,7 @@ for (int i = 1; i < 15 ;i++){
 	<OPTION value="gmail.com">gmail.com</OPTION></SELECT></TD></TR>
 	<TR>
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 align=right>요청사항</TD>
-	<TD style="PADDING-LEFT: 10px" bgColor=white colSpan=3><TEXTAREA class=box_01 cols=80 rows=4 id="requestContent" name="requestContent"></TEXTAREA></TD></TR>
+	<TD style="PADDING-LEFT: 10px" bgColor=white colSpan=3><TEXTAREA class=box_02 cols=80 rows=4 id="requestContent" name="requestContent"></TEXTAREA></TD></TR>
 	<TR>
 	<TD bgColor=#aed247 width=700 colSpan=4></TD></TR></TBODY></TABLE>
 </TD>

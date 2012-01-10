@@ -367,7 +367,7 @@
                                     <tr>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;">요청사항</td>
                                       <td bgcolor="white" style="padding-left:10px;" colspan="3">
-                                      <textarea class="box_01" rows="4" cols="85" name="reserve_memo"></textarea></td>
+                                      <textarea class="box_02" rows="4" cols="85" name="reserve_memo"></textarea></td>
                                     </tr>
                                     <tr>
                                       <td bgcolor="#AED247" colspan="4" width="701"></td>
@@ -514,7 +514,7 @@
                                               <td height="10"></td>
                                             </tr>
                                             <tr>
-                                              <td bgcolor="white" align="center"><iframe id="ifrmMap" src="" width=402 height=402 frameborder="0" border="0" marginheight="0" marginwidth="0" scrolling="no" noresize></iframe></td>
+                                              <td bgcolor="white" align="center"><iframe id="ifrmMap" src="" width=602 height=402 frameborder="0" border="0" marginheight="0" marginwidth="0" scrolling="no" noresize></iframe></td>
                                             </tr>
                                           </table>
                                         </div></td>

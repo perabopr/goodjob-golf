@@ -155,7 +155,7 @@ function billok(){
 <TD style="PADDING-LEFT: 10px" bgColor=white height=25 width=451><INPUT class=input_01 id="reserveTeam" name="reserveTeam" size=4 value="1" readonly="readonly"> 팀 <INPUT class=input_01 id="reservePerson" name="reservePerson" size=4 maxlength="2"> 인 </TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 width=122 align=right>요청사항</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white width=451><TEXTAREA class=box_01 cols=70 rows=8 id="content" name="content"></TEXTAREA></TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white width=451><TEXTAREA class=box_02 cols=70 rows=8 id="content" name="content"></TEXTAREA></TD></TR>
 <TR>
 <TD bgColor=#aed247 width=594 colSpan=2></TD></TR></TBODY></TABLE></TD></TR>
 <TR>

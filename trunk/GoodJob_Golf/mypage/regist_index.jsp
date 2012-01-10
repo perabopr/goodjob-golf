@@ -163,14 +163,14 @@ function mypage_search() {
                                                                             <tr>
                                                                               <td><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="#CCCCCC">
                                                                                   <tr>
-                                                                                    <td bgcolor="#F1F1F1" align="center" height="25" class=normal_b width="74">신청일</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="90">부킹일</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="164">골프장명</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="64">코스</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="109">금액</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" height="25" class=normal_b width="70">신청일</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="94">부킹일</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="168">골프장명</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="60">코스</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="84">금액</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="57">인원/팀</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="60">예약구분</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="50">처리상태</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="70">예약구분</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="65">처리상태</td>
                                                                                   </tr>
 																		<%
 																			
@@ -193,9 +193,18 @@ function mypage_search() {
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=Utils.numberFormat(golfDto.getProduct_price())%>원</td>
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=golfDto.getPer_num()%>명/1팀</td>
                                                                                     <td height="22" bgcolor="white" align="center" class=orange>
-                                                                                    <%=(golfDto.getMenu_seq()==1?"실시간":"사전")%></td>
+                                                                                    <%=(golfDto.getMenu_seq()==1?"실시간예약":"사전예약")%></td>
                                                                                   <td height="22" bgcolor="white" align="center" class=orange>
-                                                                           			<%=("0".equals(golfDto.getProcess_status())?"예약대기":"예약완료")%></td>
+                                                                           			<%
+                                                                           			if("0".equals(golfDto.getProcess_status()))
+                                                                           					out.println("예약대기");
+                                                                           			else if("1".equals(golfDto.getProcess_status()))
+                                                                           				out.println("예약완료");
+                                                                           			else if("2".equals(golfDto.getProcess_status()))
+                                                                           				out.println("취소불가");
+                                                                           			else if("3".equals(golfDto.getProcess_status()))
+                                                                           				out.println("예약취소");
+                                                                           			%></td>
                                                                            		</tr>
 																		<%
 																				}

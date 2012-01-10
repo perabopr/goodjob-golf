@@ -154,11 +154,11 @@
                                                         </tr>
                                                         <tr>
                                                           <td bgcolor="#F1F1F1" align="right" style="padding-right:10px;" class=mem_subject>전달사항</td>
-                                                          <td bgcolor="white" style="padding-left:10px;"><textarea id="content" name="content" rows="10" cols="64" class="box_01"></textarea></td>
+                                                          <td bgcolor="white" style="padding-left:10px;"><textarea id="content" name="content" rows="10" cols="64" class="box_02"></textarea></td>
                                                         </tr>
                                                         <tr>
                                                           <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">첨부파일</td>
-                                                          <td bgcolor="white" style="padding-left:10px;"><input class="upload" name="upfile" type="file" size="50"></td>
+                                                          <td bgcolor="white" style="padding-left:10px;"><input class="mem_input"  class="upload" name="upfile" type="file" size="50"></td>
                                                         </tr>
                                                         <tr>
                                                           <td bgcolor="#AED247" colspan="2" width="593"></td>

@@ -124,8 +124,8 @@
           <td bgcolor="#e6e7e8" align="center" width="241"><span class=normal_b>회원명</span></td>
           <td bgcolor="#e6e7e8" align="center" width="429"><span class=normal_b>아이디</span></td>
           <td width="280" align="center" bgcolor="#E6E7E8"><span class=normal_b>연락처</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="358"><span class=normal_b>회원가입상태</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="278">&nbsp;</td>
+          <td bgcolor="#e6e7e8" align="center" width="358"><span class=normal_b>회원가입상태</td>
+          <td bgcolor="#e6e7e8" align="center" width="278"><span class=normal_b>기타기능</span></td>
         </tr>
 <%
 	int mSize = mList.size();

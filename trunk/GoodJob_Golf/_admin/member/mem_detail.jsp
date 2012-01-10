@@ -44,8 +44,8 @@
   <tr>
     <td align="center" colspan="2" width="700"><table border="0" cellpadding="2" cellspacing="1" width="702" bgcolor="silver">
         <tr>
-          <td bgcolor="#e6e7e8" height="25" align="right" width="167" style="padding-right:10px;"><span class=normal_b><%=mDto.getMem_name()%></span></td>
-          <td bgcolor="white" width="162" style="padding-left:10px;"><span class=normal_b>회원명</span></td>
+          <td bgcolor="#e6e7e8" height="25" align="right" width="167" style="padding-right:10px;"><span class=normal_b>회원명</span></td>
+          <td bgcolor="white" width="162" style="padding-left:10px;"><span class=normal_b><%=mDto.getMem_name()%></span></td>
           <td width="137" bgcolor="#E6E7E8" style="padding-right:10px;" align="right"><span class=normal_b>회원가입상태</span></td>
           <td width="183" bgcolor="white" style="padding-left:10px;"><span class=red>
           <%

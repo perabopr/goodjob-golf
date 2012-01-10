@@ -49,8 +49,38 @@ public class CondoDao {
 				where += "AND condo_name LIKE concat('%',?,'%') ";
 				params.add(keyword);
 			}else if("in_date".equals(field) && keyword.length()>0){
-				where += "AND in_date LIKE concat('%',?,'%') " ;
-				params.add(keyword);
+				String[] keywords = keyword.split("~");
+				if(keywords.length == 2)
+				{
+					if(keywords[0].trim().length() > 0)
+					{
+						where += "AND in_date >= ? " ;
+						params.add(keywords[0].trim().replace("-", ""));						
+					}
+					if(keywords[1].trim().length() > 0)
+					{
+						where += "AND in_date <= ? " ;
+						params.add(keywords[1].trim().replace("-", ""));	
+					}
+				}
+				else
+				{
+					if(keyword.startsWith("~"))
+					{
+						where += "AND in_date <= ? " ;
+						params.add(keyword.substring(1).trim().replace("-", ""));
+					}
+					else if(keyword.endsWith("~"))
+					{
+						where += "AND in_date >= ? " ;
+						params.add(keyword.substring(0,keyword.length()-1).trim().replace("-", ""));
+					}
+					else
+					{
+						where += "AND in_date = ? " ;
+						params.add(keyword.trim().replace("-", ""));
+					}
+				}
 			}else if("reserve_name".equals(field) && keyword.length()>0){
 				where += "AND reserve_name LIKE concat('%',?,'%') " ;
 				params.add(keyword);

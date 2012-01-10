@@ -50,14 +50,44 @@ public class PackageDao {
 						+"AND package_name2 LIKE concat('%',?,'%') ";
 				params.add(keyword);
 				params.add(keyword);
-			}else if("reserve_day".equals(field) && keyword.length()>0){
-				where += "AND reserve_day LIKE concat('%',?,'%') " ;
-				params.add(keyword);
+			}else if("tour_date".equals(field) && keyword.length()>0){
+				String[] keywords = keyword.split("~");
+				if(keywords.length == 2)
+				{
+					if(keywords[0].trim().length() > 0)
+					{
+						where += "AND tour_date >= ? " ;
+						params.add(keywords[0].trim());						
+					}
+					if(keywords[1].trim().length() > 0)
+					{
+						where += "AND tour_date <= ? " ;
+						params.add(keywords[1].trim());	
+					}
+				}
+				else
+				{
+					if(keyword.startsWith("~"))
+					{
+						where += "AND tour_date <= ? " ;
+						params.add(keyword.substring(1).trim());
+					}
+					else if(keyword.endsWith("~"))
+					{
+						where += "AND tour_date >= ? " ;
+						params.add(keyword.substring(0,keyword.length()-1).trim());
+					}
+					else
+					{
+						where += "AND tour_date = ? " ;
+						params.add(keyword.trim());
+					}
+				}
 			}else if("reserve_name".equals(field) && keyword.length()>0){
 				where += "AND reserve_name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
-			}else if("product_price".equals(field) && keyword.length()>0){
-				where += "AND product_price LIKE concat('%',?,'%') " ;
+			}else if("package_price".equals(field) && keyword.length()>0){
+				where += "AND package_price LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}else if("process_status".equals(field) && keyword.length()>0){
 				where += "AND process_status LIKE concat('%',?,'%') " ;

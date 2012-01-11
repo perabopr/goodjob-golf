@@ -20,7 +20,7 @@ public class BBS {
 	
 	public static final String view = "SELECT * FROM %s WHERE seq = ? ";
 	
-	public static final String readcount = " UPDATE notice_bbs SET readcount = readcount + 1 WHERE seq = ? ";
+	public static final String readcount = " UPDATE %s SET readcount = readcount + 1 WHERE seq = ? ";
 	
 	public static final String update = "UPDATE %s SET " + 
 										 " name = ?, email = ?, subject = ?, content = ?, ishtml = ? where seq = ? ";
@@ -90,7 +90,7 @@ public class BBS {
 	
 	public static final String join_status = "update tb_join_bbs set join_status = 'E' where join_seq = ? ";
 	
-	public static final String join_apply = "update tb_join_bbs set apply_count = apply_count + 1 where join_seq = ? ";
+	public static final String join_apply = "update tb_join_bbs set apply_count=apply_count + 1 where join_seq = ? ";
 	
 	public static final String join_clist = "select a.cmt_seq, " +
     "a.join_seq, " +

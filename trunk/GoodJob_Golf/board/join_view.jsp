@@ -33,7 +33,10 @@
 	JoinBoardDto jDto = dao.getJoinView(NumberUtils.toInt(join_seq,0));
 	
 	List<JoinBoardDto> cmtList = dao.getJoinCommentList(jDto.getJoin_seq());
-
+	
+	dao.setJoinReadcount(NumberUtils.toInt(join_seq));
+	
+	
 	Map<String,String> params = new HashMap<String,String>();
 	params.put("npage","1");
 	params.put("region",region);

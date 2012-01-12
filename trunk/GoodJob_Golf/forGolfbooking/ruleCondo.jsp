@@ -43,6 +43,9 @@ function reserveAgree(){
 		return;		
 	}
 
+	var frm = document.exefrm;
+	frm.target =  "ifr_hidden"; 
+	frm.action = "exe_condo.jsp";
 	frm.submit();
 }
 </script>
@@ -62,7 +65,7 @@ function reserveAgree(){
                                             <tr>
                                               <td valign="top"><p>&nbsp;</p></td>
                                             </tr>
-<form name="frm" method="post" action="result.jsp">
+<FORM NAME="exefrm" METHOD="post">
 <input type="hidden" name="menu" value="<%=menu%>"/>
 <input type="hidden" name="condo_seq" value="<%=condo_seq%>"/>
 <input type="hidden" name="condo_name" value="<%=condo_name%>"/>
@@ -183,3 +186,4 @@ function reserveAgree(){
                               </table></td>
                           </tr>
                         </table>
+<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe>

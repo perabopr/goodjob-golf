@@ -66,6 +66,9 @@ function billok(){
 	
 	if($("#billBtype").attr("checked")){
 		if(window.confirm("예약을 완료하시려면 확인 버튼을 누르십시오 \r\n예약확인 SMS : "+$("#phone1").val()+$("#phone2").val()+$("#phone3").val())){
+			var frm = document.exefrm;
+			frm.target =  "ifr_hidden"; 
+			frm.action = "exe_real.jsp";
 			frm.submit();
 		}
 	}
@@ -84,7 +87,7 @@ $(function(){
 });
 //-->
 </script>
-<FORM NAME="frm" METHOD="post" ACTION="result.jsp">
+<FORM NAME="exefrm" METHOD="post">
 <input type="hidden" id="menu" name="menu" value="1">
 <input type="hidden" id="gcId" name="gcId" >
 <input type="hidden" id="golf" name="golf" >
@@ -151,4 +154,5 @@ $(function(){
 <TD style="PADDING-LEFT: 10px" bgColor=white><INPUT id="billBtype" name="billtype" value="B" type=radio checked> 무통장입금</TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD style="PADDING-BOTTOM: 50px; PADDING-TOP: 30px" align=center><IMG border=0 src="/images/booking/btn_next_page3.gif" onclick="billok();" style="cursor:hand"></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe>
 </FORM>

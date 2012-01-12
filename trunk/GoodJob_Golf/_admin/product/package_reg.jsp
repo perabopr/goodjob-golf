@@ -37,8 +37,12 @@ String up_dir = Config.get("reserve_dir");
 <html>
 <head>
 <link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/jquery.ui.all.css">
+<script src="../js/jquery-1.6.2.min.js"></script>
+<script src="../js/jquery.ui.core.js"></script>
+<script src="../js/jquery.ui.widget.js"></script>
+<script src="../js/jquery.ui.datepicker.js"></script>
 <title></title>
-<script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
 <script type="text/javascript" src="/js/highgardenEditor.js"></script>
 <script language="JavaScript"> 
 <!-- 
@@ -50,6 +54,13 @@ win = window.open(mypage, myname, winprops)
 if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); } 
 } 
 
+$(function() {
+	$( "#saleDateStart" ).datepicker({dateFormat:'yy-mm-dd'});
+});
+$(function() {
+	$( "#saleDateEnd" ).datepicker({dateFormat:'yy-mm-dd'});
+});
+
 function frmSubmit(){
 	frm.submit();
 	return false;
@@ -60,6 +71,7 @@ function frmSubmit(){
 <body topmargin="10" marginheight="10">
 <FORM NAME="frm" METHOD="post" ACTION="package_reg_ok.jsp"  enctype="multipart/form-data">
 <input type="hidden" id="pkSeq" name="pkSeq" value="<%= pkSeq%>" />
+<input type="hidden" id="menuSeq" name="menuSeq" value="<%=3%>" />
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
     <td class=title>★ 국내패키지 등록 ★</td>
@@ -101,6 +113,13 @@ function frmSubmit(){
 	}
 %>
             </select></td>
+        </tr>
+        <tr>
+          <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>할인기간</span></td>
+          <td bgcolor="white" style="padding-left:10px;"><img align="absmiddle" src="../images/common/img_calendar.gif" width="15" height="16" border="0">
+            <input class="input_box" size="13" id="saleDateStart" name="saleDateStart" readonly value="<%= vPk.getSaledate_start() %>">
+            ~ <img align="absmiddle" src="../images/common/img_calendar.gif" width="15" height="16" border="0">
+            <input class="input_box" size="13" id="saleDateEnd" name="saleDateEnd" readonly value="<%= vPk.getSaledate_end() %>"></td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>목록이미지</span></td>

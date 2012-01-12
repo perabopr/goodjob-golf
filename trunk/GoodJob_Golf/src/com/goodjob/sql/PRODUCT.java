@@ -394,6 +394,8 @@ public class PRODUCT {
 				",a.package_name2" +
 				",a.region_seq" +
 				",b.region_name" +
+				",saledate_start" +
+				",saledate_end" +
 				",a.package_type" +
 				",a.img_main" +
 				",a.img_sub" +
@@ -417,9 +419,12 @@ public class PRODUCT {
 			"ORDER BY a.region_seq";
 	public static final String package_insert
 		=	"INSERT INTO tb_package(" +
-				" package_name1" +
+				" menu_seq" +
+				",package_name1" +
 				",package_name2" +
 				",region_seq" +
+				",saledate_start" +
+				",saledate_end" +
 				",package_type" +
 				",img_main" +
 				",img_sub" +
@@ -437,13 +442,16 @@ public class PRODUCT {
 				",use_rule" +
 				",golflink_guide" +
 				",way_map" +
-			")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public static final String package_update
 		=	"UPDATE tb_package " +
 			"SET " +
-				" package_name1 = ?" +
+				" menu_seq = ?" +
+				",package_name1 = ?" +
 				",package_name2 = ?" +
 				",region_seq = ?" +
+				",saledate_start = ?" +
+				",saledate_end = ?" +
 				",package_type = ?" +
 				",img_main = ?" +
 				",img_sub = ?" +

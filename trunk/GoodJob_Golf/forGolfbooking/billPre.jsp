@@ -51,12 +51,15 @@ function reSetDate(){
 
 function billok(){
 	if(window.confirm("사전예약신청 내역입니다.\r\n예약신청내역이 맞으시면 사전신청예약버튼을 누르십시오 \r\n예약신청확인 SMS : <%=rPhone %>")){
+		var frm = document.exefrm;
+		frm.target =  "ifr_hidden"; 
+		frm.action = "exe_pre.jsp";
 		frm.submit();
 	}
 }
 //-->
 </script>
-<FORM NAME="frm" METHOD="post" ACTION="result.jsp">
+<FORM NAME="exefrm" METHOD="post">
 <input type="hidden" id="menu" name="menu" value="2" >
 <input type="hidden" id="psId" name="psId" value="<%=productsubSeq %>">
 <input type="hidden" id="golf" name="golf" value="<%=golf %>">
@@ -120,4 +123,5 @@ function billok(){
 <TR>
 <TD height=100>&nbsp;</TD></TR>
 </TBODY></TABLE></TD></TR></TBODY></TABLE>
+<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe>
 </FORM>

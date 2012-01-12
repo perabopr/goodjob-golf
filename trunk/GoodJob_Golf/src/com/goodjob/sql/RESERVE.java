@@ -180,9 +180,12 @@ public class RESERVE {
 	public static final String getPackage_select
 	=	"SELECT " +
 			" a.package_seq " +
+			",a.menu_seq " +
 			",a.package_name1 " +
 			",a.package_name2 " +
 			",a.region_seq " +
+			",a.saledate_start " +
+			",a.saledate_end " +
 			",a.package_type " +
 			",a.img_main " +
 			",a.img_sub " +

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.goodjob.util.Utils"%>
 <%@page import="com.goodjob.reserve.dto.RegionDto"%>
 <%@page import="com.goodjob.reserve.PackageDao"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
@@ -8,7 +10,6 @@
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="java.util.Date"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 int menuNum = NumberUtils.toInt(request.getParameter("menu"),1);
 
@@ -16,14 +17,14 @@ int pRegion = NumberUtils.toInt(request.getParameter("region"), 0);
 PackageDao pkDao = new PackageDao();
 List<RegionDto> rList = pkDao.getRegionList("1");
 
-//String nowDate = new java.text.SimpleDateFormat("yyyy/MM/dd").format(new java.util.Date());
 Calendar vCalendar = Calendar.getInstance();
-String strDate = Integer.toString(NumberUtils.toInt(request.getParameter("date"),0));
+
+String strDate = StringUtils.defaultIfEmpty(request.getParameter("date"),Utils.getDate("yyyyMMdd"));
+
 int tYear;
 int tMonth;
 int tDay;
 if(strDate == null || strDate.length() != 8){
-	strDate = new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
 	out.print("<script>");
 	out.print("location.href='/forGolfbooking/reserve.jsp?menu=1&region="+pRegion+"&date="+strDate+"';");
 	out.print("</script>");
@@ -169,8 +170,6 @@ for (int i = 1; i < 15 ;i++){
 	int incYear = incDate.get(incDate.YEAR);
 	int incMonth = incDate.get(incDate.MONTH)+1;
 	int incDay = incDate.get(incDate.DATE);
-	
-	
 	
 	int incWeek = incDate.get(incDate.DAY_OF_WEEK);
 	String weekImg = "";

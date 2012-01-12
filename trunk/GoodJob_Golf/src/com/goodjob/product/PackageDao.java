@@ -73,9 +73,12 @@ public class PackageDao {
 			conn = DBManager.getConnection();	
 			
 			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(pkDto.getMenu_seq());
 			bind.add(pkDto.getPackage_name1());
 			bind.add(pkDto.getPackage_name2());
 			bind.add(pkDto.getRegion_seq());
+			bind.add(pkDto.getSaledate_start());
+			bind.add(pkDto.getSaledate_end());
 			bind.add(pkDto.getPackage_type());
 			bind.add(pkDto.getImg_main());
 			bind.add(pkDto.getImg_sub());
@@ -126,9 +129,12 @@ public class PackageDao {
 			conn = DBManager.getConnection();	
 			
 			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(pkDto.getMenu_seq());
 			bind.add(pkDto.getPackage_name1());
 			bind.add(pkDto.getPackage_name2());
 			bind.add(pkDto.getRegion_seq());
+			bind.add(pkDto.getSaledate_start());
+			bind.add(pkDto.getSaledate_end());
 			bind.add(pkDto.getPackage_type());
 			bind.add(pkDto.getImg_main());
 			bind.add(pkDto.getImg_sub());
@@ -172,7 +178,7 @@ public class PackageDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, PRODUCT.package_update, bind.toArray());			
+			qr.update(conn, PRODUCT.package_delete, bind.toArray());			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

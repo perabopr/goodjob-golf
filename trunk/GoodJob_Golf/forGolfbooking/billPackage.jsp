@@ -79,12 +79,15 @@ function billok(){
 	} 
 
 	if(window.confirm("국내패키지 예약신청 내역입니다.\r\n예약내역이 맞으시면 예약신청 버튼을 누르십시오 \r\n예약신청확인 SMS : "+$("#phone1").val()+$("#phone2").val()+$("#phone3").val())){
+		var frm = document.exefrm;
+		frm.target =  "ifr_hidden"; 
+		frm.action = "exe_package.jsp";
 		frm.submit();
 	}
 }
 //-->
 </script>
-<FORM NAME="frm" METHOD="post" ACTION="result.jsp">
+<FORM NAME="exefrm" METHOD="post">
 <input type="hidden" id="menu" name="menu" value="3" >
 <input type="hidden" id="pkSeq" name="pkSeq" value="<%=pkSeq %>" >
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
@@ -163,4 +166,5 @@ function billok(){
 <TD bgColor=#aed247 width=594 colSpan=2></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD style="PADDING-BOTTOM: 60px; PADDING-TOP: 40px" align=center><A href="javascript:;" onclick="billok();"><IMG border=0 align=absMiddle src="../../images/package/btn_domestic_regist3.gif" width=150 height=39></A></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe>
 </FORM>

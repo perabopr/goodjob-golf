@@ -126,7 +126,20 @@ function imgChange(objId){
 %>
 <TD class=cc_name height=25><%=packName %></TD></TR>
 <TR>
-<TD><%=pkDto.getGolflink_guide() %></TD></TR>
+<TD>
+	<table border="0" width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td height="30" width="60" class=normal_b>위치 </td>
+      <td width="10">:</td>
+      <td width="347"><%=pkDto.getAddress1()%> <%=pkDto.getAddress2()%></td>
+    </tr>
+    <tr>
+      <td height="30" class="normal_b" width="60">할인기간</td>
+      <td height="23">:</td>
+      <td height="23"><%=pkDto.getSaledate_start()%> ~ <%=pkDto.getSaledate_end()%></td>
+    </tr>
+	</table>
+</TD></TR>
 <TR>
 <TD vAlign=top>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width="100%" bgColor=#d1d3d4>

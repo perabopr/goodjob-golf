@@ -2,10 +2,13 @@ package com.goodjob.reserve.dto;
 
 public class PackageDto {
 	private int package_seq;
+	private int menu_seq;
 	private String package_name1 = "";
 	private String package_name2 = "";
 	private int region_seq;
 	private String region_name = "";
+	private String saledate_start = "";
+	private String saledate_end = "";
 	private String package_type = "";
 	private String img_main = "";
 	private String img_sub = "";
@@ -59,6 +62,12 @@ public class PackageDto {
 	public void setPackage_seq(int package_seq) {
 		this.package_seq = package_seq;
 	}
+	public int getMenu_seq() {
+		return menu_seq;
+	}
+	public void setMenu_seq(int menu_seq) {
+		this.menu_seq = menu_seq;
+	}
 	public String getPackage_name1() {
 		return package_name1;
 	}
@@ -82,6 +91,18 @@ public class PackageDto {
 	}
 	public void setRegion_name(String region_name) {
 		this.region_name = region_name;
+	}
+	public String getSaledate_start() {
+		return saledate_start;
+	}
+	public void setSaledate_start(String saledate_start) {
+		this.saledate_start = saledate_start;
+	}
+	public String getSaledate_end() {
+		return saledate_end;
+	}
+	public void setSaledate_end(String saledate_end) {
+		this.saledate_end = saledate_end;
 	}
 	public String getPackage_type() {
 		return package_type;
@@ -160,6 +181,12 @@ public class PackageDto {
 	}
 	public void setPackage_guide(String package_guide) {
 		this.package_guide = package_guide;
+	}
+	public String getUse_rule() {
+		return use_rule;
+	}
+	public void setUse_rule(String use_rule) {
+		this.use_rule = use_rule;
 	}
 	public String getUse_guide() {
 		return use_guide;

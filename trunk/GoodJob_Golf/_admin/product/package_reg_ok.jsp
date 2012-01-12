@@ -52,9 +52,12 @@
 	if(fileUpload.getParameter("pkSeq").length() > 0){
 		pkDto.setPackage_seq(Integer.parseInt(fileUpload.getParameter("pkSeq")));
 	}
+	pkDto.setMenu_seq(Integer.parseInt(fileUpload.getParameter("menuSeq")));
 	pkDto.setPackage_name1(fileUpload.getParameter("package_name1"));
 	pkDto.setPackage_name2(fileUpload.getParameter("package_name2"));
 	pkDto.setRegion_seq(Integer.parseInt(fileUpload.getParameter("regionseq")));
+	pkDto.setSaledate_start(fileUpload.getParameter("saleDateStart"));
+	pkDto.setSaledate_end(fileUpload.getParameter("saleDateEnd"));
 	pkDto.setImg_sub(upfile0);
 	pkDto.setImg_sub1(upfile1);
 	pkDto.setImg_sub2(upfile2);

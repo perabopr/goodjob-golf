@@ -41,7 +41,7 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 } 
 
 function searchRegion(){
-	location.href = "/_admin/product/real_list.jsp?menu=2&region=" + $("#ddl_region").val();
+	location.href = "/_admin/product/pre_list.jsp?menu=2&region=" + $("#ddl_region").val();
 } 
 //--> 
 </script>

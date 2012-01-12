@@ -415,32 +415,41 @@ for (int i = 1; i < 15 ;i++){
 	switch(incWeek)
 	{
 		case 2:
-			weekImg = "img_monday.gif";
+			weekImg = "img_monday%s.gif";
 			break;
 		case 3:
-			weekImg = "img_tuesday.gif";
+			weekImg = "img_tuesday%s.gif";
 			break;
 		case 4:
-			weekImg = "img_wednesday.gif";
+			weekImg = "img_wednesday%s.gif";
 			break;
 		case 5:
-			weekImg = "img_thursday.gif";
+			weekImg = "img_thursday%s.gif";
 			break;
 		case 6:
-			weekImg = "img_friday.gif";
+			weekImg = "img_friday%s.gif";
 			break;
 		case 7:
-			weekImg = "img_saturday.gif";
+			weekImg = "img_saturday%s.gif";
 			weekClass = "saturday";
 			break;
 		case 1:
-			weekImg = "img_sunday.gif";
+			weekImg = "img_sunday%s.gif";
 			weekClass = "sunday";
 			break;
 		default:
 			break;
 	}
 	incDate.add(incDate.DATE, 1);
+	
+	boolean isHoliday = com.goodjob.util.Holiday.isHoliday(incYear+""+(incMonth<10?"0"+incMonth:incMonth)+""+incDay);
+	if(isHoliday){
+		weekClass = "sunday";
+		weekImg = String.format(weekImg , "_h");
+	}
+	else{
+		weekImg = String.format(weekImg , "");
+	}
 %>
 			<TD bgColor=#f1f1f1 width=30 align=center>
 			<SPAN class="<%=weekClass%>"><%=Integer.toString(incMonth)+"/"+Integer.toString(incDay)%><BR></SPAN>

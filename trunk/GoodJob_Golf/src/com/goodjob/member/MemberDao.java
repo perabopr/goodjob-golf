@@ -304,12 +304,12 @@ public class MemberDao {
 	 * 회원 탈퇴
 	 * @param mem_id
 	 */
-	public boolean memberSeccesstion(String mem_id){
+	public boolean memberSecession(String mem_id , String secession){
 		Connection conn = null;
 		boolean isUpdate = false;
 		try {
 			conn = DBManager.getConnection();
-			String[] bind = {mem_id};
+			String[] bind = {secession , mem_id};
 			
 			QueryRunner qr = new QueryRunner();
 			qr.update(conn , MEMBER.secession , bind);

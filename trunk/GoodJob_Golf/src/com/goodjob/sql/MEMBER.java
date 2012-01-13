@@ -50,7 +50,7 @@ public class MEMBER {
 	public static final String dup_jumin = " select count(*) as cnt from tb_member where mem_jumin= ? ";
 	
 	//어드민 탈퇴 처리탈퇴
-	public static final String secession = " update tb_member set secession = 'Y' , secession_dt = now()  where mem_id= ? ";
+	public static final String secession = " update tb_member set secession = ? , secession_dt = now()  where mem_id= ? ";
 	
 	//
 	public static final String user_secession = " update tb_member set secession = 'H',secession_dt = now(),memo = ? where mem_id= ? ";

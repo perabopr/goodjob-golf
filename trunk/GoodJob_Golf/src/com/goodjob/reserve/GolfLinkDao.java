@@ -54,10 +54,10 @@ public class GolfLinkDao {
 		try {
 			conn = DBManager.getConnection();
 			
-			String strNowDate = new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
+			//String strNowDate = new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
 			
 			ArrayList<Object> bind = new ArrayList<Object>();
-			bind.add(strNowDate);
+			//bind.add(strNowDate);
 			bind.add(pDto.getGolflink_seq());
 			bind.add(pDto.getProduct_startDate());
 			bind.add(pDto.getProduct_endDate());
@@ -200,13 +200,13 @@ public class GolfLinkDao {
 			list = (List<ProductReserveDto>)qr.query(conn , RESERVE.getProductReserve2, rsh, bind.toArray());
 			
 			// 상품이 예약가능할때만...
-			if(list.size() > 0 && list.get(0).getProduct_status().equals("0")){
+			if(list.size() > 0 && list.get(0).getProduct_status().equals("0")){				
 				bind = new ArrayList<Object>();
 				bind.add(glrDto.getReserve_name());
 				bind.add(glrDto.getReserve_uid());
 				bind.add(glrDto.getPer_num());
 				bind.add(glrDto.getReserve_phone());
-				bind.add(glrDto.getProduct_price());
+				bind.add(list.get(0).getNH_price() * Integer.parseInt(glrDto.getPer_num()));
 				bind.add(glrDto.getCoupon_price());
 				bind.add(glrDto.getProcess_status());
 				bind.add(glrDto.getCard_bill_num());

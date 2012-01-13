@@ -51,7 +51,8 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 } 
 
 function updateBookingDate(reserveseq){
-	var status = $("#bookingTime_s_h"+reserveseq).val() + $("#bookingTime_s_t"+reserveseq).val()
+	var status = $("#bookingDate"+ reserveseq).val() + " "
+			+$("#bookingTime_s_h"+reserveseq).val() + $("#bookingTime_s_t"+reserveseq).val()
 			+":"+$("#bookingTime_e_h"+reserveseq).val()+$("#bookingTime_e_t"+reserveseq).val();
 
 	$.ajax({
@@ -213,7 +214,7 @@ if(list != null){
           	<table width="100%">
           	<tr>
           	<td>
-          		<input id="bookingDate<%=list.get(i).getReserve_seq()%>" name="bookingDate" type="text" size="16" value="<%=vbookingDate %>" class="input_box" readonly>
+          		<input id="bookingDate<%=list.get(i).getReserve_seq()%>" name="bookingDate" type="text" size="16" value="<%=vbookingDate %>" class="input_box">
           	</td>
           	<td>
           		<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateBookingDate('<%=list.get(i).getReserve_seq()%>');">
@@ -221,9 +222,9 @@ if(list != null){
           	</tr>          	
           	<td colspan="2">
           		<input id="bookingTime_s_h<%=list.get(i).getReserve_seq()%>" name="bookingTime_s_h" type="text" size="2" value="<%=vbookingTime_s_1 %>" class="input_box" maxlength="2">시
-          		<input id="bookingTime_s_t<%=list.get(i).getReserve_seq()%>" name="bookingTime_s_t" type="text" size="2" value="<%=vbookingTime_s_1 %>" class="input_box" maxlength="2">분
+          		<input id="bookingTime_s_t<%=list.get(i).getReserve_seq()%>" name="bookingTime_s_t" type="text" size="2" value="<%=vbookingTime_s_2 %>" class="input_box" maxlength="2">분
           		~
-          		<input id="bookingTime_e_h<%=list.get(i).getReserve_seq()%>" name="bookingTime_s_h" type="text" size="2" value="<%=vbookingTime_e_1 %>" class="input_box" maxlength="2">시
+          		<input id="bookingTime_e_h<%=list.get(i).getReserve_seq()%>" name="bookingTime_e_h" type="text" size="2" value="<%=vbookingTime_e_1 %>" class="input_box" maxlength="2">시
           		<input id="bookingTime_e_t<%=list.get(i).getReserve_seq()%>" name="bookingTime_e_t" type="text" size="2" value="<%=vbookingTime_e_2 %>" class="input_box" maxlength="2">분
           	</td>
           	<tr>

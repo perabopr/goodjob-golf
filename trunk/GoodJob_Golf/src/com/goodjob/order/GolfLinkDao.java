@@ -257,7 +257,7 @@ public class GolfLinkDao {
 				
 				qr.update(conn, ORDER.product_sub_status_update, bind2.toArray());
 			}
-			if(process_status.equals("2") && tableName.equals("tb_golflink_reserve"))
+			if(process_status.equals("1") && tableName.equals("tb_golflink_reserve"))
 			{
 				ArrayList<Object> bind2 = new ArrayList<Object>();
 				bind2.add("2");

@@ -21,7 +21,7 @@ if(request.getParameterValues("pdsubseq") != null && request.getParameterValues(
 	String arrMin[] = request.getParameterValues("course_minute");	
 	String arrNorPrice[] = request.getParameterValues("courseN");
 	String arrSalePrice[] = request.getParameterValues("courseS");
-	String arrPrdtStatus[] = request.getParameterValues("prdtStatus");
+	String arrPrdtStatus[] = request.getParameterValues("ddl_prdtStatus");
 	
 	productDao pd = new productDao();
 	String pdsubseqs = "'";

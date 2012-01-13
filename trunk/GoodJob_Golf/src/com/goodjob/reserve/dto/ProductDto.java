@@ -10,6 +10,7 @@ public class ProductDto {
 	String product_startDate = "";
 	String product_endDate = "";
 	int product_cnt = 0;
+	int statusCnt = 0;
 	
 	public int getProduct_seq() {
 		return product_seq;
@@ -64,5 +65,11 @@ public class ProductDto {
 	}
 	public void setProduct_cnt(int product_cnt) {
 		this.product_cnt = product_cnt;
+	}
+	public int getStatusCnt() {
+		return statusCnt;
+	}
+	public void setStatusCnt(int statusCnt) {
+		this.statusCnt = statusCnt;
 	}
 }

@@ -31,7 +31,6 @@ glrDto.setReserve_name(resName);
 glrDto.setReserve_uid(user_Id);
 glrDto.setPer_num(Integer.toString(perNum));
 glrDto.setReserve_phone(uPhone);
-glrDto.setProduct_price(100);
 glrDto.setCoupon_price(0);
 glrDto.setProcess_status("0");
 glrDto.setCard_bill_num("");

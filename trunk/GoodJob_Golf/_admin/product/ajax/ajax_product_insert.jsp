@@ -21,7 +21,7 @@ prdtDto.setGolflink_seq(Integer.parseInt(golflinkseq));
 prdtDto.setProduct_year(pYear);
 prdtDto.setProduct_month(pMonth);
 prdtDto.setProduct_day(pDay);
-prdtDto.setView_yn("N");
+prdtDto.setView_yn("Y");
 productDao prdtDao = new productDao();
 
 int idSeq = 0;

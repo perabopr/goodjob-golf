@@ -118,7 +118,11 @@ function StatusModify(sDate, status){
 			}else if(evalData.Product[0].c == "2"){
 				alert("휴장 되었습니다.");
 				$("#date"+evalData.Product[0].b).prev().html("휴장");
-			}			
+			}else if(evalData.Product[0].c == "Y"){
+				alert("예약가능 하게 되었습니다.");
+				$("#date"+evalData.Product[0].b).prev().html("예약가능");
+				$("#date"+evalData.Product[0].b).prev().parent().find("span").attr("class", "regist_yes");
+			}
 		}
 	  }
 	});
@@ -126,8 +130,7 @@ function StatusModify(sDate, status){
 
 function selSetting(sDate){	
 	var splitDate = sDate.split('/');
-	selDate = splitDate[0] + "/" + LenChk(splitDate[1], 2) + "/" + LenChk(splitDate[2], 2);
-	
+	selDate = splitDate[0] + "/" + LenChk(splitDate[1], 2) + "/" + LenChk(splitDate[2], 2);	
 	var prdtseq = $("#date"+sDate.replace('/','').replace('/','')).val();
 	//상품일련번호.
 	if(prdtseq == ""){
@@ -138,12 +141,17 @@ function selSetting(sDate){
 		  success: function(html){
 			var evalData = eval("("+html+")");
 			if(evalData.Product.length == 1){
-				$("#prdtseq").val(evalData.Product[0].a);
-				
+				alert("예약가능 하게 되었습니다.");
+				$("#date"+evalData.Product[0].b).prev().html("예약가능");
+				$("#date"+evalData.Product[0].b).prev().parent().find("span").attr("class", "regist_yes");
+				$("#prdtseq").val(evalData.Product[0].a);				
 			}
 		  }
 		});
 	}else{
+		if($("#date"+sDate.replace("/","").replace("/","")).prev().html() != "예약가능"){
+			StatusModify(selDate, "Y");	
+		}		
 		$("#prdtseq").val(prdtseq);
 	}
 	prdtseq = $("#prdtseq").val();
@@ -223,6 +231,25 @@ function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, 
 	timecostHTML += "<td align='center' bgcolor='white'><input class='input_box' size='10' name='courseN' value='" + nPrice + "' ></td>";
 	timecostHTML += "<td align='center' bgcolor='white'><input class='input_box' size='10' name='courseS' value='" + sPrice + "' ></td>";
 	timecostHTML += "<td align='center' bgcolor='white'><input type='hidden' name='prdtStatus' value='" + sStatus + "' /><input type='checkbox' name='timeItems' /></td>";
+	timecostHTML += "<td bgcolor='white' align='center'><select name='ddl_prdtStatus'>"
+		for(var i = 0; i < 3;i++){
+			var selectStr = "";
+			if(sStatus == i){
+				selectStr = "selected";
+			}
+			switch(i){
+				case 0:
+					timecostHTML += "<option value='" + i + "' " + selectStr + ">예약가능</option>";
+					break;
+				case 1:
+					timecostHTML += "<option value='" + i + "' " + selectStr + ">예약중</option>";
+					break;
+				case 2:
+					timecostHTML += "<option value='" + i + "' " + selectStr + ">예약마감</option>";
+					break;
+			}
+		}
+		timecostHTML += "</select></td> "
 	timecostHTML += "</tr>";
 	$("#tbTimeCost").append(timecostHTML);
 
@@ -456,9 +483,9 @@ String.prototype.trim = function(){
         <tr>
           <td bgcolor="#F1F1F1" align="center" height="19" width="40">날짜</td>
           <td bgcolor="#F1F1F1" align="center" height="19" width="295">시간선택 </td>
-          <td align="center" bgcolor="#F1F1F1" height="19" width="112">정상가</td>
-          <td align="center" bgcolor="#F1F1F1" height="19" width="95">할인가</td>
-          <td width="95" height="19" align="center" bgcolor="#F1F1F1">
+          <td align="center" bgcolor="#F1F1F1" height="19" width="80">정상가</td>
+          <td align="center" bgcolor="#F1F1F1" height="19" width="80">할인가</td>
+          <td align="center" bgcolor="#F1F1F1" height="19" width="80">
           	<img align="absmiddle" src="../../images/inc/btn_plus.gif" style="cursor:pointer;" width="32" height="16" border="0" onclick="addTime('','0','0','0','0','0','','','0');">
           	<img src="../../images/inc/btn_del2.gif" style="cursor:pointer;" width="32" height="16" border="0" align="absmiddle" onclick="removeTime();">
           	<!-- <img align="absmiddle" src="../../images/inc/btn_save.gif" width="32" height="16" border="0"> -->
@@ -467,6 +494,7 @@ String.prototype.trim = function(){
           	<input type="hidden" name="cpYear" value="<%= currYear%>" />
           	<input type="hidden" name="cpMonth" value="<%= currMonth+1%>" />
 		  </td>
+		  <td bgcolor="#F1F1F1" align="center" height="19" width="62">마감 </td>
         </tr>
       	</table>
     </form>

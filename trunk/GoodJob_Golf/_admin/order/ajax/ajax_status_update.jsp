@@ -21,7 +21,9 @@ if(colname.equals("product_price")){
 }else if(colname.equals("per_num")){
 	params.put("per_num",status);
 }else if(colname.equals("booking_time")){
-	String[] arrDates = status.split(":");
+	String[] arrDateTime = status.split(" ");
+	String[] arrDates = arrDateTime[1].split(":");
+	params.put("booking_day", arrDateTime[0].replace("-",""));
 	params.put("booking_time_s",arrDates[0]);
 	params.put("booking_time_e",arrDates[1]);
 }else if(colname.equals("package_price")){

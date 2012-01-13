@@ -164,7 +164,7 @@ visibility: hidden;
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=707 bgColor=#d1d3d4>
 <TBODY>
 <TR>
-<TD bgColor=#f1f1f1 height=35 width=212 align=center><SPAN class=normal_s>실시간예약 골프장명</SPAN></TD>
+<TD bgColor=#f1f1f1 height=35 width=212 align=center><SPAN class=normal_s>실시간예약 골프장명1</SPAN></TD>
 <% 
 for (int i = 1; i < 15 ;i++){
 	int incYear = incDate.get(incDate.YEAR);
@@ -243,6 +243,7 @@ for(int i = 0; i < listGolf.size(); i++){
 		String pDate = "";
 		String cDate = "";
 		int rCnt = 0;
+		int cCnt = 0;
 		for(int j = 0; j < listPrdt.size(); j++){
 			if(listPrdt.get(j).getProduct_year().equals(cYear)
 					&&listPrdt.get(j).getProduct_month().equals(cMonth)
@@ -251,6 +252,7 @@ for(int i = 0; i < listGolf.size(); i++){
 				pDate = cYear + "/" + cMonth + "/" + cDay;
 				cDate = cYear + cMonth + cDay;
 				rCnt = listPrdt.get(j).getProduct_cnt();
+				cCnt = listPrdt.get(j).getStatusCnt();
 			}
 		}		
 		if(pDate.equals("")){
@@ -260,7 +262,7 @@ for(int i = 0; i < listGolf.size(); i++){
 		}else{
 %>
 		<TD bgColor=white height=30 align=center>
-		<a href="/forGolfbooking/detail.jsp?menu=<%=menuNum%>&golf=<%=listGolf.get(i).getGolflink_seq()%>&date=<%=sDate %>&cdate=<%=cDate%>"><IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate %></br>--------------------</br>예약가능팀 : <%=rCnt %>팀');" onMouseout="hideddrivetip()"></a>
+		<a href="/forGolfbooking/detail.jsp?menu=<%=menuNum%>&golf=<%=listGolf.get(i).getGolflink_seq()%>&date=<%=sDate %>&cdate=<%=cDate%>"><IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate %></br>--------------------</br>예약가능팀 : <%=cCnt %>/<%=rCnt %>팀');" onMouseout="hideddrivetip()"></a>
 		</TD>
 <%
 		}

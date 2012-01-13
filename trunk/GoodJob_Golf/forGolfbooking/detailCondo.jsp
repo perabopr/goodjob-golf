@@ -234,7 +234,7 @@
 								
 								roomDto = roomList.get(i);
 				%>
-								<span class=blue style="width:170px;height:15px;"><%=roomDto.getRoomtype()%>&nbsp;주중:<%=Utils.numberFormat(roomDto.getPrice_n1())%>원</span><span style="width:50px;height:20px;text-align:center;">~</span><span class=blue style="height:15px;">주말:<%=Utils.numberFormat(roomDto.getPrice_n2())%>원</span><br/>
+								<span class=blue style="width:200px;height:15px;"><%=roomDto.getRoomtype()%>&nbsp;주중:<%=Utils.numberFormat(roomDto.getPrice_n1())%>원 ~.</span><span style="width:5px;height:20px;text-align:center;"></span><span class=blue style="height:15px;">주말:<%=Utils.numberFormat(roomDto.getPrice_n2())%>원 ~.</span><br/>
 				<%
 							}
 						}
@@ -254,7 +254,7 @@
 								
 								roomDto = roomList.get(i);
 				%>
-								<span class=orange style="width:170px;height:15px;"><%=roomDto.getRoomtype()%>&nbsp;주중:<%=Utils.numberFormat(roomDto.getPrice_s1())%>원</span><span style="width:50px;height:20px;text-align:center;">~</span><span class=orange style="height:15px;">주말:<%=Utils.numberFormat(roomDto.getPrice_s2())%>원</span><br/>
+								<span class=orange style="width:200px;height:15px;"><%=roomDto.getRoomtype()%>&nbsp;주중:<%=Utils.numberFormat(roomDto.getPrice_s1())%>원 ~.</span><span style="width:5px;height:20px;text-align:center;"></span><span class=orange style="height:15px;">주말:<%=Utils.numberFormat(roomDto.getPrice_s2())%>원 ~.</span><br/>
 				<%
 							}
 						}
@@ -309,7 +309,7 @@
 						
 						//if(roomDto.getReserve_room_seq()==0){
 		%>
-                                      <input type="radio" id="condoroom_seq" name="condoroom_seq" value="<%=roomDto.getCondoroom_seq()%>"><%=roomDto.getRoomtype()%> (&nbsp;<%=Utils.numberFormat(roomDto.getPrice_s1())%>&nbsp;원 ~ 주말 : <%=Utils.numberFormat(roomDto.getPrice_s2())%>&nbsp;원&nbsp;)<br>
+                                      <input type="radio" id="condoroom_seq" name="condoroom_seq" value="<%=roomDto.getCondoroom_seq()%>">&nbsp;<%=roomDto.getRoomtype()%> <br>
                                       <input type="hidden" name="roomtype" value="<%=roomDto.getRoomtype()%>"/>
 		<%
 						//}

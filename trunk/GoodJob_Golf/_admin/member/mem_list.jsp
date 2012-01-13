@@ -157,7 +157,7 @@
           <td align="center" bgcolor="white"><%=mDto.getMem_mtel()%></td>
           <td align="center" bgcolor="white">
           	<select id="mem_type" name="mem_type" size="1">
-              <option value="F"<%if("F".equals(mDto.getMem_type())) out.println(" selected");%>>무료회원</option>
+              <option value="0"<%if("0".equals(mDto.getMem_type())) out.println(" selected");%>>무료회원</option>
               <option value="1"<%if("1".equals(mDto.getMem_type())) out.println(" selected");%>>유료회원(1년)</option>
               <option value="2"<%if("2".equals(mDto.getMem_type())) out.println(" selected");%>>유료회원(2년)</option>
             </select>
@@ -197,6 +197,9 @@
             </select>
             <input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="30" class="input_box">
            <a href="javascript:on_search();"><img src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle"></a></td>
+        </tr>
+        <tr>
+          <td height="30" align="center">회원가입상태 - 무료 : 0 , 1년 : 1 , 2년 : 2</td>
         </tr>
       </table></td>
   </tr>

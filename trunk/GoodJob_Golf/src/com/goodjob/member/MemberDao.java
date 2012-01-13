@@ -65,11 +65,11 @@ public class MemberDao {
 				bind.add(keyword);
 			}
 			else if("reg_dt".equals(field) && keyword.length() > 0){
-				where = " where date_format(reg_dt,'%Y%m%d') = ? " ;
+				where = " where date_format(reg_dt,'%Y-%m-%d') = ? " ;
 				bind.add(keyword);
 			}
 			else if("secession".equals(field)){
-				where = " where secession = 'H'" ;
+				where = " where secession = 'Y'" ;
 			}
 			
 			//페이징

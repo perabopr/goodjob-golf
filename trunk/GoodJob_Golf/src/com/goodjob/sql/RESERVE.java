@@ -22,6 +22,7 @@ public class RESERVE {
 			",A.product_month" +
 			",A.product_day" +
 			",A.product_date" +
+			",A.view_yn" +
 			",count(*) 'product_cnt' " +
 			",(SELECT COUNT(*) FROM tb_product_sub " +
 				"WHERE product_status = '0' " +

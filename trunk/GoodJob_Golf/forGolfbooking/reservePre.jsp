@@ -79,6 +79,8 @@ List<GolfLinkDto> listGolf = glDao.getGolfLinkList(strWhere);
 Calendar incDate = Calendar.getInstance();
 incDate.set(tYear, tMonth-1, tDay);
 
+String strNowDate = new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
+int intNowDate = Integer.parseInt(strNowDate);
 %>
 <style type="text/css">
 
@@ -244,6 +246,8 @@ for(int i = 0; i < listGolf.size(); i++){
 		String pDate = "";
 		String cDate = "";
 		int rCnt = 0;
+		int cCnt = 0;
+		String viewYn = "";
 		for(int j = 0; j < listPrdt.size(); j++){
 			if(listPrdt.get(j).getProduct_year().equals(cYear)
 					&&listPrdt.get(j).getProduct_month().equals(cMonth)
@@ -252,16 +256,32 @@ for(int i = 0; i < listGolf.size(); i++){
 				pDate = cYear + "/" + cMonth + "/" + cDay;
 				cDate = cYear + cMonth + cDay;
 				rCnt = listPrdt.get(j).getProduct_cnt();
+				cCnt = listPrdt.get(j).getStatusCnt();
+				viewYn = listPrdt.get(j).getView_yn();
+				break;
 			}
 		}		
 		if(pDate.equals("")){
 %>
 		<TD bgColor=white height=30 align=center>&nbsp;</TD>
 <%
+		}else if( Integer.parseInt(cYear + cMonth + cDay) < intNowDate 
+				|| cCnt == 0 || viewYn == "1"){
+%>
+		<TD bgColor=white height=30 align=center>
+		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole1.gif" width=24 height=22 alt="마감">
+		</TD>
+<%
+		}else if(viewYn == "2"){
+%>
+		<TD bgColor=white height=30 align=center>
+		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole2.gif" width=24 height=22 alt="휴장">
+		</TD>
+<%
 		}else{
 %>
 		<TD bgColor=white height=30 align=center>
-		<a href="/forGolfbooking/detail.jsp?menu=<%=menuNum%>&golf=<%=listGolf.get(i).getGolflink_seq()%>&date=<%=sDate %>&cdate=<%=cDate%>"><IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate %></br>--------------------</br>예약가능팀 : <%=rCnt %>팀');" onMouseout="hideddrivetip()"></a>
+		<a href="/forGolfbooking/detail.jsp?menu=<%=menuNum%>&golf=<%=listGolf.get(i).getGolflink_seq()%>&date=<%=sDate %>&cdate=<%=cDate%>"><IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate %></br>--------------------</br>예약가능팀 : <%=cCnt %>/<%=rCnt %>팀');" onMouseout="hideddrivetip()"></a>
 		</TD>
 <%
 		}

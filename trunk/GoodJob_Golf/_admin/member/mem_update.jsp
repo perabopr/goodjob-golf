@@ -11,14 +11,15 @@
 	
 	String mem_id 	= StringUtils.defaultString(request.getParameter("mem_id"), "");
 	String mem_type = StringUtils.defaultString(request.getParameter("mem_type"), "");
+	String secession = StringUtils.defaultString(request.getParameter("secession"), "");
 	String type 	= StringUtils.defaultString(request.getParameter("type"), "T");
 	
 	MemberDao mDao = new MemberDao();
 	
 	if("S".equals(type)){
 		
-		boolean isUpdate = mDao.memberSeccesstion(mem_id);
-		
+		boolean isUpdate = mDao.memberSecession(mem_id , secession);
+
 		if(isUpdate) out.println("0");
 		else  out.println("1");
 	}

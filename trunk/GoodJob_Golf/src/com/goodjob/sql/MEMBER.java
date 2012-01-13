@@ -35,7 +35,7 @@ public class MEMBER {
 	
 	//회원등록
 	public static final String insert = " insert into tb_member (mem_id,mem_name,mem_pwd,mem_jumin,mem_mtel,sms_yn,email_yn,mem_type,secession,reg_dt) "+
-										"values (? ,? ,?,? ,? ,? ,?,'F','N',now()) ";
+										"values (? ,? ,?,? ,? ,? ,?,'0','N',now()) ";
 	
 	//아이디 찾기
 	public static final String id_find = " select mem_id from tb_member where mem_name = ? and mem_mtel = ? ";

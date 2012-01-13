@@ -88,23 +88,31 @@
 		frm.submit();
 	}
 
-	function secession(mem_id , mem_name){
-		if(confirm(mem_name + "회원 탈퇴 처리하시겠습니까?")){
+	function secession(mem_id ,mem_name , secession){
+
+		var msg = "";
+		if(secession == "Y")
+			msg = mem_name + "회원 탈퇴 처리하시겠습니까?"
+		else
+			msg = mem_name + "회원 탈퇴철회 처리하시겠습니까?"
+		
+		if(confirm(msg)){
 			$.ajax({
 				type: "POST",
 				url: "/_admin/member/mem_update.jsp",
-				data: "type=S&mem_id="+mem_id,
+				data: "type=S&secession="+secession+"&mem_id="+mem_id,
 				success: function(msg){
 					if($.trim(msg) == '0'){
-						alert("회원 탈퇴 처리 완료");
+						alert("처리 완료");
 						document.location.reload();
 					}
 					else{
-						alert("회원 탈퇴 처리 실패!");
+						alert("처리 실패!");
 					}
 			}});
 		}
 	}
+
 	
 //--> 
 </script>
@@ -157,8 +165,8 @@
           <td align="center" bgcolor="white">
           <a href="mem_detail.jsp?mem_id=<%=mDto.getMem_id()%>" onClick="NewWindow(this.href,'name','760','600','yes');return false;">
           <img align="absmiddle" src="/_admin/images/common/btn_detail.gif" width="75" height="22" border="0"></a>
-          &nbsp;
-          <input type="button" value="회원탈퇴" class="input_box" onclick="secession('<%=mDto.getMem_id()%>','<%=mDto.getMem_name()%>');"/>
+          &nbsp;<input type="button" value="탈퇴" class="input_box" onclick="secession('<%=mDto.getMem_id()%>','<%=mDto.getMem_name()%>','Y');"/>
+          &nbsp;<input type="button" value="철회" class="input_box" onclick="secession('<%=mDto.getMem_id()%>','<%=mDto.getMem_name()%>','N');"/>
           </td>
         </tr>
 <%

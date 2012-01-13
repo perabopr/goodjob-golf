@@ -114,7 +114,7 @@ function updateUserPrice(reserveseq){
 
 function updatePerCnt(reserveseq){
 	var status = $("#perCnt"+reserveseq).val();
-
+	
 	$.ajax({
 	  url: "/_admin/order/ajax/ajax_status_update.jsp?tablename=tb_package_reserve&reserveseq="+reserveseq+"&colname=per_num&status="+status,
 	  cache: false,
@@ -213,7 +213,7 @@ if(list != null){
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_uid() %></td>
           <td align="center" bgcolor="white"><%=packName %></td>
           <td align="center" bgcolor="white">
-          	<input type="text" id="perCnt" name="perCnt" size="1" maxlength="2" value="<%=list.get(i).getPer_num() %>" class="input_box">명
+          	<input type="text" id="perCnt<%=list.get(i).getReserve_seq()%>" name="perCnt" size="1" maxlength="2" value="<%=list.get(i).getPer_num() %>" class="input_box">명
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePerCnt('<%=list.get(i).getReserve_seq()%>');">
           </td>
           <td align="center" bgcolor="white"><%=list.get(i).getTour_date() %></td>

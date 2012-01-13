@@ -7,6 +7,7 @@ public class ProductDto {
 	String product_month = "";
 	String product_day = "";
 	String product_date = "";
+	String view_yn = "";
 	String product_startDate = "";
 	String product_endDate = "";
 	int product_cnt = 0;
@@ -47,6 +48,12 @@ public class ProductDto {
 	}
 	public void setProduct_date(String product_date) {
 		this.product_date = product_date;
+	}
+	public String getView_yn() {
+		return view_yn;
+	}
+	public void setView_yn(String view_yn) {
+		this.view_yn = view_yn;
 	}
 	public String getProduct_startDate() {
 		return product_startDate;

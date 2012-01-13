@@ -43,6 +43,9 @@
 <!-- 상단 영역 -->
 <script language="javascript">
 
+var startDt = '<%=startDt%>';
+var endDt = '<%=endDt%>';
+var init = true;
 function DisplayMenu(index) {
 
 	$('#tab').val(index);
@@ -57,6 +60,14 @@ function DisplayMenu(index) {
 			otherMenu.display = "none"; 
 			document.getElementById("tab0"+i).src="/images/mypage/btn_tab_off_0"+i+".gif";
 		}
+	}
+	
+	if(!init){
+		$("#startDt").val("");
+		$("#endDt").val("");
+	}
+	else{
+		init = false;
 	}
 }
 
@@ -194,16 +205,16 @@ function mypage_search() {
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=golfDto.getPer_num()%>명/1팀</td>
                                                                                     <td height="22" bgcolor="white" align="center" class=orange>
                                                                                     <%=(golfDto.getMenu_seq()==1?"실시간예약":"사전예약")%></td>
-                                                                                  <td height="22" bgcolor="white" align="center" class=orange>
+                                                                                  <td height="22" bgcolor="white" align="center">
                                                                            			<%
                                                                            			if("0".equals(golfDto.getProcess_status()))
-                                                                           					out.println("예약대기");
+                                                                           					out.println("<span class=orange>예약대기</span>");
                                                                            			else if("1".equals(golfDto.getProcess_status()))
-                                                                           				out.println("예약완료");
+                                                                           				out.println("<span class=blue>예약완료</span>");
                                                                            			else if("2".equals(golfDto.getProcess_status()))
-                                                                           				out.println("취소불가");
+                                                                           				out.println("<span class=red>취소불가</span>");
                                                                            			else if("3".equals(golfDto.getProcess_status()))
-                                                                           				out.println("예약취소");
+                                                                           				out.println("<span class=red>예약취소</span>");
                                                                            			%></td>
                                                                            		</tr>
 																		<%
@@ -247,8 +258,17 @@ function mypage_search() {
                                                                            <td height="22" bgcolor="white" align="center" class=blue><%=(pkDto.getPackage_price()==0?"":Utils.numberFormat(pkDto.getPackage_price())+"원")%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=normal><%=(pkDto.getBalance_price()==0?"":Utils.numberFormat(pkDto.getBalance_price())+"원")%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=normal><%=pkDto.getPer_num()%>명/1팀</td>
-                                                                           <td height="22" bgcolor="white" align="center" class=orange>
-                                                                           <%=("0".equals(pkDto.getProcess_status())?"예약대기":"예약완료")%></td>
+                                                                           <td height="22" bgcolor="white" align="center">
+                                                                  			<%
+                                                                  			if("0".equals(pkDto.getProcess_status()))
+                                                                  					out.println("<span class=orange>예약대기</span>");
+                                                                  			else if("1".equals(pkDto.getProcess_status()))
+                                                                  				out.println("<span class=blue>예약완료</span>");
+                                                                  			else if("2".equals(pkDto.getProcess_status()))
+                                                                  				out.println("<span class=red>취소불가</span>");
+                                                                  			else if("3".equals(pkDto.getProcess_status()))
+                                                                  				out.println("<span class=red>예약취소</span>");
+                                                                  			%></td>
                                                                          </tr>
 														            <%
 																			}
@@ -291,8 +311,17 @@ function mypage_search() {
 														                    <td height="22" align="center" bgcolor="white" class="normal"><%=Utils.dateFormat(cdDto.getIn_date(),".")%></td>
 														                    <td height="22" bgcolor="white" align="center" class=normal><%=Utils.dateFormat(cdDto.getOut_date(),".")%></td>
 														                    <td height="22" bgcolor="white" align="center" class=orange><%=(cdDto.getCondo_price()==0?"":Utils.numberFormat(cdDto.getCondo_price())+"원")%></td>
-														                    <td height="22" bgcolor="white" align="center" class=blue>
-														                    <%=("0".equals(cdDto.getProcess_status())?"예약대기":"예약완료")%></td>
+														                    <td height="22" bgcolor="white" align="center">
+                                                                  			<%
+                                                                  			if("0".equals(cdDto.getProcess_status()))
+                                                                  					out.println("<span class=orange>예약대기</span>");
+                                                                  			else if("1".equals(cdDto.getProcess_status()))
+                                                                  				out.println("<span class=blue>예약완료</span>");
+                                                                  			else if("2".equals(cdDto.getProcess_status()))
+                                                                  				out.println("<span class=red>취소불가</span>");
+                                                                  			else if("3".equals(cdDto.getProcess_status()))
+                                                                  				out.println("<span class=red>예약취소</span>");
+                                                                  			%></td>
 														                </tr>
 														            <%
 																			}

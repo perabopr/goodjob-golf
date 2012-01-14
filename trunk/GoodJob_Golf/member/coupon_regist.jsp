@@ -2,6 +2,7 @@
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
+<%@include file="/include/loginCheck.jsp" %>
 <%
 	
 %>
@@ -9,6 +10,11 @@
 <%@ include file="/include/header.jsp" %>
 <!-- 상단 영역 -->
 
+<script type="text/javascript">
+	function couponreg(){
+		alert("체크");
+	}
+</script>
 					<!--############### 중앙 컨텐츠 영역 #################-->
 					<table border="0" cellpadding="0" cellspacing="0" width="751">
                           <tr>
@@ -36,8 +42,8 @@
                                                                 <td align="center" bgcolor="white" height="100"><table border="0" cellpadding="0" cellspacing="0" width="401">
                                                                     <tr>
                                                                       <td width="100"><img src="../../images/mem_join/img_coupon_no.gif" width="86" height="29" border="0"></td>
-                                                                      <td width="178"><input class="input_01" type="text" size="30" name="coupon"></td>
-                                                                      <td width="122" align="center"><img src="../../images/mem_join/btn_coupon_regist.gif" width="70" height="22" border="0"></td>
+                                                                      <td width="178"><input class="input_01" type="text" size="30" id="couponCode" name="couponCode"></td>
+                                                                      <td width="122" align="center"><img src="../../images/mem_join/btn_coupon_regist.gif" width="70" height="22" border="0" onclick="couponreg();"></td>
                                                                     </tr>
                                                                   </table></td>
                                                               </tr>

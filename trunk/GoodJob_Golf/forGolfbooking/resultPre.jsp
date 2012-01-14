@@ -17,4 +17,4 @@
 <TD align=center>
 <P><IMG border=0 src="../../images/booking/img_bank_number.gif" width=640 height=298></P></TD></TR>
 <TR>
-<TD height=100 align=center>&nbsp;</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<TD height=100 align=center><A href="/main.jsp"><IMG border=0 src="../../images/common/btn_home.gif" width=150 height=39></A></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>

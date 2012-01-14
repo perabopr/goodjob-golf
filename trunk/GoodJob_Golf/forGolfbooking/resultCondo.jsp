@@ -82,7 +82,7 @@
                                                 </table></td>
                                             </tr>
                                             <tr>
-                                              <td align="center" height="115">&nbsp;</td>
+                                              <td align="center" height="115"><A href="/main.jsp"><IMG border=0 src="../../images/common/btn_home.gif" width=150 height=39></A></td>
                                             </tr>
                                           </table></td>
                                       </tr>

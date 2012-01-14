@@ -18,7 +18,7 @@
                                       <tr>
                                         <td align="center" bgcolor="white" width="745" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="95%">
                                             <tr>
-                                              <td align="right" class="location" height="30" width="95%"><a href="/">HOME</a> &gt; <span class=location_b>사이트맵</span></td>
+                                              <td align="right" class="location" height="30" width="95%"><a href="/index.html">HOME</a> &gt; <span class=location_b>사이트맵</span></td>
                                             </tr>
                                             <tr>
                                               <td bgcolor="#D1D3D4" height="33" class="sub_title" style="padding-left:15px;padding-top:4px">사이트맵</td>
@@ -29,11 +29,8 @@
                                                     <td>&nbsp;</td>
                                                   </tr>
                                                   <tr>
-                                                    <td align="center" width="0" height="500">
-                                                     &nbsp;</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td align="center">&nbsp;</td>
+                                                    <td align="center">
+                                                     <img src="../../images/common/img_sitemap.gif" width="660" height="550" border="0"></td>
                                                   </tr>
                                                 </table></td>
                                             </tr>
@@ -42,9 +39,6 @@
                                     </table></td>
                                 </tr>
                               </table></td>
-                          </tr>
-                          <tr>
-                            <td>&nbsp;</td>
                           </tr>
                         </table>
                         

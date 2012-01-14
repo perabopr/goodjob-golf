@@ -125,7 +125,7 @@
                     </tr>
                     <tr>
                       <td align="right" bgcolor="#E6E7E8" height="25" style="padding-right:10px;"><span class=normal_b>보내는사람</span></td>
-                      <td bgcolor="white" style="padding-left:10px;"><input name="sphone" type="text" value="02-6670-0200" size="20" class="input_box"></td>
+                      <td bgcolor="white" style="padding-left:10px;"><input name="sphone" type="text" value="02-6670-0202" size="20" class="input_box"></td>
                     </tr>
                     <tr>
                       <td align="right" bgcolor="#E6E7E8" height="25" style="padding-right:10px;"><span class=normal_b>받는사람</span></td>

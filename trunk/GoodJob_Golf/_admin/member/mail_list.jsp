@@ -43,16 +43,18 @@
 <!-- 
 function NewWindow(mypage, myname, w, h, scroll) {
 
+	var send_email = "";
 	var chk = document.getElementsByName("memSeq");
 	var count = 0;
 	for(i=0; i<chk.length;i++){                                                                    
 		if(chk[i].checked==true){
 			count++;
-			$('#mobile').val(document.getElementsByName("mem_mtel")[i].value);
-			break;
+			send_email += document.getElementsByName("mem_email")[i].value + ";";
 		}
 	}
-		
+
+	$('#send_email').val(send_email);
+	
 	if(count == 0){
 		alert("메일 발송할 회원을 선택해 주세요!");
 		return;
@@ -171,7 +173,7 @@ function perPage(){
           <td colspan="3" width="1856">
           <table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
  <form name="mailFrm" method="post">
- <input type="hidden" id="mobile" name="mobile" value=""/>
+ <input type="hidden" id="send_email" name="send_email" value=""/>
               <tr>
                 <td bgcolor="#e6e7e8" height="25" align="center" width="70"><span class=normal_b>선택</span></td>
                 <td height="25" align="center" bgcolor="#E6E7E8" width="115"><span class=normal_b>회원명</span></td>
@@ -193,7 +195,6 @@ function perPage(){
               <tr>
                 <td bgcolor="white" align="center" height="25">
                 <input type="checkbox" name="memSeq" value="<%=mDto.getMem_seq()%>">
-                <input type="hidden" name="mem_mtel" value="<%=mDto.getMem_mtel()%>"/>
                 <input type="hidden" name="mem_email" value="<%=mDto.getMem_id()%>"/>
                 </td>
                 <td height="25" align="center" bgcolor="white"><%=mDto.getMem_name()%></td>

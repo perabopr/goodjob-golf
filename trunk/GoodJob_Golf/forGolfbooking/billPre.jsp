@@ -14,6 +14,7 @@ int rCnt = NumberUtils.toInt(request.getParameter("reserveCnt"), 0);
 int rTeam = NumberUtils.toInt(request.getParameter("reserveTeam"), 0);
 String rDate = StringUtils.trimToEmpty(request.getParameter("reserveDate"));
 String rTime = StringUtils.trimToEmpty(request.getParameter("reserveTime"));
+String rCoupon = StringUtils.trimToEmpty(request.getParameter("reserveCoupon"));
 String rName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
 String rPhone = StringUtils.trimToEmpty(request.getParameter("reservePhone"));
 String rEmail = StringUtils.trimToEmpty(request.getParameter("reserveEmail"));
@@ -112,6 +113,9 @@ function billok(){
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>인원</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=rCnt %>인 <%=rTeam %>팀</TD></TR>
+<TR>
+<TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>프리미엄상품권 적용</TD>
+<TD style="PADDING-LEFT: 10px" bgColor=white><SELECT size=1 id="ddlCoupon" name="ddlCoupon"> <OPTION value="" selected>선택하세요</OPTION></SELECT></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>결제예상금액</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange><%=commify(buyPrice) %></SPAN>원</TD></TR>

@@ -42,6 +42,7 @@ String up_dir = Config.get("reserve_dir");
 <script src="../js/jquery.ui.core.js"></script>
 <script src="../js/jquery.ui.widget.js"></script>
 <script src="../js/jquery.ui.datepicker.js"></script>
+<script src="/js/jquery.ui.datepicker.kr.js"></script>
 <title></title>
 <script type="text/javascript" src="/js/highgardenEditor.js"></script>
 <script language="JavaScript"> 
@@ -56,8 +57,6 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 
 $(function() {
 	$( "#saleDateStart" ).datepicker({dateFormat:'yy-mm-dd'});
-});
-$(function() {
 	$( "#saleDateEnd" ).datepicker({dateFormat:'yy-mm-dd'});
 });
 

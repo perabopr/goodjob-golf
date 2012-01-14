@@ -145,7 +145,7 @@ $(function(){
 <TD style="PADDING-LEFT: 10px" bgColor=white>4명</TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>프리미엄상품권 적용</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white height=25><SELECT size=1 name=formselect1> <OPTION selected>선택하세요</OPTION></SELECT></TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white height=25><SELECT size=1 id="ddlCoupon" name="ddlCoupon"> <OPTION selected>선택하세요</OPTION></SELECT></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>결제금액</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange><%=commify(buyPrice) %></SPAN>원</TD></TR>

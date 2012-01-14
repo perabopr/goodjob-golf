@@ -145,19 +145,31 @@
 	        
 	    }
 	function DisplayMenu(index) {
-        for (i=1; i<=4; i++)
-        if (index == i) {
-	        thisMenu = eval("menu" + index + ".style");
-	        thisMenu.display = "";
-        	if(index == 4){
-        		$("#ifrmMap").attr("src", "/forGolfbooking/ifrm_map.jsp?x=<%=cdDto.getPoint_x()%>&y=<%=cdDto.getPoint_y()%>");
-        	}
-        } 
-        else {
-	        otherMenu = eval("menu" + i + ".style"); 
-	        otherMenu.display = "none"; 
-        }
+       for (i=1; i<=4; i++)
+       if (index == i) {
+        thisMenu = eval("menu" + index + ".style");
+        thisMenu.display = "";
+       	if(index == 4){
+       		$("#ifrmMap").attr("src", "/forGolfbooking/ifrm_map.jsp?x=<%=cdDto.getPoint_x()%>&y=<%=cdDto.getPoint_y()%>");
+       	}
+       } 
+       else {
+        otherMenu = eval("menu" + i + ".style"); 
+        otherMenu.display = "none"; 
        }
+      }
+
+	$(function(){
+		$("#chkRealName").click(function(){		
+			if(this.checked){
+				document.getElementById("reserve_name").readOnly = true;
+				$("#reserve_name").val("<%=user_Name%>");
+			}else{
+				document.getElementById("reserve_name").readOnly = false;
+				$("#reserve_name").val("");
+			}
+		});
+	});
 //-->
 </script>
 <table border="0" cellpadding="0" cellspacing="0" width="751">
@@ -322,30 +334,13 @@
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" width="130">숙박일</td>
                                       <td bgcolor="white" class="red_ss" style="padding-left:10px;" width="164">
                                       <input class="mem_input" type="text" maxlength="2" size="8" id="room_show" name="room_show"/>
-                                      <input class="mem_input" type="hidden" maxlength="2" id="room_num" name="room_num"/>
-                                      <!--select id="room_num" name="room_num" size="1">
-                                          <option value="">선택</option>
-                                          <option value="1">1실</option>
-                                          <option value="2">2실</option>
-                                          <option value="3">3실</option>
-                                          <option value="4">4실</option>
-                                          <option value="5">5실</option>
-                                          <option value="6">6실</option>
-                                          <option value="7">7실</option>
-                                          <option value="8">8실</option>
-                                          <option value="9">9실</option>
-                                          <option value="10">10실</option>
-                                        </select--></td>
+                                      <input class="mem_input" type="hidden" maxlength="2" id="room_num" name="room_num"/></td>
                                       <td width="117" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" align="right">이용인원</td>
-                                      <td width="243" bgcolor="white" style="padding-left:10px;"><input class="mem_input" type="text" maxlength="2" size="5" id="per_num" name="per_num">
-                                        인 </td>
+                                      <td width="243" bgcolor="white" style="padding-left:10px;"><input class="mem_input" type="text" maxlength="2" size="5" id="per_num" name="per_num">인 </td>
                                     </tr>
                                     <tr>
-                                      <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">실제이용자</td>
-                                      <td bgcolor="white" style="padding-left:10px;">
-                                      <input class="mem_input" type="text" size="15" id="reserve_name"name="reserve_name" value="<%=StringUtils.trimToEmpty((String)session.getAttribute("mem_name"))%>"></td>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;">핸드폰</td>
-                                      <td bgcolor="white" style="padding-left:10px;">
+                                      <td colspan="3" bgcolor="white" style="padding-left:10px;padding-bottom:5px;">
                                       <select id="mobile1" name="mobile1" size="1">
                                           <option value="">선택</option>
                                           <option value="010">010</option>
@@ -359,6 +354,16 @@
                                         <input class="mem_input" type="text" size="8" id="mobile2" name="mobile2" maxlength="4">
                                         -
                                         <input class="mem_input" type="text" size="8" id="mobile3" name="mobile3" maxlength="4"></td>
+                                    </tr>
+                                    <tr>
+                                      <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">실제이용자</td>
+                                      <td colspan="3" bgcolor="white" style="padding-left:10px;"><p>
+                                        <input class="mem_input" type="text" size="15" id="reserve_name"name="reserve_name" value="">
+                                        &nbsp;
+                                        <INPUT name="chkRealName" id="chkRealName" type=checkbox>
+                                        <span class=mem_notice>실제이용자가 예약자와 동일한 경우 체크</span></p></td>
+                                      </td>
+                                      
                                     </tr>
                                     <!--tr>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">이용요금</td>

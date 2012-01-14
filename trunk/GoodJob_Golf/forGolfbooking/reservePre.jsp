@@ -269,13 +269,13 @@ for(int i = 0; i < listGolf.size(); i++){
 				|| cCnt == 0 || viewYn == "1"){
 %>
 		<TD bgColor=white height=30 align=center>
-		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole1.gif" width=24 height=22 alt="마감">
+		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole_gray.gif" width=24 height=22 alt="마감">
 		</TD>
 <%
 		}else if(viewYn == "2"){
 %>
 		<TD bgColor=white height=30 align=center>
-		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole2.gif" width=24 height=22 alt="휴장">
+		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole_gray.gif" width=24 height=22 alt="휴장">
 		</TD>
 <%
 		}else{

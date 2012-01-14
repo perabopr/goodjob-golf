@@ -40,6 +40,8 @@ function reserveAgree(){
 	$("#reserveTeam").val('<%=request.getParameter("reserveTeam")%>');
 	$("#reserveDate").val('<%=request.getParameter("reserveDate")%>');
 	$("#reserveTime").val('<%=request.getParameter("reserveTime")%>');
+
+	$("#reserveCoupon").val('<%=request.getParameter("reserveCoupon")%>');
 	
 	$("#reserveName").val('<%=request.getParameter("reserveName")%>');
 	$("#reservePhone").val('<%=request.getParameter("reservePhone")%>');
@@ -58,6 +60,8 @@ function reserveAgree(){
 <input type="hidden" id="reserveTeam" name="reserveTeam">
 <input type="hidden" id="reserveDate" name="reserveDate">
 <input type="hidden" id="reserveTime" name="reserveTime">
+
+<input type="hidden" id="reserveCoupon" name="reserveCoupon">
 
 <input type="hidden" id="reserveName" name="reserveName">
 <input type="hidden" id="reservePhone" name="reservePhone">

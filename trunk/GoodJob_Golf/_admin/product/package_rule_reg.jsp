@@ -7,6 +7,7 @@
 <%@ page import="com.goodjob.product.PackageDao"%>
 <%@ page import="com.goodjob.product.dto.PackagePromiseDto"%>
 <%
+String menu = StringUtils.trimToEmpty(request.getParameter("menu"));
 String pkSeq = StringUtils.trimToEmpty(request.getParameter("pkSeq"));
 
 List<PackagePromiseDto> arrList = null;
@@ -20,7 +21,12 @@ if(pkSeq.length() > 0){
 }
 
 
-String pageTitle = "★ 국내패키지 위약처리규정 ★";
+String pageTitle = "";
+if(menu.equals("3")){
+	pageTitle = "★ 국내패키지 위약처리규정 ★";
+}else{
+	pageTitle = "★ 해외패키지 위약처리규정 ★";
+}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

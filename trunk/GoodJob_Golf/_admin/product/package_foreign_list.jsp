@@ -13,11 +13,11 @@ String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
 int regionseq = NumberUtils.toInt(request.getParameter("region"),0);
 
 RegionDao regionDao = new RegionDao();
-List<RegionDto> arrRegions = regionDao.getRegionList("1");
+List<RegionDto> arrRegions = regionDao.getRegionList("2");
 
 PackageDao pkDao = new PackageDao();
 List<PackageDto> arrList = null;
-arrList = pkDao.getPackageSelect(regionseq, 3);
+arrList = pkDao.getPackageSelect(regionseq, 4);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -36,7 +36,7 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 } 
 
 function searchRegion(){
-	location.href = "/_admin/product/package_list.jsp?menu=3&region=" + $("#ddl_region").val();
+	location.href = "/_admin/product/package_foreign_list.jsp?menu=4&region=" + $("#ddl_region").val();
 } 
 //--> 
 </script>
@@ -44,7 +44,7 @@ function searchRegion(){
 <body topmargin="10" marginheight="10">
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
-    <td class=title>★ 국내패키지 목록 ★</td>
+    <td class=title>★ 해외패키지 목록 ★</td>
     <td width="50%" align="right" style="padding-right:30px;"><select id="ddl_region" name="ddl_region" size="1">
         <option>전체지역보기</option>
 <% 
@@ -79,10 +79,10 @@ function searchRegion(){
 		<td align="center" bgcolor="white"><span class=list_subject><%= arrList.get(i).getPackage_name1() %></span></td>
 		<td align="center" bgcolor="white"><%= arrList.get(i).getAddress1() %></td>
 		<td align="center" bgcolor="white">
-			<a href="package_rule_reg.jsp?menu=3&pkSeq=<%= arrList.get(i).getPackage_seq()%>"><img align="absmiddle" src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a>
+			<a href="package_rule_reg.jsp?menu=4&pkSeq=<%= arrList.get(i).getPackage_seq()%>"><img align="absmiddle" src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a>
 		</td>
 		<td align="center" bgcolor="white">
-		    <p><a href="package_reg.jsp?pkSeq=<%= arrList.get(i).getPackage_seq()%>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></p>
+		    <p><a href="package_foreign_reg?pkSeq=<%= arrList.get(i).getPackage_seq()%>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></p>
 		</td>
 	</tr>
 <%
@@ -91,7 +91,7 @@ function searchRegion(){
     </table>    
   </tr>
   <tr>
-    <td colspan="2" align="center" height="100"><a href="package_reg.jsp?pkSeq="><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0"></a></td>
+    <td colspan="2" align="center" height="100"><a href="package_foreign_reg.jsp?pkSeq="><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0"></a></td>
   </tr>
 </table>
 </body>

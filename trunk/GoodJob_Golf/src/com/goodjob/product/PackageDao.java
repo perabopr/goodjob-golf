@@ -29,7 +29,7 @@ public class PackageDao {
 	 * @param strWhere
 	 * @return
 	 */
-	public List<PackageDto> getPackageSelect(int region_seq, int pkSeq){
+	public List<PackageDto> getPackageSelect(int region_seq, int menuSeq){
 		Connection conn = null;
 		List<PackageDto> list = null;
 		
@@ -43,10 +43,10 @@ public class PackageDao {
 				strQuery += " AND a.region_seq = ? ";
 				bind.add(region_seq);
 			}
-			if(pkSeq > 0)
+			if(menuSeq > 0)
 			{
-				strQuery += " AND a.package_seq = ? ";
-				bind.add(pkSeq);		
+				strQuery += " AND a.menu_seq = ? ";
+				bind.add(menuSeq);		
 			}
 			
 			ResultSetHandler rsh = new BeanListHandler(PackageDto.class);

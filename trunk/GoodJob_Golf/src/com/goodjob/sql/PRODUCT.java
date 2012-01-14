@@ -127,10 +127,14 @@ public class PRODUCT {
 		=	"SELECT golflink_course_seq, golflink_seq, course_name " +
 			"FROM tb_golflink_course " +
 			"WHERE golflink_seq = ?";
-	
+
 	public static final String golflink_course_delete
-		= "DELETE FROM tb_golflink_course "
-		+ "WHERE golflink_course_seq = ?";
+		= 	"DELETE FROM tb_golflink_course " + 
+			"WHERE golflink_course_seq = ?";
+	
+	public static final String golflink_course_delete2
+		= 	"DELETE FROM tb_golflink_course " + 
+			"WHERE golflink_seq = ?";
 	
 	/*----------------------------------------------------------------- tb_golflink_price*/
 	public static final String golflink_price_insert
@@ -208,6 +212,10 @@ public class PRODUCT {
 	public static final String golflink_reserve_delete
 		=	"DELETE FROM tb_golflink_reserve " +
 			"WHERE productsub_seq = ?";
+	
+	public static final String golflink_reserve_delete2
+	=	"DELETE FROM tb_golflink_reserve " +
+		"WHERE golflink_seq = ?";
 	
 	/*----------------------------------------------------------------- tb_golflink_promise*/
 	public static final String golflink_promise_select

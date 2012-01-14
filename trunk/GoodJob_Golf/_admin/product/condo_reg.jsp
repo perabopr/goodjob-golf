@@ -38,6 +38,7 @@ if(condoSeq > 0){
 <script src="../js/jquery.ui.core.js"></script>
 <script src="../js/jquery.ui.widget.js"></script>
 <script src="../js/jquery.ui.datepicker.js"></script>
+<script src="/js/jquery.ui.datepicker.kr.js"></script>
 <title></title>
 <script type="text/javascript" src="/js/highgardenEditor.js"></script>
 <script language="JavaScript"> 

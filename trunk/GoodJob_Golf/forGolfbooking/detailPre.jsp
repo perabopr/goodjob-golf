@@ -258,6 +258,8 @@ function reserveSubmit(){
 	$("#reserveTeam").val(rTeam);
 	$("#reserveDate").val(rDate);
 	$("#reserveTime").val(rTime);
+
+	$("#reserveCoupon").val($("#ddlCoupon").val());
 	
 	$("#reserveName").val(rName);	
 	$("#reservePhone").val(rPhone);	
@@ -284,6 +286,17 @@ function commify(n) {
   return n;
 }
 
+$(function(){
+	$("#chkRealName").click(function(){		
+		if(this.checked){
+			document.getElementById("reserveUName").readOnly = true;
+			$("#reserveUName").val("<%=user_Name%>");
+		}else{
+			document.getElementById("reserveUName").readOnly = false;
+			$("#reserveUName").val("");
+		}
+	});
+});
 //--->
 </script>
 <FORM NAME="frm" METHOD="post" ACTION="rule.jsp">
@@ -297,6 +310,8 @@ function commify(n) {
 <input type="hidden" id="reserveTeam" name="reserveTeam">
 <input type="hidden" id="reserveDate" name="reserveDate">
 <input type="hidden" id="reserveTime" name="reserveTime">
+
+<input type="hidden" id="reserveCoupon" name="reserveCoupon">
 
 <input type="hidden" id="reserveName" name="reserveName">
 <input type="hidden" id="reservePhone" name="reservePhone">
@@ -513,13 +528,13 @@ for (int i = 1; i < 15 ;i++){
 				|| cCnt == 0 || viewYn == "1"){
 %>
 		<TD bgColor=white height=30 align=center>
-		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole1.gif" width=24 height=22 alt="마감">
+		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole_gray.gif" width=24 height=22 alt="마감">
 		</TD>
 <%
 		}else if(viewYn == "2"){
 %>
 		<TD bgColor=white height=30 align=center>
-		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole2.gif" width=24 height=22 alt="휴장">
+		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole_gray.gif" width=24 height=22 alt="휴장">
 		</TD>
 <%
 		}else{
@@ -625,10 +640,13 @@ for (int i = 1; i < 15 ;i++){
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 width=130 align=right>날짜/시간대</TD>
 	<TD style="PADDING-LEFT: 10px" bgColor=white width=170>
 		<input type="text" class="mem_input" id="selectDate" name="selectDate" size="10" disabled value="<%=curDate.substring(0,4) + "-" + curDate.substring(4,6) + "-" + curDate.substring(6,8)%>">/<input type="text" class="mem_input" id="selectTime" name="selectTime" size="10" disabled>  
-	</TD></TR>
+	</TD></TR>	
+	<TR>
+	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 align=right>프리미엄상품권 적용</TD>
+	<TD style="PADDING-LEFT: 10px" bgColor=white height=27 colSpan=3><SELECT size=1 id="ddlCoupon" name="ddlCoupon"> <OPTION value="" selected>선택하세요</OPTION></SELECT></TD></TR>
 	<TR>
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 align=right>예약자이름</TD>
-	<TD style="PADDING-LEFT: 10px" bgColor=white height=27 colSpan=3><INPUT class=mem_input id="reserveUName" name="reserveUName" size=15 value="<%=user_Name %>"></TD></TR>
+	<TD style="PADDING-LEFT: 10px" bgColor=white height=27 colSpan=3><INPUT class=mem_input id="reserveUName" name="reserveUName" size=15 value="<%=user_Name %>"> <INPUT name="chkRealName" id="chkRealName" type=checkbox><SPAN class=mem_notice>실제이용자가 예약자와 동일한 경우 체크</SPAN></TD></TR>
 	<TR>
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=25 align=right>핸드폰</TD>
 	<TD style="PADDING-LEFT: 10px" bgColor=white colSpan=3><SELECT size=1 id="phone1" name="phone1"> 

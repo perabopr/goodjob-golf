@@ -343,6 +343,27 @@ public class GolfLinkDao {
 	}
 	
 	/**
+	 * 골프장코스(골프장seq) - 삭제
+	 * @param glSeq
+	 */
+	public void setGolfLinkCourseDelete2(int glSeq){
+		Connection conn = null;
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(glSeq);
+			
+			QueryRunner qr = new QueryRunner();
+			
+			qr.update(conn, PRODUCT.golflink_course_delete2, bind.toArray());
+		}catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
+	
+	/**
 	 * 골프장위약 - 가져오기.
 	 * @param glSeq
 	 * @return
@@ -450,6 +471,28 @@ public class GolfLinkDao {
 			QueryRunner qr = new QueryRunner();
 			
 			qr.update(conn, PRODUCT.golflink_promise_delete, bind.toArray());
+		}catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}		
+	}
+	
+	/**
+	 * 골프장예약 - 삭제
+	 * @param idSeq
+	 */
+	public void setGolfLinkReserveDelete(int idSeq){
+		Connection conn = null;
+		
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(idSeq);
+			
+			QueryRunner qr = new QueryRunner();
+			
+			qr.update(conn, PRODUCT.golflink_reserve_delete2, bind.toArray());
 		}catch (Exception e) {
 			System.out.println(e);
 		} finally {

@@ -26,6 +26,7 @@ public class PackageDto {
 	private String use_rule = "";
 	private String golflink_guide = "";
 	private String way_map = "";
+	private String userinfo_terms = "";
 	
 	public int getPackage_seq() {
 		return package_seq;
@@ -176,5 +177,11 @@ public class PackageDto {
 	}
 	public void setWay_map(String way_map) {
 		this.way_map = way_map;
+	}
+	public String getUserinfo_terms() {
+		return userinfo_terms;
+	}
+	public void setUserinfo_terms(String userinfo_terms) {
+		this.userinfo_terms = userinfo_terms;
 	}
 }

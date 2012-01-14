@@ -14,6 +14,8 @@ include file="/include/header.jsp" %>
 						<%@ include file="resultPre.jsp" %>
 						<% }else if(menuName.equals("3")){ %>
 						<%@ include file="resultPackage.jsp" %>
+						<% }else if(menuName.equals("4")){ %>
+						<%@ include file="resultPackageForeign.jsp" %>
 						<% }else if(menuName.equals("5")){ %>
 						<%@ include file="resultCondo.jsp" %>
 						<% }%>

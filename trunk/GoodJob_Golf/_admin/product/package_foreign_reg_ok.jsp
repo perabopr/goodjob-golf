@@ -54,7 +54,7 @@
 	}
 	pkDto.setMenu_seq(Integer.parseInt(fileUpload.getParameter("menuSeq")));
 	pkDto.setPackage_name1(fileUpload.getParameter("package_name1"));
-	pkDto.setPackage_name2(fileUpload.getParameter("package_name2"));
+	pkDto.setPackage_type(fileUpload.getParameter("package_type"));	
 	pkDto.setRegion_seq(Integer.parseInt(fileUpload.getParameter("regionseq")));
 	pkDto.setSaledate_start(fileUpload.getParameter("saleDateStart"));
 	pkDto.setSaledate_end(fileUpload.getParameter("saleDateEnd"));
@@ -63,8 +63,6 @@
 	pkDto.setImg_sub2(upfile2);
 	pkDto.setImg_sub3(upfile3);
 	pkDto.setImg_sub4(upfile4);
-	pkDto.setAddress1(fileUpload.getParameter("address1"));
-	pkDto.setAddress2(fileUpload.getParameter("address2"));
 	pkDto.setPoint_x(fileUpload.getParameter("pointx"));
 	pkDto.setPoint_y(fileUpload.getParameter("pointy"));
 	pkDto.setView_yn(fileUpload.getParameter("rdbView"));
@@ -72,40 +70,41 @@
 	pkDto.setUse_guide(fileUpload.getParameter("content2"));
 	pkDto.setGolflink_guide(fileUpload.getParameter("content3"));
 	pkDto.setUse_rule(fileUpload.getParameter("content4"));
-	pkDto.setWay_map(fileUpload.getParameter("content5"));
+	pkDto.setUserinfo_terms(fileUpload.getParameter("content5"));
+	pkDto.setWay_map(fileUpload.getParameter("content6"));
 	
 	PackagePriceDto pkpDto = new PackagePriceDto();
 	if(!fileUpload.getParameter("pkSeq").equals("0")){
 		pkpDto.setPackage_seq(Integer.parseInt(fileUpload.getParameter("pkSeq")));
 	}
-	pkpDto.setPeak_n_mon(Integer.parseInt(fileUpload.getParameter("price_pn_mon")));
-	pkpDto.setPeak_s_mon(Integer.parseInt(fileUpload.getParameter("price_ps_mon")));
+	pkpDto.setPeak_n_mon(0);
+	pkpDto.setPeak_s_mon(0);
 	pkpDto.setOff_n_mon(Integer.parseInt(fileUpload.getParameter("price_on_mon")));
-	pkpDto.setOff_s_mon(Integer.parseInt(fileUpload.getParameter("price_os_mon")));
-	pkpDto.setPeak_n_tue(Integer.parseInt(fileUpload.getParameter("price_pn_tue")));
-	pkpDto.setPeak_s_tue(Integer.parseInt(fileUpload.getParameter("price_ps_tue")));
+	pkpDto.setOff_s_mon(0);
+	pkpDto.setPeak_n_tue(0);
+	pkpDto.setPeak_s_tue(0);
 	pkpDto.setOff_n_tue(Integer.parseInt(fileUpload.getParameter("price_on_tue")));
-	pkpDto.setOff_s_tue(Integer.parseInt(fileUpload.getParameter("price_os_tue")));
-	pkpDto.setPeak_n_wed(Integer.parseInt(fileUpload.getParameter("price_pn_wed")));
-	pkpDto.setPeak_s_wed(Integer.parseInt(fileUpload.getParameter("price_ps_wed")));
+	pkpDto.setOff_s_tue(0);
+	pkpDto.setPeak_n_wed(0);
+	pkpDto.setPeak_s_wed(0);
 	pkpDto.setOff_n_wed(Integer.parseInt(fileUpload.getParameter("price_on_wed")));
-	pkpDto.setOff_s_wed(Integer.parseInt(fileUpload.getParameter("price_os_wed")));
-	pkpDto.setPeak_n_thu(Integer.parseInt(fileUpload.getParameter("price_pn_thu")));
-	pkpDto.setPeak_s_thu(Integer.parseInt(fileUpload.getParameter("price_ps_thu")));
+	pkpDto.setOff_s_wed(0);
+	pkpDto.setPeak_n_thu(0);
+	pkpDto.setPeak_s_thu(0);
 	pkpDto.setOff_n_thu(Integer.parseInt(fileUpload.getParameter("price_on_thu")));
-	pkpDto.setOff_s_thu(Integer.parseInt(fileUpload.getParameter("price_os_thu")));
-	pkpDto.setPeak_n_fri(Integer.parseInt(fileUpload.getParameter("price_pn_fri")));
-	pkpDto.setPeak_s_fri(Integer.parseInt(fileUpload.getParameter("price_ps_fri")));
+	pkpDto.setOff_s_thu(0);
+	pkpDto.setPeak_n_fri(0);
+	pkpDto.setPeak_s_fri(0);
 	pkpDto.setOff_n_fri(Integer.parseInt(fileUpload.getParameter("price_on_fri")));
-	pkpDto.setOff_s_fri(Integer.parseInt(fileUpload.getParameter("price_os_fri")));
-	pkpDto.setPeak_n_sat(Integer.parseInt(fileUpload.getParameter("price_pn_sat")));
-	pkpDto.setPeak_s_sat(Integer.parseInt(fileUpload.getParameter("price_ps_sat")));
+	pkpDto.setOff_s_fri(0);
+	pkpDto.setPeak_n_sat(0);
+	pkpDto.setPeak_s_sat(0);
 	pkpDto.setOff_n_sat(Integer.parseInt(fileUpload.getParameter("price_on_sat")));
-	pkpDto.setOff_s_sat(Integer.parseInt(fileUpload.getParameter("price_os_sat")));
-	pkpDto.setPeak_n_sun(Integer.parseInt(fileUpload.getParameter("price_pn_sun")));
-	pkpDto.setPeak_s_sun(Integer.parseInt(fileUpload.getParameter("price_ps_sun")));
+	pkpDto.setOff_s_sat(0);
+	pkpDto.setPeak_n_sun(0);
+	pkpDto.setPeak_s_sun(0);
 	pkpDto.setOff_n_sun(Integer.parseInt(fileUpload.getParameter("price_on_sun")));
-	pkpDto.setOff_s_sun(Integer.parseInt(fileUpload.getParameter("price_os_sun")));
+	pkpDto.setOff_s_sun(0);
 	
 	PackageDao pkDao = new PackageDao();
 	if(!fileUpload.getParameter("pkSeq").equals("0")){//수정
@@ -118,6 +117,6 @@
 	}
 	
 	try{
-		response.sendRedirect("./package_list.jsp?pkSeq=" + fileUpload.getParameter("pkSeq"));
+		response.sendRedirect("./package_foreign_list.jsp?pkSeq=" + fileUpload.getParameter("pkSeq"));
 	}catch(Exception e){}
 %>

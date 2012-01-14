@@ -9,6 +9,8 @@
 						<%@ include file="billPre.jsp" %>
 						<% }else if(menuName == 3){ %>
 						<%@ include file="billPackage.jsp" %>
+						<% }else if(menuName == 4){ %>
+						<%@ include file="billPackageForeign.jsp" %>
 						<% }else if(menuName == 5){ %>
 						<%@ include file="billCondo.jsp" %>
 						<% } %>

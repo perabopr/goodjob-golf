@@ -29,7 +29,7 @@ public class PackageDao {
 	 * @param strWhere
 	 * @return
 	 */
-	public List<PackageDto> getPackageSelect(int region_seq, int menuSeq){
+	public List<PackageDto> getPackageSelect(int region_seq, int menuSeq, int pkSeq){
 		Connection conn = null;
 		List<PackageDto> list = null;
 		
@@ -38,13 +38,15 @@ public class PackageDao {
 			
 			String strQuery = "";
 			ArrayList<Object> bind = new ArrayList<Object>();
-			if(region_seq > 0)
-			{				
+			if(region_seq > 0){				
 				strQuery += " AND a.region_seq = ? ";
 				bind.add(region_seq);
 			}
-			if(menuSeq > 0)
-			{
+			if(pkSeq > 0){	
+				strQuery += " AND a.package_seq = ? ";
+				bind.add(pkSeq);				
+			}
+			if(menuSeq > 0)	{
 				strQuery += " AND a.menu_seq = ? ";
 				bind.add(menuSeq);		
 			}
@@ -95,7 +97,8 @@ public class PackageDao {
 			bind.add(pkDto.getUse_guide());
 			bind.add(pkDto.getUse_rule());
 			bind.add(pkDto.getGolflink_guide());
-			bind.add(pkDto.getWay_map());			
+			bind.add(pkDto.getWay_map());		
+			bind.add(pkDto.getUserinfo_terms());			
 			
 			//패키지 추가.
 			QueryRunner qr = new QueryRunner();
@@ -152,6 +155,7 @@ public class PackageDao {
 			bind.add(pkDto.getGolflink_guide());
 			bind.add(pkDto.getUse_rule());
 			bind.add(pkDto.getWay_map());	
+			bind.add(pkDto.getUserinfo_terms());	
 			bind.add(pkDto.getPackage_seq());
 			
 			QueryRunner qr = new QueryRunner();

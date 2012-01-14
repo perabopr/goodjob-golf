@@ -1568,7 +1568,12 @@ Y : 예약가능&#x0D;
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>package_name2</columnName>
           <logicalName>패키지_명2</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../net.java.amateras.db.visual.model.TableModel/columns/net.java.amateras.db.visual.model.ColumnModel[5]/columnType"/>
+          <columnType class="net.java.amateras.db.dialect.ColumnType">
+            <name>VARCHAR</name>
+            <logicalName>String</logicalName>
+            <supportSize>true</supportSize>
+            <type>12</type>
+          </columnType>
           <size>50</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
@@ -1595,43 +1600,33 @@ Y : 예약가능&#x0D;
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>saledate_start</columnName>
           <logicalName>할인기간_시작일</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType">
-            <name>VARCHAR</name>
-            <logicalName>String</logicalName>
-            <supportSize>true</supportSize>
-            <type>12</type>
-          </columnType>
+          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
           <size>10</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
-          <description></description>
+          <description>해외패키지에서 &quot;예약기간&quot; 해당</description>
           <autoIncrement>false</autoIncrement>
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>saledate_end</columnName>
           <logicalName>할인기간_시작일</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[6]/columnType"/>
+          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
           <size>10</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
-          <description></description>
+          <description>해외패키지에서 &quot;예약기간&quot; 해당</description>
           <autoIncrement>false</autoIncrement>
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>package_type</columnName>
           <logicalName>패키지_구분</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType">
-            <name>VARCHAR</name>
-            <logicalName>String</logicalName>
-            <supportSize>true</supportSize>
-            <type>12</type>
-          </columnType>
+          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[4]/columnType"/>
           <size>50</size>
           <notNull>true</notNull>
           <primaryKey>false</primaryKey>
-          <description></description>
+          <description>해외패키지에서 &quot;간략소개&quot; 해당</description>
           <autoIncrement>false</autoIncrement>
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
@@ -1779,8 +1774,8 @@ Y : 예약가능&#x0D;
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>use_rule</columnName>
-          <logicalName>이용약관</logicalName>
+          <columnName>golflink_guide</columnName>
+          <logicalName>골프장소개</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType">
             <name>TEXT</name>
             <logicalName>String</logicalName>
@@ -1790,29 +1785,40 @@ Y : 예약가능&#x0D;
           <size>10</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
-          <description></description>
+          <description>해외패키지에서 &quot;상품정보&quot;로 사용</description>
           <autoIncrement>false</autoIncrement>
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
-          <columnName>golflink_guide</columnName>
-          <logicalName>골프장소개</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../net.java.amateras.db.visual.model.TableModel/columns/net.java.amateras.db.visual.model.ColumnModel[18]/columnType"/>
+          <columnName>use_rule</columnName>
+          <logicalName>이용약관</logicalName>
+          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[22]/columnType"/>
           <size>10</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
-          <description></description>
+          <description>해외패키지에서 &quot;국외여행표준약관&quot;로 사용</description>
           <autoIncrement>false</autoIncrement>
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
         <net.java.amateras.db.visual.model.ColumnModel>
           <columnName>way_map</columnName>
           <logicalName>오시는길</logicalName>
-          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../../../net.java.amateras.db.visual.model.TableModel/columns/net.java.amateras.db.visual.model.ColumnModel[18]/columnType"/>
+          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[22]/columnType"/>
           <size>10</size>
           <notNull>false</notNull>
           <primaryKey>false</primaryKey>
-          <description></description>
+          <description>해외패키지에서 &quot;일정표&quot;로 사용</description>
+          <autoIncrement>false</autoIncrement>
+          <defaultValue></defaultValue>
+        </net.java.amateras.db.visual.model.ColumnModel>
+        <net.java.amateras.db.visual.model.ColumnModel>
+          <columnName>userinfo_terms</columnName>
+          <logicalName>개인정보제공및공유약관</logicalName>
+          <columnType class="net.java.amateras.db.dialect.ColumnType" reference="../../net.java.amateras.db.visual.model.ColumnModel[22]/columnType"/>
+          <size>10</size>
+          <notNull>false</notNull>
+          <primaryKey>false</primaryKey>
+          <description>해외패키지에서 사용</description>
           <autoIncrement>false</autoIncrement>
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>

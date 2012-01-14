@@ -14,6 +14,8 @@ include file="/include/header.jsp" %>
 						<%@ include file="rulePre.jsp" %>
 						<% }else if(menuName == 3){ %>
 						<%@ include file="rulePackage.jsp" %>
+						<% }else if(menuName == 4){ %>
+						<%@ include file="rulePackageForeign.jsp" %>
 						<% }else if(menuName == 5){ %>
 						<%@ include file="ruleCondo.jsp" %>
 						<% } %>

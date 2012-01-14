@@ -347,6 +347,7 @@ public class RESERVE {
 			",A.promise5_type,A.promise5" +
 			",IFNULL(A.cancelrule,'') 'cancelrule'" +
 			",B.use_rule "+
+			",B.userinfo_terms " +
 		"FROM tb_package_promise A " +
 			"INNER JOIN tb_package B on(A.package_seq = B.package_seq) " +
 		"WHERE A.package_seq = ?";

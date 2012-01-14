@@ -13,6 +13,8 @@ page import="org.apache.commons.lang.math.NumberUtils"%>
 						<%@ include file="reservePre.jsp" %>
 						<% }else if(menuName == 3){ %>
 						<%@ include file="reservePackage.jsp" %>
+						<% }else if(menuName == 4){ %>
+						<%@ include file="reservePackageForeign.jsp" %>
 						<% }else if(menuName == 5){ %>
 						<%@ include file="reserveCondo.jsp" %>
 						<% } %>

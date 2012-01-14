@@ -17,7 +17,7 @@ List<RegionDto> arrRegions = regionDao.getRegionList("1");
 
 PackageDao pkDao = new PackageDao();
 List<PackageDto> arrList = null;
-arrList = pkDao.getPackageSelect(regionseq, 3);
+arrList = pkDao.getPackageSelect(regionseq, 3, 0);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

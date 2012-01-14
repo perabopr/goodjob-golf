@@ -118,7 +118,7 @@
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="booking/overseas_list.html"" class=left_menu>해외패키지</a></td>
+                    <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="order/package_foreign_list.jsp"" class=left_menu>해외패키지</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>

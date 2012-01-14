@@ -45,9 +45,9 @@ public class PackageDao {
 			where = "WHERE menu_seq = ? " ;
 			params.add(data.get("menu_seq"));
 			
-			if("golflink_name".equals(field) && keyword.length()>0){
-				where += "AND package_name1 LIKE concat('%',?,'%') "
-						+"AND package_name2 LIKE concat('%',?,'%') ";
+			if("package_name".equals(field) && keyword.length()>0){
+				where += "AND (package_name1 LIKE concat('%',?,'%') "
+						+"OR package_name2 LIKE concat('%',?,'%')) ";
 				params.add(keyword);
 				params.add(keyword);
 			}else if("tour_date".equals(field) && keyword.length()>0){

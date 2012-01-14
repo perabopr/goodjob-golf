@@ -421,6 +421,7 @@ public class PRODUCT {
 				",a.use_rule" +
 				",a.golflink_guide" +
 				",a.way_map " +
+				",a.userinfo_terms " +
 			"FROM tb_package a " +
 			"	INNER JOIN tb_region b on(a.region_seq = b.region_seq) " +
 			"WHERE 1=1 {0} " +
@@ -450,7 +451,8 @@ public class PRODUCT {
 				",use_rule" +
 				",golflink_guide" +
 				",way_map" +
-			")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				",userinfo_terms " +
+			")VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 	public static final String package_update
 		=	"UPDATE tb_package " +
 			"SET " +
@@ -477,6 +479,7 @@ public class PRODUCT {
 				",golflink_guide = ?" +
 				",use_rule = ? " +
 				",way_map = ? " +
+				",userinfo_terms = ? " +
 			"WHERE package_seq = ?";
 	public static final String package_delete
 		=	"DELETE FROM tb_package " +

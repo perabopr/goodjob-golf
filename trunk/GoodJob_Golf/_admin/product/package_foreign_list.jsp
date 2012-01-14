@@ -17,7 +17,7 @@ List<RegionDto> arrRegions = regionDao.getRegionList("2");
 
 PackageDao pkDao = new PackageDao();
 List<PackageDto> arrList = null;
-arrList = pkDao.getPackageSelect(regionseq, 4);
+arrList = pkDao.getPackageSelect(regionseq, 4, 0);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -82,7 +82,7 @@ function searchRegion(){
 			<a href="package_rule_reg.jsp?menu=4&pkSeq=<%= arrList.get(i).getPackage_seq()%>"><img align="absmiddle" src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a>
 		</td>
 		<td align="center" bgcolor="white">
-		    <p><a href="package_foreign_reg?pkSeq=<%= arrList.get(i).getPackage_seq()%>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></p>
+		    <p><a href="package_foreign_reg.jsp?pkSeq=<%= arrList.get(i).getPackage_seq()%>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></p>
 		</td>
 	</tr>
 <%

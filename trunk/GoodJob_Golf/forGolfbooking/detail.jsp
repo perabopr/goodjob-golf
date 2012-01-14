@@ -14,6 +14,8 @@
 						<%@ include file="detailPre.jsp" %>
 						<% }else if(menuName == 3){ %>
 						<%@ include file="detailPackage.jsp" %>
+						<% }else if(menuName == 4){ %>
+						<%@ include file="detailPackageForeign.jsp" %>
 						<% }else if(menuName == 5){ %>
 						<%@ include file="detailCondo.jsp" %>
 						<% } %>

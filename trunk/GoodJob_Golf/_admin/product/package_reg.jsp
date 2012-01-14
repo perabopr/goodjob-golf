@@ -22,7 +22,7 @@ List<PackagePriceDto> arrList2 = null;
 PackagePriceDto vPkp = new PackagePriceDto();
 PackageDao pkDao = new PackageDao();
 if(pkSeq > 0){
-	arrList = pkDao.getPackageSelect(0, pkSeq);
+	arrList = pkDao.getPackageSelect(0, 3, pkSeq);
 	if(arrList != null && arrList.size() == 1){
 		vPk = arrList.get(0);
 	}

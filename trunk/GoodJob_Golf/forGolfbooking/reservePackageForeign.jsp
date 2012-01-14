@@ -10,9 +10,9 @@
 int pRegion = NumberUtils.toInt(request.getParameter("region"), 0);
 //String pRegion = StringUtils.defaultIfEmpty(request.getParameter("region"), "0");
 PackageDao pkDao = new PackageDao();
-List<RegionDto> rList = pkDao.getRegionList("1");
+List<RegionDto> rList = pkDao.getRegionList("2");
 
-String strWhere = " AND a.menu_seq = 3 ";
+String strWhere = " AND a.menu_seq = 4 ";
 if(pRegion != 0){
 	strWhere = "AND a.region_seq = " + pRegion;
 }
@@ -24,9 +24,9 @@ List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 	<TABLE border=0 cellSpacing=0 cellPadding=0 width="95%">
 	<TBODY>
 	<TR>
-	<TD class=location height=30 width="95%" align=right><A href="/main.jsp">HOME</A> &gt; 골프패키지 &gt; <SPAN class=location_b>국내골프패키지</SPAN></TD></TR>
+	<TD class=location height=30 width="95%" align=right><A href="/main.jsp">HOME</A> &gt; 골프패키지 &gt; <SPAN class=location_b>해외골프패키지</SPAN></TD></TR>
 	<TR>
-	<TD style="PADDING-LEFT: 15px; PADDING-TOP: 4px" class=sub_title bgColor=#d1d3d4 height=33>국내골프패키지</TD></TR>
+	<TD style="PADDING-LEFT: 15px; PADDING-TOP: 4px" class=sub_title bgColor=#d1d3d4 height=33>해외골프패키지</TD></TR>
 	<TR>
 	<TD vAlign=top>
 		<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
@@ -47,7 +47,7 @@ List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 			<%		
 				}else{
 			%>
-				<a class=area href="reserve.jsp?menu=3">전체보기</a> &nbsp;I&nbsp;
+				<a class=area href="reserve.jsp?menu=4">전체보기</a> &nbsp;I&nbsp;
 			<%		
 				}
 					
@@ -58,7 +58,7 @@ List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 			<%
 					}else{
 			%>
-					<A class=area href="reserve.jsp?menu=3&region=<%=rList.get(i).getRegion_seq()%>"><%=rList.get(i).getRegion_name()%></A> &nbsp;I &nbsp;
+					<A class=area href="reserve.jsp?menu=4&region=<%=rList.get(i).getRegion_seq()%>"><%=rList.get(i).getRegion_name()%></A> &nbsp;I &nbsp;
 			<% 
 					}
 				} 
@@ -94,18 +94,10 @@ if(pkList.size() > 0){
 					<TR>
 					<TD colSpan=2>&nbsp;</TD></TR>
 					<TR>
-					<% 
-						String packName1 = "";
-						if(pkList.get(i).getPackage_name1().trim().length() > 0 && pkList.get(i).getPackage_name2().trim().length() > 0){
-							packName1 = pkList.get(i).getPackage_name1() + " + " + pkList.get(i).getPackage_name2();
-						}else{
-							packName1 = pkList.get(i).getPackage_name1() + pkList.get(i).getPackage_name2();
-						}
-					%>
-					<TD class=cc_name colSpan=2><%=packName1 %></TD></TR>
+					<TD class=cc_name colSpan=2><%=pkList.get(i).getPackage_name1() %></TD></TR>
 					<TR>
 					<TD width=225><SPAN class=normal_fee_b><strike>정상가 : <%=commify(pkList.get(i).getOff_n_mon()) %>원 ~</strike></SPAN></TD>
-					<TD vAlign=bottom rowSpan=2 width=100 align=center><A href="detail.jsp?menu=3&pkSeq=<%=pkList.get(i).getPackage_seq() %>"><IMG border=0 align=absMiddle src="../../images/common/btn_regist_booking.gif" width=89 height=34></A></TD></TR>
+					<TD vAlign=bottom rowSpan=2 width=100 align=center><A href="detail.jsp?menu=4&pkSeq=<%=pkList.get(i).getPackage_seq() %>"><IMG border=0 align=absMiddle src="../../images/common/btn_regist_booking.gif" width=89 height=34></A></TD></TR>
 					<TR>
 					<TD width=225><SPAN class=mem_fee_b>회원가 : <%=commify(pkList.get(i).getOff_s_mon()) %>원 ~</SPAN></TD></TR></TBODY>
 					</TABLE>
@@ -131,18 +123,10 @@ if(pkList.size() > 0){
 					<TR>
 					<TD colSpan=2>&nbsp;</TD></TR>
 					<TR>
-					<% 
-						String packName2 = "";
-						if(pkList.get(i).getPackage_name1().trim().length() > 0 && pkList.get(i).getPackage_name2().trim().length() > 0){
-							packName2 = pkList.get(i).getPackage_name1() + " + " + pkList.get(i).getPackage_name2();
-						}else{
-							packName2 = pkList.get(i).getPackage_name1() + pkList.get(i).getPackage_name2();
-						}
-					%>
-					<TD class=cc_name colSpan=2><%=packName2 %></TD></TR>
+					<TD class=cc_name colSpan=2><%=pkList.get(i).getPackage_name1() %></TD></TR>
 					<TR>
 					<TD width=225><SPAN class=normal_fee_b><strike>정상가 : <%=commify(pkList.get(i).getOff_n_mon()) %>원 ~</strike></SPAN></TD>
-					<TD vAlign=bottom rowSpan=2 width=100 align=center><A href="detail.jsp?menu=3&pkSeq=<%=pkList.get(i).getPackage_seq() %>"><IMG border=0 align=absMiddle src="../../images/common/btn_regist_booking.gif" width=89 height=34></A></TD></TR>
+					<TD vAlign=bottom rowSpan=2 width=100 align=center><A href="detail.jsp?menu=4&pkSeq=<%=pkList.get(i).getPackage_seq() %>"><IMG border=0 align=absMiddle src="../../images/common/btn_regist_booking.gif" width=89 height=34></A></TD></TR>
 					<TR>
 					<TD width=225><SPAN class=mem_fee_b>회원가 : <%=commify(pkList.get(i).getOff_s_mon()) %>원 ~</SPAN></TD></TR></TBODY>
 					</TABLE>

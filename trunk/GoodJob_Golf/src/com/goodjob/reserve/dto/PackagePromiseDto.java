@@ -14,6 +14,7 @@ public class PackagePromiseDto {
 	private String promise5 = "";
 	private String cancelrule = "";
 	private String use_rule = "";
+	private String userinfo_terms = "";
 	
 	public int getPackage_seq() {
 		return package_seq;
@@ -92,5 +93,11 @@ public class PackagePromiseDto {
 	}
 	public void setUse_rule(String use_rule) {
 		this.use_rule = use_rule;
+	}
+	public String getUserinfo_terms() {
+		return userinfo_terms;
+	}
+	public void setUserinfo_terms(String userinfo_terms) {
+		this.userinfo_terms = userinfo_terms;
 	}
 }

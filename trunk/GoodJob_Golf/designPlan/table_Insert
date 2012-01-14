@@ -10,6 +10,20 @@ insert into tb_region(region_type, region_name, region_etc)
 values('1','전라권','');
 insert into tb_region(region_type, region_name, region_etc)
 values('1','제주도','');
+insert into tb_region(region_type, region_name, region_etc)
+values('2','동남아시아','');
+insert into tb_region(region_type, region_name, region_etc)
+values('2','중국/대만','');
+insert into tb_region(region_type, region_name, region_etc)
+values('2','일본','');
+insert into tb_region(region_type, region_name, region_etc)
+values('2','남태평양','');
+insert into tb_region(region_type, region_name, region_etc)
+values('2','미주/캐나다','');
+insert into tb_region(region_type, region_name, region_etc)
+values('2','유럽','');
+insert into tb_region(region_type, region_name, region_etc)
+values('2','특수지역','');
 
 insert into tb_menu(menu_name)
 values('실시간예약');

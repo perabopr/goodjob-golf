@@ -234,8 +234,11 @@ $(function() {
                                       <tr>
                                           <td><a href="/board/faq_list.jsp"><img src="/images/img_leftmenu/btn_faq.gif" width="235" height="86" border="0"></a></td>
                                       </tr>
-                                      <tr>
+                                      <tr>                                          
                                           <td><a href="/member/coupon_regist.jsp"><img src="/images/img_leftmenu/btn_coupon.gif" width="235" height="75" border="0"></a></td>
+                                      </tr>
+                                      <tr>
+                                          <td><a href="#"><img src="/images/img_leftmenu/btn_event.gif" width="235" height="86" border="0"></a></td>                                          
                                       </tr>
                                   </table>
                               </td>

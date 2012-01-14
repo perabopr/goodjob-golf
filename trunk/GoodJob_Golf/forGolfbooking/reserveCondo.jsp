@@ -115,11 +115,11 @@
                                                                 <td class="cc_name" colspan="2"><%=cdDto.getCondo_name()%></td>
                                                               </tr>
                                                               <tr>
-                                                                <td width="225"><span class=normal_fee_b><strike>정상가:주중<%=Utils.numberFormat(cdDto.getPrice_n1())%>원 ~ 주말<%=Utils.numberFormat(cdDto.getPrice_n2())%>원</strike></span></td>
+                                                                <td width="225"><span class=normal_fee_b><strike>정상가:주중<%=Utils.numberFormat(cdDto.getPrice_n1())%>원 ~,&nbsp;&nbsp;주말<%=Utils.numberFormat(cdDto.getPrice_n2())%>원 ~</strike></span></td>
                                                                 <td width="100" rowspan="2" align="center" valign="bottom"><a href="detail.jsp?menu=5&condo_seq=<%=cdDto.getCondo_seq()%>"><img align="absmiddle" src="../../images/common/btn_regist_booking.gif" width="89" height="34" border="0"></a></td>
                                                               </tr>
                                                               <tr>
-                                                                <td width="225"><span class=mem_fee_b>회원가:주중 <%=Utils.numberFormat(cdDto.getPrice_s1())%>원 ~ 주말 <%=Utils.numberFormat(cdDto.getPrice_s2())%>원</span></td>
+                                                                <td width="225"><span class=mem_fee_b>회원가:주중 <%=Utils.numberFormat(cdDto.getPrice_s1())%>원 ~,&nbsp;&nbsp;주말 <%=Utils.numberFormat(cdDto.getPrice_s2())%>원 ~</span></td>
                                                               </tr>
                                                             </table>
                                                             </td>

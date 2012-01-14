@@ -3,12 +3,18 @@
  */
 package com.goodjob.util;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.Cookie;
@@ -163,5 +169,29 @@ public class Utils {
 		}catch(Exception e){}
 
 		return str;
+	}
+	
+	/**
+	 * 
+	 * @param coupon
+	 * @return
+	 */
+	public List<String[]> getCouponRead(File coupon){
+		
+		BufferedReader br;
+		List<String[]> couponList = new ArrayList<String[]>();
+		
+		try{
+			
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(coupon)));
+			String tmp = "";
+			while((tmp = br.readLine())!= null){
+				couponList.add(StringUtils.split(tmp, ","));
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return couponList;
 	}
 }

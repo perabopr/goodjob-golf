@@ -64,4 +64,4 @@ content = content.replaceAll("\r\n", "</br>");
 <TR>
 <TD bgColor=#aed247 width=594 colSpan=2></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
-<TD style="PADDING-BOTTOM: 140px; PADDING-TOP: 40px" align=center>&nbsp;</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<TD style="PADDING-BOTTOM: 140px; PADDING-TOP: 40px" align=center><A href="/main.jsp"><IMG border=0 src="../../images/common/btn_home.gif" width=150 height=39></A></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>

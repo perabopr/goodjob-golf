@@ -99,11 +99,11 @@ function delGolf(){
     <td align="center" colspan="2">
     <table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
 	<tr>
-		<td bgcolor="#e6e7e8" align="center" height="25" width="15"><span class=list_title></span></td>
-	    <td bgcolor="#e6e7e8" align="center" width="175"><span class=list_title>지역</span></td>
+		<td bgcolor="#e6e7e8" align="center" width="30" height="25"><span class=list_title>선택</span></td>
+	    <td bgcolor="#e6e7e8" align="center" width="150"><span class=list_title>지역</span></td>
 	    <td bgcolor="#e6e7e8" align="center" width="235"><span class=list_title>골프장명</span></td>
 	    <td bgcolor="#e6e7e8" align="center" width="290"><span class=list_title>주소</span></td>
-	    <td bgcolor="#e6e7e8" align="center" width="150"><span class=list_title>운영방식</span></td>
+	    <td bgcolor="#e6e7e8" align="center" width="100"><span class=list_title>운영방식</span></td>
 	<%
 		if(menuSeq.equals("1")){
 	%>
@@ -113,7 +113,7 @@ function delGolf(){
 	%>
 	    <td width="233" align="center" bgcolor="#E6E7E8"><span class=list_title>시간 및 가격입력</span></td>
 	    <td align="center" bgcolor="#E6E7E8" width="248"><span class=list_title>위약처리규정입력 및 수정</span></td>
-	    <td align="center" bgcolor="#E6E7E8" width="216"><span class=list_title>골프장 정보</span></td>
+	    <td align="center" bgcolor="#E6E7E8" width="150"><span class=list_title>골프장 정보</span></td>
 	</tr>
 	<% 
 	if(arrGolfLink.size() > 0){
@@ -153,8 +153,8 @@ function delGolf(){
   </tr>
   <tr>
     <td colspan="2" align="center" height="100">
-    <a href="real_reg.jsp?menu=<%=menuSeq%>"><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0"></a>
-    <img align="absmiddle" src="../images/inc/btn_del3.gif" width="74" height="26" border="0" onclick="delGolf();">
+	    <a href="real_reg.jsp?menu=<%=menuSeq%>"><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0"></a>
+	    &nbsp;<img align="absmiddle" src="../images/inc/btn_del3.gif" width="74" height="26" border="0" onclick="delGolf();">
     </td>
   </tr>
 </table>

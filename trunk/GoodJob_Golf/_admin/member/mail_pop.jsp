@@ -3,10 +3,9 @@
 <%
 	
 	String[] memSeq = request.getParameterValues("memSeq");
-	String[] mem_email = request.getParameterValues("mem_email");
-	String mobile = StringUtils.defaultIfEmpty(request.getParameter("mobile"), "");
-
-	StringBuffer email = new StringBuffer();
+	String mem_email = request.getParameter("mem_email");
+	String send_email = request.getParameter("send_email");
+	
 	StringBuffer seq = new StringBuffer();
 	int send_count = 0;
 	if(memSeq != null){
@@ -15,10 +14,8 @@
 		for(int i = 0 ; i < send_count ; i++){
 			if(i != 0){
 				seq.append(",");
-				email.append(";");
 			}
 			seq.append(memSeq[i]);
-			email.append(mem_email[i]);
 		}
 	}
 %>
@@ -78,7 +75,7 @@ var rootDir = '.';
         <tr>
           <td align="right" bgcolor="#E6E7E8" height="25" style="padding-right:10px;"><span class=normal_b>받는분 E-Mail</span></td>
           <td bgcolor="white" style="padding-left:10px;">
-          <input id="mem_email" name="mem_email" value="<%=email.toString()%>" type="text" size="90" class="input_box">
+          <input id="mem_email" name="mem_email" value="<%=send_email%>" type="text" size="90" class="input_box">
           </td>
         </tr>
         <tr>

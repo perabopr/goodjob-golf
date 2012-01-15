@@ -11,6 +11,7 @@ public class CouponDto {
 	private String reg_user = "";
 	private String reg_date = "";
 	private String use_date = "";
+	private String mem_name;
 	
 	public int getCoupon_seq() {
 		return coupon_seq;
@@ -73,4 +74,12 @@ public class CouponDto {
 	public void setUse_date(String use_date) {
 		this.use_date = use_date;
 	}
+	
+	public String getMem_name() {
+		return mem_name;
+	}
+	public void setMem_name(String memName) {
+		mem_name = memName;
+	}
+	
 }

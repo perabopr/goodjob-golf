@@ -54,4 +54,17 @@ public class MYPAGE {
 							"  from tb_condo_reserve a " +
 							"where menu_seq = ? and reserve_uid = ? {0} order by menu_seq , a.reserve_seq desc ";
 	
+	public static final String my_coupon = " select "+ 
+							"a.coupon_seq, "+
+							"a.coupon_name, "+
+							"a.coupon_type, "+
+							"a.coupon_code, "+
+							"a.sale_price, "+
+							"a.expiredate_start, "+
+							"a.expiredate_end, "+
+							"a.reg_user, "+
+							"a.reg_date, "+
+							"a.use_date  "+
+							"from tb_coupon_main a "+ 
+							"where a.reg_user = ? {0} ";
 }

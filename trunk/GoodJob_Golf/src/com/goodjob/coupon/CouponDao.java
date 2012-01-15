@@ -4,11 +4,15 @@ import java.sql.Connection;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.MapHandler;
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.coupon.dto.CouponDto;
 import com.goodjob.db.DBManager;
@@ -105,4 +109,90 @@ public class CouponDao {
 			DbUtils.closeQuietly(conn);
 		}
 	}
+	
+	public List<CouponDto> getCouponList(Map<String,String> data){
+		List<CouponDto> list = null;
+		Connection conn = null;
+		
+		String type = StringUtils.defaultIfEmpty(data.get("type"), "");
+		String field = StringUtils.defaultIfEmpty(data.get("field"), "");
+		String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
+		int npage = NumberUtils.toInt(data.get("npage"), 1);
+		int per_page = NumberUtils.toInt(data.get("per_page"), 20);
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(type);
+			
+			//검색조건
+			String where = "";
+			if("name".equals(field) && keyword.length()>0){
+				where = "and b.mem_name LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("id".equals(field) && keyword.length()>0){
+				where = "and b.mem_id LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			
+			//페이징
+			bind.add(((npage-1)* per_page));
+			bind.add(per_page);
+			
+			ResultSetHandler rsh = new BeanListHandler(CouponDto.class);
+			
+			QueryRunner qr = new QueryRunner();
+						
+			list = (List<CouponDto>) qr.query(conn , MessageFormat.format(COUPON.coupon_list, where), rsh , bind.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return list;
+	}
+	
+	public int getTotalCoupon(Map<String,String> data){
+		Connection conn = null;
+		Map<String, Long> map = null;
+		String type = StringUtils.defaultIfEmpty(data.get("type"), "");
+		String field = StringUtils.defaultIfEmpty(data.get("field"), "");
+		String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(type);
+			
+			//검색조건
+			String where = "";
+			if("name".equals(field) && keyword.length()>0){
+				where = "and b.mem_name LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("id".equals(field) && keyword.length()>0){
+				where = "and b.mem_id LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("remain".equals(field)){
+				where = "and reg_user is null " ;
+			}
+			
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			map = (Map<String, Long>)qr.query(conn , MessageFormat.format(COUPON.coupon_total, where), rsh , bind.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return NumberUtils.toInt(map.get("cnt")+"");
+	}
+	
 }

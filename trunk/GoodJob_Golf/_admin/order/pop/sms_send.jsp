@@ -99,8 +99,15 @@ SMSDao sDao = new SMSDao();
 		return resultSize;
 	}
 
+	var menu = new Array(5);
+	menu[0] = "[대영베이스] 01.25(수) 11:00 예약되셨습니다.(굿잡골프)";
+	menu[1] = "[대영베이스] 01.25(수) 11:00 예약. 입금 확인되셨습니다.(굿잡골프)";
+	menu[2] = "[태안비치 외, 패키지] 01.25(수) 11:00 (굿잡골프)	";
+	menu[3] = "[대영베이스] 01.25(수) 11:00 예약취소되셨습니다.(굿잡골프)";
+	menu[4] = "[대영베이스] 01.25(수) 11:00 로변경처리 되셨습니다.(굿잡골프)";
+			
 	function changeText(txtMsg){
-		$("#message").val(txtMsg.value);
+		$("#message").val(menu[txtMsg]);
 	}
 
 	function go_send(){
@@ -184,11 +191,11 @@ SMSDao sDao = new SMSDao();
               </tr>
               <tr>
               <td>
-              <input type="radio" name="rdb_message" value="예약완료" onclick="changeText(this);">예약완료</br>
-              <input type="radio" name="rdb_message" value="입금완료" onclick="changeText(this);">입금완료</br>
-              <input type="radio" name="rdb_message" value="부킹(입실,투어)하루전" onclick="changeText(this);">부킹(입실,투어)하루전</br>
-              <input type="radio" name="rdb_message" value="예약취소" onclick="changeText(this);">예약취소</br>
-              <input type="radio" name="rdb_message" value="예약변경" onclick="changeText(this);">예약변경</br>
+              <input type="radio" name="rdb_message" value="예약완료" onclick="changeText(0);">예약완료</br>
+              <input type="radio" name="rdb_message" value="입금완료" onclick="changeText(1);">입금완료</br>
+              <input type="radio" name="rdb_message" value="부킹(입실,투어)하루전" onclick="changeText(2);">부킹(입실,투어)하루전</br>
+              <input type="radio" name="rdb_message" value="예약취소" onclick="changeText(3);">예약취소</br>
+              <input type="radio" name="rdb_message" value="예약변경" onclick="changeText(4);">예약변경</br>
               </td>
               </tr>
             </table>

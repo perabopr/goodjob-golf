@@ -1,3 +1,6 @@
+<%@page import="com.goodjob.sms.SMSDao"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
@@ -38,6 +41,27 @@ glrDto.setProductsub_seq(gcId);
 
 GolfLinkDao glDao = new GolfLinkDao();
 glDao.setGolfReserve(glrDto);
+
+/*--------------- 문자 발송 --------------*/
+String bookingDate = request.getParameter("bookingDate");
+String golflinkName = request.getParameter("golflinkName");
+String message = "";
+message += "[" + golflinkName + "]";
+message += bookingDate;
+message += "예약신청 되었습니다";
+message += "(굿잡골프)";
+String sphone = "02-6670-0202";
+String reserveuid = user_Id;
+String reservephone = uPhone;
+Map<String,String> params = new HashMap<String,String>();
+params.put("msg",message);
+params.put("sphone",sphone);
+params.put("mem_id",reserveuid);
+params.put("rphone",reservephone);
+
+SMSDao sDao = new SMSDao();
+boolean isSend = sDao.auth(params);
+
 %>
 <script language="javascript" type="text/javascript">
 top.document.location.href="result.jsp?menu=1";

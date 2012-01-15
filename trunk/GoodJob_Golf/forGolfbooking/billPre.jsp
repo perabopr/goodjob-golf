@@ -106,10 +106,18 @@ function billok(){
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=rEmail %></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>골프장명</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><%=prDto.getGolflink_name() %></TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white>
+<%=prDto.getGolflink_name() %>
+<input type="hidden" id="golflinkName" name="golflinkName" value="<%=prDto.getGolflink_name() %>">
+</TD>
+</TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>시간대</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><%=rDate %> &nbsp;<%=rTime %> &nbsp;<IMG border=0 align=absMiddle src="../../images/booking/btn_back.gif" width=67 height=16 onclick="reSetDate();" style="cursor:hand"></TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white>
+<%=rDate %> &nbsp;<%=rTime %> &nbsp;<IMG border=0 align=absMiddle src="../../images/booking/btn_back.gif" width=67 height=16 onclick="reSetDate();" style="cursor:hand">
+<input type="hidden" id="bookingDate" name="bookingDate" value="<%=rDate %> <%=rTime %>">
+</TD>
+</TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>인원</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=rCnt %>인 <%=rTeam %>팀</TD></TR>

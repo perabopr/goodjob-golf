@@ -186,7 +186,7 @@ public class Utils {
 			br = new BufferedReader(new InputStreamReader(new FileInputStream(coupon)));
 			String tmp = "";
 			while((tmp = br.readLine())!= null){
-				couponList.add(StringUtils.split(tmp, ","));
+				couponList.add(StringUtils.split(StringUtils.trimToEmpty(tmp), ","));
 			}
 			
 		}catch(Exception e){

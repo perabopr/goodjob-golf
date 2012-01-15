@@ -1,24 +1,20 @@
 package com.goodjob.coupon;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.coupon.dto.CouponDto;
 import com.goodjob.db.DBManager;
+import com.goodjob.sql.BBS;
 import com.goodjob.sql.COUPON;
+import com.goodjob.util.Utils;
 
 public class CouponDao {
 	public List<CouponDto> getGolfLinkList(String cCode){
@@ -75,5 +71,38 @@ public class CouponDao {
 		}
 
 		return list;
-	}	
+	}
+	
+	public void setCoupon(String coupon_name , String type , List<String[]> coupon){
+		Connection conn = null;
+		try {
+
+			conn = DBManager.getConnection();
+			
+			String[] temp = null;
+			ArrayList<Object> params = null;
+			QueryRunner qr = new QueryRunner();
+			int size = coupon.size();
+			
+			for(int i = 0 ; i < size ; i++){
+				
+				temp = coupon.get(i);
+				params = new ArrayList<Object>();
+				params.add(coupon_name);
+				params.add(type);
+				params.add(temp[0]);
+				params.add(temp[1]);
+				params.add(Utils.getDate("yyyy-MM-dd"));
+				params.add(temp[2]);
+
+				qr.update(conn, COUPON.coupon_insert , params.toArray());	
+				
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
 }

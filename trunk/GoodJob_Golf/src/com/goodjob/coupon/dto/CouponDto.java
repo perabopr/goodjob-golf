@@ -4,8 +4,8 @@ public class CouponDto {
 	private int coupon_seq = 0;
 	private String coupon_name = "";
 	private String coupon_type = "";
-	private int coupon_code = 0;
-	private int sale_code = 0;
+	private String coupon_code = "";
+	private int sale_price = 0;
 	private String expiredate_start = "";
 	private String expiredate_end = "";
 	private String reg_user = "";
@@ -30,17 +30,18 @@ public class CouponDto {
 	public void setCoupon_type(String coupon_type) {
 		this.coupon_type = coupon_type;
 	}
-	public int getCoupon_code() {
+	
+	public String getCoupon_code() {
 		return coupon_code;
 	}
-	public void setCoupon_code(int coupon_code) {
-		this.coupon_code = coupon_code;
+	public void setCoupon_code(String couponCode) {
+		coupon_code = couponCode;
 	}
-	public int getSale_code() {
-		return sale_code;
+	public int getSale_price() {
+		return sale_price;
 	}
-	public void setSale_code(int sale_code) {
-		this.sale_code = sale_code;
+	public void setSale_price(int salePrice) {
+		sale_price = salePrice;
 	}
 	public String getExpiredate_start() {
 		return expiredate_start;

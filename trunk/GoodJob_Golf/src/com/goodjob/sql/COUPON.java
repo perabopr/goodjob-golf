@@ -34,5 +34,23 @@ public class COUPON {
 	public static final String coupon_insert = "insert into tb_coupon_main(coupon_name,coupon_type,coupon_code,sale_price,expiredate_start,expiredate_end,reg_date) "+
 	"values( ?, ?, ?, ?, ?, ?,now())";
 	
-	public static final String coupon_list = "";
+	public static final String coupon_list = "select "+
+										"a.coupon_seq, "+
+										"a.coupon_name, "+
+										"a.coupon_type, "+
+										"a.coupon_code, "+
+										"a.sale_price, "+
+										"a.expiredate_start, "+
+										"a.expiredate_end, "+
+										"a.reg_user, "+
+										"a.reg_date, "+
+										"a.use_date , "+
+										"b.mem_name "+
+										"from tb_coupon_main a left outer join tb_member b on a.reg_user=b.mem_id "+
+										"where a.coupon_type = ? {0} limit ? , ? ";
+	
+	public static final String coupon_total = "select "+
+									"count(*) cnt "+
+									"from tb_coupon_main a left outer join tb_member b on a.reg_user=b.mem_id "+
+									"where a.coupon_type = ? {0} ";
 }

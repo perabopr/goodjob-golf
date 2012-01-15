@@ -4859,12 +4859,12 @@ Y : 예약가능&#x0D;
           <columnName>coupon_code</columnName>
           <logicalName>쿠폰코드</logicalName>
           <columnType class="net.java.amateras.db.dialect.ColumnType">
-            <name>INT</name>
-            <logicalName>Integer</logicalName>
+            <name>VARCHAR</name>
+            <logicalName>String</logicalName>
             <supportSize>true</supportSize>
-            <type>4</type>
+            <type>12</type>
           </columnType>
-          <size></size>
+          <size>20</size>
           <notNull>true</notNull>
           <primaryKey>false</primaryKey>
           <description></description>
@@ -4957,6 +4957,22 @@ Y : 예약가능&#x0D;
           <autoIncrement>false</autoIncrement>
           <defaultValue></defaultValue>
         </net.java.amateras.db.visual.model.ColumnModel>
+        <net.java.amateras.db.visual.model.ColumnModel>
+          <columnName>flag</columnName>
+          <logicalName>구분</logicalName>
+          <columnType class="net.java.amateras.db.dialect.ColumnType">
+            <name>VARCHAR</name>
+            <logicalName>String</logicalName>
+            <supportSize>true</supportSize>
+            <type>12</type>
+          </columnType>
+          <size>2</size>
+          <notNull>false</notNull>
+          <primaryKey>false</primaryKey>
+          <description></description>
+          <autoIncrement>false</autoIncrement>
+          <defaultValue></defaultValue>
+        </net.java.amateras.db.visual.model.ColumnModel>
       </columns>
       <indices/>
       <backgroundColor>
@@ -4968,8 +4984,8 @@ Y : 예약가능&#x0D;
       <constraint>
         <height>-1</height>
         <width>-1</width>
-        <x>47</x>
-        <y>2460</y>
+        <x>46</x>
+        <y>2457</y>
       </constraint>
       <sourceConnections/>
       <targetConnections/>

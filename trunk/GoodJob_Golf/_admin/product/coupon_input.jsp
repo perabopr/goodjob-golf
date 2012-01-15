@@ -2,10 +2,10 @@
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="java.util.*" %>
 <%
-	String type = StringUtils.defaultIfEmpty(request.getParameter("type") , "on");
+	String type = StringUtils.defaultIfEmpty(request.getParameter("type") , "0");
 	String title = "";
 	
-	if("on".equals(type)){
+	if("0".equals(type)){
 		title = "★ 온라인 상품권 등록 ★";
 	}
 	else{

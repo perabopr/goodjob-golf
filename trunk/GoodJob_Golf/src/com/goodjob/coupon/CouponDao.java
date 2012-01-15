@@ -21,7 +21,13 @@ import com.goodjob.sql.COUPON;
 import com.goodjob.util.Utils;
 
 public class CouponDao {
-	public List<CouponDto> getGolfLinkList(String cCode){
+	
+	/**
+	 * 
+	 * @param cCode
+	 * @return 0:코드없음, 1:코드등록완료, 2:등록된코드
+	 */
+	public int chkCouponReg(String cCode, String userId){
 		List<CouponDto> list = null;
 		Connection conn = null;
 		
@@ -38,16 +44,28 @@ public class CouponDao {
 						
 			list = (List<CouponDto>) qr.query(conn , MessageFormat.format(COUPON.chkCouponReg, strQuery), rsh , bind.toArray());
 			
+			if(list.size() == 0){
+				return 0;
+			}else{
+				if(list.get(0).getReg_user() == null){
+					bind = new ArrayList<Object>();
+					bind.add(userId);
+					bind.add(list.get(0).getCoupon_seq());
+					qr.update(conn, COUPON.coupon_update , bind.toArray());
+				}else{	
+					return 2;
+				}
+			}
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
 
-		return list;
+		return 1;
 	}	
 
-	public List<CouponDto> getGolfLinkList(String userId, String cType){
+	public List<CouponDto> getUserCouponList(String userId, String cType){
 		List<CouponDto> list = null;
 		Connection conn = null;
 		
@@ -60,6 +78,8 @@ public class CouponDao {
 			if(cType.equals("0"))
 			{				
 				strQuery = " AND use_date IS NULL";
+			}else{
+				strQuery = " AND use_date IS NOT NULL";
 			}
 			
 			ResultSetHandler rsh = new BeanListHandler(CouponDto.class);

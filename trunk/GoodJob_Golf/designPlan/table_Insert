@@ -37,3 +37,6 @@ insert into tb_menu(menu_name)
 values('콘도예약');
 insert into tb_menu(menu_name)
 values('커뮤니티');
+
+insert into tb_coupon(coupon_name,coupon_type,coupon_code,sale_price,expiredate_start,expiredate_end,reg_user,reg_date,use_date,flag)
+values('','0','1234567890','10000','2011-01-01','2011-12-31','hijjoon@lycos.co.kr',now(),null,'');

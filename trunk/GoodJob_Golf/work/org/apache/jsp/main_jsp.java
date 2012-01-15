@@ -353,8 +353,11 @@ String user_Id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"))
       out.write("                                      <tr>\r\n");
       out.write("                                          <td><a href=\"/board/faq_list.jsp\"><img src=\"/images/img_leftmenu/btn_faq.gif\" width=\"235\" height=\"86\" border=\"0\"></a></td>\r\n");
       out.write("                                      </tr>\r\n");
+      out.write("                                      <tr>                                          \r\n");
+      out.write("                                          <td><a href=\"/member/coupon_regist.jsp\"><img src=\"/images/img_leftmenu/btn_coupon.gif\" width=\"235\" height=\"75\" border=\"0\"></a></td>\r\n");
+      out.write("                                      </tr>\r\n");
       out.write("                                      <tr>\r\n");
-      out.write("                                          <td><a href=\"#\"><img src=\"/images/img_leftmenu/btn_event.gif\" width=\"235\" height=\"86\" border=\"0\"></a></td>\r\n");
+      out.write("                                          <td><a href=\"#\"><img src=\"/images/img_leftmenu/btn_event.gif\" width=\"235\" height=\"86\" border=\"0\"></a></td>                                          \r\n");
       out.write("                                      </tr>\r\n");
       out.write("                                  </table>\r\n");
       out.write("                              </td>\r\n");

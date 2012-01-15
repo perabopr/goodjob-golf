@@ -93,6 +93,14 @@
                                 <td height="22">&nbsp;</td>
                                 <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>소셜커머스</a></td>
                             </tr>
+                            <tr>
+				                <td height="22">&nbsp;</td>
+				                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/coupon_list.jsp?type=on" class=left_menu>온라인 상품권관리</a></td>
+				              </tr>
+				              <tr>
+				                <td height="22">&nbsp;</td>
+				                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/coupon_list.jsp?type=off" class=left_menu>오프라인 상품권관리</a></td>
+				              </tr>
                         </table>
                     </td>
                 </tr>

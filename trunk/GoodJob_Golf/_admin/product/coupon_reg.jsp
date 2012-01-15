@@ -25,13 +25,14 @@
 	List<String[]> coupon = Utils.getCouponRead(file);
 	
 	CouponDao cDao = new CouponDao();
+	
 	//0:온라인
 	//1:오픈
-	if("on".equals(type)){
-		cDao.setCoupon("온라인 프리미엄 상품권" , "0" ,coupon);	
+	if("0".equals(type)){
+		cDao.setCoupon("온라인 프리미엄 상품권" , type ,coupon);	
 	}
 	else{
-		cDao.setCoupon("오프라인 프리미엄 상품권" , "1" ,coupon);
+		cDao.setCoupon("오프라인 프리미엄 상품권" , type ,coupon);
 	}
 %>
 <script language="javascript" type="text/javascript">

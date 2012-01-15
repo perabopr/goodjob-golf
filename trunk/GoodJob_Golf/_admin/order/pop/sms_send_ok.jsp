@@ -4,7 +4,8 @@
 <%@page import="com.goodjob.order.PackageDao"%>
 <%@page import="com.goodjob.order.dto.GolfLinkDto"%>
 <%@page import="com.goodjob.order.GolfLinkDao"%>
-<%@page import="com.goodjob.util.Utils"%><%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.goodjob.util.Utils"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
@@ -14,7 +15,9 @@
 <%
 String reserveuid = "";
 String reservephone = "";
- 
+
+String message = request.getParameter("message");
+String sphone = StringUtils.trimToEmpty(request.getParameter("sphone"));
 int menu = NumberUtils.toInt(request.getParameter("menu"),0);
 int seq = NumberUtils.toInt(request.getParameter("seq"),0);
 
@@ -58,13 +61,26 @@ if(menu == 5){
 }
 
 Map<String,String> params = new HashMap<String,String>();
+params.put("msg",message);
+params.put("sphone",sphone);
 params.put("mem_id",reserveuid);
 params.put("rphone",reservephone);
 
 SMSDao sDao = new SMSDao();
 boolean isSend = sDao.auth(params);
+if(isSend){
 %>
 <script language="javascript" type="text/javascript">
 alert("SMS 발송 되었습니다.");
 //self.close();
 </script>
+<%
+}else{
+%>
+<script language="javascript" type="text/javascript">
+alert("SMS 발송 실패 했습니다.");
+//self.close();
+</script>
+<%
+}
+%>

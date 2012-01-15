@@ -1,3 +1,6 @@
+<%@page import="com.goodjob.sms.SMSDao"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
@@ -19,6 +22,7 @@
 	String reserve_name = StringUtils.trimToEmpty(request.getParameter("reserve_name"));
 	String mobile = StringUtils.trimToEmpty(request.getParameter("mobile"));
 	String reserve_memo = StringUtils.trimToEmpty(request.getParameter("reserve_memo"));
+	String user_Id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"));
 	
 	CondoReserveDto cdDto = new CondoReserveDto();
 	cdDto.setCondo_name(condo_name);
@@ -30,13 +34,31 @@
 	cdDto.setRoomtype(roomtype);
 	cdDto.setPer_num(NumberUtils.toInt(per_num));
 	cdDto.setReserve_name(reserve_name);
-	cdDto.setReserve_uid(StringUtils.trimToEmpty((String)session.getAttribute("mem_id")));
+	cdDto.setReserve_uid(user_Id);
 	cdDto.setReserve_phone(mobile);
 	cdDto.setReserve_memo(reserve_memo);
 	
 	CondoReserveDao cdDao = new CondoReserveDao();
 	
 	cdDao.setCondoReserve(cdDto);
+	
+	/*--------------- 문자 발송 --------------*/
+	String message = "";
+	message += "[" + condo_name + "]";
+	message += in_date;
+	message += "예약신청 되었습니다";
+	message += "(굿잡골프)";
+	String sphone = "02-6670-0202";
+	String reserveuid = user_Id;
+	String reservephone = mobile;
+	Map<String,String> params = new HashMap<String,String>();
+	params.put("msg",message);
+	params.put("sphone",sphone);
+	params.put("mem_id",reserveuid);
+	params.put("rphone",reservephone);
+
+	SMSDao sDao = new SMSDao();
+	boolean isSend = sDao.auth(params);
 %>
 <script language="javascript" type="text/javascript">
 var frm = top.document.exefrm;

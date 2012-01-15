@@ -176,7 +176,7 @@ public class Utils {
 	 * @param coupon
 	 * @return
 	 */
-	public List<String[]> getCouponRead(File coupon){
+	public static List<String[]> getCouponRead(File coupon){
 		
 		BufferedReader br;
 		List<String[]> couponList = new ArrayList<String[]>();

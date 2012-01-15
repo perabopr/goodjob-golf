@@ -15,9 +15,11 @@ a:hover  {color:#CB8303;text-decoration:none}
 .orange{font:12px "µ¸¿ò","dotum"; color:#F96F0A; text-decoration:none; font-weight:bold;}
 .orange_s{font:11px "µ¸¿ò","dotum"; color:#F96F0A; text-decoration:none;font-weight:bold;}
 .blue{font:12px "µ¸¿ò","dotum"; color:#2860C7; text-decoration:none; font-weight:bold;}
+.blue_list{font:12px "µ¸¿ò","dotum"; color:#497FBB; text-decoration:none; font-weight:bold;}
 .blue_s{font:11px "µ¸¿ò","dotum"; color:#2860C7; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
 .blue_ss{font:11px "µ¸¿ò","dotum"; color:#2860C7; text-decoration:none; letter-spacing:-0.05em;}
 .red{font:12px "µ¸¿ò","dotum"; color:#E42F1D; text-decoration:none; font-weight:bold;}
+.red_n{font:12px "µ¸¿ò","dotum"; color:#E42F1D; text-decoration:none;}
 .red_s{font:11px "µ¸¿ò","dotum"; color:#E42F1D; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
 .red_ss{font:11px "µ¸¿ò","dotum"; color:#E42F1D; text-decoration:none; letter-spacing:-0.05em;}
 .yellow{font:12px "µ¸¿ò","dotum"; color:#FFF450; text-decoration:none;font-weight:bold;}
@@ -64,6 +66,22 @@ a:visited.b_list{text-decoration:none; font-size: 9pt; color:#58595B;}
 a:hover.b_list{text-decoration:underline; font-size: 9pt; color:#FF3C00; }
 a:active.b_list{text-decoration:none; font-size: 9pt; color:#FF3C00;}
 
+
+/*·Î±×ÀÎ*/
+
+.login{font:12px "±¼¸²","gulim"; color:#F4FC21; text-decoration:none; font-weight:bold;}
+a:link.login{text-decoration:none; font-size: 9pt; color:#F4FC21; font-weight:bold;}
+a:visited.login{text-decoration:none; font-size: 9pt; color:F4FC21; font-weight:bold;}
+a:hover.login{text-decoration:underline; font-size: 9pt; color:white; font-weight:bold;}
+a:active.login{text-decoration:none; font-size: 9pt; color:white; font-weight:bold;}
+
+/*·Î±×¾Æ¿ô*/
+
+.logout{font:12px "±¼¸²","gulim"; color:#EBBBEE; text-decoration:none; font-weight:bold;}
+a:link.logout{text-decoration:none; font-size: 9pt; color:#EBBBEE; font-weight:bold;}
+a:visited.logout{text-decoration:none; font-size: 9pt; color:EBBBEE; font-weight:bold;}
+a:hover.logout{text-decoration:underline; font-size: 9pt; color:white; font-weight:bold;}
+a:active.logout{text-decoration:none; font-size: 9pt; color:white; font-weight:bold;}
 
 /*¼­ºê_º»¹®*/
 
@@ -115,7 +133,6 @@ a:active.area{text-decoration:none; font-size: 9pt; color:#FF7E00;}
 .input_02{background-color:FFFFFF;font-family:µ¸¿ò,dotum;font-size:12px;color:#636163;height:14pt;border:1 solid #bcbec1;}
 .box_01, textarea, select, input{font-family:µ¸¿ò,dotum;font-size:12px;color:#636163;border:0 solid #BCBEC1}
 .box_02, textarea{font-family:µ¸¿ò,dotum;font-size:12px;color:#636163;border:1 solid #BCBEC1}
-
 
 
 body {

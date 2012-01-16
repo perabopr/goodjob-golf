@@ -16,7 +16,8 @@ int rCnt = NumberUtils.toInt(request.getParameter("reserveCnt"), 0);
 int rTeam = NumberUtils.toInt(request.getParameter("reserveTeam"), 0);
 String rDate = StringUtils.trimToEmpty(request.getParameter("reserveDate"));
 String rTime = StringUtils.trimToEmpty(request.getParameter("reserveTime"));
-String rCoupon = StringUtils.trimToEmpty(request.getParameter("reserveCoupon"));
+int rCoupon = NumberUtils.toInt(request.getParameter("reserveCoupon"), 0);
+
 String rName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
 String rPhone = StringUtils.trimToEmpty(request.getParameter("reservePhone"));
 String rEmail = StringUtils.trimToEmpty(request.getParameter("reserveEmail"));
@@ -48,7 +49,10 @@ int buyPrice = prDto.getGoodjob_price() * rCnt;
 
 /* ----- 쿠폰 ----- */
 CouponDao cpDao = new CouponDao();
-List<CouponDto> couponList = cpDao.getUserCouponList(user_Id, "0", true);
+List<CouponDto> couponList = null;
+if(prDto.getCoupon_use_yn().equals("1")){
+	couponList = cpDao.getUserCouponList(user_Id, "0", true);
+}
 %>
 <script type="text/javascript">
 <!--
@@ -131,13 +135,15 @@ function billok(){
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>프리미엄상품권 적용</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white>
 	<SELECT size=1 id="ddlCoupon" name="ddlCoupon">
-	<OPTION value="" selected>선택하세요</OPTION>
+	<OPTION value="0" selected>선택하세요</OPTION>
 	<%
+	if(couponList != null){
 		for(int i = 0; i < couponList.size(); i++){
 	%>
-		<option value="<%=couponList.get(i).getCoupon_seq() %>" <%= Integer.parseInt(rCoupon)==couponList.get(i).getCoupon_seq()?"selected":"" %>><%=couponList.get(i).getCoupon_name() %></option>
+		<option value="<%=couponList.get(i).getCoupon_seq() %>" <%= rCoupon==couponList.get(i).getCoupon_seq()?"selected":"" %>><%=couponList.get(i).getCoupon_name() %></option>
 	<%
 		}
+	}
 	%>
 	</SELECT>
 </TD></TR>

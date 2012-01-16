@@ -12,6 +12,7 @@ public class ProductReserveDto {
 	int goodjob_price;
 	int NH_price;
 	String product_status = "";
+	String coupon_use_yn = "";
 	
 	public int getGolflink_seq() {
 		return golflink_seq;
@@ -78,5 +79,11 @@ public class ProductReserveDto {
 	}
 	public void setProduct_status(String product_status) {
 		this.product_status = product_status;
+	}
+	public String getCoupon_use_yn() {
+		return coupon_use_yn;
+	}
+	public void setCoupon_use_yn(String coupon_use_yn) {
+		this.coupon_use_yn = coupon_use_yn;
 	}
 }

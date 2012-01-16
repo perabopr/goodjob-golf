@@ -37,7 +37,10 @@ int buyPrice = prDto.getNH_price() * 4;
 
 /* ----- 쿠폰 ----- */
 CouponDao cpDao = new CouponDao();
-List<CouponDto> couponList = cpDao.getUserCouponList(user_Id, "0", true);
+List<CouponDto> couponList = null;
+if(prDto.getCoupon_use_yn().equals("1")){
+	couponList = cpDao.getUserCouponList(user_Id, "0", true);
+}
 %>
 <script type="text/javascript">
 <!--
@@ -162,13 +165,15 @@ $(function(){
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>프리미엄상품권 적용</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white height=25>
 <SELECT size=1 id="ddlCoupon" name="ddlCoupon">
-<OPTION value="" selected>선택하세요</OPTION>
+<OPTION value="0" selected>선택하세요</OPTION>
 <%
+if(couponList != null){
 	for(int i = 0; i < couponList.size(); i++){
 %>
 	<option value="<%=couponList.get(i).getCoupon_seq() %>"><%=couponList.get(i).getCoupon_name() %></option>
 <%
 	}
+}
 %>
 </SELECT>
 </TD>

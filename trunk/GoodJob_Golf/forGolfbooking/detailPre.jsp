@@ -215,6 +215,13 @@ function selectGolfLink(){
 	$("#personCnt").val($("#ddlPersonCnt").val());
 	
 	$("#psId").val(tmpOption[0]);
+	
+	$("#ddlCoupon").val(0);	
+	if(tmpOption[2] == "1"){	
+		document.getElementById("ddlCoupon").disabled=false;
+	}else{
+		$("#ddlCoupon").attr("disabled","true");
+	}
 }
 
 function reserveSubmit(){
@@ -603,14 +610,14 @@ for (int i = 1; i < 15 ;i++){
 	<TD bgColor=white height=25 align=center><%=glDto.getGolflink_name()%></TD>
 	<TD bgColor=white align=center><%=curDate.substring(0,4) + "-" + curDate.substring(4,6) + "-" + curDate.substring(6,8)%></TD>
 	<TD bgColor=white align=center><SELECT size=1 id="ddlTimeTerm" name="ddlTimeTerm" onchange="selectGolfLink();">
-		<OPTION value="/0" selected>선택하세요</OPTION>
+		<OPTION value="/0/0" selected>선택하세요</OPTION>
 <% 
 	for(int i = 0; i < listPr.size();i++){
 		int tPrdtSeq = listPr.get(i).getProductsub_seq();
 		String tTerm = listPr.get(i).getTime_start().substring(0,2) + "시 ~ " + listPr.get(i).getTime_end().substring(0,2) + "시";
-		int tPrice = listPr.get(i).getNH_price();
+		int tPrice = listPr.get(i).getNH_price();		
 %>
-		<OPTION value="<%=tPrdtSeq+"/"+tPrice%>"><%=tTerm%></OPTION>
+		<OPTION value="<%=tPrdtSeq+"/"+tPrice+"/"+listPr.get(i).getCoupon_use_yn()%>"><%=tTerm%></OPTION>
 <% 
 	} 
 %>
@@ -651,8 +658,8 @@ for (int i = 1; i < 15 ;i++){
 	<TR>
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 align=right>프리미엄상품권 적용</TD>
 	<TD style="PADDING-LEFT: 10px" bgColor=white height=27 colSpan=3>
-	<SELECT size=1 id="ddlCoupon" name="ddlCoupon">
-	<OPTION value="" selected>선택하세요</OPTION>
+	<SELECT size=1 id="ddlCoupon" name="ddlCoupon" disabled>
+	<OPTION value="0" selected>선택하세요</OPTION>
 	<%
 		for(int i = 0; i < couponList.size(); i++){
 	%>

@@ -41,7 +41,7 @@ function reserveAgree(){
 	$("#reserveDate").val('<%=request.getParameter("reserveDate")%>');
 	$("#reserveTime").val('<%=request.getParameter("reserveTime")%>');
 
-	$("#reserveCoupon").val('<%=request.getParameter("reserveCoupon")%>');
+	$("#reserveCoupon").val('<%=NumberUtils.toInt(request.getParameter("reserveCoupon"), 0)%>');
 	
 	$("#reserveName").val('<%=request.getParameter("reserveName")%>');
 	$("#reservePhone").val('<%=request.getParameter("reservePhone")%>');

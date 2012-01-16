@@ -105,6 +105,7 @@ public class RESERVE {
 			",IFNULL(C.course_name, '') course_name" +
 			",D.holl_type" +
 			",A.product_status " +
+			",A.coupon_use_yn " +
 		"FROM tb_product_sub A " +
 			"INNER JOIN tb_product B on(A.product_seq = B.product_seq) " +
 			"LEFT OUTER JOIN tb_golflink_course C on(C.golflink_course_seq = A.golflink_course_seq) " +
@@ -140,6 +141,7 @@ public class RESERVE {
 			",A.goodjob_price" +
 			",A.NH_price" +
 			",A.product_status " +
+			",A.coupon_use_yn " +
 		"FROM tb_product_sub A " +
 			"INNER JOIN tb_product B on(A.product_seq = B.product_seq) " +
 			"LEFT OUTER JOIN tb_golflink_course C on(C.golflink_course_seq = A.golflink_course_seq) " +

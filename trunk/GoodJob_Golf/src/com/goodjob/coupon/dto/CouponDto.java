@@ -11,6 +11,9 @@ public class CouponDto {
 	private String reg_user = "";
 	private String reg_date = "";
 	private String use_date = "";
+	private int menu_seq = 0;
+	private int golflink_seq = 0;
+	private String flag = "";
 	private String mem_name;
 	
 	public int getCoupon_seq() {
@@ -73,8 +76,25 @@ public class CouponDto {
 	}
 	public void setUse_date(String use_date) {
 		this.use_date = use_date;
+	}	
+	public int getMenu_seq() {
+		return menu_seq;
 	}
-	
+	public void setMenu_seq(int menu_seq) {
+		this.menu_seq = menu_seq;
+	}
+	public int getGolflink_seq() {
+		return golflink_seq;
+	}
+	public void setGolflink_seq(int golflink_seq) {
+		this.golflink_seq = golflink_seq;
+	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
 	public String getMem_name() {
 		return mem_name;
 	}

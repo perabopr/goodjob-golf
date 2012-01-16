@@ -62,8 +62,15 @@ public class MYPAGE {
 							"a.expiredate_end, "+
 							"a.reg_user, "+
 							"a.reg_date, "+
-							"a.use_date  "+
+							"a.use_date , a.menu_seq , a.reserve_seq "+
 							"from tb_coupon a "+ 
-							"where a.reg_user = ? {0} ";
-
+							"where a.reg_user = ? {0} order by a.coupon_seq desc limit ? , ? ";
+	
+	public static final String golflink_name = " select golflink_name from tb_golflink_reserve where menu_seq = ? and reserve_seq = ? ";
+	
+	public static final String my_coupon_total = " select " + 
+				" count(*) as cnt "+
+				"from tb_coupon a "+ 
+				"where a.reg_user = ? {0} ";
+	
 }

@@ -182,27 +182,34 @@ function mypage_search() {
                                                                                   <tr>
                                                                                     <td bgcolor="#F1F1F1" align="center" height="25" class=normal_b width="104">상품권번호</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="92">쿠폰명</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="80">상품권금액</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="207">제한사항</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="131">유효기간</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="59">사용유무</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="70">상품권금액</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="60">적용 골프장</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="187">제한사항</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="121">유효기간</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="49">사용유무</td>
                                                                                   </tr>
+				<%
+						if(ingList != null && !ingList.isEmpty()){
+							
+							int size = ingList.size();
+							CouponDto cpDto = null;
+							for(int i = 0 ; i < size ; i++){
+								
+								cpDto = ingList.get(i);
+				%>
                                                                                   <tr>
-                                                                                    <td bgcolor="white" align="center" class=normal height="30"><p>ABC123456789</p></td>
+                                                                                    <td bgcolor="white" align="center" class=normal height="30"><p><%=cpDto.getCoupon_code()%></p></td>
                                                                                     <td bgcolor="white" align="center" class=normal>프리미엄 쿠폰</td>
-                                                                                    <td bgcolor="white" align="center" class=orange>100,000원</td>
+                                                                                    <td bgcolor="white" align="center" class=orange><%=Utils.numberFormat(cpDto.getSale_price())%>원</td>
+                                                                                    <td bgcolor="white" align="center" class=normal></td>
                                                                                     <td bgcolor="white" align="center" class=normal>실시간/사전신청 예약시 적용</td>
-                                                                                    <td bgcolor="white" align="center" class=normal>2012년 12월 31일까지</td>
+                                                                                    <td bgcolor="white" align="center" class=normal><%=cpDto.getExpiredate_end()%>까지</td>
                                                                                     <td bgcolor="white" align="center" class=blue>가능</td>
                                                                                   </tr>
-                                                                                  <tr>
-                                                                                    <td align="center" bgcolor="white" class="normal" height="30"><p>ABC123456789</p></td>
-                                                                                    <td align="center" bgcolor="white" class="normal">프리미엄 쿠폰</td>
-                                                                                    <td align="center" bgcolor="white" class="orange">100,000원</td>
-                                                                                    <td align="center" bgcolor="white" class="normal">실시간/사전신청 예약시 적용</td>
-                                                                                    <td align="center" bgcolor="white" class="normal">2012년 12월 31일까지</td>
-                                                                                    <td align="center" bgcolor="white" class="red">불가</td>
-                                                                                  </tr>
+				<%
+							}
+						}
+				%>                                                                                  
                                                                                 </table></td>
                                                                             </tr>
                                                                             <tr>

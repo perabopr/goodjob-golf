@@ -16,7 +16,7 @@
 
 	String up_dir = Config.get("reserve_dir");
 	
-	FileUpload fileUpload = new FileUpload(request, up_dir, 1024*1024*5);
+	FileUpload fileUpload = new FileUpload(request, up_dir, 1024*1024*20);
 
 	//Map<String,String> paramMap = fileUpload.getParamMap();
 	Map<String,String> fileMap = fileUpload.getParamAfterUpload();

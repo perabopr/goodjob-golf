@@ -19,6 +19,7 @@ import com.goodjob.db.DBManager;
 import com.goodjob.sql.BBS;
 import com.goodjob.sql.COUPON;
 import com.goodjob.util.Utils;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 
 public class CouponDao {
 	
@@ -65,7 +66,7 @@ public class CouponDao {
 		return 1;
 	}	
 
-	public List<CouponDto> getUserCouponList(String userId, String cType){
+	public List<CouponDto> getUserCouponList(String userId, String cType, Boolean chkDate){
 		List<CouponDto> list = null;
 		Connection conn = null;
 		
@@ -77,9 +78,13 @@ public class CouponDao {
 			bind.add(userId);
 			if(cType.equals("0"))
 			{				
-				strQuery = " AND use_date IS NULL";
+				strQuery = " AND use_date IS NULL ";
 			}else{
-				strQuery = " AND use_date IS NOT NULL";
+				strQuery = " AND use_date IS NOT NULL ";
+			}
+			if(chkDate){
+				String strNowDate = new java.text.SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date());
+				strQuery += " AND expiredate_end >= '"+strNowDate+"'";
 			}
 			
 			ResultSetHandler rsh = new BeanListHandler(CouponDto.class);
@@ -95,6 +100,45 @@ public class CouponDao {
 		}
 
 		return list;
+	}
+	
+	public void setCouponUse(CouponDto cpDto){
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			QueryRunner qr = new QueryRunner();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(cpDto.getMenu_seq());
+			bind.add(cpDto.getReserve_seq());
+			bind.add(cpDto.getCoupon_seq());
+			qr.update(conn, COUPON.coupon_use_update , bind.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}		
+	}
+	
+	public void setCouponUseCancel(int menuSeq, int reserveSeq){
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			QueryRunner qr = new QueryRunner();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(menuSeq);
+			bind.add(reserveSeq);
+			qr.update(conn, COUPON.coupon_use_cancel_update , bind.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
 	}
 	
 	public void setCoupon(String coupon_name , String type , List<String[]> coupon){

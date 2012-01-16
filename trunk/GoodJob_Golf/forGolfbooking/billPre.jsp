@@ -1,3 +1,5 @@
+<%@page import="com.goodjob.coupon.dto.CouponDto"%>
+<%@page import="com.goodjob.coupon.CouponDao"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
@@ -43,6 +45,10 @@ bookingDate = bookingDate.substring(0,4) + "-" + bookingDate.substring(4,6) + "-
 bookingDate += bookingTime.substring(0,2) + ":" + bookingTime.substring(2,4); 
 
 int buyPrice = prDto.getGoodjob_price() * rCnt;
+
+/* ----- 쿠폰 ----- */
+CouponDao cpDao = new CouponDao();
+List<CouponDto> couponList = cpDao.getUserCouponList(user_Id, "0", true);
 %>
 <script type="text/javascript">
 <!--
@@ -123,7 +129,18 @@ function billok(){
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=rCnt %>인 <%=rTeam %>팀</TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>프리미엄상품권 적용</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><SELECT size=1 id="ddlCoupon" name="ddlCoupon"> <OPTION value="" selected>선택하세요</OPTION></SELECT></TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white>
+	<SELECT size=1 id="ddlCoupon" name="ddlCoupon">
+	<OPTION value="" selected>선택하세요</OPTION>
+	<%
+		for(int i = 0; i < couponList.size(); i++){
+	%>
+		<option value="<%=couponList.get(i).getCoupon_seq() %>" <%= Integer.parseInt(rCoupon)==couponList.get(i).getCoupon_seq()?"selected":"" %>><%=couponList.get(i).getCoupon_name() %></option>
+	<%
+		}
+	%>
+	</SELECT>
+</TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>결제예상금액</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange><%=commify(buyPrice) %></SPAN>원</TD></TR>

@@ -217,6 +217,7 @@ public class productDao {
 			bind.add(prdtsubDto.getGoodjob_price());
 			bind.add(prdtsubDto.getNH_price());
 			bind.add(prdtsubDto.getProduct_status());
+			bind.add(prdtsubDto.getCoupon_use_yn());
 			
 			QueryRunner qr = new QueryRunner();
 			
@@ -227,6 +228,7 @@ public class productDao {
 			DbUtils.closeQuietly(conn);
 		}
 	}
+	
 	public void setProductSubUpdate(ProductSubDto prdtsubDto){
 		Connection conn = null;
 		try{
@@ -238,11 +240,33 @@ public class productDao {
 			bind.add(prdtsubDto.getGoodjob_price());
 			bind.add(prdtsubDto.getNH_price());
 			bind.add(prdtsubDto.getProduct_status());
+			bind.add(prdtsubDto.getCoupon_use_yn());
 			bind.add(prdtsubDto.getProductsub_seq());
 			
 			QueryRunner qr = new QueryRunner();
 			
 			qr.update(conn, PRODUCT.product_sub_update, bind.toArray());			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
+	
+	public void setProductSubCouponUpdate(String coupon_useyn, int menuseq, int golflinkseq, String product_year, String product_month){
+		Connection conn = null;
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(coupon_useyn);
+			bind.add(menuseq);
+			bind.add(golflinkseq);
+			bind.add(product_year);
+			bind.add(product_month);
+			
+			QueryRunner qr = new QueryRunner();
+			
+			qr.update(conn, PRODUCT.product_sub_coupon_update, bind.toArray());			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

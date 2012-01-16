@@ -1,3 +1,6 @@
+<%@page import="com.goodjob.coupon.dto.CouponDto"%>
+<%@page import="java.util.List"%>
+<%@page import="com.goodjob.coupon.CouponDao"%>
 <%@page import="com.goodjob.sms.SMSDao"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
@@ -16,6 +19,7 @@ int gcId = NumberUtils.toInt(request.getParameter("gcId"),0);
 int golf = NumberUtils.toInt(request.getParameter("golf"),0);
 int date = NumberUtils.toInt(request.getParameter("date"),0);
 int cdate = NumberUtils.toInt(request.getParameter("cdate"),0);
+int couponSeq = NumberUtils.toInt(request.getParameter("ddlCoupon"),0);
 
 if(menu == 0 || gcId == 0 || golf == 0 || date == 0 || cdate == 0){
 	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=1'</script>");
@@ -29,18 +33,31 @@ uPhone += request.getParameter("phone2") + "-";
 uPhone += request.getParameter("phone3");
 int perNum = 4;
 
+/* ----- 쿠폰 ----- */
+CouponDao cpDao = new CouponDao();
+List<CouponDto> couponList = cpDao.getUserCouponList(user_Id, "0",true);
+
 GolfLinkReserveDto glrDto = new GolfLinkReserveDto();
 glrDto.setReserve_name(resName);
 glrDto.setReserve_uid(user_Id);
 glrDto.setPer_num(Integer.toString(perNum));
 glrDto.setReserve_phone(uPhone);
-glrDto.setCoupon_price(0);
+int couponPrice = 0;
+CouponDto cpDto = new CouponDto();
+for(int i = 0; i < couponList.size(); i++){
+	if(couponList.get(i).getCoupon_seq() == couponSeq){
+		couponPrice = couponList.get(i).getSale_price(); 
+		cpDto = couponList.get(i);
+		cpDto.setMenu_seq(menu);
+	}
+}
+glrDto.setCoupon_price(couponPrice);
 glrDto.setProcess_status("0");
 glrDto.setCard_bill_num("");
 glrDto.setProductsub_seq(gcId);
 
 GolfLinkDao glDao = new GolfLinkDao();
-glDao.setGolfReserve(glrDto);
+glDao.setGolfReserve(glrDto, cpDto);
 
 /*--------------- 문자 발송 --------------*/
 String bookingDate = request.getParameter("bookingDate");

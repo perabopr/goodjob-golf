@@ -144,6 +144,15 @@ public class ORDER {
 	public static final String product_sub_status_update
 	=	"UPDATE tb_product_sub " +
 		"SET product_status = ? " +
-		"WHERE productsub_seq IN " +
-		"(SELECT productsub_seq FROM tb_golflink_reserve WHERE reserve_seq = ?)";
+		"WHERE productsub_seq = ?";
+	
+	public static final String product_sub_seq_select
+	=	"SELECT " +
+			" reserve_seq " +
+			",menu_seq " +
+			",golflink_seq " +
+			",product_seq " +
+			",productsub_seq " +
+		"FROM tb_golflink_reserve " +
+		"WHERE reserve_seq = ?";
 }

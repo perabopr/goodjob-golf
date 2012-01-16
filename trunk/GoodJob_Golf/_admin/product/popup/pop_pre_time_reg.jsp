@@ -173,15 +173,15 @@ function selSetting(sDate){
 	  success: function(html){
 		var evalData = eval("("+html+")");
 		for(var i=0;i<evalData.ProductSub.length;i++){
-			addTime(evalData.ProductSub[i].a,evalData.ProductSub[i].c,evalData.ProductSub[i].d.substring(0,2),evalData.ProductSub[i].d.substring(2,4),evalData.ProductSub[i].e.substring(0,2),evalData.ProductSub[i].e.substring(2,4),evalData.ProductSub[i].f,evalData.ProductSub[i].g,evalData.ProductSub[i].h);
+			addTime(evalData.ProductSub[i].a,evalData.ProductSub[i].c,evalData.ProductSub[i].d.substring(0,2),evalData.ProductSub[i].d.substring(2,4),evalData.ProductSub[i].e.substring(0,2),evalData.ProductSub[i].e.substring(2,4),evalData.ProductSub[i].f,evalData.ProductSub[i].g,evalData.ProductSub[i].h,evalData.ProductSub[i].i);
 		}
 		
 		//기본행
-		addTime('','0','0','0','0','0','','','0');
+		addTime('','0','0','0','0','0','','','0','0');
 	  }
 	});
 }
-function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, sPrice, sStatus){
+function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, sPrice, sStatus, sCoupon){
 	var currMD = selDate.split('/');
 	var timecostHTML = "";
 	timecostHTML += "<tr><td bgcolor='white' align='center' width='40'><input type='hidden' name='pdsubseq' value='" + pdsubseq + "'>"+currMD[1]+"/"+currMD[2]+"</td>"
@@ -249,7 +249,25 @@ function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, 
 					break;
 			}
 		}
-		timecostHTML += "</select></td> "
+	timecostHTML += "</select>";
+	timecostHTML += "</td> ";
+	timecostHTML += "<td bgcolor='white' align='center'><select name='ddl_couponUse'>";
+	for(var i = 0; i < 2;i++){
+		var selectStr = "";
+		if(sCoupon == i){
+			selectStr = "selected";
+		}
+		switch(i){
+			case 0:
+				timecostHTML += "<option value='" + i + "' " + selectStr + ">미적용</option>";
+				break;
+			case 1:
+				timecostHTML += "<option value='" + i + "' " + selectStr + ">적용</option>";
+				break;
+		}
+	}	
+	timecostHTML += "</select>";
+	timecostHTML += "</td> ";
 	timecostHTML += "</tr>";
 	$("#tbTimeCost").append(timecostHTML);
 
@@ -286,6 +304,28 @@ function saveTime(){
 		alert("등록한 최신 정보를 입력하지 않으셨습니다.");
 	}
 }
+function btnAllCouponClick(){
+	var cpUseYn = 0;
+	if($("#chkAllCoupon").attr("checked")){
+		cpUseYn = 1;
+		if(!window.confirm("상품권을 전체 '적용'하시겠습니까?")){
+			return;
+		}
+	}else{
+		if(!window.confirm("상품권을 전체 '미적용'하시겠습니까?")){
+			return;
+		}		
+	}
+	$.ajax({
+	  url: "/_admin/product/ajax/ajax_productsub_coupon_update.jsp?cpUseYn="+cpUseYn+"&menu=2&glseq=<%=glSeq%>&year=<%=currYear%>&month=<%=currMonth+1%>",
+	  cache: false,
+	  async: false,
+	  success: function(html){
+		  alert("수정되었습니다");
+		  location.href = "/_admin/product/popup/pop_real_time_reg.jsp?menuseq=2&glseq=<%=glSeq%>";
+	  }
+	});
+}
 function prdtViewChange(cDate, cValue){
 	$("#changeDate").val(cDate);
 	$("#changeView").val(cValue);
@@ -311,7 +351,14 @@ String.prototype.trim = function(){
     <td align="center" width="760" class=title>★ 사전 골프장 시간 및 가격입력 ★</td>
   </tr>
   <tr>
-    <td align="right" style="padding-right:20px;" height="35"><img src="../../images/inc/month_prev.gif" style="cursor:pointer;" width="41" height="16" border="0" align="absmiddle" onclick="location.href='pop_pre_time_reg.jsp?glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=0'"> &nbsp;<span class=month><%= (currYear) %>년 <%= (currMonth+1) %>월</span> &nbsp;<img align="absmiddle" src="../../images/inc/month_next.gif" style="cursor:pointer;" width="41" height="16" border="0" onclick="location.href='pop_pre_time_reg.jsp?glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=1'"></td>
+    <td height="35" align="center">
+    <table border="0" width="740" cellpadding="2" cellspacing="1" >
+    <tr>
+    <td width="50%" align="left"><input type="checkbox" id="chkAllCoupon" name="chkAllCoupon"><input type="button" id="btnAllCoupon" name="btnAllCoupon" value="상품권 전체적용" onclick="btnAllCouponClick();" > </td>
+    <td align="right"><img src="../../images/inc/month_prev.gif" style="cursor:pointer;" width="41" height="16" border="0" align="absmiddle" onclick="location.href='pop_real_time_reg.jsp?menuseq=2&glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=0'"> &nbsp;<span class=month><%= (currYear) %>년 <%= (currMonth+1) %>월</span> &nbsp;<img align="absmiddle" src="../../images/inc/month_next.gif" width="41" height="16" style="cursor:pointer;" border="0" onclick="location.href='pop_real_time_reg.jsp?menuseq=2&glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=1'"></td>
+    </tr>
+    </table>    
+    </td>    
   </tr>
   <tr>
     <td align="center"><table border="0" width="740" cellpadding="2" cellspacing="1" bgcolor="#D1D3D4">
@@ -486,7 +533,7 @@ String.prototype.trim = function(){
           <td align="center" bgcolor="#F1F1F1" height="19" width="80">정상가</td>
           <td align="center" bgcolor="#F1F1F1" height="19" width="80">할인가</td>
           <td align="center" bgcolor="#F1F1F1" height="19" width="80">
-          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" style="cursor:pointer;" width="32" height="16" border="0" onclick="addTime('','0','0','0','0','0','','','0');">
+          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" style="cursor:pointer;" width="32" height="16" border="0" onclick="addTime('','0','0','0','0','0','','','0','0');">
           	<img src="../../images/inc/btn_del2.gif" style="cursor:pointer;" width="32" height="16" border="0" align="absmiddle" onclick="removeTime();">
           	<!-- <img align="absmiddle" src="../../images/inc/btn_save.gif" width="32" height="16" border="0"> -->
           	<input type="hidden" id="prdtseq" name="prdtseq" value="" />
@@ -495,6 +542,7 @@ String.prototype.trim = function(){
           	<input type="hidden" name="cpMonth" value="<%= currMonth+1%>" />
 		  </td>
 		  <td bgcolor="#F1F1F1" align="center" height="19" width="62">마감 </td>
+		  <td bgcolor="#F1F1F1" align="center" height="19" width="70">상품권 </td>
         </tr>
       	</table>
     </form>

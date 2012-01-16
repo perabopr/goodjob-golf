@@ -1,3 +1,5 @@
+<%@page import="com.goodjob.coupon.dto.CouponDto"%>
+<%@page import="com.goodjob.coupon.CouponDao"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
@@ -131,6 +133,10 @@ if(eMail != null && eMail.length == 2){
 
 String strNowDate = new java.text.SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
 int intNowDate = Integer.parseInt(strNowDate);
+
+/* ----- 쿠폰 ----- */
+CouponDao cpDao = new CouponDao();
+List<CouponDto> couponList = cpDao.getUserCouponList(user_Id, "0", true);
 %>
 
 <style type="text/css">
@@ -512,10 +518,11 @@ for (int i = 1; i < 15 ;i++){
 					&&listPrdt.get(j).getProduct_month().equals(cMonth)
 					&&listPrdt.get(j).getProduct_day().equals(cDay))
 			{
+				int prdtsubCnt = glDao.getGolfProductListCnt(listPrdt.get(j).getProduct_seq());
 				pDate = cYear + "/" + cMonth + "/" + cDay;
 				cDate = cYear + cMonth + cDay;
 				rCnt = listPrdt.get(j).getProduct_cnt();
-				cCnt = listPrdt.get(j).getStatusCnt();
+				cCnt = prdtsubCnt;
 				viewYn = listPrdt.get(j).getView_yn();
 				break;
 			}
@@ -643,7 +650,18 @@ for (int i = 1; i < 15 ;i++){
 	</TD></TR>	
 	<TR>
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 align=right>프리미엄상품권 적용</TD>
-	<TD style="PADDING-LEFT: 10px" bgColor=white height=27 colSpan=3><SELECT size=1 id="ddlCoupon" name="ddlCoupon"> <OPTION value="" selected>선택하세요</OPTION></SELECT></TD></TR>
+	<TD style="PADDING-LEFT: 10px" bgColor=white height=27 colSpan=3>
+	<SELECT size=1 id="ddlCoupon" name="ddlCoupon">
+	<OPTION value="" selected>선택하세요</OPTION>
+	<%
+		for(int i = 0; i < couponList.size(); i++){
+	%>
+		<option value="<%=couponList.get(i).getCoupon_seq() %>"><%=couponList.get(i).getCoupon_name() %></option>
+	<%
+		}
+	%>
+	</SELECT>
+	</TD></TR>
 	<TR>
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 align=right>예약자이름</TD>
 	<TD style="PADDING-LEFT: 10px" bgColor=white height=27 colSpan=3><INPUT class=mem_input id="reserveUName" name="reserveUName" size=15 value="<%=user_Name %>"> <INPUT name="chkRealName" id="chkRealName" type=checkbox><SPAN class=mem_notice>실제이용자가 예약자와 동일한 경우 체크</SPAN></TD></TR>

@@ -172,7 +172,7 @@ public class MyPageDao {
 			ArrayList<Object> bind = new ArrayList<Object>();
 			bind.add(mem_id);
 			
-			ResultSetHandler rsh = new BeanListHandler(CondoReserveDto.class);
+			ResultSetHandler rsh = new BeanListHandler(CouponDto.class);
 			QueryRunner qr = new QueryRunner();
 			
 			//검색조건

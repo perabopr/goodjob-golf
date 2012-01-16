@@ -3,6 +3,7 @@ package com.goodjob.reserve;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -12,9 +13,12 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
+import com.goodjob.coupon.CouponDao;
+import com.goodjob.coupon.dto.CouponDto;
 import com.goodjob.db.DBManager;
 import com.goodjob.product.dto.ProductSubDto;
 import com.goodjob.reserve.dto.GolfLinkDto;
@@ -23,6 +27,7 @@ import com.goodjob.reserve.dto.GolfLinkPromiseDto;
 import com.goodjob.reserve.dto.GolfLinkReserveDto;
 import com.goodjob.reserve.dto.ProductDto;
 import com.goodjob.reserve.dto.ProductReserveDto;
+import com.goodjob.sql.ORDER;
 import com.goodjob.sql.PRODUCT;
 import com.goodjob.sql.RESERVE;
 
@@ -73,6 +78,29 @@ public class GolfLinkDao {
 		}
 
 		return list;
+	}
+	
+	public int getGolfProductListCnt(int product_seq){
+		Map<String, Long> map = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> params = new ArrayList<Object>();	
+			params.add(product_seq);
+			
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			
+			map = (Map<String, Long>)qr.query(conn, RESERVE.getProductSub_count, rsh , params.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return NumberUtils.toInt(map.get("cnt")+"");
 	}
 	
 	public List<GolfLinkDto> getGolfLinkDetail(int idSeq){
@@ -186,7 +214,7 @@ public class GolfLinkDao {
 		return list;
 	}
 	
-	public void setGolfReserve(GolfLinkReserveDto glrDto){
+	public void setGolfReserve(GolfLinkReserveDto glrDto, CouponDto cpDto){
 		int idSeq = 0;
 		Connection conn = null;
 		List<ProductReserveDto> list = null;
@@ -227,6 +255,13 @@ public class GolfLinkDao {
 				bind.add("1");
 				bind.add(glrDto.getProductsub_seq());
 				qr.update(conn, RESERVE.setProductSub_update, bind.toArray());
+				
+				//쿠폰적용
+				if(cpDto.getCoupon_seq() > 0){
+					CouponDao cpDao = new CouponDao();
+					cpDto.setReserve_seq(idSeq);
+					cpDao.setCouponUse(cpDto);					
+				}
 			}
 			
 		}catch (Exception e) {

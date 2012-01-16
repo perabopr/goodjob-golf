@@ -14,7 +14,8 @@ public class COUPON {
 			",reg_date " +
 			",use_date " +
 		"FROM tb_coupon " +
-		"WHERE coupon_code = ?";
+		"WHERE coupon_code = ? " +
+			"AND expiredate_end >= date_format(now(),''%Y-%m-%d'')";
 	
 	public static final String coupon_update
 	=	"UPDATE tb_coupon " +
@@ -22,6 +23,23 @@ public class COUPON {
 			" reg_user = ? " +
 			",reg_date = now() " +
 		"WHERE coupon_seq = ?";
+
+	public static final String coupon_use_update
+	=	"UPDATE tb_coupon " +
+        "SET " +
+        	" use_date = now() " +
+        	",menu_seq = ? " +
+            ",reserve_seq = ? " +
+        "WHERE coupon_seq = ?";
+	
+	public static final String coupon_use_cancel_update
+	=	"UPDATE tb_coupon " +
+        "SET " +
+        	" use_date = null " +
+        	",menu_seq = null " +
+            ",reserve_seq = null " +
+        "WHERE menu_seq = ? " +
+            "AND reserve_seq = ? ";
 	
 	public static final String listUserCoupon
 	=	"SELECT " +
@@ -35,6 +53,8 @@ public class COUPON {
 			",reg_user " +
 			",reg_date " +
 			",use_date " +
+			",menu_seq " +
+			",reserve_seq " +
 		"FROM tb_coupon " +
 		"WHERE reg_user = ? {0}";
 	

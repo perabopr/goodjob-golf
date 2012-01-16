@@ -1,3 +1,5 @@
+<%@page import="com.goodjob.coupon.dto.CouponDto"%>
+<%@page import="com.goodjob.coupon.CouponDao"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="com.goodjob.sms.SMSDao"%>
 <%@page import="java.util.Map"%>
@@ -26,6 +28,7 @@ String rName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
 String rPhone = StringUtils.trimToEmpty(request.getParameter("reservePhone"));
 String rEmail = StringUtils.trimToEmpty(request.getParameter("reserveEmail"));
 String rRequest = StringUtils.trimToEmpty(request.getParameter("reserveRequest"));
+int couponSeq = NumberUtils.toInt(request.getParameter("ddlCoupon"),0);
 
 if(menu == 0 || psId == 0 || golf == 0 || date == 0 || cdate == 0 || rCnt == 0 || rTeam == 0){
 	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=2';</script>");
@@ -39,6 +42,11 @@ if(prList.size() != 1){
 	out.print("<script>alert('잘못된 접근입니다.');location.href='/forGolfbooking/reserve.jsp?menu=2';</script>");
 }else{
 	if(prList.get(0).getProduct_status().equals("0")){
+		
+		/* ----- 쿠폰 ----- */
+		CouponDao cpDao = new CouponDao();
+		List<CouponDto> couponList = cpDao.getUserCouponList(user_Id, "0", true);
+		
 		GolfLinkReserveDto glrDto = new GolfLinkReserveDto();
 		glrDto.setReserve_name(rName);
 		glrDto.setReserve_uid(StringUtils.trimToEmpty((String)session.getAttribute("mem_id")));
@@ -46,12 +54,21 @@ if(prList.size() != 1){
 		glrDto.setPer_num(Integer.toString(rCnt));
 		glrDto.setReserve_phone(rPhone);
 		glrDto.setProduct_price(prList.get(0).getGoodjob_price() * rCnt);
-		glrDto.setCoupon_price(0);
+		int couponPrice = 0;
+		CouponDto cpDto = new CouponDto();
+		for(int i = 0; i < couponList.size(); i++){
+			if(couponList.get(i).getCoupon_seq() == couponSeq){
+				couponPrice = couponList.get(i).getSale_price(); 
+				cpDto = couponList.get(i);
+				cpDto.setMenu_seq(menu);
+			}
+		}
+		glrDto.setCoupon_price(couponPrice);
 		glrDto.setProcess_status("0");
 		glrDto.setCard_bill_num("");
 		glrDto.setProductsub_seq(psId);
 		
-		glDao.setGolfReserve(glrDto);
+		glDao.setGolfReserve(glrDto, cpDto);
 		
 	}else{
 		out.print("<script>alert('예약할 수 없습니다.');location.href='/forGolfbooking/reserve.jsp?menu=2';</script>");		

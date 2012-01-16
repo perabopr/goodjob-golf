@@ -272,10 +272,11 @@ visibility: hidden;
 								&&listPrdt.get(j).getProduct_month().equals(cMonth)
 								&&listPrdt.get(j).getProduct_day().equals(cDay))
 						{
+							int prdtsubCnt = glDao.getGolfProductListCnt(listPrdt.get(j).getProduct_seq());
 							pDate = cYear + "/" + cMonth + "/" + cDay;
 							cDate = cYear + cMonth + cDay;
 							rCnt = listPrdt.get(j).getProduct_cnt();
-							cCnt = listPrdt.get(j).getStatusCnt();
+							cCnt = prdtsubCnt;
 							viewYn = listPrdt.get(j).getView_yn();
 							break;
 						}

@@ -356,6 +356,7 @@ public class PRODUCT {
 				",goodjob_price" +
 				",NH_price" +
 				",product_status " +
+				",coupon_use_yn " +
 			"FROM tb_product_sub " +
 			"WHERE productsub_seq = ?";
 	
@@ -369,14 +370,15 @@ public class PRODUCT {
 				",a.goodjob_price" + 
 				",a.NH_price" +
 				",a.product_status " + 
-				"FROM tb_product_sub a " +
+				",a.coupon_use_yn " +
+			"FROM tb_product_sub a " +
 				"INNER JOIN tb_product b ON(a.product_seq = b.product_seq) " +
-				"WHERE b.menu_seq = ? " +
+			"WHERE b.menu_seq = ? " +
 				"AND b.golflink_seq = ? " +
 				"AND b.product_year = ? " +
 				"AND b.product_month = ? " +
 				"AND b.product_day = ? " +
-				"ORDER BY a.productsub_seq";
+			"ORDER BY a.productsub_seq";
 				
 
 	public static final String product_sub_update
@@ -387,12 +389,24 @@ public class PRODUCT {
 				",goodjob_price = ?" +
 				",NH_price = ?" +
 				",product_status = ? " +
+				",coupon_use_yn = ? " +
 			"WHERE productsub_seq = ?";
 
 	public static final String product_sub_delete
 		=	"DELETE FROM tb_product_sub " +
 			"WHERE product_seq = ? " +
 			"AND productsub_seq NOT IN (%s)";
+	
+	public static final String product_sub_coupon_update
+	=	"UPDATE " +
+			"tb_product a " +
+			"INNER JOIN tb_product_sub b " +
+			"ON a.product_seq = b.product_seq " +
+		"SET b.coupon_use_yn = ? " +
+		"WHERE a.menu_seq = ? " +
+			"AND a.golflink_seq = ? " +
+			"AND a.product_year = ? " +
+			"AND a.product_month = ?";	
 
 	/*----------------------------------------------------------------- tb_package*/
 	public static final String package_select

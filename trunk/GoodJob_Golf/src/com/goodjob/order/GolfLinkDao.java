@@ -15,6 +15,7 @@ import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
+import com.goodjob.coupon.CouponDao;
 import com.goodjob.db.DBManager;
 import com.goodjob.order.dto.GolfLinkDto;
 import com.goodjob.sql.ORDER;
@@ -251,19 +252,37 @@ public class GolfLinkDao {
 			
 			if(process_status.equals("3") && tableName.equals("tb_golflink_reserve"))
 			{
-				ArrayList<Object> bind2 = new ArrayList<Object>();
-				bind2.add("0");
-				bind2.add(reserve_seq);
+				bind = new ArrayList<Object>();
+				bind.add(reserve_seq);
+				ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
+				List<GolfLinkDto> liSeq = (List<GolfLinkDto>)qr.query(conn , ORDER.product_sub_seq_select, rsh , bind.toArray());
 				
-				qr.update(conn, ORDER.product_sub_status_update, bind2.toArray());
+				if(liSeq.size() > 0){
+					bind = new ArrayList<Object>();
+					bind.add("0");
+					bind.add(liSeq.get(0).getProductsub_seq());
+					
+					//쿠폰 복구. 사용했으면~
+					CouponDao cpDao = new CouponDao();				
+					cpDao.setCouponUseCancel(liSeq.get(0).getMenu_seq(), liSeq.get(0).getReserve_seq());
+				}
+				
+				qr.update(conn, ORDER.product_sub_status_update, bind.toArray());
 			}
 			if(process_status.equals("1") && tableName.equals("tb_golflink_reserve"))
 			{
-				ArrayList<Object> bind2 = new ArrayList<Object>();
-				bind2.add("2");
-				bind2.add(reserve_seq);
+				bind = new ArrayList<Object>();
+				bind.add(reserve_seq);
+				ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
+				List<GolfLinkDto> liSeq = (List<GolfLinkDto>)qr.query(conn , ORDER.product_sub_seq_select, rsh , bind.toArray());
 				
-				qr.update(conn, ORDER.product_sub_status_update, bind2.toArray());
+				if(liSeq.size() > 0){
+					bind = new ArrayList<Object>();
+					bind.add("2");
+					bind.add(liSeq.get(0).getProductsub_seq());
+				}
+				
+				qr.update(conn, ORDER.product_sub_status_update, bind.toArray());
 			}
 		}
 		catch(Exception e){

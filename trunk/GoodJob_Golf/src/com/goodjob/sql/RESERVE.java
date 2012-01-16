@@ -23,16 +23,15 @@ public class RESERVE {
 			",A.product_day" +
 			",A.product_date" +
 			",A.view_yn" +
-			",count(*) 'product_cnt' " +
-			",(SELECT COUNT(*) FROM tb_product_sub " +
-				"WHERE product_status = '0' " +
-					"AND product_seq = A.product_seq) 'statusCnt' " +
+			",0 'product_cnt' " +
+			",0 'statusCnt' " +
 		"FROM tb_product A " +
 			"INNER JOIN tb_product_sub B on(A.product_seq = B.product_seq) " +
 		"WHERE A.golflink_seq = ? " +
 			"AND A.product_date >= ? AND A.product_date <= ? " +
 		"GROUP BY A.product_year, A.product_month, A.product_day " +
-		"ORDER BY A.product_year, A.product_month, A.product_day";	
+		"ORDER BY A.product_year, A.product_month, A.product_day";
+	
 	/*
 	public static final String getReserveGolfDate
 	=	"SELECT " +

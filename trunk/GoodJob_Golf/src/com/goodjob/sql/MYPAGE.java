@@ -36,8 +36,6 @@ public class MYPAGE {
 							"  from tb_package_reserve a " +
 							"  where menu_seq = ? and reserve_uid = ? {0} order by menu_seq , a.reserve_seq desc ";
 	
-	
-	
 	public static final String my_condo_reserve = "select a.reserve_seq, " +
 							"       a.menu_seq, " +
 							"       a.condo_seq, " +
@@ -65,6 +63,7 @@ public class MYPAGE {
 							"a.reg_user, "+
 							"a.reg_date, "+
 							"a.use_date  "+
-							"from tb_coupon_main a "+ 
+							"from tb_coupon a "+ 
 							"where a.reg_user = ? {0} ";
+
 }

@@ -6,16 +6,20 @@ package com.goodjob.mypage;
 import java.sql.Connection;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
+import com.goodjob.board.JoinBoardDto;
 import com.goodjob.coupon.dto.CouponDto;
 import com.goodjob.db.DBManager;
 import com.goodjob.reserve.dto.CondoReserveDto;
@@ -177,18 +181,22 @@ public class MyPageDao {
 			
 			//검색조건
 			String where = "";
-			if(startDt.length()>0 && endDt.length() > 0){
-				where = " and date_format(reg_date,'%Y-%m-%d') between ? and ? " ;
-				bind.add(startDt);
-				bind.add(endDt);
-			}
-			
-			if("I".equals(type)){
-				where += " and use_date is null " ;
+			if("now".equals(type)){
+				where = " and expiredate_end >= date_format(now(),'%Y-%m-%d') " ;
 			}
 			else{
-				where += " and use_date is not null " ;
+				where = " and expiredate_end < date_format(now(),'%Y-%m-%d') " ;
+				
+				if(startDt.length()>0 && endDt.length() > 0){
+					where += " and expiredate_end between ? and ? " ;
+					bind.add(startDt);
+					bind.add(endDt);
+				}
 			}
+			
+			//페이징
+			bind.add(((npage-1)* per_page));
+			bind.add(per_page);
 			
 			list = (List<CouponDto>) qr.query(conn , MessageFormat.format(MYPAGE.my_coupon, where), rsh , bind.toArray());
 			
@@ -199,5 +207,77 @@ public class MyPageDao {
 		}
 		
 		return list;
+	}
+	
+	public int getMyCouponTotal(Map<String,String> params){
+		
+		Connection conn = null;
+		Map<String, Long> map = null;
+		
+		String startDt = StringUtils.trimToEmpty(params.get("startDt"));
+		String endDt = StringUtils.trimToEmpty(params.get("endDt"));
+		String mem_id = StringUtils.trimToEmpty(params.get("mem_id"));
+		String type = StringUtils.trimToEmpty(params.get("type"));
+		
+		try {
+			conn = DBManager.getConnection();
+
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(mem_id);
+			
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			
+			//검색조건
+			String where = "";
+			if("now".equals(type)){
+				where = " and expiredate_end >= date_format(now(),'%Y-%m-%d') " ;
+			}
+			else{
+				where = " and expiredate_end < date_format(now(),'%Y-%m-%d') " ;
+				
+				if(startDt.length()>0 && endDt.length() > 0){
+					where += " and date_format(reg_date,'%Y-%m-%d') between ? and ? " ;
+					bind.add(startDt);
+					bind.add(endDt);
+				}
+			}
+			
+			map = (Map<String, Long>)qr.query(conn , MessageFormat.format(MYPAGE.my_coupon_total, where), rsh , bind.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return NumberUtils.toInt(map.get("cnt")+"");
+	}
+	
+	public String getGolflinkName(int menu_seq , int reserve_seq){
+		
+		String name = "";
+		Connection conn = null;
+		try {
+				
+			Object[] params = {menu_seq , reserve_seq};
+			
+			conn = DBManager.getConnection();
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			Map<String, String> map = (Map<String, String>)qr.query(conn, MYPAGE.golflink_name , rsh , params);
+			
+			if(map != null)
+				name = map.get("golflink_name");
+			else
+				name = "";
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return name;
 	}
 }

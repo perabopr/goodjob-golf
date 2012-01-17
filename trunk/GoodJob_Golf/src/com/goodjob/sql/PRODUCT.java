@@ -779,8 +779,7 @@ public class PRODUCT {
 			"WHERE condoroom_seq = ?";
 	public static final String condo_room_delete
 		=	"DELETE FROM tb_condo_room " +
-			"WHERE condo_seq = ? " +
-			"AND condoroom_seq NOT IN (%s)";
+			"WHERE condo_seq = ? ";
 
 	/*----------------------------------------------------------------- tb_condo_promise*/
 	public static final String condo_promise_select

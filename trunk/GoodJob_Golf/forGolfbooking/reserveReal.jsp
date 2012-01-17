@@ -128,7 +128,7 @@ visibility: hidden;
 			<TABLE border=0 cellSpacing=0 cellPadding=0 width=707>
 			<TBODY>
 			<TR>
-			<TD height=30 vAlign=bottom width=707 colSpan=2 align=center>
+			<TD height=30 vAlign=bottom width=707 colSpan=2 align=right>
 			<%
 				if(pRegion == 0){
 			%>
@@ -250,7 +250,7 @@ visibility: hidden;
 				List<ProductDto> listPrdt = glDao.getGolfProductList(pDto);
 			%>
 			<TR>
-			<TD style="PADDING-LEFT: 5px" bgColor=white height=30><SPAN class=blue_list style="color:red;font-weight:bold">(<%=listGolf.get(i).getRegion_name() %>)<%=listGolf.get(i).getGolflink_name()%></SPAN></TD>
+			<TD style="PADDING-LEFT: 5px" bgColor=white height=30><SPAN class=blue_list style="color:red;font-weight:bold">(<%=listGolf.get(i).getRegion_name() %>)<span style="color:#2860c7"><%=listGolf.get(i).getGolflink_name()%></SPAN></SPAN></TD>
 			<%
 				incDate.set(tYear, tMonth-1, tDay);
 				for (int k = 1; k < 15 ;k++){

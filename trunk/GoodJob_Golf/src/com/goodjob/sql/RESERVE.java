@@ -9,7 +9,7 @@ public class RESERVE {
 		"FROM tb_golflink A " +
 			"INNER JOIN tb_region B on(A.region_seq = B.region_seq) " +
 		"WHERE A.view_yn = 'Y' %s " +
-		"ORDER BY B.region_name";
+		"ORDER BY B.region_seq";
 		/*
 			"AND A.region_seq = 1 "
 			"AND A.menu_seq = 1 " +

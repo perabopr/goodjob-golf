@@ -197,6 +197,7 @@ public class GolfLinkDao {
 			String process_status = StringUtils.defaultIfEmpty(data.get("process_status"), "");
 			String package_price = StringUtils.defaultIfEmpty(data.get("package_price"), "");
 			String condo_price = StringUtils.defaultIfEmpty(data.get("condo_price"), "");
+			String tour_date = StringUtils.defaultIfEmpty(data.get("tour_date"), "");
 			
 			ArrayList<Object> bind = new ArrayList<Object>();
 						
@@ -240,6 +241,10 @@ public class GolfLinkDao {
 			if(condo_price.length() > 0){
 				setQuery += ",condo_price = ? " ;
 				bind.add(condo_price);
+			}
+			if(tour_date.length() > 0){
+				setQuery += ",tour_date = ? " ;
+				bind.add(tour_date);				
 			}
 			if(setQuery.length() > 0){
 				setQuery = setQuery.substring(1);

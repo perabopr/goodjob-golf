@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.goodjob.sql.ORDER"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
@@ -141,7 +142,7 @@ if(list != null){
             </select>
             <img src="../images/common/btn_save2.gif" width="32" height="16" border="0" align="absmiddle" style="cursor:pointer" onclick="updateStatus('<%=list.get(i).getReserve_seq()%>');"></td>
           <td align="center" bgcolor="white">
-	          <img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=1&seq=<%=list.get(i).getReserve_seq()%>','name','740','350','yes');return false;">
+	          <img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=1&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=URLEncoder.encode(list.get(i).getGolflink_name()) %>&msgtime=<%=vbookingDate %>','name','740','350','yes');return false;">
           </td>
         </tr>
 <%

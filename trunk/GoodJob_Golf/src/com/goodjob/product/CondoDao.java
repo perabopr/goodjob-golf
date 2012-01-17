@@ -257,6 +257,23 @@ public class CondoDao {
 		}		
 	}
 	
+	public void setCondoGallery2Delete(int condoSeq){
+		Connection conn = null;
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(condoSeq);
+			
+			QueryRunner qr = new QueryRunner();
+			
+			qr.update(conn, PRODUCT.condo_gallery2_delete, bind.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}		
+	}
+	
 	/**
 	 * 콘도룸 - 가져오기.
 	 * @param idSeq

@@ -42,7 +42,7 @@ pkDao.setPackageReserve(prDto);
 String message = "";
 message += "[" + packageName + "]";
 message += reserveDate;
-message += "예약신청 되었습니다";
+message += "예약되셨습니다";
 message += "(굿잡골프)";
 String sphone = "02-6670-0202";
 String reserveuid = user_Id;

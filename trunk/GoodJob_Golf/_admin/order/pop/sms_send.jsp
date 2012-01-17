@@ -15,6 +15,8 @@ String reservephone = "";
  
 int menu = NumberUtils.toInt(request.getParameter("menu"),0);
 int seq = NumberUtils.toInt(request.getParameter("seq"),0);
+String msgtxt = new String((request.getParameter("msgtxt")).getBytes("8859_1"), "EUC-KR") ;
+String msgtime = request.getParameter("msgtime").replace("-",".");
 
 if(menu == 1 || menu == 2){
 	GolfLinkDao glList = new GolfLinkDao();
@@ -100,11 +102,11 @@ SMSDao sDao = new SMSDao();
 	}
 
 	var menu = new Array(5);
-	menu[0] = "[대영베이스] 01.25(수) 11:00 예약되셨습니다.(굿잡골프)";
-	menu[1] = "[대영베이스] 01.25(수) 11:00 예약. 입금 확인되셨습니다.(굿잡골프)";
-	menu[2] = "[태안비치 외, 패키지] 01.25(수) 11:00 (굿잡골프)	";
-	menu[3] = "[대영베이스] 01.25(수) 11:00 예약취소되셨습니다.(굿잡골프)";
-	menu[4] = "[대영베이스] 01.25(수) 11:00 로변경처리 되셨습니다.(굿잡골프)";
+	menu[0] = "[<%=msgtxt%>] <%=msgtime%> 예약되셨습니다.(굿잡골프)";
+	menu[1] = "[<%=msgtxt%>] <%=msgtime%> 예약. 입금 확인되셨습니다.(굿잡골프)";
+	menu[2] = "[<%=msgtxt%>] <%=msgtime%> (굿잡골프)	";
+	menu[3] = "[<%=msgtxt%>] <%=msgtime%> 예약취소 되셨습니다.(굿잡골프)";
+	menu[4] = "[<%=msgtxt%>] <%=msgtime%> 로 변경처리 되셨습니다.(굿잡골프)";
 			
 	function changeText(txtMsg){
 		$("#message").val(menu[txtMsg]);

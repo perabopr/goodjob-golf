@@ -11,7 +11,7 @@ if(golflinkseq.length() > 0){
 		gldao.setGolfLinkCourseDelete2(gl_seq);
 		gldao.setGolfLinkPriceDelete(gl_seq);
 		gldao.setGolfLinkPromiseDelete(gl_seq);
-		gldao.setGolfLinkReserveDelete(gl_seq);
+		//gldao.setGolfLinkReserveDelete(gl_seq);
 		gldao.setGolfLinkDelete(gl_seq);
 	}
 }

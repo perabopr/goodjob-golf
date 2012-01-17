@@ -1,3 +1,4 @@
+<%@page import="java.net.URLEncoder"%>
 <%@page import="com.goodjob.order.dto.PackageDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.order.PackageDao"%>
@@ -258,7 +259,7 @@ if(list != null){
 				<option value="3" <%=("3".equals(list.get(i).getProcess_status())?" selected":"")%>>예약취소</option>
             </select>
             <img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateStatus('<%=list.get(i).getReserve_seq()%>');"></td>
-          <td align="center" bgcolor="white"><img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=3&seq=<%=list.get(i).getReserve_seq()%>','name','740','350','yes');return false;">
+          <td align="center" bgcolor="white"><img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=3&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=URLEncoder.encode(packName) %>&msgtime=<%=list.get(i).getTour_date() %>','name','740','350','yes');return false;">
 		  </td>
         </tr>
 <%

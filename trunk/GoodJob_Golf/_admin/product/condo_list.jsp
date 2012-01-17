@@ -38,10 +38,33 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 function searchRegion(){
 	location.href = "/_admin/product/condo_list.jsp?menu=5&region=" + $("#ddl_region").val();
 } 
+
+function delCondo(){
+	var ids = "";
+	$("input[name='chkSelc']").each(
+		function(e){
+			if(this.checked){
+				ids += this.value + ",";
+			}		
+		});
+
+	if(ids.length > 0){
+		ids = ids.substring(0, ids.length - 1); 
+	}
+
+	$("#condoSeq").val(ids);
+
+	if(window.confirm("콘도를 삭제하면 예약및 모든 정보가 복구 되지 않습니다.\r\n삭제 하시겠습니까?")){
+		frm.submit();
+	}
+}
 //--> 
 </script>
 </head>
 <body topmargin="10" marginheight="10">
+<FORM NAME="frm" METHOD="post" ACTION="condo_del_ok.jsp">
+<input type="hidden" id="condoSeq" name="condoSeq" >
+</FORM>
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
     <td width="50%" class=title>★ 콘도 목록 ★</td>
@@ -65,6 +88,7 @@ function searchRegion(){
     <td align="center" colspan="2">
     <table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
       <tr>
+		<td bgcolor="#e6e7e8" align="center" width="30" height="25"><span class=list_title>선택</span></td>
         <td bgcolor="#e6e7e8" align="center" height="25" width="230"><span class=list_title>지역</span></td>
         <td bgcolor="#e6e7e8" align="center" width="355"><span class=list_title>콘도명</span></td>
         <td bgcolor="#e6e7e8" align="center" width="501"><span class=list_title>위치</span></td>
@@ -79,6 +103,7 @@ function searchRegion(){
 	for(int i = 0; i < arrCondo.size(); i++){
 %>
       <tr>
+      	<td align="center" bgcolor="white"><input type="checkbox" id="chkSelc" name="chkSelc" value="<%=arrCondo.get(i).getCondo_seq() %>"></td>
         <td bgcolor="white" align="center" bgcolor="white"><%= arrCondo.get(i).getRegion_name() %></td>
         <td align="center" bgcolor="white"><span class=list_subject><%= arrCondo.get(i).getCondo_name() %></span></td>
         <td align="center" bgcolor="white"><%= arrCondo.get(i).getAddress1()%></td>
@@ -98,7 +123,10 @@ function searchRegion(){
     </td>
   </tr>
   <tr>
-    <td colspan="2" align="center" height="100"><a href="condo_reg.jsp?condoSeq="><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0"></a></td>
+    <td colspan="2" align="center" height="100">
+    	<a href="condo_reg.jsp?condoSeq="><img align="absmiddle" src="../images/inc/btn_regist2.gif" width="74" height="26" border="0"></a>
+    	&nbsp;<img align="absmiddle" src="../images/inc/btn_del3.gif" width="74" height="26" border="0" onclick="delCondo();">
+    </td>
   </tr>
 </table>
 </body>

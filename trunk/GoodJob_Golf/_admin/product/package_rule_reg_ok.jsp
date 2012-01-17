@@ -39,6 +39,6 @@ pkDao.setPackagePromiseInsert(glpDto);
 
 out.print("<script type='text/javascript'>");
 out.print("alert('수정되었습니다.');");
-out.print("location.href='package_rule_reg.jsp?pkSeq=" + pkSeq + "'");
+out.print("location.href='package_rule_reg.jsp?menu=3&pkSeq=" + pkSeq + "'");
 out.print("</script>");
 %>

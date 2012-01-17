@@ -738,9 +738,13 @@ public class PRODUCT {
 			"WHERE condoimg_seq = ?";
 	
 	public static final String condo_gallery_delete
-		=	"DELETE FROM tb_condo_gallery " +
-			"WHERE condo_seq = ? " +
-			"AND condoimg_seq NOT IN (%s)";			
+	=	"DELETE FROM tb_condo_gallery " +
+		"WHERE condo_seq = ? " +
+		"AND condoimg_seq NOT IN (%s)";
+	
+	public static final String condo_gallery2_delete
+	=	"DELETE FROM tb_condo_gallery " +
+		"WHERE condo_seq = ? ";
 	/*----------------------------------------------------------------- tb_condo_room*/
 	public static final String condo_term_select
 		=	"SELECT " +

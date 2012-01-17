@@ -69,9 +69,9 @@ public class COUPON {
 										"a.sale_price, "+
 										"a.expiredate_start, "+
 										"a.expiredate_end, "+
-										"a.reg_user, "+
-										"a.reg_date, "+
-										"a.use_date , "+
+										"a.reg_user, menu_seq , reserve_seq ,  "+
+										"date_format(a.reg_date,''%Y-%m-%d'') reg_date , "+
+										"date_format(a.use_date,''%Y-%m-%d'') use_date , "+
 										"b.mem_name "+
 										"from tb_coupon a left outer join tb_member b on a.reg_user=b.mem_id "+
 										"where a.coupon_type = ? {0} limit ? , ? ";
@@ -80,4 +80,6 @@ public class COUPON {
 									"count(*) cnt "+
 									"from tb_coupon a left outer join tb_member b on a.reg_user=b.mem_id "+
 									"where a.coupon_type = ? {0} ";
+	
+	public static final String golflink_name = " select golflink_name from tb_golflink_reserve where menu_seq = ? and reserve_seq = ? ";
 }

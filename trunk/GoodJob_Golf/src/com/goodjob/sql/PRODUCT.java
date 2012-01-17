@@ -343,7 +343,7 @@ public class PRODUCT {
 				",time_end" +
 				",goodjob_price" +
 				",NH_price" +
-				",product_status)" +
+				",product_status,coupon_use_yn)" +
 			"VALUES(?,?,?,?,?,?,?)";
 	
 	public static final String product_sub_select

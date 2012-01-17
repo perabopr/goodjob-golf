@@ -1,4 +1,5 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/include/loginCheck.jsp" %>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="java.sql.*,java.util.*" %>
@@ -281,7 +282,7 @@
                                                           <td background="../../images/board/img_board_ver.gif">&nbsp;</td>
                                                         </tr>
                                                         <tr>
-                                                          <td style="padding-left:133px;">골프장 JOIN커뮤니티에 참여를 원하시는 회원분께서는 댓글을 남겨주시기 바랍니다.</td>
+                                                          <td style="padding-left:133px;">골프장 JOIN커뮤니티에 참여를 원하시는 회원분께서는 신청글을 남겨주시기 바랍니다.</td>
                                                         </tr>
                                                         <form name="cmtFrm" method="post">
         												<input type="hidden" name="join_seq" value="<%=jDto.getJoin_seq()%>"/>

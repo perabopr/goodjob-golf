@@ -18,6 +18,7 @@ import com.goodjob.coupon.dto.CouponDto;
 import com.goodjob.db.DBManager;
 import com.goodjob.sql.BBS;
 import com.goodjob.sql.COUPON;
+import com.goodjob.sql.MYPAGE;
 import com.goodjob.util.Utils;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 
@@ -208,6 +209,28 @@ public class CouponDao {
 				where = "and a.expiredate_end = ? " ;
 				bind.add(keyword);
 			}
+			else if("reg_dt".equals(field) && keyword.length()>0){
+				where = "and date_format(reg_date,'%Y-%m-%d') = ? " ;
+				bind.add(keyword);
+			}
+			else if("use_dt".equals(field) && keyword.length()>0){
+				where = "and date_format(use_date,'%Y-%m-%d') = ? " ;
+				bind.add(keyword);
+			}
+			else if("name".equals(field) && keyword.length()>0){
+				where = "and b.mem_name LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("id".equals(field) && keyword.length()>0){
+				where = "and a.reg_user LIKE concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
+			else if("used".equals(field)){
+				if("Y".equals(keyword))
+					where = "and use_date is not null " ;
+				else
+					where = "and use_date is null " ;
+			}
 			
 			//페이징
 			bind.add(((npage-1)* per_page));
@@ -242,13 +265,43 @@ public class CouponDao {
 			
 			//검색조건
 			String where = "";
-			if("name".equals(field) && keyword.length()>0){
+			if("code".equals(field) && keyword.length()>0){
+				where = "and a.coupon_code = ? " ;
+				bind.add(keyword);
+			}
+			else if("price".equals(field) && keyword.length()>0){
+				where = "and a.sale_price = ? " ;
+				bind.add(keyword);
+			}
+			else if("start_dt".equals(field) && keyword.length()>0){
+				where = "and a.expiredate_start = ? " ;
+				bind.add(keyword);
+			}
+			else if("end_dt".equals(field) && keyword.length()>0){
+				where = "and a.expiredate_end = ? " ;
+				bind.add(keyword);
+			}
+			else if("reg_dt".equals(field) && keyword.length()>0){
+				where = "and date_format(reg_date,'%Y-%m-%d') = ? " ;
+				bind.add(keyword);
+			}
+			else if("use_dt".equals(field) && keyword.length()>0){
+				where = "and date_format(use_date,'%Y-%m-%d') = ? " ;
+				bind.add(keyword);
+			}
+			else if("name".equals(field) && keyword.length()>0){
 				where = "and b.mem_name LIKE concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
 			else if("id".equals(field) && keyword.length()>0){
-				where = "and b.mem_id LIKE concat('%',?,'%') " ;
+				where = "and a.reg_user LIKE concat('%',?,'%') " ;
 				bind.add(keyword);
+			}
+			else if("used".equals(field)){
+				if("Y".equals(keyword))
+					where = "and use_date is not null " ;
+				else
+					where = "and use_date is null " ;
 			}
 			else if("remain".equals(field)){
 				where = "and reg_user is null " ;
@@ -267,4 +320,30 @@ public class CouponDao {
 		return NumberUtils.toInt(map.get("cnt")+"");
 	}
 	
+	public String getGolflinkName(int menu_seq , int reserve_seq){
+		
+		String name = "";
+		Connection conn = null;
+		try {
+				
+			Object[] params = {menu_seq , reserve_seq};
+			
+			conn = DBManager.getConnection();
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			Map<String, String> map = (Map<String, String>)qr.query(conn, COUPON.golflink_name , rsh , params);
+			
+			if(map != null)
+				name = map.get("golflink_name");
+			else
+				name = "";
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return name;
+	}
 }

@@ -70,7 +70,16 @@ function DisplayMenu(index) {
 $(function() {
 	$( "#startDt" ).datepicker({dateFormat:'yy-mm-dd'});
 	$( "#endDt" ).datepicker({dateFormat:'yy-mm-dd'});
-	
+	$("#istartDt").click(
+		function(){
+			$( "#startDt" ).datepicker("show");
+		}
+	);
+	$("#iendDt").click(
+		function(){
+			$( "#endDt" ).datepicker("show");
+		}
+	);
 });
 
 function mypage_search() {
@@ -152,10 +161,10 @@ function goPage(val){
                                                                       <td><table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                           <tr>
                                                                             <td width="669" align="center"><img align="absmiddle" src="/images/mypage/img_search_title_s.gif" width="50" height="19" border="0">
-                                                                            <img align="absmiddle" src="/images/common/btn_calendar_left.gif" width="22" height="21">&nbsp;
+                                                                            <a href="#"><img align="absmiddle" id="istartDt" src="/images/common/btn_calendar_left.gif" width="22" height="21"></a>&nbsp;
                                                                             <input type="text" class="input_01" size="13" id="startDt" name="startDt" value="<%=startDt%>" readonly/>
                                                                             &nbsp;&nbsp;~&nbsp;&nbsp;
-                                                                            <img align="absmiddle" src="/images/common/btn_calendar_right.gif" width="22" height="21">&nbsp;
+                                                                            <a href="#"><img align="absmiddle" id="iendDt" src="/images/common/btn_calendar_right.gif" width="22" height="21"></a>&nbsp;
                                                                             <input type="text" class="input_01" size="13" id="endDt" name="endDt" value="<%=endDt%>" readonly/>
                                                                             <a href="javascript:mypage_search();"><img align="absmiddle" src="/images/mypage/btn_search.gif" width="38" height="19" border="0"></a></td>
                                                                           </tr>
@@ -167,6 +176,10 @@ function goPage(val){
 															</form>
                                                               <tr>
                                                                 <td height="20"></td>
+                                                              </tr>
+                                                              <%}else{ %>
+                                                              <tr>
+                                                                <td height="20"><b>최근에 회원님이 등록하신 상품권 내역입니다.</b></td>
                                                               </tr>
                                                               <%} %>
                                                             </table>

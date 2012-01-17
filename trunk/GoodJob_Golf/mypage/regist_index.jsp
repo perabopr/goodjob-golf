@@ -74,7 +74,17 @@ function DisplayMenu(index) {
 $(function() {
 	$( "#startDt" ).datepicker({dateFormat:'yy-mm-dd'});
 	$( "#endDt" ).datepicker({dateFormat:'yy-mm-dd'});
-	DisplayMenu(<%=tab%>);
+	
+	$("#istartDt").click(
+		function(){
+			$( "#startDt" ).datepicker("show");
+		}
+	);
+	$("#iendDt").click(
+		function(){
+			$( "#endDt" ).datepicker("show");
+		}
+	);
 });
 
 function mypage_search() {
@@ -127,10 +137,10 @@ function mypage_search() {
                                                                       <tr>
                                                                         <td width="426"><table border="0" cellpadding="0" cellspacing="0" width="704">
                                                                             <tr>
-                                                                              <td onClick="DisplayMenu(1)" style="cursor:hand" width="176"><img id="tab01" src="/images/mypage/btn_tab_on_01.gif" width="173" height="25" alt="골프장부킹 예약관리"></td>
-                                                                              <td onClick="DisplayMenu(2)" style="cursor:hand" width="176"><img id="tab02" src="/images/mypage/btn_tab_off_02.gif" width="173" height="25" alt="골프패키지 예약관리"></td>
-                                                                              <td onClick="DisplayMenu(3)" style="cursor:hand" width="176"><img id="tab03" src="/images/mypage/btn_tab_off_03.gif" width="173" height="25" alt="콘도 예약관리"></td>
-                                                                              <td onClick="DisplayMenu(4)" style="cursor:hand" width="176"><img id="tab04" src="/images/mypage/btn_tab_off_04.gif" width="173" height="25" alt="개인정보수정"></td>
+                                                                              <td style="cursor:hand" width="176"><a href="/mypage/regist_index.jsp?tab=1"><%if("1".equals(tab)){ %><img src="/images/mypage/btn_tab_on_01.gif" boarder="0"><%}else{ %><img src="/images/mypage/btn_tab_off_01.gif" boarder="0"><%}%></a></td>
+                                                                              <td style="cursor:hand" width="176"><a href="/mypage/regist_index.jsp?tab=2"><%if("2".equals(tab)){ %><img src="/images/mypage/btn_tab_on_02.gif" boarder="0"><%}else{ %><img src="/images/mypage/btn_tab_off_02.gif" boarder="0"><%}%></a></td>
+                                                                              <td style="cursor:hand" width="176"><a href="/mypage/regist_index.jsp?tab=3"><%if("3".equals(tab)){ %><img src="/images/mypage/btn_tab_on_03.gif" boarder="0"><%}else{ %><img src="/images/mypage/btn_tab_off_03.gif" boarder="0"><%}%></a></td>
+                                                                              <td style="cursor:hand" width="176"><a href="/mypage/regist_index.jsp?tab=4"><%if("4".equals(tab)){ %><img src="/images/mypage/btn_tab_on_04.gif" boarder="0"><%}else{ %><img src="/images/mypage/btn_tab_off_04.gif" boarder="0"><%}%></a></td>
                                                                             </tr>
                                                                             <tr>
                                                                               <td height="1" colspan="4" bgcolor="#91B500" width="704"></td>
@@ -149,10 +159,10 @@ function mypage_search() {
                                                                               <td><table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                                   <tr>
                                                                                     <td width="669" align="center"><img align="absmiddle" src="/images/mypage/img_search_title_s.gif" width="50" height="19" border="0">
-                                                                                    <img align="absmiddle" src="/images/common/btn_calendar_left.gif" width="22" height="21">&nbsp;
+                                                                                    <a href="#"><img align="absmiddle" id="istartDt" src="/images/common/btn_calendar_left.gif" width="22" height="21"></a>&nbsp;
                                                                                     <input type="text" class="input_01" size="13" id="startDt" name="startDt" value="<%=startDt%>" readonly/>
                                                                                     &nbsp;&nbsp;~&nbsp;&nbsp;
-                                                                                    <img align="absmiddle" src="/images/common/btn_calendar_right.gif" width="22" height="21">&nbsp;
+                                                                                    <a href="#"><img align="absmiddle" id="iendDt" src="/images/common/btn_calendar_right.gif" width="22" height="21"></a>&nbsp;
                                                                                     <input type="text" class="input_01" size="13" id="endDt" name="endDt" value="<%=endDt%>" readonly/>
                                                                                     <a href="javascript:mypage_search();"><img align="absmiddle" src="/images/mypage/btn_search.gif" width="38" height="19" border="0"></a></td>
                                                                                   </tr>
@@ -166,7 +176,7 @@ function mypage_search() {
                                                                         <td height="20"></td>
                                                                       </tr>
                                                                     </table>
-                                                                <div id="menu1" style="display:block;">
+                                                                <%if("1".equals(tab)){%>
                                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                       <tr>
                                                                         <td bgcolor="white" align="center">
@@ -201,14 +211,14 @@ function mypage_search() {
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=Utils.dateFormat(golfDto.getBooking_day(),".")%> <%=booking_time%></td>
                                                                                     <td height="22" bgcolor="white" align="center" class=blue><%=golfDto.getGolflink_name()%></td>
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=(StringUtils.defaultIfEmpty(golfDto.getGolflink_course(),"없음"))%></td>
-                                                                                    <td height="22" bgcolor="white" align="center" class=normal><%=Utils.numberFormat(golfDto.getProduct_price())%>원</td>
+                                                                                    <td height="22" bgcolor="white" align="center" class=red><%=Utils.numberFormat(golfDto.getProduct_price())%>원</td>
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=golfDto.getPer_num()%>명/1팀</td>
-                                                                                    <td height="22" bgcolor="white" align="center" class=orange>
-                                                                                    <%=(golfDto.getMenu_seq()==1?"실시간예약":"사전예약")%></td>
+                                                                                    <td height="22" bgcolor="white" align="center">
+                                                                                    <%=(golfDto.getMenu_seq()==1?"<b>실시간예약</b>":"사전예약")%></td>
                                                                                   <td height="22" bgcolor="white" align="center">
                                                                            			<%
                                                                            			if("0".equals(golfDto.getProcess_status()))
-                                                                           					out.println("<span class=orange>예약대기</span>");
+                                                                           					out.println("<b>예약대기</b>");
                                                                            			else if("1".equals(golfDto.getProcess_status()))
                                                                            				out.println("<span class=blue>예약완료</span>");
                                                                            			else if("2".equals(golfDto.getProcess_status()))
@@ -229,8 +239,7 @@ function mypage_search() {
                                                                           </table></td>
                                                                       </tr>
                                                                     </table>
-                                                                  </div>
-                                                                  <div id="menu2" style="display:none;">
+                                                                  <%}else if("2".equals(tab)){%>
                                                                     <table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="#CCCCCC">
 														                <tr>
 														                    <td width="100" bgcolor="#F1F1F1" align="center" height="25" class=normal_b>예약신청일</td>
@@ -255,13 +264,13 @@ function mypage_search() {
                                                                            <td height="25" bgcolor="white" align="center" class=normal><%=pkDto.getReserve_day()%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=blue><%=pkDto.getPackage_name1()%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=normal><%=pkDto.getTour_date().replaceAll("-",".")%></td>
-                                                                           <td height="22" bgcolor="white" align="center" class=blue><%=(pkDto.getPackage_price()==0?"":Utils.numberFormat(pkDto.getPackage_price())+"원")%></td>
-                                                                           <td height="22" bgcolor="white" align="center" class=normal><%=(pkDto.getBalance_price()==0?"":Utils.numberFormat(pkDto.getBalance_price())+"원")%></td>
+                                                                           <td height="22" bgcolor="white" align="center" class=red><%=(pkDto.getPackage_price()==0?"":Utils.numberFormat(pkDto.getPackage_price())+"원")%></td>
+                                                                           <td height="22" bgcolor="white" align="center" class=red><%=(pkDto.getBalance_price()==0?"":Utils.numberFormat(pkDto.getBalance_price())+"원")%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=normal><%=pkDto.getPer_num()%>명/1팀</td>
                                                                            <td height="22" bgcolor="white" align="center">
                                                                   			<%
                                                                   			if("0".equals(pkDto.getProcess_status()))
-                                                                  					out.println("<span class=orange>예약대기</span>");
+                                                                  					out.println("<b>예약대기</b>");
                                                                   			else if("1".equals(pkDto.getProcess_status()))
                                                                   				out.println("<span class=blue>예약완료</span>");
                                                                   			else if("2".equals(pkDto.getProcess_status()))
@@ -275,8 +284,7 @@ function mypage_search() {
 																		}
 																	%>
 														            </table>
-                                                                  </div>
-                                                                  <div id="menu3" style="display:none;">
+                                                                  <%}else if("3".equals(tab)){%>
                                                                     <table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="#CCCCCC">
 														                <tr>
 														                    <td bgcolor="#F1F1F1" align="center" height="25" class=normal_b width="67">예약신청일</td>
@@ -310,11 +318,11 @@ function mypage_search() {
 														                    <td height="22" bgcolor="white" align="center" class=normal><%=night_day%></td>
 														                    <td height="22" align="center" bgcolor="white" class="normal"><%=Utils.dateFormat(cdDto.getIn_date(),".")%></td>
 														                    <td height="22" bgcolor="white" align="center" class=normal><%=Utils.dateFormat(cdDto.getOut_date(),".")%></td>
-														                    <td height="22" bgcolor="white" align="center" class=orange><%=(cdDto.getCondo_price()==0?"":Utils.numberFormat(cdDto.getCondo_price())+"원")%></td>
+														                    <td height="22" bgcolor="white" align="center" class=red><%=(cdDto.getCondo_price()==0?"":Utils.numberFormat(cdDto.getCondo_price())+"원")%></td>
 														                    <td height="22" bgcolor="white" align="center">
                                                                   			<%
                                                                   			if("0".equals(cdDto.getProcess_status()))
-                                                                  					out.println("<span class=orange>예약대기</span>");
+                                                                  					out.println("<b>예약대기</b>");
                                                                   			else if("1".equals(cdDto.getProcess_status()))
                                                                   				out.println("<span class=blue>예약완료</span>");
                                                                   			else if("2".equals(cdDto.getProcess_status()))
@@ -328,8 +336,7 @@ function mypage_search() {
 																		}
 																	%>
 														            </table>
-                                                                  </div>
-                                                                  <div id="menu4" style="display:none;">
+                                                                  <%}else if("4".equals(tab)){%>
                                                                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                       <tr>
                                                                         <td width="426" background="/renewal/images/inc/img_board_bg.gif"></td>
@@ -345,7 +352,8 @@ function mypage_search() {
                                                                           </table></td>
                                                                       </tr>
                                                                     </table>
-                                                                  </div></td>
+                                                                  <%}%>
+                                                                  </td>
                                                               </tr>
                                                             </table></td>
                                                         </tr>

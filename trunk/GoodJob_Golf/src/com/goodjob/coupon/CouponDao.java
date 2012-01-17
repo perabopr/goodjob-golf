@@ -192,12 +192,20 @@ public class CouponDao {
 			
 			//검색조건
 			String where = "";
-			if("name".equals(field) && keyword.length()>0){
-				where = "and b.mem_name LIKE concat('%',?,'%') " ;
+			if("code".equals(field) && keyword.length()>0){
+				where = "and a.coupon_code = ? " ;
 				bind.add(keyword);
 			}
-			else if("id".equals(field) && keyword.length()>0){
-				where = "and b.mem_id LIKE concat('%',?,'%') " ;
+			else if("price".equals(field) && keyword.length()>0){
+				where = "and a.sale_price = ? " ;
+				bind.add(keyword);
+			}
+			else if("start_dt".equals(field) && keyword.length()>0){
+				where = "and a.expiredate_start = ? " ;
+				bind.add(keyword);
+			}
+			else if("end_dt".equals(field) && keyword.length()>0){
+				where = "and a.expiredate_end = ? " ;
 				bind.add(keyword);
 			}
 			

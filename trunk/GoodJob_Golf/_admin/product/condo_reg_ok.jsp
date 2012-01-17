@@ -57,6 +57,9 @@
 	}
 	
 	//** 객실
+	if(idSeq > 0){
+		cDao.setCondoRoomDelete(idSeq);
+	}
 	for(int i = 1;i < 5;i++){
 		String condoroomseq = StringUtils.trimToEmpty(fileUpload.getParameter("condoroomseq" +i));
 		String roomtype = StringUtils.trimToEmpty(fileUpload.getParameter("roomtype" +i));
@@ -82,13 +85,8 @@
 		crDto.setPrice_s1(Integer.parseInt(price1S));
 		crDto.setPrice_s2(Integer.parseInt(price2S));
 		crDto.setPrice_s3(Integer.parseInt(price3S));
-		if(condoroomseq.length() > 0){	//수정
-			crDto.setCondoroom_seq(Integer.parseInt(condoroomseq));
-			cDao.setCondoRoomUpdate(crDto);
-		}else{	//추가
-			if(roomtype.length()>0){
-				cDao.setCondoRoomInsert(crDto);
-			}
+		if(roomtype.trim().length()>0){
+			cDao.setCondoRoomInsert(crDto);
 		}
 	}
 	

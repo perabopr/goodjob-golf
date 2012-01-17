@@ -530,8 +530,8 @@ for (int i = 1; i < 15 ;i++){
 			<TABLE border=0 cellSpacing=0 cellPadding=0 width=150>
 			<TBODY>
 			<TR>
-			<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_prev_day.gif" width=65 height=20 onclick="preResDate();" style="cursor:hand"></TD>
-			<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_next_day.gif" width=65 height=20 onclick="nextResDate();" style="cursor:hand"></TD>
+			<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_2week_pre.gif" onclick="preResDate();" style="cursor:hand"></TD>
+			<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_2week_later.gif" onclick="nextResDate();" style="cursor:hand"></TD>
 			</TR>
 			</TBODY>
 			</TABLE>

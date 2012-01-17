@@ -344,16 +344,16 @@ public class CondoDao {
 	 * @param idSeq
 	 * @param strWhere
 	 */
-	public void setCondoRoomDelete(int idSeq, String strWhere){
+	public void setCondoRoomDelete(int condoSeq){
 		Connection conn = null;
 		try{
 			conn = DBManager.getConnection();
 			ArrayList<Object> bind = new ArrayList<Object>();
-			bind.add(idSeq);
+			bind.add(condoSeq);
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, String.format(PRODUCT.condo_room_delete, strWhere), bind.toArray());
+			qr.update(conn, PRODUCT.condo_room_delete, bind.toArray());
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

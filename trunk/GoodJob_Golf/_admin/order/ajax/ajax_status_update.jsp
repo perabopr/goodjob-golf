@@ -32,6 +32,8 @@ if(colname.equals("product_price")){
 	params.put("balance_price",status);
 }else if(colname.equals("condo_price")){
 	params.put("condo_price",status);
+}else if(colname.equals("tour_date")){
+	params.put("tour_date",status);
 }
 
 GolfLinkDao glDao = new GolfLinkDao();

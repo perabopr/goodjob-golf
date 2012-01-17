@@ -72,6 +72,26 @@ win = window.open(mypage, myname, winprops)
 if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); } 
 } 
 
+function updateTourdate(reserveseq){
+	var status = $("#TourDate"+reserveseq).val();
+
+	$.ajax({
+	  url: "/_admin/order/ajax/ajax_status_update.jsp?tablename=tb_package_reserve&reserveseq="+reserveseq+"&colname=tour_date&status="+status,
+	  cache: false,
+	  async: false,
+	  success: function(html){
+		var evalData = eval("("+html+")");
+		if(evalData.reserveResult.length == 1){
+			if(evalData.reserveResult[0].a == "1"){
+				alert("수정 되었습니다.");
+			}else if(evalData.reserveResult[0].a == "0"){
+				alert("수정 실패 했습니다.");
+			}			
+		}
+	  }
+	});
+}
+
 function updatePrice(reserveseq){
 	var status = $("#Price"+reserveseq).val();
 
@@ -216,7 +236,10 @@ if(list != null){
           	<input type="text" id="perCnt<%=list.get(i).getReserve_seq()%>" name="perCnt" size="1" maxlength="2" value="<%=list.get(i).getPer_num() %>" class="input_box">명
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePerCnt('<%=list.get(i).getReserve_seq()%>');">
           </td>
-          <td align="center" bgcolor="white"><%=list.get(i).getTour_date() %></td>
+          <td align="center" bgcolor="white">          
+          	<input id="TourDate<%=list.get(i).getReserve_seq()%>" name="price" type="text" size="10" maxlength="10" value="<%=list.get(i).getTour_date() %>" class="input_box">
+          	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateTourdate('<%=list.get(i).getReserve_seq()%>');">
+          </td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone()%></td>
           <td align="center" bgcolor="white">
           	<input id="Price<%=list.get(i).getReserve_seq()%>" name="price" type="text" size="10" value="<%=list.get(i).getPackage_price()%>" class="input_box">

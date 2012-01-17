@@ -187,7 +187,7 @@ function selSetting(sDate){
 		}
 		
 		//기본행
-		addTime('','0','0','0','','','0','0');
+		addTime('','0','0','0','','','0','1');
 	  }
 	});
 }
@@ -526,7 +526,7 @@ String.prototype.trim = function(){
           <td align="center" bgcolor="#F1F1F1" height="19" width="70">정상가</td>
           <td align="center" bgcolor="#F1F1F1" height="19" width="70">할인가</td>
           <td align="center" bgcolor="#F1F1F1" height="19" width="70">
-          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" style="cursor:pointer;" width="32" height="16" border="0" onclick="addTime('','0','0','0','','','0','0');">
+          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" style="cursor:pointer;" width="32" height="16" border="0" onclick="addTime('','0','0','0','','','0','1');">
           	<img src="../../images/inc/btn_del2.gif" style="cursor:pointer;" width="32" height="16" border="0" align="absmiddle" onclick="removeTime();">
           	<!-- <img align="absmiddle" src="../../images/inc/btn_save.gif" width="32" height="16" border="0"> -->
           	<input type="hidden" id="menuseq" name="menuseq" value="<%=menuSeq %>" />

@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
 <title>제목 없음</title>
-<link href="/_admin/style.css" rel="stylesheet" type="text/css">
+<link href="./style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body bgcolor="#666666" leftmargin="0" marginwidth="0" topmargin="0" marginheight="0">

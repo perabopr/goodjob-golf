@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
-<%@ page import="java.util.*" %>
 <%@ page import="java.util.*"%>
+<%@page import="com.goodjob.util.Utils"%>
 <%@ page import="com.goodjob.member.*"%>
 <%@page import="com.goodjob.util.PageNavigater"%>
 <%@page import="com.goodjob.coupon.CouponDao"%>
@@ -79,7 +79,7 @@ function goPage(val){
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
     <td width="50%" class=title><%=title%></td>
-    <td width="50%" align="right" style="padding-right:30px;">남은상품권 : <span class=orange><%=remainCount%>장</span></td>
+    <td width="50%" align="right" style="padding-right:30px;"><!--남은상품권 : <span class=orange><%=remainCount%>장</span>--></td>
   </tr>
   <tr>
     <td align="center" colspan="2" width="1242">&nbsp;</td>
@@ -88,21 +88,25 @@ function goPage(val){
     <td align="center" colspan="2" width="1242">
     <table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
 		<tr>
-        <td bgcolor="#e6e7e8" align="center" height="25" width="323"><span class=list_title>상품권 번호</span></td>
-                    <td bgcolor="#e6e7e8" align="center" width="531"><span class=list_title>사용자 아이디</span></td>
-                    <td align="center" bgcolor="#E6E7E8" width="372"><span class=list_title>사용자 아름</span></td>
-                </tr>
+			<td bgcolor="#e6e7e8" align="center" width="100"><span class=list_title>NO.</span></td>
+	        <td bgcolor="#e6e7e8" align="center" height="25" width="372"><span class=list_title>상품권 번호</span></td>
+	        <td bgcolor="#e6e7e8" align="center" width="240"><span class=list_title>금액</span></td>
+	        <td bgcolor="#e6e7e8" align="center" width="300"><span class=list_title>발행일</span></td>
+	        <td bgcolor="#e6e7e8" align="center" width="300"><span class=list_title>유효기간</span></td>
+		</tr>
 <%
 	int size = cpList.size();
-
+	int iNpage = NumberUtils.toInt(npage);
 	CouponDto cDto;
 	for(int i = 0 ; i < size ; i++){ 
 		cDto = cpList.get(i);
 %>
                 <tr>
-			        <td bgcolor="white" align="center" bgcolor="white" height="23" width="323"><%=cDto.getCoupon_code()%></td>
-                    <td align="center" bgcolor="white" width="531"><%=StringUtils.trimToEmpty(cDto.getReg_user())%></td>
-                    <td align="center" bgcolor="white" width="372"><%=StringUtils.trimToEmpty(cDto.getMem_name())%></td>
+                	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=totalCount-(i*iNpage)%></td>
+			        <td bgcolor="white" align="center" bgcolor="white" height="23"><%=cDto.getCoupon_code()%></td>
+			        <td bgcolor="white" align="center" bgcolor="white" height="23"><%=Utils.numberFormat(cDto.getSale_price())%></td>
+                    <td align="center" bgcolor="white" ><%=StringUtils.trimToEmpty(cDto.getExpiredate_start())%></td>
+                    <td align="center" bgcolor="white" ><%=StringUtils.trimToEmpty(cDto.getExpiredate_end())%></td>
                 </tr>
 <%
 	}
@@ -118,11 +122,13 @@ function goPage(val){
                 <tr>
                     <td width="50%" align="center"><%=strPage%></td>
                     <td width="50%" align="center">
-<select name="field" size="1">
-                                <option>선택</option>
-                                 <option value="name"<%=("name".equals(field)?" selected":"")%>>회원명</option>
-              <option value="id"<%=("id".equals(field)?" selected":"")%>>아이디</option>
-            </select>
+					<select name="field" size="1">
+						<option>선택</option>
+						<option value="code"<%=("code".equals(field)?" selected":"")%>>상품권번호</option>
+              			<option value="price"<%=("price".equals(field)?" selected":"")%>>금액</option>
+              			<option value="start_dt"<%=("start_dt".equals(field)?" selected":"")%>>발행일</option>
+              			<option value="end_dt"<%=("end_dt".equals(field)?" selected":"")%>>유효기간</option>
+            	</select>
 			<input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="20" class="input_box">
            <a href="javascript:on_search();"><img src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle"></a>
 

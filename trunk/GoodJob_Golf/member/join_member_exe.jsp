@@ -105,10 +105,26 @@ top.document.location.href="/member/join_finished.jsp";
 <%
 				return;
 			}
+			else{
+				String content = MessageFormat.format(MailContent.pwChange(),ses_mem_id,Utils.getDate("yyyy년MM월dd일"));
+				
+				String host = Config.get("mail_host");
+				String m_id = Config.get("mail_id");
+				String m_pw = Config.get("mail_pw");
+				String from = Config.get("mail_fm");
+				
+				Mail mail = new Mail(host,m_id,m_pw);
+				mail.setTo(ses_mem_id);
+				mail.setFrom(from , "굿잡골프");
+				mail.setSubject("[Goodjobgolf] 고객님의 비밀번호가 변경되었음을 알려드립니다.");
+				mail.setHtmlContent(content);
+				mail.send();
+			}
 		}
 		else{
 			mem_pwd = tmpDto.getMem_pwd();
 		}
+		
 		MemberDto mDto = new MemberDto();
 		mDto.setMem_id(ses_mem_id);
 		//mDto.setMem_jumin(mem_jumin1+"-"+mem_jumin2);

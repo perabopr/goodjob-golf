@@ -90,7 +90,7 @@ public class MyPageDao {
 			conn = DBManager.getConnection();
 
 			ArrayList<Object> bind = new ArrayList<Object>();
-			bind.add("3");
+			//bind.add("3");
 			bind.add(mem_id);
 			
 			ResultSetHandler rsh = new BeanListHandler(PackageReserveDto.class);

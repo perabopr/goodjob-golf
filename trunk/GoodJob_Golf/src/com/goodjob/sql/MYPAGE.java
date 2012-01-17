@@ -34,7 +34,7 @@ public class MYPAGE {
 							"       a.process_status, " +
 							"       a.reserve_uid " +
 							"  from tb_package_reserve a " +
-							"  where menu_seq = ? and reserve_uid = ? {0} order by menu_seq , a.reserve_seq desc ";
+							"  where reserve_uid = ? {0} order by menu_seq , a.reserve_seq desc ";
 	
 	public static final String my_condo_reserve = "select a.reserve_seq, " +
 							"       a.menu_seq, " +

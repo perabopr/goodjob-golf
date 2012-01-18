@@ -102,7 +102,7 @@ function delPackage(){
 	<tr>
 	    <td align="center" bgcolor="white"><input type="checkbox" id="chkSelc" name="chkSelc" value="<%=arrList.get(i).getPackage_seq() %>"></td>
 		<td bgcolor="white" align="center" bgcolor="white"><%= arrList.get(i).getRegion_name() %></td>
-		<td align="center" bgcolor="white"><span class=list_subject><%= arrList.get(i).getPackage_name1() %></span></td>
+		<td align="center" bgcolor="white"><span class=list_subject><%= arrList.get(i).getPackage_name1() %><%=(arrList.get(i).getPackage_name2()==null?"":" + "+arrList.get(i).getPackage_name2())%></span></td>
 		<td align="center" bgcolor="white"><%= arrList.get(i).getAddress1() %></td>
 		<td align="center" bgcolor="white">
 			<a href="package_rule_reg.jsp?menu=3&pkSeq=<%= arrList.get(i).getPackage_seq()%>"><img align="absmiddle" src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a>

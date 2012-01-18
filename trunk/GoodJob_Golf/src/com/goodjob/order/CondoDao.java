@@ -90,6 +90,9 @@ public class CondoDao {
 			}else if("process_status".equals(field) && keyword.length()>0){
 				where += "AND process_status LIKE concat('%',?,'%') " ;
 				params.add(keyword);
+			}else if("reserve_seq".equals(field) && keyword.length()>0){
+				where += "AND reserve_seq = ? " ;
+				params.add(keyword);
 			}
 			
 			//페이징

@@ -91,6 +91,9 @@ public class GolfLinkDao {
 			}else if("process_status".equals(field) && keyword.length()>0){
 				where += "AND process_status = ? " ;
 				params.add(keyword);
+			}else if("reserve_seq".equals(field) && keyword.length()>0){
+				where += "AND reserve_seq = ? " ;
+				params.add(keyword);
 			}
 			
 			//페이징
@@ -254,8 +257,9 @@ public class GolfLinkDao {
 			
 			QueryRunner qr = new QueryRunner();
 			qr.update(conn, MessageFormat.format(ORDER.update, tableName, setQuery), bind.toArray());
-			
-			if(process_status.equals("3") && tableName.equals("tb_golflink_reserve"))
+
+			if((process_status.equals("0") || process_status.equals("1") || process_status.equals("3")) 
+					&& tableName.equals("tb_golflink_reserve"))
 			{
 				bind = new ArrayList<Object>();
 				bind.add(reserve_seq);
@@ -264,27 +268,18 @@ public class GolfLinkDao {
 				
 				if(liSeq.size() > 0){
 					bind = new ArrayList<Object>();
-					bind.add("0");
+					if(process_status.equals("3")){	//(예약)예약취소
+						bind.add("0");	//(상품)예약가능
+					}else if(process_status.equals("0")){//(예약)예약대기
+						bind.add("1");	//(상품)예약중
+					}else if(process_status.equals("1")){//(예약)예약완료
+						bind.add("2");	//(상품)예약마감
+					}
 					bind.add(liSeq.get(0).getProductsub_seq());
 					
 					//쿠폰 복구. 사용했으면~
 					CouponDao cpDao = new CouponDao();				
 					cpDao.setCouponUseCancel(liSeq.get(0).getMenu_seq(), liSeq.get(0).getReserve_seq());
-				}
-				
-				qr.update(conn, ORDER.product_sub_status_update, bind.toArray());
-			}
-			if(process_status.equals("1") && tableName.equals("tb_golflink_reserve"))
-			{
-				bind = new ArrayList<Object>();
-				bind.add(reserve_seq);
-				ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
-				List<GolfLinkDto> liSeq = (List<GolfLinkDto>)qr.query(conn , ORDER.product_sub_seq_select, rsh , bind.toArray());
-				
-				if(liSeq.size() > 0){
-					bind = new ArrayList<Object>();
-					bind.add("2");
-					bind.add(liSeq.get(0).getProductsub_seq());
 				}
 				
 				qr.update(conn, ORDER.product_sub_status_update, bind.toArray());
@@ -296,5 +291,69 @@ public class GolfLinkDao {
 		finally{
 			DbUtils.closeQuietly(conn);
 		}
+	}
+	
+	public List<GolfLinkDto> getTotalReserveSearch(GolfLinkDto searchWord){
+		
+		List<GolfLinkDto> list = null;
+		Connection conn = null;
+		
+		String reserve_day = searchWord.getReserve_day();
+		String reserve_name = searchWord.getReserve_name();
+		String golflink_name = searchWord.getGolflink_name();
+		String booking_day = searchWord.getBooking_day();
+		
+		try {
+			conn = DBManager.getConnection();
+
+			ArrayList<Object> params = new ArrayList<Object>();
+			
+			ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			//검색조건
+			String where1 = "";
+			String where2 = "";
+			String where3 = "";
+			
+			if(reserve_day.length() > 0){
+				where1 = "WHERE reserve_day = ? " ;
+				params.add(reserve_day);
+				where2 = "WHERE reserve_day = ? " ;
+				params.add(reserve_day);
+				where3 = "WHERE reserve_day = ? " ;
+				params.add(reserve_day); 
+			}else if(reserve_name.length() > 0){
+				where1 = "WHERE reserve_name LIKE concat('%',?,'%') " ;
+				params.add(reserve_name);
+				where2 = "WHERE reserve_name LIKE concat('%',?,'%') " ;
+				params.add(reserve_name);
+				where3 = "WHERE reserve_name LIKE concat('%',?,'%') " ;
+				params.add(reserve_name); 
+			}else if(golflink_name.length() > 0){
+				where1 = "WHERE golflink_name LIKE concat('%',?,'%') " ;
+				params.add(golflink_name);
+				where2 = "WHERE (package_name1 LIKE concat('%',?,'%') OR package_name2 LIKE concat('%',?,'%'))" ;
+				params.add(golflink_name);
+				params.add(golflink_name);
+				where3 = "WHERE condo_name = ? " ;
+				params.add(golflink_name); 				
+			}else if(booking_day.length() > 0){
+				where1 = "WHERE booking_day = ? " ;
+				params.add(booking_day);
+				where2 = "WHERE tour_date = ? " ;
+				params.add(booking_day);
+				where3 = "WHERE in_date = ? " ;
+				params.add(booking_day); 
+			}
+			
+			list = (List<GolfLinkDto>)qr.query(conn , MessageFormat.format(ORDER.reserveTotalSearch_select, where1, where2, where3), rsh , params.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return list;
 	}
 }

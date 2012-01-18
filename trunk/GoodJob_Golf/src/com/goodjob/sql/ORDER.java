@@ -155,4 +155,44 @@ public class ORDER {
 			",productsub_seq " +
 		"FROM tb_golflink_reserve " +
 		"WHERE reserve_seq = ?";
+	
+	public static final String reserveTotalSearch_select
+	=	"SELECT " +
+			" reserve_seq " +
+			",menu_seq " +
+			",reserve_day " +
+			",reserve_name " +
+			",reserve_uid " +
+			",reserve_phone " +
+			",golflink_name " +
+			",booking_day " +
+			",process_status " +
+		"FROM tb_golflink_reserve " +
+		" {0} " +
+		"UNION ALL " +
+		"SELECT " +
+			" reserve_seq " +
+			",menu_seq " +
+			",reserve_day " +
+			",reserve_name " +
+			",reserve_uid " +
+			",reserve_phone " +
+			",package_name1+'+'+package_name2 " +
+			",tour_date " +
+			",process_status " + 
+		"FROM tb_package_reserve " +
+		" {1} " +
+		"UNION ALL " +
+		"SELECT " +
+			" reserve_seq " +
+			",menu_seq " +
+			",reserve_day " +
+			",reserve_name " +
+			",reserve_uid " +
+			",reserve_phone " +
+			",condo_name " +
+			",in_date " +
+			",process_status " +
+		"FROM tb_condo_reserve " +
+		" {2} ";
 }

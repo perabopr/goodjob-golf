@@ -29,6 +29,10 @@ List<PackageDto> list = pkDao.getList("tb_package_reserve", params);
 int totalCount = pkDao.getTotalCount("tb_package_reserve", params);
 
 String strPage = paging.getPaging(totalCount, false);
+
+if(field.equals("reserve_seq")){
+	keyword = "";
+}
 %>
 <%!
 public String commify(int n) {

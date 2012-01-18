@@ -29,6 +29,10 @@ List<GolfLinkDto> list = glList.getList("tb_golflink_reserve",params);
 int totalCount = glList.getTotalCount("tb_golflink_reserve" , params);
 
 String strPage = paging.getPaging(totalCount, false);
+
+if(field.equals("reserve_seq")){
+	keyword = "";
+}
 %>
 <%!
 public String commify(int n) {

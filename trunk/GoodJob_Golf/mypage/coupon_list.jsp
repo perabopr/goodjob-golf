@@ -221,7 +221,7 @@ function goPage(val){
                                                                                     <td bgcolor="white" align="center" class=orange><%=Utils.numberFormat(cpDto.getSale_price())%>원</td>
                                                                                     <td bgcolor="white" align="center" class=normal><%=myDao.getGolflinkName(cpDto.getMenu_seq(),cpDto.getReserve_seq())%></td>
                                                                                     <td bgcolor="white" align="center" class=normal>실시간/사전신청 예약시 적용</td>
-                                                                                    <td bgcolor="white" align="center" class=normal><%=cpDto.getExpiredate_end()%> 까지</td>
+                                                                                    <td bgcolor="white" align="center" class=normal><%=cpDto.getExpiredate_end().replaceAll("-",".")%> 까지</td>
                                                                                     <td bgcolor="white" align="center">
                                                                                     <%
                                                                                     if(cpDto.getReserve_seq()==0 && "now".equals(type))

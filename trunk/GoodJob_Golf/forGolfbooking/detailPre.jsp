@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.goodjob.coupon.dto.CouponDto"%>
 <%@page import="com.goodjob.coupon.CouponDao"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -10,7 +11,15 @@
 <%@page import="com.goodjob.reserve.dto.GolfLinkDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%!
+public boolean indexOf(String str , String... strings){
+	for(String temp : strings){
+		if(str.indexOf(temp)>-1)
+			return true;
+	}
+	return false;
+}
+%>
 <%
 int menuNum = NumberUtils.toInt(request.getParameter("menu"),1);
 
@@ -611,7 +620,9 @@ for (int i = 1; i < 15 ;i++){
 	<TD bgColor=white align=center><%=curDate.substring(0,4) + "-" + curDate.substring(4,6) + "-" + curDate.substring(6,8)%></TD>
 	<TD bgColor=white align=center><SELECT size=1 id="ddlTimeTerm" name="ddlTimeTerm" onchange="selectGolfLink();">
 		<OPTION value="/0/0" selected>선택하세요</OPTION>
-<% 
+<% 	
+	boolean disabled = indexOf(glDto.getGolflink_name(),"PAR3","파3");
+	
 	for(int i = 0; i < listPr.size();i++){
 		int tPrdtSeq = listPr.get(i).getProductsub_seq();
 		String tTerm = listPr.get(i).getTime_start().substring(0,2) + "시 ~ " + listPr.get(i).getTime_end().substring(0,2) + "시";
@@ -623,12 +634,12 @@ for (int i = 1; i < 15 ;i++){
 %>
 		</SELECT></TD>
 	<TD bgColor=white align=center>
-	<P><SELECT size=1 id="ddlPersonCnt" name="ddlPersonCnt" onchange="selectGolfLink();"> 
+	<P><SELECT size=1 id="ddlPersonCnt" name="ddlPersonCnt" onchange="selectGolfLink();"<%=(disabled?"":" disabled='disabled'")%>> 
 		<OPTION value="0" selected>선택</OPTION> 
 		<OPTION value="1">1</OPTION> 
 		<OPTION value="2">2</OPTION> 
 		<OPTION value="3">3</OPTION> 
-		<OPTION value="4">4</OPTION></SELECT> 명 /
+		<OPTION value="4"<%=(disabled?"":" selected")%>>4</OPTION></SELECT> 명 /
 		<SELECT size=1 id="ddlTeamCnt" name="ddlTeamCnt" disabled="disabled"> 
 		<OPTION value="1" selected>1</OPTION> 
 		</SELECT> 팀 </P></TD>

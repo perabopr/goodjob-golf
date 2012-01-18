@@ -250,7 +250,7 @@ visibility: hidden;
 				List<ProductDto> listPrdt = glDao.getGolfProductList(pDto);
 			%>
 			<TR>
-			<TD style="PADDING-LEFT: 5px" bgColor=white height=30><SPAN class=blue_list style="color:red;font-weight:bold">(<%=listGolf.get(i).getRegion_name() %>)<span style="color:#2860c7"><%=listGolf.get(i).getGolflink_name()%></SPAN></SPAN></TD>
+			<TD style="PADDING-LEFT: 10px" bgColor=white height=30><SPAN class=blue_list style="color:red;font-weight:bold"><!--(<%=listGolf.get(i).getRegion_name() %>)--><span style="color:#2860c7"><%=listGolf.get(i).getGolflink_name()%></SPAN></SPAN></TD>
 			<%
 				incDate.set(tYear, tMonth-1, tDay);
 				for (int k = 1; k < 15 ;k++){

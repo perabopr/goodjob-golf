@@ -194,4 +194,18 @@ public class Utils {
 		}
 		return couponList;
 	}
+	
+	/**
+	 * 
+	 * @param str
+	 * @param strings
+	 * @return
+	 */
+	public static boolean indexOf(String str , String... strings){
+		for(String temp : strings){
+			if(str.indexOf(temp)>-1)
+				return true;
+		}
+		return false;
+	}
 }

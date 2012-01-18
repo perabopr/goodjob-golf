@@ -82,4 +82,6 @@ public class COUPON {
 									"where a.coupon_type = ? {0} ";
 	
 	public static final String golflink_name = " select golflink_name from tb_golflink_reserve where menu_seq = ? and reserve_seq = ? ";
+	
+	public static final String coupon_del = " delete from tb_coupon where coupon_seq = ? and reg_user is null ";
 }

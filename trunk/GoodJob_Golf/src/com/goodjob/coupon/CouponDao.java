@@ -123,6 +123,27 @@ public class CouponDao {
 		}		
 	}
 	
+	public void couponDel(int coupon_seq){
+		
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			QueryRunner qr = new QueryRunner();
+			
+			Object[] bind = {coupon_seq};
+			
+			qr.update(conn, COUPON.coupon_del , bind);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}		
+	}
+	
+	
 	public void setCouponUseCancel(int menuSeq, int reserveSeq){
 		Connection conn = null;
 		

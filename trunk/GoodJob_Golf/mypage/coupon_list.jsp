@@ -83,16 +83,10 @@ $(function() {
 });
 
 function mypage_search() {
-
-	if(!$('#startDt').val()) {
-		alert('검색 시작일을 입력해주세요!');
-		$('#startDt').focus();
-		return;
-	}
-
-	if(!$('#endDt').val()) {
-		alert('검색 종료일을 입력해주세요!');
-		$('#endDt').focus();
+	
+	if(!$('#field').val()) {
+		alert('검색 조건 선택');
+		$('#field').focus();
 		return;
 	}
 
@@ -160,13 +154,17 @@ function goPage(val){
                                                                     <tr>
                                                                       <td><table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                           <tr>
-                                                                            <td width="669" align="center"><img align="absmiddle" src="/images/mypage/img_search_title_s.gif" width="50" height="19" border="0">
-                                                                            <a href="#"><img align="absmiddle" id="istartDt" src="/images/common/btn_calendar_left.gif" width="22" height="21"></a>&nbsp;
-                                                                            <input type="text" class="input_01" size="13" id="startDt" name="startDt" value="<%=startDt%>" readonly/>
-                                                                            &nbsp;&nbsp;~&nbsp;&nbsp;
-                                                                            <a href="#"><img align="absmiddle" id="iendDt" src="/images/common/btn_calendar_right.gif" width="22" height="21"></a>&nbsp;
-                                                                            <input type="text" class="input_01" size="13" id="endDt" name="endDt" value="<%=endDt%>" readonly/>
-                                                                            <a href="javascript:mypage_search();"><img align="absmiddle" src="/images/mypage/btn_search.gif" width="38" height="19" border="0"></a></td>
+                                                                            <td width="669" align="center">
+                                                                            <select id="field" name="field" size="1">
+																				<option>선택</option>
+																				<option value="code"<%=("code".equals(field)?" selected":"")%>>상품권번호</option>
+														              			<option value="price"<%=("price".equals(field)?" selected":"")%>>금액</option>
+														              			<option value="end_dt"<%=("end_dt".equals(field)?" selected":"")%>>유효기간</option>
+														              			<option value="use_dt"<%=("use_dt".equals(field)?" selected":"")%>>사용일</option>
+															            	</select>
+																			<input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="20" class="input_01">
+															           		<a href="javascript:mypage_search();"><img src="/images/board/bt_search.gif" border="0" align="absmiddle"></a>
+                                                                            </td>
                                                                           </tr>
                                                                         </table></td>
                                                                     </tr>
@@ -200,8 +198,8 @@ function goPage(val){
                                                                                   <tr>
                                                                                     <td bgcolor="#F1F1F1" align="center" height="25" class=normal_b width="104">상품권번호</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="92">쿠폰명</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="70">상품권금액</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="90">적용 골프장</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="70">상품권금액</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="167">제한사항</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="101">유효기간</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="59">사용유무</td>
@@ -218,8 +216,8 @@ function goPage(val){
                                                                                   <tr>
                                                                                     <td bgcolor="white" align="center" class=normal height="30"><p><%=cpDto.getCoupon_code()%></p></td>
                                                                                     <td bgcolor="white" align="center" class=normal>프리미엄 쿠폰</td>
-                                                                                    <td bgcolor="white" align="center" class=orange><%=Utils.numberFormat(cpDto.getSale_price())%>원</td>
                                                                                     <td bgcolor="white" align="center" class=normal><%=myDao.getGolflinkName(cpDto.getMenu_seq(),cpDto.getReserve_seq())%></td>
+                                                                                    <td bgcolor="white" align="center" class=orange><%=Utils.numberFormat(cpDto.getSale_price())%>원</td>
                                                                                     <td bgcolor="white" align="center" class=normal>실시간/사전신청 예약시 적용</td>
                                                                                     <td bgcolor="white" align="center" class=normal><%=cpDto.getExpiredate_end().replaceAll("-",".")%> 까지</td>
                                                                                     <td bgcolor="white" align="center">

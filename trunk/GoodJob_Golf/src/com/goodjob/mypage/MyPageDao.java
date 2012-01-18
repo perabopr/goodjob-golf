@@ -165,6 +165,9 @@ public class MyPageDao {
 		String endDt = StringUtils.trimToEmpty(params.get("endDt"));
 		String mem_id = StringUtils.trimToEmpty(params.get("mem_id"));
 		
+		String field = StringUtils.defaultIfEmpty(params.get("field"), "");
+		String keyword = StringUtils.defaultIfEmpty(params.get("keyword"), "");
+		
 		String type = StringUtils.trimToEmpty(params.get("type"));
 		
 		int npage = NumberUtils.toInt(params.get("npage"), 1);
@@ -187,10 +190,26 @@ public class MyPageDao {
 			else{
 				where = " and expiredate_end < date_format(now(),'%Y-%m-%d') " ;
 				
-				if(startDt.length()>0 && endDt.length() > 0){
+				/*if(startDt.length()>0 && endDt.length() > 0){
 					where += " and expiredate_end between ? and ? " ;
 					bind.add(startDt);
 					bind.add(endDt);
+				}*/
+				if("code".equals(field) && keyword.length()>0){
+					where += "and a.coupon_code = ? " ;
+					bind.add(keyword);
+				}
+				else if("price".equals(field) && keyword.length()>0){
+					where += "and a.sale_price = ? " ;
+					bind.add(keyword);
+				}
+				else if("end_dt".equals(field) && keyword.length()>0){
+					where += "and a.expiredate_end = ? " ;
+					bind.add(keyword);
+				}
+				else if("use_dt".equals(field) && keyword.length()>0){
+					where += "and date_format(use_date,'%Y-%m-%d') = ? " ;
+					bind.add(keyword);
 				}
 			}
 			
@@ -218,6 +237,8 @@ public class MyPageDao {
 		String endDt = StringUtils.trimToEmpty(params.get("endDt"));
 		String mem_id = StringUtils.trimToEmpty(params.get("mem_id"));
 		String type = StringUtils.trimToEmpty(params.get("type"));
+		String field = StringUtils.defaultIfEmpty(params.get("field"), "");
+		String keyword = StringUtils.defaultIfEmpty(params.get("keyword"), "");
 		
 		try {
 			conn = DBManager.getConnection();
@@ -236,10 +257,26 @@ public class MyPageDao {
 			else{
 				where = " and expiredate_end < date_format(now(),'%Y-%m-%d') " ;
 				
-				if(startDt.length()>0 && endDt.length() > 0){
-					where += " and date_format(reg_date,'%Y-%m-%d') between ? and ? " ;
+				/*if(startDt.length()>0 && endDt.length() > 0){
+					where += " and expiredate_end between ? and ? " ;
 					bind.add(startDt);
 					bind.add(endDt);
+				}*/
+				if("code".equals(field) && keyword.length()>0){
+					where += "and a.coupon_code = ? " ;
+					bind.add(keyword);
+				}
+				else if("price".equals(field) && keyword.length()>0){
+					where += "and a.sale_price = ? " ;
+					bind.add(keyword);
+				}
+				else if("end_dt".equals(field) && keyword.length()>0){
+					where += "and a.expiredate_end = ? " ;
+					bind.add(keyword);
+				}
+				else if("use_dt".equals(field) && keyword.length()>0){
+					where += "and date_format(use_date,'%Y-%m-%d') = ? " ;
+					bind.add(keyword);
 				}
 			}
 			

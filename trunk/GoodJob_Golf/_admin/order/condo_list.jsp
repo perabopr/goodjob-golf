@@ -28,6 +28,10 @@ List<CondoDto> list = cdDao.getList("tb_condo_reserve", params);
 int totalCount = cdDao.getTotalCount("tb_condo_reserve", params);
 
 String strPage = paging.getPaging(totalCount, false);
+
+if(field.equals("reserve_seq")){
+	keyword = "";
+}
 %>
 <%!
 public String commify(int n) {

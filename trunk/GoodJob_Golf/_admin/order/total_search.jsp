@@ -1,4 +1,37 @@
+<%@page import="com.goodjob.sql.ORDER"%>
+<%@page import="com.goodjob.util.PageNavigater"%>
+<%@page import="org.apache.commons.lang.math.NumberUtils"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
+<%@page import="org.apache.commons.lang.StringUtils"%>
+<%@page import="java.util.List"%>
+<%@page import="com.goodjob.order.GolfLinkDao"%>
+<%@page import="com.goodjob.order.dto.GolfLinkDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+String sField = StringUtils.trimToEmpty(request.getParameter("field2"));
+String sValue = StringUtils.trimToEmpty(request.getParameter("keyword2"));
+
+GolfLinkDto glDto = new GolfLinkDto();
+if("reserve_day".equals(sField)){
+	glDto.setReserve_day(sValue);
+}
+if("reserve_name".equals(sField)){
+	glDto.setReserve_name(sValue);
+}
+if("golflink_name".equals(sField)){
+	glDto.setGolflink_name(sValue);
+}
+if("booking_day".equals(sField)){
+	glDto.setBooking_day(sValue);
+}
+
+GolfLinkDao glList = new GolfLinkDao();
+List<GolfLinkDto> list = null;
+if(sValue.trim().length() > 0){
+	list = glList.getTotalReserveSearch(glDto);
+}
+%>
 <html>
 <head>
 <link rel="stylesheet" href="/_admin/css/style.css" type="text/css">
@@ -13,6 +46,43 @@ winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scr
 win = window.open(mypage, myname, winprops) 
 if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); } 
 } 
+
+function on_search() {
+	var frm = document.frm;
+	if(!$('#keyword2').val()) {
+		alert('검색어를 입력하시기 바랍니다.');
+		$('#keyword2').focus();
+		return;
+	} 
+	frm.action="total_search.jsp"
+	frm.submit();
+}
+
+function selItem(menuReserve){
+	var frm = document.frmLink;
+	var strValue = menuReserve.split("/");
+	var field = "reserve_seq";
+	var value = "";
+	if(strValue[0] == "1"){
+		frm.action = "real_list.jsp";
+	}
+	if(strValue[0] == "2"){
+		frm.action = "pre_list.jsp";
+	}
+	if(strValue[0] == "3"){
+		frm.action = "package_list.jsp";
+	}
+	if(strValue[0] == "4"){
+		frm.action = "package_foreign_list.jsp";
+	}
+	if(strValue[0] == "5"){
+		document.frmLink.action = "condo_list.jsp";
+	}
+	$("#field").val(field);
+	$("#keyword").val(strValue[1]);
+
+	frm.submit();
+}
 //--> 
 </script>
 </head>
@@ -24,7 +94,23 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 <TR>
 <TD align=center>&nbsp;</TD></TR>
 <TR>
-<TD align=center><INPUT name=formcheckbox1 value="" type=checkbox> 아이디 &nbsp;&nbsp; <INPUT name=formcheckbox1 value="" type=checkbox> 핸드폰&nbsp;&nbsp;&nbsp; <INPUT name=formcheckbox1 value="" type=checkbox> 이름 &nbsp;&nbsp; <INPUT class=input_01 name=day> <INPUT border=0 name=imagefield align=absMiddle src="../images/board/bt_search.gif" width=43 height=19 type=image></TD>
+<TD align=center>
+<form name="frmLink" method="post" action="total_search.jsp">
+<input type="hidden" id="field" name="field">
+<input type="hidden" id="keyword" name="keyword">
+</form>
+<form name="frm" method="post" action="total_search.jsp">
+<select id="field2" name="field2" size="1">
+  <option>선택하세요</option>
+  <option value="reserve_day" <%=("reserve_day".equals(sField)?" selected":"")%>>예약일</option>
+  <option value="reserve_name" <%=("reserve_name".equals(sField)?" selected":"")%>>예약자</option>
+  <option value="golflink_name" <%=("golflink_name".equals(sField)?" selected":"")%>>골프장명(패키지명)</option>
+  <option value="booking_day" <%=("booking_day".equals(sField)?" selected":"")%>>부킹일(출발일)</option>
+</select>
+<input id="keyword2" name="keyword2" value="<%=sValue%>" type="text" size="15" class="input_box">
+<input id="searchOk" name="searchOk" type="image" src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle" onclick="on_search();">
+</form>
+</TD>
 </TR>
 <TR>
 <TD align=center>&nbsp;</TD></TR>
@@ -33,49 +119,75 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
 	<TABLE border=0 cellSpacing=1 cellPadding=2 width="100%" bgColor=silver>
 	<TBODY>
 	<TR>
-	<TD bgColor=#e6e7e8 height=25 width=132 align=center><SPAN class=normal_b>예약신청일</SPAN></TD>
-	<TD bgColor=#e6e7e8 width=80 align=center><SPAN class=normal_b>예약자</SPAN></TD>
-	<TD bgColor=#e6e7e8 width=169 align=center><SPAN class=normal_b>아이디</SPAN></TD>
-	<TD bgColor=#e6e7e8 width=255 align=center><SPAN class=normal_b>골프장명</SPAN></TD>
-	<TD bgColor=#e6e7e8 width=194 align=center><SPAN class=normal_b>부킹일시</SPAN></TD>
-	<TD bgColor=#e6e7e8 width=206 align=center><SPAN class=normal_b>코스</SPAN></TD>
-	<TD bgColor=#e6e7e8 width=206 align=center><SPAN class=normal_b>연락처</SPAN></TD>
-	<TD bgColor=#e6e7e8 width=219 align=center><SPAN class=normal_b>예약종류</SPAN></TD>
-	<TD bgColor=#e6e7e8 width=164 align=center><SPAN class=normal_b>입금액</SPAN></TD>
-	<TD bgColor=#e6e7e8 width=176 align=center><SPAN class=normal_b>처리상태</SPAN></TD>
+	<TD bgColor=#e6e7e8 height=25 width=132 align=center><SPAN class=normal_b>예약종류</SPAN></TD>
+	<TD bgColor=#e6e7e8 width=200 align=center><SPAN class=normal_b>예약신청일</SPAN></TD>
+	<TD bgColor=#e6e7e8 width=169 align=center><SPAN class=normal_b>예약자</SPAN></TD>
+	<TD bgColor=#e6e7e8 width=255 align=center><SPAN class=normal_b>아이디</SPAN></TD>
+	<TD bgColor=#e6e7e8 width=194 align=center><SPAN class=normal_b>연락처</SPAN></TD>
+	<TD bgColor=#e6e7e8 width=206 align=center><SPAN class=normal_b>골프장 or 패키지명</SPAN></TD>
+	<TD bgColor=#e6e7e8 width=206 align=center><SPAN class=normal_b>부킹일 or 투어예정일</SPAN></TD>
+	<TD bgColor=#e6e7e8 width=100 align=center><SPAN class=normal_b>처리상태</SPAN></TD>
 	</TR>
-	<TR>
-	<TD bgColor=white height=25 align=center>2011-12-31 12:30</TD>
-	<TD bgColor=white align=center>홍길동</TD>
-	<TD bgColor=white align=center>abc@naver.com</TD>
-	<TD bgColor=white align=center>레이크힐스</TD>
-	<TD bgColor=white align=center>2011-08-01 06:36 </TD>
-	<TD bgColor=white align=center>코스명</TD>
-	<TD bgColor=white align=center>011-123-4567</TD>
-	<TD bgColor=white align=center>실시간예약</TD>
-	<TD bgColor=white align=center><SPAN class=orange>10,000 원</SPAN></TD>
-	<TD bgColor=white align=center>
-		<P>
-		<SELECT size=1 name=formselect1> 
-		<OPTION selected>예약대기</OPTION> 
-		<OPTION>예약완료</OPTION> 
-		<OPTION>취소불가</OPTION> 
-		<OPTION>예약취소</OPTION>
-		</SELECT> <IMG border=0 align=absMiddle src="../images/common/btn_save2.gif" width=32 height=16>
-		</P>
-	</TD>
+<%
+if(list != null){
+	for(int i = 0; i < list.size();i++){ 
+		String menuName = "";
+		if(list.get(i).getMenu_seq() == 1){
+			menuName = "실시간";
+		}
+		if(list.get(i).getMenu_seq() == 2){
+			menuName = "사전";
+		}
+		if(list.get(i).getMenu_seq() == 3){
+			menuName = "국내패키지";
+		}
+		if(list.get(i).getMenu_seq() == 4){
+			menuName = "해외패키지";
+		}
+		if(list.get(i).getMenu_seq() == 5){
+			menuName = "콘도";
+		}
+		String reserveDay = list.get(i).getReserve_day();
+		String bookingDay = list.get(i).getBooking_day();
+		if(bookingDay.length() == 8){
+			bookingDay = bookingDay.substring(0,4)
+				+ "-" + bookingDay.substring(4,6)
+				+ "-" + bookingDay.substring(6,8);
+		}
+		String processStatus = list.get(i).getProcess_status();
+		if(processStatus.equals("0")){
+			processStatus = "예약대기";
+		}
+		if(processStatus.equals("1")){
+			processStatus = "예약완료";
+		}
+		if(processStatus.equals("2")){
+			processStatus = "취소불가";
+		}
+		if(processStatus.equals("3")){
+			processStatus = "예약취소";
+		}
+%>
+	<TR style="cursor:pointer" onclick="selItem('<%=list.get(i).getMenu_seq() + "/" + list.get(i).getReserve_seq() %>')">
+	<TD bgColor=white height=25 align=center><%=menuName %></TD>
+	<TD bgColor=white align=center><%=reserveDay %></TD>
+	<TD bgColor=white align=center><%=list.get(i).getReserve_name() %></TD>
+	<TD bgColor=white align=center><%=list.get(i).getReserve_uid() %></TD>
+	<TD bgColor=white align=center><%=list.get(i).getReserve_phone() %></TD>
+	<TD bgColor=white align=center><%=list.get(i).getGolflink_name() %></TD>
+	<TD bgColor=white align=center><%=bookingDay %></TD>
+	<TD bgColor=white align=center><%=processStatus %></TD>
 	</TR>
+<% 
+	}
+}
+%>
 	</TBODY>
 	</TABLE>
 </TD>
 </TR>
 <TR>
 <TD height=2 align=center>&nbsp;</TD>
-</TR>
-<TR>
-<TD height=2 align=center>
-<P><IMG border=0 align=absMiddle src="../images/board/btn_prev_dual.gif" width=16 height=15> <IMG border=0 align=absMiddle src="../images/board/btn_prev.gif" width=16 height=15> <SPAN class=normal_b>1 &nbsp;</SPAN>I &nbsp;2 &nbsp;I &nbsp;3 &nbsp;I &nbsp;4 &nbsp;I &nbsp;5 &nbsp;I &nbsp;6 &nbsp;I &nbsp;7 &nbsp;I &nbsp;8 &nbsp;I &nbsp;9 &nbsp;I &nbsp;10 <IMG border=0 align=absMiddle src="../images/board/btn_next.gif" width=16 height=15> <IMG border=0 align=absMiddle src="../images/board/btn_next_dual.gif" width=16 height=15></P>
-</TD>
 </TR>
 <TR>
 <TD height=2 align=center>&nbsp;</TD>

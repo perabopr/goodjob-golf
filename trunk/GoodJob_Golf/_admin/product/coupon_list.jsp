@@ -141,6 +141,17 @@ function goPage(val){
         <td width="1242" height="50" align="center" colspan="2">
 <a href="coupon_input.jsp?type=<%=type%>" onClick="NewWindow(this.href,'name','400','300','no');return false;"><img align="absmiddle" src="/_admin/images/inc/btn_regist2.gif" width="74" height="26" border="0"></a></td>
     </tr>
+    <tr>
+        <td width="1242" height="50" align="left" colspan="2">
+업로드 하려는 파일은 CSV 형태여야 합니다.
+<br/>상품권 번호 외에는 어떤 문자(숫자)도 들어 있으면 안됩니다.
+<br/>각 줄은 “상품권번호 12자리 첫자~세째 자리까지 영문 시작~, 4번째부터 숫자”의 형태여야 합니다.
+<br/>시작  ~ 끝 번호 상품권 일련번호는 무작위 번호로 등록합니다.
+<br/>상품권을 등록할 경우 ,(쉼표)로 구분해서 등록
+<br/>Ex) ABC123456789 , 10000 , 2012-12-31
+<br/>   (상품권 번호 ,     금액 ,     유효기간)
+        </td>
+    </tr>
 </table>
 </body>
 </html>

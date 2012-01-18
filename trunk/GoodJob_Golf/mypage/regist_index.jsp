@@ -186,9 +186,10 @@ function mypage_search() {
                                                                                   <tr>
                                                                                     <td bgcolor="#F1F1F1" align="center" height="25" class=normal_b width="70">신청일</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="94">부킹일</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="168">골프장명</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="60">코스</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="84">금액</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="158">골프장명</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="50">코스</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="50">상품권</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="74">금액</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="57">인원/팀</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="70">예약구분</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="65">처리상태</td>
@@ -211,6 +212,7 @@ function mypage_search() {
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=Utils.dateFormat(golfDto.getBooking_day(),".")%> <%=booking_time%></td>
                                                                                     <td height="22" bgcolor="white" align="center" class=blue><%=golfDto.getGolflink_name()%></td>
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=(StringUtils.defaultIfEmpty(golfDto.getGolflink_course(),"없음"))%></td>
+                                                                                    <td height="22" bgcolor="white" align="center" class=blue><%=Utils.numberFormat(golfDto.getCoupon_price())%>원</td>
                                                                                     <td height="22" bgcolor="white" align="center" class=red><%=Utils.numberFormat(golfDto.getProduct_price())%>원</td>
                                                                                     <td height="22" bgcolor="white" align="center" class=normal><%=golfDto.getPer_num()%>명/1팀</td>
                                                                                     <td height="22" bgcolor="white" align="center">

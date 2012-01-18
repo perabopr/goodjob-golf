@@ -72,6 +72,16 @@ function goPage(val){
 	frm.action="coupon_list.jsp"
 	frm.submit();
 }
+
+function coupon_del(){
+
+	if(confirm("쿠폰 삭제시 이미 유저가 등록된 쿠폰은 삭제되지 않습니다.")){
+		var frm = document.cpFrm;
+		frm.target =  "ifr_hidden"; 
+		frm.action="coupon_del.jsp"
+		frm.submit();
+	}
+}
 //--> 
 </script>
 </head>
@@ -84,15 +94,17 @@ function goPage(val){
   <tr>
     <td align="center" colspan="2" width="1242">&nbsp;</td>
   </tr>
+<form name="cpFrm" method="post">
   <tr>
     <td align="center" colspan="2" width="1242">
     <table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
 		<tr>
+			<td bgcolor="#e6e7e8" align="center" width="50"><span class=list_title>선택</span></td>
 			<td bgcolor="#e6e7e8" align="center" width="100"><span class=list_title>NO.</span></td>
 	        <td bgcolor="#e6e7e8" align="center" height="25" width="372"><span class=list_title>상품권 번호</span></td>
-	        <td bgcolor="#e6e7e8" align="center" width="240"><span class=list_title>금액</span></td>
-	        <td bgcolor="#e6e7e8" align="center" width="300"><span class=list_title>발행일</span></td>
-	        <td bgcolor="#e6e7e8" align="center" width="300"><span class=list_title>유효기간</span></td>
+	        <td bgcolor="#e6e7e8" align="center" width="230"><span class=list_title>금액</span></td>
+	        <td bgcolor="#e6e7e8" align="center" width="290"><span class=list_title>발행일</span></td>
+	        <td bgcolor="#e6e7e8" align="center" width="290"><span class=list_title>유효기간</span></td>
 		</tr>
 <%
 	int size = cpList.size();
@@ -102,6 +114,7 @@ function goPage(val){
 		cDto = cpList.get(i);
 %>
                 <tr>
+                	<td bgcolor="white" align="center" bgcolor="white" height="23"><input type="checkbox" name="coupon_seq" value="<%=cDto.getCoupon_seq()%>"/></td>
                 	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=totalCount-(i*iNpage)%></td>
 			        <td bgcolor="white" align="center" bgcolor="white" height="23"><%=cDto.getCoupon_code()%></td>
 			        <td bgcolor="white" align="center" bgcolor="white" height="23"><%=Utils.numberFormat(cDto.getSale_price())%></td>
@@ -114,6 +127,7 @@ function goPage(val){
     </table>
     </td>
   </tr>
+</form>
 <form name="frm" method="post">
 <input type="hidden" name="npage" value=""/>
     <tr>
@@ -137,12 +151,15 @@ function goPage(val){
             </table>
         </td>
     </tr>
+    </form>
     <tr>
         <td width="1242" height="50" align="center" colspan="2">
-<a href="coupon_input.jsp?type=<%=type%>" onClick="NewWindow(this.href,'name','400','300','no');return false;"><img align="absmiddle" src="/_admin/images/inc/btn_regist2.gif" width="74" height="26" border="0"></a></td>
+<a href="javascript:coupon_del();"><img src="/_admin/images/inc/btn_del3.gif" border="0" align="absmiddle"></a>&nbsp;
+<a href="coupon_input.jsp?type=<%=type%>" onClick="NewWindow(this.href,'name','400','300','no');return false;"><img align="absmiddle" src="/_admin/images/inc/btn_regist2.gif" width="74" height="26" border="0"></a>
+</td>
     </tr>
     <tr>
-        <td width="1242" height="50" align="left" colspan="2">
+        <td style="padding-left:200px;" height="50" align="left" colspan="2">
 업로드 하려는 파일은 CSV 형태여야 합니다.
 <br/>상품권 번호 외에는 어떤 문자(숫자)도 들어 있으면 안됩니다.
 <br/>각 줄은 “상품권번호 12자리 첫자~세째 자리까지 영문 시작~, 4번째부터 숫자”의 형태여야 합니다.
@@ -153,5 +170,6 @@ function goPage(val){
         </td>
     </tr>
 </table>
+<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe> 
 </body>
 </html>

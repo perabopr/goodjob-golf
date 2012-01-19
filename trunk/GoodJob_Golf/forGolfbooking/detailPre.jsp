@@ -221,6 +221,7 @@ function selectGolfLink(){
 	var tmpOption = tmpOptions.split("/");
 
 	$("#txtBillPrice").text(commify(tmpPerCnt*tmpOption[1]));
+	$("#billPrice").text(commify(tmpPerCnt*tmpOption[1]));
 	$("#personCnt").val($("#ddlPersonCnt").val());
 	
 	$("#psId").val(tmpOption[0]);
@@ -231,6 +232,21 @@ function selectGolfLink(){
 	}else{
 		$("#ddlCoupon").attr("disabled","true");
 	}
+}
+
+function selectCoupon(){
+	var tmpPerCnt = $("#ddlPersonCnt").val();
+	var tmpOptions = $("#ddlTimeTerm").val();
+	var tmpOption = tmpOptions.split("/");
+
+	var tmpCoupons = $("#ddlCoupon").val();
+	var tmpCoupon = tmpCoupons.split("/");
+	var couponPrice = 0;
+	if(tmpCoupon.length > 1){
+		couponPrice = tmpCoupon[1];
+	}
+	
+	$("#billPrice").text(commify(tmpPerCnt*tmpOption[1]-couponPrice));
 }
 
 function reserveSubmit(){
@@ -281,7 +297,7 @@ function reserveSubmit(){
 	$("#reserveDate").val(rDate);
 	$("#reserveTime").val(rTime);
 
-	$("#reserveCoupon").val($("#ddlCoupon").val());
+	$("#reserveCoupon").val($("#ddlCoupon").val().split("/")[0]);
 	
 	$("#reserveName").val(rName);	
 	$("#reservePhone").val(rPhone);	
@@ -548,16 +564,16 @@ for (int i = 1; i < 15 ;i++){
 		<TD bgColor=white height=30 align=center>&nbsp;</TD>
 <%
 		}else if( Integer.parseInt(cYear + cMonth + cDay) < intNowDate 
-				|| cCnt == 0 || viewYn == "1"){
+				|| cCnt == 0 || viewYn.equals("1")){
 %>
 		<TD bgColor=white height=30 align=center>
-		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole_gray.gif" width=24 height=22 alt="마감">
+		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole_gray.gif" width=24 height=22 alt="마감/휴장">
 		</TD>
 <%
-		}else if(viewYn == "2"){
+		}else if(viewYn.equals("2")){
 %>
 		<TD bgColor=white height=30 align=center>
-		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole_gray.gif" width=24 height=22 alt="휴장">
+		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole_gray.gif" width=24 height=22 alt="마감/휴장">
 		</TD>
 <%
 		}else{
@@ -576,8 +592,8 @@ for (int i = 1; i < 15 ;i++){
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=150>
 <TBODY>
 <TR>
-<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_prev_day.gif" width=65 height=20 onclick="preResDate();" style="cursor:hand"></TD>
-<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_next_day.gif" width=65 height=20 onclick="nextResDate();" style="cursor:hand"></TD></TR></TBODY></TABLE></TD></TR>
+<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_2week_pre.gif" onclick="preResDate();" style="cursor:hand"></TD>
+<TD width=75 align=center><IMG border=0 src="../../images/booking/btn_2week_later.gif" onclick="nextResDate();" style="cursor:hand"></TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD vAlign=top width=707 colSpan=2 align=center>
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=704>
@@ -611,8 +627,8 @@ for (int i = 1; i < 15 ;i++){
 	<TABLE id="tbReserveList" border=0 cellSpacing=1 cellPadding=2 width=706 bgColor=#d1d3d4>
 	<TR>
 	<TD class=normal_b bgColor=#f1f1f1 height=25 width=192 align=center>골프장명</TD>
-	<TD class=normal_b bgColor=#f1f1f1 height=25 width=118 align=center>날짜</TD>
-	<TD class=normal_b bgColor=#f1f1f1 width=108 align=center>시간대</TD>
+	<TD class=normal_b bgColor=#f1f1f1 height=25 width=118 align=center>부킹날짜</TD>
+	<TD class=normal_b bgColor=#f1f1f1 width=108 align=center>부킹시간대</TD>
 	<TD class=normal_b bgColor=#f1f1f1 width=177 align=center>인원/팀</TD>
 	<TD class=normal_b bgColor=#f1f1f1 width=85 align=center>결제예상금액</TD></TR>
 	<TR>
@@ -662,26 +678,29 @@ for (int i = 1; i < 15 ;i++){
 	<TR>
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 width=142 align=right>인원</TD>
 	<TD style="PADDING-LEFT: 10px" bgColor=white width=211><INPUT class="mem_input" id="personCnt" name="personCnt" size=5 disabled> 인 &nbsp; <INPUT class=mem_input id="teamCnt" name="teamCnt" size=5 disabled value="1"> 팀 </TD>
-	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 width=130 align=right>날짜/시간대</TD>
+	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 width=130 align=right>부킹날짜/부킹시간대</TD>
 	<TD style="PADDING-LEFT: 10px" bgColor=white width=170>
 		<input type="text" class="mem_input" id="selectDate" name="selectDate" size="10" disabled value="<%=curDate.substring(0,4) + "-" + curDate.substring(4,6) + "-" + curDate.substring(6,8)%>">/<input type="text" class="mem_input" id="selectTime" name="selectTime" size="10" disabled>  
 	</TD></TR>	
 	<TR>
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 align=right>프리미엄상품권 적용</TD>
 	<TD style="PADDING-LEFT: 10px" bgColor=white height=27 colSpan=3>
-	<SELECT size=1 id="ddlCoupon" name="ddlCoupon" disabled>
-	<OPTION value="0" selected>선택하세요</OPTION>
+	<SELECT size=1 id="ddlCoupon" name="ddlCoupon" disabled onchange="selectCoupon();">
+	<OPTION value="0/0" selected>선택하세요</OPTION>
 	<%
 		for(int i = 0; i < couponList.size(); i++){
 	%>
-		<option value="<%=couponList.get(i).getCoupon_seq() %>"><%=couponList.get(i).getCoupon_name() %></option>
+		<option value="<%=couponList.get(i).getCoupon_seq() %>/<%=couponList.get(i).getSale_price() %>"><%=couponList.get(i).getCoupon_name()+"("+commify(couponList.get(i).getSale_price())+"원)" %></option>
 	<%
 		}
 	%>
 	</SELECT>
 	</TD></TR>
 	<TR>
-	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 align=right>예약자이름</TD>
+	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 align=right>결제금액</TD>
+	<TD style="PADDING-LEFT: 10px" bgColor=white colSpan=3><SPAN class=orange id="billPrice" name="billPrice"></SPAN>원</TD></TR>
+	<TR>
+	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 align=right>예약자명</TD>
 	<TD style="PADDING-LEFT: 10px" bgColor=white height=27 colSpan=3><INPUT class=mem_input id="reserveUName" name="reserveUName" size=15 value="<%=user_Name %>"> <INPUT name="chkRealName" id="chkRealName" type=checkbox><SPAN class=mem_notice>실제이용자가 예약자와 동일한 경우 체크</SPAN></TD></TR>
 	<TR>
 	<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=25 align=right>핸드폰</TD>

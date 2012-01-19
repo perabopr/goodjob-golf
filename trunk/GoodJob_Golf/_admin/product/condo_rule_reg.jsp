@@ -20,7 +20,7 @@ if(cdSeq.length() > 0){
 }
 
 
-String pageTitle = "★ 국내패키지 위약처리규정 ★";
+String pageTitle = "★ 콘도 위약처리규정 ★";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

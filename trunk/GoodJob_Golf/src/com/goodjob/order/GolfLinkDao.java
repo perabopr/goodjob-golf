@@ -258,8 +258,7 @@ public class GolfLinkDao {
 			QueryRunner qr = new QueryRunner();
 			qr.update(conn, MessageFormat.format(ORDER.update, tableName, setQuery), bind.toArray());
 
-			if((process_status.equals("0") || process_status.equals("1") || process_status.equals("3")) 
-					&& tableName.equals("tb_golflink_reserve"))
+			if(tableName.equals("tb_golflink_reserve"))
 			{
 				bind = new ArrayList<Object>();
 				bind.add(reserve_seq);
@@ -272,7 +271,7 @@ public class GolfLinkDao {
 						bind.add("0");	//(상품)예약가능
 					}else if(process_status.equals("0")){//(예약)예약대기
 						bind.add("1");	//(상품)예약중
-					}else if(process_status.equals("1")){//(예약)예약완료
+					}else if(process_status.equals("1") || process_status.equals("2")){//(예약)예약완료
 						bind.add("2");	//(상품)예약마감
 					}
 					bind.add(liSeq.get(0).getProductsub_seq());

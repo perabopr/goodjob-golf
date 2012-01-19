@@ -19,7 +19,16 @@ int gcId = NumberUtils.toInt(request.getParameter("gcId"),0);
 int golf = NumberUtils.toInt(request.getParameter("golf"),0);
 int date = NumberUtils.toInt(request.getParameter("date"),0);
 int cdate = NumberUtils.toInt(request.getParameter("cdate"),0);
-int couponSeq = NumberUtils.toInt(request.getParameter("ddlCoupon"),0);
+//int couponSeq = NumberUtils.toInt(request.getParameter("ddlCoupon"),0);
+String couponValue = StringUtils.trimToEmpty(request.getParameter("ddlCoupon"));
+String[] arrCouponValue = couponValue.split("/");
+int couponSeq = 0;
+try{
+	couponSeq  = NumberUtils.toInt(arrCouponValue[0]);
+}catch(Exception e){
+	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=1'</script>");
+	return;
+}
 
 if(menu == 0 || gcId == 0 || golf == 0 || date == 0 || cdate == 0){
 	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=1'</script>");

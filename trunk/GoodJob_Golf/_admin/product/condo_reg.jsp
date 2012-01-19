@@ -1,3 +1,4 @@
+<%@page import="com.goodjob.conf.Config"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
@@ -29,6 +30,8 @@ if(condoSeq > 0){
 		arrlist3 = cDao.getCondoRoomSelect(vcDto.getCondo_seq());
 	}
 }
+
+String up_dir = Config.get("reserve_dir");
 %>
 <html>
 <head>
@@ -151,7 +154,9 @@ function condoReg(){
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>목록이미지</span></td>
           <td bgcolor="white" style="padding-left:10px;">
           	<input type="hidden" name="txtimgmain" value="<%= vcDto.getImg_main() %>">
-          	<input class="upload" name="imgmain" type="file" size="55">(313x110) </td>
+          	<input class="upload" name="imgmain" type="file" size="55">(313x110) </br>
+          	<%= vcDto.getImg_main().length() > 0 && !vcDto.getImg_main().equals("null") ? up_dir + "/" + vcDto.getImg_main() : "" %>
+          </td>
         </tr>
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>주소</span></td>
@@ -319,8 +324,9 @@ function condoReg(){
 	        	<tr id="trgallery1">
 	        	<td>
 		        	<input type="hidden" name="condoimgseq1" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(0).getCondoimg_seq());} %>">
-		        	<input type="hidden" name="condoimg1" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(1).getCondo_img());} %>">
-		            <input class="upload" name="imggallery1" type="file" size="55">
+		        	<input type="hidden" name="condoimg1" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(0).getCondo_img());} %>">
+		            <input class="upload" name="imggallery1" type="file" size="55"></br>
+          			<%= arrlist2.get(0).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(0).getCondo_img() : "" %>
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('1');"> -->
 	        	</td>
 	        	</tr>
@@ -328,7 +334,8 @@ function condoReg(){
 	        	<td>
 		        	<input type="hidden" name="condoimgseq2" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(1).getCondoimg_seq());} %>">
 		        	<input type="hidden" name="condoimg2" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(1).getCondo_img());} %>">
-		            <input class="upload" name="imggallery2" type="file" size="55">
+		            <input class="upload" name="imggallery2" type="file" size="55"></br>
+          			<%= arrlist2.get(1).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(1).getCondo_img() : "" %>
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('2');"> -->
 	        	</td>
 	        	</tr>
@@ -336,7 +343,8 @@ function condoReg(){
 	        	<td>
 		        	<input type="hidden" name="condoimgseq3" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(2).getCondoimg_seq());} %>">
 		        	<input type="hidden" name="condoimg3" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(2).getCondo_img());} %>">
-		            <input class="upload" name="imggallery3" type="file" size="55">
+		            <input class="upload" name="imggallery3" type="file" size="55"></br>
+          			<%= arrlist2.get(2).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(2).getCondo_img() : "" %>
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('3');"> -->
 	        	</td>
 	        	</tr>
@@ -344,7 +352,8 @@ function condoReg(){
 	        	<td>
 		        	<input type="hidden" name="condoimgseq4" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(3).getCondoimg_seq());} %>">
 		        	<input type="hidden" name="condoimg4" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(3).getCondo_img());} %>">
-		            <input class="upload" name="imggallery4" type="file" size="55">
+		            <input class="upload" name="imggallery4" type="file" size="55"></br>
+          			<%= arrlist2.get(3).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(3).getCondo_img() : "" %>
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('4');"> -->
 	        	</td>
 	        	</tr>
@@ -352,7 +361,8 @@ function condoReg(){
 	        	<td>
 		        	<input type="hidden" name="condoimgseq5" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(4).getCondoimg_seq());} %>">
 		        	<input type="hidden" name="condoimg5" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(4).getCondo_img());} %>">
-		            <input class="upload" name="imggallery5" type="file" size="55">
+		            <input class="upload" name="imggallery5" type="file" size="55"></br>
+          			<%= arrlist2.get(4).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(4).getCondo_img() : "" %>
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('5');"> -->
 	        	</td>
 	        	</tr>

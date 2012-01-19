@@ -17,6 +17,7 @@ int menu = NumberUtils.toInt(request.getParameter("menu"),0);
 int seq = NumberUtils.toInt(request.getParameter("seq"),0);
 String msgtxt = new String((request.getParameter("msgtxt")).getBytes("8859_1"), "EUC-KR") ;
 String msgtime = request.getParameter("msgtime").replace("-",".");
+msgtime = msgtime.substring(5);
 
 if(menu == 1 || menu == 2){
 	GolfLinkDao glList = new GolfLinkDao();

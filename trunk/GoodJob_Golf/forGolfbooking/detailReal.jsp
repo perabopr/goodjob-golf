@@ -499,16 +499,16 @@ for (int i = 1; i < 15 ;i++){
 			<TD bgColor=white height=30 align=center>&nbsp;</TD>
 <%
 		}else if( Integer.parseInt(cYear + cMonth + cDay) < intNowDate 
-				|| cCnt == 0 || viewYn == "1"){
+				|| cCnt == 0 || viewYn.equals("1")){
 %>
 		<TD bgColor=white height=30 align=center>
-		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole_gray.gif" width=24 height=22 alt="마감">
+		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole_gray.gif" width=24 height=22 alt="마감/휴장">
 		</TD>
 <%
-		}else if(viewYn == "2"){
+		}else if(viewYn.equals("2")){
 %>
 		<TD bgColor=white height=30 align=center>
-		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole_gray.gif" width=24 height=22 alt="휴장">
+		<IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole_gray.gif" width=24 height=22 alt="마감/휴장">
 		</TD>
 <%
 		}else{

@@ -234,7 +234,7 @@ public class GolfLinkDao {
 				bind.add(glrDto.getReserve_uid());
 				bind.add(glrDto.getPer_num());
 				bind.add(glrDto.getReserve_phone());
-				bind.add(list.get(0).getNH_price() * Integer.parseInt(glrDto.getPer_num()));
+				bind.add(list.get(0).getNH_price() * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price());
 				bind.add(glrDto.getCoupon_price());
 				bind.add(glrDto.getProcess_status());
 				bind.add(glrDto.getCard_bill_num());

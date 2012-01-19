@@ -68,6 +68,32 @@ function billok(){
 		frm.submit();
 	}
 }
+
+function couponChange(){
+	var price;
+	var billprice = <%=buyPrice%>;
+	var tmpValue = $("#ddlCoupon").val();
+	var arrValue = tmpValue.split("/");
+	price = arrValue[1];
+	if(price.length > 0){
+		billprice = billprice - price;
+		price = commify(-price)+"원";
+		billprice = commify(billprice);
+	}else{
+		billprice = commify(billprice);
+	}
+	$("#billPrice").html(billprice);
+}
+
+function commify(n) {
+  var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
+  n += '';                          // 숫자를 문자열로 변환
+
+  while (reg.test(n))
+    n = n.replace(reg, '$1' + ',' + '$2');
+
+  return n;
+}
 //-->
 </script>
 <FORM NAME="exefrm" METHOD="post">
@@ -134,13 +160,17 @@ function billok(){
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>프리미엄상품권 적용</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white>
-	<SELECT size=1 id="ddlCoupon" name="ddlCoupon">
-	<OPTION value="0" selected>선택하세요</OPTION>
+	<SELECT size=1 id="ddlCoupon" name="ddlCoupon" onchange="couponChange();">
+	<OPTION value="0/" selected>선택하세요</OPTION>
 	<%
+	int selPrice = 0;
 	if(couponList != null){
 		for(int i = 0; i < couponList.size(); i++){
+			if(rCoupon==couponList.get(i).getCoupon_seq()){
+				selPrice = couponList.get(i).getSale_price();
+			}
 	%>
-		<option value="<%=couponList.get(i).getCoupon_seq() %>" <%= rCoupon==couponList.get(i).getCoupon_seq()?"selected":"" %>><%=couponList.get(i).getCoupon_name() %></option>
+		<option value="<%=couponList.get(i).getCoupon_seq() %>/<%=couponList.get(i).getSale_price() %>" <%= selPrice>0?"selected":"" %>><%=couponList.get(i).getCoupon_name()+"("+commify(couponList.get(i).getSale_price())+"원)" %></option>
 	<%
 		}
 	}
@@ -149,7 +179,7 @@ function billok(){
 </TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>결제예상금액</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange><%=commify(buyPrice) %></SPAN>원</TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange id="billPrice" name="billPrice"><%=commify(buyPrice-selPrice) %></SPAN>원</TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>요청사항</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=rRequest %></TD></TR></TBODY></TABLE></TD></TR>

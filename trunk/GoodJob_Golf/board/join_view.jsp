@@ -428,15 +428,6 @@
                                 </tr>
                               </table></td>
                           </tr>
-                          <tr>
-                            <td>&nbsp;</td>
-                          </tr>
-                          <tr>
-                            <td><script>flashObject("/images/swf/bottom_menu.swf","","751","27")</script></td>
-                          </tr>
-                          <tr>
-                            <td height="76"><img src="/images/common/img_copyright.gif" width="751" height="76"></td>
-                          </tr>
                         </table>
 					<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe> 
 					<!-- 하단  회사 소개 부분  -->

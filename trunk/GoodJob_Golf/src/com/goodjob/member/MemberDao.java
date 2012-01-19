@@ -109,6 +109,10 @@ public class MemberDao {
 				where = " where mem_id like concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
+			else if("mobile".equals(field) && keyword.length() > 0){
+				where = " where mem_mtel = ? " ;
+				bind.add(keyword);
+			}
 			else if("type".equals(field) && keyword.length() > 0){
 				where = " where mem_type = ? " ;
 				bind.add(keyword);
@@ -502,6 +506,30 @@ public class MemberDao {
 		}
 	}
 	
+	public MemberDto history(String mem_id){
+		
+		MemberDto mDto = null;
+		Connection conn = null;
+		
+		try {
+			
+			String[] bind = {mem_id};
+			conn = DBManager.getConnection();
+			
+			ResultSetHandler rsh = new BeanHandler(MemberDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			mDto = (MemberDto)qr.query(conn , MEMBER.history_count , rsh , bind);
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return mDto;
+	}
+
 	/**
 	 * SMS 회원 리스트
 	 * @param params
@@ -543,13 +571,15 @@ public class MemberDao {
 				bind.add(keyword);
 			}
 			else if("reserve".equals(field) && keyword.length() > 0){
-				having = " having reserve_cnt = ? " ;
+				having = " having count(reserve_uid) = ? " ;
 				bind.add(keyword);
 			}
 			
 			//페이징
 			bind.add(((npage-1)* per_page));
 			bind.add((npage*per_page));
+			
+			//System.out.println(MessageFormat.format(MEMBER.mem_sub_list,where,having));
 			
 			list = (List<MemberDto>) qr.query(conn , MessageFormat.format(MEMBER.mem_sub_list,where,having) , rsh , bind.toArray());
 			
@@ -570,7 +600,7 @@ public class MemberDao {
 		String field = StringUtils.defaultIfEmpty(params.get("field"), "");
 		String keyword = StringUtils.defaultIfEmpty(params.get("keyword"), "");
 		
-		
+		int total = 0;
 		try {
 			conn = DBManager.getConnection();
 			
@@ -583,11 +613,7 @@ public class MemberDao {
 			if("reserve".equals(field) && keyword.length() > 0){
 				bind.add(keyword);
 				map = (Map<String, Long>) qr.query(conn , MEMBER.mem_sub_total2 , rsh , bind.toArray());
-				
-				if(map == null){
-					map = new HashMap<String, Long>();
-					map.put("total", 0l);
-				}
+				total = NumberUtils.toInt(map.get("total")+"");
 			}
 			else{
 				
@@ -605,6 +631,10 @@ public class MemberDao {
 				}
 				
 				map = (Map<String, Long>) qr.query(conn , MessageFormat.format(MEMBER.mem_sub_total,where) , rsh , bind.toArray());
+				if(map == null)
+					total = 0;
+				else
+					total = NumberUtils.toInt(map.get("total")+"");
 			}
 			
 			
@@ -615,7 +645,7 @@ public class MemberDao {
 			DbUtils.closeQuietly(conn);
 		}
 
-		return NumberUtils.toInt(map.get("total")+"");
+		return total;
 	}
 	
 	public List<MemberDto> getMemTelList(String memSeq){

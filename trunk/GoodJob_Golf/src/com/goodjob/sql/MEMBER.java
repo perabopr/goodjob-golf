@@ -61,28 +61,24 @@ public class MEMBER {
 	
 	public static final String info_to_seq = " select mem_mtel , mem_name , mem_id , sms_yn , email_yn from tb_member where mem_seq in (%s) ";
 	
-	public static final String mem_sub_list = "SELECT a.mem_seq , a.mem_id , "+
+	public static final String mem_sub_list = "select a.mem_seq , a.mem_id , "+
 								"a.mem_name ,  "+
 								"date_format(a.reg_dt,''%Y-%m-%d'') reg_dt , "+ 
 								"a.mem_mtel ,  "+
 								"a.sms_yn , a.email_yn , "+
-								"count(b.mem_id) logon_cnt, "+ 
-								"date_format(max(b.reg_dt),''%Y-%m-%d'') last_dt , "+ 
-								"count(c.reserve_seq) reserve_cnt "+
-								"FROM tb_member a left outer join tb_logon_history b on a.mem_id=b.mem_id "+
-								"left outer join tb_golflink_reserve c on a.mem_id=c.reserve_uid " +
+								"count(b.reserve_uid) reserve_cnt "+
+								"from tb_member a left outer join tb_golflink_reserve b on a.mem_id=b.reserve_uid "+
 								" {0} " +
-								"GROUP BY a.mem_id, b.mem_id, c.reserve_uid {1} " + 
+								"group by a.mem_id, b.reserve_uid {1} " + 
 								"order by a.mem_seq desc limit ? , ? ";
 	
 	public static final String mem_sub_total = "SELECT count(*) total "+
-								"FROM tb_member a left outer join tb_logon_history b on a.mem_id=b.mem_id "+
-								"left outer join tb_golflink_reserve c on a.mem_id=c.reserve_uid " +
+								"from tb_member a left outer join tb_golflink_reserve b on a.mem_id=b.reserve_uid "+
 								" {0} " +
-								"GROUP BY a.mem_id, b.mem_id, c.reserve_uid ";
+								"group by a.mem_id, b.reserve_uid ";
 	
-	public static final String mem_sub_total2 = " SELECT ifnull(COUNT(mem_id),0) total FROM tb_member a left outer join tb_golflink_reserve c on a.mem_id=c.reserve_uid "+
-								" GROUP BY reserve_uid having count(reserve_seq) = ? "; 
+	public static final String mem_sub_total2 = " select ifnull(count(mem_id),0) total from tb_member a , tb_golflink_reserve c "+
+								" where a.mem_id=c.reserve_uid group by reserve_uid having count(reserve_seq) = ? "; 
 	
 	public static final String check = "SELECT auth_no,UNIX_TIMESTAMP(now())-send_date as diff FROM tb_email_auth where auth_no=? and email=? and use_yn='N' order by seq limit 1 ";
 	
@@ -90,4 +86,6 @@ public class MEMBER {
 	public static final String auth = "insert into tb_email_auth(email,auth_no,send_date) values (? , ? , UNIX_TIMESTAMP(now()))";
 	
 	public static final String auth_update = "update tb_email_auth set use_yn='Y' where email = ? ";
+	
+	public static final String history_count = "select count(mem_id) logon_cnt , max(reg_dt) last_dt from tb_logon_history where mem_id= ? ";
 }

@@ -43,10 +43,12 @@
 	cdDao.setCondoReserve(cdDto);
 	
 	/*--------------- 문자 발송 --------------*/
+	condo_name = condo_name.replace("(P)","").replace("(PAR3)","");
 	String message = "";
 	message += "[" + condo_name + "]";
+	in_date = in_date.substring(5,10).replace("-",".");
 	message += in_date;
-	message += "예약되셨습니다";
+	message += " 예약되셨습니다";
 	message += "(굿잡골프)";
 	String sphone = "02-6670-0202";
 	String reserveuid = user_Id;

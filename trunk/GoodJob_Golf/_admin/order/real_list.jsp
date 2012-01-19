@@ -1,3 +1,4 @@
+<%@page import="com.goodjob.util.Utils"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.goodjob.sql.ORDER"%>
@@ -114,9 +115,10 @@ function goPage(val){
           <td bgcolor="#e6e7e8" align="center" width="209"><span class=normal_b>부킹일시</span></td>
           <td bgcolor="#e6e7e8" align="center" width="216"><span class=normal_b>코스</span></td>
           <td bgcolor="#e6e7e8" align="center" width="167"><span class=normal_b>연락처</span></td>
+          <td align="center" bgcolor="#e6e7e8" width="114"><span class=normal_b>상품권</span></td>
           <td align="center" bgcolor="#e6e7e8" width="114"><span class=normal_b>입금액</span></td>
           <td align="center" bgcolor="#E6E7E8" width="163"><span class=normal_b>처리상태</span></td>
-          <td align="center" bgcolor="#E6E7E8" width="150"><span class=normal_b>SMS</span></td>
+          <td align="center" bgcolor="#E6E7E8" width="80"><span class=normal_b>SMS</span></td>
         </tr>
 <%
 if(list != null){
@@ -137,6 +139,7 @@ if(list != null){
           <td align="center" bgcolor="white"><%=vbookingDate %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getGolflink_course() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
+          <td align="right" bgcolor="white"><span class=blue><%=commify(list.get(i).getCoupon_price()) %> 원</span></td>
           <td align="right" bgcolor="white"><span class=orange><%=commify(list.get(i).getProduct_price()) %> 원</span></td>
           <td align="center" bgcolor="white"><select id="ddlStatus<%=list.get(i).getReserve_seq()%>" name="ddlStatus" size="1">
               <option value="0" <%=("0".equals(list.get(i).getProcess_status())?" selected":"")%>>예약대기</option>

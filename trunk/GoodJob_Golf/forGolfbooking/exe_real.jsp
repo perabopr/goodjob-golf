@@ -71,10 +71,12 @@ glDao.setGolfReserve(glrDto, cpDto);
 /*--------------- 문자 발송 --------------*/
 String bookingDate = request.getParameter("bookingDate");
 String golflinkName = request.getParameter("golflinkName");
+golflinkName = golflinkName.replace("(P)","").replace("(PAR3)","");
 String message = "";
 message += "[" + golflinkName + "]";
+bookingDate = bookingDate.substring(5,16).replace("-",".");
 message += bookingDate;
-message += "예약되셨습니다";
+message += " 예약되셨습니다";
 message += "(굿잡골프)";
 String sphone = "02-6670-0202";
 String reserveuid = user_Id;

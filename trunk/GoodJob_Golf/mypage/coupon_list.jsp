@@ -160,7 +160,7 @@ function goPage(val){
 																				<option value="code"<%=("code".equals(field)?" selected":"")%>>상품권번호</option>
 														              			<option value="price"<%=("price".equals(field)?" selected":"")%>>금액</option>
 														              			<option value="end_dt"<%=("end_dt".equals(field)?" selected":"")%>>유효기간</option>
-														              			<option value="use_dt"<%=("use_dt".equals(field)?" selected":"")%>>사용일</option>
+														              			<option value="used"<%=("used".equals(field)?" selected":"")%>>사용유무</option>
 															            	</select>
 																			<input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="20" class="input_01">
 															           		<a href="javascript:mypage_search();"><img src="/images/board/bt_search.gif" border="0" align="absmiddle"></a>
@@ -172,8 +172,11 @@ function goPage(val){
                                                                  </td>
                                                               </tr>
 															</form>
-                                                              <tr>
+															<tr>
                                                                 <td height="20"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td><b>상품권 유효 기간이 종료되어 더 이상 사용할 수 없는 상품권 내역입니다.</b></td>
                                                               </tr>
                                                               <%}else{ %>
                                                               <tr>
@@ -191,13 +194,13 @@ function goPage(val){
                                                                       <tr>
                                                                         <td bgcolor="white" align="center"><table border="0" width="100%" cellpadding="0" cellspacing="0">
                                                                             <tr>
-                                                                              <td height="30">&nbsp;</td>
+                                                                              <td height="20">&nbsp;</td>
                                                                             </tr>
                                                                             <tr>
                                                                               <td><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="#CCCCCC">
                                                                                   <tr>
                                                                                     <td bgcolor="#F1F1F1" align="center" height="25" class=normal_b width="104">상품권번호</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="92">쿠폰명</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="92">상품권</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="90">적용 골프장</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="70">상품권금액</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="167">제한사항</td>
@@ -215,7 +218,7 @@ function goPage(val){
 				%>
                                                                                   <tr>
                                                                                     <td bgcolor="white" align="center" class=normal height="30"><p><%=cpDto.getCoupon_code()%></p></td>
-                                                                                    <td bgcolor="white" align="center" class=normal>프리미엄 쿠폰</td>
+                                                                                    <td bgcolor="white" align="center" class=normal>프리미엄 상품권</td>
                                                                                     <td bgcolor="white" align="center" class=normal><%=myDao.getGolflinkName(cpDto.getMenu_seq(),cpDto.getReserve_seq())%></td>
                                                                                     <td bgcolor="white" align="center" class=orange><%=Utils.numberFormat(cpDto.getSale_price())%>원</td>
                                                                                     <td bgcolor="white" align="center" class=normal>실시간/사전신청 예약시 적용</td>
@@ -223,9 +226,9 @@ function goPage(val){
                                                                                     <td bgcolor="white" align="center">
                                                                                     <%
                                                                                     if(cpDto.getReserve_seq()==0 && "now".equals(type))
-                                                                                    	out.println("<span class=blue>가능</span>");
+                                                                                    	out.println("<span class=blue>사용</span>");
                                                                                     else
-                                                                                    	out.println("<span class=red>불가능</span>");
+                                                                                    	out.println("<span class=red>미사용</span>");
                                                                                     %>
                                                                                     </td>
                                                                                   </tr>

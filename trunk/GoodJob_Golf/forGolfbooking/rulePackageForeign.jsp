@@ -172,7 +172,7 @@ function reserveAgree(){
 <TD style="PADDING-RIGHT: 40px" align=right><INPUT id="chkAgree3" value="" type=checkbox> 이용약관에 동의합니다 </TD>
 </TR>
 <TR>
-<TD style="PADDING-BOTTOM: 30px; PADDING-TOP: 30px" align=center><A href="javascript:;" onclick="reserveAgree();"><IMG border=0 src="../../images/common/btn_regist_booking2.gif"></A></TD>
+<TD style="PADDING-BOTTOM: 30px; PADDING-TOP: 30px" align=center><A href="javascript:;" onclick="reserveAgree();"><IMG border=0 src="../../images/package/btn_domestic_regist3.gif"></A></TD>
 </TR>
 </TBODY>
 </TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>

@@ -28,7 +28,16 @@ String rName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
 String rPhone = StringUtils.trimToEmpty(request.getParameter("reservePhone"));
 String rEmail = StringUtils.trimToEmpty(request.getParameter("reserveEmail"));
 String rRequest = StringUtils.trimToEmpty(request.getParameter("reserveRequest"));
-int couponSeq = NumberUtils.toInt(request.getParameter("ddlCoupon"),0);
+//int couponSeq = NumberUtils.toInt(request.getParameter("ddlCoupon"),0);
+String couponValue = StringUtils.trimToEmpty(request.getParameter("ddlCoupon"));
+String[] arrCouponValue = couponValue.split("/");
+int couponSeq = 0;
+try{
+	couponSeq  = NumberUtils.toInt(arrCouponValue[0]);
+}catch(Exception e){
+	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=1'</script>");
+	return;
+}
 
 if(menu == 0 || psId == 0 || golf == 0 || date == 0 || cdate == 0 || rCnt == 0 || rTeam == 0){
 	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=2';</script>");
@@ -81,7 +90,7 @@ String golflinkName = request.getParameter("golflinkName");
 String message = "";
 message += "[" + golflinkName + "]";
 message += bookingDate;
-message += "예약되셨습니다";
+message += "예약신청되셨습니다";
 message += "(굿잡골프)";
 String sphone = "02-6670-0202";
 String reserveuid = user_Id;

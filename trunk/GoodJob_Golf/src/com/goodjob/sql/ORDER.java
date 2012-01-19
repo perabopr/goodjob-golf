@@ -177,7 +177,7 @@ public class ORDER {
 			",reserve_name " +
 			",reserve_uid " +
 			",reserve_phone " +
-			",package_name1+'+'+package_name2 " +
+			",CASE package_name2 WHEN '' THEN package_name1 ELSE CONCAT(package_name1 , '+' , package_name2) END " +
 			",tour_date " +
 			",process_status " + 
 		"FROM tb_package_reserve " +

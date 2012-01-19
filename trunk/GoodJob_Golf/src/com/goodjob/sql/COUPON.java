@@ -14,6 +14,21 @@ public class COUPON {
 			",reg_date " +
 			",use_date " +
 		"FROM tb_coupon " +
+		"WHERE coupon_code = ? ";
+	
+	public static final String chkCouponReg2
+	=	"SELECT " +
+			" coupon_seq " +
+			",coupon_name " +
+			",coupon_type " +
+			",coupon_code " +
+			",sale_price " +
+			",expiredate_start " +
+			",expiredate_end " +
+			",reg_user " +
+			",reg_date " +
+			",use_date " +
+		"FROM tb_coupon " +
 		"WHERE coupon_code = ? " +
 			"AND expiredate_end >= date_format(now(),''%Y-%m-%d'')";
 	

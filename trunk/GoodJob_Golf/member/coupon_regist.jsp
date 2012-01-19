@@ -13,6 +13,11 @@
 <script type="text/javascript">
 	function couponreg(){
 		var cp = $("#couponCode").val();
+		if(cp.replace(" ","").length == 0){
+			alert("상품권번호를 입력해 주시기 바랍니다");
+			return;
+		}
+			
 		$.ajax({
 		  url: "/member/ajax_couponCheck.jsp?couponcode="+cp,
 		  cache: false,
@@ -22,12 +27,14 @@
 			if(evalData.CouponCode.length == 1){
 				var msgStr = "";
 				if(evalData.CouponCode[0].rv == "0"){
-					alert("쿠폰이 없습니다.");
+					alert("정확한 상품권 번호를 입력해 주시기 바랍니다.");
 				}else if(evalData.CouponCode[0].rv == "1"){
 					alert("등록 되었습니다.");
 					$("#couponCode").val('');
 				}else if(evalData.CouponCode[0].rv == "2"){
 					alert("이미 등록된 쿠폰입니다.");
+				}else if(evalData.CouponCode[0].rv == "3"){
+					alert("유효기간이 지난 상품권번호입니다.”");
 				}
 			}
 		  }

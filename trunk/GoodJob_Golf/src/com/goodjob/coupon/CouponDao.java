@@ -27,7 +27,7 @@ public class CouponDao {
 	/**
 	 * 
 	 * @param cCode
-	 * @return 0:코드없음, 1:코드등록완료, 2:등록된코드
+	 * @return 0:코드없음, 1:코드등록완료, 2:등록된코드, 3:유효기간지난코드
 	 */
 	public int chkCouponReg(String cCode, String userId){
 		List<CouponDto> list = null;
@@ -49,13 +49,18 @@ public class CouponDao {
 			if(list.size() == 0){
 				return 0;
 			}else{
-				if(list.get(0).getReg_user() == null){
-					bind = new ArrayList<Object>();
-					bind.add(userId);
-					bind.add(list.get(0).getCoupon_seq());
-					qr.update(conn, COUPON.coupon_update , bind.toArray());
-				}else{	
-					return 2;
+				list = (List<CouponDto>) qr.query(conn , MessageFormat.format(COUPON.chkCouponReg2, strQuery), rsh , bind.toArray());
+				if(list.size() == 0){
+					return 3;
+				}else{
+					if(list.get(0).getReg_user() == null){
+						bind = new ArrayList<Object>();
+						bind.add(userId);
+						bind.add(list.get(0).getCoupon_seq());
+						qr.update(conn, COUPON.coupon_update , bind.toArray());
+					}else{	
+						return 2;
+					}
 				}
 			}
 		} catch (Exception e) {

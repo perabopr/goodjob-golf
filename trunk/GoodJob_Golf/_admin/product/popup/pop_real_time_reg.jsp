@@ -123,13 +123,15 @@ function StatusModify(sDate, status){
 		if(evalData.Product.length == 1){
 			var msgStr = "";
 			if(evalData.Product[0].c == "1"){
-				alert("마감 되었습니다.");
+				//alert("마감 되었습니다.");
 				$("#date"+evalData.Product[0].b).prev().html("예약마감");
+				$("#date"+evalData.Product[0].b).prev().parent().find("span").attr("class", "regist_no");
 			}else if(evalData.Product[0].c == "2"){
-				alert("휴장 되었습니다.");
+				//alert("휴장 되었습니다.");
 				$("#date"+evalData.Product[0].b).prev().html("휴장");
+				$("#date"+evalData.Product[0].b).prev().parent().find("span").attr("class", "regist_no");
 			}else if(evalData.Product[0].c == "Y"){
-				alert("예약가능 하게 되었습니다.");
+				//alert("예약가능 하게 되었습니다.");
 				$("#date"+evalData.Product[0].b).prev().html("예약가능");
 				$("#date"+evalData.Product[0].b).prev().parent().find("span").attr("class", "regist_yes");
 			}
@@ -151,7 +153,7 @@ function selSetting(sDate){
 		  success: function(html){
 			var evalData = eval("("+html+")");
 			if(evalData.Product.length == 1){
-				alert("예약가능 하게 되었습니다.");
+				//alert("예약가능 하게 되었습니다.");
 				$("#date"+evalData.Product[0].b).prev().html("예약가능");
 				$("#date"+evalData.Product[0].b).prev().parent().find("span").attr("class", "regist_yes");
 				$("#prdtseq").val(evalData.Product[0].a);
@@ -160,7 +162,9 @@ function selSetting(sDate){
 		});
 	}else{
 		if($("#date"+sDate.replace("/","").replace("/","")).prev().html() != "예약가능"){
-			StatusModify(selDate, "Y");	
+			$("#date"+sDate.replace("/","").replace("/","")).prev().html("예약가능");
+			$("#date"+sDate.replace("/","").replace("/","")).prev().attr("class", "regist_yes");
+			//StatusModify(selDate, "N");	
 		}			
 		$("#prdtseq").val(prdtseq);
 	}
@@ -554,4 +558,3 @@ String.prototype.trim = function(){
 </table>
 </body>
 </html>
-<script>selSetting(selDate);</script>

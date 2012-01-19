@@ -87,10 +87,12 @@ if(prList.size() != 1){
 /*--------------- 문자 발송 --------------*/
 String bookingDate = request.getParameter("bookingDate");
 String golflinkName = request.getParameter("golflinkName");
+golflinkName = golflinkName.replace("(P)","").replace("(PAR3)","");
 String message = "";
 message += "[" + golflinkName + "]";
+bookingDate = bookingDate.substring(5,10).replace("-",".");
 message += bookingDate;
-message += "예약신청되셨습니다";
+message += " 예약신청되셨습니다";
 message += "(굿잡골프)";
 String sphone = "02-6670-0202";
 String reserveuid = user_Id;

@@ -39,10 +39,12 @@ PackageDao pkDao = new PackageDao();
 pkDao.setPackageReserve(prDto);
 
 /*--------------- 문자 발송 --------------*/
+packageName = packageName.replace("(P)","").replace("(PAR3)","");
 String message = "";
 message += "[" + packageName + "]";
+reserveDate = reserveDate.substring(5,10).replace("-",".");
 message += reserveDate;
-message += "예약신청되셨습니다";
+message += " 예약신청되셨습니다";
 message += "(굿잡골프)";
 String sphone = "02-6670-0202";
 String reserveuid = user_Id;

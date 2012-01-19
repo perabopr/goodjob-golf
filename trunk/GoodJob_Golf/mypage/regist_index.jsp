@@ -184,8 +184,8 @@ function mypage_search() {
                                                                             <tr>
                                                                               <td><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="#CCCCCC">
                                                                                   <tr>
-                                                                                    <td bgcolor="#F1F1F1" align="center" height="25" class=normal_b width="70">신청일</td>
-                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="94">부킹일</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" height="25" class=normal_b width="70">예약신청일</td>
+                                                                                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="94">부킹날짜/시간</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="158">골프장명</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="50">코스</td>
                                                                                     <td bgcolor="#F1F1F1" align="center" class=normal_b width="50">상품권</td>
@@ -249,7 +249,7 @@ function mypage_search() {
 														                    <td width="100" bgcolor="#F1F1F1" align="center" class=normal_b>투어예정일</td>
 														                    <td width="80" bgcolor="#F1F1F1" align="center" class=normal_b>예약금</td>
 														                    <td width="80" bgcolor="#F1F1F1" align="center" class=normal_b>잔액금 </td>
-														                    <td width="80" bgcolor="#F1F1F1" align="center" class=normal_b>인원</td>
+														                    <td width="80" bgcolor="#F1F1F1" align="center" class=normal_b>인원/팀</td>
 														                    <td width="100" bgcolor="#F1F1F1" align="center" class=normal_b>처리상태 </td>
 														                </tr>
 																	<%

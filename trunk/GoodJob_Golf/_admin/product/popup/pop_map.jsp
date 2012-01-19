@@ -18,7 +18,7 @@ String mapkey = Config.get("mapkeyAdmin");
 <div id="map" style="border:1px solid #000;"></div>
 <script type="text/javascript">
 		var oSeoulCityPoint = new nhn.api.map.LatLng(<%=x%>, <%=y%>);
-		var defaultLevel = 11;
+		var defaultLevel = 7;
 		var oMap = new nhn.api.map.Map(document.getElementById('map'), { 
 						point : oSeoulCityPoint,
 						zoom : defaultLevel,

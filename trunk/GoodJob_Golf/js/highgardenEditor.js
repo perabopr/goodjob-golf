@@ -84,7 +84,8 @@ function HighEditor(oldTxtArea, mode){
   this.iconSet["simple"] = ['fontsize', 'bold', 'underline', 'italic', 'StrikeThrough', 'ForeColor', 'BackColor', '-',
                           'justifyleft', 'justifycenter', 'justifyright', 'justifyfull', '-',
                           'removeformat', '-',
-                          'emoticon', 'letter'
+                          'emoticon', 'letter',
+                          'attachimage', '-'
                           ];
 
   this.fontsize = ['1', '2', '3', '4', '5', '6'];
@@ -832,23 +833,23 @@ attachImage = function(ifrmObjId){
   createlinkHtml += '<input type="button" style="border:1px solid #b5b5b5;width:50px;background:#fbfbfb;color:#757575;font-weight:bold;" value="삽입" onmousedown="attachImage_local(\'' + ifrmObjId + '\');" />';
   createlinkHtml += '</div>';
   createlinkHtml += '</div>';
-  createlinkHtml += '<div style="padding-top:8px;padding-bottom:5px;padding-left:5px;padding-right:5px;">';
-  createlinkHtml += '<span style="margin-right:10px; font-size:12px; color:#757575;"><b>URL 이미지 삽입</b>';
-  createlinkHtml += '</span>';
-  createlinkHtml += '</div>';
-  createlinkHtml += '<div id="attachImage_url" style="width:250px;height:45px;padding:6px;border:1px solid #e5e5e5;background:#ffffff">';
-  createlinkHtml += '<input type="text" id="high_attachImage_url" style="width:148px;"><input style="font-size:13px;color:#000000;width:98px;" type="button" value="미리보기..." onclick="attachImage_preview(document.getElementById(\'high_attachImage_url\').value);">';
-  createlinkHtml += '<div style="padding-top:3px;text-align:right;">';
-  createlinkHtml += '<input type="button" style="border:1px solid #b5b5b5;width:50px;background:#fbfbfb;color:#757575;font-weight:bold;" value="삽입" onmousedown="attachImage_insertURL(document.getElementById(\'high_attachImage_url\').value, \'' + ifrmObjId + '\')" />';
-  createlinkHtml += '</div>';
-  createlinkHtml += '</div>';
-  createlinkHtml += '<div style="padding-top:8px;padding-bottom:5px;padding-left:5px;padding-right:5px;text-align:center;">';
-  createlinkHtml += '<span style="margin-right:10px; font-size:12px; color:#757575;text-align:center;">미리보기';
-  createlinkHtml += '</span>';
-  createlinkHtml += '</div>';
-  createlinkHtml += '<div id="preview" style="width:250px;height:180px;padding:6px;border:1px solid #e5e5e5;background:#ffffff;text-align:center;vertical-align:middle;font-size:12px;color:#757575;">';
-  createlinkHtml += 'URL 이미지 삽입만 지원합니다.';
-  createlinkHtml += '</div>';
+  //createlinkHtml += '<div style="padding-top:8px;padding-bottom:5px;padding-left:5px;padding-right:5px;">';
+  //createlinkHtml += '<span style="margin-right:10px; font-size:12px; color:#757575;"><b>URL 이미지 삽입</b>';
+  //createlinkHtml += '</span>';
+  //createlinkHtml += '</div>';
+  //createlinkHtml += '<div id="attachImage_url" style="width:250px;height:45px;padding:6px;border:1px solid #e5e5e5;background:#ffffff">';
+  //createlinkHtml += '<input type="text" id="high_attachImage_url" style="width:148px;"><input style="font-size:13px;color:#000000;width:98px;" type="button" value="미리보기..." onclick="attachImage_preview(document.getElementById(\'high_attachImage_url\').value);">';
+  //createlinkHtml += '<div style="padding-top:3px;text-align:right;">';
+  //createlinkHtml += '<input type="button" style="border:1px solid #b5b5b5;width:50px;background:#fbfbfb;color:#757575;font-weight:bold;" value="삽입" onmousedown="attachImage_insertURL(document.getElementById(\'high_attachImage_url\').value, \'' + ifrmObjId + '\')" />';
+  //createlinkHtml += '</div>';
+  //createlinkHtml += '</div>';
+  //createlinkHtml += '<div style="padding-top:8px;padding-bottom:5px;padding-left:5px;padding-right:5px;text-align:center;">';
+  //createlinkHtml += '<span style="margin-right:10px; font-size:12px; color:#757575;text-align:center;">미리보기';
+  //createlinkHtml += '</span>';
+  //createlinkHtml += '</div>';
+  //createlinkHtml += '<div id="preview" style="width:250px;height:180px;padding:6px;border:1px solid #e5e5e5;background:#ffffff;text-align:center;vertical-align:middle;font-size:12px;color:#757575;">';
+  //createlinkHtml += 'URL 이미지 삽입만 지원합니다.';
+  //createlinkHtml += '</div>';
   createlinkHtml += '</div>';
   return createlinkHtml;
 }
@@ -876,7 +877,7 @@ attachImageForm = function(ifrmObjId){
   attachImageFrmDoc.write("body,p{margin:0px; font-family:'돋움'; font-size:12px; line-height: 20px;}");
   attachImageFrmDoc.write("</style></head>");
   attachImageFrmDoc.write("<body style='width:100px;'>");
-  attachImageFrmDoc.write("      <form name='attachImage_form' method='post' action='" + editor.editorRoot + "/attach_image.jsp'  enctype='multipart/form-data'>");
+  attachImageFrmDoc.write("      <form name='attachImage_form' method='post' action='/common/attach_image.jsp'  enctype='multipart/form-data'>");
   attachImageFrmDoc.write("        <input name='high_attachImage' id='high_attachImage' type='file' />");
   attachImageFrmDoc.write("      </form>");
   attachImageFrmDoc.write("</body>");
@@ -897,7 +898,7 @@ attachImage_insertURL = function(value, ifrmObjId){
 attachImage_local = function(ifrmObjId){
   var value = document.getElementById(ifrmObjId + "_attachimage").contentWindow.document.getElementById("high_attachImage").value;
   if (/(\.gif|\.jpg|\.jpeg)$/i.test(value) == false) { alert("잘못된 이미지 화일명입니다."); return; }
-  document.getElementById(ifrmObjId + "_attachimage").contentWindow.document.forms[0].action = editor.editorRoot + "/attach_image.jsp?editor_upload=" + editor.editorUploadDir + "&ifrmObjId=" + ifrmObjId;
+  document.getElementById(ifrmObjId + "_attachimage").contentWindow.document.forms[0].action = "/common/attach_image.jsp?editor_upload=" + editor.editorUploadDir + "&ifrmObjId=" + ifrmObjId;
   document.getElementById(ifrmObjId + "_attachimage").contentWindow.document.forms[0].submit();
 }
 

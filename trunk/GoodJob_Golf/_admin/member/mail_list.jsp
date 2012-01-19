@@ -29,8 +29,12 @@
 	List<MemberDto> mList = mDao.getMemSubList(params);
 	
 	int totalMemCount = mDao.getTotalMember();
+	int totalCount = 0;
 	
-	int totalCount = mDao.getMemSubTotal(params);
+	if("reserve".equals(field))
+		totalCount = mDao.getMemSubTotal(params);
+	else
+		totalCount = mDao.getTotalMember(params);
 	
 	String strPage = paging.getPaging(totalCount, false);
 %>
@@ -189,8 +193,11 @@ function perPage(){
 	int mSize = mList.size();
 
 	MemberDto mDto;
+	MemberDto tmp;
+
 	for(int i = 0 ; i < mSize ; i++){ 
 		mDto = mList.get(i);
+		tmp = mDao.history(mDto.getMem_id());
 %>
               <tr>
                 <td bgcolor="white" align="center" height="25">
@@ -199,9 +206,9 @@ function perPage(){
                 </td>
                 <td height="25" align="center" bgcolor="white"><%=mDto.getMem_name()%></td>
                 <td align="center" bgcolor="white"><%=mDto.getMem_id()%></td>
-                <td align="center" bgcolor="white"><%=mDto.getLogon_cnt()%>회</td>
+                <td align="center" bgcolor="white"><%=tmp.getLogon_cnt()%>회</td>
                 <td align="center" bgcolor="white"><%=mDto.getReg_dt()%></td>
-                <td align="center" bgcolor="white"><%=StringUtils.defaultString(mDto.getLast_dt(),"미로그인")%></td>
+                <td align="center" bgcolor="white"><%=StringUtils.defaultString(tmp.getLast_dt(),"미로그인")%></td>
                 <td align="center" bgcolor="white"><%=mDto.getReserve_cnt()%>회</td>
                 <td align="center" bgcolor="white"><%=StringUtils.trimToEmpty(mDto.getMem_mtel())%></td>
                 <td align="center" bgcolor="white"><%=("Y".equals(mDto.getEmail_yn())?"수신":"비수신")%></td>

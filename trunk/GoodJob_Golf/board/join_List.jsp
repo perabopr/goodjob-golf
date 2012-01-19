@@ -192,9 +192,6 @@ function go_view(val){
                                 </tr>
                               </table></td>
                           </tr>
-                          <tr>
-                            <td>&nbsp;</td>
-                          </tr>
                         </table>
 					
 					<!-- 하단  회사 소개 부분  -->

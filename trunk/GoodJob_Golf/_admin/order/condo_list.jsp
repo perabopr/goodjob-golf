@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.goodjob.util.Utils"%>
 <%@page import="com.goodjob.order.dto.CondoDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.order.CondoDao"%>
@@ -8,7 +10,7 @@
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%
 String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
 String field = StringUtils.trimToEmpty(request.getParameter("field"));
@@ -198,7 +200,7 @@ if(list != null){
               </select>
               <img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateStatus('<%=list.get(i).getReserve_seq()%>');"></td>
           <td align="center" bgcolor="white">
-          	<img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=5&seq=<%=list.get(i).getReserve_seq()%>','name','740','350','yes');return false;">
+          	<img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=5&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=Utils.encoder(list.get(i).getCondo_name())%>&msgtime=<%=inDate%>&per_room=<%=list.get(i).getRoom_num()%>','name','740','350','yes');return false;">
 		  </td>
                 </tr>
 <%

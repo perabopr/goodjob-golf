@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
@@ -98,7 +98,7 @@ function goPage(val){
           <td align="center" bgcolor="white"><%=dto.getEmail()%></td>
           <td align="center" bgcolor="white"><%=dto.getMobile()%></td>
           <td align="center" bgcolor="white"><a href="partnership_detail.jsp?seq=<%=dto.getSeq()%>" onClick="NewWindow(this.href,'name','740','450','yes');return false;"><img align="absmiddle" src="/_admin/images/common/btn_detail.gif" width="75" height="22" border="0"></a></td>
-          <td align="center" bgcolor="white"><a href="download.jsp?fileName=<%=Utils.getEncoder("/bbs_upload/"+dto.getFilename())%>" target="_blank"><img src="/_admin/images/common/btn_download.gif" width="75" height="22" border="0"></a></td>
+          <td align="center" bgcolor="white"><a href="download.jsp?fileName=<%=Utils.encoder(dto.getFilename())%>" target="_blank"><img src="/_admin/images/common/btn_download.gif" width="75" height="22" border="0"></a></td>
         </tr>
 <%
 		}

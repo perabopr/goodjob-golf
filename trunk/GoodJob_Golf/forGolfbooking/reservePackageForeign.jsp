@@ -36,6 +36,17 @@ List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 		<P>&nbsp;</P></TD></TR>
 		<TR>
 		<TD align=center>
+		<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
+			<TR>
+			<TD height=50 align=center></TD>
+			</TR>
+			<TR>
+			<TD style="PADDING-RIGHT: 18px" height=30 align=center>
+			<img src="/images/package/img_ready.gif" border="0"/>
+			</TD>
+			</TR>
+		</TABLE>
+		<!--
 			<TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
 			<TBODY>
 			<TR>
@@ -140,6 +151,8 @@ if(pkList.size() > 0){
 	}
 }
 %>
-			</TBODY></TABLE></TD></TR>
+			</TBODY></TABLE>
+			-->
+			</TD></TR>
 		<TR>
 		<TD align=center>&nbsp;</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>

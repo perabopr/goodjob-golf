@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*" %>
 <%@ page import="java.io.*" %>
 <%@page import="com.goodjob.util.Utils"%>
@@ -17,11 +17,11 @@ private void dumpFile(File realFile, OutputStream outputstream) {
 }
 %>
 <%
-String fileName = Utils.getDecoder(request.getParameter("fileName"));
+	String fileName = Utils.decoder(request.getParameter("fileName"));
 
 try {
 	String rootPath = getServletConfig().getServletContext()
-			.getRealPath("/");
+	.getRealPath("/");
 	// String rootPath = request.getRealPath("/");
 	String filePath = rootPath + File.separator + fileName;
 	java.io.File tempFile = new java.io.File(filePath);
@@ -43,8 +43,8 @@ try {
 
 	try {
 		if (!tempFile.exists() || !tempFile.canRead()) {
-			out.println("<script>alert('File Not Found');history.back();</script>");
-			return;
+	out.println("<script>alert('File Not Found');history.back();</script>");
+	return;
 		}
 	} catch (Exception e) {
 		out.println("<script>alert('File Not Found');history.back();</script>");
@@ -58,20 +58,20 @@ try {
 	if (flag) {
 		response.setHeader("Content-Encoding", "gzip");
 		response.setHeader("Content-disposition",
-				"attachment;filename=" + fileName);
+		"attachment;filename=" + fileName);
 		javax.servlet.ServletOutputStream servletoutputstream = response
-				.getOutputStream();
+		.getOutputStream();
 		java.util.zip.GZIPOutputStream gzipoutputstream = new java.util.zip.GZIPOutputStream(
-				servletoutputstream);
+		servletoutputstream);
 		dumpFile(tempFile, gzipoutputstream);
 		gzipoutputstream.close();
 		servletoutputstream.close();
 	} else {
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-disposition",
-				"attachment;filename=" + fileName);
+		"attachment;filename=" + fileName);
 		javax.servlet.ServletOutputStream servletoutputstream1 = response
-				.getOutputStream();
+		.getOutputStream();
 		dumpFile(tempFile, servletoutputstream1);
 		servletoutputstream1.flush();
 		servletoutputstream1.close();

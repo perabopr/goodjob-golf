@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
 
 /**
  * @author Administrator
@@ -150,7 +151,7 @@ public class Utils {
 	 * @param str
 	 * @return String
 	 */
-	public static String getEncoder(String str){
+	public static String encoder(String str){
 		try{
 			str = URLEncoder.encode(str, "utf-8");
 		}catch(Exception e){}
@@ -163,7 +164,7 @@ public class Utils {
 	 * @param str
 	 * @return String
 	 */
-	public static String getDecoder(String str){
+	public static String decoder(String str){
 		try{
 			str = URLDecoder.decode(str, "utf-8");
 		}catch(Exception e){}
@@ -207,5 +208,42 @@ public class Utils {
 				return true;
 		}
 		return false;
+	}
+	
+	public static String getWeekName(String year , String month , String days){
+		
+		String week = "";
+		Calendar cal= Calendar.getInstance ();
+	    
+	    cal.set(Calendar.YEAR, NumberUtils.toInt(year));
+	    cal.set(Calendar.MONTH, NumberUtils.toInt(month)-1);
+	    cal.set(Calendar.DATE, NumberUtils.toInt(days));
+	    
+	    
+	    switch (cal.get(Calendar.DAY_OF_WEEK)){
+	    case 1:
+	    	week = "(일)";
+	        break;
+	    case 2:
+	        week = "(월)";
+	        break;
+	    case 3:
+	        week = "(화)";
+	        break;
+	    case 4:
+	        week = "(수)";
+	        break;
+	    case 5:
+	        week = "(목)";
+	        break;
+	    case 6:
+	        week = "(금)";
+	        break;
+	    case 7:
+	        week = "(토)";
+	        break;
+	    }
+	    
+	    return week;
 	}
 }

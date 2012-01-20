@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.goodjob.util.Utils"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -10,7 +11,6 @@
 <%@page import="com.goodjob.order.dto.GolfLinkDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.order.GolfLinkDao"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
 String field = StringUtils.trimToEmpty(request.getParameter("field"));
@@ -149,7 +149,7 @@ if(list != null){
             </select>
             <img src="../images/common/btn_save2.gif" width="32" height="16" border="0" align="absmiddle" style="cursor:pointer" onclick="updateStatus('<%=list.get(i).getReserve_seq()%>');"></td>
           <td align="center" bgcolor="white">
-	          <img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=1&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=URLEncoder.encode(list.get(i).getGolflink_name()) %>&msgtime=<%=vbookingDate %>','name','740','350','yes');return false;">
+	          <img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=1&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=Utils.encoder(list.get(i).getGolflink_name())%>&msgtime=<%=vbookingDate %>','name','740','350','yes');return false;">
           </td>
         </tr>
 <%

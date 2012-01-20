@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.goodjob.util.Utils"%>
 <%@page import="com.goodjob.order.dto.CondoDto"%>
 <%@page import="com.goodjob.order.CondoDao"%>
@@ -7,19 +8,39 @@
 <%@page import="com.goodjob.order.dto.GolfLinkDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.order.GolfLinkDao"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.sms.SMSDao"%>
 <%
+
+request.setCharacterEncoding("UTF-8");
+
 String reservename = "";
 String reservephone = "";
  
 int menu = NumberUtils.toInt(request.getParameter("menu"),0);
 int seq = NumberUtils.toInt(request.getParameter("seq"),0);
 
-String msgtxt = new String((request.getParameter("msgtxt")).getBytes("8859_1"), "EUC-KR") ;
-String msgtime = request.getParameter("msgtime").replace("-",".");
+String msgtxt = Utils.decoder(StringUtils.trimToEmpty(request.getParameter("msgtxt")));
+String msgtime = StringUtils.trimToEmpty(request.getParameter("msgtime")).replaceAll("-",".");
+int per_room = NumberUtils.toInt(request.getParameter("per_room"),0);
 msgtime = msgtime.substring(5);
+
+
+//요일구하기
+String weekName = ""; 
+if(StringUtils.trimToEmpty(request.getParameter("msgtime")).length() >= 10){
+	String tmp[] = StringUtils.trimToEmpty(request.getParameter("msgtime")).substring(0,10).split("-");
+	weekName = Utils.getWeekName(tmp[0],tmp[1],tmp[2]);
+}
+
+if(menu == 5){
+	msgtime +=" " + weekName;
+	msgtime +=" " + (per_room>1?per_room-1+"박":per_room+"일");
+}
+else{
+	msgtime +=" " +  weekName;
+	
+}
 
 if(menu == 1 || menu == 2){
 	GolfLinkDao glList = new GolfLinkDao();
@@ -105,11 +126,11 @@ SMSDao sDao = new SMSDao();
 	}
 
 	var menu = new Array(5);
-	menu[0] = "[<%=msgtxt%>] <%=msgtime%> 예약되셨습니다.(굿잡골프)";
-	menu[1] = "[<%=msgtxt%>] <%=msgtime%> 예약. 입금 확인되셨습니다.(굿잡골프)";
-	menu[2] = "[<%=msgtxt%>] <%=msgtime%> (굿잡골프)	";
-	menu[3] = "[<%=msgtxt%>] <%=msgtime%> 예약취소 되셨습니다.(굿잡골프)";
-	menu[4] = "[<%=msgtxt%>] <%=msgtime%> 로 변경처리 되셨습니다.(굿잡골프)";
+	menu[0] = "[<%=msgtxt%>] <%=msgtime%> 예약되셨습니다.\n(굿잡골프)";
+	menu[1] = "[<%=msgtxt%>] <%=msgtime%> 예약. 입금 확인되셨습니다.\n(굿잡골프)";
+	menu[2] = "[<%=msgtxt%>] <%=msgtime%> \n(굿잡골프)	";
+	menu[3] = "[<%=msgtxt%>] <%=msgtime%> 예약취소 되셨습니다.\n(굿잡골프)";
+	menu[4] = "[<%=msgtxt%>] <%=msgtime%> 로 변경처리 되셨습니다.\n(굿잡골프)";
 			
 	function changeText(txtMsg){
 		$("#message").val(menu[txtMsg]);

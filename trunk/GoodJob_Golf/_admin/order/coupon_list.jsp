@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.goodjob.util.Utils"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@ page import="java.util.*"%>
-<%@page import="com.goodjob.util.Utils"%>
 <%@ page import="com.goodjob.member.*"%>
 <%@page import="com.goodjob.util.PageNavigater"%>
 <%@page import="com.goodjob.coupon.CouponDao"%>

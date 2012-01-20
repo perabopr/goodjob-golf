@@ -1,4 +1,5 @@
-<%@page import="java.net.URLEncoder"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.goodjob.util.Utils"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.goodjob.sql.ORDER"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
@@ -9,7 +10,6 @@
 <%@page import="com.goodjob.order.dto.GolfLinkDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.order.GolfLinkDao"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
 String field = StringUtils.trimToEmpty(request.getParameter("field"));
@@ -255,7 +255,7 @@ if(list != null){
 				<option value="3" <%=("3".equals(list.get(i).getProcess_status())?" selected":"")%>>예약취소</option>
               </select>
               <img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateStatus('<%=list.get(i).getReserve_seq()%>');"></td>
-          <td align="center" bgcolor="white" width="199"><img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=2&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=URLEncoder.encode(list.get(i).getGolflink_name()) %>&msgtime=<%=vbookingDate +" " + vbookingTime_s_1 +":" + vbookingTime_s_2 %>','name','740','350','yes');return false;">
+          <td align="center" bgcolor="white" width="199"><img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=2&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=Utils.encoder(list.get(i).getGolflink_name()) %>&msgtime=<%=vbookingDate +" " + vbookingTime_s_1 +":" + vbookingTime_s_2 %>','name','740','350','yes');return false;">
 		  </td>
         </tr>
 <%

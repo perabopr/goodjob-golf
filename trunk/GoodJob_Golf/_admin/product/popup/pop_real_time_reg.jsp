@@ -445,11 +445,11 @@ String.prototype.trim = function(){
            	<%
                     }else if (prdtdto_day.getView_yn().equals("1")){
             %>
-                       	<span class=regist_yes>예약마감</span>
+                       	<span class=regist_no>예약마감</span>
            	<%
                     }else if (prdtdto_day.getView_yn().equals("2")){
             %>
-                       	<span class=regist_yes>휴장</span>
+                       	<span class=regist_no>휴장</span>
             <%            
                     }
             	}

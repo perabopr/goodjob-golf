@@ -114,7 +114,7 @@ if(ddlSearchMenu_tmp.equals("1")){
 <TD bgColor=white height=25 align=center><%=bookingDate %></TD>
 <TD bgColor=white height=25 align=center><%=listSearch1.get(i).getGolflink_name() %></TD>
 <TD bgColor=white height=25 align=center><%=bookingTime %></TD>
-<TD bgColor=white height=25 align=center><%=listSearch1.get(i).getCourse_name() %></TD>
+<TD bgColor=white height=25 align=center><%=listSearch1.get(i).getCourse_name() != null ? listSearch1.get(i).getCourse_name():"" %></TD>
 <TD bgColor=white align=center><A href="/forGolfbooking/detail.jsp?menu=1&golf=<%=listSearch1.get(i).getGolflink_seq() %>&date=<%=listSearch1.get(i).getProduct_date() %>&cdate=<%=listSearch1.get(i).getProduct_date() %>"><IMG border=0 align=absMiddle src="../../images/booking/btn_detail.gif" width=112 height=20></A></TD></TR>
 <% 
 	} 

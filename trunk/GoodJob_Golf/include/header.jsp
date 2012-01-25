@@ -213,14 +213,14 @@ $(function() {
                                   <jsp:include page="/include/logon_form.jsp" flush="true"/>
                                   </td>
                                 </tr>
+                                <tr>
+                            	<td height="10"></td>
+                          		</tr>
                               </table>
 <%
 	}
 %>
                             </td>
-                          </tr>
-                          <tr>
-                            <td height="10"></td>
                           </tr>
                           <tr>
                               <td bgcolor="#F7F5F6">
@@ -229,17 +229,22 @@ $(function() {
                                           <td width="235"><a href="/common/counsel.jsp"><img src="/images/img_leftmenu/img_customer_center.gif" width="235" height="139" border="0"></a></td>
                                       </tr>
                                       <tr>
-                                          <td><a href="/common/field_guide.jsp"><img src="/images/img_leftmenu/btn_user_guide.gif" width="235" height="86" border="0"></a></td>
+                                          <td><a href="/common/field_guide.jsp"><img src="/images/img_leftmenu/btn_user_guide.gif" width="235" height="75" border="0"></a></td>
                                       </tr>
                                       <tr>
-                                          <td><a href="/board/faq_list.jsp"><img src="/images/img_leftmenu/btn_faq.gif" width="235" height="86" border="0"></a></td>
+                                          <td><a href="/board/faq_list.jsp"><img src="/images/img_leftmenu/btn_faq.gif" width="235" height="75" border="0"></a></td>
                                       </tr>
                                       <tr>                                          
                                           <td><a href="/member/coupon_regist.jsp"><img src="/images/img_leftmenu/btn_coupon.gif" width="235" height="75" border="0"></a></td>
                                       </tr>
-                                      <tr>
-                                          <td><a href="#"><img src="/images/img_leftmenu/btn_event.gif" width="235" height="86" border="0"></a></td>                                          
+                                      <tr>                                          
+                                      <td><img src="/images/img_leftmenu/img_left_bank.gif" width="235" height="65" border="0"></td>
                                       </tr>
+                                      <tr>
+                                       <td>
+                                        <script>flashObject("/images/swf/left_banner.swf","","235","80")</script>
+                                         </td>
+                                        </tr>
                                   </table>
                               </td>
                           </tr>

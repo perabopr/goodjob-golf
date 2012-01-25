@@ -16,28 +16,22 @@
 </script>
 <table border="0" cellpadding="0" cellspacing="0" width="235" bgcolor="#052B48">
     <tr>
-        <td align="center" width="235" height="146">
+        <td align="center" width="235" height="135">
             <table border="0" cellpadding="0" cellspacing="0" width="207">
                 <tr>
-                    <td align="center"><span class=yellow_b><%=ses_mem_name%></span><span class=white>님 로그인 중입니다</span>
+                    <td align="center"><span class=yellow_b><%=ses_mem_name%></span><span class=white>님 로그인 중입니다
                     </td>
                 </tr>
                 <tr>
-                    <td align="center" height="100" width="0">
-                        <table border="0" cellpadding="2" cellspacing="2" width="207" bgcolor="#3F83B7">
+                    <td align="center" height="90" valign="bottom">
+                        <table border="0" cellpadding="0" cellspacing="0" width="95%">
                             <tr>
-                                <td bgcolor="#052B48" height="80" align="center" width="207">
-                                    <table border="0" cellpadding="0" cellspacing="0" width="90%">
-                                        <tr>
-                                            <td width="90" height="30"><img align="absmiddle" src="/images/common/img_nemo.gif" width="5" height="7" border="0"> <a href="/mypage/regist_index.jsp" class=login>예약관리</a></td>
-                                            <td width="89"><img align="absmiddle" src="/images/common/img_nemo.gif" width="5" height="7" border="0"> <a href="javascript:go_modify();" class=login>회원정보수정</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td height="30"><img align="absmiddle" src="/images/common/img_nemo.gif" width="5" height="7" border="0"> <a href="/mypage/coupon_list.jsp" class=login>상품권관리</a></td>
-                                            <td><img align="absmiddle" src="/images/common/img_nemo.gif" width="5" height="7" border="0"> <a href="/logon/logout.jsp" class=logout>로그아웃</a></td>
-                                        </tr>
-                                    </table>
-                                </td>
+                                <td width="50%" height="40" align="center"><a href="/mypage/regist_index.jsp"><img src="/images/mypage/btn_r.gif" width="88" height="26" border="0"></a></td>
+                                <td width="50%" align="center"><a href="javascript:go_modify();"><img src="/images/mypage/btn_m.gif" width="88" height="26" border="0"></a></td>
+                            </tr>
+                            <tr>
+                                <td height="40" align="center" width="50%"><a href="/mypage/coupon_list.jsp"><img src="/images/mypage/btn_c.gif" width="88" height="26" border="0"></a></td>
+                                <td align="center" width="50%"><a href="/logon/logout.jsp"><img src="/images/mypage/btn_l.gif" width="88" height="26" border="0"></a></td>
                             </tr>
                         </table>
                     </td>

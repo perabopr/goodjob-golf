@@ -442,23 +442,18 @@ $(function(){
 <TD class=normal_b>가격정보 </TD></TR>
 <TR>
 <TD>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width="100%" bgColor=#d1d3d4>
-<TBODY>
-<TR>
-<TD bgColor=#f1f1f1 height=25 width=45 align=center>&nbsp;</TD>
-<TD class=normal_s bgColor=#f1f1f1 height=22 width=95 align=center>그린피정상가</TD>
-<TD class=sunday bgColor=#f1f1f1 width=90 align=center>그린피할인가</TD>
-<TD class=red_s bgColor=#f1f1f1 width=150 align=center>4인그린피할인가 합계</TD></TR>
-<TR>
-<TD class=saturday bgColor=white height=25 align=center>주중</TD>
-<TD class=normal_s bgColor=white align=center><%=commify(np) %></TD>
-<TD class=sunday bgColor=white align=center><%=commify(sp) %></TD>
-<TD class=red_s bgColor=white align=center><%=commify(sp*4) %></TD></TR>
-<TR>
-<TD class=sunday bgColor=white height=25 align=center>주말</TD>
-<TD class=normal_s bgColor=white align=center><%=commify(nw) %></TD>
-<TD class=sunday bgColor=white align=center><%=commify(sw) %></TD>
-<TD class=red_s bgColor=white align=center><%=commify(sw*4) %></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
+					<TABLE border=0 cellSpacing=1 cellPadding=2 width="100%" bgColor=#d1d3d4>
+					<TR>
+					<TD class=normal_s bgColor=white width="150" align=center rowspan=2>그린피 정상금액</TD>
+					<TD class=saturday bgColor=#f1f1f1 align=center height=22>주중</TD>
+					<TD class=sunday bgColor=#f1f1f1 align=center>주말</TD>
+					</TR>
+					<TR>
+					<TD class=normal_s bgColor=white align=center height=25><%=commify(np) %></TD>
+					<TD class=sunday bgColor=white align=center><%=commify(nw) %></TD>
+					</TR>
+					</TABLE>
+</TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD>&nbsp;</TD></TR>
 <TR>

@@ -92,13 +92,14 @@ function goPage(val){
 		
 		int size = bbsList.size();
 		BoardDto dto;
+		int count = totalCount - ((NumberUtils.toInt(npage)-1)* BBS.per_page);
 		for(int i = 0 ; i < size ; i++){
 			
 			dto = bbsList.get(i);
 			
 %>
                                                               <tr>
-                                                                <td align="center" height="30" width="65"><%=dto.getSeq()%></td>
+                                                                <td align="center" height="30" width="65"><%=count--%></td>
                                                                 <td align="center" width="10"></td>
                                                                 <td width="450"><a href="./notice_view.jsp?seq=<%=dto.getSeq()%>" class=b_list><%=dto.getSubject()%></a><img align="absmiddle" src="../../images/board/icon_new.gif" width="10" height="9" border="0"></td>
                                                                 <td align="center" width="11"></td>

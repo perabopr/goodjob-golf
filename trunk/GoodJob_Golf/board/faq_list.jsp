@@ -98,6 +98,7 @@ function show_faq(val){
 		
 		int size = bbsList.size();
 		BoardDto dto;
+		int count = totalCount - ((NumberUtils.toInt(npage)-1)* BBS.per_page);
 		for(int i = 0 ; i < size ; i++){
 			
 			dto = bbsList.get(i);
@@ -105,7 +106,7 @@ function show_faq(val){
 %>
                                                              <table border="0" cellpadding="0" cellspacing="0" width="669">
                                                               <tr>
-                                                                <td align="center" height="30" width="65"><%=dto.getSeq()%></td>
+                                                                <td align="center" height="30" width="65"><%=count--%></td>
                                                                 <td align="center" width="10"></td>
                                                                 <td width="594"><a href="javascript:show_faq(<%=dto.getSeq()%>);" class=b_list><%=dto.getSubject()%></a></td>
                                                               </tr>

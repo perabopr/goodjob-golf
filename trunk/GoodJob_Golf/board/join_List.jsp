@@ -146,13 +146,14 @@ function go_view(val){
 		
 		int size = bbsList.size();
 		JoinBoardDto jDto;
+		int count = totalCount - ((NumberUtils.toInt(npage)-1)* BBS.per_page);
 		for(int i = 0 ; i < size ; i++){
 			
 			jDto = bbsList.get(i);
 			
 %>
                                                               <tr>
-												                     <td align="center" height="30" width="41" class=normal_s><%=jDto.getJoin_seq()%></td>
+												                     <td align="center" height="30" width="41" class=normal_s><%=count--%></td>
 												                	<td align="center" width="62" class=normal_s><%=jDto.getReg_dt()%></td>
 												                	<td width="62" align="center" class=normal_s><%=jDto.getJoin_name()%></td>
 												                <td width="180" align="center"><a href="javascript:go_view(<%=jDto.getJoin_seq()%>);" class=board_list><%=jDto.getGolflink_name()%></a></td>

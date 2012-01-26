@@ -360,26 +360,15 @@ function imgChange(objId){
 				<TR>
 				<TD>
 					<TABLE border=0 cellSpacing=1 cellPadding=2 width="100%" bgColor=#d1d3d4>
-					<TBODY>
 					<TR>
-					<TD bgColor=#f1f1f1 height=25 width=45 align=center>&nbsp;</TD>
-					<TD class=normal_s bgColor=#f1f1f1 height=22 width=95 align=center>그린피정상가</TD>
-					<TD class=sunday bgColor=#f1f1f1 width=90 align=center>그린피할인가</TD>
-					<TD class=red_s bgColor=#f1f1f1 width=150 align=center>4인그린피할인가 합계</TD>
+					<TD class=normal_s bgColor=white width="150" align=center rowspan=2>그린피 정상금액</TD>
+					<TD class=saturday bgColor=#f1f1f1 align=center height=22>주중</TD>
+					<TD class=sunday bgColor=#f1f1f1 align=center>주말</TD>
 					</TR>
 					<TR>
-					<TD class=saturday bgColor=white height=25 align=center>주중</TD>
-					<TD class=normal_s bgColor=white align=center><%=commify(np) %></TD>
-					<TD class=sunday bgColor=white align=center><%=commify(sp) %></TD>
-					<TD class=red_s bgColor=white align=center><%=commify(sp*4) %></TD>
+					<TD class=normal_s bgColor=white align=center height=25><%=commify(np) %></TD>
+					<TD class=sunday bgColor=white align=center><%=commify(nw) %></TD>
 					</TR>
-					<TR>
-					<TD class=sunday bgColor=white height=25 align=center>주말</TD>
-					<TD class=normal_s bgColor=white align=center><%=commify(nw) %></TD>
-					<TD class=sunday bgColor=white align=center><%=commify(sw) %></TD>
-					<TD class=red_s bgColor=white align=center><%=commify(sw*4) %></TD>
-					</TR>
-					</TBODY>
 					</TABLE>
 				</TD>
 				</TR>
@@ -573,11 +562,12 @@ for (int i = 1; i < 15 ;i++){
 					<TD>
 						<TABLE id="tbReserveList" border=0 cellSpacing=1 cellPadding=2 width=706 bgColor=#d1d3d4>
 						<TR>
-						<TD class=normal_b bgColor=#f1f1f1 height=25 width=120 align=center>부킹날짜</TD>
-						<TD class=normal_b bgColor=#f1f1f1 height=25 width=120 align=center>부킹시간</TD>
-						<TD class=normal_b bgColor=#f1f1f1 width=168 align=center>코스</TD>
+						<TD class=normal_b bgColor=#f1f1f1 height=25 width=100 align=center>부킹날짜</TD>
+						<TD class=normal_b bgColor=#f1f1f1 height=25 width=80 align=center>부킹시간</TD>
+						<TD class=normal_b bgColor=#f1f1f1 width=150 align=center>코스</TD>
+						<TD class=normal_b bgColor=#f1f1f1 width=120 align=center>그린피할인요금</TD>
 						<TD class=normal_b bgColor=#f1f1f1 width=90 align=center>홀구분</TD>
-						<TD class=normal_b bgColor=#f1f1f1 width=182 align=center>예약가능여부</TD>
+						<TD class=normal_b bgColor=#f1f1f1 width=160 align=center>예약가능여부</TD>
 						</TR>
 <%
 	for(int i = 0; i < listPr.size();i++){
@@ -589,8 +579,9 @@ for (int i = 1; i < 15 ;i++){
 %>
 						<TR>
 						<TD bgColor=white height=25 align=center><%=tmpDate %></TD>
-						<TD bgColor=white height=25 align=center><%=tmpTime %></TD>
+						<TD bgColor=white align=center><%=tmpTime %></TD>
 						<TD bgColor=white align=center><%=StringUtils.defaultIfEmpty(listPr.get(i).getCourse_name(), "<div class=red_s>없음</div>")%></TD>
+						<TD bgColor=white align=center><span class=red_s><%=commify(listPr.get(i).getNH_price() * 4) %></span>원</TD>
 						<TD bgColor=white align=center><%=listPr.get(i).getHoll_type() %></TD>
 <%
 		if(listPr.get(i).getProduct_status().equals("0")){			

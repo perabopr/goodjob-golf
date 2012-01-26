@@ -1,3 +1,4 @@
+<%@page import="com.goodjob.util.Utils"%>
 <%@page import="com.goodjob.sql.ORDER"%>
 <%@page import="com.goodjob.util.PageNavigater"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
@@ -9,8 +10,8 @@
 <%@page import="com.goodjob.order.dto.GolfLinkDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-String sField = StringUtils.trimToEmpty(request.getParameter("field2"));
-String sValue = StringUtils.trimToEmpty(request.getParameter("keyword2"));
+String sField = StringUtils.defaultIfEmpty(request.getParameter("field2"),"");
+String sValue = StringUtils.defaultIfEmpty(request.getParameter("keyword2"),"");
 
 GolfLinkDto glDto = new GolfLinkDto();
 if("reserve_day".equals(sField)){
@@ -27,10 +28,7 @@ if("booking_day".equals(sField)){
 }
 
 GolfLinkDao glList = new GolfLinkDao();
-List<GolfLinkDto> list = null;
-if(sValue.trim().length() > 0){
-	list = glList.getTotalReserveSearch(glDto);
-}
+List<GolfLinkDto> list = glList.getTotalReserveSearch(glDto);
 %>
 <html>
 <head>

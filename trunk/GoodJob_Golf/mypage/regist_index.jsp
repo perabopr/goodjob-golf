@@ -264,7 +264,7 @@ function mypage_search() {
 																	%>
 														                <tr>
                                                                            <td height="25" bgcolor="white" align="center" class=normal><%=pkDto.getReserve_day()%></td>
-                                                                           <td height="22" bgcolor="white" align="center" class=blue><%=pkDto.getPackage_name1()%></td>
+                                                                           <td height="22" bgcolor="white" align="center" class=blue><%=pkDto.getPackage_name1() + (StringUtils.trimToEmpty(pkDto.getPackage_name2()).length()>0?"&nbsp;+&nbsp;"+pkDto.getPackage_name2():"")%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=normal><%=pkDto.getTour_date().replaceAll("-",".")%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=red><%=(pkDto.getPackage_price()==0?"":Utils.numberFormat(pkDto.getPackage_price())+"원")%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=red><%=(pkDto.getBalance_price()==0?"":Utils.numberFormat(pkDto.getBalance_price())+"원")%></td>

@@ -316,11 +316,11 @@ public class GolfLinkDao {
 			String where3 = "";
 			
 			if(reserve_day.length() > 0){
-				where1 = "WHERE reserve_day = ? " ;
+				where1 = "WHERE date_format(reserve_day,'%Y-%m-%d') = ? " ;
 				params.add(reserve_day);
-				where2 = "WHERE reserve_day = ? " ;
+				where2 = "WHERE date_format(reserve_day,'%Y-%m-%d') = ? " ;
 				params.add(reserve_day);
-				where3 = "WHERE reserve_day = ? " ;
+				where3 = "WHERE date_format(reserve_day,'%Y-%m-%d') = ? " ;
 				params.add(reserve_day); 
 			}else if(reserve_name.length() > 0){
 				where1 = "WHERE reserve_name LIKE concat('%',?,'%') " ;
@@ -344,6 +344,11 @@ public class GolfLinkDao {
 				params.add(booking_day);
 				where3 = "WHERE in_date = ? " ;
 				params.add(booking_day); 
+			}
+			else{
+				where1 = "WHERE reserve_day between date_sub(curdate(),INTERVAL 31 DAY) and curdate() " ;
+				where2 = "WHERE reserve_day between date_sub(curdate(),INTERVAL 31 DAY) and curdate() " ;
+				where3 = "WHERE reserve_day between date_sub(curdate(),INTERVAL 31 DAY) and curdate() " ;
 			}
 			
 			list = (List<GolfLinkDto>)qr.query(conn , MessageFormat.format(ORDER.reserveTotalSearch_select, where1, where2, where3), rsh , params.toArray());

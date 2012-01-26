@@ -194,5 +194,5 @@ public class ORDER {
 			",in_date " +
 			",process_status " +
 		"FROM tb_condo_reserve " +
-		" {2} ";
+		" {2} order by reserve_day desc ";
 }

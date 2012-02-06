@@ -12,7 +12,7 @@
 	String sphone 		= "02-6670-0202";
 	String rphone 		= StringUtils.defaultString(request.getParameter("rphone"), "");
 	
-	String authNum = Utils.authNumber(5);
+	String authNum = Utils.smsAuthNumber(5);
 	
 	params.put("msg",String.format(msg , authNum));
 	params.put("authNum",authNum);

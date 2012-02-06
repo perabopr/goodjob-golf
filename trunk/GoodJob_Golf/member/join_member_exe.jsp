@@ -55,7 +55,15 @@ alert("가입하려는 주민번호가  존재 합니다.\n다른 주민번호�
 			return;
 		}
 		else{
-			
+
+			if(mem_id.length() == 0 ){
+				%>
+				<script language="javascript" type="text/javascript">
+				alert("아이디가 정상적이지 않습니다.");
+				</script>
+				<%
+				return;
+			}
 			MemberDto mDto = new MemberDto();
 			mDto.setMem_id(mem_id+"@"+mem_domain);
 			mDto.setMem_jumin(mem_jumin1+"-"+mem_jumin2);

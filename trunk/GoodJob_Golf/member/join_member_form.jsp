@@ -101,7 +101,7 @@ location.href="/member/join_agreement.jsp";
 		}
 
    		if($('#auth_yn').val() != 'Y') {
-			alert('이메일 인증을 하지 않았습니다.');
+			alert('휴대폰 인증을 하지 않았습니다.');
 			return;
 		}
 		
@@ -159,7 +159,7 @@ location.href="/member/join_agreement.jsp";
 			document.getElementById("mem_domain").readOnly = true;
 			$('#mem_domain').val(val);
 		}
-		$('#auth_yn').val("N");
+		//$('#auth_yn').val("N");
 	}
 
 	function onlyNumber2(loc) {
@@ -199,6 +199,7 @@ location.href="/member/join_agreement.jsp";
 		}});
 	}
 
+	/*
    	function auth_check(){
    	   	
    		if(!$('#mem_id').val()) {
@@ -234,7 +235,84 @@ location.href="/member/join_agreement.jsp";
 				}
 		}});
 	}
+	*/
 
+	function sms_auth(){
+
+   		if(!$('#mobile1').val()) {
+			alert('핸드폰 앞자리를 선택해 주세요.');
+			$('#mobile1').focus();
+			return;
+		}
+
+   		if(!$('#mobile2').val()) {
+			alert('핸드폰 번호를 입력해 주세요.');
+			$('#mobile2').focus();
+			return;
+		}
+
+   		if(!$('#mobile3').val()) {
+   			alert('핸드폰 번호를 입력해 주세요.');
+			$('#mobile3').focus();
+			return;
+		}
+
+		var rphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
+		$.ajax({
+			type: "POST",
+			url: "/common/authSMS.jsp",
+			data: "rphone="+rphone,
+			success: function(msg){
+				if($.trim(msg) == '0'){
+					alert("인증 번호가 발송 되었습니다.");
+				}
+				else{
+					alert("인증 번호가 발송중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
+				}
+		}});
+	}
+	
+	function auth_check(){
+   	   	
+   		if(!$('#mobile1').val()) {
+			alert('핸드폰 앞자리를 선택해 주세요.');
+			$('#mobile1').focus();
+			return;
+		}
+
+   		if(!$('#mobile2').val()) {
+			alert('핸드폰 번호를 입력해 주세요.');
+			$('#mobile2').focus();
+			return;
+		}
+
+   		if(!$('#mobile3').val()) {
+   			alert('핸드폰 번호를 입력해 주세요.');
+			$('#mobile3').focus();
+			return;
+		}
+
+		var rphone = $('#mobile1').val() + "-" + $('#mobile2').val() + "-" + $('#mobile3').val();
+		var auth_no = $('#auth_no').val();
+		$.ajax({
+			type: "POST",
+			url: "/common/authCheckSMS.jsp",
+			data: "rphone="+rphone+"&auth_no="+auth_no,
+			success: function(msg){
+			//0 : 인증 성공  , 1 : 일치하는 인증값 없음 , 2 : 인증번호 시간 초과 
+				if($.trim(msg) == '0'){
+					$('#auth_yn').val("Y");
+					alert("인증이 정상적으로 완료 되었습니다.");
+				}
+				else if($.trim(msg) == '1'){
+					alert("일치하는 인증값 없습니다. 잠시후 다시 시도해 주세요!");
+				}
+				else if($.trim(msg) == '2'){
+					alert("입력하신 인증번호는 시간이 초과되었습니다. 잠시후 다시 시도해 주세요!");
+				}
+		}});
+	}
+	
 	function idcheck(){
 		if(!$('#mem_id').val()) {
 			alert('아이디를 입력해 주세요');
@@ -335,6 +413,37 @@ location.href="/member/join_agreement.jsp";
                                                                     </tr>
                                                                   </table></td>
                                                               </tr>
+                                                              
+                                                              <tr>
+                                                                <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">휴대폰 회원인증</td>
+                                                                <td bgcolor="white" style="padding-left:10px;"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                    <tr>
+                                                                      <td height="27" width="100%">
+                                                                      <select id="mobile1" name="mobile1" size="1">
+                                                                            <option value="010" selected>010</option>
+                                                                            <option value="011">011</option>
+                                                                            <option value="016">016</option>
+                                                                            <option value="017">017</option>
+                                                                            <option value="018">018</option>
+                                                                            <option value="019">019</option>
+                                                                          </select>
+                                                                        -
+	                                                                  <input id="mobile2" class="mem_input" type="text" size="8" name="mobile2" maxlength="4">
+	                                                                  -
+	                                                                  <input id="mobile3" class="mem_input" type="text" size="8" name="mobile3" maxlength="4">
+                                                                      <a href="javascript:sms_auth();"><img align="absmiddle" src="../../images/mem_join/btn_number_send.gif" width="75" height="19" border="0"></a></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                      <td><span class=mem_notice>입력하신 휴대폰으로 인증번호를 전송해 드립니다.</span></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                      <td height="30"><img align="absmiddle" src="../../images/mem_join/btn_send_title.gif" width="68" height="19" border="0">
+                                                                          <input id="auth_no" class="mem_input" type="text" size="15" name="auth_no">
+                                                                          <a href="javascript:auth_check();"><img align="absmiddle" src="../../images/mem_join/btn_send_confirm.gif" width="42" height="19" border="0"></a> <span class=mem_notice>전송받은 인증번호를 입력해 주시기 바랍니다</span></td>
+                                                                    </tr>
+                                                                  </table></td>
+                                                              </tr>
+                                                              <!--
                                                               <tr>
                                                                 <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;">E-Mail 회원인증</td>
                                                                 <td bgcolor="white" style="padding-left:10px;"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -351,7 +460,7 @@ location.href="/member/join_agreement.jsp";
                                                                     </tr>
                                                                   </table></td>
                                                               </tr>
-                                                               <!--tr>
+                                                               <tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>주민등록번호</td>
                                                                 <td bgcolor="white" style="padding-left:10px;"><input id="mem_jumin1" class="mem_input" type="text" size="15" name="mem_jumin1">-
                                                                 <input id="mem_jumin2" class="mem_input" type="password" size="15" name="mem_jumin2"></td>
@@ -365,6 +474,7 @@ location.href="/member/join_agreement.jsp";
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>비밀번호확인</td>
                                                                 <td bgcolor="white" style="padding-left:10px;"><input id="mem_pwd_re" class="mem_input" type="password" size="20" name="mem_pwd_re"></td>
                                                               </tr>
+                                                              <!--
                                                               <tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>핸드폰</td>
                                                                 <td bgcolor="white" style="padding-left:10px;">
@@ -381,6 +491,7 @@ location.href="/member/join_agreement.jsp";
                                                                   -
                                                                   <input id="mobile3" class="mem_input" type="text" size="8" name="mobile3" maxlength="4"></td>
                                                               </tr>
+                                                              -->
                                                               <tr>
                                                                 <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=mem_subject>SMS 수신여부</td>
                                                                 <td bgcolor="white" style="padding-left:10px;"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">

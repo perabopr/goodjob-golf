@@ -237,6 +237,7 @@ function condoReg(){
         </tr>
 	<% 
 		for(int i = 1; i < 5;i++){
+			
 			if(arrlist3 != null && arrlist3.size() >= i){
 	%>
 		<tr>
@@ -326,7 +327,11 @@ function condoReg(){
 		        	<input type="hidden" name="condoimgseq1" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(0).getCondoimg_seq());} %>">
 		        	<input type="hidden" name="condoimg1" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(0).getCondo_img());} %>">
 		            <input class="upload" name="imggallery1" type="file" size="55"></br>
-          			<%= arrlist2.get(0).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(0).getCondo_img() : "" %>
+          			<%
+          			if(arrlist2!=null && arrlist2.size()>0){
+          				out.print(arrlist2.get(0).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(0).getCondo_img() : "");
+          			}
+          			%>
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('1');"> -->
 	        	</td>
 	        	</tr>
@@ -335,7 +340,11 @@ function condoReg(){
 		        	<input type="hidden" name="condoimgseq2" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(1).getCondoimg_seq());} %>">
 		        	<input type="hidden" name="condoimg2" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(1).getCondo_img());} %>">
 		            <input class="upload" name="imggallery2" type="file" size="55"></br>
-          			<%= arrlist2.get(1).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(1).getCondo_img() : "" %>
+          			<%
+          			if(arrlist2!=null && arrlist2.size()>1){
+          				out.print(arrlist2.get(1).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(0).getCondo_img() : "");
+          			}
+          			%>
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('2');"> -->
 	        	</td>
 	        	</tr>
@@ -344,7 +353,11 @@ function condoReg(){
 		        	<input type="hidden" name="condoimgseq3" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(2).getCondoimg_seq());} %>">
 		        	<input type="hidden" name="condoimg3" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(2).getCondo_img());} %>">
 		            <input class="upload" name="imggallery3" type="file" size="55"></br>
-          			<%= arrlist2.get(2).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(2).getCondo_img() : "" %>
+          			<%
+          			if(arrlist2!=null && arrlist2.size()>2){
+          				out.print(arrlist2.get(2).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(0).getCondo_img() : "");
+          			}
+          			%>
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('3');"> -->
 	        	</td>
 	        	</tr>
@@ -353,7 +366,11 @@ function condoReg(){
 		        	<input type="hidden" name="condoimgseq4" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(3).getCondoimg_seq());} %>">
 		        	<input type="hidden" name="condoimg4" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(3).getCondo_img());} %>">
 		            <input class="upload" name="imggallery4" type="file" size="55"></br>
-          			<%= arrlist2.get(3).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(3).getCondo_img() : "" %>
+          			<%
+          			if(arrlist2!=null && arrlist2.size()>3){
+          				out.print(arrlist2.get(3).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(0).getCondo_img() : "");
+          			}
+          			%>
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('4');"> -->
 	        	</td>
 	        	</tr>
@@ -362,7 +379,11 @@ function condoReg(){
 		        	<input type="hidden" name="condoimgseq5" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(4).getCondoimg_seq());} %>">
 		        	<input type="hidden" name="condoimg5" value="<% if(arrlist2!=null && arrlist2.size()>0){out.print(arrlist2.get(4).getCondo_img());} %>">
 		            <input class="upload" name="imggallery5" type="file" size="55"></br>
-          			<%= arrlist2.get(4).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(4).getCondo_img() : "" %>
+          			<%
+          			if(arrlist2!=null && arrlist2.size()>4){
+          				out.print(arrlist2.get(4).getCondo_img().length() > 0 ? up_dir + "/" + arrlist2.get(0).getCondo_img() : "");
+          			}
+          			%>
 		            <!-- <img align="absmiddle" src="../images/inc/btn_del.gif" width="13" height="14" border="0" onclick="delgallery('5');"> -->
 	        	</td>
 	        	</tr>

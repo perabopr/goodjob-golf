@@ -214,7 +214,7 @@
 													              	<option value="3"<%=("3".equals(jDto.getRegion())?" selected":"")%>>충청권</option>
 													              	<option value="4"<%=("4".equals(jDto.getRegion())?" selected":"")%>>전라권</option>
 													              	<option value="5"<%=("5".equals(jDto.getRegion())?" selected":"")%>>경상권</option>
-													              	<option value="6"<%=("6".equals(jDto.getRegion())?" selected":"")%>>제주권</option>
+													              	<option value="6"<%=("6".equals(jDto.getRegion())?" selected":"")%>>제주도</option>
 												                  </select></td>
 												                <td width="109" align="center"><img align="absmiddle" src="/_admin/images/board/img_board_title_cc.gif" width="42" height="15" border="0"></td>
 												                <td width="1" bgcolor="#D1D3D4"></td>

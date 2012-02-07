@@ -264,7 +264,7 @@ function mypage_search() {
 																	%>
 														                <tr>
                                                                            <td height="25" bgcolor="white" align="center" class=normal><%=pkDto.getReserve_day()%></td>
-                                                                           <td height="22" bgcolor="white" align="center" class=blue><%=pkDto.getPackage_name1() + (StringUtils.trimToEmpty(pkDto.getPackage_name2()).length()>0?"&nbsp;+&nbsp;"+pkDto.getPackage_name2():"")%></td>
+                                                                           <td height="22" bgcolor="white" align="center" class=blue_s><%=pkDto.getPackage_name1() + (StringUtils.trimToEmpty(pkDto.getPackage_name2()).length()>0?"<br/>+&nbsp;"+pkDto.getPackage_name2():"")%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=normal><%=pkDto.getTour_date().replaceAll("-",".")%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=red><%=(pkDto.getPackage_price()==0?"":Utils.numberFormat(pkDto.getPackage_price())+"원")%></td>
                                                                            <td height="22" bgcolor="white" align="center" class=red><%=(pkDto.getBalance_price()==0?"":Utils.numberFormat(pkDto.getBalance_price())+"원")%></td>
@@ -291,7 +291,7 @@ function mypage_search() {
 														                <tr>
 														                    <td bgcolor="#F1F1F1" align="center" height="25" class=normal_b width="67">예약신청일</td>
 														                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="142">콘도명</td>
-														                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="63">평형/타입</td>
+														                    <td bgcolor="#F1F1F1" align="center" class=normal_b>평형/타입</td>
 														                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="40">숙박일</td>
 														                    <td align="center" bgcolor="#F1F1F1" class="normal_b" width="91">입실일</td>
 														                    <td bgcolor="#F1F1F1" align="center" class=normal_b width="85">퇴실일</td>
@@ -316,7 +316,7 @@ function mypage_search() {
 																		<tr>
 														                    <td height="35" bgcolor="white" align="center" class=normal><%=cdDto.getReserve_day()%></td>
 														                    <td height="22" bgcolor="white" align="center" class=normal><%=cdDto.getCondo_name()%></td>
-														                    <td height="22" bgcolor="white" align="center" class=normal><%=cdDto.getRoomtype()%>평형<br>패밀리</td>
+														                    <td height="22" bgcolor="white" align="center" class=normal style="word-break:break-all;"><%=cdDto.getRoomtype()%></td>
 														                    <td height="22" bgcolor="white" align="center" class=normal><%=night_day%></td>
 														                    <td height="22" align="center" bgcolor="white" class="normal"><%=Utils.dateFormat(cdDto.getIn_date(),".")%></td>
 														                    <td height="22" bgcolor="white" align="center" class=normal><%=Utils.dateFormat(cdDto.getOut_date(),".")%></td>

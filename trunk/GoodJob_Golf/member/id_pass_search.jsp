@@ -16,12 +16,12 @@
 			alert('회원명을 입력해 주세요.');
 			return;
 		}
-		
+		/*
    		if(!$('#mobile0').val()) {
 			alert('이통사를 선택해 주세요.');
 			return;
 		}
-
+		*/
    		if(!$('#mobile1').val()) {
 			alert('핸드폰 앞자리를 선택해 주세요.');
 			$('#mobile1').focus();
@@ -199,12 +199,14 @@
                                                               <tr>
                                                                 <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" width="142" height="25">핸드폰번호</td>
                                                                 <td bgcolor="white" style="padding-left:10px;">
+                                                                <!--
                                                                 <select id="mobile0" name="mobile0" size="1">
                                                                             <option value="">통신사선택</option>
                                                                             <option value="SKT">SKT</option>
                                                                             <option value="KT">KT</option>
                                                                             <option value="LG">LG</option>
                                                                           </select>
+                                                                          -->
                                                                         <select id="mobile1" name="mobile1" size="1">
                                                                             <option value="010">010</option>
                                                                             <option value="011">011</option>

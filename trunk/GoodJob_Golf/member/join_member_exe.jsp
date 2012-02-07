@@ -37,6 +37,7 @@
 		
 		boolean isJumin = false;
 		//boolean isJumin = mDao.isJumin(mem_jumin1+"-"+mem_jumin2);
+		boolean isMTel = mDao.isMTel(mobile1+"-"+mobile2+"-"+mobile3);
 		
 		if(isDup){
 %>
@@ -50,6 +51,14 @@ alert("가입하려는 아이디가 존재 합니다.\n다른 아이디로 가�
 %>
 <script language="javascript" type="text/javascript">
 alert("가입하려는 주민번호가  존재 합니다.\n다른 주민번호로 가입해 주세요!");
+</script>
+<%
+			return;
+		}
+		else if(isMTel){
+%>
+<script language="javascript" type="text/javascript">
+alert("동일한 핸드폰번호로 가입되어 있습니다. 다시 확인해서 입력해 주시기 바랍니다.");
 </script>
 <%
 			return;

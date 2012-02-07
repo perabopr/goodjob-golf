@@ -28,14 +28,14 @@ location.href="/member/join_agreement.jsp";
 <script language="javascript" type="text/javascript">
 	function on_submit() {
 
-		if(!$('#mem_name').val()) {
-			alert('회원명을 입력해 주세요');
+		if(!$('#mem_name').val() || $('#mem_name').val().length < 2) {
+			alert('회원명을 정확히 입력해 주시기 바랍니다.');
 			$('#mem_name').focus();
 			return;
 		}
 
 		if(!$('#mem_id').val()) {
-			alert('아이디를 입력해 주세요');
+			alert('아이디를 정확히 입력해 주시기 바랍니다.');
 			$('#mem_id').focus();
 			return;
 		}
@@ -88,13 +88,13 @@ location.href="/member/join_agreement.jsp";
 			return;
 		}
 
-   		if(!$('#mobile2').val()) {
+   		if(!$('#mobile2').val() || $('#mobile2').val().length < 2) {
 			alert('핸드폰 번호를 입력해 주세요.');
 			$('#mobile2').focus();
 			return;
 		}
 
-   		if(!$('#mobile3').val()) {
+   		if(!$('#mobile3').val() || $('#mobile3').val().length < 3) {
    			alert('핸드폰 번호를 입력해 주세요.');
 			$('#mobile3').focus();
 			return;
@@ -159,9 +159,13 @@ location.href="/member/join_agreement.jsp";
 			document.getElementById("mem_domain").readOnly = true;
 			$('#mem_domain').val(val);
 		}
-		//$('#auth_yn').val("N");
+		$('#idcheck_yn').val("Y");
 	}
 
+	function idChange(){
+		$('#idcheck_yn').val("Y");
+	}
+	
 	function onlyNumber2(loc) {
 		if(/[^0123456789]/g.test(loc.value)) {
 			alert("숫자가 아닙니다.");
@@ -245,14 +249,14 @@ location.href="/member/join_agreement.jsp";
 			return;
 		}
 
-   		if(!$('#mobile2').val()) {
-			alert('핸드폰 번호를 입력해 주세요.');
+   		if(!$('#mobile2').val() || $('#mobile2').val().length < 2) {
+			alert('핸드폰번호를 정확하게 입력해 주시기 바랍니다.');
 			$('#mobile2').focus();
 			return;
 		}
 
-   		if(!$('#mobile3').val()) {
-   			alert('핸드폰 번호를 입력해 주세요.');
+   		if(!$('#mobile3').val() || $('#mobile3').val().length < 3) {
+   			alert('핸드폰번호를 정확하게 입력해 주시기 바랍니다.');
 			$('#mobile3').focus();
 			return;
 		}
@@ -264,7 +268,7 @@ location.href="/member/join_agreement.jsp";
 			data: "rphone="+rphone,
 			success: function(msg){
 				if($.trim(msg) == '0'){
-					alert("인증 번호가 발송 되었습니다.");
+					alert("인증번호를 입력하신 핸드폰번호로 보내드렸습니다.\n아래에 인증번호를 입력해 주시기 바랍니다.");
 				}
 				else{
 					alert("인증 번호가 발송중 오류가 발생 했습니다. 잠시후 다시 시도해 주세요!");
@@ -388,7 +392,7 @@ location.href="/member/join_agreement.jsp";
                                                                 <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;">아이디</td>
                                                                 <td bgcolor="white" style="padding-left:10px;"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
                                                                     <tr>
-                                                                      <td height="27"><input id="mem_id" class="mem_input" type="text" size="15" name="mem_id"/>
+                                                                      <td height="27"><input id="mem_id" class="mem_input" type="text" size="15" name="mem_id" onKeyDown="idChange()"/>
                                                                         @
                                                                         <input id="mem_domain" class="mem_input" type="text" size="15" name="mem_domain" readonly/>
                                                                         <select id="domain_sel" name="domain_sel" size="1" onchange="domainChange(this.value);">

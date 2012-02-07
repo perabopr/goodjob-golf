@@ -49,6 +49,8 @@ public class MEMBER {
 	//주민번호 중복
 	public static final String dup_jumin = " select count(*) as cnt from tb_member where mem_jumin= ? ";
 	
+	public static final String dup_mtel = " select count(*) as cnt from tb_member where mem_mtel= ? ";
+	
 	//어드민 탈퇴 처리탈퇴
 	public static final String secession = " update tb_member set secession = ? , secession_dt = now()  where mem_id= ? ";
 	

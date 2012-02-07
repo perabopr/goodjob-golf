@@ -155,7 +155,7 @@ public class ORDER {
 			",productsub_seq " +
 		"FROM tb_golflink_reserve " +
 		"WHERE reserve_seq = ?";
-	
+
 	public static final String reserveTotalSearch_select
 	=	"SELECT " +
 			" reserve_seq " +
@@ -194,5 +194,6 @@ public class ORDER {
 			",in_date " +
 			",process_status " +
 		"FROM tb_condo_reserve " +
-		" {2} order by reserve_day desc ";
+		" {2} " +
+		" order by reserve_day desc ";
 }

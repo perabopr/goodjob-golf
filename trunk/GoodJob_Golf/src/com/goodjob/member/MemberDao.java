@@ -455,7 +455,31 @@ public class MemberDao {
 			QueryRunner qr = new QueryRunner();
 			
 			Map<String,Long> map = (Map)qr.query(conn , MEMBER.dup_jumin , rsh , bind);
-			long cnt = map.get("cnt");
+			long cnt = NumberUtils.toInt(map.get("cnt")+"");
+			if(cnt > 0) isDuplicate = true;
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return isDuplicate;
+	}
+	
+	public boolean isMTel(String mem_mtel){
+		
+		boolean isDuplicate = false;
+		
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			String[] bind = {mem_mtel};
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			
+			Map<String,Long> map = (Map)qr.query(conn , MEMBER.dup_mtel , rsh , bind);
+			long cnt = NumberUtils.toInt(map.get("cnt")+"");
 			if(cnt > 0) isDuplicate = true;
 		} catch (Exception e) {
 			System.out.println(e);

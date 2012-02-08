@@ -45,7 +45,7 @@ String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));
 		}
 	}
 
-String pageTitle = "★  사전 ";
+String pageTitle = "★ " + gldto.getGolflink_name() + " 사전 ";
 
 if(glSeq.length() > 0){
 	pageTitle += "골프장 수정 ★";

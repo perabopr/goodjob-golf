@@ -134,7 +134,7 @@ function commify(n) {
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 width=132 align=right>예약자이름</TD>
 <TD style="PADDING-LEFT: 10px" class=normal_b bgColor=white width=442><%=rName %></TD></TR>
 <TR>
-<TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>연락처</TD>
+<TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>핸드폰</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white>
 <P><%=rPhone %></P></TD></TR>
 <TR>

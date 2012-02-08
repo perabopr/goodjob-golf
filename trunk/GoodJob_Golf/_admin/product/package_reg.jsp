@@ -73,7 +73,7 @@ function frmSubmit(){
 <input type="hidden" id="menuSeq" name="menuSeq" value="<%=3%>" />
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
-    <td class=title>★ 국내패키지 등록 ★</td>
+    <td class=title>★ <%= (vPk.getPackage_name2() != null && vPk.getPackage_name2() != "") ? vPk.getPackage_name1() + " + " + vPk.getPackage_name2() + " ":"" %>국내패키지 등록 ★</td>
   </tr>
   <tr>
     <td align="center">&nbsp;</td>

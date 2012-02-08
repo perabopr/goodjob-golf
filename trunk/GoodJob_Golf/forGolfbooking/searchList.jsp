@@ -61,7 +61,7 @@ if(ddlSearchMenu_tmp.equals("1")){
 	searchWheres += "<span class=blue>사전 골프장</span> ";
 }
 %>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
+<TABLE border=0 cellSpacing=1 cellPadding=2 width=751 height="650" bgColor=#d2d2d2><TBODY>
 <TR>
 <TD bgColor=white vAlign=top width=745 align=center>
 <TABLE border=0 cellSpacing=0 cellPadding=0 width="95%" height=550>

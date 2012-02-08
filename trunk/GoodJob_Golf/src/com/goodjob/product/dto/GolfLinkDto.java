@@ -4,6 +4,7 @@ public class GolfLinkDto {
 	private int golflink_seq;     
 	private int menu_seq;
 	private String golflink_name = "";    
+	private String event_price = "";
 	private int region_seq;  
 	private String region_name = "";
 	private String holl_type = "";    
@@ -42,6 +43,12 @@ public class GolfLinkDto {
 	}
 	public void setGolflink_name(String golflink_name) {
 		this.golflink_name = golflink_name;
+	}
+	public String getEvent_price() {
+		return event_price;
+	}
+	public void setEvent_price(String event_price) {
+		this.event_price = event_price;
 	}
 	public int getRegion_seq() {
 		return region_seq;

@@ -111,7 +111,7 @@ function condoReg(){
 <input type="hidden" id="condoSeq" name="condoSeq" value="<%= condoSeq%>" />
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
-    <td class=title>★ 콘도 등록 ★</td>
+    <td class=title>★ <%= vcDto.getCondo_name() + " " %>콘도 등록 ★</td>
   </tr>
   <tr>
     <td align="center">&nbsp;</td>

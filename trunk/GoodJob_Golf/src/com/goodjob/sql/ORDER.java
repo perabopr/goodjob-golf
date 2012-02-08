@@ -156,6 +156,7 @@ public class ORDER {
 		"FROM tb_golflink_reserve " +
 		"WHERE reserve_seq = ?";
 
+	//통합 검색
 	public static final String reserveTotalSearch_select
 	=	"SELECT " +
 			" reserve_seq " +

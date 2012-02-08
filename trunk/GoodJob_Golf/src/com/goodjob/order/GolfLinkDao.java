@@ -314,6 +314,7 @@ public class GolfLinkDao {
 			String where1 = "";
 			String where2 = "";
 			String where3 = "";
+			String where4 = "";
 			
 			if(reserve_day.length() > 0){
 				where1 = "WHERE date_format(reserve_day,'%Y-%m-%d') = ? " ;
@@ -346,12 +347,10 @@ public class GolfLinkDao {
 				params.add(booking_day); 
 			}
 			else{
-				where1 = "WHERE reserve_day between date_sub(curdate(),INTERVAL 31 DAY) and curdate() " ;
-				where2 = "WHERE reserve_day between date_sub(curdate(),INTERVAL 31 DAY) and curdate() " ;
-				where3 = "WHERE reserve_day between date_sub(curdate(),INTERVAL 31 DAY) and curdate() " ;
+				where4 = " limit 0 , 30 ";
 			}
 			
-			list = (List<GolfLinkDto>)qr.query(conn , MessageFormat.format(ORDER.reserveTotalSearch_select, where1, where2, where3), rsh , params.toArray());
+			list = (List<GolfLinkDto>)qr.query(conn , MessageFormat.format(ORDER.reserveTotalSearch_select, where1, where2, where3 , where4), rsh , params.toArray());
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

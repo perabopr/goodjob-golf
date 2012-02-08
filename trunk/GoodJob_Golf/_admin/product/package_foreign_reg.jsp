@@ -73,7 +73,7 @@ function frmSubmit(){
 <input type="hidden" id="menuSeq" name="menuSeq" value="<%=4%>" />
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
-    <td class=title>★ 해외패키지 등록 ★</td>
+    <td class=title>★ <%= vPk.getPackage_name1() + " "%>해외패키지 등록 ★</td>
   </tr>
   <tr>
     <td align="center">&nbsp;</td>

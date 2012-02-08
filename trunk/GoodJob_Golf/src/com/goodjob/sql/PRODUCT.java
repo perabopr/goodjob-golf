@@ -16,6 +16,7 @@ public class PRODUCT {
 		= 	"INSERT INTO tb_golflink( " +
 				" menu_seq " +
 				",golflink_name " +
+				",event_price " +
 				",region_seq " +
 				",holl_type " +
 				",course_guide " +
@@ -35,12 +36,13 @@ public class PRODUCT {
 				",use_guide" +
 				",golflink_guide" +
 				",use_rule) " +
-			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";	
+			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";	
 	public static final String golflink_select_full
 	=	"SELECT " +
 			" a.golflink_seq " +
 			",a.menu_seq " +
 			",a.golflink_name " +
+			",a.event_price " +
 			",a.region_seq " +
 			",b.region_name " +
 			",a.holl_type " +
@@ -70,6 +72,7 @@ public class PRODUCT {
 				" golflink_seq " +
 				",menu_seq " +
 				",golflink_name " +
+				",event_price " +
 				",region_seq " +
 				",holl_type " +
 				",course_guide " +
@@ -94,6 +97,7 @@ public class PRODUCT {
 	public static final String golflink_update
 		=	"UPDATE tb_golflink " +
 				" SET golflink_name = ? " +
+				",event_price = ? " +
 				",region_seq = ? " +
 				",holl_type = ?" +
 				",course_guide = ? " +

@@ -50,6 +50,7 @@ CREATE TABLE TB_GOLFLINK(
 		golflink_seq                  		INT		 NOT NULL AUTO_INCREMENT,
 		menu_seq                      		INT		 NULL ,
 		golflink_name                 		VARCHAR(50)		 NOT NULL,
+		event_price							VARCHAR(1000)	NULL,
 		region_seq                    		INT		 NULL ,
 		holl_type                     		VARCHAR(50)		 NULL ,
 		course_guide                  		VARCHAR(1000)		 NULL ,

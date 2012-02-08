@@ -99,6 +99,7 @@ public class GolfLinkDao {
 			ArrayList<Object> bind = new ArrayList<Object>();
 			bind.add(gldto.getMenu_seq());
 			bind.add(gldto.getGolflink_name());
+			bind.add(gldto.getEvent_price());
 			bind.add(gldto.getRegion_seq());
 			bind.add(gldto.getHoll_type());
 			bind.add(gldto.getCourse_guide());
@@ -149,6 +150,7 @@ public class GolfLinkDao {
 			conn = DBManager.getConnection();
 			ArrayList<Object> bind = new ArrayList<Object>();
 			bind.add(gldto.getGolflink_name());
+			bind.add(gldto.getEvent_price());
 			bind.add(gldto.getRegion_seq());
 			bind.add(gldto.getHoll_type());
 			bind.add(gldto.getCourse_guide());

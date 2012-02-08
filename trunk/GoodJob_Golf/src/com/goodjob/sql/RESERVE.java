@@ -5,6 +5,7 @@ public class RESERVE {
 	=	"SELECT " +
 			" A.golflink_seq " +
 			",A.golflink_name " +
+			",A.event_price " +
 			",B.region_name " +
 		"FROM tb_golflink A " +
 			"INNER JOIN tb_region B on(A.region_seq = B.region_seq) " +
@@ -62,6 +63,7 @@ public class RESERVE {
 			" golflink_seq " +
 			",menu_seq " +
 			",golflink_name " +
+			",event_price " +
 			",region_seq " +
 			",holl_type " +
 			",course_guide " +

@@ -11,6 +11,9 @@ include file="/include/header.jsp" %>
 						<%@ include file="searchList.jsp" %>
 						</td>
 						</tr>
+						<tr>
+                            <td>&nbsp;</td>
+                          </tr>
 					</table>					
                     <%@ include file="/include/copyright.jsp" %>					
 <%@ include file="/include/footer.jsp" %>

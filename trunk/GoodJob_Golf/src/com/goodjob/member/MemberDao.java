@@ -656,6 +656,10 @@ public class MemberDao {
 					where = " where a.mem_mtel like concat('%',?,'%') " ;
 					bind.add(keyword);
 				}
+				else if("sms_yn".equals(field) && keyword.length() > 0){
+					where = " where a.sms_yn = ? " ;
+					bind.add(keyword);
+				}
 				
 				map = (Map<String, Long>) qr.query(conn , MessageFormat.format(MEMBER.mem_sub_total,where) , rsh , bind.toArray());
 				if(map == null)

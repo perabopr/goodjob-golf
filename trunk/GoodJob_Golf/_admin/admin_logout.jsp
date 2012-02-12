@@ -10,8 +10,12 @@ try{
 	
 	session.invalidate();
 
-	response.sendRedirect("/_admin/");
-	
+	//response.sendRedirect("/_admin/");
+%>
+<script language="javascript" type="text/javascript">
+top.document.location.href="/_admin/";
+</script>
+<%
 	return;
 	
 } catch(Exception e){}

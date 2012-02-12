@@ -17,7 +17,7 @@
 %>
 <html>
 <head>
-<link rel="stylesheet" href="/_admin/style/style.css">
+<link rel="stylesheet" href="/_admin/style.css">
 <script type="text/javascript" src="/js/jquery-1.5.2.min.js"></script>
 <script type="text/javascript">
 	function on_submit() {
@@ -49,7 +49,7 @@
           <td width="137" bgcolor="#E6E7E8" style="padding-right:10px;" align="right"><span class=normal_b>회원가입상태</span></td>
           <td width="183" bgcolor="white" style="padding-left:10px;"><span class=red>
           <%
-          	if("F".equals(mDto.getMem_type())){
+          	if("0".equals(mDto.getMem_type())){
           		out.println("무료회원");
           	}
           	else if("1".equals(mDto.getMem_type())){

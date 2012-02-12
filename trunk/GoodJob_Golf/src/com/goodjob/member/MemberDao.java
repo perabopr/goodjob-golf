@@ -74,7 +74,7 @@ public class MemberDao {
 			
 			//페이징
 			bind.add(((npage-1)* MEMBER.per_page));
-			bind.add((npage*MEMBER.per_page));
+			bind.add(MEMBER.per_page);
 			
 			list = (List<MemberDto>) qr.query(conn , MessageFormat.format(MEMBER.list,where) , rsh , bind.toArray());
 			
@@ -598,10 +598,13 @@ public class MemberDao {
 				having = " having count(reserve_uid) = ? " ;
 				bind.add(keyword);
 			}
-			
+			else if("sms_yn".equals(field) && keyword.length() > 0){
+				where = " where a.sms_yn = ? " ;
+				bind.add(keyword);
+			}
 			//페이징
 			bind.add(((npage-1)* per_page));
-			bind.add((npage*per_page));
+			bind.add(per_page);
 			
 			//System.out.println(MessageFormat.format(MEMBER.mem_sub_list,where,having));
 			

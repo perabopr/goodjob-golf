@@ -23,7 +23,7 @@ public class MYPAGE {
 	public static final String my_package_reserve = "select a.reserve_seq, " +
 							"       a.menu_seq, " +
 							"       a.package_seq, " +
-							"       date_format(a.reserve_day,''%Y.%m.%d %H:%i'') reserve_day, " +
+							"       date_format(a.reserve_day,''%Y.%m.%d'') reserve_day, " +
 							"       a.reserve_name, " +
 							"       a.package_name1, " +
 							"       a.package_name2,"+

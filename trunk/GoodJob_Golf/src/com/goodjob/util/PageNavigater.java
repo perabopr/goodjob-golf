@@ -126,10 +126,13 @@ public class PageNavigater {
 				break;
 			}
 			
+			if(i != 1)
+				str.append("&nbsp; I &nbsp;");
+			
 			if(i == npage){
-				str.append("<span class=normal_b>"+i+"</span>");
+				str.append("<span style='color:#CC0000;font-weight:bold;'>"+i+"</span>");
 			} else{
-				str.append("&nbsp; I &nbsp;<a href=\"javascript:goPage('"+i+"');\">" + i + "</a>\n");
+				str.append("<a href=\"javascript:goPage('"+i+"');\" class=normal_b>" + i + "</a>\n");
 			}
 		}
 		

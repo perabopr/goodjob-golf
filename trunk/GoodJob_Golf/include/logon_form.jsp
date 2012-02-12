@@ -19,7 +19,7 @@
         <td align="center" width="235" height="135">
             <table border="0" cellpadding="0" cellspacing="0" width="207">
                 <tr>
-                    <td align="center"><span class=yellow_b><%=ses_mem_name%></span><span class=white>님 로그인 중입니다
+                    <td align="center"><span class=yellow_b><%=ses_mem_name%></span><span class=white>님 로그인 되었습니다.
                     </td>
                 </tr>
                 <tr>

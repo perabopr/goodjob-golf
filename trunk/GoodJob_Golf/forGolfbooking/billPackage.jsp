@@ -138,7 +138,7 @@ $(function(){
 <input type="hidden" id="packageName" name="packageName" value="<%=packName %>">
 </TD></TR>
 <TR>
-<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 width=122 align=right>예약자이름</TD>
+<TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 width=122 align=right>예약자명</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white width=451><INPUT class=input_01 id="reserveName" name="reserveName" size=15> <INPUT name="chkRealName" id="chkRealName" type=checkbox><SPAN class=mem_notice>실제이용자가 예약자와 동일한 경우 체크</SPAN></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=25 align=right>핸드폰</TD>

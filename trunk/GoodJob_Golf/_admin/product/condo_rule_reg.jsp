@@ -60,10 +60,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white">
-              	<input class="input_box" size="55" id="promise1" name="promise1" value="<%= cdProList.getPromise1()%>">
+              	<input class="input_box" size="55" id="promise1_type" name="promise1_type" value="<%= cdProList.getPromise1_type()%>">
               </td>
               <td align="center" bgcolor="white">
-              	<input class="input_box" size="55" id="promise1_type" name="promise1_type" value="<%= cdProList.getPromise1_type()%>">
+              	<input class="input_box" size="55" id="promise1" name="promise1" value="<%= cdProList.getPromise1()%>">
               </td>
               </tr>
             </table></td>
@@ -77,10 +77,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise2" value="<%= cdProList.getPromise2()%>">
-                </td>
+              	<input class="input_box" size="55" name="promise2_type" value="<%= cdProList.getPromise2_type()%>">
+              </td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise2_type" value="<%= cdProList.getPromise2_type()%>">
+                  <input class="input_box" size="55" name="promise2" value="<%= cdProList.getPromise2()%>">
               </td>
               </tr>
             </table></td>
@@ -94,10 +94,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise3" value="<%= cdProList.getPromise3()%>">
-				</td>
+              	<input class="input_box" size="55" name="promise3_type" value="<%= cdProList.getPromise3_type()%>">
+			  </td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise3_type" value="<%= cdProList.getPromise3_type()%>">
+                  <input class="input_box" size="55" name="promise3" value="<%= cdProList.getPromise3()%>">
               </td>
               </tr>
             </table></td>
@@ -111,10 +111,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise4" value="<%= cdProList.getPromise4()%>">
+              	<input class="input_box" size="55" name="promise4_type" value="<%= cdProList.getPromise4_type()%>">
 			</td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise4_type" value="<%= cdProList.getPromise4_type()%>">
+                <input class="input_box" size="55" name="promise4" value="<%= cdProList.getPromise4()%>">
               </td>
               </tr>
             </table></td>
@@ -129,10 +129,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               <tr>
               
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise5" value="<%= cdProList.getPromise5()%>">
-			</td>
+              	<input class="input_box" size="55" name="promise5_type" value="<%= cdProList.getPromise5_type()%>">
+			  </td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise5_type" value="<%= cdProList.getPromise5_type()%>">
+                <input class="input_box" size="55" name="promise5" value="<%= cdProList.getPromise5()%>">
               </td>
               </tr>
             </table></td>

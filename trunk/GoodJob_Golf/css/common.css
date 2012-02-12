@@ -49,6 +49,16 @@ a:visited.realtime_team{text-decoration:none; font-size: 9pt; color:#FF7E00;}
 a:hover.realtime_team{text-decoration:none; font-size: 9pt; color:#FF7E00;}
 a:active.realtime_team{text-decoration:none; font-size: 9pt; color:#FF7E00;}
 
+/*¸¶ÀÌÆäÀÌÁö*/
+
+.m_title{font:11px "µ¸¿ò","dotum"; color:#58595B; text-decoration:none;}
+.m_title_b{font:11px "µ¸¿ò","dotum"; color:#58595B; text-decoration:none;font-weight:bold;letter-spacing:-0.05em;}
+.m_title_blue{font:11px "µ¸¿ò","dotum"; color:#2860C7; text-decoration:none;font-weight:bold;letter-spacing:-0.05em;}
+.m_title_red{font:11px "µ¸¿ò","dotum"; color:#E42F1D; text-decoration:none;font-weight:bold;letter-spacing:-0.05em;}
+.m_title_green{font:11px "µ¸¿ò","dotum"; color:#008000; text-decoration:none;letter-spacing:-0.05em;}
+.m_title_pink{font:11px "µ¸¿ò","dotum"; color:#CC16CC; text-decoration:none;;letter-spacing:-0.05em;}
+
+
 /*¸ÞÀÎ°Ô½ÃÆÇ¸®½ºÆ®*/
 
 .board_date{font:11px "µ¸¿ò","dotum"; color:#808285; text-decoration:none;}

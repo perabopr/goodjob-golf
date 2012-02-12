@@ -66,10 +66,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white">
-              	<input class="input_box" size="55" id="promise1" name="promise1" value="<%= pkProList.getPromise1()%>">
+              	<input class="input_box" size="55" id="promise1_type" name="promise1_type" value="<%= pkProList.getPromise1_type()%>">
               </td>
               <td align="center" bgcolor="white">
-              	<input class="input_box" size="55" id="promise1_type" name="promise1_type" value="<%= pkProList.getPromise1_type()%>">
+              	<input class="input_box" size="55" id="promise1" name="promise1" value="<%= pkProList.getPromise1()%>">
               </td>
               </tr>
             </table></td>
@@ -83,10 +83,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise2" value="<%= pkProList.getPromise2()%>">
-                </td>
+              	<input class="input_box" size="55" name="promise2_type" value="<%= pkProList.getPromise2_type()%>">
+              </td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise2_type" value="<%= pkProList.getPromise2_type()%>">
+                <input class="input_box" size="55" name="promise2" value="<%= pkProList.getPromise2()%>">
               </td>
               </tr>
             </table></td>
@@ -100,10 +100,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise3" value="<%= pkProList.getPromise3()%>">
-				</td>
+              	<input class="input_box" size="55" name="promise3_type" value="<%= pkProList.getPromise3_type()%>">
+			  </td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise3_type" value="<%= pkProList.getPromise3_type()%>">
+                <input class="input_box" size="55" name="promise3" value="<%= pkProList.getPromise3()%>">
               </td>
               </tr>
             </table></td>
@@ -117,10 +117,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               </tr>
               <tr>
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise4" value="<%= pkProList.getPromise4()%>">
-			</td>
+              	<input class="input_box" size="55" name="promise4_type" value="<%= pkProList.getPromise4_type()%>">
+			  </td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise4_type" value="<%= pkProList.getPromise4_type()%>">
+                <input class="input_box" size="55" name="promise4" value="<%= pkProList.getPromise4()%>">
               </td>
               </tr>
             </table></td>
@@ -135,10 +135,10 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
               <tr>
               
               <td align="center" bgcolor="white" width="50%">
-                  <input class="input_box" size="55" name="promise5" value="<%= pkProList.getPromise5()%>">
-			</td>
+              	<input class="input_box" size="55" name="promise5_type" value="<%= pkProList.getPromise5_type()%>">
+			  </td>
               <td align="center" bgcolor="white" width="50%">
-              <input class="input_box" size="55" name="promise5_type" value="<%= pkProList.getPromise5_type()%>">
+                <input class="input_box" size="55" name="promise5" value="<%= pkProList.getPromise5()%>">
               </td>
               </tr>
             </table></td>
@@ -153,8 +153,8 @@ if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); }
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;" width="162"><span class=list_title>취소규정</span></td>
           <td bgcolor="white" style="padding-left:10px;" width="710">
-              <textarea class="box03" rows="8" cols="113" id="cancelrule" name="cancelrule"><%= pkProList.getCancelrule() %></textarea>
-            </td>
+            <textarea class="box03" rows="8" cols="113" id="cancelrule" name="cancelrule"><%= pkProList.getCancelrule() %></textarea>
+          </td>
         </tr>
       </table></td>
   </tr>

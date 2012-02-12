@@ -18,8 +18,19 @@ PackageDao pkDao = new PackageDao();
 List<RegionDto> rList = pkDao.getRegionList("1");
 
 Calendar vCalendar = Calendar.getInstance();
+String tmYear = Utils.getDate("yyyyMMdd").substring(0, 4);
+String tmMonth = Utils.getDate("yyyyMMdd").substring(4, 6);
+String tmDay = Utils.getDate("yyyyMMdd").substring(6, 8);
+vCalendar.set(Integer.parseInt(tmYear), Integer.parseInt(tmMonth)-1, Integer.parseInt(tmDay));
+vCalendar.add(vCalendar.DATE, 5);
+tmYear = Integer.toString(vCalendar.get(vCalendar.YEAR));
+tmMonth = "0" + Integer.toString(vCalendar.get(vCalendar.MONTH)+1);
+tmDay = "0" + Integer.toString(vCalendar.get(vCalendar.DATE));
+String current5Date = tmYear
+	+ tmMonth.substring(tmMonth.length()-2, tmMonth.length())
+	+ tmDay.substring(tmDay.length()-2, tmDay.length());
 
-String strDate = StringUtils.defaultIfEmpty(request.getParameter("date"),Utils.getDate("yyyyMMdd"));
+String strDate = StringUtils.defaultIfEmpty(request.getParameter("date"),current5Date);
 
 int tYear;
 int tMonth;
@@ -43,9 +54,9 @@ if(strDate == null || strDate.length() != 8){
 }
 
 vCalendar.add(vCalendar.DATE, -14);
-String tmYear = Integer.toString(vCalendar.get(vCalendar.YEAR));
-String tmMonth = "0" + Integer.toString(vCalendar.get(vCalendar.MONTH)+1);
-String tmDay = "0" + Integer.toString(vCalendar.get(vCalendar.DATE));
+tmYear = Integer.toString(vCalendar.get(vCalendar.YEAR));
+tmMonth = "0" + Integer.toString(vCalendar.get(vCalendar.MONTH)+1);
+tmDay = "0" + Integer.toString(vCalendar.get(vCalendar.DATE));
 
 String preDate = tmYear
 			+ tmMonth.substring(tmMonth.length()-2, tmMonth.length())

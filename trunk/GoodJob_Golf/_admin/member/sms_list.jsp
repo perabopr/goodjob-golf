@@ -69,7 +69,6 @@ function NewWindow(mypage, myname, w, h, scroll) {
 	document.smsFrm.target="pop_sms_1";
 	document.smsFrm.action=mypage;
 	document.smsFrm.submit();
-	 
 } 
 
 var check  = 0;                                                                            //체크 여부 확인
@@ -130,22 +129,6 @@ function perPage(){
           <option value="reserve"<%=("reserve".equals(field)?" selected":"")%>>예약횟수</option>
           <option value="sms_yn"<%=("sms_yn".equals(field)?" selected":"")%>>SMS수신여부</option>
         </select>
-        <!--select name="region" size="1">
-          <option value=""<%=("".equals(region)?" selected":"")%>>선택하세요</option>
-          <option value="1"<%=("1".equals(region)?" selected":"")%>>수도권</option>
-          <option value="2"<%=("2".equals(region)?" selected":"")%>>강원권</option>
-          <option value="3"<%=("3".equals(region)?" selected":"")%>>충청권</option>
-          <option value="4"<%=("4".equals(region)?" selected":"")%>>경상권</option>
-          <option value="5"<%=("5".equals(region)?" selected":"")%>>전라권</option>
-          <option value="6"<%=("6".equals(region)?" selected":"")%>>제주권</option>
-        </select>
-
-        <select name="reserve" size="1">
-          <option value=""<%=("".equals(reserve)?" selected":"")%>>선택하세요</option>
-          <option value="real"<%=("".equals(reserve)?" selected":"")%>>실시간부킹</option>
-          <option value="book"<%=("".equals(reserve)?" selected":"")%>>사전예약</option>
-          <option value="package"<%=("".equals(reserve)?" selected":"")%>>패키지</option>
-        </select>-->
         &nbsp;
         <input id="keyword" name="keyword" type="text" size="20" value="<%=keyword%>" class="input_box">
         <a href="javascript:on_search();"><img src="/_admin/images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle"></a>

@@ -89,7 +89,7 @@ function go_view(val){
               <option value="3"<%=("3".equals(region)?" selected":"")%>>충청권</option>
               <option value="4"<%=("4".equals(region)?" selected":"")%>>전라권</option>
               <option value="5"<%=("5".equals(region)?" selected":"")%>>경상권</option>
-              <option value="6"<%=("6".equals(region)?" selected":"")%>>제주권</option>
+              <option value="6"<%=("6".equals(region)?" selected":"")%>>제주도</option>
             </select>
             <select name="sex" size="1">
               <option value="">성별선택</option>

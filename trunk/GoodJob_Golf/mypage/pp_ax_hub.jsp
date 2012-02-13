@@ -9,6 +9,7 @@
 	String ses_mem_id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"));
 	String menu = StringUtils.trimToEmpty(request.getParameter("menu"));
 	String reserve_seq = StringUtils.trimToEmpty(request.getParameter("reserve_seq"));
+	String process_status = StringUtils.trimToEmpty(request.getParameter("process_status"));
 
 
     /* ============================================================================== */
@@ -326,11 +327,10 @@
                 }
                 
                 //---------------------- DB 처리 ---------------------
-                
                 MemberDao mDao = new MemberDao();
                 GolfLinkDao glDao = new GolfLinkDao();
                 Map<String,String> params = new HashMap<String,String>();
-                params.put("process_status","1");
+                params.put("process_status",process_status);
                 params.put("reserve_seq", reserve_seq);
                 
                 String tablename = "";
@@ -346,7 +346,6 @@
                 else {
                 	tablename = "tb_golflink_reserve";
                 }
-                
                 glDao.setStatusUpdate(tablename, params);
             	
 			}

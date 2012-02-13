@@ -6,6 +6,7 @@
 	String good_price = StringUtils.trimToEmpty(request.getParameter("good_price"));
 	String menu = StringUtils.trimToEmpty(request.getParameter("menu"));
 	String reserve_seq = StringUtils.trimToEmpty(request.getParameter("reserve_seq"));
+	String process_status = StringUtils.trimToEmpty(request.getParameter("process_status"));
 	
 %>
 <html>
@@ -47,6 +48,8 @@
 <input type="hidden" name="good_price" value="<%=good_price%>"/>
 <input type="hidden" name="menu" value="<%=menu%>"/>
 <input type="hidden" name="reserve_seq" value="<%=reserve_seq%>"/>
+<input type="hidden" name="process_status" value="<%=process_status%>"/>
+
 </form>
 	    <tr>
 	        <td style="background-image:url('/kcp/img/kcp_plug_bg01.gif');">

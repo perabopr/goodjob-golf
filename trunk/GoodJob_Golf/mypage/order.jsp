@@ -9,6 +9,7 @@
 	String ses_mem_id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"));
 	String menu = StringUtils.trimToEmpty(request.getParameter("menu"));
 	String reserve_seq = StringUtils.trimToEmpty(request.getParameter("reserve_seq"));
+	String process_status = StringUtils.trimToEmpty(request.getParameter("process_status"));
 	
 	MemberDao mDao = new MemberDao();
 	
@@ -102,12 +103,10 @@
             else
             {
                 /*  res_cd와 res_msg변수에 해당 오류코드와 오류메시지가 설정됩니다.
-                    ex) 고객이 Payplus Plugin에서 취소 버튼 클릭시 res_cd=3001, res_msg=사용자 취소
-                    값이 설정됩니다.
+                    ex) 고객이 Payplus Plugin에서 취소 버튼 클릭시 res_cd=3001, res_msg=사용자 취소값이 설정됩니다.
                 */
                 res_cd  = document.order_info.res_cd.value ;
                 res_msg = document.order_info.res_msg.value ;
-
                 //alert ( "Payplus Plug-in 실행 결과(샘플)\n" + "res_cd = " + res_cd + "|" + "res_msg=" + res_msg ) ;
             }
 
@@ -161,6 +160,7 @@
 <form name="order_info" method="post" action="/mypage/pp_ax_hub.jsp" >
 <input type="hidden" name="menu" value="<%=menu%>"/>
 <input type="hidden" name="reserve_seq" value="<%=reserve_seq%>"/>
+<input type="hidden" name="process_status" value="<%=process_status%>"/>
 <%
     /* ============================================================================== */
     /* =   1. 주문 정보 입력                                                        = */

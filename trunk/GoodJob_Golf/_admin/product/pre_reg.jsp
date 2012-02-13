@@ -164,6 +164,12 @@ function getFileExtension(filePath)
           <td width="712" bgcolor="white" style="padding-left:10px;"><input id="golflinkName" class="input_box" size="40" name="golflinkName" value="<%= gldto.getGolflink_name()%>"></td>
         </tr>
         <tr>
+          <td bgcolor="#E6E7E8" align="right" style="padding-right:10px;" width="162"><span class=list_title>메인노출 이벤트</span></td>
+          <td width="712" bgcolor="white" style="padding-left:10px;">
+          	<textarea class="box03" rows="10" cols="113" id="eventPrice" name="eventPrice" title="higheditor_simple"><%= gldto.getEvent_price() != null?gldto.getEvent_price():""%></textarea>
+          </td>
+        </tr>
+        <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>지역선택</span></td>
           <td bgcolor="white" style="padding-left:10px;"><select id="regionSeq" name="regionSeq" size="1">
               <option>선택하세요</option>

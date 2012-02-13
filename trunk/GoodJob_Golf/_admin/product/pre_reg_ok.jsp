@@ -51,6 +51,7 @@
 		glDto.setGolflink_seq(Integer.parseInt(fileUpload.getParameter("glSeq")));
 	}
 	glDto.setGolflink_name((String)fileUpload.getParameter("golflinkName"));
+	glDto.setEvent_price(fileUpload.getParameter("eventPrice"));
 	glDto.setRegion_seq(Integer.parseInt(fileUpload.getParameter("regionSeq")));
 	glDto.setHoll_type((String)fileUpload.getParameter("hollType"));
 	glDto.setCourse_guide((String)fileUpload.getParameter("courseGuide"));

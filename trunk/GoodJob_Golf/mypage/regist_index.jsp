@@ -106,7 +106,7 @@ function mypage_search() {
 	frm.submit();
 }
 
-function card_order(menu , reserve_seq , good_price , good_name){
+function card_order(process_status , menu , reserve_seq , good_price , good_name){
 
 	<%
 		if(!("gundallove@gmail.com".equals(mem_id) || "killkoo@naver.com".equals(mem_id))){
@@ -127,6 +127,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
 	$('#good_price').val(good_price);
 	$('#menu').val(menu);
 	$('#reserve_seq').val(reserve_seq);
+	$('#process_status').val(process_status);
 	
 	var win_pop = window.open("","order_pop","width=650,height=700,scrollbars=no");
 	frm.target =  "order_pop"; 
@@ -135,7 +136,6 @@ function card_order(menu , reserve_seq , good_price , good_name){
 }
 
 </script>
-
 					<!--############### 중앙 컨텐츠 영역 #################-->
 					<table border="0" cellpadding="0" cellspacing="0" width="751">
                           <tr>
@@ -183,6 +183,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
 														<input type="hidden" id="good_price" name="good_price" value=""/>
 														<input type="hidden" id="menu" name="menu" value=""/>
 														<input type="hidden" id="reserve_seq" name="reserve_seq" value=""/>
+														<input type="hidden" id="process_status" name="process_status" value=""/>
 														</form>
 														<form name="frm" method="post">
 														<input type="hidden" id="tab" name="tab" value="<%=tab%>"/>
@@ -249,7 +250,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
                                                                                     <td bgcolor="white" align="center" class=m_title_blue><%=Utils.numberFormat(golfDto.getCoupon_price())%>원</td>
                                                                                     <td bgcolor="white" align="center" class=m_title_red><%=Utils.numberFormat(golfDto.getProduct_price())%>원<br>
                                                                                     <%if("0".equals(golfDto.getProcess_status())){%>
-																					<a href="javascript:card_order('<%=golfDto.getMenu_seq()%>','<%=golfDto.getReserve_seq()%>','<%=golfDto.getProduct_price()%>','<%=golfDto.getGolflink_name()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>
+																					<a href="javascript:card_order('1','<%=golfDto.getMenu_seq()%>','<%=golfDto.getReserve_seq()%>','<%=golfDto.getProduct_price()%>','<%=golfDto.getGolflink_name()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>
 																					<%}%>
 																					</td>
                                                                                     <td bgcolor="white" align="center" class=m_title><%=golfDto.getPer_num()%>명/1팀</td>
@@ -304,10 +305,14 @@ function card_order(menu , reserve_seq , good_price , good_name){
                                                                            <td height="35" bgcolor="white" align="center" class=m_title><%=pkDto.getReserve_day()%></td>
                                                                            <td bgcolor="white" align="center" class=m_title_blue><%=pkDto.getPackage_name1() + (StringUtils.trimToEmpty(pkDto.getPackage_name2()).length()>0?"<br/>+&nbsp;"+pkDto.getPackage_name2():"")%></td>
                                                                            <td bgcolor="white" align="center" class=m_title><%=pkDto.getTour_date().replaceAll("-",".")%></td>
-                                                                           <td bgcolor="white" align="center" class=m_title_red><%=(pkDto.getPackage_price()==0?"":Utils.numberFormat(pkDto.getPackage_price())+"원")%></td>
+                                                                           <td bgcolor="white" align="center" class=m_title_red><%=(pkDto.getPackage_price()==0?"":Utils.numberFormat(pkDto.getPackage_price())+"원")%><br>
+                                                                            <%if("0".equals(pkDto.getProcess_status())){%>
+																			<a href="javascript:card_order('0','<%=pkDto.getMenu_seq()%>','<%=pkDto.getReserve_seq()%>','<%=pkDto.getBalance_price()%>','<%=pkDto.getPackage_name1()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>
+																			<%}%>
+                                                                           </td>
                                                                            <td bgcolor="white" align="center" class=m_title_red><%=(pkDto.getBalance_price()==0?"":Utils.numberFormat(pkDto.getBalance_price())+"원")%><br>
                                                                            <%if("0".equals(pkDto.getProcess_status())){%>
-																			<a href="javascript:card_order('<%=pkDto.getMenu_seq()%>','<%=pkDto.getReserve_seq()%>','<%=pkDto.getBalance_price()%>','<%=pkDto.getPackage_name1()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>
+																			<a href="javascript:card_order('1','<%=pkDto.getMenu_seq()%>','<%=pkDto.getReserve_seq()%>','<%=pkDto.getBalance_price()%>','<%=pkDto.getPackage_name1()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>
 																			<%}%>
 																			</td>
                                                                            <td bgcolor="white" align="center" class=m_title><%=pkDto.getPer_num()%>명/1팀</td>
@@ -364,7 +369,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
 														                    <td bgcolor="white" align="center" class=m_title><%=Utils.dateFormat(cdDto.getOut_date(),".")%></td>
 														                    <td bgcolor="white" align="center" class=m_title_red><%=(cdDto.getCondo_price()==0?"":Utils.numberFormat(cdDto.getCondo_price())+"원")%><br>
 														                    <%if("0".equals(cdDto.getProcess_status())){%>
-																			<a href="javascript:card_order('<%=cdDto.getMenu_seq()%>','<%=cdDto.getReserve_seq()%>','<%=cdDto.getCondo_price()%>','<%=cdDto.getCondo_name()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>
+																			<a href="javascript:card_order('1','<%=cdDto.getMenu_seq()%>','<%=cdDto.getReserve_seq()%>','<%=cdDto.getCondo_price()%>','<%=cdDto.getCondo_name()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>
 																			<%}%>
 																			</td>
 														                    <td bgcolor="white" align="center">

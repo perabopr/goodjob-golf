@@ -1,3 +1,4 @@
+<%@page import="com.goodjob.product.dto.GolfLinkDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
@@ -58,6 +59,15 @@ String selectMonth = "0" + Integer.toString(currMonth+1);
 prdtDto.setProduct_month(selectMonth.substring(selectMonth.length()-2));
 productDao prdtDao = new productDao();
 List<ProductDto> arrPrdt = prdtDao.getProductSelect(prdtDto);
+
+String golflinkName = "";
+GolfLinkDao dld = new GolfLinkDao();
+List<GolfLinkDto> arrgldto = null;
+arrgldto = dld.getGolfLink(Integer.parseInt(glSeq));
+if(arrgldto.size() == 1){
+	GolfLinkDto gldto = arrgldto.get(0);
+	golflinkName = gldto.getGolflink_name();
+}
 %>
 <%!
 	public ProductDto chkDayFind(List<ProductDto> arrPrdtparam, int day){
@@ -352,7 +362,7 @@ String.prototype.trim = function(){
 </form>
 <table align="center" border="0" cellpadding="0" cellspacing="0" width="760">
   <tr>
-    <td align="center" width="760" class=title>★ 사전 골프장 시간 및 가격입력 ★</td>
+    <td align="center" width="760" class=title>★ <%=golflinkName.length() > 0 ? golflinkName+" ":"" %>사전 골프장 시간 및 가격입력 ★</td>
   </tr>
   <tr>
     <td height="35" align="center">

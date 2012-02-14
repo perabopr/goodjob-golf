@@ -19,6 +19,8 @@ int gcId = NumberUtils.toInt(request.getParameter("gcId"),0);
 int golf = NumberUtils.toInt(request.getParameter("golf"),0);
 int date = NumberUtils.toInt(request.getParameter("date"),0);
 int cdate = NumberUtils.toInt(request.getParameter("cdate"),0);
+int perNum = NumberUtils.toInt(request.getParameter("perNum"),0);
+String cbNum = StringUtils.trimToEmpty(request.getParameter("cbNum"));
 //int couponSeq = NumberUtils.toInt(request.getParameter("ddlCoupon"),0);
 String couponValue = StringUtils.trimToEmpty(request.getParameter("ddlCoupon"));
 String[] arrCouponValue = couponValue.split("/");
@@ -40,7 +42,6 @@ String uPhone = "";
 uPhone += request.getParameter("phone1") + "-";
 uPhone += request.getParameter("phone2") + "-";
 uPhone += request.getParameter("phone3");
-int perNum = 4;
 
 /* ----- 쿠폰 ----- */
 CouponDao cpDao = new CouponDao();
@@ -62,7 +63,7 @@ for(int i = 0; i < couponList.size(); i++){
 }
 glrDto.setCoupon_price(couponPrice);
 glrDto.setProcess_status("0");
-glrDto.setCard_bill_num("");
+glrDto.setCard_bill_num(cbNum);
 glrDto.setProductsub_seq(gcId);
 
 GolfLinkDao glDao = new GolfLinkDao();

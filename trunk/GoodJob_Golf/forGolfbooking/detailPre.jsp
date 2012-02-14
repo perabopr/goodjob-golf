@@ -645,10 +645,12 @@ for (int i = 1; i < 15 ;i++){
 %>
 		</SELECT></TD>
 	<TD bgColor=white align=center>
-	<P><SELECT size=1 id="ddlPersonCnt" name="ddlPersonCnt" onchange="selectGolfLink();"<%=(disabled?"":" disabled='disabled'")%>> 
+	<P><SELECT size=1 id="ddlPersonCnt" name="ddlPersonCnt" onchange="selectGolfLink();"> 
 		<OPTION value="0" selected>선택</OPTION> 
+		<% if(disabled){ %>
 		<OPTION value="1">1</OPTION> 
-		<OPTION value="2">2</OPTION> 
+		<OPTION value="2">2</OPTION>
+		<% } %>
 		<OPTION value="3">3</OPTION> 
 		<OPTION value="4"<%=(disabled?"":" selected")%>>4</OPTION></SELECT> 명 /
 		<SELECT size=1 id="ddlTeamCnt" name="ddlTeamCnt" disabled="disabled"> 

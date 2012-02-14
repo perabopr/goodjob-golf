@@ -59,7 +59,7 @@
 																}
 																else{
 													%>
-															<a href="/forGolfbooking/reserve.jsp?menu=5&region=<%=arrRegions.get(i).getRegion_seq() %>" class=area><%=arrRegions.get(i).getRegion_name()%></a> &nbsp;I &nbsp;
+															<a href="/forGolfbooking/reserve.jsp?menu=5&region=<%=arrRegions.get(i).getRegion_seq() %>" class=area><%=arrRegions.get(i).getRegion_name()%></a> <%=i+1 < arrRegions.size()? "&nbsp;I &nbsp;":"" %>
 													<%				
 																}
 															}

@@ -77,12 +77,19 @@ function billok(){
 	
 	if($("#billBtype").attr("checked")){
 		if(window.confirm("예약을 완료하시려면 확인 버튼을 누르십시오 \r\n예약확인 SMS : "+$("#phone1").val()+$("#phone2").val()+$("#phone3").val())){
-			var frm = document.exefrm;
-			frm.target =  "ifr_hidden"; 
-			frm.action = "exe_real.jsp";
-			frm.submit();
+			billSubmit("");
 		}
+	}else{
+		card_order('1','','<%=buyPrice%>','<%=prDto.getGolflink_name()%>');
 	}
+}
+
+function billSubmit(cbNum){
+	$("#cbNum").val(cbNum);
+	var frm = document.exefrm;
+	frm.target =  "ifr_hidden"; 
+	frm.action = "exe_real.jsp";
+	frm.submit();
 }
 
 function couponChange(){
@@ -123,14 +130,48 @@ $(function(){
 		}
 	});
 });
+
+function card_order(menu , reserve_seq , good_price , good_name){
+	<%
+		if(("gundallove@gmail.com".equals(user_Id) || "killkoo@naver.com".equals(user_Id))){
+	%>
+	alert("카드 결제는 준비 중 입니다.");
+	return;
+	<%
+		}
+	%>
+
+	if(good_price == '' || good_price == '0'){
+		alert("결제 금액이 없습니다.");
+		return;
+	}
+	var frm = document.order_frm;
+	
+	$("#good_name").val(good_name);
+	$('#good_price').val(good_price);
+	$('#menu').val(menu);
+	$('#reserve_seq').val(reserve_seq);
+	
+	var win_pop = window.open("","order_pop","width=650,height=700,scrollbars=no");
+	frm.target =  "order_pop"; 
+	frm.action = "/mypage/chk_plugin.jsp";
+	frm.submit();
+}
 //-->
 </script>
+<form name="order_frm" method="post">
+<input type="hidden" id="good_name" name="good_name" value=""/>
+<input type="hidden" id="good_price" name="good_price" value=""/>
+<input type="hidden" id="menu" name="menu" value=""/>
+<input type="hidden" id="reserve_seq" name="reserve_seq" value=""/>
+</form>
 <FORM NAME="exefrm" METHOD="post">
 <input type="hidden" id="menu" name="menu" value="1">
 <input type="hidden" id="gcId" name="gcId" >
 <input type="hidden" id="golf" name="golf" >
 <input type="hidden" id="date" name="date" >
 <input type="hidden" id="cdate" name="cdate" >
+<input type="hidden" id="cbNum" name="cbNum" >
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
 <TR>
 <TD bgColor=white vAlign=top width=745 align=center>
@@ -188,7 +229,7 @@ $(function(){
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=StringUtils.defaultIfEmpty(prDto.getCourse_name(), "<div class=red_s>없음</div>") %></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>인원</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white>4명</TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white><select id="perNum" name="perNum"><option value="3">3</option><option value="4" selected>4</option></select>명</TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>프리미엄상품권 적용</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white height=25>
@@ -211,7 +252,12 @@ if(couponList != null){
 <TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange id="billPrice" name="billPrice"><%=commify(buyPrice) %></SPAN>원</TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>결제방법선택</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><INPUT id="billBtype" name="billtype" value="B" type=radio checked> 무통장입금</TD></TR></TBODY></TABLE></TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white><INPUT id="billBtype" name="billtype" value="B" type=radio checked> 무통장입금 <%if(("gundallove@gmail.com".equals(user_Id) || "killkoo@naver.com".equals(user_Id))){%>&nbsp;<INPUT id="billBtype2" name="billtype" value="C" type=radio> 카드결제<%}%></TD>
+</TR>
+</TBODY>
+</TABLE>
+</TD>
+</TR>
 <TR>
 <TD style="PADDING-BOTTOM: 50px; PADDING-TOP: 30px" align=center><IMG border=0 src="/images/booking/btn_next_page3.gif" onclick="billok();" style="cursor:hand"></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
 <iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe>

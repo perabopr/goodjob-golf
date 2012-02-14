@@ -58,7 +58,7 @@ List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 			<%
 					}else{
 			%>
-					<A class=area href="reserve.jsp?menu=3&region=<%=rList.get(i).getRegion_seq()%>"><%=rList.get(i).getRegion_name()%></A> &nbsp;I &nbsp;
+					<A class=area href="reserve.jsp?menu=3&region=<%=rList.get(i).getRegion_seq()%>"><%=rList.get(i).getRegion_name()%></A> <%=i+1 < rList.size()? "&nbsp;I &nbsp;":"" %>
 			<% 
 					}
 				} 

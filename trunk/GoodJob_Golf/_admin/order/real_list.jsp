@@ -113,6 +113,7 @@ function goPage(val){
           <td bgcolor="#e6e7e8" align="center" width="234"><span class=normal_b>아이디</span></td>
           <td width="235" align="center" bgcolor="#E6E7E8"><span class=normal_b>골프장명</span></td>
           <td bgcolor="#e6e7e8" align="center" width="209"><span class=normal_b>부킹일시</span></td>
+          <td bgcolor="#E6E7E8" align="center" width="130"><span class=normal_b>인원/팀</span></td>
           <td bgcolor="#e6e7e8" align="center" width="216"><span class=normal_b>코스</span></td>
           <td bgcolor="#e6e7e8" align="center" width="167"><span class=normal_b>연락처</span></td>
           <td align="center" bgcolor="#e6e7e8" width="114"><span class=normal_b>상품권</span></td>
@@ -137,6 +138,7 @@ if(list != null){
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_uid() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getGolflink_name() %></td>
           <td align="center" bgcolor="white"><%=vbookingDate %></td>
+          <td align="center" bgcolor="white"><%=list.get(i).getPer_num() %>명/1팀</td>
           <td align="center" bgcolor="white"><%=list.get(i).getGolflink_course() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
           <td align="right" bgcolor="white"><span class=blue><%=commify(list.get(i).getCoupon_price()) %> 원</span></td>

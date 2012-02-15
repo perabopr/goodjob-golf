@@ -401,7 +401,7 @@ visibility: hidden;
 			%>
 			</TR>
 			<%
-			for(int i = 0; i < listGolf.size(); i++){
+			for(int i = 0; i < listGolf2.size(); i++){
 				ProductDto pDto = new ProductDto();
 				pDto.setGolflink_seq(listGolf2.get(i).getGolflink_seq());
 				pDto.setProduct_startDate(sDate);

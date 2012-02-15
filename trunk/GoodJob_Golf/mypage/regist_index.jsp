@@ -303,7 +303,7 @@ function card_order(process_status , menu , reserve_seq , good_price , good_name
 																	%>
 														                <tr>
                                                                            <td height="35" bgcolor="white" align="center" class=m_title><%=pkDto.getReserve_day()%></td>
-                                                                           <td bgcolor="white" align="center" class=m_title_blue><%=pkDto.getPackage_name1() + (StringUtils.trimToEmpty(pkDto.getPackage_name2()).length()>0?"<br/>+&nbsp;"+pkDto.getPackage_name2():"")%></td>
+                                                                           <td bgcolor="white" align="center" class=m_title_blue><%=pkDto.getPackage_name1() + (StringUtils.trimToEmpty(pkDto.getPackage_name2()).length()>0?"+&nbsp;"+pkDto.getPackage_name2():"")%></td>
                                                                            <td bgcolor="white" align="center" class=m_title><%=pkDto.getTour_date().replaceAll("-",".")%></td>
                                                                            <td bgcolor="white" align="center" class=m_title_red><%=(pkDto.getPackage_price()==0?"":Utils.numberFormat(pkDto.getPackage_price())+"원")%><br>
                                                                             <%if("0".equals(pkDto.getProcess_status())){%>

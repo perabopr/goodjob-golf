@@ -248,7 +248,7 @@
                     <!-- 주문번호(ordr_idxx) -->
                     <tr style="height:20px">
                         <td class="sub_title1">주문 번호</td>
-                        <td class="sub_input1"><input type="text" name="ordr_idxx" class="frminput" value="" size="40" maxlength="40"/></td>
+                        <td class="sub_input1"><input type="text" name="ordr_idxx" class="frminput" value="" size="40" maxlength="40" readonly/></td>
                     </tr>
                     <!-- 상품명(good_name) -->
                     <tr style="height:20px">
@@ -258,17 +258,17 @@
                     <!-- 결제금액(good_mny) - ※ 필수 : 값 설정시 ,(콤마)를 제외한 숫자만 입력하여 주십시오. -->
                     <tr style="height:20px">
                         <td class="sub_title1">결제 금액</td>
-                        <td class="sub_input1"><input type="text" name="good_mny" class="frminput right" value="<%=good_price%>" size="10" maxlength="9"/>원(숫자만 입력)</td>
+                        <td class="sub_input1"><input type="text" name="good_mny" class="frminput right" value="<%=good_price%>" size="10" maxlength="9" readonly/>원(숫자만 입력)</td>
                     </tr>
                     <!-- 주문자명(buyr_name) -->
                     <tr style="height:20px">
                         <td class="sub_title1">주문자명</td>
-                        <td class="sub_input1"><input type="text" name="buyr_name" class="frminput" value="<%=mDto.getMem_name()%>"/></td>
+                        <td class="sub_input1"><input type="text" name="buyr_name" class="frminput" value="<%=mDto.getMem_name()%>" readonly/></td>
                     </tr>
                     <!-- 주문자 E-mail(buyr_mail) -->
                     <tr style="height:20px">
                         <td class="sub_title1">E-mail</td>
-                        <td class="sub_input1"><input type="text" name="buyr_mail" class="frminput" value="<%=mDto.getMem_id()%>" size="30" maxlength="30" /></td>
+                        <td class="sub_input1"><input type="text" name="buyr_mail" class="frminput" value="<%=mDto.getMem_id()%>" size="30" maxlength="30" readonly/></td>
                     </tr>
                     <!-- 주문자 연락처1(buyr_tel1)
                     <tr style="height:20px">

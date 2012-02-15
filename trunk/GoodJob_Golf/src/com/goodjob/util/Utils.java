@@ -67,6 +67,7 @@ public class Utils {
 		else
 			return date.substring(0,4)+pattern+date.substring(4,6)+pattern+date.substring(6,8);
 	}
+	
 	/**
 	 * 인증번호 
 	 * @param length

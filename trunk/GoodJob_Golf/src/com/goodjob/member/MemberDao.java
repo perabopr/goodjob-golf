@@ -208,6 +208,7 @@ public class MemberDao {
 			bind.add(mDto.getMem_mtel());
 			bind.add(mDto.getSms_yn());
 			bind.add(mDto.getEmail_yn());
+			bind.add(mDto.getRecommend());
 			
 			QueryRunner qr = new QueryRunner();
 			qr.update(conn , MEMBER.insert , bind.toArray());

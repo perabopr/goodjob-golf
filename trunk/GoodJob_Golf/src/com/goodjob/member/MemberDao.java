@@ -491,6 +491,36 @@ public class MemberDao {
 		return isDuplicate;
 	}
 
+	/**
+	 * 추천아이디
+	 * @param mem_id
+	 * @return
+	 */
+	public String getRecommend(String mem_id){
+		
+		Map<String,String> map = null;
+		Connection conn = null;
+		String mem_pwd = "";
+		try {
+			
+			String[] bind = {mem_id};
+			conn = DBManager.getConnection();
+			
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			map = (Map)qr.query(conn , MEMBER.recommend , rsh , bind);
+			
+			if(map != null) mem_pwd = map.get("recommend");
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return mem_pwd;
+	}
+
 	public MemberDto logon(String mem_id , String mem_pwd){
 		
 		MemberDto mDto = null;

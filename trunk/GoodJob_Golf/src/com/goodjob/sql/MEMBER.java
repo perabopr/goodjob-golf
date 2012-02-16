@@ -34,8 +34,11 @@ public class MEMBER {
 	public static final String memo_update = " update tb_member set memo = ? where MEM_ID = ?";
 	
 	//회원등록
-	public static final String insert = " insert into tb_member (mem_id,mem_name,mem_pwd,mem_jumin,mem_mtel,sms_yn,email_yn,mem_type,recommend,secession,reg_dt) "+
-										"values (? ,? ,?,? ,? ,? ,?,'0',?,'N',now()) ";
+	public static final String insert = "insert into tb_member (mem_id,mem_name,mem_pwd,mem_jumin,mem_mtel,sms_yn,email_yn,mem_type,recommend,secession,reg_dt) "+
+										"values (? ,? , ?,? ,? ,? ,? ,'0',?,'N',now()) ";
+	
+	//추천 아이디
+	public static final String recommend = "select ifnull(recommend,'') recommend from tb_member where mem_id = ? ";
 	
 	//아이디 찾기
 	public static final String id_find = " select mem_id from tb_member where mem_name = ? and mem_mtel = ? ";
@@ -90,4 +93,6 @@ public class MEMBER {
 	public static final String auth_update = "update tb_email_auth set use_yn='Y' where email = ? ";
 	
 	public static final String history_count = "select count(mem_id) logon_cnt , max(reg_dt) last_dt from tb_logon_history where mem_id= ? ";
+	
+	
 }

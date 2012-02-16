@@ -155,7 +155,7 @@ visibility: hidden;
 			<%		
 				}else{
 			%>
-				<a class=area href="reserve.jsp?menu=1&date=<%=strDate %>">전체보기</a> &nbsp;I&nbsp;
+				<a class=area href="reserve.jsp?menu=12&date=<%=strDate %>">전체보기</a> &nbsp;I&nbsp;
 			<%		
 				}
 					
@@ -166,7 +166,7 @@ visibility: hidden;
 			<%
 					}else{
 			%>
-					<A class=area href="reserve.jsp?menu=1&region=<%=rList.get(i).getRegion_seq()%>&date=<%=strDate %>"><%=rList.get(i).getRegion_name()%></A> <%=i+1 < rList.size()? "&nbsp;I &nbsp;":"" %>
+					<A class=area href="reserve.jsp?menu=12&region=<%=rList.get(i).getRegion_seq()%>&date=<%=strDate %>"><%=rList.get(i).getRegion_name()%></A> <%=i+1 < rList.size()? "&nbsp;I &nbsp;":"" %>
 			<% 
 					}
 				} 

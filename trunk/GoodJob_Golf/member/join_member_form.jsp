@@ -162,6 +162,17 @@ location.href="/member/join_agreement.jsp";
 		$('#idcheck_yn').val("Y");
 	}
 
+	function domainChange2(val){
+		if(val == 'self'){
+			document.getElementById("recom_domain").readOnly = false;
+			$('#recom_domain').val("");
+		}
+		else{
+			document.getElementById("recom_domain").readOnly = true;
+			$('#recom_domain').val(val);
+		}
+	}
+	
 	function idChange(){
 		$('#idcheck_yn').val("Y");
 	}
@@ -379,7 +390,9 @@ location.href="/member/join_agreement.jsp";
                                                           <td><img src="../../images/mem_join/img_join_message.gif" width="560" height="50" border="0"></td>
                                                         </tr>
                                                         <tr>
-                                                          <td align="center"><table align="center" border="0" cellpadding="2" cellspacing="1" width="610" bgcolor="#D1D3D4">
+                                                          <td align="center">
+                                                          
+                                                          <table align="center" border="0" cellpadding="2" cellspacing="1" width="610" bgcolor="#D1D3D4">
                                                               <tr>
                                                                 <td bgcolor="#AED247" colspan="2" width="593"></td>
                                                               </tr>
@@ -524,11 +537,30 @@ location.href="/member/join_agreement.jsp";
                                                                     </tr>
                                                                   </table></td>
                                                               </tr>
-                                                              <!--tr>
-                                                                <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">추천인 아이디</td>
-                                                                <td bgcolor="white" style="padding-left:10px;"><input id="recom_id" class="mem_input" type="text" size="15" name="recom_id">
+                                                              <tr>
+                                                                <td bgcolor="#AED247" colspan="2" width="593"></td>
+                                                              </tr>
+                                                            </table></td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td>&nbsp;</td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td><img src="../../images/mem_join/img_join_sub_title_02.gif" width="115" height="26" border="0"></td>
+                                                        </tr>
+                                                        <tr>
+                                                          <td align="center"><table align="center" border="0" cellpadding="2" cellspacing="1" width="600" bgcolor="#D1D3D4">
+                                                              <tr>
+                                                                <td bgcolor="#AED247" colspan="2" width="594"></td>
+                                                              </tr>
+                                                              <tr>
+                                                                <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" width="132">추천인 아이디</td>
+                                                                <td bgcolor="white" style="padding-left:10px;" width="441"><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                    <tr>
+                                                                      <td height="27">
+                                                                      <input id="recom_id" class="mem_input" type="text" size="15" name="recom_id"/>
                                                                   @
-                                                                  <input id="recom_domain" class="mem_input" type="text" size="15" name=""recom_domain"">
+                                                                  <input id="recom_domain" class="mem_input" type="text" size="15" name="recom_domain" readonly/>
                                                                   <select name="formselect1" size="1" onchange="domainChange2(this.value);">
                                                                           <option value="">선택하세요</option>
                                                                           <option value="naver.com">naver.com</option>
@@ -541,11 +573,16 @@ location.href="/member/join_agreement.jsp";
                                                                           <option value="paran.com">paran.com</option>
                                                                           <option value="yahoo.co.kr">yahoo.co.kr</option>
                                                                           <option value="gmail.com">gmail.com</option>
-                                                                          <option value="">직접입력하기</option>
+                                                                          <option value="self">직접입력하기</option>
                                                                         </select></td>
-                                                              </tr-->
+                                                                    </tr>
+                                                                    <tr>
+                                                                      <td height="20"><span class=mem_notice>추천인이 있을경우 추천인 ID(E-Mail)를 입력해 주시기 바랍니다.</span></td>
+                                                                    </tr>
+                                                                  </table></td>
+                                                              </tr>
                                                               <tr>
-                                                                <td bgcolor="#AED247" colspan="2" width="593"></td>
+                                                                <td bgcolor="#AED247" colspan="2" width="594"></td>
                                                               </tr>
                                                             </table></td>
                                                         </tr>

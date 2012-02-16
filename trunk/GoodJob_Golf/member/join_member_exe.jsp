@@ -26,6 +26,9 @@
 	String mem_jumin1 	= StringUtils.trimToEmpty(request.getParameter("mem_jumin1"));
 	String mem_jumin2 	= StringUtils.trimToEmpty(request.getParameter("mem_jumin2"));
 	
+	String recom_id 		= StringUtils.trimToEmpty(request.getParameter("recom_id"));
+	String recom_domain 	= StringUtils.trimToEmpty(request.getParameter("recom_domain"));
+	
 	String sms_yn 	= StringUtils.trimToEmpty(request.getParameter("sms_yn"));
 	String email_yn 	= StringUtils.trimToEmpty(request.getParameter("email_yn"));
 
@@ -81,6 +84,8 @@ alert("동일한 핸드폰번호로 가입되어 있습니다. 다시 확인해�
 			mDto.setMem_mtel(mobile1+"-"+mobile2+"-"+mobile3);
 			mDto.setSms_yn(sms_yn);
 			mDto.setEmail_yn(email_yn);
+			if(recom_id.length() > 0)
+				mDto.setRecommend(recom_id+"@"+recom_domain);
 			
 			mDao.memberRegist(mDto);
 			

@@ -552,7 +552,7 @@ location.href="/member/join_agreement.jsp";
                                                           <td><img src="../../images/mem_join/img_join_sub_title_02.gif" width="115" height="26" border="0"></td>
                                                         </tr>
                                                         <tr>
-                                                          <td align="center"><table align="center" border="0" cellpadding="2" cellspacing="1" width="600" bgcolor="#D1D3D4">
+                                                          <td align="center"><table align="center" border="0" cellpadding="2" cellspacing="1" width="610" bgcolor="#D1D3D4">
                                                               <tr>
                                                                 <td bgcolor="#AED247" colspan="2" width="594"></td>
                                                               </tr>

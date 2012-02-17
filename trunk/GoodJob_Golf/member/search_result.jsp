@@ -67,7 +67,7 @@
 			Mail mail = new Mail(host,m_id,m_pw);
 			mail.setTo(mem_id);
 			mail.setFrom(from , "굿잡골프");
-			mail.setSubject("[Goodjobgolf] 회원님의 비밀번호를 알려 드립니다. ");
+			mail.setSubject("[GoodJobGOLF] 회원님의 비밀번호를 알려 드립니다. ");
 			mail.setHtmlContent(content);
 			mail.send();
 			
@@ -93,7 +93,7 @@
 			Mail mail = new Mail(host,m_id,m_pw);
 			mail.setTo(mem_id);
 			mail.setFrom(from , "굿잡골프");
-			mail.setSubject("[Goodjobgolf] 회원님의 비밀번호를 알려 드립니다. ");
+			mail.setSubject("[GoodJobGOLF] 회원님의 비밀번호를 알려 드립니다. ");
 			mail.setHtmlContent(content);
 			mail.send();
 			

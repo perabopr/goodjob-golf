@@ -100,7 +100,7 @@ alert("동일한 핸드폰번호로 가입되어 있습니다. 다시 확인해�
 			Mail mail = new Mail(host,m_id,m_pw);
 			mail.setTo(mDto.getMem_id());
 			mail.setFrom(from , "굿잡골프");
-			mail.setSubject("[Goodjobgolf] 가입해 주셔서 감사합니다. ");
+			mail.setSubject("[GoodJobGOLF] 가입해 주셔서 감사합니다. ");
 			mail.setHtmlContent(content);
 			mail.send();
 			
@@ -138,7 +138,7 @@ top.document.location.href="/member/join_finished.jsp";
 				Mail mail = new Mail(host,m_id,m_pw);
 				mail.setTo(ses_mem_id);
 				mail.setFrom(from , "굿잡골프");
-				mail.setSubject("[Goodjobgolf] 고객님의 비밀번호가 변경되었음을 알려드립니다.");
+				mail.setSubject("[GoodJobGOLF] 고객님의 비밀번호가 변경되었음을 알려드립니다.");
 				mail.setHtmlContent(content);
 				mail.send();
 			}

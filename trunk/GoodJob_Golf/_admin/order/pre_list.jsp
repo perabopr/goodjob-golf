@@ -17,6 +17,8 @@ String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
 
 PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , ORDER.per_page );
 
+com.goodjob.member.MemberDao mDao = new com.goodjob.member.MemberDao();
+
 Map<String,String> params = new HashMap<String,String>();
 params.put("menu_seq", "2");
 params.put("npage",npage);
@@ -159,7 +161,7 @@ function goPage(val){
 </script>
 </head>
 <body topmargin="10" marginheight="10">
-<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="1520">
   <tr>
     <td class=title>★ 사전예약현황 ★</td>
   </tr>
@@ -167,19 +169,20 @@ function goPage(val){
     <td><p>&nbsp;</p></td>
   </tr>
   <tr>
-    <td align="center" width="1851"><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
+    <td align="center" width="1520"><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
         <tr>
-          <td bgcolor="#e6e7e8" align="center" width="120" height="25"><span class=normal_b>예약신청일</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="130" height="25"><span class=normal_b>예약신청일</span></td>
           <td bgcolor="#e6e7e8" align="center" width="100"><span class=normal_b>예약자</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="190"><span class=normal_b>아이디</span></td>
-          <td bgcolor="#E6E7E8" align="center" width="220"><span class=normal_b>골프장명</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="208"><span class=normal_b>부킹일시</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="130"><span class=normal_b>아이디</span></td>
+          <td bgcolor="#E6E7E8" align="center" width="180"><span class=normal_b>골프장명</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="180"><span class=normal_b>부킹일시</span></td>
           <td bgcolor="#E6E7E8" align="center" width="130"><span class=normal_b>인원/팀</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="103"><span class=normal_b>연락처</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="130"><span class=normal_b>상품권</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="100"><span class=normal_b>연락처</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="100"><span class=normal_b>상품권</span></td>
           <td bgcolor="#e6e7e8" align="center" width="150"><span class=normal_b>금액</span></td>
           <td bgcolor="#E6E7E8" align="center" width="150"><span class=normal_b>처리상태</span></td>
-          <td bgcolor="#E6E7E8" align="center" width="80"><span class=normal_b>SMS</span></td>
+          <td bgcolor="#E6E7E8" align="center" width="60"><span class=normal_b>SMS</span></td>
+          <td align="center" bgcolor="#E6E7E8" width="120"><span class=normal_b>추천인</span></td>
         </tr>
 <%
 if(list != null){
@@ -255,7 +258,8 @@ if(list != null){
 				<option value="3" <%=("3".equals(list.get(i).getProcess_status())?" selected":"")%>>예약취소</option>
               </select>
               <img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateStatus('<%=list.get(i).getReserve_seq()%>');"></td>
-          <td align="center" bgcolor="white" width="199"><img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=2&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=Utils.encoder(list.get(i).getGolflink_name()) %>&msgtime=<%=vbookingDate +" " + vbookingTime_s_1 +":" + vbookingTime_s_2 %>','name','740','350','yes');return false;">
+          <td align="center" bgcolor="white"><img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=2&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=Utils.encoder(list.get(i).getGolflink_name()) %>&msgtime=<%=vbookingDate +" " + vbookingTime_s_1 +":" + vbookingTime_s_2 %>','name','740','350','yes');return false;">
+          <td align="center" bgcolor="white"><span class=blue_s><%=mDao.getRecommend(list.get(i).getReserve_uid())%></span></td>
 		  </td>
         </tr>
 <%

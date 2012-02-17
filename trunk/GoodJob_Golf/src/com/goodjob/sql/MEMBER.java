@@ -12,7 +12,7 @@ public class MEMBER {
 	public static final int per_page = 20;
 	
 	//회원 리스트
-	public static final String list = " select mem_seq,mem_id,mem_name,mem_pwd,mem_jumin,mem_mtel,sms_yn,email_yn,secession, "+
+	public static final String list = " select mem_seq,mem_id,mem_name,mem_pwd,mem_jumin,mem_mtel,recommend,sms_yn,email_yn,secession, "+
 		" mem_type, date_format(reg_dt,''%Y-%m-%d %H:%i:%s'') reg_dt from tb_member {0} order by mem_seq desc limit ? , ? ";
 	
 	

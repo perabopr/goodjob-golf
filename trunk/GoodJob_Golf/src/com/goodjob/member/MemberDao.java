@@ -71,6 +71,10 @@ public class MemberDao {
 			else if("secession".equals(field)){
 				where = " where secession = 'Y'" ;
 			}
+			else if("recomm".equals(field)){
+				where = " where recommend like concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
 			
 			//페이징
 			bind.add(((npage-1)* MEMBER.per_page));

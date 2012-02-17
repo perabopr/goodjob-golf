@@ -18,6 +18,8 @@ String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
 
 PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , ORDER.per_page );
 
+com.goodjob.member.MemberDao mDao = new com.goodjob.member.MemberDao();
+
 Map<String,String> params = new HashMap<String,String>();
 params.put("menu_seq", "1");
 params.put("npage",npage);
@@ -98,7 +100,7 @@ function goPage(val){
 </script>
 </head>
 <body topmargin="10" marginheight="10">
-<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="1430">
   <tr>
     <td class=title>★ 실시간예약현황 ★</td>
   </tr>
@@ -106,20 +108,21 @@ function goPage(val){
     <td><p>&nbsp;</p></td>
   </tr>
   <tr>
-    <td align="center" width="1851"><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
+    <td align="center" width="1430"><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
         <tr>
-          <td bgcolor="#e6e7e8" height="25" align="center" width="156"><span class=normal_b>예약신청일</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="157"><span class=normal_b>예약자</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="234"><span class=normal_b>아이디</span></td>
-          <td width="235" align="center" bgcolor="#E6E7E8"><span class=normal_b>골프장명</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="209"><span class=normal_b>부킹일시</span></td>
-          <td bgcolor="#E6E7E8" align="center" width="130"><span class=normal_b>인원/팀</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="216"><span class=normal_b>코스</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="167"><span class=normal_b>연락처</span></td>
-          <td align="center" bgcolor="#e6e7e8" width="114"><span class=normal_b>상품권</span></td>
-          <td align="center" bgcolor="#e6e7e8" width="114"><span class=normal_b>입금액</span></td>
-          <td align="center" bgcolor="#E6E7E8" width="163"><span class=normal_b>처리상태</span></td>
+          <td bgcolor="#e6e7e8" height="25" align="center" width="130"><span class=normal_b>예약신청일</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="100"><span class=normal_b>예약자</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="150"><span class=normal_b>아이디</span></td>
+          <td width="200" align="center" bgcolor="#E6E7E8"><span class=normal_b>골프장명</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="130"><span class=normal_b>부킹일시</span></td>
+          <td bgcolor="#E6E7E8" align="center" width="60"><span class=normal_b>인원/팀</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="80"><span class=normal_b>코스</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="120"><span class=normal_b>연락처</span></td>
+          <td align="center" bgcolor="#e6e7e8" width="50"><span class=normal_b>상품권</span></td>
+          <td align="center" bgcolor="#e6e7e8" width="50"><span class=normal_b>입금액</span></td>
+          <td align="center" bgcolor="#E6E7E8" width="160"><span class=normal_b>처리상태</span></td>
           <td align="center" bgcolor="#E6E7E8" width="80"><span class=normal_b>SMS</span></td>
+          <td align="center" bgcolor="#E6E7E8" width="120"><span class=normal_b>추천인</span></td>
         </tr>
 <%
 if(list != null){
@@ -153,6 +156,7 @@ if(list != null){
           <td align="center" bgcolor="white">
 	          <img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=1&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=Utils.encoder(list.get(i).getGolflink_name())%>&msgtime=<%=vbookingDate %>','name','740','350','yes');return false;">
           </td>
+          <td align="center" bgcolor="white"><span class=blue><%=mDao.getRecommend(list.get(i).getReserve_uid())%></span></td>
         </tr>
 <%
 	}

@@ -18,6 +18,8 @@ String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
 
 PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , ORDER.per_page );
 
+com.goodjob.member.MemberDao mDao = new com.goodjob.member.MemberDao();
+
 Map<String,String> params = new HashMap<String,String>();
 params.put("menu_seq", "5");
 params.put("npage",npage);

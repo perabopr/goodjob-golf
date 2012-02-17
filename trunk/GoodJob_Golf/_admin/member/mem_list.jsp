@@ -126,14 +126,15 @@
     <td align="center" width="1852">&nbsp;</td>
   </tr>
   <tr>
-    <td align="center" width="1852"><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
+    <td align="center" width="1850"><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
         <tr>
-          <td bgcolor="#e6e7e8" height="25" align="center" width="235"><span class=normal_b>회원가입일</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="241"><span class=normal_b>회원명</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="429"><span class=normal_b>아이디</span></td>
-          <td width="280" align="center" bgcolor="#E6E7E8"><span class=normal_b>연락처</span></td>
-          <td bgcolor="#e6e7e8" align="center" width="358"><span class=normal_b>회원가입상태</td>
-          <td bgcolor="#e6e7e8" align="center" width="278"><span class=normal_b>기타기능</span></td>
+          <td bgcolor="#e6e7e8" height="25" align="center" width="240"><span class=normal_b>회원가입일</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="250"><span class=normal_b>회원명</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="310"><span class=normal_b>아이디</span></td>
+          <td width="230" align="center" bgcolor="#E6E7E8"><span class=normal_b>연락처</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="300"><span class=normal_b>회원가입상태</td>
+          <td bgcolor="#e6e7e8" align="center" width="200"><span class=normal_b>추천인</span></td>
+          <td bgcolor="#e6e7e8" align="center" width="350"><span class=normal_b>기타기능</span></td>
         </tr>
 <%
 	int mSize = mList.size();
@@ -144,13 +145,13 @@
 %>
         <tr>
           <td bgcolor="white" align="center" height="25"><%=mDto.getReg_dt()%></td>
-          <td bgcolor="white">
+          <td bgcolor="white" align="center" >
           <%if("Y".equals(mDto.getSecession())){%>
-          <div style="padding-left:20px;color:#CC0000;font-weight:bold;"><%=mDto.getMem_name()%> [탈퇴]</div>
+          <div style="color:#CC0000;font-weight:bold;"><%=mDto.getMem_name()%> [탈퇴]</div>
           <%} else if("H".equals(mDto.getSecession())){%>
-          <div style="padding-left:20px;color:#0066CC;font-weight:bold;"><%=mDto.getMem_name()%> [탈퇴요청]</div>
+          <div style="color:#0066CC;font-weight:bold;"><%=mDto.getMem_name()%> [탈퇴요청]</div>
           <%}else{%>
-          <div style="padding-left:20px;font-weight:bold;"><%=mDto.getMem_name()%></div>
+          <div style="font-weight:bold;"><%=mDto.getMem_name()%></div>
           <%}%>
           </td>
           <td align="center" bgcolor="white"><%=mDto.getMem_id()%></td>
@@ -162,6 +163,7 @@
               <option value="2"<%if("2".equals(mDto.getMem_type())) out.println(" selected");%>>유료회원(2년)</option>
             </select>
             <a href=""></a><a href="javascript:mem_type_update(<%=i%>,'<%=mDto.getMem_id()%>');"><img align="absmiddle" src="/_admin/images/common/btn_save2.gif" onclick="" width="32" height="16" border="0"></a></td>
+          <td align="center" bgcolor="white"><span class=blue><%=StringUtils.trimToEmpty(mDto.getRecommend())%></span></td>
           <td align="center" bgcolor="white">
           <a href="mem_detail.jsp?mem_id=<%=mDto.getMem_id()%>" onClick="NewWindow(this.href,'name','760','600','yes');return false;">
           <img align="absmiddle" src="/_admin/images/common/btn_detail.gif" width="75" height="22" border="0"></a>
@@ -194,6 +196,7 @@
               <option value="id"<%=("id".equals(field)?" selected":"")%>>아이디</option>
               <option value="type"<%=("type".equals(field)?" selected":"")%>>회원가입상태</option>
               <option value="secession"<%=("secession".equals(field)?" selected":"")%>>탈퇴요청</option>
+              <option value="recomm"<%=("recomm".equals(field)?" selected":"")%>>추천인</option>
             </select>
             <input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="30" class="input_box">
            <a href="javascript:on_search();"><img src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle"></a></td>

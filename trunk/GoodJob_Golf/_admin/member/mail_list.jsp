@@ -188,6 +188,7 @@ function perPage(){
                 <td align="center" bgcolor="#E6E7E8" width="240"><span class=normal_b>골프장예약횟수</span></td>
                 <td bgcolor="#e6e7e8" align="center" width="250"><span class=normal_b>연락처</span></td>
                 <td bgcolor="#e6e7e8" align="center" width="246"><span class=normal_b>이메일수신여부</span></td>
+                
               </tr>
 <%
 	int mSize = mList.size();
@@ -212,6 +213,7 @@ function perPage(){
                 <td align="center" bgcolor="white"><%=mDto.getReserve_cnt()%>회</td>
                 <td align="center" bgcolor="white"><%=StringUtils.trimToEmpty(mDto.getMem_mtel())%></td>
                 <td align="center" bgcolor="white"><%=("Y".equals(mDto.getEmail_yn())?"수신":"비수신")%></td>
+                
               </tr>
 <%
 	}

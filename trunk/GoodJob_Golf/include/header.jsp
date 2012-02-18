@@ -30,6 +30,9 @@ String user_Id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"))
 		else if("5".equals(request.getParameter("menu"))){
 			swf_param = "pageNum=3&sub=1";
 		}
+		else if("12".equals(request.getParameter("menu"))){
+			swf_param = "pageNum=1";
+		}
 	}
 	
 	PackageDao listRegionDao = new PackageDao();

@@ -10,7 +10,7 @@ public class RESERVE {
 		"FROM tb_golflink A " +
 			"INNER JOIN tb_region B on(A.region_seq = B.region_seq) " +
 		"WHERE A.view_yn = 'Y' %s " +
-		"ORDER BY B.region_seq";
+		"ORDER BY B.region_seq, A.golflink_name";
 		/*
 			"AND A.region_seq = 1 "
 			"AND A.menu_seq = 1 " +
@@ -113,6 +113,7 @@ public class RESERVE {
 			"LEFT OUTER JOIN tb_golflink_course C on(C.golflink_course_seq = A.golflink_course_seq) " +
 			"INNER JOIN tb_golflink D on(B.golflink_seq = D.golflink_seq) " +
 		"WHERE A.product_status = '0' " +
+			"AND B.view_yn = 'Y' " +
 			"AND B.golflink_seq = ? " +
 			"AND B.product_date = ?";
 	
@@ -149,6 +150,7 @@ public class RESERVE {
 			"LEFT OUTER JOIN tb_golflink_course C on(C.golflink_course_seq = A.golflink_course_seq) " +
 			"INNER JOIN tb_golflink D on(B.golflink_seq = D.golflink_seq) " +
 		"WHERE A.product_status = '0' " +
+			"AND B.view_yn = 'Y' " +
 			"AND A.productsub_seq = ?";
 	
 	public static final String setGolfLinkReserve_insert
@@ -408,6 +410,7 @@ public class RESERVE {
 		    "INNER JOIN tb_product_sub c ON(b.product_seq = c.product_seq) " +
 			"LEFT OUTER JOIN tb_golflink_course d ON(c.golflink_course_seq = d.golflink_course_seq) " +
 		"WHERE c.product_status = '0' " +
+			"AND b.view_yn = 'Y' " +
 			"AND b.product_date >= ? %s " +
 		"ORDER BY a.menu_seq, a.golflink_seq, b.product_date, c.time_start";	
 }

@@ -268,7 +268,7 @@ visibility: hidden;
 				pDto.setProduct_endDate(eDate);
 				List<ProductDto> listPrdt = glDao.getGolfProductList(pDto);
 			%>
-			<TR>
+			<TR height="30">
 			<TD style="PADDING-LEFT: 10px" bgColor=white height=30><SPAN class=blue_list style="color:red;font-weight:bold"><!--(<%=listGolf.get(i).getRegion_name() %>)--><span style="color:#2860c7"><%=listGolf.get(i).getGolflink_name()%></SPAN></SPAN><%=listGolf.get(i).getEvent_price()!=null&&listGolf.get(i).getEvent_price().length()>0?"</br>"+listGolf.get(i).getEvent_price():"" %></TD>
 			<%
 				incDate.set(tYear, tMonth-1, tDay);

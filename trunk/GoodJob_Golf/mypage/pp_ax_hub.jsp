@@ -10,8 +10,8 @@
 	String menu = StringUtils.trimToEmpty(request.getParameter("menu"));
 	String reserve_seq = StringUtils.trimToEmpty(request.getParameter("reserve_seq"));
 	String process_status = StringUtils.trimToEmpty(request.getParameter("process_status"));
-
-
+	String ordr_id = StringUtils.trimToEmpty(request.getParameter("ordr_id"));
+	
     /* ============================================================================== */
     /* =   PAGE : 지불 요청 및 결과 처리 PAGE                                       = */
     /* = -------------------------------------------------------------------------- = */
@@ -328,10 +328,13 @@
                 
                 //---------------------- DB 처리 ---------------------
                 MemberDao mDao = new MemberDao();
-                GolfLinkDao glDao = new GolfLinkDao();
+                //GolfLinkDao glDao = new GolfLinkDao();
+                MyPageDao myDao = new MyPageDao();
+                
                 Map<String,String> params = new HashMap<String,String>();
                 params.put("process_status",process_status);
                 params.put("reserve_seq", reserve_seq);
+                params.put("card_bill_num", ordr_idxx);
                 
                 String tablename = "";
                 if("3".equals(menu)){
@@ -346,7 +349,7 @@
                 else {
                 	tablename = "tb_golflink_reserve";
                 }
-                glDao.setStatusUpdate(tablename, params);
+                myDao.setStatusUpdate(tablename, params);
             	
 			}
 
@@ -443,7 +446,8 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" >
+
+<%@page import="com.goodjob.mypage.MyPageDao"%><html xmlns="http://www.w3.org/1999/xhtml" >
     <head>
         <title>*** KCP [AX-HUB Version] ***</title>
         <script type="text/javascript">

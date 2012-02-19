@@ -259,7 +259,7 @@ if(list != null){
               </select>
               <img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateStatus('<%=list.get(i).getReserve_seq()%>');"></td>
           <td align="center" bgcolor="white"><img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=2&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=Utils.encoder(list.get(i).getGolflink_name()) %>&msgtime=<%=vbookingDate +" " + vbookingTime_s_1 +":" + vbookingTime_s_2 %>','name','740','350','yes');return false;">
-          <td align="center" bgcolor="white"><span class=blue_s><%=mDao.getRecommend(list.get(i).getReserve_uid())%></span></td>
+          <td align="center" bgcolor="white"><span class=blue><%=mDao.getRecommend(list.get(i).getReserve_uid())%></span></td>
 		  </td>
         </tr>
 <%
@@ -287,6 +287,7 @@ if(list != null){
               <option value="reserve_name"<%=("reserve_name".equals(field)?" selected":"")%>>예약자</option>
               <option value="product_price"<%=("product_price".equals(field)?" selected":"")%>>금액</option>
               <option value="process_status"<%=("process_status".equals(field)?" selected":"")%>>처리상태</option>
+              <option value="recommend"<%=("recommend".equals(field)?" selected":"")%>>추천인</option>
 		    </select>
             <input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="15" class="input_box">
 		    <input id="searchOk" name="searchOk" type="image" src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle" onclick="on_search();">

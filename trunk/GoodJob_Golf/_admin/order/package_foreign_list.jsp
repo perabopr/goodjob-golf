@@ -44,7 +44,7 @@ public String commify(int n) {
 %>
 <html>
 <head>
-<link rel="stylesheet" href="/_admin/css/style.css" type="text/css">
+<link rel="stylesheet" href="/_admin/style.css" type="text/css">
 <script type="text/javascript" src="/js/jquery-1.6.2.min.js"></script>
 <title></title>
 <style type="text/css">
@@ -223,6 +223,7 @@ function goPage(val){
           <td width="97" align="center" bgcolor="#E6E7E8"><span class=normal_b>요청사항</span></td>
           <td width="160" align="center" bgcolor="#E6E7E8"><span class=normal_b>처리상태</span></td>
           <td width="193" align="center" bgcolor="#E6E7E8"><span class=normal_b>SMS</span></td>
+          <td align="center" bgcolor="#E6E7E8" width="120"><span class=normal_b>추천인</span></td>
         </tr>
 <%
 if(list != null){
@@ -260,6 +261,7 @@ if(list != null){
             </select>
             <img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateStatus('<%=list.get(i).getReserve_seq()%>');"></td>
           <td align="center" bgcolor="white"><img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=3&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=URLEncoder.encode(list.get(i).getPackage_name1()) %>&msgtime=<%=list.get(i).getTour_date() %>','name','740','350','yes');return false;">
+          <td align="center" bgcolor="white"><span class=blue><%=mDao.getRecommend(list.get(i).getReserve_uid())%></span></td>
 		  </td>
         </tr>
 <%

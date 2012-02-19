@@ -165,6 +165,7 @@ function goPage(val){
           <td align="center" bgcolor="#e6e7e8" width="187"><span class=normal_b>금액</span></td>
           <td width="156" align="center" bgcolor="#E6E7E8"><span class=normal_b>처리상태</span></td>
           <td width="199" align="center" bgcolor="#E6E7E8"><span class=normal_b>SMS</span></td>
+          <td align="center" bgcolor="#E6E7E8" width="120"><span class=normal_b>추천인</span></td>
           </tr>
 <%
 if(list != null){
@@ -204,6 +205,7 @@ if(list != null){
           <td align="center" bgcolor="white">
           	<img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=5&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=Utils.encoder(list.get(i).getCondo_name())%>&msgtime=<%=inDate%>&per_room=<%=list.get(i).getRoom_num()%>','name','740','350','yes');return false;">
 		  </td>
+		  <td align="center" bgcolor="white"><span class=blue><%=mDao.getRecommend(list.get(i).getReserve_uid())%></span></td>
                 </tr>
 <%
 	}
@@ -229,6 +231,7 @@ if(list != null){
               <option value="reserve_name"<%=("reserve_name".equals(field)?" selected":"")%>>예약자</option>
               <option value="condo_price"<%=("condo_price".equals(field)?" selected":"")%>>금액</option>
               <option value="process_status"<%=("process_status".equals(field)?" selected":"")%>>처리상태</option>
+              <option value="recommend"<%=("recommend".equals(field)?" selected":"")%>>추천인</option>
             </select>
             <input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="15" class="input_box">
 		    <input id="searchOk" name="searchOk" type="image" src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle" onclick="on_search();"></td>

@@ -183,6 +183,7 @@
                 <tr>
                     <td>
                         <table id="menu2" name="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
+                            <!--
                             <tr>
                                 <td width="20" height="25">&nbsp;</td>
                                 <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>신규회원분석</a></td>
@@ -198,6 +199,11 @@
                             <tr>
                                 <td height="25">&nbsp;</td>
                                 <td><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a href="#" target="main" class=left_menu>인기골프장분석</a></td>
+                            </tr>
+                            -->
+                            <tr>
+                                <td height="25">&nbsp;</td>
+                                <td><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a href="/_admin/stats/stats_list.jsp" target="main" class=left_menu>골프장분석</a></td>
                             </tr>
                             <tr>
                                 <td height="25">&nbsp;</td>

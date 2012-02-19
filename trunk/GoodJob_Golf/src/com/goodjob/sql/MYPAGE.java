@@ -18,7 +18,7 @@ public class MYPAGE {
 								"a.per_num ,a.process_status, " +
 								"a.golflink_course " +
 							"from tb_golflink_reserve a " +
-							"where reserve_uid = ? {0} order by menu_seq , a.reserve_seq desc ";
+							"where reserve_uid = ? and reserve_day >= date_add(now(),interval -180 day) {0} order by menu_seq , a.reserve_seq desc ";
 	
 	public static final String my_package_reserve = "select a.reserve_seq, " +
 							"       a.menu_seq, " +
@@ -34,7 +34,7 @@ public class MYPAGE {
 							"       a.process_status, " +
 							"       a.reserve_uid " +
 							"  from tb_package_reserve a " +
-							"  where reserve_uid = ? {0} order by menu_seq , a.reserve_seq desc ";
+							"  where reserve_uid = ? and reserve_day >= date_add(now(),interval -180 day) {0} order by menu_seq , a.reserve_seq desc ";
 	
 	public static final String my_condo_reserve = "select a.reserve_seq, " +
 							"       a.menu_seq, " +
@@ -50,7 +50,7 @@ public class MYPAGE {
 							"       a.process_status, " +
 							"       a.reserve_uid  " +
 							"  from tb_condo_reserve a " +
-							"where menu_seq = ? and reserve_uid = ? {0} order by menu_seq , a.reserve_seq desc ";
+							"where menu_seq = ? and reserve_uid = ? and reserve_day >= date_add(now(),interval -180 day) {0} order by menu_seq , a.reserve_seq desc ";
 	
 	public static final String my_coupon = " select "+ 
 							"a.coupon_seq, "+
@@ -73,4 +73,5 @@ public class MYPAGE {
 				"from tb_coupon a "+ 
 				"where a.reg_user = ? {0} ";
 	
+	public static final String status_update = "UPDATE {0} SET process_status=? , card_bill_num=? WHERE reserve_seq = ?";
 }

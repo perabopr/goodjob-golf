@@ -20,13 +20,16 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.board.JoinBoardDto;
+import com.goodjob.coupon.CouponDao;
 import com.goodjob.coupon.dto.CouponDto;
 import com.goodjob.db.DBManager;
+import com.goodjob.order.dto.GolfLinkDto;
 import com.goodjob.reserve.dto.CondoReserveDto;
 import com.goodjob.reserve.dto.GolfLinkReserveDto;
 import com.goodjob.reserve.dto.PackageReserveDto;
 import com.goodjob.sql.BBS;
 import com.goodjob.sql.MYPAGE;
+import com.goodjob.sql.ORDER;
 
 /**
  * @author Administrator
@@ -316,5 +319,32 @@ public class MyPageDao {
 		}
 		
 		return name;
+	}
+	
+	public void setStatusUpdate(String tableName, Map<String,String> data){
+		Connection conn = null;
+		
+		try{
+			conn = DBManager.getConnection();
+
+			String reserve_seq = StringUtils.defaultIfEmpty(data.get("reserve_seq"), "");
+			String process_status = StringUtils.defaultIfEmpty(data.get("process_status"), "");
+			String card_bill_num = StringUtils.defaultIfEmpty(data.get("card_bill_num"), "");
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(process_status);
+			bind.add(card_bill_num);
+			bind.add(reserve_seq);
+			
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn, MessageFormat.format(MYPAGE.status_update, tableName), bind.toArray());
+			
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		finally{
+			DbUtils.closeQuietly(conn);
+		}
 	}
 }

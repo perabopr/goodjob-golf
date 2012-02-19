@@ -94,7 +94,12 @@ public class GolfLinkDao {
 			}else if("reserve_seq".equals(field) && keyword.length()>0){
 				where += "AND reserve_seq = ? " ;
 				params.add(keyword);
+			}else if("recommend".equals(field) && keyword.length()>0){
+				where = ",tb_member where menu_seq = ? and reserve_uid=mem_id and recommend=? " ;
+				params.add(keyword);
 			}
+			
+			
 			
 			//페이징
 			params.add(((npage-1)* per_page));

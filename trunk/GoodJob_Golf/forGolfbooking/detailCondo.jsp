@@ -87,6 +87,7 @@
 				var nowDate = ("<%=now_date%>").replace('-','').replace('-','');
 				var arrDate = dateText.split("-");
 				arrDate = arrDate[0] + arrDate[1] + arrDate[2];
+				
 				if(nowDate > arrDate){
 					alert("오늘보다 이전날짜를 선택할 수 없습니다.");
 					$( "#in_date" ).val("<%=now_date%>");
@@ -107,6 +108,18 @@
 				if(nowDate > arrDate){
 					alert("오늘보다 이전날짜를 선택할 수 없습니다.");
 					$( "#out_date" ).val("<%=now_date%>");
+					return;
+				}
+
+				if($("#out_date").val() < $("#in_date").val()){
+					alert("시작날짜보다 이전날짜를 선택할 수 없습니다.");
+					$( "#out_date" ).val("");
+					return;
+				}
+				
+				if($("#out_date").val() == $("#in_date").val()){
+					alert("시작날짜와 같은날짜를 선택할 수 없습니다.\n하루 숙박이시면 시작날짜(입실일) 이후 퇴실일을 선택하시기 바랍니다.");
+					$( "#out_date" ).val("");
 					return;
 				}
 

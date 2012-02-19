@@ -176,6 +176,9 @@ public class GolfLinkDao {
 			}else if("process_status".equals(field) && keyword.length()>0){
 				where += "AND process_status LIKE concat('%',?,'%') " ;
 				params.add(keyword);
+			}else if("recommend".equals(field) && keyword.length()>0){
+				where = ",tb_member where menu_seq = ? and reserve_uid=mem_id and recommend=? " ;
+				params.add(keyword);
 			}
 			
 			map = (Map<String, Long>)qr.query(conn, MessageFormat.format(ORDER.totalcnt, tableName , where) , rsh , params.toArray());

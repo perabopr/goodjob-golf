@@ -369,7 +369,7 @@ String.prototype.trim = function(){
     <table border="0" width="740" cellpadding="2" cellspacing="1" >
     <tr>
     <td width="50%" align="left"><input type="checkbox" id="chkAllCoupon" name="chkAllCoupon"><input type="button" id="btnAllCoupon" name="btnAllCoupon" value="상품권 전체적용" onclick="btnAllCouponClick();" > </td>
-    <td align="right"><img src="../../images/inc/month_prev.gif" style="cursor:pointer;" width="41" height="16" border="0" align="absmiddle" onclick="location.href='pop_real_time_reg.jsp?menuseq=2&glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=0'"> &nbsp;<span class=month><%= (currYear) %>년 <%= (currMonth+1) %>월</span> &nbsp;<img align="absmiddle" src="../../images/inc/month_next.gif" width="41" height="16" style="cursor:pointer;" border="0" onclick="location.href='pop_real_time_reg.jsp?menuseq=2&glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=1'"></td>
+    <td align="right"><img src="../../images/inc/month_prev.gif" style="cursor:pointer;" width="41" height="16" border="0" align="absmiddle" onclick="location.href='pop_pre_time_reg.jsp?menuseq=2&glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=0'"> &nbsp;<span class=month><%= (currYear) %>년 <%= (currMonth+1) %>월</span> &nbsp;<img align="absmiddle" src="../../images/inc/month_next.gif" width="41" height="16" style="cursor:pointer;" border="0" onclick="location.href='pop_pre_time_reg.jsp?menuseq=2&glseq=<%= glSeq%>&month=<%=currMonth%>&year=<%=currYear%>&action=1'"></td>
     </tr>
     </table>    
     </td>    

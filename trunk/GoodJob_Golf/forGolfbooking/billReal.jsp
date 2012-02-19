@@ -32,7 +32,7 @@ String bookingDate = prDto.getProduct_date();
 String bookingTime = prDto.getTime_start();
 bookingDate = bookingDate.substring(0,4) + "-" + bookingDate.substring(4,6) + "-" + bookingDate.substring(6,8) + " ";
 bookingDate += bookingTime.substring(0,2) + ":" + bookingTime.substring(2,4); 
-int buyPrice = prDto.getNH_price() * 4;
+int buyPrice = prDto.getNH_price();// * 4;
 
 
 /* ----- 쿠폰 ----- */
@@ -92,6 +92,24 @@ function billSubmit(cbNum){
 	frm.submit();
 }
 
+function priceChange(){
+	var price;
+	var billprice = <%=buyPrice%> * $("#perNum").val();
+	var tmpValue = $("#ddlCoupon").val();
+	var arrValue = tmpValue.split("/");
+	price = arrValue[1];
+	if(price.length > 0){
+		billprice = billprice - price;
+		price = commify(-price)+"원";
+		billprice = commify(billprice);
+	}else{
+		billprice = commify(billprice);
+	}
+
+	$("#billPrice").html(billprice);
+	
+}
+/*
 function couponChange(){
 	var price;
 	var billprice = <%=buyPrice%>;
@@ -108,7 +126,7 @@ function couponChange(){
 
 	$("#billPrice").html(billprice);
 }
-
+*/
 function commify(n) {
   var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
   n += '';                          // 숫자를 문자열로 변환
@@ -229,11 +247,11 @@ function card_order(menu , reserve_seq , good_price , good_name){
 <TD style="PADDING-LEFT: 10px" bgColor=white><%=StringUtils.defaultIfEmpty(prDto.getCourse_name(), "<div class=red_s>없음</div>") %></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>인원</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><select id="perNum" name="perNum"><option value="3">3</option><option value="4" selected>4</option></select>명</TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white><select id="perNum" name="perNum" onchange="priceChange();"><option value="3">3</option><option value="4" selected>4</option></select>명</TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>프리미엄상품권 적용</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white height=25>
-<SELECT size=1 id="ddlCoupon" name="ddlCoupon" onchange="couponChange();">
+<SELECT size=1 id="ddlCoupon" name="ddlCoupon" onchange="priceChange();">
 <OPTION value="0/" selected>선택하세요</OPTION>
 <%
 if(couponList != null){
@@ -249,7 +267,7 @@ if(couponList != null){
 </TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>결제금액</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange id="billPrice" name="billPrice"><%=commify(buyPrice) %></SPAN>원</TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange id="billPrice" name="billPrice"><%=commify(buyPrice*4) %></SPAN>원</TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>결제방법선택</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><INPUT id="billBtype" name="billtype" value="B" type=radio checked> 무통장입금 <%if(("gundallove@gmail.com".equals(user_Id) || "killkoo@naver.com".equals(user_Id))){%>&nbsp;<INPUT id="billBtype2" name="billtype" value="C" type=radio> 카드결제<%}%></TD>

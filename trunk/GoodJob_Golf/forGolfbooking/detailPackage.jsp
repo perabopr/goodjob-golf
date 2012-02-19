@@ -137,32 +137,32 @@ function imgChange(objId){
 <TD class=normal_b bgColor=#f1f1f1 width=146 align=center>비성수기</TD></TR>
 <TR>
 <TD class=normal_s bgColor=#f1f1f1 height=18 align=center>월요일</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_n_mon()) %>원/인</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getOff_n_mon()) %>원/인</TD></TR>
+<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_s_mon()) %>원/인</TD>
+<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getOff_s_mon()) %>원/인</TD></TR>
 <TR>
 <TD class=normal_s bgColor=#f1f1f1 height=18 align=center>화요일</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_n_tue()) %>원/인</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getOff_n_tue()) %>원/인</TD></TR>
+<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_s_tue()) %>원/인</TD>
+<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getOff_s_tue()) %>원/인</TD></TR>
 <TR>
 <TD class=normal_s bgColor=#f1f1f1 height=18 align=center>수요일</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_n_wed()) %>원/인</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getOff_n_wed()) %>원/인</TD></TR>
+<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_s_wed()) %>원/인</TD>
+<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getOff_s_wed()) %>원/인</TD></TR>
 <TR>
 <TD class=normal_s bgColor=#f1f1f1 height=18 align=center>목요일</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_n_thu()) %>원/인</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getOff_n_thu()) %>원/인</TD></TR>
+<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_s_thu()) %>원/인</TD>
+<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getOff_s_thu()) %>원/인</TD></TR>
 <TR>
 <TD class=normal_s bgColor=#f1f1f1 height=18 align=center>금요일</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_n_fri()) %>원/인</TD>
-<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getOff_n_fri()) %>원/인</TD></TR>
+<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_s_fri()) %>원/인</TD>
+<TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getOff_s_fri()) %>원/인</TD></TR>
 <TR>
 <TD class=saturday bgColor=#f1f1f1 height=18 align=center>토요일</TD>
-<TD class=saturday bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_n_sat()) %>원/인</TD>
-<TD class=saturday bgColor=white align=center><%=myUtil.commify(pkDto.getOff_n_sat()) %>원/인</TD></TR>
+<TD class=saturday bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_s_sat()) %>원/인</TD>
+<TD class=saturday bgColor=white align=center><%=myUtil.commify(pkDto.getOff_s_sat()) %>원/인</TD></TR>
 <TR>
 <TD class=sunday bgColor=#f1f1f1 height=18 align=center>일요일</TD>
-<TD class=sunday bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_n_sun()) %>원/인</TD>
-<TD class=sunday bgColor=white align=center><%=myUtil.commify(pkDto.getOff_n_sun()) %>원/인</TD></TR></TBODY></TABLE></TD></TR>
+<TD class=sunday bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_s_sun()) %>원/인</TD>
+<TD class=sunday bgColor=white align=center><%=myUtil.commify(pkDto.getOff_s_sun()) %>원/인</TD></TR></TBODY></TABLE></TD></TR>
 <TR>
 <TD style="PADDING-TOP: 17px"><A href="rule.jsp?menu=3&pkSeq=<%=packSeq %>"><IMG border=0 src="../../images/package/btn_domestic_regist.gif" width=407 height=39></A></TD></TR>
 <TR>

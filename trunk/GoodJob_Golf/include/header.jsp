@@ -242,11 +242,13 @@ $(function() {
                                       <tr>                                          
                                       <td><img src="/images/img_leftmenu/img_left_bank.gif" width="235" height="65" border="0"></td>
                                       </tr>
+                                      <!--
                                       <tr>
                                        <td>
                                         <script>flashObject("/images/swf/left_banner.swf","","235","80")</script>
                                          </td>
                                         </tr>
+                                        -->
                                   </table>
                               </td>
                           </tr>

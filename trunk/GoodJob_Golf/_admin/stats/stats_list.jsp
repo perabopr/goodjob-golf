@@ -46,7 +46,8 @@ if(menuSeq == 1){
 
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+
+<%@page import="com.goodjob.util.Utils"%><html>
 <head>
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="../css/jquery.ui.all.css">
@@ -105,6 +106,8 @@ function formSubmit(){
 		</select>
 		인원/팀수 <select id="perNum" name="perNum">
 	        <option value="0" <%= perNum == 0? "selected":"" %>>인원선택-------</option>
+			<option value="3" <%= perNum == 1? "selected":"" %>>3</option>
+			<option value="3" <%= perNum == 2? "selected":"" %>>3</option>
 			<option value="3" <%= perNum == 3? "selected":"" %>>3</option>
 			<option value="4" <%= perNum == 4? "selected":"" %>>4</option></select>인/1팀
 	</td>
@@ -123,16 +126,16 @@ function formSubmit(){
 	</tr>
 	</table>
 	</p>
-	<table>
-	<tr>
-	<td>날짜</td>
-	<td>골프장명(패키지,콘도명)</td>
-	<td>예약대기건</td>
-	<td>예약완료건</td>
-	<td>예약취소건</td>
-	<td>상품권</td>
-	<td>금액</td>
-	<td>인원/팀수</td>
+	<table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
+	<tr height="23">
+	<td bgcolor="#e6e7e8" align="center"><span class=list_title>날짜</span></td>
+	<td bgcolor="#e6e7e8" align="center"><span class=list_title>골프장명(패키지,콘도명)</span></td>
+	<td bgcolor="#e6e7e8" align="center"><span class=list_title>예약대기건</span></td>
+	<td bgcolor="#e6e7e8" align="center"><span class=list_title>예약완료건</span></td>
+	<td bgcolor="#e6e7e8" align="center"><span class=list_title>예약취소건</span></td>
+	<td bgcolor="#e6e7e8" align="center"><span class=list_title>상품권</span></td>
+	<td bgcolor="#e6e7e8" align="center"><span class=list_title>금액</span></td>
+	<td bgcolor="#e6e7e8" align="center"><span class=list_title>인원/팀수</span></td>
 	</tr>
 	<% 
 	StatsDto tmpsdto = new StatsDto();
@@ -152,27 +155,27 @@ function formSubmit(){
 		}
 	%>
 	<tr>
-	<td><%=list.get(i).getReserve_day() %></td>
-	<td><%=list.get(i).getGolflink_name()+list.get(i).getPackage_name()+list.get(i).getCondo_name() %></td>
-	<td><%=list.get(i).getProcess_status0() %></td>
-	<td><%=list.get(i).getProcess_status1() %></td>
-	<td><%=list.get(i).getProcess_status3() %></td>
-	<td><%=list.get(i).getCoupon_price() %></td>
-	<td><%=list.get(i).getProduct_price() %></td>
-	<td><%=list.get(i).getPer_num() %>인/1팀</td>
+	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getReserve_day() %></td>
+	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getGolflink_name()+list.get(i).getPackage_name()+list.get(i).getCondo_name() %></td>
+	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getProcess_status0() %></td>
+	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getProcess_status1() %></td>
+	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getProcess_status3() %></td>
+	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=Utils.numberFormat(list.get(i).getCoupon_price()) %></td>
+	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=Utils.numberFormat(list.get(i).getProduct_price()) %></td>
+	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getPer_num() %>인/1팀</td>
 	</tr>
 	<% 
 	} 
 	%>
 	<tr>
-	<td>합계</td>
-	<td></td>
-	<td><%=tmpsdto.getProcess_status0() %></td>
-	<td><%=tmpsdto.getProcess_status1() %></td>
-	<td><%=tmpsdto.getProcess_status3() %></td>
-	<td><%=tmpsdto.getCoupon_price() %></td>
-	<td><%=tmpsdto.getProduct_price() %></td>
-	<td><%=tmpsdto.getPer_num() %>인/1팀</td>
+	<td bgcolor="#e6e7e8" align="center" height="23"><span class=list_title>합계</span></td>
+	<td bgcolor="#e6e7e8" align="center" height="23"></td>
+	<td bgcolor="#e6e7e8" align="center" height="23"><span class=list_title><%=tmpsdto.getProcess_status0() %></span></td>
+	<td bgcolor="#e6e7e8" align="center" height="23"><span class=list_title><%=tmpsdto.getProcess_status1() %></span></td>
+	<td bgcolor="#e6e7e8" align="center" height="23"><span class=list_title><%=tmpsdto.getProcess_status3() %></span></td>
+	<td bgcolor="#e6e7e8" align="center" height="23"><span class=list_title><%=Utils.numberFormat(tmpsdto.getCoupon_price()) %></span></td>
+	<td bgcolor="#e6e7e8" align="center" height="23"><span class=list_title><%=Utils.numberFormat(tmpsdto.getProduct_price()) %></span></td>
+	<td bgcolor="#e6e7e8" align="center" height="23"><span class=list_title><%=tmpsdto.getPer_num() %>인/1팀</span></td>
 	</tr>
 	</table>
 </form>

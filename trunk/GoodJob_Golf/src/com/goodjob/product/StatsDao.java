@@ -59,7 +59,8 @@ public class StatsDao {
 				}
 			}else if(statsdto.getMenu_seq() == 3 || statsdto.getMenu_seq() == 4){
 				if(statsdto.getReserve_prdt_name().length() > 0){
-					strWhere += " AND A.package_name LIKE concat('%',?,'%')";
+					strWhere += " AND (A.package_name1 LIKE concat('%',?,'%') OR A.package_name2 LIKE concat('%',?,'%'))";
+					bind.add(statsdto.getReserve_prdt_name());
 					bind.add(statsdto.getReserve_prdt_name());
 				}
 			}else if(statsdto.getMenu_seq() == 5){

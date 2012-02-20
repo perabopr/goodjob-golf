@@ -47,7 +47,8 @@ if(menuSeq == 1){
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<%@page import="com.goodjob.util.Utils"%><html>
+<%@page import="com.goodjob.util.Utils"%>
+<html>
 <head>
 <link rel="stylesheet" href="../style.css">
 <link rel="stylesheet" href="../css/jquery.ui.all.css">
@@ -89,7 +90,7 @@ function formSubmit(){
 	<tr>
 	<td><span class=list_title>분류</span></td>
 	<td>
-		<select id="regionseq" name="regionseq" size="1">
+		<select id="regionSeq" name="regionSeq" size="1">
 	              <option value="0">지역선택-------</option>
 	<% 
 		if (arrRegions != null && !arrRegions.isEmpty()){

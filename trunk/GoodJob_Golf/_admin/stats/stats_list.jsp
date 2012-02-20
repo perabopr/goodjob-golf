@@ -10,7 +10,7 @@
 <%
 String reserveDateStart = StringUtils.trimToEmpty(request.getParameter("reserveDateStart"));
 String reserveDateEnd = StringUtils.trimToEmpty(request.getParameter("reserveDateEnd"));
-int regionSeq = NumberUtils.toInt(request.getParameter("regionSeq"), 0);
+int regionSeq = NumberUtils.toInt(request.getParameter("regionseq"), 0);
 int menuSeq = NumberUtils.toInt(request.getParameter("menuSeq"), 1);
 int perNum = NumberUtils.toInt(request.getParameter("perNum"), 0);
 String txtReservePrdtName = StringUtils.trimToEmpty(request.getParameter("txtReservePrdtName"));

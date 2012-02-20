@@ -106,8 +106,8 @@ function formSubmit(){
 		</select>
 		인원/팀수 <select id="perNum" name="perNum">
 	        <option value="0" <%= perNum == 0? "selected":"" %>>인원선택-------</option>
-			<option value="3" <%= perNum == 1? "selected":"" %>>3</option>
-			<option value="3" <%= perNum == 2? "selected":"" %>>3</option>
+			<option value="3" <%= perNum == 1? "selected":"" %>>1</option>
+			<option value="3" <%= perNum == 2? "selected":"" %>>2</option>
 			<option value="3" <%= perNum == 3? "selected":"" %>>3</option>
 			<option value="4" <%= perNum == 4? "selected":"" %>>4</option></select>인/1팀
 	</td>

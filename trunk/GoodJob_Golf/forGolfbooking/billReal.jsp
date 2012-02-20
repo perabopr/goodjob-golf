@@ -151,7 +151,7 @@ $(function(){
 
 function card_order(menu , reserve_seq , good_price , good_name){
 	<%
-		if(("gundallove@gmail.com".equals(user_Id) || "killkoo@naver.com".equals(user_Id))){
+		if(!("gundallove@gmail.com".equals(user_Id) || "killkoo@naver.com".equals(user_Id))){
 	%>
 	alert("카드 결제는 준비 중 입니다.");
 	return;

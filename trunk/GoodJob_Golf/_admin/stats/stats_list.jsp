@@ -71,9 +71,14 @@ function formSubmit(){
 </head>
 <body>
 <form id="myform" name="myform" method="post" action="stats_list.jsp">
-	<table>
+
+<table width="700">
 	<tr>
-	<td>예약신청일</td>
+	<td style="padding-left:60px;" align="left">
+	
+	<table width="600">
+	<tr>
+	<td><span class=list_title>예약신청일</span></td>
 	<td bgcolor="white" style="padding-left:10px;"><img align="absmiddle" src="../images/common/img_calendar.gif" width="15" height="16" border="0">
 	            <input class="input_box" size="13" id="reserveDateStart" name="reserveDateStart" readonly value="<%=reserveDateStart %>">
 	            ~ <img align="absmiddle" src="../images/common/img_calendar.gif" width="15" height="16" border="0">
@@ -82,7 +87,7 @@ function formSubmit(){
 	<td rowspan="5" valign=bottom><IMG style="CURSOR: pointer" onclick="formSubmit();return false;" border=0 align=absMiddle src="../images/inc/btn_search2.gif" width=45 height=22></td>
 	</tr>
 	<tr>
-	<td>분류</td>
+	<td><span class=list_title>분류</span></td>
 	<td>
 		<select id="regionseq" name="regionseq" size="1">
 	              <option value="0">지역선택-------</option>
@@ -113,16 +118,19 @@ function formSubmit(){
 	</td>
 	</tr>
 	<tr>
-	<td>골프장/콘도명</td>
+	<td><span class=list_title>골프장/콘도명</span></td>
 	<td><input type=text id="txtReservePrdtName" name="txtReservePrdtName" value="<%=txtReservePrdtName %>" /></td>
 	</tr>
 	<tr>
-	<td>결제금액</td>
+	<td><span class=list_title>결제금액</span></td>
 	<td><input type=text id="txtPriceS" name="txtPriceS" value="<%=txtPriceS %>" />원 ~ <input type=text id="txtPriceE" name="txtPriceE" value="<%=txtPriceE %>" />원</td>
 	</tr>
 	<tr>
-	<td>예약자명</td>
+	<td><span class=list_title>예약자명</span></td>
 	<td><input type=text id="txtReserveName" name="txtReserveName" value="<%=txtReserveName %>" /></td>
+	</tr>
+	</table>
+	</td>
 	</tr>
 	</table>
 	</p>

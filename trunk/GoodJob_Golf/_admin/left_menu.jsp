@@ -175,7 +175,7 @@
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td width="20" height="25" align="center"><img src="/_admin/images/common/menu_bullet.gif" width="4" height="4" align="absmiddle"></td>
-                                <td width="160" STYLE="cursor:hand"><font color="white"><a target="main" href="/_admin/stats/stats_list.jsp" class=left_menu><b>통계관리</b></a></font></td>
+                                <td width="160" ONCLICK="toggleMenu(5)" STYLE="cursor:hand"><font color="white"><b>통계관리</b></font></td>
                             </tr>
                         </table>
                     </td>

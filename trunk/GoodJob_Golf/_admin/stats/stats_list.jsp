@@ -165,7 +165,7 @@ function formSubmit(){
 	%>
 	<tr>
 	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getReserve_day() %></td>
-	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getGolflink_name()+list.get(i).getPackage_name()+list.get(i).getCondo_name() %></td>
+	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getReserve_prdt_name()+list.get(i).getGolflink_name()+list.get(i).getPackage_name()+list.get(i).getCondo_name() %></td>
 	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getProcess_status0() %></td>
 	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getProcess_status1() %></td>
 	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getProcess_status3() %></td>

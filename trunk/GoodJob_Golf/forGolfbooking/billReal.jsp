@@ -80,7 +80,8 @@ function billok(){
 			billSubmit("");
 		}
 	}else{
-		card_order('1','','<%=buyPrice%>','<%=prDto.getGolflink_name()%>');
+		var billprice = <%=buyPrice%> * $("#perNum").val();
+		card_order('1','',billprice,'<%=prDto.getGolflink_name()%>');
 	}
 }
 

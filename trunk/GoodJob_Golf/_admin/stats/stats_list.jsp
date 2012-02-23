@@ -137,7 +137,7 @@ function formSubmit(){
 	</p>
 	<table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
 	<tr height="23">
-	<td bgcolor="#e6e7e8" align="center"><span class=list_title>날짜</span></td>
+	<td bgcolor="#e6e7e8" align="center"><span class=list_title>예약날짜</span></td>
 	<td bgcolor="#e6e7e8" align="center"><span class=list_title>골프장명(패키지,콘도명)</span></td>
 	<td bgcolor="#e6e7e8" align="center"><span class=list_title>예약대기건</span></td>
 	<td bgcolor="#e6e7e8" align="center"><span class=list_title>예약완료건</span></td>
@@ -164,7 +164,7 @@ function formSubmit(){
 		}
 	%>
 	<tr>
-	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getReserve_day() %></td>
+	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getBooking_day()+list.get(i).getTour_date()+list.get(i).getIn_date() %></td>
 	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getReserve_prdt_name()+list.get(i).getGolflink_name()+list.get(i).getPackage_name()+list.get(i).getCondo_name() %></td>
 	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getProcess_status0() %></td>
 	<td bgcolor="white" align="center" bgcolor="white" height="23"><%=list.get(i).getProcess_status1() %></td>

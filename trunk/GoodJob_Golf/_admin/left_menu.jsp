@@ -158,6 +158,10 @@
             <table id="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td height="22">&nbsp;</td>
+                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/member/admin_list.jsp" class=left_menu>어드민</a></td>
+                </tr>
+                <tr>
+                    <td height="22">&nbsp;</td>
                     <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/member/mem_list.jsp" class=left_menu>회원가입현황</a></td>
                 </tr>
                 <tr>

@@ -6,7 +6,6 @@ package com.goodjob.member;
 import java.sql.Connection;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

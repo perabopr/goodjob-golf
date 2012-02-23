@@ -32,14 +32,38 @@ public class StatsDao {
 			conn = DBManager.getConnection();
 			ArrayList<Object> bind = new ArrayList<Object>();
 			
-			if(statsdto.getReservedate_start().length() > 0){
-				strWhere += " AND date_format(A.reserve_day, '%Y-%m-%d') >= ?";
-				bind.add(statsdto.getReservedate_start());
+			
+			
+			
+			if(statsdto.getMenu_seq() == 1 || statsdto.getMenu_seq() == 2){
+				if(statsdto.getReservedate_start().length() > 0){
+					strWhere += " AND booking_day >= ?";
+					bind.add(statsdto.getReservedate_start().replaceAll("-", ""));
+				}
+				if(statsdto.getReservedate_end().length() > 0){
+					strWhere += " AND booking_day <= ?";
+					bind.add(statsdto.getReservedate_end().replaceAll("-", ""));
+				}
+			}else if(statsdto.getMenu_seq() == 3 || statsdto.getMenu_seq() == 4){
+				if(statsdto.getReservedate_start().length() > 0){
+					strWhere += " AND tour_date >= ?";
+					bind.add(statsdto.getReservedate_start().replaceAll("-", ""));
+				}
+				if(statsdto.getReservedate_end().length() > 0){
+					strWhere += " AND tour_date <= ?";
+					bind.add(statsdto.getReservedate_end().replaceAll("-", ""));
+				}
+			}else if(statsdto.getMenu_seq() == 5){
+				if(statsdto.getReservedate_start().length() > 0){
+					strWhere += " AND in_date >= ?";
+					bind.add(statsdto.getReservedate_start().replaceAll("-", ""));
+				}
+				if(statsdto.getReservedate_end().length() > 0){
+					strWhere += " AND in_date <= ?";
+					bind.add(statsdto.getReservedate_end().replaceAll("-", ""));
+				}
 			}
-			if(statsdto.getReservedate_end().length() > 0){
-				strWhere += " AND date_format(A.reserve_day, '%Y-%m-%d') <= ?";
-				bind.add(statsdto.getReservedate_end());
-			}
+			
 			if(statsdto.getMenu_seq() > 0){
 				strWhere += " AND A.menu_seq = ?";
 				bind.add(statsdto.getMenu_seq());

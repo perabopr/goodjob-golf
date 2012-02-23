@@ -22,6 +22,10 @@ public class StatsDto implements Serializable {
 	private String package_name = "";
 	private String condo_name = "";
 	
+	private String booking_day = "";
+	private String tour_date = "";
+	private String in_date = "";
+	
 	public String getReserve_day() {
 		return reserve_day;
 	}
@@ -129,5 +133,23 @@ public class StatsDto implements Serializable {
 	}
 	public void setCondo_name(String condo_name) {
 		this.condo_name = condo_name;
+	}
+	public String getBooking_day() {
+		return booking_day;
+	}
+	public void setBooking_day(String bookingDay) {
+		booking_day = bookingDay;
+	}
+	public String getTour_date() {
+		return tour_date;
+	}
+	public void setTour_date(String tourDate) {
+		tour_date = tourDate;
+	}
+	public String getIn_date() {
+		return in_date;
+	}
+	public void setIn_date(String inDate) {
+		in_date = inDate;
 	}
 }

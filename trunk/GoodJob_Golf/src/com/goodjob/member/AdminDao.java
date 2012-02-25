@@ -11,6 +11,7 @@ import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
 
 import com.goodjob.db.DBManager;
 import com.goodjob.sql.ADMIN;
@@ -30,6 +31,7 @@ public class AdminDao {
 			bind.add(dto.getAdmin_id());
 			bind.add(dto.getAdmin_pwd());
 			bind.add(dto.getAdmin_name());
+			bind.add(dto.getType());
 			
 			QueryRunner qr = new QueryRunner();
 			qr.update(conn , ADMIN.insert , bind.toArray());
@@ -60,7 +62,7 @@ public class AdminDao {
 		}
 	}
 	
-	public void setUpdate(String  admin_id){
+	public void setDelete(String  admin_id){
 		
 		Connection conn = null;
 		try {
@@ -86,10 +88,10 @@ public class AdminDao {
 			
 			conn = DBManager.getConnection();
 			
-			ResultSetHandler rsh = new BeanHandler(AdminDto.class);
+			ResultSetHandler rsh = new BeanListHandler(AdminDto.class);
 			QueryRunner qr = new QueryRunner();
 			
-			list = (List<AdminDto>) qr.query(conn , ADMIN.list , rsh );
+			list = (List<AdminDto>) qr.query(conn , ADMIN.list , rsh);
 			
 		} catch (Exception e) {
 			System.out.println(e);
@@ -99,5 +101,29 @@ public class AdminDao {
 		return list;
 	}
 	
-	
+	public AdminDto login(String admin_id){
+		
+		Connection conn = null;
+		AdminDto dto = null;
+		String pw = null;
+		
+		try {
+			
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(admin_id);
+			
+			ResultSetHandler rsh = new BeanHandler(AdminDto.class);
+			QueryRunner qr = new QueryRunner();
+			dto = (AdminDto) qr.query(conn , ADMIN.login , rsh , bind.toArray() );
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return dto;
+	}
 }

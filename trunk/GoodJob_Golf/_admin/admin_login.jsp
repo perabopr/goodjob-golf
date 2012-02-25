@@ -4,18 +4,22 @@
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@ page import="java.util.*" %>
 <%@ page import="com.goodjob.util.Utils"%>
-<%@ page import="com.goodjob.member.MemberDto"%>
-<%@ page import="com.goodjob.member.MemberDao"%>
+<%@page import="com.goodjob.member.*"%>
 <%
 
 	Map<String,String> params = new HashMap<String,String>();
 	
-	String mem_id = StringUtils.defaultString(request.getParameter("admin_id"), "");
-	String mem_pwd = StringUtils.defaultString(request.getParameter("admin_pwd"), "");
+	String admin_id = StringUtils.defaultString(request.getParameter("admin_id"), "");
+	String admin_pwd = StringUtils.defaultString(request.getParameter("admin_pwd"), "");
 	
-	if(!"admin".equals(mem_id)){
+	AdminDao adminDao = new AdminDao();
+	
+	AdminDto dto = adminDao.login(admin_id);
+	
+	if(dto == null || dto.getAdmin_pwd() == null){
 %>
-		<script language="javascript" type="text/javascript">
+		
+<script language="javascript" type="text/javascript">
 			alert("아이디가 존재 하지 않습니다.");
 			history.go(-1);
 		</script>
@@ -23,7 +27,7 @@
 		return;
 	}
 	
-	if(!"66700110".equals(mem_pwd)){
+	if(!admin_pwd.equals(dto.getAdmin_pwd())){
 %>
 		<script language="javascript" type="text/javascript">
 			alert("비밀번호가 일치하지 않습니다.");
@@ -33,9 +37,10 @@
 		return;
 	}
 	
-	session.setAttribute("admin_id",mem_id);
-	session.setAttribute("admin_name","관리자");
-
+	session.setAttribute("admin_id",admin_id);
+	session.setAttribute("admin_type",dto.getType());
+	session.setAttribute("admin_name",dto.getAdmin_name());
+	
 	response.sendRedirect("/_admin/Main.jsp");
 	
 %>

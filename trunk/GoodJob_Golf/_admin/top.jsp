@@ -19,8 +19,8 @@
 <td width="111" align="center" valign="bottom">
 <p>&nbsp;</p>
 </td>
-<td width="66" valign="bottom">
-<p><a href="/_admin/Main.jsp" target="main"><font color="white">메인</font></a></p>
+<td width="100" valign="bottom">
+<p><font color="white">[<%=StringUtils.trimToEmpty((String)session.getAttribute("admin_name"))%>]님 로그인</font></p>
 </td>
 <td width="152" valign="bottom">
 <p><a href="/_admin/admin_logout.jsp" target="main"><font color="white">로그아웃</font></a></p>

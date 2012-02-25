@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="org.apache.commons.lang.StringUtils"%>
+<%
+	String admin_type = StringUtils.trimToEmpty((String)session.getAttribute("admin_type"));
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -12,6 +16,8 @@
 <script language="JavaScript">
 		<!--
 			function toggleMenu(currMenu) {
+
+			<%if("0".equals(admin_type)){ %>
 				if (document.all) {
 					thisMenu = eval("document.all.menu2[" + (currMenu-1) + "].style");
 					if (thisMenu.display == "block") {
@@ -27,6 +33,16 @@
 				} else {
 					return true;
 				}
+			<%}else{ %>
+				thisMenu = eval("document.all.menu2.style");
+				if (thisMenu.display == "block") {
+					thisMenu.display = "none";
+				} else {
+					thisMenu.display = "block";
+				}
+				return true;
+				
+			<%} %>
 			}
 		//-->
 		</script>
@@ -43,15 +59,10 @@
 <table width="180" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
         <td width="180" valign="top">
+		<%if("0".equals(admin_type)){ %>
             <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td>
-                        <!--table width="100%" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                                <td width="20" height="25" align="center"><img src="/_admin/images/common/menu_bullet.gif" width="4" height="4" align="absmiddle"></td>
-                                <td width="160" ONCLICK="return toggleMenu(1)" STYLE="cursor:hand"><b><font color="white">메인관리</font></b></td>
-                            </tr>
-                        </table-->
                         <table id="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td width="20" height="22">&nbsp;</td>
@@ -105,6 +116,8 @@
                     </td>
                 </tr>
             </table>
+            <%}%>
+            <%if("0".equals(admin_type)){ %>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td width="20" height="25" align="center"><img src="/_admin/images/common/menu_bullet.gif" width="4" height="4" align="absmiddle"></td>
@@ -149,6 +162,8 @@
                     <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>소셜커머스</a></td>
                 </tr>
             </table>
+            <%}%>
+            <%if("0".equals(admin_type)){ %>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td width="20" height="25" align="center"><img src="/_admin/images/common/menu_bullet.gif" width="4" height="4" align="absmiddle"></td>
@@ -158,7 +173,7 @@
             <table id="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td height="22">&nbsp;</td>
-                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/member/admin_list.jsp" class=left_menu>어드민</a></td>
+                    <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/member/admin_list.jsp" class=left_menu>관리자현황</a></td>
                 </tr>
                 <tr>
                     <td height="22">&nbsp;</td>
@@ -173,6 +188,7 @@
                     <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/member/mail_list.jsp" class=left_menu>E-Mail 보내기</a></td>
                 </tr>
             </table>
+            <%}%>
             <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td>
@@ -187,24 +203,6 @@
                 <tr>
                     <td>
                         <table id="menu2" name="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
-                            <!--
-                            <tr>
-                                <td width="20" height="25">&nbsp;</td>
-                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="#" class=left_menu>신규회원분석</a></td>
-                            </tr>
-                            <tr>
-                                <td height="25">&nbsp;</td>
-                                <td><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a href="#" target="main" class=left_menu>방문자분석</a></td>
-                            </tr>
-                            <tr>
-                                <td height="25">&nbsp;</td>
-                                <td><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a href="#" target="main" class=left_menu>결제수단분석</a></td>
-                            </tr>
-                            <tr>
-                                <td height="25">&nbsp;</td>
-                                <td><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a href="#" target="main" class=left_menu>인기골프장분석</a></td>
-                            </tr>
-                            -->
                             <tr>
                                 <td height="25">&nbsp;</td>
                                 <td><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a href="/_admin/stats/stats_list.jsp" target="main" class=left_menu>골프장분석</a></td>
@@ -217,6 +215,7 @@
                     </td>
                 </tr>
             </table>
+            <%if("0".equals(admin_type)){ %>
             <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td>
@@ -251,6 +250,7 @@
                     </td>
                 </tr>
             </table>
+            <%}%>
         </td>
     </tr>
 </table>

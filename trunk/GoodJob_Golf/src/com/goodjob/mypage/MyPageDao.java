@@ -6,30 +6,24 @@ package com.goodjob.mypage;
 import java.sql.Connection;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
-import com.goodjob.board.JoinBoardDto;
-import com.goodjob.coupon.CouponDao;
 import com.goodjob.coupon.dto.CouponDto;
 import com.goodjob.db.DBManager;
-import com.goodjob.order.dto.GolfLinkDto;
 import com.goodjob.reserve.dto.CondoReserveDto;
 import com.goodjob.reserve.dto.GolfLinkReserveDto;
 import com.goodjob.reserve.dto.PackageReserveDto;
 import com.goodjob.sql.BBS;
 import com.goodjob.sql.MYPAGE;
-import com.goodjob.sql.ORDER;
 
 /**
  * @author Administrator

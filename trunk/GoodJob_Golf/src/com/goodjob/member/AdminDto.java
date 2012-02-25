@@ -13,6 +13,7 @@ public class AdminDto {
 	private String admin_pwd;
 	private String admin_name;
 	private String reg_date;
+	private String type;
 	
 	public String getAdmin_id() {
 		return admin_id;
@@ -38,6 +39,10 @@ public class AdminDto {
 	public void setReg_date(String regDate) {
 		reg_date = regDate;
 	}
-	
-	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 }

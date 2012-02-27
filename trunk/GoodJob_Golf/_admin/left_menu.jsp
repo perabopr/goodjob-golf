@@ -17,9 +17,25 @@
 		<!--
 			function toggleMenu(currMenu) {
 
-			<%if("9".equals(admin_type) || "0".equals(admin_type)){ %>
+			<%if("9".equals(admin_type)){ %>
 				if (document.all) {
 					thisMenu = eval("document.all.menu2[" + (currMenu-1) + "].style");
+					if (thisMenu.display == "block") {
+						thisMenu.display = "none";
+					} else {
+						for(i=0;i<document.all.menu2.length;i++) {
+							otherMenu = eval("document.all.menu2[" + i + "].style");
+							otherMenu.display = "none";
+						}
+						thisMenu.display = "block";
+					}
+					return false;
+				} else {
+					return true;
+				}
+			<%}else if("0".equals(admin_type)){ %>
+				if (document.all) {
+					thisMenu = eval("document.all.menu2[" + (currMenu-3) + "].style");
 					if (thisMenu.display == "block") {
 						thisMenu.display = "none";
 					} else {
@@ -59,7 +75,7 @@
 <table width="180" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
         <td width="180" valign="top">
-		<%if("9".equals(admin_type) || "0".equals(admin_type)){ %>
+		<%if("9".equals(admin_type)){ %>
             <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td>

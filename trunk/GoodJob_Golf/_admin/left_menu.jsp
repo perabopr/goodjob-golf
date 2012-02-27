@@ -17,7 +17,7 @@
 		<!--
 			function toggleMenu(currMenu) {
 
-			<%if("0".equals(admin_type)){ %>
+			<%if("9".equals(admin_type) || "0".equals(admin_type)){ %>
 				if (document.all) {
 					thisMenu = eval("document.all.menu2[" + (currMenu-1) + "].style");
 					if (thisMenu.display == "block") {
@@ -59,7 +59,7 @@
 <table width="180" border="0" cellpadding="0" cellspacing="0" align="center">
     <tr>
         <td width="180" valign="top">
-		<%if("0".equals(admin_type)){ %>
+		<%if("9".equals(admin_type) || "0".equals(admin_type)){ %>
             <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td>
@@ -117,7 +117,7 @@
                 </tr>
             </table>
             <%}%>
-            <%if("0".equals(admin_type)){ %>
+            <%if("9".equals(admin_type) || "0".equals(admin_type)){ %>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td width="20" height="25" align="center"><img src="/_admin/images/common/menu_bullet.gif" width="4" height="4" align="absmiddle"></td>
@@ -163,7 +163,7 @@
                 </tr>
             </table>
             <%}%>
-            <%if("0".equals(admin_type)){ %>
+            <%if("9".equals(admin_type) || "0".equals(admin_type)){ %>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td width="20" height="25" align="center"><img src="/_admin/images/common/menu_bullet.gif" width="4" height="4" align="absmiddle"></td>
@@ -171,6 +171,7 @@
                 </tr>
             </table>
             <table id="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
+                <%if("9".equals(admin_type)){ %>
                 <tr>
                     <td height="22">&nbsp;</td>
                     <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/member/admin_list.jsp" class=left_menu>관리자현황</a></td>
@@ -179,6 +180,7 @@
                     <td height="22">&nbsp;</td>
                     <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/member/mem_list.jsp" class=left_menu>회원가입현황</a></td>
                 </tr>
+                <%}%>
                 <tr>
                     <td height="22">&nbsp;</td>
                     <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/member/sms_list.jsp" class=left_menu>SMS 보내기</a></td>
@@ -215,7 +217,7 @@
                     </td>
                 </tr>
             </table>
-            <%if("0".equals(admin_type)){ %>
+            <%if("9".equals(admin_type) || "0".equals(admin_type)){ %>
             <table width="100%" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td>

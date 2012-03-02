@@ -114,9 +114,10 @@ public class PageNavigater {
 		if(prePage > 0){
 			str.append("<A HREF=\"javascript:goPage('"+prePage+"');\">"+prevImage+"</A>&nbsp;\n");
 		} else{
-			if(!isDisable){
+			if(npage > 1)
+				str.append("<A HREF=\"javascript:goPage('"+(npage-1)+"');\">"+prevImage+"</A>&nbsp;\n");
+			else
 				str.append("<A HREF=\"#\">"+prevImage+"</a>&nbsp;\n");
-			}
 		}
 		
 		//페이지
@@ -140,9 +141,10 @@ public class PageNavigater {
 		if(nextPage <= totalPage){
 			str.append("&nbsp;<A HREF=\"javascript:goPage('"+nextPage+"');\">"+nextImage+"</A> \n");
 		} else{
-			if(!isDisable){
+			if(npage < totalPage)
+				str.append("&nbsp;<A HREF=\"javascript:goPage('"+(npage+1)+"');\">"+nextImage+"</A> \n");
+			else
 				str.append("&nbsp;<A HREF=\"#\">"+nextImage+"</a> \n");
-			}
 		}
 		
 		//마지막페이지

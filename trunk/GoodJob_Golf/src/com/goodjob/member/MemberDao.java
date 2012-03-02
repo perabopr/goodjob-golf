@@ -116,6 +116,10 @@ public class MemberDao {
 				where = " where mem_mtel = ? " ;
 				bind.add(keyword);
 			}
+			else if("sms_yn".equals(field) && keyword.length() > 0){
+				where = " where sms_yn = ? " ;
+				bind.add(keyword);
+			}
 			else if("type".equals(field) && keyword.length() > 0){
 				where = " where mem_type = ? " ;
 				bind.add(keyword);

@@ -13,7 +13,7 @@
 	String region = StringUtils.defaultIfEmpty(request.getParameter("region"), "");
 	String reserve = StringUtils.defaultIfEmpty(request.getParameter("reserve"), "");
 	
-	String per_page = StringUtils.defaultIfEmpty(request.getParameter("per_page"), "10");
+	String per_page = StringUtils.defaultIfEmpty(request.getParameter("per_page"), MEMBER.per_page+"");
 	
 	PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , MEMBER.per_page );
 	

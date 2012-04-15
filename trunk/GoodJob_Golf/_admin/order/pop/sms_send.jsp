@@ -33,13 +33,25 @@ if(StringUtils.trimToEmpty(request.getParameter("msgtime")).length() >= 10){
 	weekName = Utils.getWeekName(tmp[0],tmp[1],tmp[2]);
 }
 
+String tmpDay = "";
+String tmpHour = "";
 if(menu == 5){
-	msgtime +=" " + weekName;
+	
+	int len = msgtime.length();
+	if(msgtime.length()>=10){
+		tmpDay = msgtime.substring(0,5);
+		tmpHour = msgtime.substring(7,len);
+	}
+	msgtime = tmpDay + weekName + " " + tmpHour;
 	msgtime +=" " + (per_room>1?per_room-1+"박":per_room+"일");
 }
 else{
-	msgtime +=" " +  weekName;
-	
+	int len = msgtime.length();
+	if(msgtime.length()>=10){
+		tmpDay = msgtime.substring(0,5);
+		tmpHour = msgtime.substring(7,len);
+	}
+	msgtime =tmpDay + weekName + " " + tmpHour;
 }
 
 if(menu == 1 || menu == 2){

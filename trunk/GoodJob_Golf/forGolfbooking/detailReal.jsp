@@ -355,7 +355,7 @@ function imgChange(objId){
 				<TR>
 				<TD>&nbsp;</TD></TR>
 				<TR>
-				<TD class=normal_b>가격정보 </TD>
+				<TD class=normal_b>가격정보(자세한 할인 금액은 아래 요일/시간 별로 확인해 주시기 바랍니다.)</TD>
 				</TR>
 				<TR>
 				<TD>

@@ -62,7 +62,7 @@ if(prList.size() != 1){
 		//glrDto.setReserve_uid(rEmail);
 		glrDto.setPer_num(Integer.toString(rCnt));
 		glrDto.setReserve_phone(rPhone);
-		glrDto.setProduct_price(prList.get(0).getGoodjob_price() * rCnt);
+		glrDto.setProduct_price(prList.get(0).getNH_price() * rCnt);
 		int couponPrice = 0;
 		CouponDto cpDto = new CouponDto();
 		for(int i = 0; i < couponList.size(); i++){
@@ -104,7 +104,18 @@ params.put("mem_id",reserveuid);
 params.put("rphone",reservephone);
 
 SMSDao sDao = new SMSDao();
-boolean isSend = sDao.auth(params);
+boolean isSend = sDao.send(params);
+
+message = "계좌번호 : 국민 421737-04-015359\n";
+message += "예금주 : ㈜세이브코리아 입니다.\n";
+message += "(굿잡골프)";
+params.clear();
+params.put("msg",message);
+params.put("sphone",sphone);
+params.put("mem_id",reserveuid);
+params.put("rphone",reservephone);
+isSend = sDao.send(params);
+
 %>
 <script language="javascript" type="text/javascript">
 top.document.location.href="result.jsp?menu=2";

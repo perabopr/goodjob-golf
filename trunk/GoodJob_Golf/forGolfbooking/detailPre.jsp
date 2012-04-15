@@ -439,7 +439,7 @@ $(function(){
 <TR>
 <TD>&nbsp;</TD></TR>
 <TR>
-<TD class=normal_b>가격정보 </TD></TR>
+<TD class=normal_b>가격정보(자세한 할인 금액은 아래 요일/시간 별로 확인해 주시기 바랍니다.)</TD></TR>
 <TR>
 <TD>
 					<TABLE border=0 cellSpacing=1 cellPadding=2 width="100%" bgColor=#d1d3d4>

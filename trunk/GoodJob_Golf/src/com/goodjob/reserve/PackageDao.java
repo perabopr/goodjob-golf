@@ -53,9 +53,7 @@ public class PackageDao{
 			
 			ResultSetHandler rsh = new BeanListHandler(PackageDto.class);
 			QueryRunner qr = new QueryRunner();
-			
-			System.out.println(String.format(RESERVE.getPackage_select,strWhere));
-			
+						
 			list = (List<PackageDto>) qr.query(conn , String.format(RESERVE.getPackage_select,strWhere), rsh );
 			
 		} catch (Exception e) {

@@ -107,7 +107,16 @@ function mypage_search() {
 }
 
 function card_order(process_status , menu , reserve_seq , good_price , good_name){
-	
+
+	<%
+		if(!("gundallove@gmail.com".equals(mem_id) || "killkoo@naver.com".equals(mem_id))){
+	%>
+	alert("카드 결제는 준비 중 입니다.");
+	return;
+	<%
+		}
+	%>
+
 	if(good_price == '' || good_price == '0'){
 		alert("결제 금액이 없습니다.");
 		return;
@@ -241,7 +250,7 @@ function card_order(process_status , menu , reserve_seq , good_price , good_name
                                                                                     <td bgcolor="white" align="center" class=m_title_blue><%=Utils.numberFormat(golfDto.getCoupon_price())%>원</td>
                                                                                     <td bgcolor="white" align="center" class=m_title_red><%=Utils.numberFormat(golfDto.getProduct_price())%>원<br>
                                                                                     <%if("0".equals(golfDto.getProcess_status())){%>
-																					<!--<a href="javascript:card_order('1','<%=golfDto.getMenu_seq()%>','<%=golfDto.getReserve_seq()%>','<%=golfDto.getProduct_price()%>','<%=golfDto.getGolflink_name()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>-->
+																					<a href="javascript:card_order('1','<%=golfDto.getMenu_seq()%>','<%=golfDto.getReserve_seq()%>','<%=golfDto.getProduct_price()%>','<%=golfDto.getGolflink_name()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>
 																					<%}%>
 																					</td>
                                                                                     <td bgcolor="white" align="center" class=m_title><%=golfDto.getPer_num()%>명/1팀</td>
@@ -298,12 +307,12 @@ function card_order(process_status , menu , reserve_seq , good_price , good_name
                                                                            <td bgcolor="white" align="center" class=m_title><%=pkDto.getTour_date().replaceAll("-",".")%></td>
                                                                            <td bgcolor="white" align="center" class=m_title_red><%=(pkDto.getPackage_price()==0?"":Utils.numberFormat(pkDto.getPackage_price())+"원")%><br>
                                                                             <%if("0".equals(pkDto.getProcess_status())){%>
-																			<!--<a href="javascript:card_order('0','<%=pkDto.getMenu_seq()%>','<%=pkDto.getReserve_seq()%>','<%=pkDto.getBalance_price()%>','<%=pkDto.getPackage_name1()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>-->
+																			<a href="javascript:card_order('0','<%=pkDto.getMenu_seq()%>','<%=pkDto.getReserve_seq()%>','<%=pkDto.getBalance_price()%>','<%=pkDto.getPackage_name1()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>
 																			<%}%>
                                                                            </td>
                                                                            <td bgcolor="white" align="center" class=m_title_red><%=(pkDto.getBalance_price()==0?"":Utils.numberFormat(pkDto.getBalance_price())+"원")%><br>
                                                                            <%if("0".equals(pkDto.getProcess_status())){%>
-																			<!--<a href="javascript:card_order('1','<%=pkDto.getMenu_seq()%>','<%=pkDto.getReserve_seq()%>','<%=pkDto.getBalance_price()%>','<%=pkDto.getPackage_name1()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>-->
+																			<a href="javascript:card_order('1','<%=pkDto.getMenu_seq()%>','<%=pkDto.getReserve_seq()%>','<%=pkDto.getBalance_price()%>','<%=pkDto.getPackage_name1()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>
 																			<%}%>
 																			</td>
                                                                            <td bgcolor="white" align="center" class=m_title><%=pkDto.getPer_num()%>명/1팀</td>
@@ -360,7 +369,7 @@ function card_order(process_status , menu , reserve_seq , good_price , good_name
 														                    <td bgcolor="white" align="center" class=m_title><%=Utils.dateFormat(cdDto.getOut_date(),".")%></td>
 														                    <td bgcolor="white" align="center" class=m_title_red><%=(cdDto.getCondo_price()==0?"":Utils.numberFormat(cdDto.getCondo_price())+"원")%><br>
 														                    <%if("0".equals(cdDto.getProcess_status())){%>
-																			<!--<a href="javascript:card_order('1','<%=cdDto.getMenu_seq()%>','<%=cdDto.getReserve_seq()%>','<%=cdDto.getCondo_price()%>','<%=cdDto.getCondo_name()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>-->
+																			<a href="javascript:card_order('1','<%=cdDto.getMenu_seq()%>','<%=cdDto.getReserve_seq()%>','<%=cdDto.getCondo_price()%>','<%=cdDto.getCondo_name()%>');"><img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>
 																			<%}%>
 																			</td>
 														                    <td bgcolor="white" align="center">

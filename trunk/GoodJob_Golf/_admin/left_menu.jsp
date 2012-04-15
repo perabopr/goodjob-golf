@@ -192,11 +192,11 @@
                     <td height="22">&nbsp;</td>
                     <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/member/admin_list.jsp" class=left_menu>관리자현황</a></td>
                 </tr>
+                <%}%>
                 <tr>
                     <td height="22">&nbsp;</td>
                     <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/member/mem_list.jsp" class=left_menu>회원가입현황</a></td>
                 </tr>
-                <%}%>
                 <tr>
                     <td height="22">&nbsp;</td>
                     <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/member/sms_list.jsp" class=left_menu>SMS 보내기</a></td>

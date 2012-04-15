@@ -13,7 +13,7 @@
 	String reserve = StringUtils.defaultIfEmpty(request.getParameter("reserve"), "");
 	
 	String keyword = StringUtils.defaultIfEmpty(request.getParameter("keyword"), "");
-	String per_page = StringUtils.defaultIfEmpty(request.getParameter("per_page"), MEMBER.per_page+"");
+	String per_page = StringUtils.defaultIfEmpty(request.getParameter("per_page"), "10");
 	
 	PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , MEMBER.per_page );
 	

@@ -12,6 +12,7 @@ public class Holiday {
 		days.add("20120301");
 		days.add("20120411");
 		days.add("20120528");
+		days.add("20120501");
 		days.add("20120606");
 		days.add("20120815");
 		days.add("20121001");

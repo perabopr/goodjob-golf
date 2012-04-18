@@ -74,8 +74,7 @@ public class RESERVE {
 		"FROM tb_golflink_price "	+ 
 		"WHERE golflink_seq = ?";
 	
-	public static final String getProductReserve
-	=	"SELECT " +				
+	public static final String getProductReserve =	"SELECT " +				
 			" A.productsub_seq" +
 			",D.golflink_name" +
 			",B.product_date" +
@@ -96,8 +95,8 @@ public class RESERVE {
 			"AND B.golflink_seq = ? " +
 			"AND B.product_date = ? ORDER BY time_start ";
 	
-	public static final String getGolfPromise
-	=	"SELECT " +
+	
+	public static final String getGolfPromise =	"SELECT " +
 			" C.promise1_type,C.promise1" +
 			",C.promise2_type,C.promise2" +
 			",C.promise3_type,C.promise3" + 
@@ -111,8 +110,8 @@ public class RESERVE {
 			"INNER JOIN tb_golflink D on(B.golflink_seq = D.golflink_seq) " +
 		"WHERE A.productsub_seq = ?";
 	
-	public static final String getProductReserve2
-	=	"SELECT " +				
+	
+	public static final String getProductReserve2 =	"SELECT " +				
 			" A.productsub_seq" +
 			",D.golflink_name" +
 			",B.product_date" +

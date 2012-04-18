@@ -434,7 +434,7 @@ for (int i = 1; i < 15 ;i++){
 	}
 	incDate.add(incDate.DATE, 1);
 	
-	boolean isHoliday = com.goodjob.util.Holiday.isHoliday(incYear+""+(incMonth<10?"0"+incMonth:incMonth)+""+incDay);
+	boolean isHoliday = com.goodjob.util.Holiday.isHoliday(incYear+""+(incMonth<10?"0"+incMonth:incMonth)+""+(incDay<10?"0"+incDay:incDay));
 	if(isHoliday){
 		weekClass = "sunday";
 		weekImg = String.format(weekImg , "_h");

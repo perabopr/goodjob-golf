@@ -11,11 +11,7 @@ public class RESERVE {
 			"INNER JOIN tb_region B on(A.region_seq = B.region_seq) " +
 		"WHERE A.view_yn = 'Y' %s " +
 		"ORDER BY B.region_seq, A.golflink_name";
-		/*
-			"AND A.region_seq = 1 "
-			"AND A.menu_seq = 1 " +
-			"AND A.golflink_name LIKE '%2%'	";
-		*/
+		
 	
 	public static final String getReserveGolfDate
 	=	"SELECT " +
@@ -40,23 +36,6 @@ public class RESERVE {
 		"WHERE A.product_status = '0' " +
 		"AND A.product_seq = ?";
 	
-	/*
-	public static final String getReserveGolfDate
-	=	"SELECT " +
-			" A.product_year" +
-			",A.product_month" +
-			",A.product_day" +
-			",A.product_date" +
-			",count(*) 'product_cnt' " +
-		"FROM tb_product A " +
-			"INNER JOIN tb_product_sub B on(A.product_seq = B.product_seq) " +
-		"WHERE A.view_yn = 'Y' " +
-			"AND B.product_status = '0' " +
-			"AND A.product_date >= ? " +
-			"AND A.golflink_seq = ? " +
-			"AND A.product_date >= ? AND A.product_date <= ? " +
-		"GROUP BY A.product_year, A.product_month, A.product_day ";	
-	*/
 
 	public static final String getDetailGolf
 	=	"SELECT " +
@@ -115,7 +94,7 @@ public class RESERVE {
 		"WHERE A.product_status = '0' " +
 			"AND B.view_yn = 'Y' " +
 			"AND B.golflink_seq = ? " +
-			"AND B.product_date = ?";
+			"AND B.product_date = ? ORDER BY time_start ";
 	
 	public static final String getGolfPromise
 	=	"SELECT " +
@@ -209,6 +188,9 @@ public class RESERVE {
 		"FROM tb_product " +
 			"WHERE golflink_seq = ?";
 	
+	/**
+	 * 추가 수정 view_yn 추가 
+	 */
 	public static final String getPackage_select
 	=	"SELECT " +
 			" a.package_seq " +
@@ -265,9 +247,7 @@ public class RESERVE {
 			",b.off_s_sun " +
 		"FROM tb_package a " +
 			"INNER JOIN tb_package_price b ON(a.package_seq = b.package_seq) " +
-		"WHERE view_yn=''Y'' %s";
-	
-	
+		"WHERE view_yn = 'Y' %s";
 	
 	//--------------------------------------------- condo
 	public static final String condo_select_list = " select a.condo_seq, " +
@@ -399,6 +379,8 @@ public class RESERVE {
 			"INNER JOIN tb_package_price b on(a.package_seq = b.package_seq) " +
 		"WHERE a.package_seq = ?";
 	
+	
+	
 	public static final String getSearch
 	=	"SELECT " +
 			" b.product_date " +
@@ -414,5 +396,5 @@ public class RESERVE {
 		"WHERE c.product_status = '0' " +
 			"AND b.view_yn = 'Y' " +
 			"AND b.product_date >= ? %s " +
-		"ORDER BY a.menu_seq, a.golflink_seq, b.product_date, c.time_start";	
+		"ORDER BY a.menu_seq, a.golflink_seq, b.product_date, c.time_start";
 }

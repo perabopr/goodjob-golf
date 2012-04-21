@@ -135,7 +135,7 @@ if(ddlSearchMenu_tmp.equals("1")){
 <TD class=normal_b bgColor=#f1f1f1 height=25 width=90 align=center>부킹날짜</TD>
 <TD class=normal_b bgColor=#f1f1f1 height=25 width=253 align=center>골프장명</TD>
 <TD class=normal_b bgColor=#f1f1f1 height=25 width=100 align=center>부킹시간</TD>
-<TD class=normal_b bgColor=#f1f1f1 height=25 width=100 align=center>가능팀수</TD>
+<!--<TD class=normal_b bgColor=#f1f1f1 height=25 width=100 align=center>가능팀수</TD>-->
 <TD class=normal_b bgColor=#f1f1f1 width=142 align=center>예약가능여부</TD></TR>
 <%
 	for(int i = 0;i < listSearch2.size();i++){
@@ -155,7 +155,7 @@ if(ddlSearchMenu_tmp.equals("1")){
 <TD bgColor=white height=25 align=center><%=bookingDate %></TD>
 <TD bgColor=white height=25 align=center><%=listSearch2.get(i).getGolflink_name() %></TD>
 <TD bgColor=white height=25 align=center><%=bookingTime %></TD>
-<TD bgColor=white height=25 align=center>1타임</TD>
+<!--<TD bgColor=white height=25 align=center>1타임</TD>-->
 <TD bgColor=white align=center><A href="/forGolfbooking/detail.jsp?menu=2&golf=<%=listSearch2.get(i).getGolflink_seq() %>&date=<%=listSearch2.get(i).getProduct_date() %>&cdate=<%=listSearch2.get(i).getProduct_date() %>"><IMG border=0 align=absMiddle src="../../images/booking/btn_detail.gif" width=112 height=20></A></TD></TR>
 <%
 	}

@@ -62,7 +62,8 @@ public class PRODUCT {
 			",a.promise_rule" +
 			",a.use_guide" +
 			",a.golflink_guide" +
-			",a.use_rule " +	
+			",a.use_rule " +
+			",a.order_num " +
 		"FROM tb_golflink a " +
 		"INNER JOIN tb_region b on(a.region_seq = b.region_seq) " +
 		"WHERE a.menu_seq = ? {0} " +
@@ -121,6 +122,11 @@ public class PRODUCT {
 	public static final String golflink_delete 
 		=	"DELETE FROM tb_golflink " +
 			"WHERE golflink_seq = ?";
+	
+	public static final String golflink_order_update
+	=	"UPDATE tb_golflink " +
+			" SET order_num = ? " +
+		"WHERE golflink_seq = ?";	
 	
 	/*----------------------------------------------------------------- tb_golflink_course*/
 	public static final String golflink_course_insert
@@ -441,6 +447,7 @@ public class PRODUCT {
 				",a.golflink_guide" +
 				",a.way_map " +
 				",a.userinfo_terms " +
+				",a.order_num " +
 			"FROM tb_package a " +
 			"	INNER JOIN tb_region b on(a.region_seq = b.region_seq) " +
 			"WHERE 1=1 {0} " +
@@ -503,6 +510,11 @@ public class PRODUCT {
 	public static final String package_delete
 		=	"DELETE FROM tb_package " +
 			"WHERE package_seq = ?";
+	
+	public static final String package_order_update
+	=	"UPDATE tb_package " +
+			" SET order_num = ? " +
+		"WHERE package_seq = ?";
 	/*----------------------------------------------------------------- tb_package_price*/
 	public static final String package_price_select
 		=	"SELECT "+
@@ -675,6 +687,7 @@ public class PRODUCT {
 				",a.detail_info" +
 				",a.use_rule " +
 				",a.way_map " +
+				",a.order_num " +
 			"FROM tb_condo a " +
 			"INNER JOIN tb_region b on(a.region_seq = b.region_seq) " +
 			"WHERE 1=1 {0} " +
@@ -721,6 +734,11 @@ public class PRODUCT {
 	public static final String condo_delete
 		=	"DELETE FROM tb_condo " +
 			"WHERE condo_seq = ?";
+	
+	public static final String condo_order_update
+	=	"UPDATE tb_condo " +
+			" SET order_num = ? " +
+		"WHERE condo_seq = ?";
 	/*----------------------------------------------------------------- tb_condo_gallery*/
 	public static final String condo_gallery_select
 		=	"SELECT " +
@@ -840,4 +858,59 @@ public class PRODUCT {
 	public static final String condo_promise_delete
 		=	"DELETE FROM tb_condo_promise " +	
 			"WHERE condo_seq = ?";
+	
+	/*----------------------------------------------------------------- tb_site*/
+	public static final String site_all_select
+		=	"SELECT " +
+				" site_name "+
+				",phone_num " +
+				",use_yn" +
+			"FROM tb_site" +
+			"WHERE use_yn = 'Y'";
+	
+	public static final String site_insert
+		=	"INSERT INTO tb_site( " +
+				" site_name " +
+				",phone_num " +
+			")VALUES(?,?)" ;
+	
+	public static final String site_update
+		=	"UPDATE tb_site " +
+			"SET site_name = ? "+
+				", phone_num = ? " +
+				", use_yn = ? " +
+			"WHERE site_seq = ?";
+	
+	public static final String site_delete
+		=	"DELETE FROM tb_site " + 
+			"WHERE site_seq = ?";
+	
+	/*----------------------------------------------------------------- tb_menu_view_site*/
+	public static final String menu_view_site_select
+		=	"SELECT " + 
+				" A.menu_seq " +
+				",B.menu_name " +
+				",A.service_seq " +
+				",A.site_seq " + 
+				",C.site_name " +
+			"FROM tb_menu_view_site A " +
+				"INNER JOIN tb_menu B on(A.menu_seq = B.menu_seq) " + 
+				"INNER JOIN tb_site C on(A.site_seq = C.site_seq) " +
+			"WHERE A.menu_seq = ? " +
+				"AND A.service_seq = ?";
+	
+	public static final String menu_view_site_insert
+		=	"INSERT tb_menu_view_site( " +
+				" menu_seq "+
+				",service_seq " +
+				",site_seq " +
+			")VALUES(?,?,?)";
+	
+	public static final String menu_view_site_delete
+		=	"DELETE FROM tb_menu_view_site " +
+			"WHERE menu_seq = ? " +
+				"AND service_seq = ? " +
+				"AND site_seq = ? ";
+				
+				
 }

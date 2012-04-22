@@ -25,6 +25,7 @@ public class GolfLinkDto {
 	private String use_guide = "";
 	private String golflink_guide = "";
 	private String use_rule = "";
+	private int order_num;
 	
 	public int getGolflink_seq() {
 		return golflink_seq;
@@ -170,4 +171,10 @@ public class GolfLinkDto {
 	public void setUse_rule(String use_rule) {
 		this.use_rule = use_rule;
 	}
+	public int getOrder_num() {
+		return order_num;
+	}
+	public void setOrder_num(int order_num) {
+		this.order_num = order_num;
+	}	
 }

@@ -168,6 +168,29 @@ public class PackageDao {
 	}
 	
 	/**
+	 *패키지 - 수정 - 정렬순서 
+	 * @param pkDto
+	 */
+	public void setPackageOrderUpdate(PackageDto pkDto){
+		Connection conn = null;
+		
+		try{
+			conn = DBManager.getConnection();	
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(pkDto.getOrder_num());
+			bind.add(pkDto.getPackage_seq());
+			
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn, PRODUCT.package_order_update, bind.toArray());			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
+	
+	/**
 	 * 패키지 - 삭제
 	 * @param idSeq
 	 */

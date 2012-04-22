@@ -69,6 +69,18 @@ function delGolf(){
 		frm.submit();
 	}
 }
+
+function orderUpdate(serviceseq){
+	$.ajax({
+	  url: "/_admin/product/ajax/ajax_order_update.jsp?menuseq=1&serviceseq=" + serviceseq + "&onum=" + $("#ddlOrder" + serviceseq).val(),
+	  cache: false,
+	  async: false,
+	  success: function(html){
+		//var evalData = eval("("+html+")");
+		alert("수정 되었습니다.");
+	  }
+	});
+}
 //--> 
 </script>
 </head>
@@ -100,10 +112,10 @@ function delGolf(){
     <table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
 	<tr>
 		<td bgcolor="#e6e7e8" align="center" width="30" height="25"><span class=list_title>선택</span></td>
-	    <td bgcolor="#e6e7e8" align="center" width="150"><span class=list_title>지역</span></td>
-	    <td bgcolor="#e6e7e8" align="center" width="235"><span class=list_title>골프장명</span></td>
+	    <td bgcolor="#e6e7e8" align="center" width="80"><span class=list_title>지역</span></td>
+	    <td bgcolor="#e6e7e8" align="center" width="200"><span class=list_title>골프장명</span></td>
 	    <td bgcolor="#e6e7e8" align="center" width="290"><span class=list_title>주소</span></td>
-	    <td bgcolor="#e6e7e8" align="center" width="100"><span class=list_title>운영방식</span></td>
+	    <td bgcolor="#e6e7e8" align="center" width="80"><span class=list_title>운영방식</span></td>
 	<%
 		if(menuSeq.equals("1")){
 	%>
@@ -111,9 +123,11 @@ function delGolf(){
 	<%
 		}
 	%>
-	    <td width="233" align="center" bgcolor="#E6E7E8"><span class=list_title>시간 및 가격입력</span></td>
+	    <td align="center" bgcolor="#E6E7E8" width="180" ><span class=list_title>시간 및 가격입력</span></td>
 	    <td align="center" bgcolor="#E6E7E8" width="248"><span class=list_title>위약처리규정입력 및 수정</span></td>
 	    <td align="center" bgcolor="#E6E7E8" width="150"><span class=list_title>골프장 정보</span></td>
+	    <td align="center" bgcolor="#E6E7E8" width="120"><span class=list_title>정렬</span></td>
+	    <td align="center" bgcolor="#E6E7E8" width="100"><span class=list_title>노출사이트</span></td>
 	</tr>
 	<% 
 	if(arrGolfLink.size() > 0){
@@ -143,6 +157,19 @@ function delGolf(){
         <td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_real_time_reg.jsp?menuseq=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','820','520','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
         <td align="center" bgcolor="white"><a href="real_rule_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
         <td align="center" bgcolor="white"><a href="real_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></td>
+        <td align="center" bgcolor="white">
+        	<select id="ddlOrder<%=arrGolfLink.get(i).getGolflink_seq()%>">
+        	<%
+        	for(int k = 1;k <= arrGolfLink.size();k++){
+        	%>
+        	<option value=<%=k %> <%= k == arrGolfLink.get(i).getOrder_num()? "SELECTED":"" %>><%=k %></option>
+        	<%
+        	}
+        	%>
+        	</select>
+        	<img src="../images/inc/btn_edit.gif" width="28" height="16" border="0" align="absmiddle" style="cursor:pointer;" onclick="orderUpdate('<%=arrGolfLink.get(i).getGolflink_seq()%>');">
+        </td>
+        <td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_menuviewsite.jsp?menuseq=1&serviceseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','415','400','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
     </tr>
     <%
 		}

@@ -58,6 +58,18 @@ function delPackage(){
 		frm.submit();
 	}
 }
+
+function orderUpdate(serviceseq){
+	$.ajax({
+	  url: "/_admin/product/ajax/ajax_order_update.jsp?menuseq=4&serviceseq=" + serviceseq + "&onum=" + $("#ddlOrder" + serviceseq).val(),
+	  cache: false,
+	  async: false,
+	  success: function(html){
+		//var evalData = eval("("+html+")");
+		alert("수정 되었습니다.");
+	  }
+	});
+}
 //--> 
 </script>
 </head>
@@ -95,7 +107,9 @@ function delPackage(){
 		<td bgcolor="#e6e7e8" align="center" width="399"><span class=list_title>위치</span></td>
 	    <td width="259" align="center" bgcolor="#E6E7E8"><span class=list_title>위약처리규정입력 및 수정</span></td>
 	    <td bgcolor="#e6e7e8" align="center" width="220"><span class=list_title>패키지수정</span></td>
-	</tr>
+	    <td align="center" bgcolor="#E6E7E8" width="120"><span class=list_title>정렬</span></td>
+	    <td align="center" bgcolor="#E6E7E8" width="100"><span class=list_title>노출사이트</span></td>
+    </tr>
 <% 
 	for(int i = 0; i < arrList.size();i++){		
 %>
@@ -110,6 +124,19 @@ function delPackage(){
 		<td align="center" bgcolor="white">
 		    <p><a href="package_foreign_reg.jsp?pkSeq=<%= arrList.get(i).getPackage_seq()%>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></p>
 		</td>
+		<td align="center" bgcolor="white">
+        	<select id="ddlOrder<%=arrList.get(i).getPackage_seq()%>">
+        	<%
+        	for(int k = 1;k <= arrList.size();k++){
+        	%>
+        	<option value=<%=k %> <%= k == arrList.get(i).getOrder_num()? "SELECTED":"" %>><%=k %></option>
+        	<%
+        	}
+        	%>
+        	</select>
+        	<img src="../images/inc/btn_edit.gif" width="28" height="16" border="0" align="absmiddle" style="cursor:pointer;" onclick="orderUpdate('<%=arrList.get(i).getPackage_seq()%>');">
+        </td>
+        <td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_menuviewsite.jsp?menuseq=5&serviceseq=<%=arrList.get(i).getPackage_seq()%>" onClick="NewWindow(this.href,'name','415','400','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
 	</tr>
 <%
 	}

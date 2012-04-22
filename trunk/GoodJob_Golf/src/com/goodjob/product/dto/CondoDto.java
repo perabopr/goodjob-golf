@@ -19,6 +19,7 @@ public class CondoDto {
 	private String detail_info = "";
 	private String way_map = "";
 	private String use_rule = "";
+	private int order_num;
 	
 	public int getCondo_seq() {
 		return condo_seq;
@@ -127,5 +128,11 @@ public class CondoDto {
 	}
 	public void setUse_rule(String use_rule) {
 		this.use_rule = use_rule;
+	}
+	public int getOrder_num() {
+		return order_num;
+	}
+	public void setOrder_num(int order_num) {
+		this.order_num = order_num;
 	}
 }

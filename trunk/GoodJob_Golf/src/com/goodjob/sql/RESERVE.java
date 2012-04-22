@@ -10,7 +10,7 @@ public class RESERVE {
 		"FROM tb_golflink A " +
 			"INNER JOIN tb_region B on(A.region_seq = B.region_seq) " +
 		"WHERE A.view_yn = 'Y' %s " +
-		"ORDER BY B.region_seq, A.golflink_name";
+		"ORDER BY A.order_num, B.region_seq, A.golflink_name";
 		
 	
 	public static final String getReserveGolfDate

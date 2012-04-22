@@ -10,6 +10,7 @@
 <%@ page import="com.goodjob.product.*" %>
 <%@ page import="com.goodjob.db.*" %>
 <%
+String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
 int regionseq = NumberUtils.toInt(request.getParameter("region"),0);
 
 RegionDao regionDao = new RegionDao();
@@ -63,6 +64,18 @@ function delGolf(){
 		frm.submit();
 	}
 }
+
+function orderUpdate(serviceseq){
+	$.ajax({
+	  url: "/_admin/product/ajax/ajax_order_update.jsp?menuseq=2&serviceseq=" + serviceseq + "&onum=" + $("#ddlOrder" + serviceseq).val(),
+	  cache: false,
+	  async: false,
+	  success: function(html){
+		//var evalData = eval("("+html+")");
+		alert("수정 되었습니다.");
+	  }
+	});
+}
 //--> 
 </script>
 </head>
@@ -101,6 +114,8 @@ function delGolf(){
 	    <td width="233" align="center" bgcolor="#E6E7E8"><span class=list_title>시간 및 가격입력</span></td>
 	    <td align="center" bgcolor="#E6E7E8" width="248"><span class=list_title>위약처리규정입력 및 수정</span></td>
 	    <td align="center" bgcolor="#E6E7E8" width="216"><span class=list_title>골프장 정보</span></td>
+	    <td align="center" bgcolor="#E6E7E8" width="120"><span class=list_title>정렬</span></td>
+	    <td align="center" bgcolor="#E6E7E8" width="100"><span class=list_title>노출사이트</span></td>
 	</tr>
 	<% 
 	if(arrGolfLink.size() > 0){
@@ -116,6 +131,19 @@ function delGolf(){
 		<td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_pre_time_reg.jsp?glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','820','520','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
         <td align="center" bgcolor="white"><a href="pre_rule_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
         <td align="center" bgcolor="white"><a href="pre_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></td>
+    	<td align="center" bgcolor="white">
+        	<select id="ddlOrder<%=arrGolfLink.get(i).getGolflink_seq()%>">
+        	<%
+        	for(int k = 1;k <= arrGolfLink.size();k++){
+        	%>
+        	<option value=<%=k %> <%= k == arrGolfLink.get(i).getOrder_num()? "SELECTED":"" %>><%=k %></option>
+        	<%
+        	}
+        	%>
+        	</select>
+        	<img src="../images/inc/btn_edit.gif" width="28" height="16" border="0" align="absmiddle" style="cursor:pointer;" onclick="orderUpdate('<%=arrGolfLink.get(i).getGolflink_seq()%>');">
+        </td>
+        <td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_menuviewsite.jsp?menuseq=2&serviceseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','415','400','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
     </tr>
     <%
 		}

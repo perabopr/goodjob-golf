@@ -146,6 +146,24 @@ public class CondoDao {
 		}	
 	}
 	
+	public void setCondoOrderUpdate(CondoDto cDto){
+		Connection conn = null;
+		try	{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(cDto.getOrder_num());
+			bind.add(cDto.getCondo_seq());
+			
+			QueryRunner qr = new QueryRunner();
+			
+			qr.update(conn, PRODUCT.condo_order_update, bind.toArray());
+		}catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}	
+	}
+	
 	/**
 	 * 콘도 - 삭제.
 	 * @param idSeq

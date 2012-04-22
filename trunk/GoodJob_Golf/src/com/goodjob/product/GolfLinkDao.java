@@ -183,6 +183,28 @@ public class GolfLinkDao {
 	}	
 	
 	/**
+	 * 골프장 - 수정 - 정렬순서
+	 * @param gldto
+	 */
+	public void setGolfLinkOrderUpdate(GolfLinkDto gldto){
+		Connection conn = null;
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(gldto.getOrder_num());
+			bind.add(gldto.getGolflink_seq());
+			
+			QueryRunner qr = new QueryRunner();
+			
+			qr.update(conn, PRODUCT.golflink_order_update, bind.toArray());			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}		
+	}
+	
+	/**
 	 * 골프장 - 삭제
 	 * @param gl_seq
 	 */

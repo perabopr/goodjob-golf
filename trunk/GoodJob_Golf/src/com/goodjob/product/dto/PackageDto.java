@@ -27,6 +27,7 @@ public class PackageDto {
 	private String golflink_guide = "";
 	private String way_map = "";
 	private String userinfo_terms = "";
+	private int order_num;
 	
 	public int getPackage_seq() {
 		return package_seq;
@@ -183,5 +184,11 @@ public class PackageDto {
 	}
 	public void setUserinfo_terms(String userinfo_terms) {
 		this.userinfo_terms = userinfo_terms;
+	}
+	public int getOrder_num() {
+		return order_num;
+	}
+	public void setOrder_num(int order_num) {
+		this.order_num = order_num;
 	}
 }

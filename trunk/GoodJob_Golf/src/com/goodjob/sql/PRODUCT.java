@@ -860,19 +860,28 @@ public class PRODUCT {
 			"WHERE condo_seq = ?";
 	
 	/*----------------------------------------------------------------- tb_site*/
+	public static final String site_select
+	=	"SELECT " +
+			" site_seq " +
+			",site_name "+
+			",phone_num " +
+			",use_yn " +
+		"FROM tb_site " +
+		"WHERE use_yn = 'Y'";
 	public static final String site_all_select
-		=	"SELECT " +
-				" site_name "+
-				",phone_num " +
-				",use_yn" +
-			"FROM tb_site" +
-			"WHERE use_yn = 'Y'";
+	=	"SELECT " +
+			" site_seq " +
+			",site_name "+
+			",phone_num " +
+			",use_yn " +
+		"FROM tb_site ";
 	
 	public static final String site_insert
 		=	"INSERT INTO tb_site( " +
 				" site_name " +
 				",phone_num " +
-			")VALUES(?,?)" ;
+				",use_yn " +
+			")VALUES(?,?,?)" ;
 	
 	public static final String site_update
 		=	"UPDATE tb_site " +

@@ -110,11 +110,11 @@
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>
-                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/package_foreign_list.jsp?menu=3" class=left_menu>해외패키지</a></td>
+                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/package_foreign_list.jsp?menu=4" class=left_menu>해외패키지</a></td>
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>
-                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/condo_list.jsp?menu=4" class=left_menu>콘도</a></td>
+                                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/condo_list.jsp?menu=5" class=left_menu>콘도</a></td>
                             </tr>
                             <tr>
                                 <td height="22">&nbsp;</td>
@@ -127,6 +127,10 @@
 				              <tr>
 				                <td height="22">&nbsp;</td>
 				                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/coupon_list.jsp?type=1" class=left_menu>오프라인 상품권관리</a></td>
+				              </tr>
+				              <tr>
+				                <td height="22">&nbsp;</td>
+				                <td width="160" height="22"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="product/site_list.jsp" class=left_menu>상호관리</a></td>
 				              </tr>
                         </table>
                     </td>

@@ -173,7 +173,7 @@ if(list != null){
 	<TD bgColor=white align=center><%=list.get(i).getReserve_uid() %></TD>
 	<TD bgColor=white align=center><%=list.get(i).getReserve_phone() %></TD>
 	<TD bgColor=white align=center><%=list.get(i).getGolflink_name() %></TD>
-	<TD bgColor=white align=center><%=bookingDay %></TD>
+	<TD bgColor=white align=center><span class=<%=Utils.getIsWeek(bookingDay)%>><%=bookingDay %></span></TD>
 	<TD bgColor=white align=center><%=processStatus %></TD>
 	</TR>
 <% 

@@ -223,7 +223,7 @@ if(list != null){
           	<table width="100%">
           	<tr>
           	<td>
-          		<input id="bookingDate<%=list.get(i).getReserve_seq()%>" name="bookingDate" type="text" size="16" value="<%=vbookingDate %>" class="input_box">
+          		<input id="bookingDate<%=list.get(i).getReserve_seq()%>" name="bookingDate" type="text" size="16" value="<%=vbookingDate %>" class="input_box" class="<%=Utils.getIsWeek(vbookingDate)%>">
           	</td>
           	<td>
           		<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateBookingDate('<%=list.get(i).getReserve_seq()%>');">

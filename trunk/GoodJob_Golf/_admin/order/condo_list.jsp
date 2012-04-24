@@ -186,7 +186,7 @@ if(list != null){
           <td align="center" bgcolor="white"><%=list.get(i).getCondo_name() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getRoomtype() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getRoom_num() > 1? list.get(i).getRoom_num()-1+"박"+list.get(i).getRoom_num()+"일":list.get(i).getRoom_num()+"일" %></td>
-          <td align="center" bgcolor="white"><%=inDate %></td>
+          <td align="center" bgcolor="white"><span class=<%=Utils.getIsWeek(inDate)%>><%=inDate %></span></td>
           <td align="center" bgcolor="white"><%=outDate %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
           <td align="center" bgcolor="white"><a href="javascript:;" ><img align="absmiddle" src="../images/common/btn_detail.gif" width="75" height="22" border="0" onMouseover="ddrivetip('<%=list.get(i).getReserve_memo().replace("\r\n","</br>") %>');" onMouseout="hideddrivetip()"></a></td>

@@ -245,7 +245,7 @@ if(list != null){
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePerCnt('<%=list.get(i).getReserve_seq()%>');">
           </td>
           <td align="center" bgcolor="white">          
-          	<input id="TourDate<%=list.get(i).getReserve_seq()%>" name="price" type="text" size="10" maxlength="10" value="<%=list.get(i).getTour_date() %>" class="input_box">
+          	<input id="TourDate<%=list.get(i).getReserve_seq()%>" name="price" type="text" size="10" maxlength="10" value="<%=list.get(i).getTour_date() %>" class="<%=Utils.getIsWeek(list.get(i).getTour_date())%>">
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateTourdate('<%=list.get(i).getReserve_seq()%>');">
           </td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone()%></td>

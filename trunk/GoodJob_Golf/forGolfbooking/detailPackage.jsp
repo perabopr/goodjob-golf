@@ -132,9 +132,9 @@ function imgChange(objId){
 <TABLE border=0 cellSpacing=1 cellPadding=2 width="100%" bgColor=#d1d3d4>
 <TBODY>
 <TR>
-<TD class=normal_b bgColor=#f1f1f1 height=18 align=center>요일</TD>
-<TD class=normal_b bgColor=#f1f1f1 width=145 align=center>성수기</TD>
-<TD class=normal_b bgColor=#f1f1f1 width=146 align=center>비성수기</TD></TR>
+<TD class=normal_b bgColor=#f1f1f1 height=18 align=center>첫째날</TD>
+<TD class=normal_b bgColor=#f1f1f1 width=145 align=center>최고가</TD>
+<TD class=normal_b bgColor=#f1f1f1 width=146 align=center>최저가</TD></TR>
 <TR>
 <TD class=normal_s bgColor=#f1f1f1 height=18 align=center>월요일</TD>
 <TD class=normal_s bgColor=white align=center><%=myUtil.commify(pkDto.getPeak_s_mon()) %>원/인</TD>

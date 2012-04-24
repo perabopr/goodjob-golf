@@ -266,6 +266,10 @@ public class Utils {
 	public static String getIsWeek(String date){
 		
 		String week = "";
+		
+		if(date == null || date.length() < 10)
+			return "normal";
+		
 		String[] arrDate = date.split("-");
 		
 		Calendar cal= Calendar.getInstance ();
@@ -277,10 +281,10 @@ public class Utils {
 	    
 	    switch (cal.get(Calendar.DAY_OF_WEEK)){
 	    case 1:
-	    	week = "red";
+	    	week = "red_s";
 	        break;
 	    case 7:
-	        week = "blue";
+	        week = "blue_s";
 	        break;
 	    default :
 	    	week = "normal";

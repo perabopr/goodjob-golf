@@ -138,9 +138,9 @@ if(list != null){
         <tr>
           <td bgcolor="white" align="center" height="25"><%=list.get(i).getReserve_day() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_name() %></td>
-          <td align="center" bgcolor="white"><%=list.get(i).getReserve_uid() %></td>
+          <td align="center" bgcolor="white"><%=list.get(i).getReserve_uid().indexOf("@") > 0 ? list.get(i).getReserve_uid() : list.get(i).getReserve_uid() + "<font color='blue'>NH</font>" %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getGolflink_name() %></td>
-          <td align="center" bgcolor="white"><%=vbookingDate %></td>
+          <td align="center" bgcolor="white"><span class=<%=Utils.getIsWeek(vbookingDate.substring(0,10))%>><%=vbookingDate %></span></td>
           <td align="center" bgcolor="white"><%=list.get(i).getPer_num() %>명/1팀</td>
           <td align="center" bgcolor="white"><%=list.get(i).getGolflink_course() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>

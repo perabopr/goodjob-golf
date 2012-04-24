@@ -262,4 +262,31 @@ public class Utils {
 	    
 	    return week;
 	}
+	
+	public static String getIsWeek(String date){
+		
+		String week = "";
+		String[] arrDate = date.split("-");
+		
+		Calendar cal= Calendar.getInstance ();
+	    
+	    cal.set(Calendar.YEAR, NumberUtils.toInt(arrDate[0]));
+	    cal.set(Calendar.MONTH, NumberUtils.toInt(arrDate[1])-1);
+	    cal.set(Calendar.DATE, NumberUtils.toInt(arrDate[2]));
+	    
+	    
+	    switch (cal.get(Calendar.DAY_OF_WEEK)){
+	    case 1:
+	    	week = "red";
+	        break;
+	    case 7:
+	        week = "blue";
+	        break;
+	    default :
+	    	week = "normal";
+	    	break;
+	    }
+	    
+	    return week;
+	}
 }

@@ -348,6 +348,7 @@ public class PRODUCT {
 		=	"DELETE FROM tb_product " +
 			"WHERE product_seq = ?";
 	
+	
 	/*----------------------------------------------------------------- tb_product_sub*/
 	public static final String product_sub_insert
 		=	"INSERT INTO tb_product_sub(" +
@@ -357,9 +358,9 @@ public class PRODUCT {
 				",time_end" +
 				",goodjob_price" +
 				",NH_price" +
-				",product_status" +
+				",product_status , real_nh_price" +
 				",coupon_use_yn)" +
-			"VALUES(?,?,?,?,?,?,?,?)";
+			"VALUES(?,?,?,?,?,?,?,?,?)";
 	
 	public static final String product_sub_select
 		=	"SELECT" +
@@ -384,7 +385,7 @@ public class PRODUCT {
 				",a.time_end" + 
 				",a.goodjob_price" + 
 				",a.NH_price" +
-				",a.product_status " + 
+				",a.product_status , a.real_nh_price " + 
 				",a.coupon_use_yn " +
 			"FROM tb_product_sub a " +
 				"INNER JOIN tb_product b ON(a.product_seq = b.product_seq) " +
@@ -404,7 +405,7 @@ public class PRODUCT {
 				",goodjob_price = ?" +
 				",NH_price = ?" +
 				",product_status = ? " +
-				",coupon_use_yn = ? " +
+				",coupon_use_yn = ? ,real_nh_price = ?" +
 			"WHERE productsub_seq = ?";
 
 	public static final String product_sub_delete

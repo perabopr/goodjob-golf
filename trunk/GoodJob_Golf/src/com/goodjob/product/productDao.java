@@ -5,18 +5,13 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.db.DBManager;
-
 import com.goodjob.product.dto.ProductDto;
 import com.goodjob.product.dto.ProductSubDto;
 import com.goodjob.sql.PRODUCT;
@@ -217,6 +212,7 @@ public class productDao {
 			bind.add(prdtsubDto.getGoodjob_price());
 			bind.add(prdtsubDto.getNH_price());
 			bind.add(prdtsubDto.getProduct_status());
+			bind.add(prdtsubDto.getReal_nh_price());
 			bind.add(prdtsubDto.getCoupon_use_yn());
 			
 			QueryRunner qr = new QueryRunner();
@@ -241,6 +237,7 @@ public class productDao {
 			bind.add(prdtsubDto.getNH_price());
 			bind.add(prdtsubDto.getProduct_status());
 			bind.add(prdtsubDto.getCoupon_use_yn());
+			bind.add(prdtsubDto.getReal_nh_price());
 			bind.add(prdtsubDto.getProductsub_seq());
 			
 			QueryRunner qr = new QueryRunner();

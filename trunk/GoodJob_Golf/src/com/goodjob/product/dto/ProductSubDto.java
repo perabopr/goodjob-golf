@@ -11,6 +11,7 @@ public class ProductSubDto {
 	private int NH_price;      
 	private String product_status;
 	private String coupon_use_yn;
+	private int real_nh_price;
 	
 	public int getProductsub_seq() {
 		return productsub_seq;
@@ -72,4 +73,11 @@ public class ProductSubDto {
 	public void setCoupon_use_yn(String coupon_use_yn) {
 		this.coupon_use_yn = coupon_use_yn;
 	}
+	public int getReal_nh_price() {
+		return real_nh_price;
+	}
+	public void setReal_nh_price(int realNhPrice) {
+		real_nh_price = realNhPrice;
+	}
+	
 }

@@ -23,6 +23,9 @@ if(request.getParameterValues("pdsubseq") != null && request.getParameterValues(
 	String arrSalePrice[] = request.getParameterValues("courseS");
 	String arrPrdtStatus[] = request.getParameterValues("ddl_prdtStatus");
 	String arrCouponUse[] = request.getParameterValues("ddl_couponUse");
+	String arrNHPrice[] = request.getParameterValues("courseNH");
+	String arrCalcNHPrice[] = request.getParameterValues("courseNH_calc");
+	
 	
 	productDao pd = new productDao();
 	String pdsubseqs = "'";
@@ -52,6 +55,7 @@ if(request.getParameterValues("pdsubseq") != null && request.getParameterValues(
 		pdsd2.setTime_end("");
 		pdsd2.setGoodjob_price(Integer.parseInt(arrNorPrice[i]));
 		pdsd2.setNH_price(Integer.parseInt(arrSalePrice[i]));
+		pdsd2.setReal_nh_price(Integer.parseInt(arrNHPrice[i]));
 		pdsd2.setProduct_status(arrPrdtStatus[i]);
 		pdsd2.setCoupon_use_yn(arrCouponUse[i]);
 		

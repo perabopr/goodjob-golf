@@ -187,15 +187,61 @@ function selSetting(sDate){
 	  success: function(html){
 		var evalData = eval("("+html+")");
 		for(var i=0;i<evalData.ProductSub.length;i++){
-			addTime(evalData.ProductSub[i].a,evalData.ProductSub[i].c,evalData.ProductSub[i].d.substring(0,2),evalData.ProductSub[i].d.substring(2,4),evalData.ProductSub[i].e.substring(0,2),evalData.ProductSub[i].e.substring(2,4),evalData.ProductSub[i].f,evalData.ProductSub[i].g,evalData.ProductSub[i].h,evalData.ProductSub[i].i);
+			addTime(evalData.ProductSub[i].a,evalData.ProductSub[i].c,evalData.ProductSub[i].d.substring(0,2),evalData.ProductSub[i].d.substring(2,4),evalData.ProductSub[i].e.substring(0,2),evalData.ProductSub[i].e.substring(2,4),evalData.ProductSub[i].f,evalData.ProductSub[i].g,evalData.ProductSub[i].h,evalData.ProductSub[i].i,evalData.ProductSub[i].j);
+			
+			var calcVal = document.all['idCourseNh'];
+			if (typeof calcVal.length == "undefined") {
+				calcVal.onkeyup(calcVal,evalData.ProductSub[i].g);
+			} else {
+				for (var j=0; j<calcVal.length; j++) {
+					calcVal[j].onkeyup(calcVal[j],evalData.ProductSub[j].g);
+				}
+			}
 		}
-		
+
 		//기본행
-		addTime('','0','0','0','0','0','','','0','1');
+		addTime('','0','0','0','0','0','','','0','1','0');
 	  }
 	});
 }
-function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, sPrice, sStatus, sCoupon){
+function checkNhColor(parm, parmPreVal) {
+	if (parmPreVal == "") {
+		parmPreVal = 0;
+	} else {
+		parmPreVal = parseInt(parmPreVal);
+	}
+	//var inTest = document.getElementById("test1");
+	//alert(inTest.style.color);
+	if (parm.value.substring(0,1) == "-") {
+		parm.style.color = "red";
+	} else {
+		parm.style.color = "blue";
+	}
+	var n = parm.value.replace(/\,/g,"");
+	var orgN = parseInt(n);
+	var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
+	while (reg.test(n))
+		n = n.replace(reg, '$1' + ',' + '$2');
+	parm.value = n;
+	
+	var calcVal = document.all['idCourseNh'];
+	var calcResult = document.all['idCourseNhResult'];
+	
+	if (typeof calcVal.length == "undefined") {
+		calcResult.value = parmPreVal + orgN;
+		while (reg.test(calcResult.value))
+			calcResult.value = calcResult.value.replace(reg, '$1' + ',' + '$2');
+	} else {
+		for (var i=0; i<calcResult.length; i++) {
+			if (calcVal[i] == parm) {
+				calcResult[i].value = parmPreVal + orgN;
+				while (reg.test(calcResult[i].value))
+					calcResult[i].value = calcResult[i].value.replace(reg, '$1' + ',' + '$2');
+			}
+		}
+	}
+}
+function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, sPrice, sStatus, sCoupon, realNhPrice){
 	var currMD = selDate.split('/');
 	var timecostHTML = "";
 	timecostHTML += "<tr><td bgcolor='white' align='center' width='40'><input type='hidden' name='pdsubseq' value='" + pdsubseq + "'>"+currMD[1]+"/"+currMD[2]+"</td>"
@@ -242,8 +288,14 @@ function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, 
 			}	
 		}  
 	timecostHTML += "</select>분</td>";
+	var calcRealNhPrice = 0;
+	if (sPrice != "") {
+		calcRealNhPrice = parseInt(sPrice) + parseInt(realNhPrice);	
+	}
 	timecostHTML += "<td align='center' bgcolor='white'><input class='input_box' size='10' name='courseN' value='" + nPrice + "' ></td>";
 	timecostHTML += "<td align='center' bgcolor='white'><input class='input_box' size='10' name='courseS' value='" + sPrice + "' ></td>";
+	timecostHTML += "<td align='center' bgcolor='white'><input class='input_box' size='9' name='courseNH' id='idCourseNh' value='" + realNhPrice + "'  style='color:blue' onkeyup='javascript:checkNhColor(this,"+sPrice+");'></td>";
+	timecostHTML += "<td align='center' bgcolor='white'><input class='input_box' size='9' name='courseNH_calc' id='idCourseNhResult' value='" + calcRealNhPrice + "' readonly></td>";
 	timecostHTML += "<td align='center' bgcolor='white'><input type='hidden' name='prdtStatus' value='" + sStatus + "' /><input type='checkbox' name='timeItems' /></td>";
 	timecostHTML += "<td bgcolor='white' align='center'><select name='ddl_prdtStatus'>"
 		for(var i = 0; i < 3;i++){
@@ -312,6 +364,25 @@ function saveTime(){
 			blVali = true;
 		} 
 	}
+	
+	var calcVal = document.all['idCourseNh'];
+	var calcResult = document.all['idCourseNhResult'];
+	
+	if (typeof calcResult.length == "undefined") {
+		calcResult.value = calcResult.value.replace(/\,/g,"");
+	} else {
+		for (var i=0; i<calcResult.length; i++) {
+			calcResult[i].value = calcResult[i].value.replace(/\,/g,"");
+		}
+	}
+	if (typeof calcVal.length == "undefined") {
+		calcVal.value = calcVal.value.replace(/\,/g,"");
+	} else {
+		for (var i=0; i<calcVal.length; i++) {
+			calcVal[i].value = calcVal[i].value.replace(/\,/g,"");
+		}
+	}
+	
 	if(blVali){
 		frm2.submit();
 	}else{
@@ -543,11 +614,13 @@ String.prototype.trim = function(){
     	<table id="tbTimeCost" name="tbTimeCost" border="0" width="745" cellpadding="2" cellspacing="1" bgcolor="#D1D3D4">
         <tr>
           <td bgcolor="#F1F1F1" align="center" height="19" width="40">날짜</td>
-          <td bgcolor="#F1F1F1" align="center" height="19" width="295">시간선택 </td>
-          <td align="center" bgcolor="#F1F1F1" height="19" width="80">정상가</td>
-          <td align="center" bgcolor="#F1F1F1" height="19" width="80">할인가</td>
+          <td bgcolor="#F1F1F1" align="center" height="19">시간선택 </td>
+          <td align="center" bgcolor="#F1F1F1" height="19" width="60">정상가</td>
+          <td align="center" bgcolor="#F1F1F1" height="19" width="60">할인가</td>
+          <td align="center" bgcolor="#F1F1F1" height="19" width="60">농협적용</td>
+          <td align="center" bgcolor="#F1F1F1" height="19" width="60">농협가</td>
           <td align="center" bgcolor="#F1F1F1" height="19" width="80">
-          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" style="cursor:pointer;" width="32" height="16" border="0" onclick="addTime('','0','0','0','0','0','','','0','1');">
+          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" style="cursor:pointer;" width="32" height="16" border="0" onclick="addTime('','0','0','0','0','0','','','0','1','0');">
           	<img src="../../images/inc/btn_del2.gif" style="cursor:pointer;" width="32" height="16" border="0" align="absmiddle" onclick="removeTime();">
           	<!-- <img align="absmiddle" src="../../images/inc/btn_save.gif" width="32" height="16" border="0"> -->
           	<input type="hidden" id="prdtseq" name="prdtseq" value="" />

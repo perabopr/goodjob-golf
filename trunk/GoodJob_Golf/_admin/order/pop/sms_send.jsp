@@ -10,13 +10,21 @@
 <%@page import="com.goodjob.order.GolfLinkDao"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.sms.SMSDao"%>
+<%@page import="com.goodjob.product.dto.SiteDto"%>
+<%@page import="com.goodjob.product.SiteDao"%>
 <%
 
 request.setCharacterEncoding("UTF-8");
 
 String reservename = "";
 String reservephone = "";
- 
+
+//sms
+SMSDao sDao = new SMSDao();
+//site
+SiteDao siteDao = new SiteDao();
+List<SiteDto> siteList = siteDao.getSiteAllList();
+
 int menu = NumberUtils.toInt(request.getParameter("menu"),0);
 int seq = NumberUtils.toInt(request.getParameter("seq"),0);
 
@@ -93,7 +101,6 @@ if(menu == 5){
 	}
 }
 
-SMSDao sDao = new SMSDao();
 %>
 <html>
 <head>
@@ -138,14 +145,28 @@ SMSDao sDao = new SMSDao();
 	}
 
 	var menu = new Array(5);
-	menu[0] = "[<%=msgtxt%>] <%=msgtime%> 예약되셨습니다.\n(굿잡골프)";
-	menu[1] = "[<%=msgtxt%>] <%=msgtime%> 예약. 입금 확인되셨습니다.\n(굿잡골프)";
-	menu[2] = "[<%=msgtxt%>] <%=msgtime%> \n(굿잡골프)	";
-	menu[3] = "[<%=msgtxt%>] <%=msgtime%> 예약취소 되셨습니다.\n(굿잡골프)";
-	menu[4] = "[<%=msgtxt%>] <%=msgtime%> 로 변경처리 되셨습니다.\n(굿잡골프)";
-			
+	menu[0] = "[<%=msgtxt%>] <%=msgtime%> 예약되셨습니다.\n";
+	menu[1] = "[<%=msgtxt%>] <%=msgtime%> 예약. 입금 확인되셨습니다.\n";
+	menu[2] = "[<%=msgtxt%>] <%=msgtime%> \n";
+	menu[3] = "[<%=msgtxt%>] <%=msgtime%> 예약취소 되셨습니다.\n";
+	menu[4] = "[<%=msgtxt%>] <%=msgtime%> 로 변경처리 되셨습니다.\n";
+
+	var size = new Array();
+	<%for(int i = 0; i < siteList.size();i++){%>
+	size[<%=i%>] = "(<%=siteList.get(i).getSite_name()%>)";
+	<%}%>
 	function changeText(txtMsg){
-		$("#message").val(menu[txtMsg]);
+
+		var chk_obj = document.getElementsByName("sphone");
+		var chk_leng = chk_obj.length;
+		var checked = 0;
+		for (i=0; i<chk_leng; i++) {
+			if (chk_obj[i].checked == true) { 
+				checked = i;
+			}
+		}
+		
+		$("#message").val(menu[txtMsg]+size[checked]);
 	}
 
 	function go_send(){
@@ -214,7 +235,13 @@ SMSDao sDao = new SMSDao();
                     </tr>
                     <tr>
                       <td align="right" bgcolor="#E6E7E8" height="25" style="padding-right:10px;"><span class=normal_b>보내는사람</span></td>
-                      <td bgcolor="white" style="padding-left:10px;"><input name="sphone" type="text" value="02-6670-0202" size="20" class="input_box"></td>
+                      <td bgcolor="white" style="padding-left:10px;">
+                   	<% 
+						for(int i = 0; i < siteList.size();i++){
+					%>
+                      <input id="sphone" name="sphone" type="radio" value="<%=siteList.get(i).getPhone_num()%>"><%=siteList.get(i).getSite_name()%>고객센터(<%=siteList.get(i).getPhone_num()%>)<br/>
+                    <%} %>
+                      </td>
                     </tr>
                     <tr>
                       <td align="right" bgcolor="#E6E7E8" height="25" style="padding-right:10px;"><span class=normal_b>받는사람</span></td>

@@ -14,7 +14,7 @@ int date = NumberUtils.toInt(request.getParameter("date"), 0);
 int cdate = NumberUtils.toInt(request.getParameter("cdate"), 0);
 
 if(productsubSeq == 0 || golf == 0 || date == 0 || cdate == 0){
-	out.println("<script>location.href='reserve.jsp?menu=1'</script>");
+	out.println("<script>location.href='reserve.jsp?menu=1&gr_cd="+nhNum+"&username="+URLEncoder.encode(nhName, "utf-8")+"'</script>");
 	return;
 }
 
@@ -23,7 +23,7 @@ List<ProductReserveDto> listPr = glDao.getGolfProduct(productsubSeq);
 
 ProductReserveDto prDto = null;
 if(listPr == null || listPr.size() != 1){
-	out.println("<script>location.href='reserve.jsp?menu=1'</script>");
+	out.println("<script>location.href='reserve.jsp?menu=1&gr_cd="+nhNum+"&username="+URLEncoder.encode(nhName, "utf-8")+"'</script>");
 	return;
 }
 prDto = listPr.get(0);
@@ -32,7 +32,7 @@ String bookingDate = prDto.getProduct_date();
 String bookingTime = prDto.getTime_start();
 bookingDate = bookingDate.substring(0,4) + "-" + bookingDate.substring(4,6) + "-" + bookingDate.substring(6,8) + " ";
 bookingDate += bookingTime.substring(0,2) + ":" + bookingTime.substring(2,4); 
-int buyPrice = prDto.getNH_price();// * 4;
+int buyPrice = prDto.getNH_price() + prDto.getReal_nh_price();// * 4;
 
 
 /* ----- 쿠폰 ----- */
@@ -46,7 +46,7 @@ if(prDto.getCoupon_use_yn().equals("1")){
 <script type="text/javascript">
 <!--
 function reSetDate(){
-	location.href = "/forGolfbooking/detail.jsp?menu=1&golf=<%=golf%>&date=<%=date%>&cdate=<%=cdate%>";
+	location.href = "/linkpages/detail.jsp?menu=1&gr_cd=<%=nhNum%>&username=<%=URLEncoder.encode(nhName, "utf-8")%>&golf=<%=golf%>&date=<%=date%>&cdate=<%=cdate%>";
 }
 
 function billok(){
@@ -94,22 +94,23 @@ function billSubmit(cbNum){
 }
 
 function priceChange(){
-	var price;
+	//var price;
 	var billprice = <%=buyPrice%> * $("#perNum").val();
-	var tmpValue = $("#ddlCoupon").val();
-	var arrValue = tmpValue.split("/");
-	price = arrValue[1];
-	if(price.length > 0){
-		billprice = billprice - price;
-		price = commify(-price)+"원";
+	//var tmpValue = $("#ddlCoupon").val();
+	//var arrValue = tmpValue.split("/");
+	//price = arrValue[1];
+	//if(price.length > 0){
+	//	billprice = billprice - price;
+	//	price = commify(-price)+"원";
+	//	billprice = commify(billprice);
+	//}else{
 		billprice = commify(billprice);
-	}else{
-		billprice = commify(billprice);
-	}
+	//}
 
 	$("#billPrice").html(billprice);
 	
 }
+
 /*
 function couponChange(){
 	var price;
@@ -191,28 +192,26 @@ function card_order(menu , reserve_seq , good_price , good_name){
 <input type="hidden" id="date" name="date" >
 <input type="hidden" id="cdate" name="cdate" >
 <input type="hidden" id="cbNum" name="cbNum" >
+<input type="hidden" id="gr_cd" name="gr_cd" value="<%=nhNum%>">
+<input type="hidden" id="username" name="username" value="<%=nhName%>">
 <input type="hidden" id="bill_price" name="bill_price" value="<%=buyPrice%>"/>
-<TABLE border=0 cellSpacing=1 cellPadding=2 width=751 bgColor=#d2d2d2><TBODY>
+<TABLE border=0 cellSpacing=1 cellPadding=2 width=751><TBODY>
 <TR>
 <TD bgColor=white vAlign=top width=745 align=center>
 <TABLE border=0 cellSpacing=0 cellPadding=0 width="95%">
 <TBODY>
 <TR>
-<TD class=location height=30 width="95%" align=right><A href="/main.jsp">HOME</A> &gt; 골프장부킹 &gt; <SPAN class=location_b>예약확인 및 결제</SPAN></TD></TR>
-<TR>
-<TD style="PADDING-LEFT: 15px; PADDING-TOP: 4px" class=sub_title bgColor=#d1d3d4 height=33>예약확인 및 결제</TD></TR>
-<TR>
 <TD>
 <P>&nbsp;</P></TD></TR>
 <TR>
-<TD align=center><IMG border=0 src="/images/booking/img_finished_title.gif" width=640 height=108></TD></TR>
+<TD align=center><IMG src="../../images/nh_golf/img_finished_title.gif" width="556" height="91" border="0"></TD></TR>
 <TR>
 <TD align=center>
 <TABLE border=0 cellSpacing=1 cellPadding=2 width=601 bgColor=#d1d3d4>
 <TBODY>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 width=170 align=right>예약자명</TD>
-<TD style="PADDING-LEFT: 10px" class=normal_b bgColor=white width=420><INPUT id="reserveName" name="reserveName" class=input_01 name=day size=14 value=""> <INPUT name="chkRealName" id="chkRealName" type=checkbox><SPAN class=mem_notice>실제이용자가 예약자와 동일한 경우 체크</SPAN></TD></TR>
+<TD style="PADDING-LEFT: 10px" class=normal_b bgColor=white width=420><INPUT id="reserveName" name="reserveName" class=input_01 name=day size=14 value=""></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>핸드폰</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white>
@@ -250,23 +249,6 @@ function card_order(menu , reserve_seq , good_price , good_name){
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>인원</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><select id="perNum" name="perNum" onchange="priceChange();"><option value="3">3</option><option value="4" selected>4</option></select>명</TD></TR>
-<TR>
-<TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>프리미엄상품권 적용</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white height=25>
-<SELECT size=1 id="ddlCoupon" name="ddlCoupon" onchange="priceChange();">
-<OPTION value="0/" selected>선택하세요</OPTION>
-<%
-if(couponList != null){
-	for(int i = 0; i < couponList.size(); i++){
-%>
-	<option value="<%=couponList.get(i).getCoupon_seq() %>/<%=couponList.get(i).getSale_price() %>"><%=couponList.get(i).getCoupon_name()+"("+commify(couponList.get(i).getSale_price())+"원)" %></option>
-<%
-	}
-}
-%>
-</SELECT>
-</TD>
-</TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>결제금액</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white><SPAN class=orange id="billPrice" name="billPrice"><%=commify(buyPrice*4) %></SPAN>원</TD></TR>

@@ -94,5 +94,8 @@ public class MEMBER {
 	
 	public static final String history_count = "select count(mem_id) logon_cnt , max(reg_dt) last_dt from tb_logon_history where mem_id= ? ";
 	
-	
+	//예약회원 메모
+	public static final String order_memo_select = " select memo from tb_order_memo where reserve_uid = ?";
+	public static final String order_memo_insert = " insert into tb_order_memo(reserve_uid , memo , reg_dt) values (? , ? , now())";
+	public static final String order_memo_update = " update tb_order_memo set memo = ? , up_dt = now() where reserve_uid = ?";
 }

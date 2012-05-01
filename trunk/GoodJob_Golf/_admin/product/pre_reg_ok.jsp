@@ -72,6 +72,7 @@
 	glDto.setUse_guide(fileUpload.getParameter("content3"));
 	glDto.setGolflink_guide(fileUpload.getParameter("content4"));
 	glDto.setUse_rule(fileUpload.getParameter("content5"));
+	glDto.setCancel_rule_nh(fileUpload.getParameter("content6"));
 	
 	GolfLinkDao glDao = new GolfLinkDao();	
 	int idSeq = 0;
@@ -84,20 +85,42 @@
 		idSeq = glDao.setGolfLinkInsert(glDto);
 	}
 		
+	int ii = 1;
 	for(int i = 1; i <= 2;i++){
 		if(fileUpload.getParameter("priceN" + Integer.toString(i)).length() > 0){
 			GolfLinkPriceDto glpDto1 = new GolfLinkPriceDto();
 			glpDto1.setGolflink_seq(idSeq);
-			glpDto1.setPrice_type(Integer.toString(i));
+			glpDto1.setPrice_type(Integer.toString(ii++));
 			glpDto1.setGolflink_price(Integer.parseInt(fileUpload.getParameter("priceN" + Integer.toString(i))));
 			glDao.setGolfLinkPriceInsert(glpDto1);
 		}
 	}
-	for(int i = 1; i <= 2;i++){
+	
+	for(int i = 1; i <= 4;i++){
 		if(fileUpload.getParameter("priceS" + Integer.toString(i)).length() > 0){
 			GolfLinkPriceDto glpDto2 = new GolfLinkPriceDto();
 			glpDto2.setGolflink_seq(idSeq);
-			glpDto2.setPrice_type(Integer.toString(i+2));
+			glpDto2.setPrice_type(Integer.toString(ii++));
+			glpDto2.setGolflink_price(Integer.parseInt(fileUpload.getParameter("priceS" + Integer.toString(i))));
+			glDao.setGolfLinkPriceInsert(glpDto2);
+		}
+	}
+	
+	for(int i = 3; i <= 4;i++){
+		if(fileUpload.getParameter("priceN" + Integer.toString(i)).length() > 0){
+			GolfLinkPriceDto glpDto1 = new GolfLinkPriceDto();
+			glpDto1.setGolflink_seq(idSeq);
+			glpDto1.setPrice_type(Integer.toString(ii++));
+			glpDto1.setGolflink_price(Integer.parseInt(fileUpload.getParameter("priceN" + Integer.toString(i))));
+			glDao.setGolfLinkPriceInsert(glpDto1);
+		}
+	}
+	
+	for(int i = 5; i <= 8;i++){
+		if(fileUpload.getParameter("priceS" + Integer.toString(i)).length() > 0){
+			GolfLinkPriceDto glpDto2 = new GolfLinkPriceDto();
+			glpDto2.setGolflink_seq(idSeq);
+			glpDto2.setPrice_type(Integer.toString(ii++));
 			glpDto2.setGolflink_price(Integer.parseInt(fileUpload.getParameter("priceS" + Integer.toString(i))));
 			glDao.setGolfLinkPriceInsert(glpDto2);
 		}

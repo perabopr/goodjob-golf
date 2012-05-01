@@ -32,11 +32,12 @@ public class PRODUCT {
 				",cancel_term " +
 				",view_yn" +
 				",cancel_rule" +
+				",cancel_rule_nh" +
 				",promise_rule" +
 				",use_guide" +
 				",golflink_guide" +
 				",use_rule) " +
-			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";	
+			"VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";	
 	public static final String golflink_select_full
 	=	"SELECT " +
 			" a.golflink_seq " +
@@ -59,6 +60,7 @@ public class PRODUCT {
 			",a.cancel_term " +
 			",a.view_yn" +
 			",a.cancel_rule" +
+			",cancel_rule_nh" +
 			",a.promise_rule" +
 			",a.use_guide" +
 			",a.golflink_guide" +
@@ -89,6 +91,7 @@ public class PRODUCT {
 				",cancel_term " +
 				",view_yn" +
 				",cancel_rule" +
+				",cancel_rule_nh" +
 				",promise_rule" +
 				",use_guide" +
 				",golflink_guide" +
@@ -114,6 +117,7 @@ public class PRODUCT {
 				",cancel_term = ? " +
 				",view_yn = ? " +
 				",cancel_rule = ?" +
+				",cancel_rule_nh = ?" +
 				",promise_rule = ?" +
 				",use_guide = ?" +
 				",golflink_guide = ?" +
@@ -159,7 +163,7 @@ public class PRODUCT {
 				",price_type" +
 				",golflink_price " +
 			"FROM tb_golflink_price "	+ 
-			"WHERE golflink_seq = ?";
+			"WHERE golflink_seq = ? order by price_type ";
 	
 	public static final String golflink_price_update
 		= 	"UPDATE tb_golflink_price " +

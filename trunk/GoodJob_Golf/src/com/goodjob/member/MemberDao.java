@@ -308,6 +308,8 @@ public class MemberDao {
 		return isUpdate;
 	}
 	
+	
+	
 	/**
 	 * 회원 탈퇴
 	 * @param mem_id
@@ -807,4 +809,98 @@ public class MemberDao {
 		
 		return check;
 	}
+	
+	public String getOrderMemo(String mem_id){
+		Connection conn = null;
+		String memo = "";
+		try {
+			
+			conn = DBManager.getConnection();
+			
+			ArrayList<String> bind = new ArrayList<String>();
+			bind.add(mem_id);
+			
+			QueryRunner qr = new QueryRunner();
+			ResultSetHandler rsh = new MapHandler();
+			Map<String, String> map = (Map<String, String>) qr.query(conn , MEMBER.order_memo_select , rsh , bind.toArray());
+			
+			if(map != null) memo = StringUtils.trimToEmpty(map.get("memo"));
+		
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		return memo;
+	}
+	
+	/**
+	 * 예약 회원 메모 업데이트
+	 * @param mem_id
+	 * @param memo
+	 * @return
+	 */
+	public boolean orderMemoUpdate(String mem_id , String memo){
+		Connection conn = null;
+		boolean isUpdate = false;
+		try {
+			
+			conn = DBManager.getConnection();
+			
+			ArrayList<String> bind = new ArrayList<String>();
+			bind.add(memo);
+			bind.add(mem_id);
+			
+			QueryRunner qr = new QueryRunner();
+			int result = qr.update(conn , MEMBER.order_memo_update , bind.toArray());
+			
+			if(result == 0){
+				bind.clear();
+				bind.add(mem_id);
+				bind.add(memo);
+				qr.update(conn , MEMBER.order_memo_insert , bind.toArray());
+			}
+			
+			isUpdate = true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return isUpdate;
+	}
+	
+	/**
+	 * 예약회원 메모 입력
+	 * @param mem_id
+	 * @param memo
+	 * @return
+	 */
+	/*public boolean orderMemoInsert(String mem_id , String memo){
+		Connection conn = null;
+		boolean isUpdate = false;
+		try {
+			
+			conn = DBManager.getConnection();
+			
+			ArrayList<String> bind = new ArrayList<String>();
+			bind.add(memo);
+			bind.add(mem_id);
+			
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn , MEMBER.order_memo_insert , bind.toArray());
+			
+			isUpdate = true;
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return isUpdate;
+	}*/
 }

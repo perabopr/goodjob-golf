@@ -6,22 +6,18 @@ import java.sql.Statement;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.db.DBManager;
-import com.goodjob.sql.PRODUCT;
 import com.goodjob.product.dto.GolfLinkCourseDto;
 import com.goodjob.product.dto.GolfLinkDto;
 import com.goodjob.product.dto.GolfLinkPriceDto;
 import com.goodjob.product.dto.GolfLinkPromiseDto;
+import com.goodjob.sql.PRODUCT;
 
 public class GolfLinkDao {	
 	/**
@@ -115,6 +111,7 @@ public class GolfLinkDao {
 			bind.add(gldto.getCancel_term());
 			bind.add(gldto.getView_yn());
 			bind.add(gldto.getCancel_rule());
+			bind.add(gldto.getCancel_rule_nh());
 			bind.add(gldto.getPromise_rule());
 			bind.add(gldto.getUse_guide());
 			bind.add(gldto.getGolflink_guide());
@@ -166,6 +163,7 @@ public class GolfLinkDao {
 			bind.add(gldto.getCancel_term());
 			bind.add(gldto.getView_yn());
 			bind.add(gldto.getCancel_rule());
+			bind.add(gldto.getCancel_rule_nh());
 			bind.add(gldto.getPromise_rule());
 			bind.add(gldto.getUse_guide());
 			bind.add(gldto.getGolflink_guide());

@@ -72,7 +72,7 @@ public class RESERVE {
 			",price_type" +
 			",golflink_price " +
 		"FROM tb_golflink_price "	+ 
-		"WHERE golflink_seq = ?";
+		"WHERE golflink_seq = ? order by price_type ";
 	
 	public static final String getProductReserve =	"SELECT " +				
 			" A.productsub_seq" +

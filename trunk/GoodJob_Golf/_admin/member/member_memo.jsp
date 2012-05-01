@@ -11,13 +11,25 @@
 	
 	String mem_id 		= StringUtils.trimToEmpty(request.getParameter("mem_id"));
 	String memo 		= StringUtils.trimToEmpty(request.getParameter("memo"));
+	String type 		= StringUtils.trimToEmpty(request.getParameter("type"));
 	
 	MemberDao mDao = new MemberDao();
 	
-	boolean isUpdate = mDao.memberMemoUpdate(mem_id , memo);
+	boolean isUpdate = false;
+	
+	if("order".equals(type)){
+		isUpdate = mDao.orderMemoUpdate(mem_id , memo);
+	}
+	else{
+		isUpdate = mDao.memberMemoUpdate(mem_id , memo);
+	}
 	
 %>
 <script language="javascript" type="text/javascript">
 alert("저장 되었습니다.");
+<%if("order".equals(type)){%>
+top.self.close();
+<%}else{%>
 top.document.location.href="mem_detail.jsp?mem_id=<%=mem_id%>";
+<%}%>
 </script>

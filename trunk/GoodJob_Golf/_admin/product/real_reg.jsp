@@ -9,6 +9,7 @@
 <%@page import="com.goodjob.product.dto.GolfLinkPriceDto"%>
 <%@ page import="com.goodjob.product.*" %>
 <%@ page import="com.goodjob.db.*" %>
+<%@page import="org.apache.commons.lang.ObjectUtils"%>
 <%
 String menuSeq = StringUtils.trimToEmpty(request.getParameter("menu"));
 String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));
@@ -20,10 +21,15 @@ String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));
 	List<GolfLinkDto> arrgldto = null;
 	List<GolfLinkPriceDto> dlpricedto = null;
 	GolfLinkDto gldto = new GolfLinkDto();
+	
+	int ii = 0;
+	String[] vPrice = {"0","0","0","0","0","0","0","0","0","0","0","0"};
 	String vPrice1 = "";
 	String vPrice2 = "";
 	String vPrice3 = "";
 	String vPrice4 = "";
+	String vPrice5 = "";
+	String vPrice6 = "";
 	if(glSeq.length() > 0){
 		arrgldto = dld.getGolfLink(Integer.parseInt(glSeq));
 		if(arrgldto.size() == 1){
@@ -33,14 +39,10 @@ String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));
 		dlpricedto = dld.getGolfLinkPriceSelect(Integer.parseInt(glSeq));		
 		if(dlpricedto != null){
 			for(int i = 0; i< dlpricedto.size();i++){
-				if(dlpricedto.get(i).getPrice_type().startsWith("1")){
-					vPrice1 = Integer.toString(dlpricedto.get(i).getGolflink_price());
-				}else if(dlpricedto.get(i).getPrice_type().startsWith("2")){
-					vPrice2 = Integer.toString(dlpricedto.get(i).getGolflink_price());
-				}else if(dlpricedto.get(i).getPrice_type().startsWith("3")){
-					vPrice3 = Integer.toString(dlpricedto.get(i).getGolflink_price());
-				}else if(dlpricedto.get(i).getPrice_type().startsWith("4")){
-					vPrice4 = Integer.toString(dlpricedto.get(i).getGolflink_price());
+				
+				String index = (i+1)+"";
+				if(dlpricedto.get(i).getPrice_type().equals(index)){
+					vPrice[i] = ObjectUtils.toString(dlpricedto.get(i).getGolflink_price(),"0");
 				}
 			}
 		}
@@ -312,22 +314,60 @@ function getFileExtension(filePath)
     <td colspan="2" align="center"><table border="0" width="900" cellpadding="2" cellspacing="1" bgcolor="#CCCCCC">
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;" width="162"><span class=list_title>가격입력</span></td>
-          <td height="18" bgcolor="white" style="padding-left:10px;" width="711"><table width="100%" cellpadding="2" cellspacing="1" bgcolor="silver">
+          <td height="18" bgcolor="white" style="padding-left:10px;" width="711">
+          <table width="100%" cellpadding="2" cellspacing="1" bgcolor="silver">
               <tr>
                 <td bgcolor="#FCF9EB" align=middle colspan="2" width="353"><b>그린피 정상요금</b></td>
-                <td bgcolor=#fcf9eb colspan="2" align=middle  할인요금 width="356"><b>그린피 할인요금</b></td>
+                <td bgcolor=#fcf9eb colspan="4" align=middle  할인요금 width="356"><b>그린피 할인요금</b></td>
               </tr>
               <tr>
                 <td align="center" bgcolor="#FCF9EB">주중</td>
-                <td bgcolor=#fcf9eb align=middle 주중>&nbsp;주말</td>
-                <td bgcolor=#fcf9eb align=middle 주중>&nbsp;주중</td>
-                <td align="center" bgcolor="#FCF9EB">주말</td>
+                <td bgcolor=#fcf9eb align=middle>&nbsp;주말</td>
+                <td bgcolor=#fcf9eb align=middle>&nbsp;주중 최저가</td>
+                <td align="center" bgcolor="#FCF9EB">주중 최대가</td>
+                <td bgcolor=#fcf9eb align=middle>&nbsp;주말 최저가</td>
+                <td align="center" bgcolor="#FCF9EB">주말 최대가</td>
               </tr>
               <tr>
-                <td height="11" align="center" bgcolor="white"><input class="input_box" size="15" id="priceN1" name="priceN1" value="<%= vPrice1%>"></td>
-                <td height="22" align="center" bgcolor="white"><input class="input_box" size="15" id="priceN2" name="priceN2" value="<%= vPrice2%>"></td>
-                <td height="22" align="center" bgcolor="white"><input class="input_box" size="15" id="priceS1" name="priceS1" value="<%= vPrice3%>"></td>
-                <td height="22" align="center" bgcolor="white"><input class="input_box" size="15" id="priceS2" name="priceS2" value="<%= vPrice4%>"></td>
+                <td height="11" align="center" bgcolor="white"><input class="input_box" size="15" id="priceN1" name="priceN1" value="<%= vPrice[ii++]%>"></td>
+                <td height="22" align="center" bgcolor="white"><input class="input_box" size="15" id="priceN2" name="priceN2" value="<%= vPrice[ii++]%>"></td>
+                <td height="22" align="center" bgcolor="white"><input class="input_box" size="15" id="priceS1" name="priceS1" value="<%= vPrice[ii++]%>"></td>
+                <td height="22" align="center" bgcolor="white"><input class="input_box" size="15" id="priceS2" name="priceS2" value="<%= vPrice[ii++]%>"></td>
+                <td height="22" align="center" bgcolor="white"><input class="input_box" size="15" id="priceS3" name="priceS3" value="<%= vPrice[ii++]%>"></td>
+                <td height="22" align="center" bgcolor="white"><input class="input_box" size="15" id="priceS4" name="priceS4" value="<%= vPrice[ii++]%>"></td>
+              </tr>
+            </table></td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr>
+    <td colspan="2">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><table border="0" width="900" cellpadding="2" cellspacing="1" bgcolor="#CCCCCC">
+        <tr>
+          <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;" width="162"><span class=list_title>가격입력<br/>(NH카드만 적용)</span></td>
+          <td height="18" bgcolor="white" style="padding-left:10px;" width="711">
+          <table width="100%" cellpadding="2" cellspacing="1" bgcolor="silver">
+              <tr>
+                <td bgcolor="#FCF9EB" align=middle colspan="2" width="353"><b>그린피 정상요금</b></td>
+                <td bgcolor=#fcf9eb colspan="4" align=middle  할인요금 width="356"><b>그린피 할인요금</b></td>
+              </tr>
+              <tr>
+                <td align="center" bgcolor="#FCF9EB">주중</td>
+                <td bgcolor=#fcf9eb align=middle>&nbsp;주말</td>
+                <td bgcolor=#fcf9eb align=middle>&nbsp;주중 최저가</td>
+                <td align="center" bgcolor="#FCF9EB">주중 최대가</td>
+                <td bgcolor=#fcf9eb align=middle>&nbsp;주말 최저가</td>
+                <td align="center" bgcolor="#FCF9EB">주말 최대가</td>
+              </tr>
+              <tr>
+                <td height="11" align="center" bgcolor="white"><input class="input_box" size="15" id="priceN3" name="priceN3" value="<%= vPrice[ii++]%>"></td>
+                <td height="22" align="center" bgcolor="white"><input class="input_box" size="15" id="priceN4" name="priceN4" value="<%= vPrice[ii++]%>"></td>
+                <td height="22" align="center" bgcolor="white"><input class="input_box" size="15" id="priceS5" name="priceS5" value="<%= vPrice[ii++]%>"></td>
+                <td height="22" align="center" bgcolor="white"><input class="input_box" size="15" id="priceS6" name="priceS6" value="<%= vPrice[ii++]%>"></td>
+                <td height="22" align="center" bgcolor="white"><input class="input_box" size="15" id="priceS7" name="priceS7" value="<%= vPrice[ii++]%>"></td>
+                <td height="22" align="center" bgcolor="white"><input class="input_box" size="15" id="priceS8" name="priceS8" value="<%= vPrice[ii++]%>"></td>
               </tr>
             </table></td>
         </tr>
@@ -344,14 +384,12 @@ function getFileExtension(filePath)
           <textarea class="box03" rows="10" cols="113" id="content1" name="content1" title="higheditor_simple"><%= gldto.getCancel_rule()%></textarea>
           </td>
         </tr>
-        <!--
         <tr>
-          <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>위약처리규정</span></td>
-          <td bgcolor="white" style="padding-left:10px;">
-          <textarea class="box03" rows="10" cols="113" id="content2" name="content2" title="higheditor_simple"><%= gldto.getPromise_rule()%></textarea>
+          <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;" width="162"><span class=list_title>취소가능일표시<br/>(NH카드만 적용)</span></td>
+          <td bgcolor="white" style="padding-left:10px;" width="710">
+          <textarea class="box03" rows="10" cols="113" id="content6" name="content6" title="higheditor_simple"><%= gldto.getCancel_rule_nh()%></textarea>
           </td>
         </tr>
-        -->
         <tr>
           <td align="right" bgcolor="#E6E7E8" style="padding-right:10px;"><span class=list_title>이용안내</span></td>
           <td bgcolor="white" style="padding-left:10px;">

@@ -125,6 +125,7 @@ function selItem(menuReserve){
 	<TD bgColor=#e6e7e8 width=206 align=center><SPAN class=normal_b>골프장 or 패키지명</SPAN></TD>
 	<TD bgColor=#e6e7e8 width=206 align=center><SPAN class=normal_b>부킹일 or 투어예정일</SPAN></TD>
 	<TD bgColor=#e6e7e8 width=100 align=center><SPAN class=normal_b>처리상태</SPAN></TD>
+	<TD bgColor=#e6e7e8 width=100 align=center><SPAN class=normal_b>메모</SPAN></TD>
 	</TR>
 <%
 if(list != null){
@@ -154,16 +155,16 @@ if(list != null){
 		}
 		String processStatus = list.get(i).getProcess_status();
 		if(processStatus.equals("0")){
-			processStatus = "예약대기";
+			processStatus = "<span class='normal'>예약대기</span>";
 		}
 		if(processStatus.equals("1")){
-			processStatus = "예약완료";
+			processStatus = "<span class='blue_s'>예약완료</span>";
 		}
 		if(processStatus.equals("2")){
-			processStatus = "취소불가";
+			processStatus = "<span class='blue_s'>취소불가</span>";
 		}
 		if(processStatus.equals("3")){
-			processStatus = "예약취소";
+			processStatus = "<span class='red_s'>예약취소</span>";
 		}
 %>
 	<TR style="cursor:pointer" onclick="selItem('<%=list.get(i).getMenu_seq() + "/" + list.get(i).getReserve_seq() %>')">
@@ -175,6 +176,7 @@ if(list != null){
 	<TD bgColor=white align=center><%=list.get(i).getGolflink_name() %></TD>
 	<TD bgColor=white align=center><span class=<%=Utils.getIsWeek(bookingDay)%>><%=bookingDay %></span></TD>
 	<TD bgColor=white align=center><%=processStatus %></TD>
+	<TD bgColor=white align=center><input type="button" value="메모" onclick="NewWindow('/_admin/member/order_memo.jsp?mem_id=<%=list.get(i).getReserve_uid()%>','name','760','300','yes');"/></TD>
 	</TR>
 <% 
 	}

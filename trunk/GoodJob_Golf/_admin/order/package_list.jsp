@@ -223,6 +223,7 @@ function goPage(val){
           <td width="97" align="center" bgcolor="#E6E7E8"><span class=normal_b>요청사항</span></td>
           <td width="160" align="center" bgcolor="#E6E7E8"><span class=normal_b>처리상태</span></td>
           <td width="193" align="center" bgcolor="#E6E7E8"><span class=normal_b>SMS</span></td>
+          <td align="center" bgcolor="#E6E7E8" width="50"><span class=normal_b>메모</span></td>
           <td align="center" bgcolor="#E6E7E8" width="120"><span class=normal_b>추천인</span></td>
         </tr>
 <%
@@ -261,13 +262,14 @@ if(list != null){
           <td align="center" bgcolor="white">
           	<select id="ddlStatus<%=list.get(i).getReserve_seq()%>" name="ddlStatus" size="1">
 				<option value="0" <%=("0".equals(list.get(i).getProcess_status())?" selected":"")%>>예약대기</option>
-				<option value="1" <%=("1".equals(list.get(i).getProcess_status())?" selected":"")%>>예약완료</option>
-				<option value="2" <%=("2".equals(list.get(i).getProcess_status())?" selected":"")%>>취소불가</option>
-				<option value="3" <%=("3".equals(list.get(i).getProcess_status())?" selected":"")%>>예약취소</option>
+				<option value="1" <%=("1".equals(list.get(i).getProcess_status())?" selected":"")%> style="color:blue">예약완료</option>
+				<option value="2" <%=("2".equals(list.get(i).getProcess_status())?" selected":"")%> style="color:blue">취소불가</option>
+				<option value="3" <%=("3".equals(list.get(i).getProcess_status())?" selected":"")%> style="color:red">예약취소</option>
             </select>
             <img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updateStatus('<%=list.get(i).getReserve_seq()%>');"></td>
           <td align="center" bgcolor="white"><img align="absmiddle" src="../images/common/btn_r_finished.gif" width="50" height="16" border="0" onclick="NewWindow('pop/sms_send.jsp?menu=3&seq=<%=list.get(i).getReserve_seq()%>&msgtxt=<%=Utils.encoder(packName) %>&msgtime=<%=list.get(i).getTour_date() %>','name','740','350','yes');return false;">
 		  </td>
+		  <TD bgColor=white align=center><input type="button" value="메모" onclick="NewWindow('/_admin/member/order_memo.jsp?mem_id=<%=list.get(i).getReserve_uid()%>','name','760','300','yes');"/></TD>
 		  <td align="center" bgcolor="white"><span class=blue><%=mDao.getRecommend(list.get(i).getReserve_uid())%></span></td>
         </tr>
 <%

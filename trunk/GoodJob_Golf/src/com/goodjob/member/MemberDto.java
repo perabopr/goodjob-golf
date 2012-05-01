@@ -32,6 +32,7 @@ public class MemberDto implements Serializable {
 	private int login_attempt;
 	private String input_pwd;
 	private String memo;
+	private String order_memo;
 	
 	//sms 관련
 	private int logon_cnt;
@@ -153,5 +154,11 @@ public class MemberDto implements Serializable {
 	}
 	public void setReserve_cnt(int reserveCnt) {
 		reserve_cnt = reserveCnt;
+	}
+	public String getOrder_memo() {
+		return order_memo;
+	}
+	public void setOrder_memo(String orderMemo) {
+		order_memo = orderMemo;
 	}
 }

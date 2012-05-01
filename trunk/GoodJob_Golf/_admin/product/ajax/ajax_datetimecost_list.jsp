@@ -29,7 +29,8 @@ for(int i = 0; i < arrPrdtSub.size();i++){
 	returnJson += "\"f\":\"" + arrPrdtSub.get(i).getGoodjob_price() + "\",";
 	returnJson += "\"g\":\"" + arrPrdtSub.get(i).getNH_price() + "\",";
 	returnJson += "\"h\":\"" + arrPrdtSub.get(i).getProduct_status() + "\",";
-	returnJson += "\"i\":\"" + arrPrdtSub.get(i).getCoupon_use_yn() + "\"";
+	returnJson += "\"i\":\"" + arrPrdtSub.get(i).getCoupon_use_yn() + "\",";
+	returnJson += "\"j\":\"" + arrPrdtSub.get(i).getReal_nh_price() + "\"";
 	returnJson += "},";
 }
 if(arrPrdtSub.size() > 0){

@@ -11,6 +11,7 @@ public class ProductReserveDto {
 	String holl_type = "";
 	int goodjob_price;
 	int NH_price;
+	int real_nh_price;
 	String product_status = "";
 	String coupon_use_yn = "";
 	
@@ -85,5 +86,11 @@ public class ProductReserveDto {
 	}
 	public void setCoupon_use_yn(String coupon_use_yn) {
 		this.coupon_use_yn = coupon_use_yn;
+	}
+	public int getReal_nh_price() {
+		return real_nh_price;
+	}
+	public void setReal_nh_price(int realNhPrice) {
+		real_nh_price = realNhPrice;
 	}
 }

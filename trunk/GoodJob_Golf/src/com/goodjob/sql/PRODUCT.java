@@ -351,16 +351,16 @@ public class PRODUCT {
 	
 	/*----------------------------------------------------------------- tb_product_sub*/
 	public static final String product_sub_insert
-		=	"INSERT INTO tb_product_sub(" +
-				" product_seq" +
-				",golflink_course_seq" +
-				",time_start" +
-				",time_end" +
-				",goodjob_price" +
-				",NH_price" +
-				",product_status , real_nh_price" +
-				",coupon_use_yn)" +
-			"VALUES(?,?,?,?,?,?,?,?,?)";
+	=	"INSERT INTO tb_product_sub(" +
+			" product_seq" +
+			",golflink_course_seq" +
+			",time_start" +
+			",time_end" +
+			",goodjob_price" +
+			",NH_price" +
+			",product_status" +
+			",real_nh_price,coupon_use_yn)" +
+		"VALUES(?,?,?,?,?,?,?,?,?)";
 	
 	public static final String product_sub_select
 		=	"SELECT" +
@@ -377,36 +377,38 @@ public class PRODUCT {
 			"WHERE productsub_seq = ?";
 	
 	public static final String product_sub_select_date
-		=	"SELECT "+
-				" a.productsub_seq" +
-				",a.product_seq" +
-				",a.golflink_course_seq" +
-				",a.time_start" +
-				",a.time_end" + 
-				",a.goodjob_price" + 
-				",a.NH_price" +
-				",a.product_status , a.real_nh_price " + 
-				",a.coupon_use_yn " +
-			"FROM tb_product_sub a " +
-				"INNER JOIN tb_product b ON(a.product_seq = b.product_seq) " +
-			"WHERE b.menu_seq = ? " +
-				"AND b.golflink_seq = ? " +
-				"AND b.product_year = ? " +
-				"AND b.product_month = ? " +
-				"AND b.product_day = ? " +
-			"ORDER BY a.productsub_seq";
+	=	"SELECT "+
+			" a.productsub_seq" +
+			",a.product_seq" +
+			",a.golflink_course_seq" +
+			",a.time_start" +
+			",a.time_end" + 
+			",a.goodjob_price" + 
+			",a.NH_price" +
+			",a.real_nh_price" +
+			",a.product_status " + 
+			",a.coupon_use_yn " +
+		"FROM tb_product_sub a " +
+			"INNER JOIN tb_product b ON(a.product_seq = b.product_seq) " +
+		"WHERE b.menu_seq = ? " +
+			"AND b.golflink_seq = ? " +
+			"AND b.product_year = ? " +
+			"AND b.product_month = ? " +
+			"AND b.product_day = ? " +
+		"ORDER BY a.productsub_seq";
 				
 
 	public static final String product_sub_update
-		=	"UPDATE tb_product_sub " +
-			"SET golflink_course_seq = ?" +
-				",time_start = ?" +
-				",time_end = ?" +
-				",goodjob_price = ?" +
-				",NH_price = ?" +
-				",product_status = ? " +
-				",coupon_use_yn = ? ,real_nh_price = ?" +
-			"WHERE productsub_seq = ?";
+	=	"UPDATE tb_product_sub " +
+		"SET golflink_course_seq = ?" +
+			",time_start = ?" +
+			",time_end = ?" +
+			",goodjob_price = ?" +
+			",NH_price = ?" +
+			",product_status = ? " +
+			",coupon_use_yn = ? " +
+			",real_nh_price = ? " +
+		"WHERE productsub_seq = ?";
 
 	public static final String product_sub_delete
 		=	"DELETE FROM tb_product_sub " +

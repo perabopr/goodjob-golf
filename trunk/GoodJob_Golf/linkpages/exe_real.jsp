@@ -70,6 +70,7 @@ glrDto.setCoupon_price(couponPrice);
 glrDto.setProcess_status("0");
 glrDto.setCard_bill_num(cbNum);
 glrDto.setProductsub_seq(gcId);
+glrDto.setSite_seq(2);
 
 GolfLinkDao glDao = new GolfLinkDao();
 glDao.setGolfReserve(glrDto, cpDto);

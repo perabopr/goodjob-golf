@@ -14,6 +14,7 @@ public class ProductReserveDto {
 	int real_nh_price;
 	String product_status = "";
 	String coupon_use_yn = "";
+	private int site_seq = 1;
 	
 	public int getGolflink_seq() {
 		return golflink_seq;
@@ -92,5 +93,11 @@ public class ProductReserveDto {
 	}
 	public void setReal_nh_price(int realNhPrice) {
 		real_nh_price = realNhPrice;
+	}
+	public int getSite_seq() {
+		return site_seq;
+	}
+	public void setSite_seq(int siteSeq) {
+		site_seq = siteSeq;
 	}
 }

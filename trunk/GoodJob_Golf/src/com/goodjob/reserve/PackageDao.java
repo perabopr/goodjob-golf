@@ -101,8 +101,8 @@ public class PackageDao{
 			bind.add(glrDto.getPackage_price());
 			bind.add(glrDto.getRequest_content());
 			bind.add(glrDto.getProcess_status());
+			bind.add(glrDto.getSite_seq());
 			bind.add(glrDto.getPackage_seq());
-			
 			QueryRunner qr = new QueryRunner();
 			
 			//예약

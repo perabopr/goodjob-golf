@@ -24,6 +24,7 @@ public class PackageReserveDto implements Serializable {
 	
 	private String request_content;
 	private String process_status;
+	private int site_seq = 1;
 	
 	public int getReserve_seq() {
 		return reserve_seq;
@@ -114,5 +115,11 @@ public class PackageReserveDto implements Serializable {
 	}
 	public void setBalance_price(int balance_price) {
 		this.balance_price = balance_price;
+	}
+	public int getSite_seq() {
+		return site_seq;
+	}
+	public void setSite_seq(int siteSeq) {
+		site_seq = siteSeq;
 	}
 }

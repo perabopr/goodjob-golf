@@ -23,6 +23,7 @@ public class GolfLinkReserveDto {
 	
 	private String booking_time_s;
 	private String booking_time_e;
+	private int site_seq = 1;
 	
 	public int getReserve_seq() {
 		return reserve_seq;
@@ -149,5 +150,11 @@ public class GolfLinkReserveDto {
 	}
 	public void setBooking_time_e(String bookingTimeE) {
 		booking_time_e = bookingTimeE;
-	}	
+	}
+	public int getSite_seq() {
+		return site_seq;
+	}
+	public void setSite_seq(int siteSeq) {
+		site_seq = siteSeq;
+	}
 }

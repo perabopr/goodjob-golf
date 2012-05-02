@@ -84,6 +84,9 @@ public class CondoDao {
 			}else if("reserve_name".equals(field) && keyword.length()>0){
 				where += "AND reserve_name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
+			}else if("reserve_uid".equals(field) && keyword.length()>0){
+				where += "AND reserve_uid LIKE concat('%',?,'%') " ;
+				params.add(keyword);
 			}else if("condo_price".equals(field) && keyword.length()>0){
 				where += "AND condo_price LIKE concat('%',?,'%') " ;
 				params.add(keyword);
@@ -166,6 +169,9 @@ public class CondoDao {
 				params.add(keyword);
 			}else if("reserve_name".equals(field) && keyword.length()>0){
 				where += "AND reserve_name LIKE concat('%',?,'%') " ;
+				params.add(keyword);
+			}else if("reserve_uid".equals(field) && keyword.length()>0){
+				where += "AND reserve_uid LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}else if("condo_price".equals(field) && keyword.length()>0){
 				where += "AND condo_price LIKE concat('%',?,'%') " ;

@@ -150,7 +150,7 @@ public class RESERVE {
 			",product_price" +
 			",coupon_price" +
 			",process_status" +
-			",card_bill_num" +
+			",card_bill_num,site_seq" +
 		")SELECT " +
 			" A.menu_seq" +
 			",A.golflink_seq" +
@@ -162,7 +162,7 @@ public class RESERVE {
 			",C.time_start" +
 			",C.time_end" +
 			",IFNULL(D.course_name, '')" +
-			",?,?,?,?,?,? " +
+			",?,?,?,?,?,?,? " +
 		"FROM tb_golflink A " +
 			"INNER JOIN tb_product B on(A.golflink_seq = B.golflink_seq) " +
 			"INNER JOIN tb_product_sub C on(B.product_seq = C.product_seq) " +
@@ -359,7 +359,7 @@ public class RESERVE {
 			",reserve_phone" +
 			",package_price" +
 			",request_content" +
-			",process_status) " +
+			",process_status,site_seq) " +
 		"SELECT " +
 			" ? " +
 			",a.package_seq " +
@@ -368,6 +368,7 @@ public class RESERVE {
 			",? " +
 			",a.package_name1 " +
 			",a.package_name2 " +
+			",? " +
 			",? " +
 			",? " +
 			",? " +

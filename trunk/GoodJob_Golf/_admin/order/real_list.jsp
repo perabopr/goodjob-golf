@@ -37,12 +37,6 @@ if(field.equals("reserve_seq")){
 	keyword = "";
 }
 %>
-<%!
-public String commify(int n) {
-	DecimalFormat formater = new DecimalFormat("###,###,###,###,###,###,###");
-	return formater.format(n);
-}
-%>
 <html>
 <head>
 <link rel="stylesheet" href="/_admin/css/style.css" type="text/css">
@@ -145,8 +139,8 @@ if(list != null){
           <td align="center" bgcolor="white"><%=list.get(i).getPer_num() %>명/1팀</td>
           <td align="center" bgcolor="white"><%=list.get(i).getGolflink_course() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
-          <td align="right" bgcolor="white"><span class=blue><%=commify(list.get(i).getCoupon_price()) %> 원</span></td>
-          <td align="right" bgcolor="white"><span class=orange><%=commify(list.get(i).getProduct_price()) %> 원</span></td>
+          <td align="right" bgcolor="white"><span class=blue><%=Utils.numberFormat(list.get(i).getCoupon_price()) %> 원</span></td>
+          <td align="right" bgcolor="white"><span class=orange><%=Utils.numberFormat(list.get(i).getProduct_price()) %> 원</span></td>
           <td align="center" bgcolor="white"><select id="ddlStatus<%=list.get(i).getReserve_seq()%>" name="ddlStatus" size="1">
               <option value="0" <%=("0".equals(list.get(i).getProcess_status())?" selected":"")%>>예약대기</option>
               <option value="1" <%=("1".equals(list.get(i).getProcess_status())?" selected":"")%> style="color:blue">예약완료</option>
@@ -185,6 +179,7 @@ if(list != null){
               <option value="product_price"<%=("product_price".equals(field)?" selected":"")%>>금액</option>
               <option value="process_status"<%=("process_status".equals(field)?" selected":"")%>>처리상태</option>
               <option value="recommend"<%=("recommend".equals(field)?" selected":"")%>>추천인</option>
+              <option value="reserve_uid" <%=("reserve_uid".equals(field)?" selected":"")%>>아이디</option>
             </select>
             <input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="15" class="input_box">
             <input id="searchOk" name="searchOk" type="image" src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle" onclick="on_search();">

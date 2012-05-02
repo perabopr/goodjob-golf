@@ -86,6 +86,9 @@ public class PackageDao {
 			}else if("reserve_name".equals(field) && keyword.length()>0){
 				where += "AND reserve_name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
+			}else if("reserve_uid".equals(field) && keyword.length()>0){
+				where += "AND reserve_uid LIKE concat('%',?,'%') " ;
+				params.add(keyword);
 			}else if("package_price".equals(field) && keyword.length()>0){
 				where += "AND package_price LIKE concat('%',?,'%') " ;
 				params.add(keyword);
@@ -168,6 +171,9 @@ public class PackageDao {
 				params.add(keyword);
 			}else if("reserve_day".equals(field) && keyword.length()>0){
 				where += "AND reserve_day LIKE concat('%',?,'%') " ;
+				params.add(keyword);
+			}else if("reserve_uid".equals(field) && keyword.length()>0){
+				where += "AND reserve_uid LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}else if("reserve_name".equals(field) && keyword.length()>0){
 				where += "AND reserve_name LIKE concat('%',?,'%') " ;

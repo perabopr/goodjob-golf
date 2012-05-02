@@ -85,6 +85,9 @@ public class GolfLinkDao {
 			}else if("reserve_name".equals(field) && keyword.length()>0){
 				where += "AND reserve_name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
+			}else if("reserve_uid".equals(field) && keyword.length()>0){
+				where += "AND reserve_uid LIKE concat('%',?,'%') " ;
+				params.add(keyword);
 			}else if("product_price".equals(field) && keyword.length()>0){
 				where += "AND product_price LIKE concat('%',?,'%') " ;
 				params.add(keyword);
@@ -166,6 +169,9 @@ public class GolfLinkDao {
 				params.add(keyword);
 			}else if("reserve_day".equals(field) && keyword.length()>0){
 				where += "AND reserve_day LIKE concat('%',?,'%') " ;
+				params.add(keyword);
+			}else if("reserve_uid".equals(field) && keyword.length()>0){
+				where += "AND reserve_uid LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}else if("reserve_name".equals(field) && keyword.length()>0){
 				where += "AND reserve_name LIKE concat('%',?,'%') " ;
@@ -306,6 +312,7 @@ public class GolfLinkDao {
 		Connection conn = null;
 		
 		String reserve_day = searchWord.getReserve_day();
+		String reserve_uid = searchWord.getReserve_uid();
 		String reserve_name = searchWord.getReserve_name();
 		String golflink_name = searchWord.getGolflink_name();
 		String booking_day = searchWord.getBooking_day();
@@ -331,6 +338,13 @@ public class GolfLinkDao {
 				params.add(reserve_day);
 				where3 = "WHERE date_format(reserve_day,'%Y-%m-%d') = ? " ;
 				params.add(reserve_day); 
+			}else if(reserve_uid.length() > 0){
+				where1 = "WHERE reserve_uid LIKE concat('%',?,'%') " ;
+				params.add(reserve_name);
+				where2 = "WHERE reserve_uid LIKE concat('%',?,'%') " ;
+				params.add(reserve_name);
+				where3 = "WHERE reserve_uid LIKE concat('%',?,'%') " ;
+				params.add(reserve_name); 
 			}else if(reserve_name.length() > 0){
 				where1 = "WHERE reserve_name LIKE concat('%',?,'%') " ;
 				params.add(reserve_name);

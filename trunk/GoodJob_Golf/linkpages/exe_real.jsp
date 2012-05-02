@@ -96,17 +96,18 @@ params.put("rphone",reservephone);
 SMSDao sDao = new SMSDao();
 boolean isSend = sDao.send(params);
 
-message = "계좌번호:농협 317-0001-2481-91\n";
-message += "㈜세이브코리아\n";
-message += "입금액:"+Utils.numberFormat(bill_price * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price())+"\n";
-message += "▶하나로고객센터";
-params.clear();
-params.put("msg",message);
-params.put("sphone",sphone);
-params.put("mem_id",reserveuid);
-params.put("rphone",reservephone);
-isSend = sDao.send(params);
-
+if("".equals(cbNum) && cbNum.length() == 0 ){
+	message = "계좌번호:농협 317-0001-2481-91 ";
+	message += "㈜세이브코리아\n";
+	message += "입금액:"+Utils.numberFormat(bill_price * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price())+"\n";
+	message += "[하나로고객센터]";
+	params.clear();
+	params.put("msg",message);
+	params.put("sphone",sphone);
+	params.put("mem_id",reserveuid);
+	params.put("rphone",reservephone);
+	isSend = sDao.send(params);
+}
 %>
 <script language="javascript" type="text/javascript">
 this.parent.document.location.href="result.jsp?menu=1&gr_cd=<%=request.getParameter("gr_cd")%>";

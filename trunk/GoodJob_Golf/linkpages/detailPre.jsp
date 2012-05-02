@@ -4,6 +4,7 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
+<%@page import="org.apache.commons.lang.ObjectUtils"%>
 <%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
 <%@page import="com.goodjob.reserve.dto.ProductDto"%>
 <%@page import="java.util.Calendar"%>
@@ -11,6 +12,7 @@
 <%@page import="com.goodjob.reserve.dto.GolfLinkDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
+<%@page import="com.goodjob.util.Utils"%>
 <%!
 	public boolean indexOf(String str , String... strings){
 		for(String temp : strings){
@@ -45,19 +47,12 @@
 	
 	//가격정보.
 	List<GolfLinkPriceDto> listGolfPrice = glDao.getGolfLinkPrice(Integer.parseInt(golfSeq));
-	int np = 0;
-	int nw = 0;
-	int sp = 0;
-	int sw = 0;
+	String[] priceInfo = {"0","0","0","0","0","0","0","0","0","0","0","0"};
 	for(int i = 0; i < listGolfPrice.size();i++){
-		if(listGolfPrice.get(i).getPrice_type().equals("1")){
-			np = listGolfPrice.get(i).getGolflink_price();
-		}else if(listGolfPrice.get(i).getPrice_type().equals("2")){
-			nw = listGolfPrice.get(i).getGolflink_price();		
-		}else if(listGolfPrice.get(i).getPrice_type().equals("3")){
-			sp = listGolfPrice.get(i).getGolflink_price();		
-		}else if(listGolfPrice.get(i).getPrice_type().equals("4")){
-			sw = listGolfPrice.get(i).getGolflink_price();		
+		
+		String index = (i+1)+"";
+		if(listGolfPrice.get(i).getPrice_type().equals(index)){
+			priceInfo[i] = ObjectUtils.toString(listGolfPrice.get(i).getGolflink_price(),"0");
 		}
 	}
 	
@@ -462,20 +457,20 @@ $(function(){
                   <TR>
                     <TD><TABLE border=0 cellSpacing=1 cellPadding=2 width="100%" bgColor=#d1d3d4>
                         <TR>
-                          <TD class=normal_b bgColor=#f1f1f1 width="150" align=center>구분</TD>
-                          <TD class=normal_b bgColor=#f1f1f1 align=center height=20>주중</TD>
-                          <TD class=normal_b bgColor=#f1f1f1 align=center>주말</TD>
-                        </TR>
-                        <TR>
-                          <TD class=normal_s bgColor=white width="150" align=center>그린피 정상금액</TD>
-                          <TD class=normal_s bgColor=white align=center height=20><strike><%=commify(np) %></strike></TD>
-                          <TD class=normal_s bgColor=white align=center><strike><%=commify(nw) %></strike></TD>
-                        </TR>
-                        <TR>
-                          <TD class=normal_s bgColor=white width="150" align=center>그린피 할인금액</TD>
-                          <TD class=saturday bgColor=white align=center height=20><%=commify(sp) %></TD>
-                          <TD class=sunday bgColor=white align=center><%=commify(sw) %></TD>
-                        </TR>
+                            <TD class=normal_b bgColor=#f1f1f1 width="150" align=center>구분</TD>
+                            <TD class=normal_b bgColor=#f1f1f1 align=center height=20>주중</TD>
+                            <TD class=normal_b bgColor=#f1f1f1 align=center>주말</TD>
+                          </TR>
+                          <TR>
+                            <TD class=normal_s bgColor=white width="150" align=center>그린피 정상금액</TD>
+                            <TD class=normal_s bgColor=white align=center height=20><strike><%=Utils.numberFormat(NumberUtils.toInt(priceInfo[0]))%></strike></TD>
+                            <TD bgColor=white align=center><strike><%=Utils.numberFormat(NumberUtils.toInt(priceInfo[1]))%></strike></TD>
+                          </TR>
+                          <TR>
+                            <TD class=normal_s bgColor=white width="150" align=center>그린피 할인금액</TD>
+                            <TD class=saturday bgColor=white align=center height=20><%=Utils.numberFormat(NumberUtils.toInt(priceInfo[2]))%> ~ <%=Utils.numberFormat(NumberUtils.toInt(priceInfo[3]))%></TD>
+                            <TD class=sunday bgColor=white align=center><%=Utils.numberFormat(NumberUtils.toInt(priceInfo[4]))%> ~ <%=Utils.numberFormat(NumberUtils.toInt(priceInfo[5]))%></TD>
+                          </TR>
                       </TABLE></TD>
                   </TR>
                   </TBODY>

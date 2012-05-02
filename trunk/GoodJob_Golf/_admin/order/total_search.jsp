@@ -104,6 +104,8 @@ function selItem(menuReserve){
   <option value="reserve_name" <%=("reserve_name".equals(sField)?" selected":"")%>>예약자</option>
   <option value="golflink_name" <%=("golflink_name".equals(sField)?" selected":"")%>>골프장명(패키지명)</option>
   <option value="booking_day" <%=("booking_day".equals(sField)?" selected":"")%>>부킹일(출발일)</option>
+  <option value="process_status"<%=("process_status".equals(sField)?" selected":"")%>>처리상태</option>
+  <option value="reserve_uid" <%=("reserve_uid".equals(sField)?" selected":"")%>>아이디</option>
 </select>
 <input id="keyword2" name="keyword2" value="<%=sValue%>" type="text" size="15" class="input_box">
 <input id="searchOk" name="searchOk" type="image" src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle" onclick="on_search();">

@@ -291,6 +291,7 @@ if(list != null){
               <option value="reserve_name"<%=("reserve_name".equals(field)?" selected":"")%>>예약자</option>
               <option value="package_price"<%=("package_price".equals(field)?" selected":"")%>>금액</option>
               <option value="process_status"<%=("process_status".equals(field)?" selected":"")%>>처리상태</option>
+              <option value="reserve_uid" <%=("reserve_uid".equals(field)?" selected":"")%>>아이디</option>
 		    </select>
             <input id="keyword" name="keyword" value="<%=keyword%>" type="text" size="15" class="input_box">
 		    <input id="searchOk" name="searchOk" type="image" src="../images/common/bt_search.gif" border="0" width="50" height="19" align="absmiddle" onclick="on_search();"></td>

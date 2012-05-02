@@ -35,6 +35,7 @@
 	prDto.setRequest_content(content);
 	prDto.setProcess_status("0");
 	prDto.setPackage_seq(pkSeq);
+	prDto.setSite_seq(2);
 	
 	PackageDao pkDao = new PackageDao();
 	pkDao.setPackageReserve(prDto);

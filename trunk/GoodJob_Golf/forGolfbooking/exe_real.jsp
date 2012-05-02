@@ -98,7 +98,7 @@ if("".equals(cbNum) && cbNum.length() == 0 ){
 	message = "계좌번호 : 국민 421737-04-015359 ";
 	message += "㈜세이브코리아\n";
 	message += "입금액 : "+Utils.numberFormat(bill_price * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price())+"\n";
-	message += "▶굿잡골프";
+	message += "[굿잡골프]";
 	params.clear();
 	params.put("msg",message);
 	params.put("sphone",sphone);

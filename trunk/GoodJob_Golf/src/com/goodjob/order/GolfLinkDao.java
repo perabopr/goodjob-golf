@@ -25,27 +25,27 @@ public class GolfLinkDao {
 	public List<GolfLinkDto> getList(String tableName , Map<String,String> data){
 		List<GolfLinkDto> list = null;
 		Connection conn = null;
-		
+
 		String field = StringUtils.defaultIfEmpty(data.get("field"), "");
 		String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
 		int npage = NumberUtils.toInt(data.get("npage"), 1);
 		int per_page = NumberUtils.toInt(data.get("per_page"), ORDER.per_page);
-		
+
 		try {
 			conn = DBManager.getConnection();
 
 			ArrayList<Object> params = new ArrayList<Object>();
-			
+
 			ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
 			QueryRunner qr = new QueryRunner();
-			
+
 			//검색조건
 			String where = "";
-			
+
 			//요값은 무조건있어야지요~
 			where = "WHERE menu_seq = ? " ;
 			params.add(data.get("menu_seq"));
-			
+
 			if("golflink_name".equals(field) && keyword.length()>0){
 				where += "AND golflink_name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
@@ -56,12 +56,12 @@ public class GolfLinkDao {
 					if(keywords[0].trim().length() > 0)
 					{
 						where += "AND booking_day >= ? " ;
-						params.add(keywords[0].trim().replace("-", ""));						
+						params.add(keywords[0].trim().replace("-", ""));
 					}
 					if(keywords[1].trim().length() > 0)
 					{
 						where += "AND booking_day <= ? " ;
-						params.add(keywords[1].trim().replace("-", ""));	
+						params.add(keywords[1].trim().replace("-", ""));
 					}
 				}
 				else
@@ -101,13 +101,13 @@ public class GolfLinkDao {
 				where = ",tb_member where menu_seq = ? and reserve_uid=mem_id and recommend=? " ;
 				params.add(keyword);
 			}
-			
-			
-			
+
+
+
 			//페이징
 			params.add(((npage-1)* per_page));
 			params.add(per_page);
-			
+
 			list = (List<GolfLinkDto>)qr.query(conn , MessageFormat.format(ORDER.listRealPre, tableName, where), rsh , params.toArray());
 		} catch (Exception e) {
 			System.out.println(e);
@@ -117,53 +117,53 @@ public class GolfLinkDao {
 
 		return list;
 	}
-	
+
 	public List<GolfLinkDto> getGolfLinkReserve(int seq){
 		List<GolfLinkDto> list = null;
 		Connection conn = null;
-		
+
 		try {
 			conn = DBManager.getConnection();
 
 			ArrayList<Object> params = new ArrayList<Object>();
 			params.add(seq);
-			
+
 			ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
 			QueryRunner qr = new QueryRunner();
-			
+
 			list = (List<GolfLinkDto>)qr.query(conn , ORDER.RealPre, rsh , params.toArray());
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
-		
+
 		return list;
 	}
-	
+
 	public int getTotalCount(String tableName , Map<String,String> data) {
 		Connection conn = null;
 		Map<String, Long> map = null;
 		try {
-			
+
 			String field = StringUtils.defaultIfEmpty(data.get("field"), "");
 			String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
 			int npage = NumberUtils.toInt(data.get("npage"), 1);
-			
+
 			ArrayList<Object> params = new ArrayList<Object>();
-			
+
 			conn = DBManager.getConnection();
 
 			ResultSetHandler rsh = new MapHandler();
 			QueryRunner qr = new QueryRunner();
-			
+
 			//검색조건
 			String where = "";
-			
+
 			//요값은 무조건있어야지요~
 			where = "WHERE menu_seq = ? " ;
 			params.add(data.get("menu_seq"));
-			
+
 			if("golflink_name".equals(field) && keyword.length()>0){
 				where += "AND golflink_name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
@@ -186,7 +186,7 @@ public class GolfLinkDao {
 				where = ",tb_member where menu_seq = ? and reserve_uid=mem_id and recommend=? " ;
 				params.add(keyword);
 			}
-			
+
 			map = (Map<String, Long>)qr.query(conn, MessageFormat.format(ORDER.totalcnt, tableName , where) , rsh , params.toArray());
 		} catch (Exception e) {
 			System.out.println(e);
@@ -196,10 +196,10 @@ public class GolfLinkDao {
 
 		return NumberUtils.toInt(map.get("cnt")+"");
 	}
-	
+
 	public void setStatusUpdate(String tableName, Map<String,String> data){
 		Connection conn = null;
-		
+
 		try{
 			conn = DBManager.getConnection();
 
@@ -215,9 +215,9 @@ public class GolfLinkDao {
 			String package_price = StringUtils.defaultIfEmpty(data.get("package_price"), "");
 			String condo_price = StringUtils.defaultIfEmpty(data.get("condo_price"), "");
 			String tour_date = StringUtils.defaultIfEmpty(data.get("tour_date"), "");
-			
+
 			ArrayList<Object> bind = new ArrayList<Object>();
-						
+
 			String setQuery = "";
 			if(booking_day.length() > 0){
 				setQuery += ",booking_day = ? " ;
@@ -229,11 +229,11 @@ public class GolfLinkDao {
 			}
 			if(booking_time_s.length() > 0){
 				setQuery += ",booking_time_s = ? " ;
-				bind.add(booking_time_s);				
+				bind.add(booking_time_s);
 			}
 			if(booking_time_e.length() > 0){
 				setQuery += ",booking_time_e = ? " ;
-				bind.add(booking_time_e);				
+				bind.add(booking_time_e);
 			}
 			if(product_price.length() > 0){
 				setQuery += ",product_price = ? " ;
@@ -261,14 +261,14 @@ public class GolfLinkDao {
 			}
 			if(tour_date.length() > 0){
 				setQuery += ",tour_date = ? " ;
-				bind.add(tour_date);				
+				bind.add(tour_date);
 			}
 			if(setQuery.length() > 0){
 				setQuery = setQuery.substring(1);
 			}
-			
+
 			bind.add(reserve_seq);
-			
+
 			QueryRunner qr = new QueryRunner();
 			qr.update(conn, MessageFormat.format(ORDER.update, tableName, setQuery), bind.toArray());
 
@@ -278,7 +278,7 @@ public class GolfLinkDao {
 				bind.add(reserve_seq);
 				ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
 				List<GolfLinkDto> liSeq = (List<GolfLinkDto>)qr.query(conn , ORDER.product_sub_seq_select, rsh , bind.toArray());
-				
+
 				if(liSeq.size() > 0){
 					bind = new ArrayList<Object>();
 					if(process_status.equals("3")){	//(예약)예약취소
@@ -289,12 +289,12 @@ public class GolfLinkDao {
 						bind.add("2");	//(상품)예약마감
 					}
 					bind.add(liSeq.get(0).getProductsub_seq());
-					
+
 					//쿠폰 복구. 사용했으면~
-					CouponDao cpDao = new CouponDao();				
+					CouponDao cpDao = new CouponDao();
 					cpDao.setCouponUseCancel(liSeq.get(0).getMenu_seq(), liSeq.get(0).getReserve_seq());
 				}
-				
+
 				qr.update(conn, ORDER.product_sub_status_update, bind.toArray());
 			}
 		}
@@ -305,73 +305,98 @@ public class GolfLinkDao {
 			DbUtils.closeQuietly(conn);
 		}
 	}
-	
-	public List<GolfLinkDto> getTotalReserveSearch(GolfLinkDto searchWord){
-		
+
+	public List<GolfLinkDto> getTotalReserveSearch(GolfLinkDto glDto){
+
 		List<GolfLinkDto> list = null;
 		Connection conn = null;
-		
-		String reserve_day = searchWord.getReserve_day();
-		String reserve_uid = searchWord.getReserve_uid();
-		String reserve_name = searchWord.getReserve_name();
-		String golflink_name = searchWord.getGolflink_name();
-		String booking_day = searchWord.getBooking_day();
-		
+
+		String reserve_day = glDto.getReserve_day();
+		String reserve_uid = glDto.getReserve_uid();
+		String reserve_name = glDto.getReserve_name();
+		String golflink_name = glDto.getGolflink_name();
+		String booking_day = glDto.getBooking_day();
+		String process_status = glDto.getProcess_status();
 		try {
 			conn = DBManager.getConnection();
 
 			ArrayList<Object> params = new ArrayList<Object>();
-			
+
 			ResultSetHandler rsh = new BeanListHandler(GolfLinkDto.class);
 			QueryRunner qr = new QueryRunner();
-			
+
 			//검색조건
 			String where1 = "";
 			String where2 = "";
 			String where3 = "";
 			String where4 = "";
-			
+
 			if(reserve_day.length() > 0){
 				where1 = "WHERE date_format(reserve_day,'%Y-%m-%d') = ? " ;
 				params.add(reserve_day);
+				if(glDto.getSite_seq() > 0){ where1 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 				where2 = "WHERE date_format(reserve_day,'%Y-%m-%d') = ? " ;
 				params.add(reserve_day);
+				if(glDto.getSite_seq() > 0){ where2 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 				where3 = "WHERE date_format(reserve_day,'%Y-%m-%d') = ? " ;
-				params.add(reserve_day); 
+				params.add(reserve_day);
+				if(glDto.getSite_seq() > 0){ where3 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 			}else if(reserve_uid.length() > 0){
 				where1 = "WHERE reserve_uid LIKE concat('%',?,'%') " ;
-				params.add(reserve_name);
+				params.add(reserve_uid);
+				if(glDto.getSite_seq() > 0){ where1 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 				where2 = "WHERE reserve_uid LIKE concat('%',?,'%') " ;
-				params.add(reserve_name);
+				params.add(reserve_uid);
+				if(glDto.getSite_seq() > 0){ where2 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 				where3 = "WHERE reserve_uid LIKE concat('%',?,'%') " ;
-				params.add(reserve_name); 
+				params.add(reserve_uid);
+				if(glDto.getSite_seq() > 0){ where3 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
+			}else if(process_status.length() > 0){
+				where1 = "WHERE process_status = ? " ;
+				params.add(process_status);
+				if(glDto.getSite_seq() > 0){ where1 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
+				where2 = "WHERE process_status = ? " ;
+				params.add(process_status);
+				if(glDto.getSite_seq() > 0){ where2 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
+				where3 = "WHERE process_status = ? " ;
+				params.add(process_status);
+				if(glDto.getSite_seq() > 0){ where3 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 			}else if(reserve_name.length() > 0){
 				where1 = "WHERE reserve_name LIKE concat('%',?,'%') " ;
 				params.add(reserve_name);
+				if(glDto.getSite_seq() > 0){ where1 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 				where2 = "WHERE reserve_name LIKE concat('%',?,'%') " ;
 				params.add(reserve_name);
+				if(glDto.getSite_seq() > 0){ where2 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 				where3 = "WHERE reserve_name LIKE concat('%',?,'%') " ;
-				params.add(reserve_name); 
+				params.add(reserve_name);
+				if(glDto.getSite_seq() > 0){ where3 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 			}else if(golflink_name.length() > 0){
 				where1 = "WHERE golflink_name LIKE concat('%',?,'%') " ;
 				params.add(golflink_name);
+				if(glDto.getSite_seq() > 0){ where1 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 				where2 = "WHERE (package_name1 LIKE concat('%',?,'%') OR package_name2 LIKE concat('%',?,'%'))" ;
 				params.add(golflink_name);
 				params.add(golflink_name);
+				if(glDto.getSite_seq() > 0){ where2 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 				where3 = "WHERE condo_name = ? " ;
-				params.add(golflink_name); 				
+				params.add(golflink_name);
+				if(glDto.getSite_seq() > 0){ where3 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 			}else if(booking_day.length() > 0){
 				where1 = "WHERE booking_day = ? " ;
 				params.add(booking_day);
+				if(glDto.getSite_seq() > 0){ where1 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 				where2 = "WHERE tour_date = ? " ;
 				params.add(booking_day);
+				if(glDto.getSite_seq() > 0){ where2 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 				where3 = "WHERE in_date = ? " ;
-				params.add(booking_day); 
+				params.add(booking_day);
+				if(glDto.getSite_seq() > 0){ where3 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 			}
 			else{
 				where4 = " limit 0 , 30 ";
 			}
-			
+
 			list = (List<GolfLinkDto>)qr.query(conn , MessageFormat.format(ORDER.reserveTotalSearch_select, where1, where2, where3 , where4), rsh , params.toArray());
 		} catch (Exception e) {
 			System.out.println(e);

@@ -325,10 +325,10 @@ public class RESERVE {
 	public static final String condo_reserve_insert = 
 	"insert into tb_condo_reserve(menu_seq,condo_seq,reserve_day,reserve_name, "+
 	"reserve_uid,condo_name,roomtype,condoroom_seq,in_date, "+
-	"out_date,room_num,per_num,reserve_phone,condo_price,reserve_memo ) "+
+	"out_date,room_num,per_num,reserve_phone,condo_price,reserve_memo,site_seq ) "+
 	"values(?, ?, now(), ?, "+
 	" ?, ?, ?, ?, ?,  "+
-	" ?, ?, ?, ?, ?, ?) ";
+	" ?, ?, ?, ?, ?, ? , ?) ";
 	
 	
 	public static final String getPackagePromise

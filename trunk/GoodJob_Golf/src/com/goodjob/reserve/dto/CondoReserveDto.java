@@ -33,6 +33,7 @@ public class CondoReserveDto implements Serializable{
 	private int room_num;
 	private int per_num;
 	private String reserve_memo;
+	private int site_seq = 1;
 	
 	
 	public int getReserve_seq() {
@@ -136,5 +137,11 @@ public class CondoReserveDto implements Serializable{
 	}
 	public void setReserve_memo(String reserveMemo) {
 		reserve_memo = reserveMemo;
+	}
+	public int getSite_seq() {
+		return site_seq;
+	}
+	public void setSite_seq(int siteSeq) {
+		site_seq = siteSeq;
 	}
 }

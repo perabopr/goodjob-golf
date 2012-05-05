@@ -37,6 +37,7 @@
 	cdDto.setReserve_uid(user_Id);
 	cdDto.setReserve_phone(mobile);
 	cdDto.setReserve_memo(reserve_memo);
+	cdDto.setSite_seq(1);
 	
 	CondoReserveDao cdDao = new CondoReserveDao();
 	

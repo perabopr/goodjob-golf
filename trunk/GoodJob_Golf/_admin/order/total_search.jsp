@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.goodjob.util.Utils"%>
 <%@page import="com.goodjob.sql.ORDER"%>
 <%@page import="com.goodjob.util.PageNavigater"%>
@@ -8,10 +9,13 @@
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.order.GolfLinkDao"%>
 <%@page import="com.goodjob.order.dto.GolfLinkDto"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.goodjob.product.dto.SiteDto"%>
+<%@page import="com.goodjob.product.SiteDao"%>
 <%
 String sField = StringUtils.defaultIfEmpty(request.getParameter("field2"),"");
 String sValue = StringUtils.defaultIfEmpty(request.getParameter("keyword2"),"");
+int site_seq = NumberUtils.toInt(request.getParameter("site_seq"),0);
+
 
 GolfLinkDto glDto = new GolfLinkDto();
 if("reserve_day".equals(sField)){
@@ -26,9 +30,21 @@ if("golflink_name".equals(sField)){
 if("booking_day".equals(sField)){
 	glDto.setBooking_day(sValue);
 }
+if("process_status".equals(sField)){
+	glDto.setProcess_status(sValue);
+}
+if("reserve_uid".equals(sField)){
+	glDto.setReserve_uid(sValue);
+}
+glDto.setSite_seq(site_seq);
 
 GolfLinkDao glList = new GolfLinkDao();
 List<GolfLinkDto> list = glList.getTotalReserveSearch(glDto);
+
+//site
+SiteDao siteDao = new SiteDao();
+List<SiteDto> siteList = siteDao.getSiteAllList();
+
 %>
 <html>
 <head>
@@ -98,6 +114,12 @@ function selItem(menuReserve){
 <input type="hidden" id="keyword" name="keyword">
 </form>
 <form name="frm" method="post" action="total_search.jsp">
+<select id="site_seq" name="site_seq" size="1">
+  <option>사이트선택</option>
+  <%for(int i = 0; i < siteList.size();i++){%>
+	<option value="<%=siteList.get(i).getSite_seq()%>"<%=(site_seq==siteList.get(i).getSite_seq()?" selected":"")%>><%=siteList.get(i).getSite_name()%></option>
+  <%}%>
+</select>
 <select id="field2" name="field2" size="1">
   <option>선택하세요</option>
   <option value="reserve_day" <%=("reserve_day".equals(sField)?" selected":"")%>>예약일</option>

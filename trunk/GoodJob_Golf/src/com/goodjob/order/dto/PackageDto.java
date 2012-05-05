@@ -16,6 +16,7 @@ public class PackageDto {
 	private int balance_price;
 	private String request_content;
 	private String process_status;
+	private int site_seq = 0;
 	
 	public int getReserve_seq() {
 		return reserve_seq;
@@ -106,5 +107,11 @@ public class PackageDto {
 	}
 	public void setProcess_status(String process_status) {
 		this.process_status = process_status;
+	}
+	public int getSite_seq() {
+		return site_seq;
+	}
+	public void setSite_seq(int siteSeq) {
+		site_seq = siteSeq;
 	}
 }

@@ -24,6 +24,7 @@ public class ORDER {
 			",product_price "+
 			",coupon_price "+
 			",process_status "+
+			",site_seq " +
 		"FROM {0}" +
 		" {1} ORDER BY reserve_seq desc LIMIT ? , ? ";
 	
@@ -47,6 +48,7 @@ public class ORDER {
 			",product_price "+
 			",coupon_price "+
 			",process_status "+
+			",site_seq " +
 		"FROM tb_golflink_reserve " +
 		"WHERE reserve_seq = ?";
 	
@@ -67,6 +69,7 @@ public class ORDER {
 			",balance_price " +
 			",IFNULL(request_content, '''') request_content " +
 			",process_status " +
+			",site_seq " +
 		"FROM {0}" +
 		" {1} ORDER BY reserve_seq desc LIMIT ? , ? ";
 	
@@ -86,6 +89,7 @@ public class ORDER {
 			",package_price " +
 			",IFNULL(request_content, '''') request_content " +
 			",process_status " +
+			",site_seq " +
 		"FROM tb_package_reserve " +
 		"WHERE reserve_seq = ?";
 	
@@ -108,6 +112,7 @@ public class ORDER {
 			",condo_price " +
 			",reserve_memo " +
 			",process_status " +
+			",site_seq " +
 		"FROM {0}" +
 		" {1} ORDER BY reserve_seq desc LIMIT ? , ? ";
 	
@@ -130,6 +135,7 @@ public class ORDER {
 			",condo_price " +
 			",reserve_memo " +
 			",process_status " +
+			",site_seq " +
 		"FROM tb_condo_reserve " +
 		"WHERE reserve_seq = ?";
 	
@@ -168,6 +174,7 @@ public class ORDER {
 			",golflink_name " +
 			",booking_day " +
 			",process_status " +
+			",site_seq " +
 		"FROM tb_golflink_reserve " +
 		" {0} " +
 		"UNION ALL " +
@@ -181,6 +188,7 @@ public class ORDER {
 			",CASE package_name2 WHEN '''' THEN package_name1 ELSE CONCAT(package_name1 , ''+'' , package_name2) END " +
 			",tour_date " +
 			",process_status " + 
+			",site_seq " +
 		"FROM tb_package_reserve " +
 		" {1} " +
 		"UNION ALL " +
@@ -194,6 +202,7 @@ public class ORDER {
 			",condo_name " +
 			",in_date " +
 			",process_status " +
+			",site_seq " +
 		"FROM tb_condo_reserve " +
 		" {2} " +
 		" order by reserve_day desc {3} ";

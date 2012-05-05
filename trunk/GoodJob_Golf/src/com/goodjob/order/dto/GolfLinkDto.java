@@ -20,6 +20,7 @@ public class GolfLinkDto {
 	private int coupon_price = 0;
 	private String process_status = "";
 	private String card_bill_num = "";
+	private int site_seq = 0;
 	
 	public int getReserve_seq() {
 		return reserve_seq;
@@ -134,5 +135,11 @@ public class GolfLinkDto {
 	}
 	public void setCard_bill_num(String card_bill_num) {
 		this.card_bill_num = card_bill_num;
+	}
+	public int getSite_seq() {
+		return site_seq;
+	}
+	public void setSite_seq(int siteSeq) {
+		site_seq = siteSeq;
 	}
 }

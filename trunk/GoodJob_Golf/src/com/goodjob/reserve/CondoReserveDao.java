@@ -170,6 +170,7 @@ public class CondoReserveDao {
 			bind.add(cdDto.getReserve_phone());
 			bind.add(0);
 			bind.add(cdDto.getReserve_memo());
+			bind.add(cdDto.getSite_seq());
 			
 			QueryRunner qr = new QueryRunner();
 			

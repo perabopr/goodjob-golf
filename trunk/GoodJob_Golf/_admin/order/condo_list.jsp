@@ -10,11 +10,14 @@
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
+<%@page import="com.goodjob.product.dto.SiteDto"%>
+<%@page import="com.goodjob.product.SiteDao"%>
 
 <%
 String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
 String field = StringUtils.trimToEmpty(request.getParameter("field"));
 String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
+int site_seq = NumberUtils.toInt(request.getParameter("site_seq"),0);
 
 PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , ORDER.per_page );
 
@@ -36,12 +39,11 @@ String strPage = paging.getPaging(totalCount, false);
 if(field.equals("reserve_seq")){
 	keyword = "";
 }
-%>
-<%!
-public String commify(int n) {
-	DecimalFormat formater = new DecimalFormat("###,###,###,###,###,###,###");
-	return formater.format(n);
-}
+
+//site
+SiteDao siteDao = new SiteDao();
+List<SiteDto> siteList = siteDao.getSiteAllList();
+
 %>
 <html>
 <head>
@@ -192,7 +194,7 @@ if(list != null){
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
           <td align="center" bgcolor="white"><a href="javascript:;" ><img align="absmiddle" src="../images/common/btn_detail.gif" width="75" height="22" border="0" onMouseover="ddrivetip('<%=list.get(i).getReserve_memo().replace("\r\n","</br>") %>');" onMouseout="hideddrivetip()"></a></td>
           <td align="center" bgcolor="white">
-			<input id="Price<%=list.get(i).getReserve_seq()%>" name="price" type="text" size="10" value="<%=commify(list.get(i).getCondo_price())%>" class="input_box">
+			<input id="Price<%=list.get(i).getReserve_seq()%>" name="price" type="text" size="10" value="<%=Utils.numberFormat(list.get(i).getCondo_price())%>" class="input_box">
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePrice('<%=list.get(i).getReserve_seq()%>');">
           </td>
           <td align="center" bgcolor="white">
@@ -226,7 +228,14 @@ if(list != null){
         <form name="frm" method="post" action="condo_list.jsp">
 		<input type="hidden" name="npage" value="<%=npage%>"/>
         <tr>
-          <td height="4" align="center"><select id="field" name="field" size="1">
+          <td height="4" align="center">
+		  <!--select id="site_seq" name="site_seq" size="1">
+			  <option>사이트선택</option>
+			  <%for(int i = 0; i < siteList.size();i++){%>
+				<option value="<%=siteList.get(i).getSite_seq()%>" <%=(site_seq==siteList.get(i).getSite_seq()?" selected":"")%>><%=siteList.get(i).getSite_name()%></option>
+			  <%}%>
+			</select>-->
+          	<select id="field" name="field" size="1">
               <option>선택하세요</option>
               <option value="condo_name"<%=("condo_name".equals(field)?" selected":"")%>>콘도</option>
               <option value="in_date"<%=("in_date".equals(field)?" selected":"")%>>입실일</option>
@@ -255,9 +264,8 @@ if(list != null){
 </table>
 </body>
 <script type="text/javascript">
-<!---//
-var offsetfromcursorX=12 // 커서의 x 축 
-var offsetfromcursorY=10 //y 축 위치
+var offsetfromcursorX=12; // 커서의 x 축 
+var offsetfromcursorY=10; //y 축 위치
 
 var offsetdivfrompointerX=10 //커서그림의 X
 var offsetdivfrompointerY=14 //Y축임 신경안써도 무방
@@ -339,6 +347,6 @@ tipobj.style.width=''
 }
 
 document.onmousemove=positiontip
-//--->
+
 </script>
 </html>

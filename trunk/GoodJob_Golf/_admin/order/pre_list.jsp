@@ -10,10 +10,13 @@
 <%@page import="com.goodjob.order.dto.GolfLinkDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.order.GolfLinkDao"%>
+<%@page import="com.goodjob.product.dto.SiteDto"%>
+<%@page import="com.goodjob.product.SiteDao"%>
 <%
 String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
 String field = StringUtils.trimToEmpty(request.getParameter("field"));
 String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
+int site_seq = NumberUtils.toInt(request.getParameter("site_seq"),0);
 
 PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , ORDER.per_page );
 
@@ -35,12 +38,11 @@ String strPage = paging.getPaging(totalCount, false);
 if(field.equals("reserve_seq")){
 	keyword = "";
 }
-%>
-<%!
-public String commify(int n) {
-	DecimalFormat formater = new DecimalFormat("###,###,###,###,###,###,###");
-	return formater.format(n);
-}
+
+//site
+SiteDao siteDao = new SiteDao();
+List<SiteDto> siteList = siteDao.getSiteAllList();
+
 %>
 <html>
 <head>
@@ -218,7 +220,13 @@ if(list != null){
         <tr>
           <td bgcolor="white" align="center" height="45"><%=list.get(i).getReserve_day() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_name() %></td>
-          <td align="center" bgcolor="white"><%=list.get(i).getReserve_uid() %></td>
+          <td align="center" bgcolor="white">
+          <%
+          	out.println(list.get(i).getReserve_uid());
+          	if(list.get(i).getSite_seq()==2){out.println("<font color='blue'>[NH하나로]</font>");}
+          	else if(list.get(i).getSite_seq()==3){out.println("<font color='orange'>[NH카드]</font>");}
+          %>
+          </td>
           <td align="center" bgcolor="white"><%=list.get(i).getGolflink_name() %></td>
           <td align="center" bgcolor="white">
           	<table width="100%">
@@ -246,9 +254,9 @@ if(list != null){
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePerCnt('<%=list.get(i).getReserve_seq()%>');">
           </td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
-          <td align="right" bgcolor="white"><span class=blue><%=commify(list.get(i).getCoupon_price()) %> 원</span></td>
+          <td align="right" bgcolor="white"><span class=blue><%=Utils.numberFormat(list.get(i).getCoupon_price()) %> 원</span></td>
           <td align="center" bgcolor="white">
-          	<input id="Price<%=list.get(i).getReserve_seq()%>" name="Price" type="text" size="10" value="<%=commify(list.get(i).getProduct_price()) %>" class="input_box">
+          	<input id="Price<%=list.get(i).getReserve_seq()%>" name="Price" type="text" size="10" value="<%=Utils.numberFormat(list.get(i).getProduct_price()) %>" class="input_box">
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePrice('<%=list.get(i).getReserve_seq()%>');">
           </td>
           <td align="center" bgcolor="white">
@@ -282,7 +290,14 @@ if(list != null){
 		<form name="frm" method="post" action="pre_list.jsp">
 		<input type="hidden" name="npage" value="<%=npage%>"/>
 		<tr>
-		  <td height="4" align="center"><select id="field" name="field" size="1">
+		  <td height="4" align="center">
+		  <!--select id="site_seq" name="site_seq" size="1">
+			  <option>사이트선택</option>
+			  <%for(int i = 0; i < siteList.size();i++){%>
+				<option value="<%=siteList.get(i).getSite_seq()%>" <%=(site_seq==siteList.get(i).getSite_seq()?" selected":"")%>><%=siteList.get(i).getSite_name()%></option>
+			  <%}%>
+			</select>-->
+		  	<select id="field" name="field" size="1">
 		      <option>선택하세요</option>
               <option value="golflink_name"<%=("golflink_name".equals(field)?" selected":"")%>>골프장</option>
               <option value="reserve_day"<%=("reserve_day".equals(field)?" selected":"")%>>부킹일</option>

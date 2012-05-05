@@ -11,10 +11,13 @@
 <%@page import="com.goodjob.order.dto.GolfLinkDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.order.GolfLinkDao"%>
+<%@page import="com.goodjob.product.dto.SiteDto"%>
+<%@page import="com.goodjob.product.SiteDao"%>
 <%
 String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
 String field = StringUtils.trimToEmpty(request.getParameter("field"));
 String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
+int site_seq = NumberUtils.toInt(request.getParameter("site_seq"),0);
 
 PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , ORDER.per_page );
 
@@ -36,6 +39,11 @@ String strPage = paging.getPaging(totalCount, false);
 if(field.equals("reserve_seq")){
 	keyword = "";
 }
+
+//site
+SiteDao siteDao = new SiteDao();
+List<SiteDto> siteList = siteDao.getSiteAllList();
+
 %>
 <html>
 <head>
@@ -133,7 +141,13 @@ if(list != null){
         <tr>
           <td bgcolor="white" align="center" height="25"><%=list.get(i).getReserve_day() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_name() %></td>
-          <td align="center" bgcolor="white"><%=list.get(i).getReserve_uid().indexOf("@") > 0 ? list.get(i).getReserve_uid() : list.get(i).getReserve_uid() + "<font color='blue'>NH</font>" %></td>
+          <td align="center" bgcolor="white">
+          <%
+          	out.println(list.get(i).getReserve_uid());
+          	if(list.get(i).getSite_seq()==2){out.println("<font color='blue'>[NH하나로]</font>");}
+          	else if(list.get(i).getSite_seq()==3){out.println("<font color='orange'>[NH카드]</font>");}
+          %>
+          </td>
           <td align="center" bgcolor="white"><%=list.get(i).getGolflink_name() %></td>
           <td align="center" bgcolor="white"><span class=<%=Utils.getIsWeek(vbookingDate.substring(0,10))%>><%=vbookingDate %></span></td>
           <td align="center" bgcolor="white"><%=list.get(i).getPer_num() %>명/1팀</td>
@@ -171,7 +185,14 @@ if(list != null){
         <form name="frm" method="post" action="real_list.jsp">
         <input type="hidden" name="npage" value="<%=npage%>"/>
         <tr>
-          <td height="4" align="center"><select id="field" name="field" size="1">
+          <td height="4" align="center">
+          	<!--select id="site_seq" name="site_seq" size="1">
+			  <option>사이트선택</option>
+			  <%for(int i = 0; i < siteList.size();i++){%>
+				<option value="<%=siteList.get(i).getSite_seq()%>" <%=(site_seq==siteList.get(i).getSite_seq()?" selected":"")%>><%=siteList.get(i).getSite_name()%></option>
+			  <%}%>
+			</select>-->
+          	<select id="field" name="field" size="1">
               <option>선택하세요</option>
               <option value="golflink_name"<%=("golflink_name".equals(field)?" selected":"")%>>골프장</option>
               <option value="reserve_day"<%=("reserve_day".equals(field)?" selected":"")%>>부킹일</option>

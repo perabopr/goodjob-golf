@@ -76,6 +76,7 @@ if(prList.size() != 1){
 		glrDto.setProcess_status("0");
 		glrDto.setCard_bill_num("");
 		glrDto.setProductsub_seq(psId);
+		glrDto.setSite_seq(1);
 		
 		glDao.setGolfReserve(glrDto, cpDto);
 		

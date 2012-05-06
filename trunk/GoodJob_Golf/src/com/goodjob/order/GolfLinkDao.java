@@ -18,6 +18,8 @@ import org.apache.commons.lang.math.NumberUtils;
 import com.goodjob.coupon.CouponDao;
 import com.goodjob.db.DBManager;
 import com.goodjob.order.dto.GolfLinkDto;
+import com.goodjob.product.productDao;
+import com.goodjob.product.dto.ProductSubSiteDto;
 import com.goodjob.sql.ORDER;
 import com.goodjob.sql.PRODUCT;
 
@@ -293,9 +295,15 @@ public class GolfLinkDao {
 					//쿠폰 복구. 사용했으면~
 					CouponDao cpDao = new CouponDao();
 					cpDao.setCouponUseCancel(liSeq.get(0).getMenu_seq(), liSeq.get(0).getReserve_seq());
+					
+					if(process_status.equals("3")){	//(예약)예약취소
+						productDao pd = new productDao(); 
+						pd.setProductUpdate(liSeq.get(0).getProduct_seq(), "Y");
+					}
 				}
 
-				qr.update(conn, ORDER.product_sub_status_update, bind.toArray());
+				qr.update(conn, ORDER.product_sub_status_update, bind.toArray());				
+				
 			}
 		}
 		catch(Exception e){
@@ -383,6 +391,7 @@ public class GolfLinkDao {
 				params.add(golflink_name);
 				if(glDto.getSite_seq() > 0){ where3 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}
 			}else if(booking_day.length() > 0){
+				booking_day = booking_day.replace("-", "");
 				where1 = "WHERE booking_day = ? " ;
 				params.add(booking_day);
 				if(glDto.getSite_seq() > 0){ where1 += " AND site_seq = ? ";params.add(glDto.getSite_seq());}

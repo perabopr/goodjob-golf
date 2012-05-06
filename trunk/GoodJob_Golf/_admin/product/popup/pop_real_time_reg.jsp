@@ -435,8 +435,10 @@ function saveTime(){
 		blVali = true;
 	}
 	else{
-		alert("등록할 시간이 없습니다.");
-		return;
+		if(confirm("등록할 시간이 없습니다. 전체 삭제 하시겠습니까?")){
+			frm2.submit();
+			return;
+		}
 	}
 	
 	var calcVal = document.all['idCourseNh'];

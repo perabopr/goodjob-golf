@@ -225,6 +225,64 @@ public class GolfLinkDao {
 			// 상품이 예약가능할때만...
 			if(list.size() > 0 && list.get(0).getProduct_status().equals("0")){				
 				bind = new ArrayList<Object>();
+				bind.add(glrDto.getReserve_name());
+				bind.add(glrDto.getReserve_uid());
+				bind.add(glrDto.getPer_num());
+				bind.add(glrDto.getReserve_phone());
+				bind.add(list.get(0).getNH_price() * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price());
+				bind.add(glrDto.getCoupon_price());
+				bind.add(glrDto.getProcess_status());
+				bind.add(glrDto.getCard_bill_num());
+				bind.add(glrDto.getSite_seq());
+				bind.add(glrDto.getProductsub_seq());
+				
+				//예약
+				qr.update(conn, RESERVE.setGolfLinkReserve_insert, bind.toArray());
+				
+				//생성키 반환.
+				Statement stmt = conn.createStatement();
+				ResultSet rst = stmt.executeQuery(PRODUCT.getSequenceId);
+				if(rst.next()){
+					idSeq = rst.getInt(1);
+				}
+				
+				//상품상세 "예약중"상태로 변경.
+				bind = new ArrayList<Object>();
+				bind.add("1");
+				bind.add(glrDto.getProductsub_seq());
+				qr.update(conn, RESERVE.setProductSub_update, bind.toArray());
+				
+				//쿠폰적용
+				if(cpDto.getCoupon_seq() > 0){
+					CouponDao cpDao = new CouponDao();
+					cpDto.setReserve_seq(idSeq);
+					cpDao.setCouponUse(cpDto);					
+				}
+			}
+			
+		}catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
+	
+	public void setGolfReserve2(GolfLinkReserveDto glrDto, CouponDto cpDto){
+		int idSeq = 0;
+		Connection conn = null;
+		List<ProductReserveDto> list = null;
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(glrDto.getProductsub_seq());
+			
+			QueryRunner qr = new QueryRunner();
+			ResultSetHandler rsh = new BeanListHandler(ProductReserveDto.class);
+			list = (List<ProductReserveDto>)qr.query(conn , RESERVE.getProductReserve3, rsh, bind.toArray());
+			
+			// 상품이 예약가능할때만...
+			if(list.size() > 0){				
+				bind = new ArrayList<Object>();
 				if(glrDto.getReserve_day().length() > 0){
 					bind.add(glrDto.getReserve_day());
 				}

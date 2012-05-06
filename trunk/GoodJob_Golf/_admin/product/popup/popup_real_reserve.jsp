@@ -1,3 +1,5 @@
+<%@page import="com.goodjob.product.dto.SiteDto"%>
+<%@page import="com.goodjob.product.SiteDao"%>
 <%@page import="com.goodjob.product.dto.GolfLinkCourseDto"%>
 <%@page import="com.goodjob.product.dto.GolfLinkDto"%>
 <%@page import="com.goodjob.product.GolfLinkDao"%>
@@ -18,6 +20,8 @@ List<GolfLinkDto> glList = glDao.getGolfLink(Integer.parseInt(glSeq));
 
 List<GolfLinkCourseDto> glcList = glDao.getGolfLinkCourseSelect(Integer.parseInt(glSeq));
 
+SiteDao sDao = new SiteDao();
+List<SiteDto> sitelist = sDao.getSiteAllList();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -67,6 +71,19 @@ function billSubmit(cbNum){
 <input type="hidden" id="menuSeq" name="menuSeq" value="1">
 <input type="hidden" id="glSeq" name="glSeq"  value="<%=glSeq%>">
 <table cellpadding="2" cellspacing="1" bgcolor="#D1D3D4">
+<tr>
+<td  bgcolor="#F1F1F1">(예약)사이트</td>
+<td bgcolor='white' nowrap>
+<select id="txtSiteSeq" name="txtSiteSeq">
+<%
+for(int i = 0; i < sitelist.size();i++){
+%>
+<option value="<%=sitelist.get(i).getSite_seq() %>"><%=sitelist.get(i).getSite_name() %></option>
+<%
+}
+%>
+</select>
+</td>
 <tr>
 <td  bgcolor="#F1F1F1">예약신청일</td>
 <td bgcolor='white' nowrap><input type="text" id="txtReserveRegDate" name="txtReserveRegDate" value="" size="9" maxlength=10 /></td>

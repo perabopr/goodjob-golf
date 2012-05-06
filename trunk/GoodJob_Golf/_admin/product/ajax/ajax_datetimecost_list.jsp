@@ -1,3 +1,4 @@
+<%@page import="com.goodjob.product.dto.ProductSubSiteDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%><%@ page import="org.apache.commons.dbutils.*" %><%@ page import="org.apache.commons.lang.StringUtils"%><%@ page import="java.sql.*,java.util.*" %><%@ page import="org.apache.commons.dbutils.handlers.*" %><%@ page import="com.goodjob.product.dto.ProductDto"%><%@ page import="com.goodjob.product.dto.ProductSubDto"%><%@ page import="com.goodjob.product.productDao"%><% 
 String menuseq = request.getParameter("mnseq");
 String golflinkseq = request.getParameter("glseq");
@@ -30,7 +31,23 @@ for(int i = 0; i < arrPrdtSub.size();i++){
 	returnJson += "\"g\":\"" + arrPrdtSub.get(i).getNH_price() + "\",";
 	returnJson += "\"h\":\"" + arrPrdtSub.get(i).getProduct_status() + "\",";
 	returnJson += "\"i\":\"" + arrPrdtSub.get(i).getCoupon_use_yn() + "\",";
-	returnJson += "\"j\":\"" + arrPrdtSub.get(i).getReal_nh_price() + "\"";
+	returnJson += "\"j\":\"" + arrPrdtSub.get(i).getReal_nh_price() + "\",";
+
+	/**
+	  * 싸이트 가격 가져오기.
+	*/
+	List<ProductSubSiteDto> lstpss = pDao.getProductSubSite( arrPrdtSub.get(i).getProductsub_seq());
+	String strSitePrice = "";
+	for(int k = 0; k < lstpss.size();k++){
+		strSitePrice += "{\"aa\":\"" + lstpss.get(k).getSite_seq() + "\",";
+		strSitePrice += "\"bb\":\"" + lstpss.get(k).getPrice1() + "\",";
+		strSitePrice += "\"cc\":\"" + lstpss.get(k).getPrice2() + "\",";
+		strSitePrice += "\"dd\":\"" + lstpss.get(k).getPrice3() + "\"},";		
+	}
+	if(strSitePrice.length() > 0){
+		strSitePrice = strSitePrice.substring(0, strSitePrice.length()-1);
+	}
+	returnJson += "\"k\":[" + strSitePrice + "]";
 	returnJson += "},";
 }
 if(arrPrdtSub.size() > 0){

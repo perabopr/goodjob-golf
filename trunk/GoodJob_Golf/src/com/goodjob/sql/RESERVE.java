@@ -169,6 +169,44 @@ public class RESERVE {
 			"LEFT OUTER JOIN tb_golflink_course D on(C.golflink_course_seq = D.golflink_course_seq) " +
 		"WHERE C.productsub_seq = ?";
 	
+	public static final String setGolfLinkReserve_insert2
+	=	"INSERT INTO tb_golflink_reserve(" +
+			" menu_seq" +
+			",golflink_seq" +
+			",product_seq" +
+			",productsub_seq" +
+			",reserve_day" +
+			",reserve_name" +
+			",reserve_uid" +
+			",golflink_name" +
+			",booking_day" +
+			",booking_time_s" +
+			",booking_time_e" +
+			",golflink_course" +
+			",per_num" +
+			",reserve_phone" +
+			",product_price" +
+			",coupon_price" +
+			",process_status" +
+			",card_bill_num,site_seq" +
+		")SELECT " +
+			" A.menu_seq" +
+			",A.golflink_seq" +
+			",B.product_seq" +
+			",C.productsub_seq" +
+			",?,?,?" +
+			",A.golflink_name" +
+			",B.product_date" +
+			",C.time_start" +
+			",C.time_end" +
+			",IFNULL(D.course_name, '')" +
+			",?,?,?,?,?,?,? " +
+		"FROM tb_golflink A " +
+			"INNER JOIN tb_product B on(A.golflink_seq = B.golflink_seq) " +
+			"INNER JOIN tb_product_sub C on(B.product_seq = C.product_seq) " +
+			"LEFT OUTER JOIN tb_golflink_course D on(C.golflink_course_seq = D.golflink_course_seq) " +
+		"WHERE C.productsub_seq = ?";
+	
 	public static final String setProductSub_update
 	=	"UPDATE tb_product_sub " +
 			"SET product_status = ? " +

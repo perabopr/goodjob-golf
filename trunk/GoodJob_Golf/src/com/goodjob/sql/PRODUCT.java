@@ -902,18 +902,32 @@ public class PRODUCT {
 			"WHERE site_seq = ?";
 	
 	/*----------------------------------------------------------------- tb_menu_view_site*/
+	public static final String menu_view_site_select_NHException
+	=	"SELECT " + 
+			" A.menu_seq " +
+			",B.menu_name " +
+			",A.service_seq " +
+			",A.site_seq " + 
+			",C.site_name " +
+		"FROM tb_menu_view_site A " +
+			"INNER JOIN tb_menu B on(A.menu_seq = B.menu_seq) " + 
+			"INNER JOIN tb_site C on(A.site_seq = C.site_seq) " +
+		"WHERE A.menu_seq = ? " +
+			"AND A.service_seq = ? " +
+			"AND C.site_seq NOT IN(1,2)";
+	
 	public static final String menu_view_site_select
-		=	"SELECT " + 
-				" A.menu_seq " +
-				",B.menu_name " +
-				",A.service_seq " +
-				",A.site_seq " + 
-				",C.site_name " +
-			"FROM tb_menu_view_site A " +
-				"INNER JOIN tb_menu B on(A.menu_seq = B.menu_seq) " + 
-				"INNER JOIN tb_site C on(A.site_seq = C.site_seq) " +
-			"WHERE A.menu_seq = ? " +
-				"AND A.service_seq = ?";
+	=	"SELECT " + 
+			" A.menu_seq " +
+			",B.menu_name " +
+			",A.service_seq " +
+			",A.site_seq " + 
+			",C.site_name " +
+		"FROM tb_menu_view_site A " +
+			"INNER JOIN tb_menu B on(A.menu_seq = B.menu_seq) " + 
+			"INNER JOIN tb_site C on(A.site_seq = C.site_seq) " +
+		"WHERE A.menu_seq = ? " +
+			"AND A.service_seq = ?";
 	
 	public static final String menu_view_site_insert
 		=	"INSERT tb_menu_view_site( " +
@@ -927,6 +941,29 @@ public class PRODUCT {
 			"WHERE menu_seq = ? " +
 				"AND service_seq = ? " +
 				"AND site_seq = ? ";
-				
-				
+
+	/*----------------------------------------------------------------- tb_product_sub_site*/
+	public static final String product_sub_site_select
+		= "SELECT " +
+				" productsub_seq " +
+				",site_seq " +
+				",price1 " +
+				",price2 " +
+				",price3 " +
+			"FROM tb_product_sub_site " +
+			"WHERE productsub_seq = ?";
+	
+	public static final String product_sub_site_insert
+		= "INSERT INTO tb_product_sub_site( " +
+				" productsub_seq " +
+				",site_seq " +
+				",price1 " +
+				",price2 " +
+				",price3 " +
+			")VALUES(?,?,?,?,?)";
+	
+	public static final String product_sub_site_delete
+		=	"DELETE FROM tb_product_sub_site " +
+			"WHERE productsub_seq = ? " +
+				"AND site_seq = ?";
 }

@@ -225,6 +225,9 @@ public class GolfLinkDao {
 			// 상품이 예약가능할때만...
 			if(list.size() > 0 && list.get(0).getProduct_status().equals("0")){				
 				bind = new ArrayList<Object>();
+				if(glrDto.getReserve_day().length() > 0){
+					bind.add(glrDto.getReserve_day());
+				}
 				bind.add(glrDto.getReserve_name());
 				bind.add(glrDto.getReserve_uid());
 				bind.add(glrDto.getPer_num());
@@ -237,7 +240,11 @@ public class GolfLinkDao {
 				bind.add(glrDto.getProductsub_seq());
 				
 				//예약
-				qr.update(conn, RESERVE.setGolfLinkReserve_insert, bind.toArray());
+				if(glrDto.getReserve_day().length() > 0){
+					qr.update(conn, RESERVE.setGolfLinkReserve_insert2, bind.toArray());
+				}else{
+					qr.update(conn, RESERVE.setGolfLinkReserve_insert, bind.toArray());
+				}
 				
 				//생성키 반환.
 				Statement stmt = conn.createStatement();

@@ -1,3 +1,5 @@
+<%@page import="org.apache.commons.lang.math.NumberUtils"%>
+<%@page import="com.goodjob.product.dto.ProductSubSiteDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
@@ -11,6 +13,9 @@ String prdtSeq = request.getParameter("prdtseq");
 String glSeq = request.getParameter("glseq");
 String backYear = request.getParameter("cpYear");
 String backMonth = request.getParameter("cpMonth");
+String siteSeqs = request.getParameter("siteSeqs");
+String[] arrSiteSeqs =siteSeqs.split(",");
+
 if(request.getParameterValues("pdsubseq") != null && request.getParameterValues("course_list") != null
 		&& request.getParameterValues("course_hour") != null && request.getParameterValues("course_minute") != null
 		&& request.getParameterValues("courseN") != null && request.getParameterValues("courseS") != null
@@ -59,11 +64,33 @@ if(request.getParameterValues("pdsubseq") != null && request.getParameterValues(
 		pdsd2.setProduct_status(arrPrdtStatus[i]);
 		pdsd2.setCoupon_use_yn(arrCouponUse[i]);
 		
+		int prdtsubseqprice = 0;
 		if(arrPrdtSubSeq[i].length() > 0 && arrNorPrice[i].trim().length() > 0){//수정
+			prdtsubseqprice = Integer.parseInt(arrPrdtSubSeq[i]);
 			pdsd2.setProductsub_seq(Integer.parseInt(arrPrdtSubSeq[i]));
 			pd.setProductSubUpdate(pdsd2);					
 		}else if(arrPrdtSubSeq[i].length() == 0 ){//추가
-			pd.setProductSubInsert(pdsd2);
+			prdtsubseqprice = pd.setProductSubInsert(pdsd2);
+		}
+		
+		for(int k = 0; k < arrSiteSeqs.length;k++){
+			String[] arrPrice1 = request.getParameterValues("sitePriceN"+arrSiteSeqs[k]);
+			String[] arrPrice2 = request.getParameterValues("sitePriceS"+arrSiteSeqs[k]);
+			String[] arrPrice3 = request.getParameterValues("sitePriceP"+arrSiteSeqs[k]);
+			
+			int a = NumberUtils.toInt(arrPrice1[i], 0);
+			int b = NumberUtils.toInt(arrPrice2[i], 0);
+			int c = NumberUtils.toInt(arrPrice3 != null ? arrPrice3[i] : "0", 0);
+			
+			ProductSubSiteDto pssDto = new ProductSubSiteDto();
+			pssDto.setProductsub_seq(prdtsubseqprice);
+			pssDto.setSite_seq(Integer.parseInt(arrSiteSeqs[k]));
+			pssDto.setPrice1(a);
+			pssDto.setPrice2(b);
+			pssDto.setPrice3(c);
+			
+			pd.setProductSubSiteDelete(pssDto);
+			pd.setProductSubSiteInsert(pssDto);
 		}
 		
 		//out.println(pdsd2.getProductsub_seq());

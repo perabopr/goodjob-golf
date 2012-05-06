@@ -14,6 +14,7 @@ import org.apache.commons.dbutils.handlers.BeanListHandler;
 import com.goodjob.db.DBManager;
 import com.goodjob.product.dto.ProductDto;
 import com.goodjob.product.dto.ProductSubDto;
+import com.goodjob.product.dto.ProductSubSiteDto;
 import com.goodjob.sql.PRODUCT;
 
 public class productDao {
@@ -200,8 +201,9 @@ public class productDao {
 		}
 	}
 
-	public void setProductSubInsert(ProductSubDto prdtsubDto){
+	public int setProductSubInsert(ProductSubDto prdtsubDto){
 		Connection conn = null;
+		int idSeq = 0;
 		try{
 			conn = DBManager.getConnection();
 			ArrayList<Object> bind = new ArrayList<Object>();
@@ -217,12 +219,21 @@ public class productDao {
 			
 			QueryRunner qr = new QueryRunner();
 			
-			qr.update(conn, PRODUCT.product_sub_insert, bind.toArray());			
+			qr.update(conn, PRODUCT.product_sub_insert, bind.toArray());
+			
+			//생성키 반환.
+			Statement stmt = conn.createStatement();
+			ResultSet rst = stmt.executeQuery(PRODUCT.getSequenceId);
+			if(rst.next()){
+				idSeq = rst.getInt(1);
+			}
+			
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
+		return idSeq;
 	}
 	
 	public void setProductSubUpdate(ProductSubDto prdtsubDto){
@@ -264,6 +275,69 @@ public class productDao {
 			QueryRunner qr = new QueryRunner();
 			
 			qr.update(conn, PRODUCT.product_sub_coupon_update, bind.toArray());			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
+	
+	public List<ProductSubSiteDto> getProductSubSite(int prdtsubSeq){
+		List<ProductSubSiteDto> list = null;
+		Connection conn = null;
+		
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(prdtsubSeq);
+			
+			ResultSetHandler rsh = new BeanListHandler(ProductSubSiteDto.class);
+			
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<ProductSubSiteDto>)qr.query(conn, PRODUCT.product_sub_site_select, rsh, bind.toArray());	
+					
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return list;		
+	}
+	
+	public void setProductSubSiteInsert(ProductSubSiteDto prdtsubsiteDto){
+		Connection conn = null;
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(prdtsubsiteDto.getProductsub_seq());
+			bind.add(prdtsubsiteDto.getSite_seq());
+			bind.add(prdtsubsiteDto.getPrice1());
+			bind.add(prdtsubsiteDto.getPrice2());
+			bind.add(prdtsubsiteDto.getPrice3());
+			
+			QueryRunner qr = new QueryRunner();
+			
+			qr.update(conn, PRODUCT.product_sub_site_insert, bind.toArray());			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}		
+	}
+	
+	public void setProductSubSiteDelete(ProductSubSiteDto prdtsubsiteDto){
+		Connection conn = null;
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(prdtsubsiteDto.getProductsub_seq());
+			bind.add(prdtsubsiteDto.getSite_seq());
+			
+			QueryRunner qr = new QueryRunner();
+			
+			qr.update(conn,PRODUCT.product_sub_site_delete, bind.toArray());
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

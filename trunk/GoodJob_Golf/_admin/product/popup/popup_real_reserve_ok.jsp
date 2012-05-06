@@ -145,6 +145,7 @@ if("".equals(cbNum) && cbNum.length() == 0 ){
 */
 %>
 <script language="javascript" type="text/javascript">
-alert("<%=prdtSubSeq%>등록되었습니다.");
+alert("등록되었습니다.");
 parent.opener.location.reload(); 
+self.close();
 </script>

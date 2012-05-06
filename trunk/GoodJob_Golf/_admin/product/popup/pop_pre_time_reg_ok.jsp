@@ -16,6 +16,10 @@ String backMonth = request.getParameter("cpMonth");
 String siteSeqs = request.getParameter("siteSeqs");
 String[] arrSiteSeqs =siteSeqs.split(",");
 
+//마감상태 체크를 위해...
+String chkStatus = "N";
+
+productDao pd = new productDao();
 if(request.getParameterValues("pdsubseq") != null 		
 		&& request.getParameterValues("courseN") != null && request.getParameterValues("courseS") != null
 		&& request.getParameterValues("prdtStatus") != null){
@@ -32,11 +36,13 @@ if(request.getParameterValues("pdsubseq") != null
 	String arrNHPrice[] = request.getParameterValues("courseNH");
 	String arrCalcNHPrice[] = request.getParameterValues("courseNH_calc");
 	
-	productDao pd = new productDao();
 	String pdsubseqs = "'";
 	for(int i = 0; i < arrPrdtSubSeq.length;i++){
 		if(arrPrdtSubSeq[i].length() > 0){
 			pdsubseqs += arrPrdtSubSeq[i] +"','";	
+		}
+		if(arrPrdtStatus[i].equals("0")){
+			chkStatus = "Y";
 		}
 	}
 	if(pdsubseqs.length() > 3){
@@ -103,12 +109,16 @@ if(request.getParameterValues("pdsubseq") != null
 		out.print("<br>");
 		*/
 	}
-	pd.setProductUpdate(Integer.parseInt(prdtSeq), "Y");
+	pd.setProductUpdate(Integer.parseInt(prdtSeq),chkStatus);
 }else{
-	
+	ProductSubDto pdsd = new ProductSubDto();
+	pdsd.setProduct_seq(Integer.parseInt(prdtSeq));
+	pdsd.setProductsub_seqs("''");
+	pd.setProductSubDelete(pdsd);
+	pd.setProductUpdate(Integer.parseInt(prdtSeq), chkStatus);	
 }
 out.print("<script type='text/javascript'>");
 out.print("alert('등록했습니다.');");
-out.print("location.href='pop_pre_time_reg.jsp?menuSeq="+ menuSeq +"glseq=" + glSeq + "&month=" + backMonth + "&year=" + backYear + "&action=0'");
+out.print("location.href='pop_pre_time_reg.jsp?menuseq="+ menuSeq +"&glseq=" + glSeq + "&month=" + backMonth + "&year=" + backYear + "&action=0'");
 out.print("</script>");
 %>

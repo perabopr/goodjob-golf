@@ -15,6 +15,7 @@
 <%
 String menuSeq = request.getParameter("menuSeq");
 String golfSeq = request.getParameter("glSeq");
+String siteSeq = request.getParameter("txtSiteSeq");
 String bookingDate = request.getParameter("txtBookingDate");
 String[] bookingDateSplit = bookingDate.split("-");
 String pYear = bookingDateSplit[0];
@@ -101,10 +102,10 @@ glrDto.setCoupon_price(couponPrice);
 glrDto.setProcess_status("0");
 glrDto.setCard_bill_num(cbNum);
 glrDto.setProductsub_seq(prdtSubSeq);
-glrDto.setSite_seq(1);
+glrDto.setSite_seq(Integer.parseInt(siteSeq));
 
 com.goodjob.reserve.GolfLinkDao glDao = new com.goodjob.reserve.GolfLinkDao();
-glDao.setGolfReserve(glrDto, cpDto);
+glDao.setGolfReserve2(glrDto, cpDto);
 
 /*--------------- 문자 발송 --------------*/
 GolfLinkDao glDao2 = new GolfLinkDao();

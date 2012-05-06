@@ -110,7 +110,6 @@ public class RESERVE {
 			"INNER JOIN tb_golflink D on(B.golflink_seq = D.golflink_seq) " +
 		"WHERE A.productsub_seq = ?";
 	
-	
 	public static final String getProductReserve2 =	"SELECT " +				
 			" A.productsub_seq" +
 			",D.golflink_name" +
@@ -130,6 +129,24 @@ public class RESERVE {
 		"WHERE A.product_status = '0' " +
 			"AND B.view_yn = 'Y' " +
 			"AND A.productsub_seq = ?";
+	
+	public static final String getProductReserve3 =	"SELECT " +				
+			" A.productsub_seq" +
+			",D.golflink_name" +
+			",B.product_date" +
+			",A.time_start" +
+			",A.time_end" +
+			",IFNULL(C.course_name, '') course_name" +
+			",D.holl_type" +
+			",A.goodjob_price" +
+			",A.NH_price" +
+			",A.product_status " +
+			",A.coupon_use_yn " +
+		"FROM tb_product_sub A " +
+			"INNER JOIN tb_product B on(A.product_seq = B.product_seq) " +
+			"LEFT OUTER JOIN tb_golflink_course C on(C.golflink_course_seq = A.golflink_course_seq) " +
+			"INNER JOIN tb_golflink D on(B.golflink_seq = D.golflink_seq) " +
+		"WHERE A.productsub_seq = ?";
 	
 	public static final String setGolfLinkReserve_insert
 	=	"INSERT INTO tb_golflink_reserve(" +

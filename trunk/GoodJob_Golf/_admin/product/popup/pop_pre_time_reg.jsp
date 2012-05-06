@@ -438,10 +438,21 @@ function saveTime(){
 	var arrCourseN = $("input[name='courseN']");
 
 	var delchkStr = "";
+	/*
 	for(var i = 0; i < arrCourseN.length;i++){
 		if(arrCourseN[i].value.length > 0){
 			blVali = true;
 		} 
+	}
+	*/	
+	if(arrCourseN.length > 0){
+		blVali = true;
+	}
+	else{
+		if(confirm("등록할 시간이 없습니다. 전체 삭제 하시겠습니까?")){
+			frm2.submit();
+			return;
+		}
 	}
 	
 	var calcVal = document.all['idCourseNh'];

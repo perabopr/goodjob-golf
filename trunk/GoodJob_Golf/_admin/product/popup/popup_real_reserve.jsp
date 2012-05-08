@@ -170,14 +170,6 @@ if(glcList != null){
 </td>
 </tr>
 <tr>
-<td  bgcolor="#F1F1F1">상품권</td>
-<td bgcolor='white' nowrap>
-<SELECT size=1 id="ddlCoupon" name="ddlCoupon">
-<OPTION value="0" selected>선택하세요</OPTION>
-</SELECT>
-</td>
-</tr>
-<tr>
 <td  bgcolor="#F1F1F1">입금액</td>
 <td bgcolor='white' nowrap><INPUT id=inPrice name=inPrice ></td>
 </tr>

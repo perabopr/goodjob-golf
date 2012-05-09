@@ -21,7 +21,7 @@ import com.goodjob.sql.RESERVE;
 
 public class CondoReserveDao {
 
-	public List<CondoDto> getCondoList(int region){
+	public List<CondoDto> getCondoList(int region , int site_seq){
 		
 		List<CondoDto> list = null;
 		Connection conn = null;
@@ -35,9 +35,10 @@ public class CondoReserveDao {
 			ResultSetHandler rsh = new BeanListHandler(CondoDto.class);
 			QueryRunner qr = new QueryRunner();
 			
-			String where = "";
+			String where = " AND site_seq = ? ";
+			bind.add(site_seq);
 			if(region > 0){
-				where = " and region_seq = ? ";
+				where = " AND region_seq = ? ";
 				bind.add(region);
 			}
 			

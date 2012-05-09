@@ -136,7 +136,7 @@ function orderUpdate(serviceseq){
         	</select>
         	<img src="../images/inc/btn_edit.gif" width="28" height="16" border="0" align="absmiddle" style="cursor:pointer;" onclick="orderUpdate('<%=arrList.get(i).getPackage_seq()%>');">
         </td>
-        <td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_menuviewsite.jsp?menuseq=5&serviceseq=<%=arrList.get(i).getPackage_seq()%>" onClick="NewWindow(this.href,'name','415','400','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
+        <td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_menuviewsite.jsp?menuseq=<%=menuSeq%>&serviceseq=<%=arrList.get(i).getPackage_seq()%>" onClick="NewWindow(this.href,'name','415','400','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
     </tr>
 <%
 	}

@@ -72,12 +72,12 @@
 				+ tmMonth.substring(tmMonth.length()-2, tmMonth.length())
 				+ tmDay.substring(tmDay.length()-2, tmDay.length());
 	
-	String strWhere = "AND A.menu_seq = 1 ";
+	String strWhere = "AND C.site_seq = 2 AND C.menu_seq = 1 AND A.menu_seq = 1 ";
 	if(pRegion >= 1 && pRegion <= 6){
 		strWhere += "AND A.region_seq = " + pRegion;
 	}
 	
-	String strWhere2 = "AND A.menu_seq = 2 ";
+	String strWhere2 = "AND C.site_seq = 2 AND C.menu_seq = 2 AND A.menu_seq = 2 ";
 	if(pRegion >= 1 && pRegion <= 6){
 		strWhere2 += "AND A.region_seq = " + pRegion;
 	}

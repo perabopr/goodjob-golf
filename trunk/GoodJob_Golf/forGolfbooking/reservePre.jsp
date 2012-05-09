@@ -71,20 +71,11 @@ String eDate = tmYear
 			+ tmMonth.substring(tmMonth.length()-2, tmMonth.length())
 			+ tmDay.substring(tmDay.length()-2, tmDay.length());
 
-String strWhere = "AND A.menu_seq = " + Integer.toString(menuNum) + " ";
+String strWhere = "AND C.site_seq = 1 AND C.menu_seq = 2 AND A.menu_seq = " + Integer.toString(menuNum) + " ";
 if(pRegion >= 1 && pRegion <= 6){
 	strWhere += "AND A.region_seq = " + pRegion;
 }
-/*
-String strRegion = request.getParameter("region");
-if(strRegion != null){
-	if(strRegion.equals("1") || strRegion.equals("2") 
-			|| strRegion.equals("3") || strRegion.equals("4")
-			|| strRegion.equals("5") || strRegion.equals("6")){
-		strWhere += "AND A.region_seq = " + strRegion;
-	}
-}
-*/
+
 GolfLinkDao glDao = new GolfLinkDao();
 List<GolfLinkDto> listGolf = glDao.getGolfLinkList(strWhere);
 

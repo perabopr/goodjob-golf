@@ -18,7 +18,7 @@
 	
 	CondoReserveDao cdDao = new CondoReserveDao();
 	
-	List<CondoDto> condoList = cdDao.getCondoList(region);
+	List<CondoDto> condoList = cdDao.getCondoList(region , 1);
 	
 %>
 <table border="0" cellpadding="0" cellspacing="0" width="751">

@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.goodjob.coupon.dto.CouponDto"%>
 <%@page import="com.goodjob.coupon.CouponDao"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
@@ -5,7 +6,6 @@
 <%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 String menu = "1";
 int productsubSeq = NumberUtils.toInt(request.getParameter("gcId"), 0);

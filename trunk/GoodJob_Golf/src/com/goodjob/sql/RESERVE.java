@@ -82,7 +82,7 @@ public class RESERVE {
 			",A.time_start" +
 			",A.time_end" +
 			",A.goodjob_price" +
-			",A.NH_price" +
+			",A.NH_price , real_nh_price" +
 			",IFNULL(C.course_name, '') course_name" +
 			",D.holl_type" +
 			",A.product_status " +
@@ -120,7 +120,7 @@ public class RESERVE {
 			",IFNULL(C.course_name, '') course_name" +
 			",D.holl_type" +
 			",A.goodjob_price" +
-			",A.NH_price" +
+			",A.NH_price , real_nh_price" +
 			",A.product_status " +
 			",A.coupon_use_yn " +
 		"FROM tb_product_sub A " +
@@ -140,7 +140,7 @@ public class RESERVE {
 			",IFNULL(C.course_name, '') course_name" +
 			",D.holl_type" +
 			",A.goodjob_price" +
-			",A.NH_price" +
+			",A.NH_price , real_nh_price" +
 			",A.product_status " +
 			",A.coupon_use_yn " +
 		"FROM tb_product_sub A " +

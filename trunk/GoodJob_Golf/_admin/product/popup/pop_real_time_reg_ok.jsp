@@ -6,7 +6,7 @@
 <%@ page import="java.sql.*,java.util.*" %>
 <%@ page import="org.apache.commons.dbutils.handlers.*" %>
 <%@ page import="com.goodjob.product.dto.ProductSubDto"%>
-<%@ page import="com.goodjob.product.productDao"%>
+<%@ page import="com.goodjob.product.productDao"%> 
 <%
 String menuSeq = request.getParameter("menuseq");
 String prdtSeq = request.getParameter("prdtseq");

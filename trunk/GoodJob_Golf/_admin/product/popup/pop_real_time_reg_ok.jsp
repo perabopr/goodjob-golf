@@ -83,19 +83,21 @@ if(request.getParameterValues("pdsubseq") != null && request.getParameterValues(
 			String[] arrPrice2 = request.getParameterValues("sitePriceS"+arrSiteSeqs[k]);
 			String[] arrPrice3 = request.getParameterValues("sitePriceP"+arrSiteSeqs[k]);
 			
-			int a = NumberUtils.toInt(arrPrice1[i], 0);
-			int b = NumberUtils.toInt(arrPrice2[i], 0);
-			int c = NumberUtils.toInt(arrPrice3 != null ? arrPrice3[i] : "0", 0);
-			
-			ProductSubSiteDto pssDto = new ProductSubSiteDto();
-			pssDto.setProductsub_seq(prdtsubseqprice);
-			pssDto.setSite_seq(Integer.parseInt(arrSiteSeqs[k]));
-			pssDto.setPrice1(a);
-			pssDto.setPrice2(b);
-			pssDto.setPrice3(c);
-			
-			pd.setProductSubSiteDelete(pssDto);
-			pd.setProductSubSiteInsert(pssDto);
+			if(arrPrice1 != null){
+				int a = NumberUtils.toInt(arrPrice1[i], 0);
+				int b = NumberUtils.toInt(arrPrice2[i], 0);
+				int c = NumberUtils.toInt(arrPrice3 != null ? arrPrice3[i] : "0", 0);
+				
+				ProductSubSiteDto pssDto = new ProductSubSiteDto();
+				pssDto.setProductsub_seq(prdtsubseqprice);
+				pssDto.setSite_seq(Integer.parseInt(arrSiteSeqs[k]));
+				pssDto.setPrice1(a);
+				pssDto.setPrice2(b);
+				pssDto.setPrice3(c);
+				
+				pd.setProductSubSiteDelete(pssDto);
+				pd.setProductSubSiteInsert(pssDto);
+			}
 		}
 		
 		//out.println(pdsd2.getProductsub_seq());

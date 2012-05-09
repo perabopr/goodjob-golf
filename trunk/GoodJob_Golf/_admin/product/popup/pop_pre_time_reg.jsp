@@ -9,7 +9,7 @@
 <%@ page import="com.goodjob.product.dto.GolfLinkCourseDto"%>
 <%@ page import="com.goodjob.product.dto.ProductDto"%>
 <%@ page import="com.goodjob.product.productDao"%>
-<%@ page import="com.goodjob.product.GolfLinkDao"%>
+<%@ page import="com.goodjob.product.GolfLinkDao"%> 
 <%
 String menuSeq = StringUtils.trimToEmpty(request.getParameter("menuseq"));
 String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));

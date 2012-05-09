@@ -12,7 +12,7 @@
 	PackageDao pkDao = new PackageDao();
 	List<RegionDto> rList = pkDao.getRegionList("1");
 	
-	String strWhere = " AND a.menu_seq = 3 ";
+	String strWhere = "AND C.site_seq = 2 AND C.menu_seq = 3 AND a.menu_seq = 3 ";
 	if(pRegion != 0){
 		strWhere = "AND a.region_seq = " + pRegion;
 	}

@@ -72,7 +72,7 @@ String eDate = tmYear
 			+ tmMonth.substring(tmMonth.length()-2, tmMonth.length())
 			+ tmDay.substring(tmDay.length()-2, tmDay.length());
 
-String strWhere = "AND A.menu_seq = " + menuNum + " ";
+String strWhere = "AND C.site_seq = 1 AND C.menu_seq = 1 AND A.menu_seq = " + menuNum + " ";
 if(pRegion >= 1 && pRegion <= 6){
 	strWhere += "AND A.region_seq = " + pRegion;
 }

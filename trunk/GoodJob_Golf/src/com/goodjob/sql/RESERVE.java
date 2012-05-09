@@ -303,7 +303,8 @@ public class RESERVE {
 		"FROM tb_package a " +
 			"INNER JOIN tb_package_price b ON(a.package_seq = b.package_seq) " +
 			"INNER JOIN tb_menu_view_site C on(a.package_seq = C.service_seq) " + 
-		"WHERE view_yn = 'Y' %s ORDER BY a.order_num ";
+		"WHERE view_yn = 'Y'  %s " +
+		"ORDER BY a.order_num ";
 	
 	//--------------------------------------------- condo
 	public static final String condo_select_list = " select a.condo_seq, " +
@@ -320,6 +321,7 @@ public class RESERVE {
 				"left outer join tb_condo_room b on(a.condo_seq=b.condo_seq) " +
 				"INNER JOIN tb_menu_view_site C on(a.condo_seq = C.service_seq) " + 
 				" where view_yn=''Y'' {0} " +
+				" AND C.menu_seq = 5 " +
 				"group by a.condo_seq order by a.order_num , condo_seq desc ";
 	
 	public static final String condo_select = " select a.condo_seq, " +

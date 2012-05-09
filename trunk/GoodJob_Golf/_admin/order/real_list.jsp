@@ -153,7 +153,7 @@ if(list != null){
           <td align="center" bgcolor="white"><%=list.get(i).getPer_num() %>명/1팀</td>
           <td align="center" bgcolor="white"><%=list.get(i).getGolflink_course() %></td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
-          <td align="right" bgcolor="white"><span class=blue><%=Utils.numberFormat(list.get(i).getCoupon_price()) %> 원</span></td>
+          <td align="right" bgcolor="white"><span class=blue><%=(list.get(i).getCoupon_price()==0?"":Utils.numberFormat(list.get(i).getCoupon_price())+" 원")%></span></td>
           <td align="right" bgcolor="white"><span class=orange><%=Utils.numberFormat(list.get(i).getProduct_price()) %> 원</span></td>
           <td align="center" bgcolor="white"><select id="ddlStatus<%=list.get(i).getReserve_seq()%>" name="ddlStatus" size="1">
               <option value="0" <%=("0".equals(list.get(i).getProcess_status())?" selected":"")%>>예약대기</option>

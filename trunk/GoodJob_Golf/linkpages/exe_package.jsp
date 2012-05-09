@@ -48,7 +48,7 @@
 	message += reserveDate;
 	message += " 예약신청되셨습니다";
 	//message += "(굿잡골프)";
-	message += " ▶하나로고객센터";
+	message += "▶NH하나로고객센터";
 	String sphone = "02-6670-0110";
 	String reserveuid = user_Id;
 	String reservephone = reservePhone;

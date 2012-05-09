@@ -48,7 +48,7 @@ if(menu == 5){
 	int len = msgtime.length();
 	if(msgtime.length()>=10){
 		tmpDay = msgtime.substring(0,5);
-		tmpHour = msgtime.substring(7,len);
+		tmpHour = msgtime.substring(6,len);
 	}
 	msgtime = tmpDay + weekName + " " + tmpHour;
 	msgtime +=" " + (per_room>1?per_room-1+"박":per_room+"일");
@@ -57,7 +57,7 @@ else{
 	int len = msgtime.length();
 	if(msgtime.length()>=10){
 		tmpDay = msgtime.substring(0,5);
-		tmpHour = msgtime.substring(7,len);
+		tmpHour = msgtime.substring(6,len);
 	}
 	msgtime =tmpDay + weekName + " " + tmpHour;
 }

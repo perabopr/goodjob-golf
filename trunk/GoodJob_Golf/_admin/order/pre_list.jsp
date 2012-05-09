@@ -254,7 +254,7 @@ if(list != null){
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePerCnt('<%=list.get(i).getReserve_seq()%>');">
           </td>
           <td align="center" bgcolor="white"><%=list.get(i).getReserve_phone() %></td>
-          <td align="right" bgcolor="white"><span class=blue><%=Utils.numberFormat(list.get(i).getCoupon_price()) %> 원</span></td>
+          <td align="right" bgcolor="white"><span class=blue><%=(list.get(i).getCoupon_price()==0?"":Utils.numberFormat(list.get(i).getCoupon_price())+" 원")%></span></td>
           <td align="center" bgcolor="white">
           	<input id="Price<%=list.get(i).getReserve_seq()%>" name="Price" type="text" size="10" value="<%=Utils.numberFormat(list.get(i).getProduct_price()) %>" class="input_box">
           	<img align="absmiddle" src="../images/common/btn_save3.gif" width="28" height="16" border="0" style="cursor:pointer" onclick="updatePrice('<%=list.get(i).getReserve_seq()%>');">

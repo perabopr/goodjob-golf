@@ -434,6 +434,10 @@ function removeTime(){
 	}
 }
 function saveTime(){
+	if($("#prdtseq").val().length == 0)	{
+		alert("날짜를 선택하세요.");
+		return;			
+	}
 	var blVali = false;
 	var arrCourseN = $("input[name='courseN']");
 

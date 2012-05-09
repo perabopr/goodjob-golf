@@ -433,11 +433,19 @@ function removeTime(){
 		}
 	}
 }
+
+var regClick = false;
 function saveTime(){
 	if($("#prdtseq").val().length == 0)	{
 		alert("날짜를 선택하세요.");
 		return;			
 	}
+	//클릭은 한번만.
+	if(regClick){
+		return;
+	}
+	regClick = true;
+	
 	var blVali = false;
 	var arrCourseN = $("input[name='courseN']");
 
@@ -480,6 +488,7 @@ function saveTime(){
 	if(blVali){
 		frm2.submit();
 	}else{
+		regClick = false;
 		alert("등록한 최신 정보를 입력하지 않으셨습니다.");
 	}
 }

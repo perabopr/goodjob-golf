@@ -9,6 +9,7 @@ public class RESERVE {
 			",B.region_name " +
 		"FROM tb_golflink A " +
 			"INNER JOIN tb_region B on(A.region_seq = B.region_seq) " +
+			"INNER JOIN tb_menu_view_site C on(A.golflink_seq = C.service_seq)  " + 
 		"WHERE A.view_yn = 'Y' %s " +
 		"ORDER BY A.order_num, B.region_seq, A.golflink_name";
 		
@@ -301,6 +302,7 @@ public class RESERVE {
 			",b.off_s_sun " +
 		"FROM tb_package a " +
 			"INNER JOIN tb_package_price b ON(a.package_seq = b.package_seq) " +
+			"INNER JOIN tb_menu_view_site C on(a.package_seq = C.service_seq) " + 
 		"WHERE view_yn = 'Y' %s ORDER BY a.order_num ";
 	
 	//--------------------------------------------- condo
@@ -314,7 +316,9 @@ public class RESERVE {
 				"min(b.price_s1) price_s1 , " +
 				"min(b.price_s2) price_s2 ,  " +
 				"min(b.price_s3) price_s3  " +
-				"from tb_condo a left outer join tb_condo_room b on(a.condo_seq=b.condo_seq) " +
+				"from tb_condo a " +
+				"left outer join tb_condo_room b on(a.condo_seq=b.condo_seq) " +
+				"INNER JOIN tb_menu_view_site C on(a.condo_seq = C.service_seq) " + 
 				" where view_yn=''Y'' {0} " +
 				"group by a.condo_seq order by a.order_num , condo_seq desc ";
 	

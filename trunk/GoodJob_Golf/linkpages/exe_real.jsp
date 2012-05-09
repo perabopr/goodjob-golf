@@ -84,7 +84,7 @@ message += "[" + golflinkName + "]";
 bookingDate = bookingDate.substring(5,16).replace("-",".");
 message += bookingDate;
 message += " 예약되셨습니다";
-message += " ▶하나로고객센터";
+message += " ▶NH하나로고객센터";
 String sphone = "02-6670-0110";
 String reserveuid = user_Id;
 String reservephone = uPhone;
@@ -101,7 +101,7 @@ if("".equals(cbNum) && cbNum.length() == 0 ){
 	message = "계좌번호:농협 317-0001-2481-91 ";
 	message += "㈜세이브코리아\n";
 	message += "입금액:"+Utils.numberFormat(bill_price * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price())+"\n";
-	message += "[하나로고객센터]";
+	message += "[NH하나로]";
 	params.clear();
 	params.put("msg",message);
 	params.put("sphone",sphone);

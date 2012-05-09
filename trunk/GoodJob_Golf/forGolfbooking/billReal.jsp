@@ -183,6 +183,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
 <input type="hidden" id="good_price" name="good_price" value=""/>
 <input type="hidden" id="menu" name="menu" value=""/>
 <input type="hidden" id="reserve_seq" name="reserve_seq" value=""/>
+<input type="hidden" id="bill_price" name="bill_price" value="<%=buyPrice%>"/>
 </form>
 <FORM NAME="exefrm" METHOD="post">
 <input type="hidden" id="menu" name="menu" value="1">

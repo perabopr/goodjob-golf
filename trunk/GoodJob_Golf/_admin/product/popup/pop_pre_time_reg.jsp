@@ -240,6 +240,7 @@ function customAddTime(){
 	var vPriceN = $("#txtAddPriceN").val();
 	var vPriceS = $("#txtAddPriceS").val();
 	var vPriceN0 = $("#txtAddPriceN0").val();
+	var vPriceS0 = $("#txtAddPriceS0").val();
 	var vArrSite =new Array(<%=listMvsd.size()%>);
 	var iCnt = -1;
 	$("#tbCustomAddTime input").each(function(e){
@@ -258,8 +259,7 @@ function customAddTime(){
 			}
 		}
 	});
-	
-	addTime('','0','0','0','0','0',vPriceN,vPriceS,'0','1',vPriceN0,vArrSite);
+	addTime('','0','0','0',vPriceN,vPriceS,'0','1',vPriceN0, vPriceS0, vArrSite);
 }
 
 function checkNhColor(parm, parmPreVal) {
@@ -299,9 +299,10 @@ function checkNhColor(parm, parmPreVal) {
 		}
 	}
 }
-function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, sPrice, sStatus, sCoupon, realNhPrice, vArrSite){
+function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, sPrice, sStatus, sCoupon, realNhPrice, realNhsPrice, vArrSite){
 	var currMD = selDate.split('/');
 	var timecostHTML = "";
+
 	timecostHTML += "<tr><td bgcolor='white' align='center' width='40' nowrap><input type='hidden' name='pdsubseq' value='" + pdsubseq + "'>"+currMD[1]+"/"+currMD[2]+"</td>"
 		+"<td bgcolor='white' align='center' nowrap><select name='course_S_hour'>"
 	for(var i=0;i<24;i++){
@@ -350,10 +351,10 @@ function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, 
 	if (sPrice != "") {
 		calcRealNhPrice = parseInt(sPrice) + parseInt(realNhPrice);	
 	}
-	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='10' name='courseN' value='" + nPrice + "' ></td>";
-	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='10' name='courseS' value='" + sPrice + "' ></td>";
-	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' name='courseNH' id='idCourseNh' value='" + realNhPrice + "'  style='color:blue' onkeyup='javascript:checkNhColor(this,"+sPrice+");'></td>";
-	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' name='courseNH_calc' id='idCourseNhResult' value='" + calcRealNhPrice + "' readonly></td>";
+	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' name='courseN' value='" + nPrice + "' ></td>";
+	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' name='courseS' value='" + sPrice + "' ></td>";
+	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' name='courseNH' id='idCourseNh' value='" + realNhPrice + "' style='color:blue' onkeyup='javascript:checkNhColor(this,"+sPrice+");'></td>";
+	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' name='courseNH_calc' id='idCourseNhResult' value='" + realNhsPrice + "' readonly></td>";
 	
 	var sitePriceN, sitePriceS, sitePriceP;
 	<% for(int i = 0; i < listMvsd.size(); i++){ %>
@@ -723,7 +724,10 @@ String.prototype.trim = function(){
     	</td>    	
     	<td bgcolor="#F1F1F1" align="center" height="19" nowrap>
     		NH하나로농협가 </br><input type="text" id="txtAddPriceN0" name="txtAddPriceN0" size="10" value="0" >    		
-    	</td>	
+    	</td>
+    	<td bgcolor="#F1F1F1" align="center" height="19" nowrap>
+    		NH하나로가 </br><input type="text" id="txtAddPriceS0" name="txtAddPriceS0" size="10" value="0" >    		
+    	</td>
 <% for(int i = 0; i < listMvsd.size(); i++){ %>    	
     	<td bgcolor="#F1F1F1" align="center" height="19" nowrap>
     		<%=listMvsd.get(i).getSite_name() %>적용가 </br><input type="text" id="txtAddPriceN<%=listMvsd.get(i).getSite_seq() %>" name="txtAddPriceN<%=listMvsd.get(i).getSite_seq() %>" size="10" >    		

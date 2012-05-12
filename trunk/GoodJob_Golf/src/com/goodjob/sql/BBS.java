@@ -11,7 +11,8 @@ public class BBS {
 
 	public static final int per_page = 20;
 	
-	public static final String list = " SELECT seq , name , email , subject , content, readcount , date_format(reg_dt,''%Y-%m-%d'') reg_dt , filename , position, thread FROM {0} " +
+	public static final String list = " SELECT seq , name , email , subject , content, readcount , date_format(reg_dt,''%Y-%m-%d'') reg_dt , " +
+										"TO_DAYS( now( ) ) - TO_DAYS( reg_dt ) reg_term , filename , position, thread FROM {0} " +
 										" {1} ORDER BY thread desc , position LIMIT ? , ? ";
 	
 	public static final String totalcnt = "SELECT COUNT(*) AS CNT FROM {0} {1} ";
@@ -48,7 +49,7 @@ public class BBS {
     "a.content, " +
     "a.readcount,apply_count, " +
     "a.join_status, " +
-    " date_format(a.reg_dt,''%y/%m/%d'') reg_dt " +
+    " date_format(a.reg_dt,''%y/%m/%d'') reg_dt , TO_DAYS( now( ) ) - TO_DAYS( reg_dt ) reg_term " +
     " from tb_join_bbs a where 1=1 {0} order by a.join_seq desc limit ? , ? ";
 	
 	public static final String join_view = "select a.join_seq, " +

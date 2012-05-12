@@ -101,7 +101,11 @@ function goPage(val){
                                                               <tr>
                                                                 <td align="center" height="30" width="65"><%=count--%></td>
                                                                 <td align="center" width="10"></td>
-                                                                <td width="450"><a href="./notice_view.jsp?seq=<%=dto.getSeq()%>" class=b_list><%=dto.getSubject()%></a><img align="absmiddle" src="../../images/board/icon_new.gif" width="10" height="9" border="0"></td>
+                                                                <td width="450"><a href="./notice_view.jsp?seq=<%=dto.getSeq()%>" class=b_list><%=dto.getSubject()%></a>
+                                                                <%if(dto.getReg_term()<=3){ %>
+                                                                <img align="absmiddle" src="../../images/board/icon_new.gif" width="10" height="9" border="0">
+                                                                <%}%>
+                                                                </td>
                                                                 <td align="center" width="11"></td>
                                                                 <td align="center" width="133"><%=dto.getReg_dt()%></td>
                                                               </tr>

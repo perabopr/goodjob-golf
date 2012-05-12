@@ -36,6 +36,7 @@ public class JoinBoardDto implements Serializable{
 	private int apply_count;
 	private String join_status;
 	private String reg_dt;
+	private int reg_term;
 	
 	private int cmt_seq;
 	private String cmt_name;
@@ -179,5 +180,10 @@ public class JoinBoardDto implements Serializable{
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
-	
+	public int getReg_term() {
+		return reg_term;
+	}
+	public void setReg_term(int regTerm) {
+		reg_term = regTerm;
+	}
 }

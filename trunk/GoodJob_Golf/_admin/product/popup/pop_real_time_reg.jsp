@@ -385,10 +385,10 @@ function addTime(pdsubseq, vCourse, vTimeH, vTimeM, nPrice, sPrice, sStatus, sCo
 				timecostHTML += "<option value='" + i + "' " + selectStr + ">예약가능</option>";
 				break;
 			case 1:
-				timecostHTML += "<option value='" + i + "' " + selectStr + ">예약중</option>";
+				timecostHTML += "<option value='" + i + "' " + selectStr + " style='color:red'>예약중</option>";
 				break;
 			case 2:
-				timecostHTML += "<option value='" + i + "' " + selectStr + ">예약마감</option>";
+				timecostHTML += "<option value='" + i + "' " + selectStr + " style='color:red'>예약마감</option>";
 				break;
 		}
 	}

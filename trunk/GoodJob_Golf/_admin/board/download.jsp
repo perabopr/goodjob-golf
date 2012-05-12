@@ -2,6 +2,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.io.*" %>
 <%@page import="com.goodjob.util.Utils"%>
+<%@page import="com.goodjob.conf.Config"%>
 <%!
 private void dumpFile(File realFile, OutputStream outputstream) {
 	byte readByte[] = new byte[4096];
@@ -18,17 +19,16 @@ private void dumpFile(File realFile, OutputStream outputstream) {
 %>
 <%
 	String fileName = Utils.decoder(request.getParameter("fileName"));
-
 try {
-	String rootPath = getServletConfig().getServletContext()
-	.getRealPath("/");
+	
+	String up_dir = Config.get("bbs_dir");
+	
+	String rootPath = getServletConfig().getServletContext().getRealPath("/");
 	// String rootPath = request.getRealPath("/");
-	String filePath = rootPath + File.separator + fileName;
+	String filePath = up_dir + "/" + fileName;
 	java.io.File tempFile = new java.io.File(filePath);
 	
-	
-	
-	fileName = fileName.substring(fileName.lastIndexOf("/") + 1);
+	fileName = fileName.substring(fileName.lastIndexOf("/")+1);
 	//fileName = BoardUtils.kscToasc(fileName);
 
 	System.out.println("rootPath : "+rootPath);
@@ -59,8 +59,7 @@ try {
 		response.setHeader("Content-Encoding", "gzip");
 		response.setHeader("Content-disposition",
 		"attachment;filename=" + fileName);
-		javax.servlet.ServletOutputStream servletoutputstream = response
-		.getOutputStream();
+		javax.servlet.ServletOutputStream servletoutputstream = response.getOutputStream();
 		java.util.zip.GZIPOutputStream gzipoutputstream = new java.util.zip.GZIPOutputStream(
 		servletoutputstream);
 		dumpFile(tempFile, gzipoutputstream);
@@ -70,14 +69,14 @@ try {
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-disposition",
 		"attachment;filename=" + fileName);
-		javax.servlet.ServletOutputStream servletoutputstream1 = response
-		.getOutputStream();
+		javax.servlet.ServletOutputStream servletoutputstream1 = response.getOutputStream();
 		dumpFile(tempFile, servletoutputstream1);
 		servletoutputstream1.flush();
 		servletoutputstream1.close();
 	}
 
 } catch (Exception e) {
+	e.printStackTrace();
 	out.println("<script>alert('File Not Found');history.back();</script>");
 	return;
 }

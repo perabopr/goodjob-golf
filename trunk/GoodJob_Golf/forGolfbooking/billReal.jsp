@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.goodjob.coupon.dto.CouponDto"%>
 <%@page import="com.goodjob.coupon.CouponDao"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
@@ -5,7 +6,6 @@
 <%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 String menu = "1";
 int productsubSeq = NumberUtils.toInt(request.getParameter("gcId"), 0);
@@ -143,12 +143,24 @@ $(function(){
 		if(this.checked){
 			document.getElementById("reserveName").readOnly = true;
 			$("#reserveName").val("<%=user_Name%>");
+			$("#phone1").focus();
 		}else{
 			document.getElementById("reserveName").readOnly = false;
 			$("#reserveName").val("");
 		}
 	});
 });
+
+function sel_phone1(){
+	$("#phone2").focus();
+}
+
+function sel_phone2(){
+	var ph_num = $("#phone2").val();
+	if(ph_num.length >= 4){
+		$("#phone3").focus();
+	}
+}
 
 function card_order(menu , reserve_seq , good_price , good_name){
 	<%
@@ -220,7 +232,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
 <TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
 <TBODY>
 <TR>
-<TD height=30><SELECT size=1 id="phone1" name="phone1"> 
+<TD height=30><SELECT size=1 id="phone1" name="phone1" onChange="sel_phone1();"> 
 <OPTION value="" selected>선택</OPTION> 
 <OPTION value="010">010</OPTION> 
 <OPTION value="011">011</OPTION> 
@@ -228,7 +240,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
 <OPTION value="017">017</OPTION> 
 <OPTION value="018">018</OPTION> 
 <OPTION value="019">019</OPTION>
-</SELECT> - <INPUT id="phone2" name="phone2" class=input_01 name=day size=6 maxlength="4"> - <INPUT id="phone3" name="phone3" class=input_01 name=day size=6 maxlength="4"></TD></TR>
+</SELECT> - <INPUT id="phone2" name="phone2" class=input_01 name=day size=6 onKeydown="sel_phone2();" maxlength="4"> - <INPUT id="phone3" name="phone3" class=input_01 name=day size=6 maxlength="4"></TD></TR>
 <TR>
 <TD class=mem_notice height=20>예약사항을 입력하신 핸드폰번호로 SMS발송해드립니다 </TD></TR></TBODY></TABLE></TD></TR>
 <TR>

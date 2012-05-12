@@ -177,12 +177,25 @@
 			if(this.checked){
 				document.getElementById("reserve_name").readOnly = true;
 				$("#reserve_name").val("<%=user_Name%>");
+				$("#mobile1").focus();
 			}else{
 				document.getElementById("reserve_name").readOnly = false;
 				$("#reserve_name").val("");
 			}
 		});
 	});
+
+	function sel_phone1(){
+		$("#mobile2").focus();
+	}
+
+	function sel_phone2(){
+		var ph_num = $("#mobile2").val();
+		if(ph_num.length >= 4){
+			$("#mobile3").focus();
+		}
+	}
+	
 //-->
 </script>
 <table border="0" cellpadding="0" cellspacing="0" width="751">
@@ -354,7 +367,7 @@
                                     <tr>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;">핸드폰</td>
                                       <td colspan="3" bgcolor="white" style="padding-left:10px;padding-bottom:5px;">
-                                      <select id="mobile1" name="mobile1" size="1">
+                                      <select id="mobile1" name="mobile1" size="1" onChange="sel_phone1();">
                                           <option value="">선택</option>
                                           <option value="010">010</option>
                                           <option value="011">011</option>
@@ -364,7 +377,7 @@
                                           <option value="019">019</option>
                                         </select>
                                         -
-                                        <input class="mem_input" type="text" size="8" id="mobile2" name="mobile2" maxlength="4">
+                                        <input class="mem_input" type="text" size="8" id="mobile2" name="mobile2" onKeydown="sel_phone2();" maxlength="4">
                                         -
                                         <input class="mem_input" type="text" size="8" id="mobile3" name="mobile3" maxlength="4"></td>
                                     </tr>

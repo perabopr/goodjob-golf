@@ -32,6 +32,7 @@ public class BoardDto implements Serializable{
 	private String ishtml;
 	private String writeip;
 	private String notice;
+	private int reg_term;
 	
 	public int getSeq() {
 		return seq;
@@ -123,5 +124,10 @@ public class BoardDto implements Serializable{
 	public void setNotice(String notice) {
 		this.notice = notice;
 	}
-	
+	public int getReg_term() {
+		return reg_term;
+	}
+	public void setReg_term(int regTerm) {
+		reg_term = regTerm;
+	}
 }

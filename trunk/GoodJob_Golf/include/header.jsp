@@ -39,7 +39,7 @@ String user_Id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"))
 	List<RegionDto> listRegion = listRegionDao.getRegionList("1");
 
 	String headDate_now = Utils.getDate("yyyy-MM-dd" , 5);
-	String headDate_2week = Utils.getDate("yyyy-MM-dd" , 10);
+	String headDate_2week = Utils.getDate("yyyy-MM-dd" , 19);
 	
 	String ddlSearchRegion = StringUtils.trimToEmpty(request.getParameter("ddlSearchRegion"));
 	String ddlSearchMenu = StringUtils.trimToEmpty(request.getParameter("ddlSearchMenu"));

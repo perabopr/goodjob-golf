@@ -79,7 +79,7 @@ function formSubmit(){
 	
 	<table width="600">
 	<tr>
-	<td><span class=list_title>예약신청일</span></td>
+	<td><span class=list_title>부킹일짜</span></td>
 	<td bgcolor="white" style="padding-left:10px;"><img align="absmiddle" src="../images/common/img_calendar.gif" width="15" height="16" border="0">
 	            <input class="input_box" size="13" id="reserveDateStart" name="reserveDateStart" readonly value="<%=reserveDateStart %>">
 	            ~ <img align="absmiddle" src="../images/common/img_calendar.gif" width="15" height="16" border="0">
@@ -137,7 +137,7 @@ function formSubmit(){
 	</p>
 	<table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="silver">
 	<tr height="23">
-	<td bgcolor="#e6e7e8" align="center"><span class=list_title>예약날짜</span></td>
+	<td bgcolor="#e6e7e8" align="center"><span class=list_title>부킹일짜</span></td>
 	<td bgcolor="#e6e7e8" align="center"><span class=list_title>골프장명(패키지,콘도명)</span></td>
 	<td bgcolor="#e6e7e8" align="center"><span class=list_title>예약대기건</span></td>
 	<td bgcolor="#e6e7e8" align="center"><span class=list_title>예약완료건</span></td>

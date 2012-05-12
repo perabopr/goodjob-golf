@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="com.goodjob.util.Utils"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.sms.SMSDao"%>
@@ -15,6 +16,7 @@
 <%
 String menuSeq = request.getParameter("menuSeq");
 String golfSeq = request.getParameter("glSeq");
+int prdtSubSeq = NumberUtils.toInt(request.getParameter("pdsubseq"), 0);
 String siteSeq = request.getParameter("txtSiteSeq");
 String bookingDate = request.getParameter("txtBookingDate");
 String[] bookingDateSplit = bookingDate.split("-");
@@ -22,6 +24,8 @@ String pYear = bookingDateSplit[0];
 String pMonth = bookingDateSplit[1];
 String pDay = bookingDateSplit[2];
 String resRegDate = request.getParameter("txtReserveRegDate");
+String resRegHour = request.getParameter("ddlReserveRegHour");
+String resRegMin = request.getParameter("ddlReserveRegMin");
 String golfcourse = request.getParameter("course_list");
 String BookingHour = request.getParameter("ddlBookingHour");
 String BookingMin = request.getParameter("ddlBookingMin");
@@ -37,8 +41,8 @@ String userPhone3 = request.getParameter("phone3");
 String uPhone = userPhone1 + "-" + userPhone2 + "-" + userPhone3;
 String cbNum = StringUtils.trimToEmpty(request.getParameter("cbNum"));
 
-
-/** 상품 등록 **/
+/*
+// 상품 등록 
 ProductDto prdtDto = new ProductDto();
 prdtDto.setMenu_seq(Integer.parseInt(menuSeq));
 prdtDto.setGolflink_seq(Integer.parseInt(golfSeq));
@@ -57,7 +61,7 @@ else{
 	prdtSeq = list.get(0).getProduct_seq();
 }
 
-/** 상품-시간별 등록 **/
+// 상품-시간별 등록 
 ProductSubDto prdtSubDto = new ProductSubDto();
 prdtSubDto.setProduct_seq(prdtSeq);
 prdtSubDto.setGolflink_course_seq(Integer.parseInt(golfcourse));
@@ -79,14 +83,16 @@ int prdtSubSeq = pd.setProductSubInsert(prdtSubDto);
 if(prdtStatus.equals("0")){
 	pd.setProductUpdate(prdtSeq, "Y");
 }
+*/
 
 /** 예약 **/
 GolfLinkReserveDto glrDto = new GolfLinkReserveDto();
-glrDto.setReserve_day(resRegDate);
+glrDto.setReserve_day(resRegDate + " " +resRegHour+":"+resRegMin +":00");
 glrDto.setReserve_name(resName);
 glrDto.setReserve_uid(user_Id);
 glrDto.setPer_num(perNum);
 glrDto.setReserve_phone(uPhone);
+glrDto.setProduct_price(Integer.parseInt(inPrice));
 int couponPrice = 0;
 CouponDto cpDto = new CouponDto();
 /*
@@ -99,7 +105,7 @@ for(int i = 0; i < couponList.size(); i++){
 }
 */
 glrDto.setCoupon_price(couponPrice);
-glrDto.setProcess_status("0");
+glrDto.setProcess_status(prdtStatus);
 glrDto.setCard_bill_num(cbNum);
 glrDto.setProductsub_seq(prdtSubSeq);
 glrDto.setSite_seq(Integer.parseInt(siteSeq));
@@ -129,7 +135,7 @@ params.put("mem_id",reserveuid);
 params.put("rphone",reservephone);
 
 SMSDao sDao = new SMSDao();
-//boolean isSend = sDao.send(params);
+boolean isSend = sDao.send(params);
 /* -- 필요없긴 하겠는데...
 if("".equals(cbNum) && cbNum.length() == 0 ){
 	message = "계좌번호:농협 317-0001-2481-91 ";
@@ -145,8 +151,8 @@ if("".equals(cbNum) && cbNum.length() == 0 ){
 }
 */
 %>
-<script language="javascript" type="text/javascript">
+<script type="text/javascript">
 alert("등록되었습니다.");
 parent.opener.location.reload(); 
-self.close();
+parent.window.close();
 </script>

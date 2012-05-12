@@ -373,6 +373,7 @@ public class PRODUCT {
 				",NH_price" +
 				",product_status " +
 				",coupon_use_yn " +
+				",real_nh_price " +
 			"FROM tb_product_sub " +
 			"WHERE productsub_seq = ?";
 	
@@ -966,4 +967,44 @@ public class PRODUCT {
 		=	"DELETE FROM tb_product_sub_site " +
 			"WHERE productsub_seq = ? " +
 				"AND site_seq = ?";
+	
+	/*----------------------------------------------------------------- tb_month_price*/
+	public static final String  month_price_select
+	=	"SELECT " +
+			"  menu_seq "+
+			",service_seq " +
+			",yearmonth " +
+			",site_seq " +
+			",price1 " +
+			",price2 " +
+			",price3 " +
+		"FROM tb_month_price " +
+		"WHERE menu_seq = ? " +
+			"AND service_seq = ? " +
+			"AND yearmonth = ? ";
+	
+	public static final String month_price_insert
+	=	"INSERT INTO tb_month_price(" +
+			" menu_seq"+
+			",service_seq"+
+			",yearmonth"+
+			",site_seq"+
+			",price1" +
+			",price2" +
+			",price3" +
+		")VALUES(?,?,?,?,?,?,?)";
+       
+	public static final String month_price_update
+	=	"UPDATE tb_month_price " +
+			"SET price1 = ?, price2 = ?, price3 = ? " +
+		"WHERE menu_seq = ? " +
+			"AND service_seq = ? "+ 
+			"AND yearmonth = ? " +
+			"AND site_seq = ?";
+	
+	public static final String month_price_delete
+	=	"DELETE FROM tb_month_price " +
+		"WHERE menu_seq = ? " +
+			"AND service_seq = ? "+ 
+			"AND yearmonth = ? ";
 }

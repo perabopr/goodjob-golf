@@ -1,3 +1,9 @@
+<%@page import="com.goodjob.product.dto.ProductDto"%>
+<%@page import="com.goodjob.product.MenuViewSiteDao"%>
+<%@page import="com.goodjob.product.dto.MenuViewSiteDto"%>
+<%@page import="com.goodjob.product.productDao"%>
+<%@page import="com.goodjob.product.dto.ProductSubDto"%>
+<%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="com.goodjob.product.dto.SiteDto"%>
 <%@page import="com.goodjob.product.SiteDao"%>
 <%@page import="com.goodjob.product.dto.GolfLinkCourseDto"%>
@@ -12,6 +18,12 @@
 <%
 String menuSeq = StringUtils.trimToEmpty(request.getParameter("menuseq"));
 String glSeq = StringUtils.trimToEmpty(request.getParameter("glseq"));
+int pdsubseq = NumberUtils.toInt(request.getParameter("pdsubseq"), 0);
+if(pdsubseq == 0){
+	out.print("<script>");
+	out.print("self.close();");
+	out.print("</script>");
+}
 
 String headDate_now = Utils.getDate("yyyy-MM-dd" , 5);
 
@@ -22,6 +34,37 @@ List<GolfLinkCourseDto> glcList = glDao.getGolfLinkCourseSelect(Integer.parseInt
 
 SiteDao sDao = new SiteDao();
 List<SiteDto> sitelist = sDao.getSiteAllList();
+
+/**
+  * 상품시간 가격정보.
+  */
+productDao pdDao = new productDao();
+List<ProductDto> pdDto = null;
+List<ProductSubDto> pdsubDto = pdDao.getProductSubSelect(pdsubseq);
+if(pdsubDto != null){
+	pdDto = pdDao.getProductSelect(pdsubDto.get(0).getProduct_seq());
+}else{
+	out.print("<script>");
+	out.print("self.close();");
+	out.print("</script>");
+}
+String bookingDate = pdDto.get(0).getProduct_year() + "-" + pdDto.get(0).getProduct_month() + "-" + pdDto.get(0).getProduct_day();
+String bookingDate_hour = pdsubDto.get(0).getTime_start().substring(0,2);
+String bookingDate_min = pdsubDto.get(0).getTime_start().substring(2,4);
+String courseName = "";
+for(int i = 0; i < glcList.size();i++){
+	if(glcList.get(i).getGolflink_course_seq() == pdsubDto.get(0).getGolflink_course_seq()){
+		courseName = glcList.get(i).getCourse_name();
+	}
+}
+/**
+ *관련싸이트 정보 가져오기.
+*/
+MenuViewSiteDto mvsDto = new MenuViewSiteDto();
+mvsDto.setMenu_seq(Integer.parseInt(menuSeq));
+mvsDto.setService_seq(Integer.parseInt(glSeq));
+MenuViewSiteDao mvsd = new MenuViewSiteDao();
+List<MenuViewSiteDto> listMvsd = mvsd.getMenuViewSiteListNHException(mvsDto);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -45,16 +88,6 @@ $(function() {
 				$( "#txtReserveRegDate" ).datepicker("show");
 			}
 		);
-	$( "#txtBookingDate" ).datepicker({
-		dateFormat:'yy-mm-dd',
-		onSelect : function(dateText, inst){
-		}
-	});
-	$("#txtBookingDate").click(
-			function(){
-				$( "#txtBookingDate" ).datepicker("show");
-			}
-		);
 });
 
 function billSubmit(cbNum){
@@ -70,6 +103,7 @@ function billSubmit(cbNum){
 <FORM NAME="exefrm" METHOD="post">
 <input type="hidden" id="menuSeq" name="menuSeq" value="1">
 <input type="hidden" id="glSeq" name="glSeq"  value="<%=glSeq%>">
+<input type="hidden" id="pdsubseq" name="pdsubseq" value="<%=pdsubDto.get(0).getProductsub_seq()%>">
 <table cellpadding="2" cellspacing="1" bgcolor="#D1D3D4">
 <tr>
 <td  bgcolor="#F1F1F1">(예약)사이트</td>
@@ -86,7 +120,31 @@ for(int i = 0; i < sitelist.size();i++){
 </td>
 <tr>
 <td  bgcolor="#F1F1F1">예약신청일</td>
-<td bgcolor='white' nowrap><input type="text" id="txtReserveRegDate" name="txtReserveRegDate" value="" size="9" maxlength=10 /></td>
+<td bgcolor='white' nowrap>
+	<input type="text" id="txtReserveRegDate" name="txtReserveRegDate" value="" size="10" maxlength=10 />
+	<select name='ddlReserveRegHour'>
+	<%
+	for(int  i=0;i<24;i++){
+		String ih = "0" + Integer.toString(i);
+		ih = ih.substring(ih.length()-2);
+	%>
+	<option value="<%=ih %>"><%=ih %></option>
+	<%
+	}
+	%>
+	</select>시
+	<select name='ddlReserveRegMin'>
+	<%
+	for(int  i=0;i<60;i++){
+		String im = "0" + Integer.toString(i);
+		im = im.substring(im.length()-2);
+	%>
+	<option value="<%=im %>"><%=im%></option>
+	<%
+	}
+	%>
+	</select>분
+</td>
 </tr>
 <tr>
 <td  bgcolor="#F1F1F1">예약자</td>
@@ -106,29 +164,9 @@ for(int i = 0; i < sitelist.size();i++){
 <tr>
 <td  bgcolor="#F1F1F1">부킹일시</td>
 <td bgcolor='white' nowrap>
-	<input type="text" id="txtBookingDate" name="txtBookingDate" value="" size="10" />
-	<select name='ddlBookingHour'>
-	<%
-	for(int  i=0;i<24;i++){
-		String ih = "0" + Integer.toString(i);
-		ih = ih.substring(ih.length()-2);
-	%>
-	<option value="<%=ih %>"><%=ih %></option>
-	<%
-	}
-	%>
-	</select>시
-	<select name='ddlBookingMin'>
-	<%
-	for(int  i=0;i<60;i++){
-		String im = "0" + Integer.toString(i);
-		im = im.substring(im.length()-2);
-	%>
-	<option value="<%=im %>"><%=im%></option>
-	<%
-	}
-	%>
-	</select>분
+	<input type="text" id="txtBookingDate" name="txtBookingDate" size="10" value="<%=bookingDate %>" readonly  />
+	<input type="text" id="txtBookingDateHour" name="txtBookingDateHour" size="2" value="<%=bookingDate_hour %>" readonly  />시
+	<input type="text" id="txtBookingDateMin" name="txtBookingDateMin" size="2" value="<%=bookingDate_min %>" readonly  />분
 </td>
 </tr>
 <tr>
@@ -145,18 +183,7 @@ for(int i = 0; i < sitelist.size();i++){
 <tr>
 <td  bgcolor="#F1F1F1">코스</td>
 <td bgcolor='white' nowrap>
-<select name='course_list'>
-<option value='0' selected>선택하세요</option>
-<%
-if(glcList != null){
-	for(int i = 0; i < glcList.size();i++){
-%>
-		<option value="<%=glcList.get(i).getGolflink_course_seq() %>"> <%=glcList.get(i).getCourse_name()%></option>
-<% 
-	}
-}
-%>
-</select>
+<%=courseName%>
 </td>
 </tr>
 <tr>
@@ -177,9 +204,8 @@ if(glcList != null){
 <td  bgcolor="#F1F1F1">처리상태</td>
 <td bgcolor='white' nowrap>
 	<select name='ddl_prdtStatus'>
-		<option value=0>예약가능</option>
-		<option value=1>예약중</option>
-		<option value=2>예약마감</option>
+		<option value=0>예약대기</option>
+		<option value=1>예약완료</option>
 	</select>
 </td>
 </tr>

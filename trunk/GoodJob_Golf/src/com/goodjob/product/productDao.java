@@ -67,6 +67,28 @@ public class productDao {
 		return idSeq;
 	}
 	
+	public List<ProductDto> getProductSelect(int Seq){
+		Connection conn = null;
+		List<ProductDto> list = null;
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(Seq);
+			
+			ResultSetHandler rsh = new BeanListHandler(ProductDto.class);
+					
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<ProductDto>)qr.query(conn, PRODUCT.product_select, rsh, bind.toArray());			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return list;		
+	}
+	
 	public List<ProductDto> getProductSelectDate(ProductDto prdtDto){
 		Connection conn = null;
 		List<ProductDto> list = null;
@@ -155,7 +177,7 @@ public class productDao {
 			DbUtils.closeQuietly(conn);
 		}
 	}
-	
+
 	public List<ProductSubDto> getProductSubSelect(ProductDto prdtDto){
 		List<ProductSubDto> list = null;
 		Connection conn = null;
@@ -174,6 +196,30 @@ public class productDao {
 			QueryRunner qr = new QueryRunner();
 			
 			list = (List<ProductSubDto>)qr.query(conn, PRODUCT.product_sub_select_date, rsh, bind.toArray());	
+					
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return list;
+	}
+	
+	public List<ProductSubDto> getProductSubSelect(int pdsubSeq){
+		List<ProductSubDto> list = null;
+		Connection conn = null;
+		
+		try{
+			conn = DBManager.getConnection();
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(pdsubSeq);
+			
+			ResultSetHandler rsh = new BeanListHandler(ProductSubDto.class);
+			
+			QueryRunner qr = new QueryRunner();
+			
+			list = (List<ProductSubDto>)qr.query(conn, PRODUCT.product_sub_select, rsh, bind.toArray());	
 					
 		} catch (Exception e) {
 			System.out.println(e);

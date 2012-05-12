@@ -1,3 +1,5 @@
+<%@page import="com.goodjob.product.dto.MonthPriceDto"%>
+<%@page import="com.goodjob.product.MonthPriceDao"%>
 <%@page import="com.goodjob.product.dto.MenuViewSiteDto"%>
 <%@page import="com.goodjob.product.MenuViewSiteDao"%>
 <%@page import="com.goodjob.product.dto.GolfLinkDto"%>
@@ -59,7 +61,8 @@ prdtDto.setMenu_seq(2);
 prdtDto.setGolflink_seq(Integer.parseInt(glSeq));
 prdtDto.setProduct_year(Integer.toString(currYear));
 String selectMonth = "0" + Integer.toString(currMonth+1);
-prdtDto.setProduct_month(selectMonth.substring(selectMonth.length()-2));
+selectMonth = selectMonth.substring(selectMonth.length()-2);
+prdtDto.setProduct_month(selectMonth);
 productDao prdtDao = new productDao();
 List<ProductDto> arrPrdt = prdtDao.getProductSelect(prdtDto);
 
@@ -88,6 +91,16 @@ for(int i = 0; i < listMvsd.size();i++){
 if(siteSeq.length() > 0){
 	siteSeq = siteSeq.substring(0, siteSeq.length() - 1);
 }
+
+/**
+ *메뉴골프장월별 - 가격가져오기.
+ */
+MonthPriceDao mPriceDao = new MonthPriceDao();
+MonthPriceDto mPriceDto = new MonthPriceDto();
+mPriceDto.setMenu_seq(Integer.parseInt(menuSeq));
+mPriceDto.setService_seq(Integer.parseInt(glSeq));
+mPriceDto.setYearmonth(currYear+selectMonth);  
+List<MonthPriceDto> arrMPDto = mPriceDao.getMonthPrice(mPriceDto); 
 %>
 <%!
 	public ProductDto chkDayFind(List<ProductDto> arrPrdtparam, int day){
@@ -218,8 +231,20 @@ function selSetting(sDate){
 					vArrSite[ilstCnt][3] = evalData.ProductSub[i].k[ilstCnt].dd;
 				}
 			}			
-			addTime(evalData.ProductSub[i].a,evalData.ProductSub[i].c,evalData.ProductSub[i].d.substring(0,2),evalData.ProductSub[i].d.substring(2,4),evalData.ProductSub[i].e.substring(0,2),evalData.ProductSub[i].e.substring(2,4),evalData.ProductSub[i].f,evalData.ProductSub[i].g,evalData.ProductSub[i].h,evalData.ProductSub[i].i,evalData.ProductSub[i].j,vArrSite);
-			
+			addTime(evalData.ProductSub[i].a
+					,evalData.ProductSub[i].c
+					,evalData.ProductSub[i].d.substring(0,2)
+					,evalData.ProductSub[i].d.substring(2,4)
+					,evalData.ProductSub[i].e.substring(0,2)
+					,evalData.ProductSub[i].e.substring(2,4)
+					,evalData.ProductSub[i].f
+					,evalData.ProductSub[i].g
+					,evalData.ProductSub[i].h
+					,evalData.ProductSub[i].i
+					,evalData.ProductSub[i].j
+					,parseInt(evalData.ProductSub[i].g)+parseInt(evalData.ProductSub[i].j) 
+					,vArrSite);
+			/*
 			var calcVal = document.all['idCourseNh'];
 			if (typeof calcVal.length == "undefined") {
 				calcVal.onkeyup(calcVal,evalData.ProductSub[i].g);
@@ -228,15 +253,26 @@ function selSetting(sDate){
 					calcVal[j].onkeyup(calcVal[j],evalData.ProductSub[j].g);
 				}
 			}
+			*/
 		}
 
-		//기본행
-		addTime('','0','0','0','0','0','0','0','0','1','0',null);
+		//기본행 -- 삭제
+		//addTime('','0','0','0','0','0','0','0','0','1','0',null);
 	  }
 	});
+	
+	$("input:text").each(function (i){
+		this.value = this.value.replace(/\,/g,"");
+		this.value = commify(this.value);
+	});	
 }
 
 function customAddTime(){
+	if($("#prdtseq").val().length == 0)	{
+		alert("날짜를 선택하세요.");
+		return;			
+	}
+	
 	var vPriceN = $("#txtAddPriceN").val();
 	var vPriceS = $("#txtAddPriceS").val();
 	var vPriceN0 = $("#txtAddPriceN0").val();
@@ -259,46 +295,10 @@ function customAddTime(){
 			}
 		}
 	});
-	addTime('','0','0','0',vPriceN,vPriceS,'0','1',vPriceN0, vPriceS0, vArrSite);
+	addTime('','0','0','0','0','0',vPriceN,vPriceS,'0','1',vPriceN0, vPriceS0, vArrSite);
 }
 
-function checkNhColor(parm, parmPreVal) {
-	if (parmPreVal == "") {
-		parmPreVal = 0;
-	} else {
-		parmPreVal = parseInt(parmPreVal);
-	}
-	//var inTest = document.getElementById("test1");
-	//alert(inTest.style.color);
-	if (parm.value.substring(0,1) == "-") {
-		parm.style.color = "red";
-	} else {
-		parm.style.color = "blue";
-	}
-	var n = parm.value.replace(/\,/g,"");
-	var orgN = parseInt(n);
-	var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
-	while (reg.test(n))
-		n = n.replace(reg, '$1' + ',' + '$2');
-	parm.value = n;
-	
-	var calcVal = document.all['idCourseNh'];
-	var calcResult = document.all['idCourseNhResult'];
-	
-	if (typeof calcVal.length == "undefined") {
-		calcResult.value = parmPreVal + orgN;
-		while (reg.test(calcResult.value))
-			calcResult.value = calcResult.value.replace(reg, '$1' + ',' + '$2');
-	} else {
-		for (var i=0; i<calcResult.length; i++) {
-			if (calcVal[i] == parm) {
-				calcResult[i].value = parmPreVal + orgN;
-				while (reg.test(calcResult[i].value))
-					calcResult[i].value = calcResult[i].value.replace(reg, '$1' + ',' + '$2');
-			}
-		}
-	}
-}
+var addTimeCnt = 0;
 function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, sPrice, sStatus, sCoupon, realNhPrice, realNhsPrice, vArrSite){
 	var currMD = selDate.split('/');
 	var timecostHTML = "";
@@ -351,16 +351,23 @@ function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, 
 	if (sPrice != "") {
 		calcRealNhPrice = parseInt(sPrice) + parseInt(realNhPrice);	
 	}
-	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' name='courseN' value='" + nPrice + "' ></td>";
-	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' name='courseS' value='" + sPrice + "' ></td>";
-	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' name='courseNH' id='idCourseNh' value='" + realNhPrice + "' style='color:blue' onkeyup='javascript:checkNhColor(this,"+sPrice+");'></td>";
-	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' name='courseNH_calc' id='idCourseNhResult' value='" + realNhsPrice + "' readonly></td>";
+	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' id='courseN' name='courseN' value='" + nPrice + "' ></td>";
+	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' id='courseS"+addTimeCnt+"' name='courseS' value='" + sPrice + "' ></td>";
+	if(realNhPrice >= 0){
+		timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' id='idCourseNh"+addTimeCnt+"' name='courseNH' value='" + realNhPrice + "' style='color:blue' onkeyup=\"autoPriceCalc('courseS"+addTimeCnt+"','idCourseNh"+addTimeCnt+"','courseNH_calc"+addTimeCnt+"');\"></td>";
+	}else{
+		timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' id='idCourseNh"+addTimeCnt+"' name='courseNH' value='" + realNhPrice + "' style='color:red' onkeyup=\"autoPriceCalc('courseS"+addTimeCnt+"','idCourseNh"+addTimeCnt+"','courseNH_calc"+addTimeCnt+"');\"></td>";
+	}
+	timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' id='courseNH_calc"+addTimeCnt+"' name='courseNH_calc' value='" + realNhsPrice + "' readonly></td>";
+	
+	//timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' name='courseNH' id='idCourseNh' value='" + realNhPrice + "' style='color:blue' onkeyup='javascript:checkNhColor(this,"+sPrice+");'></td>";
+	//timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='9' name='courseNH_calc' id='idCourseNhResult' value='" + realNhsPrice + "' readonly></td>";
 	
 	var sitePriceN, sitePriceS, sitePriceP;
 	<% for(int i = 0; i < listMvsd.size(); i++){ %>
-		sitePriceN = "";
-		sitePriceS = "";
-		sitePriceP = "";
+	sitePriceN = 0;
+	sitePriceS = 0;
+	sitePriceP = 0;
 		if(vArrSite != null){
 			for(var i = 0; i < vArrSite.length;i++){
 				if(vArrSite[i][0] == <%=listMvsd.get(i).getSite_seq()%>){
@@ -369,9 +376,13 @@ function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, 
 					sitePriceP = vArrSite[i][3];				
 				}
 			}
-		} 
-		timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='10' name='sitePriceN<%=listMvsd.get(i).getSite_seq() %>' value='" + sitePriceN + "' ></td>";
-		timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='10' name='sitePriceS<%=listMvsd.get(i).getSite_seq() %>' value='" + sitePriceS + "' ></td>";
+		}
+		if(sitePriceN >= 0){
+			timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='10' id='sitePriceN<%=listMvsd.get(i).getSite_seq() %>_"+addTimeCnt+"' name='sitePriceN<%=listMvsd.get(i).getSite_seq() %>' style='color:blue' value='" + sitePriceN + "' onkeyup=\"autoPriceCalc('courseS"+addTimeCnt+"','sitePriceN<%=listMvsd.get(i).getSite_seq() %>_"+addTimeCnt+"','sitePriceS<%=listMvsd.get(i).getSite_seq() %>_"+addTimeCnt+"');\"></td>";
+		}else{
+			timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='10' id='sitePriceN<%=listMvsd.get(i).getSite_seq() %>_"+addTimeCnt+"' name='sitePriceN<%=listMvsd.get(i).getSite_seq() %>' style='color:red' value='" + sitePriceN + "' onkeyup=\"autoPriceCalc('courseS"+addTimeCnt+"','sitePriceN<%=listMvsd.get(i).getSite_seq() %>_"+addTimeCnt+"','sitePriceS<%=listMvsd.get(i).getSite_seq() %>_"+addTimeCnt+"');\"></td>";
+		}
+		timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='10' id='sitePriceS<%=listMvsd.get(i).getSite_seq() %>_"+addTimeCnt+"' name='sitePriceS<%=listMvsd.get(i).getSite_seq() %>' value='" + sitePriceS + "' ></td>"; 
 		if("<%=listMvsd.get(i).getSite_name()%>" == "NH카드"){
 			timecostHTML += "<td align='center' bgcolor='white' nowrap><input class='input_box' size='10' name='sitePriceP<%=listMvsd.get(i).getSite_seq() %>' value='" + sitePriceP + "' ></td>";
 		}	
@@ -418,6 +429,8 @@ function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, 
 	$("#tbTimeCost").append(timecostHTML);
 
 	$("#tbTimeCost tr:last-child select[name='course_list']").val(vCourse);
+	
+	addTimeCnt++;
 }
 function removeTime(){
 	var arrChkItems = $("input[name='timeItems']");
@@ -467,24 +480,10 @@ function saveTime(){
 			return;
 		}
 	}
-	
-	var calcVal = document.all['idCourseNh'];
-	var calcResult = document.all['idCourseNhResult'];
-	
-	if (typeof calcResult.length == "undefined") {
-		calcResult.value = calcResult.value.replace(/\,/g,"");
-	} else {
-		for (var i=0; i<calcResult.length; i++) {
-			calcResult[i].value = calcResult[i].value.replace(/\,/g,"");
-		}
-	}
-	if (typeof calcVal.length == "undefined") {
-		calcVal.value = calcVal.value.replace(/\,/g,"");
-	} else {
-		for (var i=0; i<calcVal.length; i++) {
-			calcVal[i].value = calcVal[i].value.replace(/\,/g,"");
-		}
-	}
+
+	$("input:text").each(function (i){
+		this.value = this.value.replace(/\,/g,"");
+	});
 	
 	if(blVali){
 		frm2.submit();
@@ -525,9 +524,83 @@ function LenChk(inval, n){
 	var len = tmp.length;
 	return (tmp.substring(len - n, len));
 }
+function autoPriceCalc(price1tag, price2tag, resulttag){	
+	var a = $("#"+price1tag).val().replace(/\,/g,"");
+	if(a.length > 0){
+		a = parseInt(a);
+	}
+	var b = $("#"+price2tag).val().replace(/\,/g,"");
+	if(b.length > 0){
+		if(b.substring(0,1) == "-"){
+			$("#"+price2tag).attr('style', 'color:red');
+		}else{
+			$("#"+price2tag).attr('style', 'color:blue');
+		}
+		b = parseInt(b);
+	}
+	
+	$("#"+resulttag).val(commify(a+b));
+	
+	$("input:text").each(function (i){
+		this.value = this.value.replace(/\,/g,"");
+		this.value = commify(this.value);
+	});
+}
+
+function regMonthPrice(){
+	$("input:text").each(function (i){
+		this.value = this.value.replace(/\,/g,"");
+	});
+	var arrsiteseq = $("#siteseqs").val().split(",");
+	
+	var tmpArrPrices = "";
+	tmpArrPrices = ":"+$("#txtAddPriceN").val()+":"+$("#txtAddPriceS").val()+":,";
+	tmpArrPrices += "0:"+$("#txtAddPriceN0").val()+":"+$("#txtAddPriceS0").val()+":,";
+	for(var  i = 0;  i < arrsiteseq.length; i++){
+		if($("#txtAddPriceP"+arrsiteseq[i]).val() == undefined){
+			tmpArrPrices += arrsiteseq[i]+":"+$("#txtAddPriceN"+arrsiteseq[i]).val()+":"+$("#txtAddPriceS"+arrsiteseq[i]).val()+":,";
+		}else{
+			tmpArrPrices += arrsiteseq[i]+":"+$("#txtAddPriceN"+arrsiteseq[i]).val()+":"+$("#txtAddPriceS"+arrsiteseq[i]).val()+":"+$("#txtAddPriceP"+arrsiteseq[i]).val()+",";
+		}
+	}
+	if(tmpArrPrices.length > 0){
+		tmpArrPrices = tmpArrPrices.substring(0, tmpArrPrices.length-1);
+	}
+
+	$.ajax({
+		url: "/_admin/product/ajax/ajax_month_price_set.jsp?menuseq=<%=menuSeq%>&serviceseq=<%=glSeq%>&yearmonth=<%=currYear+selectMonth%>&arrprices="+tmpArrPrices,
+		cache: false,
+		success: function(html){
+			alert("저장 되었습니다");
+			 
+			$("input:text").each(function (i){
+				this.value = this.value.replace(/\,/g,"");
+				this.value = commify(this.value);
+			});
+		}
+	});
+}
+
 String.prototype.trim = function(){
 	return this.replace(/^\s*/,"").replace(/\s*$/,"");
 }
+
+function commify(n) {
+	  var reg = /(^[+-]?\d+)(\d{3})/;   // 정규식
+	  n += '';                          // 숫자를 문자열로 변환
+
+	  while (reg.test(n))
+	    n = n.replace(reg, '$1' + ',' + '$2');
+
+	  return n;
+}
+
+window.onload = (function(){
+	$("input:text").each(function (i){
+		this.value = this.value.replace(/\,/g,"");
+		this.value = commify(this.value);
+	});
+});
 </script>
 </head>
 <body>
@@ -714,35 +787,84 @@ String.prototype.trim = function(){
   </tr>
   <tr>
     <td align="center">
+    <% 
+    	String tmpSiteSeqs = "";
+	    for(int i = 0; i < listMvsd.size(); i++){
+	    	tmpSiteSeqs += listMvsd.get(i).getSite_seq() + ",";
+		} 
+	  	if(tmpSiteSeqs.length() > 0){
+	  		tmpSiteSeqs = tmpSiteSeqs.substring(0, tmpSiteSeqs.length()-1);
+	  	}
+	%>
+    <input type=hidden id="siteseqs" name="siteseqs" value="<%=tmpSiteSeqs%>"/>
+<%
+	int v1NPrice = 0;
+	int v1SPrice = 0;
+	int v2NPrice = 0;
+	int v2SPrice = 0;
+	String Price_style = "blue" ;
+	if(arrMPDto.size() > 0){
+		for(int k = 0; k < arrMPDto.size(); k++){
+			if(arrMPDto.get(k).getSite_seq() == -1){
+				v1NPrice = arrMPDto.get(k).getPrice1();
+				v1SPrice = arrMPDto.get(k).getPrice2();
+			}
+			if(arrMPDto.get(k).getSite_seq() == 0){
+				if(arrMPDto.get(k).getPrice1() < 0){
+					Price_style = "red";
+				}
+				v2NPrice = arrMPDto.get(k).getPrice1();
+				v2SPrice = arrMPDto.get(k).getPrice2();
+			}
+		}
+	}
+%>
     	<table id="tbCustomAddTime" name="tbCustomAddTime" border="0" width="745" cellpadding="2" cellspacing="1" bgcolor="#D1D3D4">
     	<tr>
     	<td bgcolor="#F1F1F1" align="center" height="19" nowrap>
-    		정상가 </br><input type="text" id="txtAddPriceN" name="txtAddPriceN" size="10" value="0">    		
+    		정상가 </br><input type="text" id="txtAddPriceN" name="txtAddPriceN" size="10" value="<%=v1NPrice%>">    		 		
     	</td>
     	<td bgcolor="#F1F1F1" align="center" height="19" nowrap>
-    		할인가 </br><input type="text" id="txtAddPriceS" name="txtAddPriceS" size="10" value="0">    		
+    		할인가 </br><input type="text" id="txtAddPriceS" name="txtAddPriceS" size="10" value="<%=v1SPrice%>">    		
     	</td>    	
     	<td bgcolor="#F1F1F1" align="center" height="19" nowrap>
-    		NH하나로농협가 </br><input type="text" id="txtAddPriceN0" name="txtAddPriceN0" size="10" value="0" >    		
+    		NH하나로적용가 </br><input type="text" id="txtAddPriceN0" name="txtAddPriceN0" size="10" value="<%=v2NPrice%>" style="color:<%=Price_style %>"  onkeyup="autoPriceCalc('txtAddPriceS','txtAddPriceN0','txtAddPriceS0');">    		
     	</td>
     	<td bgcolor="#F1F1F1" align="center" height="19" nowrap>
-    		NH하나로가 </br><input type="text" id="txtAddPriceS0" name="txtAddPriceS0" size="10" value="0" >    		
+    		NH하나로가 </br><input type="text" id="txtAddPriceS0" name="txtAddPriceS0" size="10" value="<%=v2SPrice%>" >    		
     	</td>
-<% for(int i = 0; i < listMvsd.size(); i++){ %>    	
+<% 
+	for(int i = 0; i < listMvsd.size(); i++){
+		int vNPrice = 0;
+		int vSPrice = 0;
+		int vPPrice = 0;
+		Price_style = "blue" ;
+		for(int k = 0; k < arrMPDto.size();k++){
+			if(listMvsd.get(i).getSite_seq() == arrMPDto.get(k).getSite_seq()){
+				if(arrMPDto.get(k).getPrice1() < 0){
+					Price_style = "red";
+				}
+				vNPrice = arrMPDto.get(k).getPrice1();
+				vSPrice = arrMPDto.get(k).getPrice2();
+				vPPrice = arrMPDto.get(k).getPrice3();
+				break;
+			}
+		} 
+%>    	
     	<td bgcolor="#F1F1F1" align="center" height="19" nowrap>
-    		<%=listMvsd.get(i).getSite_name() %>적용가 </br><input type="text" id="txtAddPriceN<%=listMvsd.get(i).getSite_seq() %>" name="txtAddPriceN<%=listMvsd.get(i).getSite_seq() %>" size="10" >    		
+    		<%=listMvsd.get(i).getSite_name() %>적용가 </br><input type="text" id="txtAddPriceN<%=listMvsd.get(i).getSite_seq() %>" name="txtAddPriceN<%=listMvsd.get(i).getSite_seq() %>" size="10"  style="color:<%=Price_style %>"  onkeyup="autoPriceCalc('txtAddPriceS','txtAddPriceN<%=listMvsd.get(i).getSite_seq() %>','txtAddPriceS<%=listMvsd.get(i).getSite_seq() %>');" value="<%=vNPrice %>">    		
     	</td>    	
     	<td bgcolor="#F1F1F1" align="center" height="19" nowrap>
-    		<%=listMvsd.get(i).getSite_name() %>가 </br><input type="text" id="txtAddPriceS<%=listMvsd.get(i).getSite_seq() %>" name="txtAddPriceS<%=listMvsd.get(i).getSite_seq() %>" size="10" >    		
+    		<%=listMvsd.get(i).getSite_name() %>가 </br><input type="text" id="txtAddPriceS<%=listMvsd.get(i).getSite_seq() %>" name="txtAddPriceS<%=listMvsd.get(i).getSite_seq() %>" size="10"  value="<%=vSPrice %>" >    		
     	</td>
 	<% 	if(listMvsd.get(i).getSite_name().equals("NH카드")){	%>    	
     	<td bgcolor="#F1F1F1" align="center" height="19" nowrap>
-    		<%=listMvsd.get(i).getSite_name() %>적립가 </br><input type="text" id="txtAddPriceP<%=listMvsd.get(i).getSite_seq() %>" name="txtAddPriceP<%=listMvsd.get(i).getSite_seq() %>" size="10" >    		
+    		<%=listMvsd.get(i).getSite_name() %>적립가 </br><input type="text" id="txtAddPriceP<%=listMvsd.get(i).getSite_seq() %>" name="txtAddPriceP<%=listMvsd.get(i).getSite_seq() %>" size="10"  value="<%=vPPrice %>" >    		
     	</td>
 	<%	} 	%>
 <% } %>
     	<td bgcolor="#F1F1F1" align="center" height="19" nowrap>
-    		<IMG border=0 src="../../images/inc/btn_regist2.gif" width=74 height=26 onclick="customAddTime();">    		
+    		<IMG border=0 src="../../images/inc/btn_regist2.gif" width=74 height=26 onclick="regMonthPrice();">    		
     	</td>
     	</tr>
     	</table>
@@ -765,7 +887,7 @@ String.prototype.trim = function(){
     <%	} 	%>
 <% } %>	
           <td align="center" bgcolor="#F1F1F1" height="19" width="80" nowrap>
-          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" style="cursor:pointer;" width="32" height="16" border="0" onclick="addTime('','0','0','0','0','0','0','0','0','1','0',null);">
+          	<img align="absmiddle" src="../../images/inc/btn_plus.gif" style="cursor:pointer;" width="32" height="16" border="0" onclick="customAddTime();">
           	<img src="../../images/inc/btn_del2.gif" style="cursor:pointer;" width="32" height="16" border="0" align="absmiddle" onclick="removeTime();">
           	<!-- <img align="absmiddle" src="../../images/inc/btn_save.gif" width="32" height="16" border="0"> -->
           	<input type="hidden" id="menuseq" name="menuseq" value="<%=menuSeq %>" />

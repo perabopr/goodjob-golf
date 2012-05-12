@@ -294,7 +294,7 @@ public class GolfLinkDao {
 				bind.add(glrDto.getReserve_uid());
 				bind.add(glrDto.getPer_num());
 				bind.add(glrDto.getReserve_phone());
-				bind.add(list.get(0).getNH_price() * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price());
+				bind.add(glrDto.getProduct_price());
 				bind.add(glrDto.getCoupon_price());
 				bind.add(glrDto.getProcess_status());
 				bind.add(glrDto.getCard_bill_num());
@@ -317,7 +317,12 @@ public class GolfLinkDao {
 				
 				//상품상세 "예약중"상태로 변경.
 				bind = new ArrayList<Object>();
-				bind.add("1");
+				if(glrDto.getProcess_status().equals("0")){
+					bind.add("1");
+				}
+				if(glrDto.getProcess_status().equals("1")){
+					bind.add("2");
+				}
 				bind.add(glrDto.getProductsub_seq());
 				qr.update(conn, RESERVE.setProductSub_update, bind.toArray());
 				

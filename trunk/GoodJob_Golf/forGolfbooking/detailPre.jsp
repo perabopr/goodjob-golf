@@ -321,12 +321,25 @@ $(function(){
 		if(this.checked){
 			document.getElementById("reserveUName").readOnly = true;
 			$("#reserveUName").val("<%=user_Name%>");
+			$("#phone1").focus();
 		}else{
 			document.getElementById("reserveUName").readOnly = false;
 			$("#reserveUName").val("");
 		}
 	});
 });
+
+function sel_phone1(){
+	$("#phone2").focus();
+}
+
+function sel_phone2(){
+	var ph_num = $("#phone2").val();
+	if(ph_num.length >= 4){
+		$("#phone3").focus();
+	}
+}
+
 //--->
 </script>
 <FORM NAME="frm" METHOD="post" ACTION="rule.jsp">
@@ -733,7 +746,7 @@ for (int i = 1; i < 15 ;i++){
                                                       </TR>
                                                       <TR>
                                                         <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>핸드폰</TD>
-                                                        <TD style="PADDING-LEFT: 10px" bgColor=white colSpan=3><SELECT size=1 id="phone1" name="phone1">
+                                                        <TD style="PADDING-LEFT: 10px" bgColor=white colSpan=3><SELECT size=1 id="phone1" name="phone1" onChange="sel_phone1();">
                                                             <OPTION value="" selected>선택</OPTION>
                                                             <OPTION value="010">010</OPTION>
                                                             <OPTION value="011">011</OPTION>
@@ -743,7 +756,7 @@ for (int i = 1; i < 15 ;i++){
                                                             <OPTION value="019">019</OPTION>
                                                           </SELECT>
                                                           -
-                                                          <INPUT class=mem_input id="phone2" name="phone2" maxLength=4 size=8>
+                                                          <INPUT class=mem_input id="phone2" name="phone2" onKeydown="sel_phone2();" maxLength=4 size=8>
                                                           -
                                                           <INPUT class=mem_input id="phone3" name="phone3" maxLength=4 size=8></TD>
                                                       </TR>

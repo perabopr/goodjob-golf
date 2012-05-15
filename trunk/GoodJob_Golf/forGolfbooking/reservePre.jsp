@@ -137,7 +137,7 @@ visibility: hidden;
 			<%		
 				}else{
 			%>
-				<a class=area href="reserve.jsp?menu=1&date=<%=strDate %>">전체보기</a> &nbsp;I&nbsp;
+				<a class=area href="reserve.jsp?menu=<%=menuNum%>&date=<%=strDate %>">전체보기</a> &nbsp;I&nbsp;
 			<%		
 				}
 					

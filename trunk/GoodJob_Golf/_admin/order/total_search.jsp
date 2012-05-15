@@ -170,7 +170,7 @@ if(list != null){
 		if(list.get(i).getMenu_seq() == 5){
 			menuName = "콘도";
 		}
-		String reserveDay = list.get(i).getReserve_day();
+		String reserveDay = list.get(i).getReserve_day().substring(0, 19);
 		String bookingDay = list.get(i).getBooking_day();
 		if(bookingDay.length() == 8){
 			bookingDay = bookingDay.substring(0,4)

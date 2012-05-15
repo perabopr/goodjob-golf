@@ -225,7 +225,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
 <TBODY>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 width=170 align=right>예약자명</TD>
-<TD style="PADDING-LEFT: 10px" class=normal_b bgColor=white width=420><INPUT id="reserveName" name="reserveName" class=input_01 name=day size=14 value=""> <INPUT name="chkRealName" id="chkRealName" type=checkbox><SPAN class=mem_notice>실제이용자가 예약자와 동일한 경우 체크</SPAN></TD></TR>
+<TD style="PADDING-LEFT: 10px" class=normal_b bgColor=white width=420><INPUT id="reserveName" name="reserveName" class=input_01 name=day size=14 value="" style="ime-mode:active;"> <INPUT name="chkRealName" id="chkRealName" type=checkbox><SPAN class=mem_notice>실제이용자가 예약자와 동일한 경우 체크</SPAN></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=normal_b bgColor=#f1f1f1 height=25 align=right>핸드폰</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white>
@@ -240,7 +240,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
 <OPTION value="017">017</OPTION> 
 <OPTION value="018">018</OPTION> 
 <OPTION value="019">019</OPTION>
-</SELECT> - <INPUT id="phone2" name="phone2" class=input_01 name=day size=6 onKeydown="sel_phone2();" maxlength="4"> - <INPUT id="phone3" name="phone3" class=input_01 name=day size=6 maxlength="4"></TD></TR>
+</SELECT> - <INPUT id="phone2" name="phone2" class=input_01 name=day size=6 onKeyup="sel_phone2();" maxlength="4"> - <INPUT id="phone3" name="phone3" class=input_01 name=day size=6 maxlength="4"></TD></TR>
 <TR>
 <TD class=mem_notice height=20>예약사항을 입력하신 핸드폰번호로 SMS발송해드립니다 </TD></TR></TBODY></TABLE></TD></TR>
 <TR>

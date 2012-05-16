@@ -384,7 +384,7 @@
                                     <tr>
                                       <td align="right" bgcolor="#F1F1F1" class="mem_subject" style="padding-right:10px;" height="25">실제이용자</td>
                                       <td colspan="3" bgcolor="white" style="padding-left:10px;"><p>
-                                        <input class="mem_input" type="text" size="15" id="reserve_name"name="reserve_name" value="">
+                                        <input class="mem_input" type="text" size="15" id="reserve_name"name="reserve_name" value="" style="ime-mode:active;">
                                         &nbsp;
                                         <INPUT name="chkRealName" id="chkRealName" type=checkbox>
                                         <span class=mem_notice>실제이용자가 예약자와 동일한 경우 체크</span></p></td>

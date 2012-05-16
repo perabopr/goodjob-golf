@@ -4,6 +4,7 @@ public class SiteDto {
 	private int site_seq;
 	private String site_name = "";
 	private String phone_num = "";
+	private String bank_num = "";
 	private String use_yn = "";
 	
 	public int getSite_seq() {
@@ -23,6 +24,12 @@ public class SiteDto {
 	}
 	public void setPhone_num(String phone_num) {
 		this.phone_num = phone_num;
+	}
+	public String getBank_num() {
+		return bank_num;
+	}
+	public void setBank_num(String bank_num) {
+		this.bank_num = bank_num;
 	}
 	public String getUse_yn() {
 		return use_yn;

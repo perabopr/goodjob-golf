@@ -1,0 +1,1 @@
+ALTER TABLE `savekorea2400`.`tb_site` ADD COLUMN `bank_num` VARCHAR(100) NOT NULL DEFAULT ' ' AFTER `phone_num`;

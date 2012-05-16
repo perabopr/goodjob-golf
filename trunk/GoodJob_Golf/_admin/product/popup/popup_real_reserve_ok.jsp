@@ -1,3 +1,5 @@
+<%@page import="com.goodjob.product.dto.SiteDto"%>
+<%@page import="com.goodjob.product.SiteDao"%>
 <%@page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@page import="com.goodjob.util.Utils"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
@@ -19,6 +21,8 @@ String golfSeq = request.getParameter("glSeq");
 int prdtSubSeq = NumberUtils.toInt(request.getParameter("pdsubseq"), 0);
 String siteSeq = request.getParameter("txtSiteSeq");
 String bookingDate = request.getParameter("txtBookingDate");
+String bookingDateHour = request.getParameter("txtBookingDateHour");
+String bookingDateMin = request.getParameter("txtBookingDateMin");
 String[] bookingDateSplit = bookingDate.split("-");
 String pYear = bookingDateSplit[0];
 String pMonth = bookingDateSplit[1];
@@ -41,6 +45,16 @@ String userPhone3 = request.getParameter("phone3");
 String uPhone = userPhone1 + "-" + userPhone2 + "-" + userPhone3;
 String cbNum = StringUtils.trimToEmpty(request.getParameter("cbNum"));
 
+String Bank_num = "";
+String Site_name = "";
+SiteDao ssDao = new SiteDao();
+List<SiteDto> sList = ssDao.getSiteList();
+for(int i = 0; i < sList.size();i++){
+	if(sList.get(i).getSite_seq() == Integer.parseInt(siteSeq)){
+		Bank_num = sList.get(i).getBank_num();
+		Site_name = sList.get(i).getSite_name();
+	}
+}
 /*
 // 상품 등록 
 ProductDto prdtDto = new ProductDto();
@@ -121,7 +135,7 @@ String golflinkName = glList.get(0).getGolflink_name();
 golflinkName = golflinkName.replace("(P)","").replace("(PAR3)","");
 String message = "";
 message += "[" + golflinkName + "]";
-bookingDate = bookingDate.replace("-",".");
+bookingDate = bookingDate.replace("-",".") + " " + bookingDateHour + ":" + bookingDateMin;
 message += bookingDate;
 message += " 예약되셨습니다";
 message += " ▶하나로고객센터";
@@ -136,20 +150,22 @@ params.put("rphone",reservephone);
 
 SMSDao sDao = new SMSDao();
 boolean isSend = sDao.send(params);
-/* -- 필요없긴 하겠는데...
-if("".equals(cbNum) && cbNum.length() == 0 ){
-	message = "계좌번호:농협 317-0001-2481-91 ";
-	message += "㈜세이브코리아\n";
-	message += "입금액:"+Utils.numberFormat(Integer.parseInt(inPrice) * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price())+"\n";
-	message += "[하나로고객센터]";
-	params.clear();
-	params.put("msg",message);
-	params.put("sphone",sphone);
-	params.put("mem_id",reserveuid);
-	params.put("rphone",reservephone);
-	isSend = sDao.send(params);
+
+message = "계좌번호: " + Bank_num;
+message += " ㈜세이브코리아\n";
+message += "입금액:"+Utils.numberFormat(Integer.parseInt(inPrice) * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price())+"\n";
+if(siteSeq.equals("1")){
+	message += "["+Site_name+"]";
+}else{
+	message += "["+Site_name+"고객센터]";
 }
-*/
+params.clear();
+params.put("msg",message);
+params.put("sphone",sphone);
+params.put("mem_id",reserveuid);
+params.put("rphone",reservephone);
+isSend = sDao.send(params);
+
 %>
 <script type="text/javascript">
 alert("등록되었습니다.");

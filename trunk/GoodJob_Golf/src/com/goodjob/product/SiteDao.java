@@ -86,6 +86,7 @@ public class SiteDao {
 			ArrayList<Object> bind = new ArrayList<Object>();
 			bind.add(sDto.getSite_name());
 			bind.add(sDto.getPhone_num());
+			bind.add(sDto.getBank_num());
 			bind.add(sDto.getUse_yn());
 			
 			QueryRunner qr = new QueryRunner();
@@ -112,6 +113,7 @@ public class SiteDao {
 			ArrayList<Object> bind = new ArrayList<Object>();
 			bind.add(sDto.getSite_name());
 			bind.add(sDto.getPhone_num());
+			bind.add(sDto.getBank_num());
 			bind.add(sDto.getUse_yn());
 			bind.add(sDto.getSite_seq());
 			

@@ -873,6 +873,7 @@ public class PRODUCT {
 			" site_seq " +
 			",site_name "+
 			",phone_num " +
+			",bank_num " +
 			",use_yn " +
 		"FROM tb_site " +
 		"WHERE use_yn = 'Y'";
@@ -881,6 +882,7 @@ public class PRODUCT {
 			" site_seq " +
 			",site_name "+
 			",phone_num " +
+			",bank_num " +
 			",use_yn " +
 		"FROM tb_site ";
 	
@@ -888,13 +890,15 @@ public class PRODUCT {
 		=	"INSERT INTO tb_site( " +
 				" site_name " +
 				",phone_num " +
+				",bank_num " +
 				",use_yn " +
-			")VALUES(?,?,?)" ;
+			")VALUES(?,?,?,?)" ;
 	
 	public static final String site_update
 		=	"UPDATE tb_site " +
 			"SET site_name = ? "+
 				", phone_num = ? " +
+				",bank_num = ? " +
 				", use_yn = ? " +
 			"WHERE site_seq = ?";
 	

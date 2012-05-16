@@ -27,9 +27,9 @@ String[] bookingDateSplit = bookingDate.split("-");
 String pYear = bookingDateSplit[0];
 String pMonth = bookingDateSplit[1];
 String pDay = bookingDateSplit[2];
-String resRegDate = request.getParameter("txtReserveRegDate");
-String resRegHour = request.getParameter("ddlReserveRegHour");
-String resRegMin = request.getParameter("ddlReserveRegMin");
+//String resRegDate = request.getParameter("txtReserveRegDate");
+//String resRegHour = request.getParameter("ddlReserveRegHour");
+//String resRegMin = request.getParameter("ddlReserveRegMin");
 String golfcourse = request.getParameter("course_list");
 String BookingHour = request.getParameter("ddlBookingHour");
 String BookingMin = request.getParameter("ddlBookingMin");
@@ -44,6 +44,7 @@ String userPhone2 = request.getParameter("phone2");
 String userPhone3 = request.getParameter("phone3");
 String uPhone = userPhone1 + "-" + userPhone2 + "-" + userPhone3;
 String cbNum = StringUtils.trimToEmpty(request.getParameter("cbNum"));
+
 
 String Bank_num = "";
 String Site_name = "";
@@ -101,7 +102,7 @@ if(prdtStatus.equals("0")){
 
 /** 예약 **/
 GolfLinkReserveDto glrDto = new GolfLinkReserveDto();
-glrDto.setReserve_day(resRegDate + " " +resRegHour+":"+resRegMin +":00");
+glrDto.setReserve_day(Utils.getDate("yyyy-MM-dd HH:mm:ss"));
 glrDto.setReserve_name(resName);
 glrDto.setReserve_uid(user_Id);
 glrDto.setPer_num(perNum);
@@ -138,7 +139,7 @@ message += "[" + golflinkName + "]";
 bookingDate = bookingDate.replace("-",".") + " " + bookingDateHour + ":" + bookingDateMin;
 message += bookingDate;
 message += " 예약되셨습니다";
-message += " ▶하나로고객센터";
+message += " ["+Site_name+"고객센터]";
 String sphone = "02-6670-0110";
 String reserveuid = user_Id;
 String reservephone = uPhone;

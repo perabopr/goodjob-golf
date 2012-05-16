@@ -86,19 +86,17 @@ function billok(){
 	}
 }
 
-/*
-$(function(){
-	$("#chkRealName").click(function(){		
-		if(this.checked){
-			document.getElementById("reserveName").readOnly = true;
-			$("#reserveName").val("<%=user_Name%>");
-		}else{
-			document.getElementById("reserveName").readOnly = false;
-			$("#reserveName").val("");
-		}
-	});
-});
-*/
+function sel_phone1(){
+	$("#phone2").focus();
+}
+
+function sel_phone2(){
+	var ph_num = $("#phone2").val();
+	if(ph_num.length >= 4){
+		$("#phone3").focus();
+	}
+}
+
 //-->
 </script>
 <FORM NAME="exefrm" METHOD="post">
@@ -139,17 +137,18 @@ $(function(){
 </TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=13 width=122 align=right>예약자명</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white width=451><INPUT class=input_01 id="reserveName" name="reserveName" size=15> <!-- <INPUT name="chkRealName" id="chkRealName" type=checkbox><SPAN class=mem_notice>실제이용자가 예약자와 동일한 경우 체크</SPAN> --></TD></TR>
+<TD style="PADDING-LEFT: 10px" bgColor=white width=451>
+<INPUT class=input_01 id="reserveName" name="reserveName" size=15 style="ime-mode:active;"></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=25 align=right>핸드폰</TD>
-<TD style="PADDING-LEFT: 10px" bgColor=white><SELECT size=1 id="phone1" name="phone1"> 
+<TD style="PADDING-LEFT: 10px" bgColor=white><SELECT size=1 id="phone1" name="phone1" onChange="sel_phone1();"> 
 <OPTION value="" selected>선택</OPTION> 
 <OPTION value="010">010</OPTION> 
 <OPTION value="011">011</OPTION> 
 <OPTION value="016">016</OPTION> 
 <OPTION value="017">017</OPTION> 
 <OPTION value="018">018</OPTION> 
-<OPTION value="019">019</OPTION></SELECT> - <INPUT class=input_01 id="phone2" name="phone2" size=8 maxlength="4"> - <INPUT class=input_01 id="phone3" name="phone3" size=8 maxlength="4"></TD></TR>
+<OPTION value="019">019</OPTION></SELECT> - <INPUT class=input_01 id="phone2" name="phone2" size=8 onKeyup="sel_phone2();" maxlength="4"> - <INPUT class=input_01 id="phone3" name="phone3" size=8 maxlength="4"></TD></TR>
 <TR>
 <TD style="PADDING-RIGHT: 10px" class=mem_subject bgColor=#f1f1f1 height=25 width=122 align=right>E-Mail</TD>
 <TD style="PADDING-LEFT: 10px" bgColor=white width=451><INPUT class=input_01 id="eMail1" name="eMail1" size=15 value="<%=eMail1 %>"> @ <INPUT class=input_01 id="eMail2" name="eMail2" size=15 value="<%=eMail2 %>"> 

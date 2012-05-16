@@ -195,7 +195,13 @@ if(list != null){
 	<TD bgColor=white height=25 align=center><%=menuName %></TD>
 	<TD bgColor=white align=center><%=reserveDay %></TD>
 	<TD bgColor=white align=center><%=list.get(i).getReserve_name() %></TD>
-	<TD bgColor=white align=center><%=list.get(i).getReserve_uid() %></TD>
+	<TD bgColor=white align=center>
+	<%
+          	out.println(list.get(i).getReserve_uid());
+          	if(list.get(i).getSite_seq()==2){out.println("<font color='blue'>[NH하나로]</font>");}
+          	else if(list.get(i).getSite_seq()==3){out.println("<font color='orange'>[NH카드]</font>");}
+          %>
+	</TD>
 	<TD bgColor=white align=center><%=list.get(i).getReserve_phone() %></TD>
 	<TD bgColor=white align=center><%=list.get(i).getGolflink_name() %></TD>
 	<TD bgColor=white align=center><span class=<%=Utils.getIsWeek(bookingDay)%>><%=bookingDay %></span></TD>

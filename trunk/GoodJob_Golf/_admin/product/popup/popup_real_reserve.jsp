@@ -89,8 +89,15 @@ $(function() {
 			}
 		);
 });
-
+var regClick = false;
 function billSubmit(cbNum){
+
+	//클릭은 한번만.
+	if(regClick){
+		return;
+	}
+	regClick = true;
+	
 	var frm = document.exefrm;
 	frm.target =  "ifr_hidden"; 
 	frm.action = "popup_real_reserve_ok.jsp";
@@ -118,6 +125,7 @@ for(int i = 0; i < sitelist.size();i++){
 %>
 </select>
 </td>
+<!--
 <tr>
 <td  bgcolor="#F1F1F1">예약신청일</td>
 <td bgcolor='white' nowrap>
@@ -146,6 +154,7 @@ for(int i = 0; i < sitelist.size();i++){
 	</select>분
 </td>
 </tr>
+-->
 <tr>
 <td  bgcolor="#F1F1F1">예약자</td>
 <td bgcolor='white' nowrap><input type="text" id="txtReserveUser" name="txtReserveUser" value="" size="10" /></td>

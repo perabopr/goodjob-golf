@@ -144,7 +144,9 @@ public class BoardDao {
 				conn = DBManager.getConnection();
 				ResultSetHandler rsh = new BeanHandler(BoardDto.class);
 				QueryRunner qr = new QueryRunner();
-				dto = (BoardDto) qr.query(conn, String.format(BBS.view,tableName) , rsh , params.toArray());
+				
+				//System.out.println(String.format(BBS.view,tableName));
+				dto = (BoardDto) qr.query(conn, MessageFormat.format(BBS.view,tableName) , rsh , params.toArray());
 			}
 			else{
 				dto = new BoardDto();

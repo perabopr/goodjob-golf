@@ -19,7 +19,21 @@ public class BBS {
 	
 	public static final String max = " SELECT IFNULL(MAX(seq),0)+1 as seq FROM %s ";
 	
-	public static final String view = "SELECT * FROM %s WHERE seq = ? ";
+	public static final String view = " select seq, " + 
+									" mem_id, " +
+									" name, " +
+									" email, " +
+									" subject, " +
+									" content, " +
+									" password, " +
+									" readcount, " +
+									" filename, " +
+									" position, " +
+									" thread, " +
+									" ishtml, " +
+									" notice_yn, " +
+									" writeip, " +
+									" date_format(a.reg_dt,''%Y-%m-%d'') reg_dt FROM {0} a WHERE seq = ? ";
 	
 	public static final String readcount = " UPDATE %s SET readcount = readcount + 1 WHERE seq = ? ";
 	

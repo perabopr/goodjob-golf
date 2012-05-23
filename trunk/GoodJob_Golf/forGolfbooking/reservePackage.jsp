@@ -14,7 +14,7 @@ List<RegionDto> rList = pkDao.getRegionList("1");
 
 String strWhere = "AND C.site_seq = 1 AND C.menu_seq = 3 AND a.menu_seq = 3 ";
 if(pRegion != 0){
-	strWhere = "AND a.region_seq = " + pRegion;
+	strWhere += "AND a.region_seq = " + pRegion;
 }
 List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 %>

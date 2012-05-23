@@ -250,7 +250,7 @@ function imgChange(objId){
 				<TABLE border=0 cellSpacing=1 cellPadding=2 width=274 bgColor=silver>
 				<TBODY>
 				<TR>
-				<TD bgColor=white width=270><IMG border=0 id="imgmain" name="imgmain" src="<%=imgSubPath1 %>" width=270 height=202></TD>
+				<TD bgColor=white width=270><IMG border=0 id="imgmain" name="imgmain" src="<%=imgSubPath1%>" width=270 height=202></TD>
 				</TR>
 				</TBODY>
 				</TABLE>
@@ -267,7 +267,7 @@ function imgChange(objId){
 					<TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
 					<TBODY>
 					<TR>
-					<TD bgColor=white><IMG border=0 name=img1 src="<%=imgSubPath1 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD>
+					<TD bgColor=white><IMG border=0 name=img1 src="<%=imgSubPath1%>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD>
 					</TR>
 					</TBODY>
 					</TABLE>
@@ -276,7 +276,7 @@ function imgChange(objId){
 					<TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
 					<TBODY>
 					<TR>
-					<TD bgColor=white><IMG border=0 name=img2 src="<%=imgSubPath2 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD>
+					<TD bgColor=white><IMG border=0 name=img2 src="<%=imgSubPath2%>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD>
 					</TR>
 					</TBODY>
 					</TABLE>
@@ -285,7 +285,7 @@ function imgChange(objId){
 					<TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
 					<TBODY>
 					<TR>
-					<TD bgColor=white><IMG border=0 name=img3 src="<%=imgSubPath3 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD>
+					<TD bgColor=white><IMG border=0 name=img3 src="<%=imgSubPath3%>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD>
 					</TR>
 					</TBODY>
 					</TABLE>
@@ -294,7 +294,7 @@ function imgChange(objId){
 					<TABLE border=0 cellSpacing=1 cellPadding=2 width=69 bgColor=silver>
 					<TBODY>
 					<TR>
-					<TD bgColor=white><IMG border=0 name=img4 src="<%=imgSubPath4 %>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD>
+					<TD bgColor=white><IMG border=0 name=img4 src="<%=imgSubPath4%>" width=63 height=47 onclick="imgChange(this);" style="cursor:hand;"></TD>
 					</TR>
 					</TBODY>
 					</TABLE>
@@ -327,12 +327,12 @@ function imgChange(objId){
 					<TR>
 					<TD class=normal_b height=23 width=47>주소 </TD>
 					<TD width=12>:</TD>
-					<TD width=320><%=glDto.getGolflink_address1() + " " + glDto.getGolflink_address2() %></TD>
+					<TD width=320><%=glDto.getGolflink_address1() + " " + glDto.getGolflink_address2()%></TD>
 					</TR>
 					<TR>
 					<TD class=normal_b height=23>홀구분</TD>
 					<TD>:</TD>
-					<TD class=orange><%=glDto.getHoll_type()%>&nbsp;&nbsp;&nbsp;<a href="<%=glDto.getCourse_guide() %>" target="_blank"><IMG border=0 src="../images/common/btn_golfcourse.gif" width=68 height=17 style="cursor:hand" align="absmiddle"></a></TD>
+					<TD class=orange><%=glDto.getHoll_type()%>&nbsp;&nbsp;&nbsp;<a href="<%=glDto.getCourse_guide()%>" target="_blank"><IMG border=0 src="../images/common/btn_golfcourse.gif" width=68 height=17 style="cursor:hand" align="absmiddle"></a></TD>
 					</TR>
 					</TBODY>
 					</TABLE>
@@ -371,7 +371,7 @@ function imgChange(objId){
 			<TR>
 			<TD height="10"></TD></TR>
 			<TR>
-			<TD class=red_s><%=glDto.getCancel_rule() %></TD>
+			<TD class=red_s><%=glDto.getCancel_rule()%></TD>
 			</TR>
 			</TBODY>
 			</TABLE>
@@ -425,7 +425,7 @@ for (int i = 1; i < 15 ;i++){
 	}
 	incDate.add(incDate.DATE, 1);
 	
-	boolean isHoliday = com.goodjob.util.Holiday.isHoliday(incYear+""+(incMonth<10?"0"+incMonth:incMonth)+""+incDay);
+	boolean isHoliday = com.goodjob.util.Holiday.isHoliday(incYear+""+(incMonth<10?"0"+incMonth:incMonth)+""+(incDay<10?"0"+incDay:incDay));
 	if(isHoliday){
 		weekClass = "sunday";
 		weekImg = String.format(weekImg , "_h");
@@ -494,7 +494,7 @@ for (int i = 1; i < 15 ;i++){
 		}else{
 %>
 			<TD bgColor=white height=30 align=center>
-			<a href="/linkpages/detail.jsp?menu=<%=menuNum%>&gr_cd=<%=nhNum%>&username=<%=URLEncoder.encode(nhName, "utf-8")%>&golf=<%=glDto.getGolflink_seq()%>&date=<%=sDate %>&cdate=<%=cDate%>"><IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate %></br>--------------------</br>예약가능팀 : <%=cCnt %>/<%=rCnt %>팀');" onMouseout="hideddrivetip()"></a>
+			<a href="/linkpages/detail.jsp?menu=<%=menuNum%>&gr_cd=<%=nhNum%>&username=<%=URLEncoder.encode(nhName, "utf-8")%>&golf=<%=glDto.getGolflink_seq()%>&date=<%=sDate%>&cdate=<%=cDate%>"><IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate%></br>--------------------</br>예약가능팀 : <%=cCnt%>/<%=rCnt%>팀');" onMouseout="hideddrivetip()"></a>
 			</TD>
 <%
 		}
@@ -569,15 +569,15 @@ for (int i = 1; i < 15 ;i++){
 		
 %>
 						<TR>
-						<TD bgColor=white height=25 align=center><%=tmpDate %></TD>
-						<TD bgColor=white align=center><%=tmpTime %></TD>
+						<TD bgColor=white height=25 align=center><%=tmpDate%></TD>
+						<TD bgColor=white align=center><%=tmpTime%></TD>
 						<TD bgColor=white align=center><%=StringUtils.defaultIfEmpty(listPr.get(i).getCourse_name(), "<div class=red_ss>없음</div>")%></TD>
-						<TD bgColor=white align=center><span class=orange_s><%=commify((listPr.get(i).getNH_price() + listPr.get(i).getReal_nh_price()) * 4) %></span> <span class=normal_s>원</span></TD>
-						<TD bgColor=white align=center><span class=normal_s><%=listPr.get(i).getHoll_type() %></span></TD>
+						<TD bgColor=white align=center><span class=orange_s><%=commify((listPr.get(i).getNH_price() + listPr.get(i).getReal_nh_price()) * 4)%></span> <span class=normal_s>원</span></TD>
+						<TD bgColor=white align=center><span class=normal_s><%=listPr.get(i).getHoll_type()%></span></TD>
 <%
 		if(listPr.get(i).getProduct_status().equals("0")){			
 %>
-						<TD bgColor=white align=center><A href="javascript:;" onclick="reserveSubmit('<%=listPr.get(i).getProductsub_seq() %>')"><IMG border=0 align=absMiddle src="../../images/booking/btn_regist_ok.gif" width=112 height=20></A></TD>		
+						<TD bgColor=white align=center><A href="javascript:;" onclick="reserveSubmit('<%=listPr.get(i).getProductsub_seq()%>')"><IMG border=0 align=absMiddle src="../../images/booking/btn_regist_ok.gif" width=112 height=20></A></TD>		
 <%
 		}else{
 %>
@@ -596,8 +596,8 @@ for (int i = 1; i < 15 ;i++){
 					</TBODY>
 					</TABLE>
 					</DIV>
-					<div id="destap2" style="display:none;"><%=glDto.getUse_guide() %></div>
-					<div id="destap3" style="display:none;"><%=glDto.getGolflink_guide() %></div>
+					<div id="destap2" style="display:none;"><%=glDto.getUse_guide()%></div>
+					<div id="destap3" style="display:none;"><%=glDto.getGolflink_guide()%></div>
 					<div id="destap4" style="display:none;">					
 					<iframe id="ifrmMap" src="" width=702 height=702 frameborder="0" border="0" marginheight="0" marginwidth="0" scrolling="no" noresize></iframe>
 					</div>

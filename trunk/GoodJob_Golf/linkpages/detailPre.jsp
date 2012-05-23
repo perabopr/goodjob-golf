@@ -512,7 +512,7 @@ function sel_phone2(){
                 <TBODY>
                   <TR>
                     <TD bgColor=#f1f1f1 height=35 width=212 align=center><img src="../images/common/img_pre_subject.gif" width="160" height="25" border="0"></TD>
-                    <% 
+<% 
 for (int i = 1; i < 15 ;i++){
 	int incYear = incDate.get(incDate.YEAR);
 	int incMonth = incDate.get(incDate.MONTH)+1;
@@ -551,7 +551,7 @@ for (int i = 1; i < 15 ;i++){
 	}
 	incDate.add(incDate.DATE, 1);
 	
-	boolean isHoliday = com.goodjob.util.Holiday.isHoliday(incYear+""+(incMonth<10?"0"+incMonth:incMonth)+""+incDay);
+	boolean isHoliday = com.goodjob.util.Holiday.isHoliday(incYear+""+(incMonth<10?"0"+incMonth:incMonth)+""+(incDay<10?"0"+incDay:incDay));
 	if(isHoliday){
 		weekClass = "sunday";
 		weekImg = String.format(weekImg , "_h");
@@ -567,7 +567,7 @@ for (int i = 1; i < 15 ;i++){
 %>
                   <TR>
                     <TD style="PADDING-LEFT: 5px" bgColor=white height=30><SPAN class=blue_list><%=glDto.getGolflink_name()%></SPAN></TD>
-                    <%
+<%
 	incDate.set(tYear, tMonth-1, tDay);
 	for (int k = 1; k < 15 ;k++){
 		String cYear = Integer.toString(incDate.get(incDate.YEAR));
@@ -659,7 +659,9 @@ for (int i = 1; i < 15 ;i++){
                             <TD height=10></TD>
                           </TR>
                           <TR>
-                            <TD bgColor=white align=center><DIV style="DISPLAY: block" id="destap1">
+                            <TD bgColor=white align=center>
+                            
+                            <DIV style="DISPLAY: block" id="destap1">
                                 <TABLE border=0 cellSpacing=0 cellPadding=0 width="100%">
                                   <TBODY>
                                     <TR>
@@ -674,7 +676,9 @@ for (int i = 1; i < 15 ;i++){
                                           <TR>
                                             <TD bgColor=white height=25 align=center><%=glDto.getGolflink_name()%></TD>
                                             <TD bgColor=white align=center><%=curDate.substring(0,4) + "-" + curDate.substring(4,6) + "-" + curDate.substring(6,8)%></TD>
-                                            <TD bgColor=white align=center><SELECT size=1 id="ddlTimeTerm" name="ddlTimeTerm" onchange="selectGolfLink();">
+                                            <TD bgColor=white align=center>
+                                            
+                                            <SELECT size=1 id="ddlTimeTerm" name="ddlTimeTerm" onchange="selectGolfLink();">
                                                 <OPTION value="/0/0" selected>선택하세요</OPTION>
                                                 <% 	
 	boolean disabled = indexOf(glDto.getGolflink_name(),"PAR3","파3");

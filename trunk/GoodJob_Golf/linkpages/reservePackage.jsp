@@ -14,8 +14,9 @@
 	
 	String strWhere = "AND C.site_seq = 2 AND C.menu_seq = 3 AND a.menu_seq = 3 ";
 	if(pRegion != 0){
-		strWhere = "AND a.region_seq = " + pRegion;
+		strWhere += "AND a.region_seq = " + pRegion;
 	}
+	
 	List<PackageDto> pkList = pkDao.getPackageList(strWhere);
 %>
 <TABLE border=0 cellSpacing=0 cellPadding=0 width=751><TBODY>

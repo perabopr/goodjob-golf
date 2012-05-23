@@ -21,6 +21,7 @@ public class GolfLinkDto {
 	private String cancel_term = "";
 	private String view_yn = "";
 	private String cancel_rule = "";
+	private String cancel_rule_nh = "";
 	private String promise_rule = "";
 	private String use_guide = "";
 	private String golflink_guide = "";
@@ -169,5 +170,11 @@ public class GolfLinkDto {
 	}
 	public void setUse_rule(String use_rule) {
 		this.use_rule = use_rule;
+	}
+	public String getCancel_rule_nh() {
+		return cancel_rule_nh;
+	}
+	public void setCancel_rule_nh(String cancelRuleNh) {
+		cancel_rule_nh = cancelRuleNh;
 	}
 }

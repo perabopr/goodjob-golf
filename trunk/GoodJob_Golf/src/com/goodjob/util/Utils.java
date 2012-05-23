@@ -11,6 +11,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.text.StringCharacterIterator;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -293,4 +294,26 @@ public class Utils {
 	    
 	    return week;
 	}
+	
+	public static String getCutstring(String param, int len, String tail)
+    {
+        if(param.length() <= len)
+            return param;
+        StringCharacterIterator sci = new StringCharacterIterator(param);
+        StringBuffer buffer = new StringBuffer();
+        buffer.append(sci.first());
+        for(int i = 1; i < len; i++)
+            if(i < len - 1)
+            {
+                buffer.append(sci.next());
+            } else
+            {
+                char c = sci.next();
+                if(c != ' ')
+                    buffer.append(c);
+            }
+
+        buffer.append(tail);
+        return buffer.toString();
+    }
 }

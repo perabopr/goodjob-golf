@@ -58,7 +58,7 @@ public class RESERVE {
 			",img_sub4 " +
 			",cancel_term " +
 			",view_yn" +
-			",cancel_rule" +
+			",cancel_rule , cancel_rule_nh " +
 			",promise_rule" +
 			",use_guide" +
 			",golflink_guide " +	

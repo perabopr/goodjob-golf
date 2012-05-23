@@ -38,7 +38,7 @@ public class CondoReserveDao {
 			String where = " AND site_seq = ? ";
 			bind.add(site_seq);
 			if(region > 0){
-				where = " AND region_seq = ? ";
+				where += " AND region_seq = ? ";
 				bind.add(region);
 			}
 			

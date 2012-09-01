@@ -45,7 +45,7 @@ String bookingTime = prDto.getTime_start();
 bookingDate = bookingDate.substring(0,4) + "-" + bookingDate.substring(4,6) + "-" + bookingDate.substring(6,8) + " ";
 bookingDate += bookingTime.substring(0,2) + ":" + bookingTime.substring(2,4); 
 
-int buyPrice = prDto.getGoodjob_price() * rCnt;
+int buyPrice = prDto.getNH_price() * rCnt;
 
 /* ----- 쿠폰 ----- */
 CouponDao cpDao = new CouponDao();

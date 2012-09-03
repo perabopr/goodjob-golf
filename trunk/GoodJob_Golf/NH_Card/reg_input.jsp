@@ -1,6 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- 상단 영역 -->
 <%@ include file="/include/header_nhcard.jsp" %>
+<script type="text/javascript">
+<!---//
+
+function sel_phone1(){
+	$("#phone2").focus();
+}
+
+function sel_phone2(){
+	var ph_num = $("#phone2").val();
+	if(ph_num.length >= 4){
+		$("#phone3").focus();
+	}
+}
+
+//--->
+</script>
+
 <!-- 상단 영역 -->
 <table border="0" cellpadding="0" cellspacing="0" width="713" align="center">
   <tr>
@@ -30,19 +47,20 @@
         <tr>
           <td height="40" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="129">핸드폰</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="350"><select name="formselect1" size="1">
-              <option>선택</option>
-              <option>010</option>
-              <option>011</option>
-              <option>016</option>
-              <option>017</option>
-              <option>018</option>
-              <option>019</option>
-            </select>
-            -
-            <input class="input_01" type="text" size="6" name="day">
-            -
-            <input class="input_01" type="text" size="6" name="day"></td>
+          <td style="padding-left: 10px;" width="350">
+          <SELECT size=1 id="phone1" name="phone1" onChange="sel_phone1();">
+                 <OPTION value="" selected>선택</OPTION>
+                           <OPTION value="010">010</OPTION>
+                           <OPTION value="011">011</OPTION>
+                           <OPTION value="016">016</OPTION>
+                           <OPTION value="017">017</OPTION>
+                           <OPTION value="018">018</OPTION>
+                           <OPTION value="019">019</OPTION>
+               </SELECT>
+                         -
+                         <INPUT class=mem_input id="phone2" name="phone2" onKeyup="sel_phone2();" maxLength=4 size=8>
+                         -
+                         <INPUT class=mem_input id="phone3" name="phone3" maxLength=4 size=8></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="500"></td>

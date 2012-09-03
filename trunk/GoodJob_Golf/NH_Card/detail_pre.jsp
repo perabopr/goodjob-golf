@@ -640,10 +640,11 @@ for (int i = 1; i < 15 ;i++){
                               <td><table border="0" cellpadding="2" cellspacing="1" width="702" bgcolor="#D1D3D4">
                                   <tr>
                                     <td align="center" bgcolor="#F1F1F1" class="normal_b" height="25" width="215">골프장명</td>
-                                    <td align="center" bgcolor="#F1F1F1" class="normal_b" width="94">부킹날짜</td>
-                                    <td align="center" bgcolor="#F1F1F1" class="normal_b" width="119">부킹시간대</td>
-                                    <td align="center" bgcolor="#F1F1F1" class="normal_b" width="160">인원/팀</td>
+                                    <td align="center" bgcolor="#F1F1F1" class="normal_b" width="90">부킹날짜</td>
+                                    <td align="center" bgcolor="#F1F1F1" class="normal_b" width="110">부킹시간대</td>
+                                    <td align="center" bgcolor="#F1F1F1" class="normal_b" width="150">인원/팀</td>
                                     <td align="center" bgcolor="#F1F1F1" class="normal_b" width="88">결제예상금액</td>
+                                    <td align="center" bgcolor="#F1F1F1" class="normal_b" width="60">적립금액</td>
                                   </tr>
                                   <tr>
                                     <td align="center" bgcolor="white" height="25"><%=glDto.getGolflink_name()%></td>
@@ -682,6 +683,7 @@ for (int i = 1; i < 15 ;i++){
                                                 팀 
                                     </td>
                                     <td align="center" bgcolor="white"><span class=orange_s id="txtBillPrice" name="txtBillPrice">0</span> <span class=normal_s>원</span></td>
+                                    <td align="center" bgcolor="white"><span class=orange_s>0</span> <span class=normal_s>원</span></td>
                                   </tr>
                                 </table></td>
                             </tr>
@@ -711,6 +713,10 @@ for (int i = 1; i < 15 ;i++){
                                   <tr>
                                     <td height="25" align="right" bgcolor="#F1F1F1" class="normal_b" style="padding-right:10px;" width="118">결제금액</td>
                                     <td height="27" bgcolor="white" style="padding-left:10px;" colspan="3" width="559"><span class=orange id="billPrice" name="billPrice"></span> 원</td>
+                                  </tr>
+                                  <tr>
+                                    <td height="25" align="right" bgcolor="#F1F1F1" class="normal_b" style="padding-right:10px;" width="118">적립금액</td>
+                                    <td height="27" bgcolor="white" style="padding-left:10px;" colspan="3" width="559"><span class=orange>0</span> 원</td>
                                   </tr>
                                   <tr>
                                     <td height="25" align="right" bgcolor="#F1F1F1" class="normal_b" style="padding-right:10px;" width="118">예약자이름</td>

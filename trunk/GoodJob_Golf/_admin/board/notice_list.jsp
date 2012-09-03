@@ -13,6 +13,7 @@
 	String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
 	String field = StringUtils.trimToEmpty(request.getParameter("field"));
 	String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
+	String site_seq = StringUtils.defaultIfEmpty(request.getParameter("site_seq"),"1");
 	
 	PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , BBS.per_page );
 	
@@ -20,6 +21,7 @@
 	params.put("npage",npage);
 	params.put("field",field);
 	params.put("keyword",keyword);
+	params.put("site_seq",site_seq);
 	
 	List<BoardDto> bbsList = bDao.getList("tb_notice_bbs" , params);
 	
@@ -104,7 +106,7 @@ function goPage(val){
 					<tr>
                      <td height="24" width="40" align="center"><%=count--%></td>
                      <td width="10"><img src="/_admin/images/board/bl.gif" width="10" height="22"></td>
-                     <td width="437" class="list"><a href="./notice_view.jsp?seq=<%=dto.getSeq()%>"><%=dto.getSubject()%></a></td>
+                     <td width="437" class="list"><a href="./notice_view.jsp?seq=<%=dto.getSeq()%>&site_seq=<%=site_seq%>"><%=dto.getSubject()%></a></td>
                      <td width="10">&nbsp;</td>
                      <td width="9"><img src="/_admin/images/board/bl.gif" width="10" height="22"></td>
                      <td width="80" align="center"><%=dto.getReg_dt()%></td>
@@ -131,6 +133,7 @@ function goPage(val){
               </tr>
               <form name="frm" method="post">
               <input type="hidden" name="npage" value="<%=npage%>"/>
+              <input type="hidden" name="site_seq" value="<%=site_seq%>"/>
               <tr>
                 <td height="45" align="center" bgcolor="#f5f5f5">
                 <table border="0" cellpadding="0" cellspacing="0" width="230">
@@ -155,7 +158,7 @@ function goPage(val){
                     <td height="50" align="center"><p><span class=normal_b><%=strPage%></span></p></td>
                 </tr>
         <tr>
-          <td align="right"><a href="notice_write.jsp"><img src="/_admin/images/board/bbs_write.gif" border="0"></a></td>
+          <td align="right"><a href="notice_write.jsp?site_seq=<%=site_seq%>"><img src="/_admin/images/board/bbs_write.gif" border="0"></a></td>
         </tr>
       </table></td>
   </tr>

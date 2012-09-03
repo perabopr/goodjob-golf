@@ -10,6 +10,7 @@
 	String seq = StringUtils.trimToEmpty(request.getParameter("seq"));
 	String thread = StringUtils.trimToEmpty(request.getParameter("thread"));
 	String mode = StringUtils.trimToEmpty(request.getParameter("mode"));
+	String site_seq = StringUtils.defaultIfEmpty(request.getParameter("site_seq"),"1");
 	
 	BoardDto dto = dao.getView("tb_notice_bbs" , NumberUtils.toInt(seq,0));
 	
@@ -97,6 +98,7 @@ var rootDir = '.';
 <FORM NAME="frm" METHOD="post" ACTION="notice_write_reg.jsp"  enctype="multipart/form-data">
 <input type="hidden" id="seq" name="seq" value="<%=seq%>"/>
 <input type="hidden" id="mode" name="mode" value="<%=mode%>"/>
+<input type="hidden" id="site_seq" name="site_seq" value="<%=site_seq%>"/>
 <input type="hidden" id="thread" name="thread" value="<%=dto.getThread()%>"/>
   <tr>
     <td align="center"><table width="600" border="0" cellspacing="0" cellpadding="0">

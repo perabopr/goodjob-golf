@@ -35,6 +35,7 @@ public class BoardDao {
 		String field = StringUtils.defaultIfEmpty(data.get("field"), "");
 		String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
 		int npage = NumberUtils.toInt(data.get("npage"), 1);
+		int site_seq = NumberUtils.toInt(data.get("site_seq"), 1);
 		int per_page = NumberUtils.toInt(data.get("per_page"), BBS.per_page);
 		
 		try {
@@ -46,17 +47,19 @@ public class BoardDao {
 			QueryRunner qr = new QueryRunner();
 			
 			//검색조건
-			String where = "";
+			String where = "WHERE site_seq = ? ";
+			params.add(site_seq);
+			
 			if("name".equals(field) && keyword.length()>0){
-				where = "WHERE name LIKE concat('%',?,'%') " ;
+				where = "AND name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
 			else if("subject".equals(field) && keyword.length()>0){
-				where = "WHERE subject LIKE concat('%',?,'%') " ;
+				where = "AND subject LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
 			else if("content".equals(field) && keyword.length()>0){
-				where = "WHERE content LIKE concat('%',?,'%') " ;
+				where = "AND content LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
 			
@@ -91,6 +94,7 @@ public class BoardDao {
 			String field = StringUtils.defaultIfEmpty(data.get("field"), "");
 			String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
 			int npage = NumberUtils.toInt(data.get("npage"), 1);
+			int site_seq = NumberUtils.toInt(data.get("site_seq"), 1);
 			
 			ArrayList<Object> params = new ArrayList<Object>();
 			
@@ -100,17 +104,19 @@ public class BoardDao {
 			QueryRunner qr = new QueryRunner();
 			
 			//검색조건
-			String where = "";
+			String where = "WHERE site_seq = ? ";
+			params.add(site_seq);
+
 			if("name".equals(field) && keyword.length()>0){
-				where = "WHERE name LIKE concat('%',?,'%') " ;
+				where = "AND name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
 			else if("subject".equals(field) && keyword.length()>0){
-				where = "WHERE subject LIKE concat('%',?,'%') " ;
+				where = "AND subject LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
 			else if("content".equals(field) && keyword.length()>0){
-				where = "WHERE content LIKE concat('%',?,'%') " ;
+				where = "AND content LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
 			
@@ -260,8 +266,9 @@ public class BoardDao {
 			params.add(dto.getIshtml());
 			params.add(dto.getWriteip());
 			params.add("N");
+			params.add(dto.getSite_seq());
 			
-			System.out.println("getMem_id : " + dto.getMem_id());
+			/*System.out.println("getMem_id : " + dto.getMem_id());
 			System.out.println("getName : " + dto.getName());
 			System.out.println("getEmail : " + dto.getEmail());
 			System.out.println("getSubject : " + dto.getSubject());
@@ -270,7 +277,7 @@ public class BoardDao {
 			System.out.println("getFilename : " + dto.getFilename());
 			System.out.println("getIshtml : " + dto.getIshtml());
 			System.out.println("getWriteip : " + dto.getWriteip());
-			System.out.println("seq : " + seq);
+			System.out.println("seq : " + seq);*/
 			
 			QueryRunner queryRunner = new QueryRunner();
 			queryRunner.update(conn, String.format(BBS.insert,tableName) , params.toArray());

@@ -33,6 +33,7 @@ public class BoardDto implements Serializable{
 	private String writeip;
 	private String notice;
 	private int reg_term;
+	private int site_seq;
 	
 	public int getSeq() {
 		return seq;
@@ -129,5 +130,11 @@ public class BoardDto implements Serializable{
 	}
 	public void setReg_term(int regTerm) {
 		reg_term = regTerm;
+	}
+	public int getSite_seq() {
+		return site_seq;
+	}
+	public void setSite_seq(int siteSeq) {
+		site_seq = siteSeq;
 	}
 }

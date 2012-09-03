@@ -11,6 +11,7 @@
 	String seq = StringUtils.trimToEmpty(request.getParameter("seq"));
 	String thread = StringUtils.trimToEmpty(request.getParameter("thread"));
 	String npage = StringUtils.trimToEmpty(request.getParameter("npage"));
+	String site_seq = StringUtils.defaultIfEmpty(request.getParameter("site_seq"),"1");
 	
 	BoardDto dto = dao.getView("tb_notice_bbs" , NumberUtils.toInt(seq,0));
 	
@@ -30,7 +31,7 @@
 			success: function(msg){
 				if($.trim(msg) == '0'){
 					alert("글이 정상적으로 삭제 되었습니다.");
-					location.href="./notice_list.jsp";
+					location.href="./notice_list.jsp?site_seq=<%=site_seq%>";
 				}
 				else{
 					alert("글삭제시 오류 발생!");
@@ -94,10 +95,10 @@
         <tr>
           <td align="center"><table width="500" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td width="200"><a href="notice_list.jsp?npage=<%=npage%>"><img src="/_admin/images/board/bbs_list.gif" width="53" height="22" border='0'></a></td>
+                <td width="200"><a href="notice_list.jsp?site_seq=<%=site_seq%>&npage=<%=npage%>"><img src="/_admin/images/board/bbs_list.gif" width="53" height="22" border='0'></a></td>
                 <td width="350" align="right"><table border="0" width="150" cellpadding="0" cellspacing="0">
                     <tr>
-                      <td width="75" align="center"><a href="notice_write.jsp?seq=<%=seq%>&mode=modify"><img src="/_admin/images/board/bbs_modify.gif" width="53" height="22" border="0"></a></td>
+                      <td width="75" align="center"><a href="notice_write.jsp?site_seq=<%=site_seq%>&seq=<%=seq%>&mode=modify"><img src="/_admin/images/board/bbs_modify.gif" width="53" height="22" border="0"></a></td>
                       <td width="75" align="center"><a href="javascript:board_del(<%=seq%>);"><img src="/_admin/images/board/bbs_del.gif" width="53" height="22" border="0"></a></td>
                     </tr>
                   </table></td>

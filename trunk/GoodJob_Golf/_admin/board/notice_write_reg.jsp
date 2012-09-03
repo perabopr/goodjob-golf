@@ -29,6 +29,7 @@
 	String password = upload.getParameter("password");
 	String upfile = StringUtils.trimToEmpty((String)fileMap.get("upfile"));
 	String mode = upload.getParameter("mode");
+	String site_seq = upload.getParameter("site_seq");
 	
 	
 	BoardDto dto = new BoardDto();
@@ -42,18 +43,19 @@
 	dto.setFilename(upfile);
 	dto.setWriteip(request.getRemoteAddr());
 	dto.setIshtml("N");
+	dto.setSite_seq(NumberUtils.toInt(site_seq));
 	
 	BoardDao dao = new BoardDao();
 	
 	if("modify".equals(mode)){
 		
 		dao.setUpdate("tb_notice_bbs" , dto);
-		response.sendRedirect("./notice_view.jsp?seq="+seq);
+		response.sendRedirect("./notice_view.jsp?seq="+seq+"&site_seq="+site_seq);
 	}
 	else{
 		
 		dao.setInsert("tb_notice_bbs" , dto);
 		
-		response.sendRedirect("./notice_list.jsp");
+		response.sendRedirect("./notice_list.jsp?site_seq="+site_seq);
 	}
 %>

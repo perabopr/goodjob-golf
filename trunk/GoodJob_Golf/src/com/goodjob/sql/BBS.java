@@ -40,8 +40,8 @@ public class BBS {
 	public static final String update = "UPDATE %s SET " + 
 										 " name = ?, email = ?, subject = ?, content = ?, ishtml = ? where seq = ? ";
 	
-	public static final String insert = " insert into %s (seq,mem_id,name,email,subject,content,password,readcount,reg_dt,filename,position,thread,ishtml,writeip,notice_yn) " + 
-										 "values (?,?,?,?,?,?,?,0,curdate(),?,?,?,?,?,?)";
+	public static final String insert = " insert into %s (seq,mem_id,name,email,subject,content,password,readcount,reg_dt,filename,position,thread,ishtml,writeip,notice_yn,site_seq) " + 
+										 "values (?,?,?,?,?,?,?,0,curdate(),?,?,?,?,?,?,?)";
 	
 	public static final String delete = "DELETE FROM %s WHERE seq = ? ";
 	

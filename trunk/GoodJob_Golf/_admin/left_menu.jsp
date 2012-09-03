@@ -256,7 +256,11 @@
                         <table id="menu2" name="menu2" width="100%" border="0" cellpadding="0" cellspacing="0">
                             <tr>
                                 <td height="25" width="20">&nbsp;</td>
-                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/board/notice_list.jsp" class=left_menu>공지사항</a></td>
+                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/board/notice_list.jsp?site_seq=1" class=left_menu>공지사항</a></td>
+                            </tr>
+                            <tr>
+                                <td height="25" width="20">&nbsp;</td>
+                                <td width="160"><img align="absmiddle" src="/_admin/images/common/left_menu_bullet.gif" width="6" height="7" border="0"> <a target="main" href="/_admin/board/notice_list.jsp?site_seq=3" class=left_menu>NH카드 공지사항</a></td>
                             </tr>
                             <tr>
                                 <td height="25" width="20">&nbsp;</td>

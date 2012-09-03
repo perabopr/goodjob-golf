@@ -17,6 +17,7 @@
 	params.put("npage",npage);
 	params.put("field",field);
 	params.put("keyword",keyword);
+	params.put("site_seq","1");
 	
 	List<BoardDto> bbsList = dao.getList("TB_NOTICE_BBS" , params);
 	

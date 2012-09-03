@@ -11,6 +11,7 @@ page import="com.goodjob.util.Utils"%><%
 	Map<String,String> params = new HashMap<String,String>();
 	params.put("npage","1");
 	params.put("per_page","5");
+	params.put("site_seq","3");
 	
 	List<BoardDto> bbsList = bDao.getList("tb_notice_bbs" , params);
 	

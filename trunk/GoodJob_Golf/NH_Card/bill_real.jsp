@@ -279,6 +279,14 @@ function card_order(menu , reserve_seq , good_price , good_name){
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
         </tr>
         <tr>
+          <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>적립금액</td>
+          <td width="1" height="18" bgcolor="#D1D3D4"></td>
+          <td style="padding-left: 10px;"><span class=orange><%=Utils.numberFormat(buyPrice*4) %></span> 원</td>
+        </tr>
+        <tr>
+          <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
+        </tr>
+        <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>결제방법</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
           <td style="padding-left: 10px;"><INPUT id="billBtype2" name="billtype" value="C" type=radio checked> 신용카드결제</td>

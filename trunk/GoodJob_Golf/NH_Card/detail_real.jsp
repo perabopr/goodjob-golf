@@ -483,10 +483,11 @@ for (int i = 1; i < 15 ;i++){
 						<TR>
 						<TD class=normal_b bgColor=#f1f1f1 height=25 width=100 align=center>부킹날짜</TD>
 						<TD class=normal_b bgColor=#f1f1f1 height=25 width=80 align=center>부킹시간</TD>
-						<TD class=normal_b bgColor=#f1f1f1 width=150 align=center>코스</TD>
+						<TD class=normal_b bgColor=#f1f1f1 width=100 align=center>코스</TD>
 						<TD class=normal_b bgColor=#f1f1f1 width=120 align=center>할인요금(4人기준)</TD>
-						<TD class=normal_b bgColor=#f1f1f1 width=90 align=center>홀구분</TD>
+						<TD class=normal_b bgColor=#f1f1f1 width=80 align=center>홀구분</TD>
 						<TD class=normal_b bgColor=#f1f1f1 width=160 align=center>예약가능여부</TD>
+						<TD class=normal_b bgColor=#f1f1f1 width=60 align=center>적립금액</TD>
 						</TR>
 <%
 	for(int i = 0; i < listPr.size();i++){
@@ -513,6 +514,7 @@ for (int i = 1; i < 15 ;i++){
 <%			
 		}
 %>
+						<TD bgColor=white align=center>10,000</TD>
 						</TR>
 <%
 	}

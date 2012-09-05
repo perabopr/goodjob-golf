@@ -15,6 +15,36 @@ function sel_phone2(){
 	}
 }
 
+function on_submit() {
+
+	var frm = document.frm;
+	if(!$('#reserve_name').val()) {
+		alert('예약자명을 입력하시기 바랍니다.');
+		$('#reserve_name').focus();
+		return;
+	}
+
+	if(!$('#phone1').val()) {
+		alert('핸드폰을 입력하시기 바랍니다.');
+		$('#phone1').focus();
+		return;
+	} 
+
+	if(!$('#phone2').val()) {
+		alert('핸드폰을 입력하시기 바랍니다.');
+		$('#phone2').focus();
+		return;
+	} 
+
+	if(!$('#phone3').val()) {
+		alert('핸드폰을 입력하시기 바랍니다.');
+		$('#phone3').focus();
+		return;
+	} 
+	frm.action="reg_list.jsp"
+	frm.submit();
+}
+
 //--->
 </script>
 
@@ -36,10 +66,11 @@ function sel_phone2(){
         <tr>
           <td width="500" colspan="3" bgcolor="#D1D3D4" height="1"></td>
         </tr>
+<form name="frm" method="post">
         <tr>
           <td width="129" height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>예약자명</td>
           <td width="1" bgcolor="#D1D3D4"></td>
-          <td width="350"  style="padding-left: 10px;"><input class="input_01" type="text" size="14" name="day"></td>
+          <td width="350"  style="padding-left: 10px;"><input class="input_01" type="text" size="14" name="reserve_name" id="reserve_name"></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="500"></td>
@@ -67,8 +98,10 @@ function sel_phone2(){
         </tr>
       </table></td>
   </tr>
+  </form>
   <tr>
-    <td style="padding-bottom: 30px; padding-top: 30px" align=center><a href="reg_list.jsp"><img border=0 src="../images/booking/btn_next_page3.gif" width="150" height="39"></a></td>
+    <td style="padding-bottom: 30px; padding-top: 30px" align=center>
+    <a href="javascript:on_submit();"><img border=0 src="../images/booking/btn_next_page3.gif" width="150" height="39"></a></td>
   </tr>
 </table>
 <!-- 하단 footer  -->

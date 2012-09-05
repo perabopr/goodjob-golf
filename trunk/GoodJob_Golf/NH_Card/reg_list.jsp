@@ -1,4 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="org.apache.commons.lang.StringUtils"%>
+<%@ page import="org.apache.commons.lang.math.NumberUtils"%>
+<%@ page import="java.util.*" %>
+<%@ page import="com.goodjob.util.PageNavigater"%>
+<%@page import="com.goodjob.mypage.*"%>
+<%@page import="com.goodjob.reserve.dto.*"%>
+<%@ page import="com.goodjob.util.Utils" %>
+<%
+	
+	String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
+	String field = StringUtils.trimToEmpty(request.getParameter("field"));
+	String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
+	
+	String reserve_name = StringUtils.defaultString((String)session.getAttribute("reserve_name"),"");
+	String reserve_phone = StringUtils.trimToEmpty((String)session.getAttribute("phone1"))+"-"+
+						StringUtils.trimToEmpty((String)session.getAttribute("phone2"))+"-"+
+						StringUtils.trimToEmpty((String)session.getAttribute("phone3"));
+	
+	String startDt = StringUtils.trimToEmpty(request.getParameter("startDt"));
+	String endDt = StringUtils.trimToEmpty(request.getParameter("endDt"));
+	
+	PageNavigater paging = new PageNavigater(NumberUtils.toInt(npage) , 10 );
+	
+	Map<String,String> params = new HashMap<String,String>();
+	params.put("startDt",startDt);
+	params.put("endDt",endDt);
+	params.put("reserve_name",reserve_name);
+	params.put("reserve_phone",reserve_phone);
+	
+	MyPageDao myDao = new MyPageDao();
+	
+	//골프장
+	List<GolfLinkReserveDto> golfList = myDao.getNHReserveList(params);
+	
+	int totalCount = myDao.getNHReserveTotal(params);
+	
+	String strPage = paging.getPaging(totalCount, false);
+	
+%>
 <!-- 상단 영역 -->
 <%@ include file="/include/header_nhcard.jsp" %>
 <!-- 상단 영역 -->
@@ -57,8 +96,7 @@
       변동사항이나 예약취소를 원하실 경우 <span class=blue_list>고객센터(02-6670-0110)</span>로 연락주시면 빠른시일내에 처리해 드리겠습니다. 감사합니다.</td>
   </tr>
   <tr>
-    <td align="center" style="padding-top: 30px; padding-bottom: 30px"><img align="absmiddle" src="../images/board/btn_prev_dual.gif" width="16" height="15" border="0"> <img align="absmiddle" src="../images/board/btn_prev.gif" width="16" height="15" border="0"> <span class=normal_b>1 &nbsp;</span>I &nbsp;2 &nbsp;I &nbsp;3 &nbsp;I &nbsp;4 &nbsp;I &nbsp;5 &nbsp;I &nbsp;6 &nbsp;I &nbsp;7 &nbsp;I &nbsp;8 &nbsp;I &nbsp;9 &nbsp;I &nbsp;10 <img align="absmiddle"
-src="../images/board/btn_next.gif" width="16" height="15" border="0"> <img align="absmiddle" src="../images/board/btn_next_dual.gif" width="16" height="15" border="0"></td>
+    <td align="center" style="padding-top: 30px; padding-bottom: 30px"><p><%=strPage%></p></td>
   </tr>
 </table>
 <!-- 하단 footer  -->

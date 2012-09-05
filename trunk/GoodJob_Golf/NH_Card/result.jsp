@@ -2,7 +2,7 @@
 <%@ page import="org.apache.commons.dbutils.*" %>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
-<%@ include file="header.jsp" %>
+<%@ include file="/include/header_nhcard.jsp" %>
 <%String menuName = StringUtils.defaultIfEmpty(request.getParameter("menu"),"1");%>
 <table border="0" cellpadding="0" cellspacing="0" width="751">
 <tr>
@@ -12,7 +12,7 @@
 		<% }else if(menuName.equals("2")){ %>
 			<%@ include file="resultPre.jsp" %>
 		<% }else if(menuName.equals("3")){ %>
-			<%@ include file="resultPackage.jsp" %>
+			<%//@ include file="resultPackage.jsp" %>
 		<% }else if(menuName.equals("4")){ %>
 			<%//@ include file="resultPackageForeign.jsp" %>
 		<% }else if(menuName.equals("5")){ %>
@@ -20,8 +20,5 @@
 		<% }%>
 	</td>
 </tr>
-<tr>
-	<td>&nbsp;</td>
-</tr>
 </table>
-<%@ include file="tail.jsp" %>
+<%@ include file="/include/footer_nhcard.jsp" %>

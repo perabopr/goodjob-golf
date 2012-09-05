@@ -79,7 +79,7 @@ if(prList.size() != 1){
 		glrDto.setCoupon_price(couponPrice);
 		glrDto.setProcess_status("0");
 		glrDto.setCard_bill_num("");
-		glrDto.setSite_seq(2);
+		glrDto.setSite_seq(3);
 		
 		glrDto.setProductsub_seq(psId);
 		
@@ -100,7 +100,7 @@ bookingDate = bookingDate.substring(5,10).replace("-",".");
 message += bookingDate;
 message += " 예약신청되셨습니다";
 message += "[NH카드고객센터]";
-String sphone = "02-6670-0000";
+String sphone = "02-6670-0200";
 String reserveuid = user_Id;
 String reservephone = rPhone;
 Map<String,String> params = new HashMap<String,String>();

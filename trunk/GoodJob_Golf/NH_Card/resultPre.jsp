@@ -1,4 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.goodjob.coupon.dto.CouponDto"%>
+<%@page import="com.goodjob.coupon.CouponDao"%>
+<%@page import="org.apache.commons.lang.math.NumberUtils"%>
+<%@page import="org.apache.commons.lang.StringUtils"%>
+<%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
+<%@page import="java.util.List"%>
+<%@page import="com.goodjob.reserve.GolfLinkDao"%>
+<%@page import="com.goodjob.util.Utils"%>
+<%
+int productsubSeq = NumberUtils.toInt(request.getParameter("gcId"), 0);
+int golf = NumberUtils.toInt(request.getParameter("golf"), 0);
+int date = NumberUtils.toInt(request.getParameter("date"), 0);
+int cdate = NumberUtils.toInt(request.getParameter("cdate"), 0);
+
+int rCnt = NumberUtils.toInt(request.getParameter("reserveCnt"), 0);
+int rTeam = NumberUtils.toInt(request.getParameter("reserveTeam"), 0);
+String rDate = StringUtils.trimToEmpty(request.getParameter("reserveDate"));
+String rTime = StringUtils.trimToEmpty(request.getParameter("reserveTime"));
+int rCoupon = NumberUtils.toInt(request.getParameter("reserveCoupon"), 0);
+
+String rName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
+String rPhone = StringUtils.trimToEmpty(request.getParameter("reservePhone"));
+String rEmail = StringUtils.trimToEmpty(request.getParameter("reserveEmail"));
+String rRequest = StringUtils.trimToEmpty(request.getParameter("reserveRequest"));
+rRequest = rRequest.replaceAll("\r\n","</br>");
+
+String golflinkName = StringUtils.trimToEmpty(request.getParameter("golflinkName"));
+String bookingDate = StringUtils.trimToEmpty(request.getParameter("bookingDate"));
+String buyPrice = StringUtils.trimToEmpty(request.getParameter("buyPrice"));
+String savePrice = StringUtils.trimToEmpty(request.getParameter("savePrice"));
+%>
 <!-- 상단 영역 -->
 <%@ include file="/include/header_nhcard.jsp" %>
 <!-- 상단 영역 -->
@@ -25,7 +56,7 @@
         <tr>
           <td width="139" height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>예약자명</td>
           <td width="1" bgcolor="#D1D3D4"></td>
-          <td width="440"  style="padding-left: 10px;" class=normal_b>홍길동</td>
+          <td width="440"  style="padding-left: 10px;" class=normal_b><%=rName %></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -33,7 +64,7 @@
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">핸드폰</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440">010-123-4567 </td>
+          <td style="padding-left: 10px;" width="440"><%=rPhone %> </td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -41,7 +72,7 @@
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">E-Mail</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440">abc@naver.com</td>
+          <td style="padding-left: 10px;" width="440"><%=rEmail %></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -49,7 +80,7 @@
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">골프장명</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" class=blue_list width="440">골프장명</td>
+          <td style="padding-left: 10px;" class=blue_list width="440"><%=golflinkName%></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -57,7 +88,7 @@
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">시간대</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440">2012-12-34 07시~10시</td>
+          <td style="padding-left: 10px;" width="440"><%=bookingDate %></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -65,7 +96,7 @@
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">인원</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440"><span class=orange>2 </span>명</td>
+          <td style="padding-left: 10px;" width="440"><span class=orange><%=rCnt %></span>명</td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -73,7 +104,15 @@
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">결제금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440"><span class=orange>300,000</span> 원</td>
+          <td style="padding-left: 10px;" width="440"><span class=orange><%=buyPrice%></span> 원</td>
+        </tr>
+        <tr>
+          <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
+        </tr>
+        <tr>
+          <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">적립금액</td>
+          <td width="1" height="18" bgcolor="#D1D3D4"></td>
+          <td style="padding-left: 10px;" width="440"><span class=orange><%=savePrice%></span> 원</td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -81,7 +120,7 @@
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">요청사항</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;padding-right: 10px;padding-top: 10px;padding-bottom: 10px;" width="430">요청사항요청사항요청사항요청사항요청사항요청사항요청사항요청사항요청사항요청사항요청사항요청사항요청사항요청사항요청사항요청사항요청사항요청사항요청사</td>
+          <td style="padding-left: 10px;padding-right: 10px;padding-top: 10px;padding-bottom: 10px;" width="430"><%=rRequest%></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>

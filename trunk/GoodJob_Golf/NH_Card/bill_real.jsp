@@ -105,7 +105,7 @@ function priceChange(){
 		billprice = commify(billprice);
 
 	$("#billPrice").html(billprice);
-	
+	$("#buyPrice").val(billprice);
 }
 
 function commify(n) {
@@ -256,7 +256,8 @@ function card_order(menu , reserve_seq , good_price , good_name){
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>코스명</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;"><%=StringUtils.defaultIfEmpty(prDto.getCourse_name(), "<div class=red_s>없음</div>") %></td>
+          <td style="padding-left: 10px;"><%=StringUtils.defaultIfEmpty(prDto.getCourse_name(), "<div class=red_s>없음</div>") %>
+          <input type="hidden" id="course_name" name="course_name" value="<%=StringUtils.defaultIfEmpty(prDto.getCourse_name(), "<div class=red_s>없음</div>") %>"></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -273,7 +274,8 @@ function card_order(menu , reserve_seq , good_price , good_name){
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>결제금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;"><span class=orange><%=Utils.numberFormat(buyPrice*4) %></span> 원</td>
+          <td style="padding-left: 10px;"><span class=orange><%=Utils.numberFormat(buyPrice*4) %></span> 원
+          <input type="hidden" id="buyPrice" name="buyPrice" value=""/></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -281,7 +283,8 @@ function card_order(menu , reserve_seq , good_price , good_name){
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>적립금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;"><span class=orange><%=Utils.numberFormat(buyPrice*4) %></span> 원</td>
+          <td style="padding-left: 10px;"><span class=orange>0</span> 원
+          <input type="hidden" id="savePrice" name="savePrice" value="0"/></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -298,7 +301,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
   </tr>
   <tr>
     <td style="padding-bottom: 30px; padding-top: 30px" align=center>
-    <img border=0 src="../img_nhcard/common/btn_pay.gif" onclick="billok();" width="150" height="39"></a></td>
+    <a href="javascript:billok();"><img border=0 src="../img_nhcard/common/btn_pay.gif" width="150" height="39"></a></td>
   </tr>
 </table>
 <iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe>

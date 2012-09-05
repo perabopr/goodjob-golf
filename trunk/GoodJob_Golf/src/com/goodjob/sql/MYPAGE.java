@@ -74,4 +74,29 @@ public class MYPAGE {
 				"where a.reg_user = ? {0} ";
 	
 	public static final String status_update = "UPDATE {0} SET process_status=? , card_bill_num=? WHERE reserve_seq = ?";
+	
+	//---------------------------- NH Card ----------------------------------
+	//1 : 실시간 , 2 : 사전
+	public static final String my_nh_reserve = "select a.reserve_seq," +
+								"a.menu_seq," +
+								"a.golflink_seq," +
+								"a.product_seq," +
+								"a.productsub_seq," +
+								"date_format(a.reserve_day,''%Y.%m.%d'') reserve_day," +
+								"a.reserve_name," +
+								"a.reserve_uid," +
+								"a.golflink_name," +
+								"a.booking_day," +
+								"a.booking_time_s," +
+								"a.golflink_course,a.product_price,a.coupon_price," +
+								"a.per_num ,a.process_status, " +
+								"a.golflink_course " +
+							"from tb_golflink_reserve a " +
+							"where reserve_name = ? and reserve_phone = ? and site_seq = 3 " +
+							"and reserve_day >= date_add(now(),interval -180 day) {0} order by menu_seq , a.reserve_seq desc ";
+	
+	public static final String my_nh_reserve_total = "select count(*) as cnt " +
+							"from tb_golflink_reserve a " +
+							"where reserve_name = ? and reserve_phone = ? and site_seq = 3 " +
+							"and reserve_day >= date_add(now(),interval -180 day) {0} ";
 }

@@ -341,4 +341,85 @@ public class MyPageDao {
 			DbUtils.closeQuietly(conn);
 		}
 	}
+	
+	//================================ NH Card =======================
+	public List<GolfLinkReserveDto> getNHReserveList(Map<String,String> params){
+		
+		List<GolfLinkReserveDto> list = null;
+		Connection conn = null;
+		
+		String startDt = StringUtils.trimToEmpty(params.get("startDt"));
+		String endDt = StringUtils.trimToEmpty(params.get("endDt"));
+		String reserve_name = StringUtils.trimToEmpty(params.get("reserve_name"));
+		String reserve_phone = StringUtils.trimToEmpty(params.get("reserve_phone"));
+		
+		
+		int npage = NumberUtils.toInt(params.get("npage"), 1);
+		int per_page = NumberUtils.toInt(params.get("per_page"), BBS.per_page);
+		
+		try {
+			conn = DBManager.getConnection();
+
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(reserve_name);
+			bind.add(reserve_phone);
+			
+			ResultSetHandler rsh = new BeanListHandler(GolfLinkReserveDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			//검색조건
+			String where = "";
+			if(startDt.length()>0 && endDt.length() > 0){
+				where = " and date_format(reserve_day,'%Y-%m-%d') between ? and ? " ;
+				bind.add(startDt);
+				bind.add(endDt);
+			}
+			
+			list = (List<GolfLinkReserveDto>) qr.query(conn , MessageFormat.format(MYPAGE.my_nh_reserve, where), rsh , bind.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+		return list;
+	}
+	
+	public int getNHReserveTotal(Map<String,String> params){
+		
+		Map<String, Long> map = null;
+		Connection conn = null;
+		
+		String startDt = StringUtils.trimToEmpty(params.get("startDt"));
+		String endDt = StringUtils.trimToEmpty(params.get("endDt"));
+		String reserve_name = StringUtils.trimToEmpty(params.get("reserve_name"));
+		String reserve_phone = StringUtils.trimToEmpty(params.get("reserve_phone"));
+		try {
+			conn = DBManager.getConnection();
+
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(reserve_name);
+			bind.add(reserve_phone);
+			
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			
+			//검색조건
+			String where = "";
+			if(startDt.length()>0 && endDt.length() > 0){
+				where = " and date_format(reserve_day,'%Y-%m-%d') between ? and ? " ;
+				bind.add(startDt);
+				bind.add(endDt);
+			}
+			
+			map = (Map<String, Long>)qr.query(conn , MessageFormat.format(MYPAGE.my_nh_reserve_total, where), rsh , bind.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		return NumberUtils.toInt(map.get("cnt")+"");
+	}
 }

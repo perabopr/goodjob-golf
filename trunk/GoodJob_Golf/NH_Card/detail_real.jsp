@@ -312,7 +312,7 @@ function imgChange(objId){
                 <td height="10"></td>
               </tr>
               <tr>
-                <td><%=glDto.getCancel_rule_nh()%></td>
+                <td><%=StringUtils.trimToEmpty(glDto.getCancel_rule_nh())%></td>
               </tr>
             </table>
             <p>&nbsp;</p></td>

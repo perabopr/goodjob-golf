@@ -193,7 +193,8 @@ function commify(n) {
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">결제금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440"><span class=orange><%=Utils.numberFormat(buyPrice) %></span> 원</td>
+          <td style="padding-left: 10px;" width="440"><span class=orange><%=Utils.numberFormat(buyPrice) %></span> 원
+          <input type="hidden" id="buyPrice" name="buyPrice" value="<%=buyPrice%>"></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -201,7 +202,8 @@ function commify(n) {
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">적립금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440"><span class=orange>0</span> 원</td>
+          <td style="padding-left: 10px;" width="440"><span class=orange>0</span> 원
+          <input type="hidden" id="savePrice" name="savePrice" value="0"></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -217,7 +219,7 @@ function commify(n) {
       </table></td>
   </tr>
   <tr>
-    <td style="padding-bottom: 30px; padding-top: 30px" align=center><a href="confirm_pre.jsp"><img border=0 src="../images/booking/btn_next_page2.gif" width="150" height="39"></a></td>
+    <td style="padding-bottom: 30px; padding-top: 30px" align=center><a href="javascript:billok();"><img border=0 src="../images/booking/btn_next_page2.gif" width="150" height="39"></a></td>
   </tr>
 </table>
 </FORM>

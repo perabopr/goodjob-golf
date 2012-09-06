@@ -69,16 +69,43 @@
           <td bgcolor="#F1F1F1" align="center" class=m_title_b width="56">예약구분</td>
           <td bgcolor="#F1F1F1" align="center" class=m_title_b width="59">처리상태</td>
         </tr>
+<%
+																			
+GolfLinkReserveDto golfDto;
+if(golfList != null && !golfList.isEmpty()){
+	
+	int size = golfList.size();
+	String booking_time = "";
+	for(int i = 0 ; i < size ; i++){
+		
+		golfDto = golfList.get(i);
+		
+		booking_time = golfDto.getBooking_time_s().substring(0,2)+":"+golfDto.getBooking_time_s().substring(2,4);
+%>
         <tr>
-          <td height="25" bgcolor="white" align="center" class=m_title>2012.12.31</td>
-          <td bgcolor="white" align="center" class=blue_ss>2012.12.25 12:15</td>
-          <td bgcolor="white" class=m_title_blue style="padding-left:7px;padding-right:7px;">대영힐스 CC</td>
-          <td bgcolor="white" align="center" class=m_title>스텔라</td>
-          <td bgcolor="white" align="center" class=m_title_red>500,000원<br></td>
-          <td bgcolor="white" align="center" class=m_title>3명/1팀</td>
-          <td bgcolor="white" align="center" class=m_title_pink>실시간</td>
-          <td bgcolor="white" align="center" class=m_title_blue>예약완료</td>
+	        <td height="35" bgcolor="white" align="center" class=m_title><%=golfDto.getReserve_day()%></td>
+			<td bgcolor="white" align="center" class=m_title><%=Utils.dateFormat(golfDto.getBooking_day(),".")%> <%=booking_time%></td>
+	        <td bgcolor="white" class=m_title_blue style="padding-left:7px;padding-right:7px;"><%=golfDto.getGolflink_name()%></td>
+	        <td bgcolor="white" align="center" class=m_title><%=(StringUtils.defaultIfEmpty(golfDto.getGolflink_course(),"없음"))%></td>
+	        <td bgcolor="white" align="center" class=m_title_red><%=Utils.numberFormat(golfDto.getProduct_price())%>원</td>
+	        <td bgcolor="white" align="center" class=m_title><%=golfDto.getPer_num()%>명/1팀</td>
+	        <td bgcolor="white" align="center"><%=(golfDto.getMenu_seq()==1?"<span class=m_title_pink>실시간</span>":"<span class=m_title_green>사전신청</span>")%></td>
+			<td bgcolor="white" align="center">
+			<%
+			if("0".equals(golfDto.getProcess_status()))
+					out.println("<span class=m_title_b>예약대기</span>");
+			else if("1".equals(golfDto.getProcess_status()))
+				out.println("<span class=m_title_blue>예약완료</span>");
+			else if("2".equals(golfDto.getProcess_status()))
+				out.println("<span class=m_title_red>취소불가</span>");
+			else if("3".equals(golfDto.getProcess_status()))
+				out.println("<span class=m_title_red>예약취소</span>");
+			%></td>
         </tr>
+<%
+		}
+	}
+%>
         <tr>
           <td height="25" align="center" bgcolor="white" class="m_title">2012.12.31</td>
           <td align="center" bgcolor="white" class="red_ss">2012.12.25 12:15</td>

@@ -30,12 +30,12 @@ int couponSeq = 0;
 try{
 	couponSeq  = NumberUtils.toInt(arrCouponValue[0]);
 }catch(Exception e){
-	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=1&gr_cd="+request.getParameter("gr_cd")+"&username="+URLEncoder.encode(request.getParameter("username"), "utf-8")+"'</script>");
+	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=1&gr_cd="+request.getParameter("gr_cd")+"&username="+user_Name+"'</script>");
 	return;
 }
 
 if(menu == 0 || gcId == 0 || golf == 0 || date == 0 || cdate == 0){
-	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=1&gr_cd="+request.getParameter("gr_cd")+"&username="+URLEncoder.encode(request.getParameter("username"), "utf-8")+"'</script>");
+	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=1&gr_cd="+request.getParameter("gr_cd")+"&username="+user_Name+"'</script>");
 	return;
 }
 
@@ -51,7 +51,7 @@ List<CouponDto> couponList = cpDao.getUserCouponList(user_Id, "0",true);
 
 GolfLinkReserveDto glrDto = new GolfLinkReserveDto();
 glrDto.setReserve_name(resName);
-glrDto.setReserve_uid(user_Id);
+glrDto.setReserve_uid(resName);
 glrDto.setPer_num(Integer.toString(perNum));
 glrDto.setReserve_phone(uPhone);
 int couponPrice = 0;
@@ -92,7 +92,7 @@ params.put("mem_id",reserveuid);
 params.put("rphone",reservephone);
 
 SMSDao sDao = new SMSDao();
-boolean isSend = sDao.send(params);
+//boolean isSend = sDao.send(params);
 
 if("".equals(cbNum) && cbNum.length() == 0 ){
 	message = "계좌번호:농협 317-0001-2481-91 ";
@@ -104,9 +104,12 @@ if("".equals(cbNum) && cbNum.length() == 0 ){
 	params.put("sphone",sphone);
 	params.put("mem_id",reserveuid);
 	params.put("rphone",reservephone);
-	isSend = sDao.send(params);
+	//isSend = sDao.send(params);
 }
 %>
-<script language="javascript" type="text/javascript">
-this.parent.document.location.href="result.jsp?menu=1&gr_cd=<%=request.getParameter("gr_cd")%>";
+<script type="text/javascript">
+var frm = this.parent.document.exefrm;
+frm.target = ""; 
+frm.action = "result.jsp";
+frm.submit();
 </script>

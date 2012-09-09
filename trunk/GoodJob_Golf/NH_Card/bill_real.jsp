@@ -14,6 +14,11 @@ int golf = NumberUtils.toInt(request.getParameter("golf"), 0);
 int date = NumberUtils.toInt(request.getParameter("date"), 0);
 int cdate = NumberUtils.toInt(request.getParameter("cdate"), 0);
 
+String rName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
+String rPhone = StringUtils.trimToEmpty(request.getParameter("reservePhone"));
+String rEmail = StringUtils.trimToEmpty(request.getParameter("reserveEmail"));
+String rRequest = StringUtils.trimToEmpty(request.getParameter("reserveRequest"));
+
 //사용자정보.
 String user_Name = StringUtils.trimToEmpty((String)session.getAttribute("mem_name"));
 String user_Id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"));
@@ -25,6 +30,9 @@ if(productsubSeq == 0 || golf == 0 || date == 0 || cdate == 0){
 
 GolfLinkDao glDao = new GolfLinkDao();
 List<ProductReserveDto> listPr = glDao.getGolfProduct(productsubSeq);
+
+//=================적립금 가져 오기..
+int site_save_price = glDao.getSiteSavePrice(productsubSeq , 3);
 
 ProductReserveDto prDto = null;
 if(listPr == null || listPr.size() != 1){
@@ -52,7 +60,7 @@ if(prDto.getCoupon_use_yn().equals("1")){
 <script type="text/javascript">
 <!--
 function reSetDate(){
-	location.href = "/linkpages/detail.jsp?menu=1&golf=<%=golf%>&date=<%=date%>&cdate=<%=cdate%>";
+	location.href = "/NH_Card/detail.jsp?menu=1&golf=<%=golf%>&date=<%=date%>&cdate=<%=cdate%>";
 }
 
 function billok(){
@@ -60,7 +68,7 @@ function billok(){
 	if($("#reserveName").val().length == 0){
 		alert("예약자명을 입력하세요");
 		$("#reserveName").focus();
-		return false;
+		return;
 	}
 	if($("#phone1").val().length == 0){
 		chkBool = false;
@@ -73,7 +81,12 @@ function billok(){
 	}
 	if(!chkBool){
 		alert("연락처를 입력하세요.");
-		return false;
+		return ;
+	}
+	var rEmail = $("#email1").val()+"@"+$("#email2").val();
+	if($("#email1").val().length == 0 && $("#email2").val().length == 0){
+		alert("E-Mail을 입력하세요.");
+		return ;
 	}
 	
 	$("#menu").val("<%=menu%>");
@@ -81,6 +94,8 @@ function billok(){
 	$("#golf").val('<%=golf%>');
 	$("#date").val('<%=date%>');
 	$("#cdate").val('<%=cdate%>');
+
+	$("#reserveEmail").val(rEmail);	
 	
 	if($("#billBtype").attr("checked")){
 		if(window.confirm("예약을 완료하시려면 확인 버튼을 누르십시오 \r\n예약확인 SMS : "+$("#phone1").val()+$("#phone2").val()+$("#phone3").val())){
@@ -102,10 +117,14 @@ function billSubmit(cbNum){
 
 function priceChange(){
 	var billprice = <%=buyPrice%> * $("#perNum").val();
+	var save_price = <%=site_save_price%> * $("#perNum").val();
 		billprice = commify(billprice);
 
 	$("#billPrice").html(billprice);
 	$("#buyPrice").val(billprice);
+
+	$("#savePrice").html(save_price);
+	$("#save_price").val(save_price);
 }
 
 function commify(n) {
@@ -141,16 +160,12 @@ function sel_phone2(){
 	}
 }
 
-function card_order(menu , reserve_seq , good_price , good_name){
-	<%
-		if(!("gundallove@gmail.com".equals(user_Id) || "killkoo@naver.com".equals(user_Id))){
-	%>
-	alert("카드 결제는 준비 중 입니다.");
-	return;
-	<%
-		}
-	%>
+function emaildomain(){
+	$("#email2").val($("#ddlEmail").val());
+}
 
+function card_order(menu , reserve_seq , good_price , good_name){
+	
 	if(good_price == '' || good_price == '0'){
 		alert("결제 금액이 없습니다.");
 		return;
@@ -161,12 +176,19 @@ function card_order(menu , reserve_seq , good_price , good_name){
 	$('#good_price').val(good_price);
 	$('#menu').val(menu);
 	$('#reserve_seq').val(reserve_seq);
+	$('#reserve_name').val($("#reserveName").val());
+	var phone = $("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val();
+	$('#mtel').val(phone);
+
+	var rEmail = $("#email1").val()+"@"+$("#email2").val();
+	$('#ordEmail').val(rEmail);
 	
 	var win_pop = window.open("","order_pop","width=650,height=700,scrollbars=no");
 	frm.target =  "order_pop"; 
 	frm.action = "./chk_plugin.jsp";
 	frm.submit();
 }
+
 //-->
 </script>
 <form name="order_frm" method="post">
@@ -174,6 +196,9 @@ function card_order(menu , reserve_seq , good_price , good_name){
 <input type="hidden" id="good_price" name="good_price" value=""/>
 <input type="hidden" id="menu" name="menu" value=""/>
 <input type="hidden" id="reserve_seq" name="reserve_seq" value=""/>
+<input type="hidden" id="reserve_name" name="reserve_name" value=""/>
+<input type="hidden" id="mtel" name="mtel" value=""/>
+<input type="hidden" id="reserveEmail" name="reserveEmail" value=""/>
 </form>
 <FORM NAME="exefrm" METHOD="post">
 <input type="hidden" id="menu" name="menu" value="1">
@@ -183,6 +208,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
 <input type="hidden" id="cdate" name="cdate" >
 <input type="hidden" id="cbNum" name="cbNum" >
 <input type="hidden" id="bill_price" name="bill_price" value="<%=buyPrice%>"/>
+<input type="hidden" id="save_price" name="save_price" value="<%=buyPrice%>"/>
 <table border="0" cellpadding="0" cellspacing="0" width="713" align="center">
   <tr>
     <td width="713"><table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -217,15 +243,21 @@ function card_order(menu , reserve_seq , good_price , good_name){
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
           <td style="padding-left: 10px;"><table border="0" width="100%" cellpadding="0" cellspacing="0">
               <tr>
-                <td height="30"><SELECT size=1 id="phone1" name="phone1" onChange="sel_phone1();"> 
-<OPTION value="" selected>선택</OPTION> 
-<OPTION value="010">010</OPTION> 
-<OPTION value="011">011</OPTION> 
-<OPTION value="016">016</OPTION> 
-<OPTION value="017">017</OPTION> 
-<OPTION value="018">018</OPTION> 
-<OPTION value="019">019</OPTION>
-</SELECT> - <INPUT id="phone2" name="phone2" class=input_01 name=day size=6 onKeyup="sel_phone2();" maxlength="4"> - <INPUT id="phone3" name="phone3" class=input_01 name=day size=6 maxlength="4"></td>
+                <td height="30">
+                <SELECT size=1 id="phone1" name="phone1" onChange="sel_phone1();">
+                 <OPTION value="" selected>선택</OPTION>
+                           <OPTION value="010">010</OPTION>
+                           <OPTION value="011">011</OPTION>
+                           <OPTION value="016">016</OPTION>
+                           <OPTION value="017">017</OPTION>
+                           <OPTION value="018">018</OPTION>
+                           <OPTION value="019">019</OPTION>
+               </SELECT>
+                         -
+                         <INPUT class=mem_input id="phone2" name="phone2" onKeyup="sel_phone2();" maxLength=4 size=8>
+                         -
+                         <INPUT class=mem_input id="phone3" name="phone3" maxLength=4 size=8>
+				</td>
               </tr>
               <tr>
                 <td class="mem_notice" height="20">입력하신 핸드폰으로 예약사항 내역을 SMS 발송해드립니다 </td>
@@ -236,9 +268,33 @@ function card_order(menu , reserve_seq , good_price , good_name){
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
         </tr>
         <tr>
+          <td width="169" height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>E-Mail</td>
+          <td width="1" bgcolor="#D1D3D4"></td>
+          <td bgcolor="white" style="padding-left:10px;" colspan="3" width="559"><INPUT class=mem_input id="email1" name="email1" size=15 value="">
+                      @
+                      <INPUT class=mem_input ID="email2" name="email2" size=15 value="">
+                      <SELECT size=1 id="ddlEmail" name="ddlEmail" onchange="emaildomain();">
+                        <OPTION value="" SELECTED>직접입력하기</OPTION>
+                        <OPTION value="naver.com">naver.com</OPTION>
+                        <OPTION value="hanmail.net">hanmail.net</OPTION>
+                        <OPTION value="dreamwiz.com">dreamwiz.com</OPTION>
+                        <OPTION value="empal.com">empal.com</OPTION>
+                        <OPTION value="hanmir.com">hanmir.com</OPTION>
+                        <OPTION value="hanafos.com">hanafos.com</OPTION>
+                        <OPTION value="nate.com">nate.com</OPTION>
+                        <OPTION value="paran.com">paran.com</OPTION>
+                        <OPTION value="yahoo.co.kr">yahoo.co.kr</OPTION>
+                        <OPTION value="gmail.com">gmail.com</OPTION>
+                      </SELECT></td>
+        </tr>
+        <tr>
+          <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
+        </tr>
+        <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>골프장명</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" class=blue_list><%=prDto.getGolflink_name() %></td>
+          <td style="padding-left: 10px;" class=blue_list><%=prDto.getGolflink_name() %>
+          <input type="hidden" id="golflinkName" name="golflinkName" value="<%=prDto.getGolflink_name() %>"></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -283,8 +339,8 @@ function card_order(menu , reserve_seq , good_price , good_name){
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>적립금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;"><span class=orange>0</span> 원
-          <input type="hidden" id="savePrice" name="savePrice" value="0"/></td>
+          <td style="padding-left: 10px;"><span class=orange><%=Utils.numberFormat(site_save_price*4) %></span> 원
+          <input type="hidden" id="savePrice" name="savePrice" value="<%=(site_save_price*4)%>"/></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>

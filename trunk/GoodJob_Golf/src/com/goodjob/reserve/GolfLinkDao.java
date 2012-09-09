@@ -10,6 +10,7 @@ import java.util.Map;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.lang.math.NumberUtils;
@@ -17,6 +18,7 @@ import org.apache.commons.lang.math.NumberUtils;
 import com.goodjob.coupon.CouponDao;
 import com.goodjob.coupon.dto.CouponDto;
 import com.goodjob.db.DBManager;
+import com.goodjob.product.dto.ProductSubSiteDto;
 import com.goodjob.reserve.dto.GolfLinkDto;
 import com.goodjob.reserve.dto.GolfLinkPriceDto;
 import com.goodjob.reserve.dto.GolfLinkPromiseDto;
@@ -262,6 +264,10 @@ public class GolfLinkDao {
 					cpDto.setReserve_seq(idSeq);
 					cpDao.setCouponUse(cpDto);					
 				}
+				
+				if(glrDto.getSite_seq()==3 && glrDto.getSave_price() > 0){
+					this.setReserveSavePrice(idSeq , glrDto.getSite_seq() , glrDto.getSave_price());
+				}
 			}
 			
 		}catch (Exception e) {
@@ -360,5 +366,72 @@ public class GolfLinkDao {
 			DbUtils.closeQuietly(conn);
 		}
 		return list;		
+	}
+	
+	//---------------------------------- 적립금 -------------------------------
+	public int getSiteSavePrice(int product_seq , int site_seq){
+		
+		Connection conn = null;
+		ProductSubSiteDto psDto =null;
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(product_seq);
+			bind.add(site_seq);
+			
+			ResultSetHandler rsh = new BeanHandler(ProductSubSiteDto.class);
+			QueryRunner qr = new QueryRunner();
+			psDto = (ProductSubSiteDto) qr.query(conn , RESERVE.product_save_price, rsh, bind.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		return psDto.getPrice3();
+	}
+	
+	public void setReserveSavePrice(int reserve_seq , int site_seq , int save_price){
+		
+		Connection conn = null;
+		ProductSubSiteDto psDto =null;
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(reserve_seq);
+			bind.add(site_seq);
+			bind.add(save_price);
+			
+			QueryRunner qr = new QueryRunner();
+			qr.update(conn, RESERVE.set_save_price, bind.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		
+	}
+	
+	public int getReserveSavePrice(int reserve_seq){
+		
+		Connection conn = null;
+		ProductSubSiteDto psDto =null;
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Integer> bind = new ArrayList<Integer>();
+			bind.add(reserve_seq);
+			
+			ResultSetHandler rsh = new BeanListHandler(ProductSubSiteDto.class);
+			QueryRunner qr = new QueryRunner();
+			psDto = (ProductSubSiteDto) qr.query(conn , RESERVE.product_save_price, rsh, bind.toArray());
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		return psDto.getPrice3();
 	}
 }

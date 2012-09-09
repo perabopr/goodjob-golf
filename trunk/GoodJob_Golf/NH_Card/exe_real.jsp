@@ -23,6 +23,9 @@ int date = NumberUtils.toInt(request.getParameter("date"),0);
 int cdate = NumberUtils.toInt(request.getParameter("cdate"),0);
 int perNum = NumberUtils.toInt(request.getParameter("perNum"),0);
 int bill_price = NumberUtils.toInt(request.getParameter("bill_price"),0);
+
+int savePrice = NumberUtils.toInt(request.getParameter("savePrice"),0);
+
 String cbNum = StringUtils.trimToEmpty(request.getParameter("cbNum"));
 String couponValue = StringUtils.trimToEmpty(request.getParameter("ddlCoupon"));
 String[] arrCouponValue = couponValue.split("/");
@@ -39,7 +42,7 @@ if(menu == 0 || gcId == 0 || golf == 0 || date == 0 || cdate == 0){
 	return;
 }
 
-String resName = request.getParameter("reserveName");
+String resName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
 String uPhone = "";
 uPhone += request.getParameter("phone1") + "-";
 uPhone += request.getParameter("phone2") + "-";
@@ -56,26 +59,29 @@ glrDto.setPer_num(Integer.toString(perNum));
 glrDto.setReserve_phone(uPhone);
 int couponPrice = 0;
 CouponDto cpDto = new CouponDto();
-for(int i = 0; i < couponList.size(); i++){
+/*for(int i = 0; i < couponList.size(); i++){
 	if(couponList.get(i).getCoupon_seq() == couponSeq){
 		couponPrice = couponList.get(i).getSale_price(); 
 		cpDto = couponList.get(i);
 		cpDto.setMenu_seq(menu);
 	}
-}
+}*/
 glrDto.setCoupon_price(couponPrice);
-glrDto.setProcess_status("0");
+glrDto.setProcess_status("1");
 glrDto.setCard_bill_num(cbNum);
 glrDto.setProductsub_seq(gcId);
 glrDto.setSite_seq(3);
+glrDto.setSave_price(savePrice);
 
 GolfLinkDao glDao = new GolfLinkDao();
 glDao.setGolfReserve(glrDto, cpDto);
 
 /*--------------- 문자 발송 --------------*/
-String bookingDate = request.getParameter("bookingDate");
-String golflinkName = request.getParameter("golflinkName");
+String bookingDate = StringUtils.trimToEmpty(request.getParameter("bookingDate"));
+String golflinkName = StringUtils.trimToEmpty(request.getParameter("golflinkName"));
+
 golflinkName = golflinkName.replace("(P)","").replace("(PAR3)","");
+
 String message = "";
 message += "[" + golflinkName + "]";
 bookingDate = bookingDate.substring(5,16).replace("-",".");
@@ -85,6 +91,7 @@ message += "[NH카드고객센터]";
 String sphone = "02-6670-0200";
 String reserveuid = user_Id;
 String reservephone = uPhone;
+
 Map<String,String> params = new HashMap<String,String>();
 params.put("msg",message);
 params.put("sphone",sphone);

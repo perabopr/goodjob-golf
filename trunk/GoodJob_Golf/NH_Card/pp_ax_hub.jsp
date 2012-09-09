@@ -12,6 +12,10 @@
 	String process_status = StringUtils.trimToEmpty(request.getParameter("process_status"));
 	String ordr_id = StringUtils.trimToEmpty(request.getParameter("ordr_id"));
 	
+	String reserveName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
+	String mtel = StringUtils.trimToEmpty(request.getParameter("mtel"));
+	String ordEmail = StringUtils.trimToEmpty(request.getParameter("ordEmail"));
+	
     /* ============================================================================== */
     /* =   PAGE : 지불 요청 및 결과 처리 PAGE                                       = */
     /* = -------------------------------------------------------------------------- = */
@@ -30,7 +34,7 @@
 %>
 	<%@ page import="com.kcp.*" %>
 	<%@ page import="java.net.URLEncoder"%>
-	<%@ include file="/cfg/site_conf_inc.jsp"%>
+	<%@ include file="/cfg/site_conf_inc_nh.jsp"%>
 <%
     /* = -------------------------------------------------------------------------- = */
     /* =   환경 설정 파일 Include END                                               = */

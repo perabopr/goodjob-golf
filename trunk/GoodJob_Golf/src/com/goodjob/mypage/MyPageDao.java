@@ -374,7 +374,7 @@ public class MyPageDao {
 				bind.add(startDt);
 				bind.add(endDt);
 			}
-			
+			System.out.println(MessageFormat.format(MYPAGE.my_nh_reserve, where));
 			list = (List<GolfLinkReserveDto>) qr.query(conn , MessageFormat.format(MYPAGE.my_nh_reserve, where), rsh , bind.toArray());
 			
 		} catch (Exception e) {

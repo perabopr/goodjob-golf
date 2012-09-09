@@ -27,8 +27,9 @@ rRequest = rRequest.replaceAll("\r\n","</br>");
 
 String golflinkName = StringUtils.trimToEmpty(request.getParameter("golflinkName"));
 String bookingDate = StringUtils.trimToEmpty(request.getParameter("bookingDate"));
-String buyPrice = StringUtils.trimToEmpty(request.getParameter("buyPrice"));
-String savePrice = StringUtils.trimToEmpty(request.getParameter("savePrice"));
+
+int buyPrice = NumberUtils.toInt(request.getParameter("buyPrice"),0);
+int savePrice = NumberUtils.toInt(request.getParameter("savePrice"),0);
 %>
 <!-- 상단 영역 -->
 <%@ include file="/include/header_nhcard.jsp" %>
@@ -104,7 +105,7 @@ String savePrice = StringUtils.trimToEmpty(request.getParameter("savePrice"));
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">결제금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440"><span class=orange><%=buyPrice%></span> 원</td>
+          <td style="padding-left: 10px;" width="440"><span class=orange><%=Utils.numberFormat(buyPrice)%></span> 원</td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -112,7 +113,7 @@ String savePrice = StringUtils.trimToEmpty(request.getParameter("savePrice"));
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">적립금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440"><span class=orange><%=savePrice%></span> 원</td>
+          <td style="padding-left: 10px;" width="440"><span class=orange><%=Utils.numberFormat(savePrice)%></span> 원</td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -133,6 +134,3 @@ String savePrice = StringUtils.trimToEmpty(request.getParameter("savePrice"));
             ※ <span class=blue_list>고객센터</span>에서 예약시간 확인 후 연락을 드리며, 예약시간 확정 후 <span class=blue_list>메인페이지</span> &gt; <span class=blue_list>예약확인</span> 메뉴에서 24시간<br> &nbsp;&nbsp;&nbsp;&nbsp;안에 <span class=blue_list>“카드결제”</span>를 하시면 예약이 완료됩니다. 이용해 주셔서 감사합니다.
     </tr>
 </table>
-<!-- 하단 footer  -->
-<%@ include file="/include/footer_nhcard.jsp" %>
-<!-- 하단 footer  -->

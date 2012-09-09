@@ -7,6 +7,9 @@
 	String menu = StringUtils.trimToEmpty(request.getParameter("menu"));
 	String reserve_seq = StringUtils.trimToEmpty(request.getParameter("reserve_seq"));
 	String process_status = StringUtils.trimToEmpty(request.getParameter("process_status"));
+	String reserveName = StringUtils.trimToEmpty(request.getParameter("reserve_name"));
+	String mtel = StringUtils.trimToEmpty(request.getParameter("mtel"));
+	String ordEmail = StringUtils.trimToEmpty(request.getParameter("ordEmail"));
 	
 %>
 <html>
@@ -49,6 +52,9 @@
 <input type="hidden" name="menu" value="<%=menu%>"/>
 <input type="hidden" name="reserve_seq" value="<%=reserve_seq%>"/>
 <input type="hidden" name="process_status" value="<%=process_status%>"/>
+<input type="hidden" name="reserveName" value="<%=reserveName%>"/>
+<input type="hidden" name="mtel" value="<%=mtel%>"/>
+<input type="hidden" name="ordEmail" value="<%=ordEmail%>"/>
 
 </form>
 	    <tr>

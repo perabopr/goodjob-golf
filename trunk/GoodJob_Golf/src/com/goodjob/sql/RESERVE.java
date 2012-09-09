@@ -457,4 +457,13 @@ public class RESERVE {
 			"AND b.view_yn = 'Y' " +
 			"AND b.product_date >= ? %s " +
 		"ORDER BY a.menu_seq, a.golflink_seq, b.product_date, c.time_start";
+	
+	//-------------------------------- 적립금 -----------------
+	public static final String product_save_price = "select productsub_seq , price3 from tb_product_sub_site where productsub_seq = ? and site_seq = ? ";
+	
+	public static final String set_save_price = "insert into tb_reserve_saveprice( reserve_seq,site_seq,save_price) values( ?, ?, ?)";
+	
+	public static final String get_save_price = "select reserve_seq, site_seq, save_price from tb_reserve_saveprice where reserve_seq = ?";
+	
+	
 }

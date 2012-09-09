@@ -495,7 +495,6 @@ for (int i = 1; i < 15 ;i++){
 		String tmpTime = listPr.get(i).getTime_start();
 		tmpDate = tmpDate.substring(0,4) + "-" + tmpDate.substring(4,6) + "-" + tmpDate.substring(6,8);
 		tmpTime = tmpTime.substring(0,2) + ":" + tmpTime.substring(2,4);
-		
 %>
 						<TR>
 						<TD bgColor=white height=25 align=center><%=tmpDate%></TD>
@@ -514,7 +513,7 @@ for (int i = 1; i < 15 ;i++){
 <%			
 		}
 %>
-						<TD bgColor=white align=center>10,000</TD>
+						<TD bgColor=white align=center><span class=orange_s><%=Utils.numberFormat((glDao.getSiteSavePrice(listPr.get(i).getProductsub_seq(),3)*4))%></span> 원</TD>
 						</TR>
 <%
 	}

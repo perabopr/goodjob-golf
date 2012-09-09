@@ -35,7 +35,7 @@ public class BoardDao {
 		String field = StringUtils.defaultIfEmpty(data.get("field"), "");
 		String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
 		int npage = NumberUtils.toInt(data.get("npage"), 1);
-		int site_seq = NumberUtils.toInt(data.get("site_seq"), 1);
+		int site_seq = NumberUtils.toInt(data.get("site_seq"), 0);
 		int per_page = NumberUtils.toInt(data.get("per_page"), BBS.per_page);
 		
 		try {
@@ -47,19 +47,28 @@ public class BoardDao {
 			QueryRunner qr = new QueryRunner();
 			
 			//검색조건
-			String where = "WHERE site_seq = ? ";
-			params.add(site_seq);
+			String where = "";
+			if(site_seq > 0){
+				where = "WHERE site_seq = ? ";
+				params.add(site_seq);
+			}
+			else if(site_seq == 0 && keyword.length()>0){
+				where = "WHERE ";
+			}
 			
 			if("name".equals(field) && keyword.length()>0){
-				where = "AND name LIKE concat('%',?,'%') " ;
+				if(site_seq > 0) where += " AND "; 
+				where += "name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
 			else if("subject".equals(field) && keyword.length()>0){
-				where = "AND subject LIKE concat('%',?,'%') " ;
+				if(site_seq > 0) where += " AND ";
+				where += "subject LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
 			else if("content".equals(field) && keyword.length()>0){
-				where = "AND content LIKE concat('%',?,'%') " ;
+				if(site_seq > 0) where += " AND ";
+				where += "content LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
 			
@@ -94,7 +103,7 @@ public class BoardDao {
 			String field = StringUtils.defaultIfEmpty(data.get("field"), "");
 			String keyword = StringUtils.defaultIfEmpty(data.get("keyword"), "");
 			int npage = NumberUtils.toInt(data.get("npage"), 1);
-			int site_seq = NumberUtils.toInt(data.get("site_seq"), 1);
+			int site_seq = NumberUtils.toInt(data.get("site_seq"), 0);
 			
 			ArrayList<Object> params = new ArrayList<Object>();
 			
@@ -104,19 +113,28 @@ public class BoardDao {
 			QueryRunner qr = new QueryRunner();
 			
 			//검색조건
-			String where = "WHERE site_seq = ? ";
-			params.add(site_seq);
-
+			String where = "";
+			if(site_seq > 0){
+				where = "WHERE site_seq = ? ";
+				params.add(site_seq);
+			}
+			else if(site_seq == 0 && keyword.length()>0){
+				where = "WHERE ";
+			}
+			
 			if("name".equals(field) && keyword.length()>0){
-				where = "AND name LIKE concat('%',?,'%') " ;
+				if(site_seq > 0) where += " AND "; 
+				where += "name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
 			else if("subject".equals(field) && keyword.length()>0){
-				where = "AND subject LIKE concat('%',?,'%') " ;
+				if(site_seq > 0) where += " AND ";
+				where += "subject LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
 			else if("content".equals(field) && keyword.length()>0){
-				where = "AND content LIKE concat('%',?,'%') " ;
+				if(site_seq > 0) where += " AND ";
+				where += "content LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}
 			

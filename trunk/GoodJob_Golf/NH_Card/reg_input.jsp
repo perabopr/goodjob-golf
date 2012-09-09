@@ -70,7 +70,7 @@ function on_submit() {
         <tr>
           <td width="129" height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>예약자명</td>
           <td width="1" bgcolor="#D1D3D4"></td>
-          <td width="350"  style="padding-left: 10px;"><input class="input_01" type="text" size="14" name="reserve_name" id="reserve_name"></td>
+          <td width="350"  style="padding-left: 10px;"><input class="input_01" type="text" size="14" name="reserve_name" id="reserve_name"/></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="500"></td>

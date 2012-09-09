@@ -12,10 +12,10 @@
 	String field = StringUtils.trimToEmpty(request.getParameter("field"));
 	String keyword = StringUtils.trimToEmpty(request.getParameter("keyword"));
 	
-	String reserve_name = StringUtils.defaultString((String)session.getAttribute("reserve_name"),"");
-	String reserve_phone = StringUtils.trimToEmpty((String)session.getAttribute("phone1"))+"-"+
-						StringUtils.trimToEmpty((String)session.getAttribute("phone2"))+"-"+
-						StringUtils.trimToEmpty((String)session.getAttribute("phone3"));
+	String reserve_name = StringUtils.defaultString(request.getParameter("reserve_name"),"");
+	String reserve_phone = StringUtils.trimToEmpty(request.getParameter("phone1"))+"-"+
+						StringUtils.trimToEmpty(request.getParameter("phone2"))+"-"+
+						StringUtils.trimToEmpty(request.getParameter("phone3"));
 	
 	String startDt = StringUtils.trimToEmpty(request.getParameter("startDt"));
 	String endDt = StringUtils.trimToEmpty(request.getParameter("endDt"));
@@ -41,6 +41,53 @@
 <!-- 상단 영역 -->
 <%@ include file="/include/header_nhcard.jsp" %>
 <!-- 상단 영역 -->
+<script language="javascript">
+
+function mypage_search() {
+
+	if(!$('#startDt').val()) {
+		alert('검색 시작일을 입력해주세요!');
+		$('#startDt').focus();
+		return;
+	}
+
+	if(!$('#endDt').val()) {
+		alert('검색 종료일을 입력해주세요!');
+		$('#endDt').focus();
+		return;
+	}
+
+	var frm = document.frm;
+	frm.action="reg_list.jsp"
+	frm.submit();
+}
+
+function card_order(process_status, menu, reserve_seq, good_price, good_name, reserve_name, mtel, ordEmail){
+
+	if(good_price == '' || good_price == '0'){
+		alert("결제 금액이 없습니다.");
+		return;
+	}
+	var frm = document.order_frm;
+
+	$("#good_name").val(good_name);
+	$('#good_price').val(good_price);
+	$('#menu').val(menu);
+	$('#reserve_seq').val(reserve_seq);
+	$('#process_status').val(process_status);
+
+	$('#reserve_name').val(reserve_name);
+	$('#mtel').val(mtel);
+	$('#ordEmail').val(ordEmail);
+
+	var win_pop = window.open("","order_pop","width=650,height=700,scrollbars=no");
+	frm.target =  "order_pop"; 
+	frm.action = "chk_plugin.jsp";
+	frm.submit();
+}
+
+</script>
+<!-- 상단 영역 -->
 <table border="0" cellpadding="0" cellspacing="0" width="713" align="center">
   <tr>
     <td width="713"><table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -50,13 +97,25 @@
         </tr>
       </table></td>
   </tr>
+<form name="order_frm" method="post">
+<input type="hidden" id="good_name" name="good_name" value=""/>
+<input type="hidden" id="good_price" name="good_price" value=""/>
+<input type="hidden" id="menu" name="menu" value=""/>
+<input type="hidden" id="reserve_seq" name="reserve_seq" value=""/>
+<input type="hidden" id="process_status" name="process_status" value=""/>
+<input type="hidden" id="reserve_name" name="reserve_name" value=""/>
+<input type="hidden" id="mtel" name="mtel" value=""/>
+<input type="hidden" id="ordEmail" name="ordEmail" value=""/>
+</form>
+<form name="frm" method="post">
   <tr>
     <td align="center" height="60"><img align="absmiddle" src="../images/mypage/img_search_title_s.gif" width="50" height="19" border="0"> <a href="#"><img align="absmiddle" id="istartDt" src="../images/common/btn_calendar_left.gif" width="22" height="21"></a>&nbsp;
-      <input type="text" class="input_01" size="13" id="startDt" name="startDt" readonly/>
+      <input type="text" class="input_01" size="13" id="startDt" name="startDt" value="<%=startDt%>" readonly/>
       &nbsp;&nbsp;~&nbsp;&nbsp; <a href="#"><img align="absmiddle" id="iendDt" src="../images/common/btn_calendar_right.gif" width="22" height="21"></a>&nbsp;
-      <input type="text" class="input_01" size="13" id="endDt" name="endDt" readonly/>
+      <input type="text" class="input_01" size="13" id="endDt" name="endDt" value="<%=endDt%>" readonly/>
       <a href="javascript:mypage_search();"><img align="absmiddle" src="../images/mypage/btn_search.gif" width="38" height="19" border="0"></a></td>
   </tr>
+</form>
   <tr>
     <td align="center"><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="#CCCCCC">
         <tr>
@@ -84,16 +143,22 @@ if(golfList != null && !golfList.isEmpty()){
 %>
         <tr>
 	        <td height="35" bgcolor="white" align="center" class=m_title><%=golfDto.getReserve_day()%></td>
-			<td bgcolor="white" align="center" class=m_title><%=Utils.dateFormat(golfDto.getBooking_day(),".")%> <%=booking_time%></td>
+			<td bgcolor="white" align="center" class=m_title>
+			<span class=<%=Utils.getIsWeek(golfDto.getBooking_day())%>>
+			<%=Utils.dateFormat(golfDto.getBooking_day(),".")%> <%=booking_time%></span>
+			</td>
 	        <td bgcolor="white" class=m_title_blue style="padding-left:7px;padding-right:7px;"><%=golfDto.getGolflink_name()%></td>
-	        <td bgcolor="white" align="center" class=m_title><%=(StringUtils.defaultIfEmpty(golfDto.getGolflink_course(),"없음"))%></td>
+	        <td bgcolor="white" align="center" class=m_title><%=(StringUtils.defaultIfEmpty(golfDto.getGolflink_course(),""))%></td>
 	        <td bgcolor="white" align="center" class=m_title_red><%=Utils.numberFormat(golfDto.getProduct_price())%>원</td>
 	        <td bgcolor="white" align="center" class=m_title><%=golfDto.getPer_num()%>명/1팀</td>
 	        <td bgcolor="white" align="center"><%=(golfDto.getMenu_seq()==1?"<span class=m_title_pink>실시간</span>":"<span class=m_title_green>사전신청</span>")%></td>
 			<td bgcolor="white" align="center">
 			<%
-			if("0".equals(golfDto.getProcess_status()))
-					out.println("<span class=m_title_b>예약대기</span>");
+			if("0".equals(golfDto.getProcess_status())){
+			%>
+			<a href="javascript:card_order('1','<%=golfDto.getMenu_seq()%>','<%=golfDto.getReserve_seq()%>','<%=golfDto.getProduct_price()%>','<%=golfDto.getGolflink_name()%>','<%=golfDto.getReserve_name()%>','<%=golfDto.getReserve_phone()%>','<%=golfDto.getReserve_uid()%>');">
+			<img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>
+			<%}
 			else if("1".equals(golfDto.getProcess_status()))
 				out.println("<span class=m_title_blue>예약완료</span>");
 			else if("2".equals(golfDto.getProcess_status()))
@@ -106,16 +171,6 @@ if(golfList != null && !golfList.isEmpty()){
 		}
 	}
 %>
-        <tr>
-          <td height="25" align="center" bgcolor="white" class="m_title">2012.12.31</td>
-          <td align="center" bgcolor="white" class="red_ss">2012.12.25 12:15</td>
-          <td bgcolor="white" class="m_title_blue" style="padding-right:7px; padding-left:7px;">대영힐스 CC</td>
-          <td align="center" bgcolor="white" class="m_title">스텔라</td>
-          <td align="center" bgcolor="white" class="m_title_red">500,000원</td>
-          <td align="center" bgcolor="white" class="m_title">3명/1팀</td>
-          <td align="center" bgcolor="white" class="m_title_green">사전신청</td>
-          <td align="center" bgcolor="white" class="m_title_red">예약취소</td>
-        </tr>
       </table></td>
   </tr>
   <tr>

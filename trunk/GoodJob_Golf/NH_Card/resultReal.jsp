@@ -20,17 +20,19 @@ String rTime = StringUtils.trimToEmpty(request.getParameter("reserveTime"));
 int rCoupon = NumberUtils.toInt(request.getParameter("reserveCoupon"), 0);
 
 
-String perNum = StringUtils.trimToEmpty(request.getParameter("perNum"));
+String course_name = StringUtils.trimToEmpty(request.getParameter("course_name"));
+int perNum = NumberUtils.toInt(request.getParameter("perNum"),0);
 String rName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
-String rPhone = StringUtils.trimToEmpty(request.getParameter("reservePhone"));
-String rEmail = StringUtils.trimToEmpty(request.getParameter("reserveEmail"));
+String rPhone = StringUtils.trimToEmpty(request.getParameter("phone1"))+"-"+StringUtils.trimToEmpty(request.getParameter("phone2"))
+					+"-"+StringUtils.trimToEmpty(request.getParameter("phone3"));
+String rEmail = StringUtils.trimToEmpty(request.getParameter("email1"))+"@"+StringUtils.trimToEmpty(request.getParameter("email2"));
 String rRequest = StringUtils.trimToEmpty(request.getParameter("reserveRequest"));
 rRequest = rRequest.replaceAll("\r\n","</br>");
 
 String golflinkName = StringUtils.trimToEmpty(request.getParameter("golflinkName"));
 String bookingDate = StringUtils.trimToEmpty(request.getParameter("bookingDate"));
-String buyPrice = StringUtils.trimToEmpty(request.getParameter("buyPrice"));
-String savePrice = StringUtils.trimToEmpty(request.getParameter("savePrice"));
+int buyPrice = NumberUtils.toInt(request.getParameter("bill_price"),0);
+int savePrice = NumberUtils.toInt(request.getParameter("savePrice"),0);
 %>
 <!-- 상단 영역 -->
 <%@ include file="/include/header_nhcard.jsp" %>
@@ -98,7 +100,7 @@ String savePrice = StringUtils.trimToEmpty(request.getParameter("savePrice"));
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>코스명</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;"><%=bookingDate %></td>
+          <td style="padding-left: 10px;"><%=course_name %></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -114,7 +116,7 @@ String savePrice = StringUtils.trimToEmpty(request.getParameter("savePrice"));
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>결제금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;"><span class=orange><%=buyPrice%></span> 원</td>
+          <td style="padding-left: 10px;"><span class=orange><%=Utils.numberFormat(buyPrice*perNum)%></span> 원</td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -122,7 +124,7 @@ String savePrice = StringUtils.trimToEmpty(request.getParameter("savePrice"));
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>적립금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;"><span class=orange><%=savePrice%></span> 원</td>
+          <td style="padding-left: 10px;"><span class=orange><%=Utils.numberFormat(savePrice)%></span> 원</td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -142,6 +144,3 @@ String savePrice = StringUtils.trimToEmpty(request.getParameter("savePrice"));
         </td>
     </tr>
 </table>
-<!-- 하단 footer  -->
-<%@ include file="/include/footer_nhcard.jsp" %>
-<!-- 하단 footer  -->

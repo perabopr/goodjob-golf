@@ -229,18 +229,40 @@ function selectGolfLink(){
 	var tmpOptions = $("#ddlTimeTerm").val();
 	var tmpOption = tmpOptions.split("/");
 
+	//alert(tmpOption[0]);
 	$("#txtBillPrice").text(commify(tmpPerCnt*tmpOption[1]));
 	$("#billPrice").text(commify(tmpPerCnt*tmpOption[1]));
 	$("#personCnt").val($("#ddlPersonCnt").val());
 	
 	$("#psId").val(tmpOption[0]);
+
+	var result = site_save_price(tmpOption[0]);
+
+	var save_price = $("#reserveSavePrice").val();
+	$("#billPrice").text(commify(tmpPerCnt*tmpOption[1]-couponPrice));
+	$("#totSavePrice").text(commify(result*tmpPerCnt));
 	
-	//$("#ddlCoupon").val(0);	
 	if(tmpOption[2] == "1"){	
 		//document.getElementById("ddlCoupon").disabled=false;
 	}else{
 		//$("#ddlCoupon").attr("disabled","true");
 	}
+}
+
+function site_save_price(product_seq){
+
+	$.ajax({
+		url: "/NH_Card/ajax_save_price.jsp?product_seq="+product_seq,
+		cache: false,
+		async: false,
+		success: function(result){
+			$("#savePrice").text(commify(result));
+			$("#reserveSavePrice").val(result);
+			
+		}
+	});
+
+	return result;
 }
 
 function selectCoupon(){
@@ -254,7 +276,6 @@ function selectCoupon(){
 	if(tmpCoupon.length > 1){
 		couponPrice = tmpCoupon[1];
 	}
-	
 	$("#billPrice").text(commify(tmpPerCnt*tmpOption[1]-couponPrice));
 }
 
@@ -373,6 +394,7 @@ function sel_phone2(){
   <input type="hidden" id="reservePhone" name="reservePhone">
   <input type="hidden" id="reserveEmail" name="reserveEmail">
   <input type="hidden" id="reserveRequest" name="reserveRequest">
+  <input type="hidden" id="reserveSavePrice" name="reserveSavePrice">
 </FORM>
 <table border="0" cellpadding="0" cellspacing="0" width="713" align="center">
   <tr>
@@ -683,7 +705,7 @@ for (int i = 1; i < 15 ;i++){
                                                 팀 
                                     </td>
                                     <td align="center" bgcolor="white"><span class=orange_s id="txtBillPrice" name="txtBillPrice">0</span> <span class=normal_s>원</span></td>
-                                    <td align="center" bgcolor="white"><span class=orange_s>0</span> <span class=normal_s>원</span></td>
+                                    <td align="center" bgcolor="white"><span class=orange id="savePrice" name="savePrice">0</span><span class=normal_s>원</span></td>
                                   </tr>
                                 </table></td>
                             </tr>
@@ -716,7 +738,7 @@ for (int i = 1; i < 15 ;i++){
                                   </tr>
                                   <tr>
                                     <td height="25" align="right" bgcolor="#F1F1F1" class="normal_b" style="padding-right:10px;" width="118">적립금액</td>
-                                    <td height="27" bgcolor="white" style="padding-left:10px;" colspan="3" width="559"><span class=orange>0</span> 원</td>
+                                    <td height="27" bgcolor="white" style="padding-left:10px;" colspan="3" width="559"><span class=orange id="totSavePrice" name="totSavePrice"></span> 원</td>
                                   </tr>
                                   <tr>
                                     <td height="25" align="right" bgcolor="#F1F1F1" class="normal_b" style="padding-right:10px;" width="118">예약자이름</td>

@@ -24,6 +24,7 @@ public class GolfLinkReserveDto {
 	private String booking_time_s;
 	private String booking_time_e;
 	private int site_seq = 1;
+	private int save_price = 0;
 	
 	public int getReserve_seq() {
 		return reserve_seq;
@@ -157,4 +158,12 @@ public class GolfLinkReserveDto {
 	public void setSite_seq(int siteSeq) {
 		site_seq = siteSeq;
 	}
+	public int getSave_price() {
+		return this.save_price;
+	}
+	
+	public void setSave_price(int save_price) {
+		this.save_price = save_price;
+	}
+	
 }

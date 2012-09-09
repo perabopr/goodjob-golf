@@ -24,6 +24,8 @@ int date = NumberUtils.toInt(request.getParameter("date"),0);
 int cdate = NumberUtils.toInt(request.getParameter("cdate"),0);
 int rCnt = NumberUtils.toInt(request.getParameter("reserveCnt"),0);
 int rTeam = NumberUtils.toInt(request.getParameter("reserveTeam"),0);
+int savePrice = NumberUtils.toInt(request.getParameter("savePrice"),0);
+
 String rDate = StringUtils.trimToEmpty(request.getParameter("reserveDate"));
 String rTime = StringUtils.trimToEmpty(request.getParameter("reserveTime"));
 String rName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
@@ -66,6 +68,7 @@ if(prList.size() != 1){
 		glrDto.setCoupon_price(couponPrice);
 		glrDto.setProcess_status("0");
 		glrDto.setCard_bill_num("");
+		glrDto.setSave_price(savePrice);
 		glrDto.setSite_seq(3);
 		
 		glrDto.setProductsub_seq(psId);

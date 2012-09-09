@@ -57,11 +57,15 @@ List<CouponDto> couponList = null;
 if(prDto.getCoupon_use_yn().equals("1")){
 	couponList = cpDao.getUserCouponList(user_Id, "0", true);
 }
+
+//=================적립금 가져 오기..
+int site_save_price = glDao.getSiteSavePrice(productsubSeq , 3);
+
 %>
 <script type="text/javascript">
 <!--
 function reSetDate(){
-	location.href = "/linkpages/detail.jsp?menu=2&golf=<%=golf%>&date=<%=date%>&cdate=<%=cdate%>";
+	location.href = "/NH_Card/detail.jsp?menu=2&golf=<%=golf%>&date=<%=date%>&cdate=<%=cdate%>";
 }
 
 function billok(){
@@ -202,8 +206,8 @@ function commify(n) {
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">적립금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440"><span class=orange>0</span> 원
-          <input type="hidden" id="savePrice" name="savePrice" value="0"></td>
+          <td style="padding-left: 10px;" width="440"><span class=orange><%=Utils.numberFormat(site_save_price)%></span> 원
+          <input type="hidden" id="savePrice" name="savePrice" value="<%=site_save_price%>"></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>

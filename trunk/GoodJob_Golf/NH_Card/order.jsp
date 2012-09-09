@@ -1,21 +1,19 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
+<%@page import="com.goodjob.util.Utils"%>
 <%@ page import="com.goodjob.member.*"%><%
-	
 
 	String good_name = StringUtils.trimToEmpty(request.getParameter("good_name"));
-	String good_price = StringUtils.trimToEmpty(request.getParameter("good_price"));
+	int good_price = NumberUtils.toInt(request.getParameter("good_price"),0);
 	String ses_mem_id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"));
 	String menu = StringUtils.trimToEmpty(request.getParameter("menu"));
 	String reserve_seq = StringUtils.trimToEmpty(request.getParameter("reserve_seq"));
 	String process_status = StringUtils.trimToEmpty(request.getParameter("process_status"));
 	
-	MemberDao mDao = new MemberDao();
-	
-	MemberDto mDto = mDao.getMember(ses_mem_id);
-	
-	String[] mobile = mDto.getMem_mtel().split("-");
+	String reserveName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
+	String mtel = StringUtils.trimToEmpty(request.getParameter("mtel"));
+	String ordEmail = StringUtils.trimToEmpty(request.getParameter("ordEmail"));
 %>
 <%
     /* ============================================================================== */
@@ -39,7 +37,7 @@
     /* =   테스트 및 실결제 연동시 site_conf_inc.jsp 파일을 수정하시기 바랍니다.    = */
     /* = -------------------------------------------------------------------------- = */
 %>
-	<%@ include file="/cfg/site_conf_inc.jsp" %>
+	<%@ include file="/cfg/site_conf_inc_nh.jsp" %>
 <%
 	request.setCharacterEncoding ( "utf-8" ) ;
     /* = -------------------------------------------------------------------------- = */
@@ -138,7 +136,7 @@
                 date = "0" + date;
             }
 
-            var order_idxx = "GGOLF_" + year + "" + month + "" + date + "" + time;
+            var order_idxx = "NHGLF_" + year + "" + month + "" + date + "" + time;
 
             document.order_info.ordr_idxx.value = order_idxx;
         }
@@ -258,17 +256,18 @@
                     <!-- 결제금액(good_mny) - ※ 필수 : 값 설정시 ,(콤마)를 제외한 숫자만 입력하여 주십시오. -->
                     <tr style="height:20px">
                         <td class="sub_title1">결제 금액</td>
-                        <td class="sub_input1"><input type="text" name="good_mny" class="frminput right" value="<%=good_price%>" size="10" maxlength="9" readonly/>원(숫자만 입력)</td>
+                        <td class="sub_input1"><input type="text" name="good_mny_tmp" class="frminput right" value="<%=Utils.numberFormat(good_price)%>" size="10" maxlength="9" readonly/>원(숫자만 입력)
+                        <input type="hidden" name="good_mny" class="frminput right" value="<%=good_price%>" size="10" maxlength="9" readonly/></td>
                     </tr>
                     <!-- 주문자명(buyr_name) -->
                     <tr style="height:20px">
                         <td class="sub_title1">주문자명</td>
-                        <td class="sub_input1"><input type="text" name="buyr_name" class="frminput" value="<%=mDto.getMem_name()%>" readonly/></td>
+                        <td class="sub_input1"><input type="text" name="buyr_name" class="frminput" value="<%=reserveName%>" readonly/></td>
                     </tr>
                     <!-- 주문자 E-mail(buyr_mail) -->
                     <tr style="height:20px">
                         <td class="sub_title1">E-mail</td>
-                        <td class="sub_input1"><input type="text" name="buyr_mail" class="frminput" value="<%=mDto.getMem_id()%>" size="30" maxlength="30" readonly/></td>
+                        <td class="sub_input1"><input type="text" name="buyr_mail" class="frminput" value="<%=ordEmail%>" size="30" maxlength="30" readonly/></td>
                     </tr>
                     <!-- 주문자 연락처1(buyr_tel1)
                     <tr style="height:20px">
@@ -279,8 +278,8 @@
                     <tr style="height:20px">
                         <td class="sub_title1">휴대폰번호</td>
                         <td class="sub_input1">
-                        <input type="hidden" name="buyr_tel1" class="frminput" value="<%=mDto.getMem_mtel()%>"/>
-                        <input type="text" name="buyr_tel2" class="frminput" value="<%=mDto.getMem_mtel()%>"/>
+                        <input type="hidden" name="buyr_tel1" class="frminput" value="<%=mtel%>"/>
+                        <input type="text" name="buyr_tel2" class="frminput" value="<%=mtel%>"/>
                         </td>
                     </tr>
                 </table>
@@ -391,8 +390,8 @@
     /* = -------------------------------------------------------------------------- = */
 
     /* PayPlus에서 보이는 신용카드사 삭제 파라미터 입니다
-    ※ 해당 카드를 결제창에서 보이지 않게 하여 고객이 해당 카드로 결제할 수 없도록 합니다. (카드사 코드는 매뉴얼을 참고)
-    <input type="hidden" name="not_used_card" value="CCPH:CCSS:CCKE:CCHM:CCSH:CCLO:CCLG:CCJB:CCHN:CCCH"/> */
+    ※ 해당 카드를 결제창에서 보이지 않게 하여 고객이 해당 카드로 결제할 수 없도록 합니다. (카드사 코드는 매뉴얼을 참고)*/
+    
 
     /* 신용카드 결제시 OK캐쉬백 적립 여부를 묻는 창을 설정하는 파라미터 입니다
          포인트 가맹점의 경우에만 창이 보여집니다
@@ -417,7 +416,8 @@
 
     /*  가상계좌 은행 선택 파라미터
          ※ 해당 은행을 결제창에서 보이게 합니다.(은행코드는 매뉴얼을 참조) */
-%>
+%>  
+    <input type="hidden" name="not_used_card" value="CCKM:CCSG:CCCT:CCHM:CCXX:CCLO:CCPH:CCHN:CCSS:CCKJ:CCSU:CCSH:CCJB:CCCJ:CCKW:CCLG:CCKE:CCDI:CCSB:CCKD:CCCH:CCCU"/>
     <input type="hidden" name="wish_vbank_list" value="05:03:04:07:11:23:26:32:34:81:71"/>
 <%
     /*  가상계좌 입금 기한 설정하는 파라미터 - 발급일 + 3일

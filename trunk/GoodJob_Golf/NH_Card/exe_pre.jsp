@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="com.goodjob.coupon.dto.CouponDto"%>
 <%@page import="com.goodjob.coupon.CouponDao"%>
 <%@page import="java.util.HashMap"%>
@@ -9,8 +10,7 @@
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%@page import="com.goodjob.reserve.dto.GolfLinkReserveDto"%>
-<%@page import="java.net.URLEncoder"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="com.goodjob.util.Utils"%>
 <%
 
 String nhNum = request.getParameter("gr_cd");
@@ -99,7 +99,14 @@ params.put("mem_id",rEmail);
 params.put("rphone",reservephone);
 
 SMSDao sDao = new SMSDao();
-//boolean isSend = sDao.send(params);
+boolean isSend = sDao.send(params);
+
+//추가 SMS 발송
+message = "적립금액 : "+(Utils.numberFormat(savePrice))+"원은 익월 초에 자동 적립됩니다.";
+message += "(NH카드)";
+params.put("msg",message);
+isSend = sDao.send(params);
+
 %>
 <script type="text/javascript">
 var frm = this.parent.document.exefrm;

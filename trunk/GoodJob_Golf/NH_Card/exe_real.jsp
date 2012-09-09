@@ -99,20 +99,14 @@ params.put("mem_id",reserveuid);
 params.put("rphone",reservephone);
 
 SMSDao sDao = new SMSDao();
-//boolean isSend = sDao.send(params);
+boolean isSend = sDao.send(params);
 
-if("".equals(cbNum) && cbNum.length() == 0 ){
-	message = "계좌번호:농협 317-0001-2481-91 ";
-	message += "㈜세이브코리아\n";
-	message += "입금액:"+Utils.numberFormat(bill_price * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price())+"\n";
-	message += "[NH카드]";
-	params.clear();
-	params.put("msg",message);
-	params.put("sphone",sphone);
-	params.put("mem_id",reserveuid);
-	params.put("rphone",reservephone);
-	//isSend = sDao.send(params);
-}
+//추가 SMS 발송
+message = "적립금액 : "+(Utils.numberFormat(savePrice))+"원은 익월 초에 자동 적립됩니다.";
+message += "(NH카드)";
+params.put("msg",message);
+isSend = sDao.send(params);
+
 %>
 <script type="text/javascript">
 var frm = this.parent.document.exefrm;

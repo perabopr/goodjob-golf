@@ -237,32 +237,26 @@ function selectGolfLink(){
 	$("#psId").val(tmpOption[0]);
 
 	var result = site_save_price(tmpOption[0]);
-
-	var save_price = $("#reserveSavePrice").val();
-	$("#billPrice").text(commify(tmpPerCnt*tmpOption[1]-couponPrice));
 	$("#totSavePrice").text(commify(result*tmpPerCnt));
-	
-	if(tmpOption[2] == "1"){	
-		//document.getElementById("ddlCoupon").disabled=false;
-	}else{
-		//$("#ddlCoupon").attr("disabled","true");
-	}
+		
 }
 
 function site_save_price(product_seq){
 
+	var price = "";
 	$.ajax({
 		url: "/NH_Card/ajax_save_price.jsp?product_seq="+product_seq,
 		cache: false,
 		async: false,
 		success: function(result){
+			price = result;
 			$("#savePrice").text(commify(result));
 			$("#reserveSavePrice").val(result);
 			
 		}
 	});
 
-	return result;
+	return price;
 }
 
 function selectCoupon(){
@@ -705,7 +699,7 @@ for (int i = 1; i < 15 ;i++){
                                                 팀 
                                     </td>
                                     <td align="center" bgcolor="white"><span class=orange_s id="txtBillPrice" name="txtBillPrice">0</span> <span class=normal_s>원</span></td>
-                                    <td align="center" bgcolor="white"><span class=orange id="savePrice" name="savePrice">0</span><span class=normal_s>원</span></td>
+                                    <td align="center" bgcolor="white"><span class=orange id="savePrice" name="savePrice">0</span> <span class=normal_s>원</span></td>
                                   </tr>
                                 </table></td>
                             </tr>
@@ -812,6 +806,3 @@ for (int i = 1; i < 15 ;i++){
       </table></td>
   </tr>
 </table>
-<!-- 하단 footer  -->
-<%@ include file="/include/footer_nhcard.jsp" %>
-<!-- 하단 footer  -->

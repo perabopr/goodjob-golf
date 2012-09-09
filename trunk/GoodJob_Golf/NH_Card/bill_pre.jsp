@@ -206,8 +206,8 @@ function commify(n) {
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">적립금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440"><span class=orange><%=Utils.numberFormat(site_save_price)%></span> 원
-          <input type="hidden" id="savePrice" name="savePrice" value="<%=site_save_price%>"></td>
+          <td style="padding-left: 10px;" width="440"><span class=orange><%=Utils.numberFormat(site_save_price*rCnt)%></span> 원
+          <input type="hidden" id="savePrice" name="savePrice" value="<%=site_save_price*rCnt%>"></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>

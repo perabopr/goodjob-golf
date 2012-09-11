@@ -236,12 +236,12 @@ function selectGolfLink(){
 	
 	$("#psId").val(tmpOption[0]);
 
-	var result = site_save_price(tmpOption[0]);
+	var result = site_save_price(tmpOption[0] , tmpPerCnt);
 	$("#totSavePrice").text(commify(result*tmpPerCnt));
 		
 }
 
-function site_save_price(product_seq){
+function site_save_price(product_seq , perCnt){
 
 	var price = "";
 	$.ajax({
@@ -250,7 +250,7 @@ function site_save_price(product_seq){
 		async: false,
 		success: function(result){
 			price = result;
-			$("#savePrice").text(commify(result));
+			$("#savePrice").text(commify(result*perCnt));
 			$("#reserveSavePrice").val(result);
 			
 		}

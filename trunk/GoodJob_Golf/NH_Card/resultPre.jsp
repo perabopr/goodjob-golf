@@ -67,14 +67,14 @@ int savePrice = NumberUtils.toInt(request.getParameter("savePrice"),0);
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
           <td style="padding-left: 10px;" width="440"><%=rPhone %> </td>
         </tr>
-        <tr>
+        <!--<tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
         </tr>
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">E-Mail</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
           <td style="padding-left: 10px;" width="440"><%=rEmail %></td>
-        </tr>
+        </tr>-->
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
         </tr>
@@ -97,7 +97,7 @@ int savePrice = NumberUtils.toInt(request.getParameter("savePrice"),0);
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">인원</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440"><span class=orange><%=rCnt %></span>명</td>
+          <td style="padding-left: 10px;" width="440"><span class=orange><%=rCnt %></span> 명</td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>

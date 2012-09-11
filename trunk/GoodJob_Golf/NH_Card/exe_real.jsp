@@ -88,7 +88,7 @@ bookingDate = bookingDate.substring(5,16).replace("-",".");
 message += bookingDate;
 message += " 예약되셨습니다";
 message += "[NH카드고객센터]";
-String sphone = "02-6670-0200";
+String sphone = "02-6670-4321";
 String reserveuid = user_Id;
 String reservephone = uPhone;
 

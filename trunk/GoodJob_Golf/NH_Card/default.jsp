@@ -139,7 +139,7 @@
   <tr>
     <td><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="#D1D3D4">
         <tr>
-          <td align="center" bgcolor="#F1F1F1" height="35"><img src="../img_nhcard/img_main/img_field_subject.gif" width="160" height="25" border="0"></td>
+          <td align="center" bgcolor="#F1F1F1" height="35"><img src="/images/common/img_real_subject.gif" width="160" height="25" border="0"></td>
 		<% 
 			for (int i = 1; i < 15 ;i++){
 				int incYear = incDate.get(incDate.YEAR);
@@ -204,7 +204,7 @@
 				List<ProductDto> listPrdt = glDao.getGolfProductList(pDto);
 			%>
 			<TR height="30">
-			<td bgcolor="white" height="30" style="padding-left:5px;"><span class=blue_list><a href="#"><%=listGolf.get(i).getGolflink_name()%></a></span><%=listGolf.get(i).getEvent_price()!=null&&listGolf.get(i).getEvent_price().length()>0?"</br>"+listGolf.get(i).getEvent_price():"" %></td>
+			<td bgcolor="white" height="30" style="padding-left:5px;"><span class=blue_list><a href="#"><%=listGolf.get(i).getGolflink_name()%></a></span><!--<%=listGolf.get(i).getEvent_price()!=null&&listGolf.get(i).getEvent_price().length()>0?"</br>"+listGolf.get(i).getEvent_price():"" %>--></td>
 			<%
 			incDate.set(tYear, tMonth-1, tDay);
 			for (int k = 1; k < 15 ;k++){
@@ -264,16 +264,81 @@
 			</TR>
 			<%
 			}
-        
+			%>
+      </table></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  
+  <tr>
+    <td><table border="0" cellpadding="2" cellspacing="1" width="100%" bgcolor="#D1D3D4">
+        <tr>
+          <td align="center" bgcolor="#F1F1F1" height="35"><img src="/images/common/img_pre_subject.gif" width="160" height="25" border="0"></td>
+		<% 
+			incDate.add(incDate.DATE, -14);
+			for (int i = 1; i < 15 ;i++){
+				int incYear = incDate.get(incDate.YEAR);
+				int incMonth = incDate.get(incDate.MONTH)+1;
+				int incDay = incDate.get(incDate.DATE);
+				
+				int incWeek = incDate.get(incDate.DAY_OF_WEEK);
+				String weekImg = "";
+				String weekClass = "day";
+				switch(incWeek)
+				{
+					case 2:
+						weekImg = "img_monday%s.gif";
+						break;
+					case 3:
+						weekImg = "img_tuesday%s.gif";
+						break;
+					case 4:
+						weekImg = "img_wednesday%s.gif";
+						break;
+					case 5:
+						weekImg = "img_thursday%s.gif";
+						break;
+					case 6:
+						weekImg = "img_friday%s.gif";
+						break;
+					case 7:
+						weekImg = "img_saturday%s.gif";
+						weekClass = "saturday";
+						break;
+					case 1:
+						weekImg = "img_sunday%s.gif";
+						weekClass = "sunday";
+						break;
+					default:
+						break;
+				}
+				incDate.add(incDate.DATE, 1);
+				boolean isHoliday = com.goodjob.util.Holiday.isHoliday(incYear+""+(incMonth<10?"0"+incMonth:incMonth)+""+(incDay<10?"0"+incDay:incDay));
+				if(isHoliday){
+					weekClass = "sunday";
+					weekImg = String.format(weekImg , "_h");
+				}
+				else{
+					weekImg = String.format(weekImg , "");
+				}
+			%>
+				<td bgColor=#f1f1f1 width=30 align=center>
+				<span class="<%=weekClass%>"><%=Integer.toString(incMonth)+"/"+Integer.toString(incDay)%><BR></span>
+				<img border=0 align=absMiddle src="../../images/booking/<%=weekImg%>" width=20 height=16>
+				</td>
+			<%}%>
+        </tr>
+        <%
 			for(int i = 0; i < listGolf2.size(); i++){
 				ProductDto pDto = new ProductDto();
 				pDto.setGolflink_seq(listGolf2.get(i).getGolflink_seq());
 				pDto.setProduct_startDate(sDate);
 				pDto.setProduct_endDate(eDate);
 				List<ProductDto> listPrdt = glDao.getGolfProductList(pDto);
-			%>
-			<TR>
-			<td bgcolor="white" height="30" style="padding-left:5px;"><span class=blue_list><a href="#"><%=listGolf2.get(i).getGolflink_name()%></a></span><%=listGolf2.get(i).getEvent_price()!=null&&listGolf2.get(i).getEvent_price().length()>0?"</br>"+listGolf2.get(i).getEvent_price():"" %></td>
+		%>
+			<TR height="30">
+			<td bgcolor="white" height="30" style="padding-left:5px;"><span class=blue_list><a href="#"><%=listGolf2.get(i).getGolflink_name()%></a></span><!--<%=listGolf2.get(i).getEvent_price()!=null&&listGolf2.get(i).getEvent_price().length()>0?"</br>"+listGolf2.get(i).getEvent_price():"" %>--></td>
 			<%
 				incDate.set(tYear, tMonth-1, tDay);
 				for (int k = 1; k < 15 ;k++){
@@ -323,9 +388,9 @@
 			<%
 					}else{
 			%>
-					<TD bgColor=white height=40 align=center>
-					<a href="/NH_Card/detail.jsp?menu=2&golf=<%=listGolf2.get(i).getGolflink_seq()%>&date=<%=sDate %>&cdate=<%=cDate%>"><IMG border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate %></br>--------------------</br>예약가능팀 : <%=cCnt %>/<%=rCnt %>팀');" onMouseout="hideddrivetip()"></a>
-					</TD>
+					<td bgColor=white height=40 align=center>
+					<a href="/NH_Card/detail.jsp?menu=2&golf=<%=listGolf2.get(i).getGolflink_seq()%>&date=<%=sDate %>&cdate=<%=cDate%>"><img border=0 align=absMiddle src="../../images/booking/img_golf_pole.gif" width=24 height=22 onMouseover="ddrivetip('<%=pDate %></br>--------------------</br>예약가능팀 : <%=cCnt %>/<%=rCnt %>팀');" onMouseout="hideddrivetip()"></a>
+					</td>
 			<%
 					}
 				}
@@ -336,9 +401,7 @@
 			%>
       </table></td>
   </tr>
-  <tr>
-    <td>&nbsp;</td>
-  </tr>
+  
   <tr>
     <td>&nbsp;</td>
   </tr>
@@ -370,46 +433,7 @@
               <tr>
                 <td bgcolor="white" align="center"">
                 <%@ include file="/NH_Card/nhcard_notice_list.jsp" %>
-                <!--
-                <table border="0" cellpadding="0" cellspacing="0" width="330">
-                    <tr>
-                      <td width="260" height="25"><a href="#">공지사항입니다</a> 
-                      <img align="absmiddle" src="../images/board/icon_new.gif" width="10" height="9" border="0"></td>
-                      <td width=70" align="right" class=board_date>2012-12-31</td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"><img src="../img_nhcard/img_main/img_board_dot.gif" width="330" height="1" border="0"></td>
-                    </tr>
-                  </table>
-                  <table border="0" cellpadding="0" cellspacing="0" width="330">
-                    <tr>
-                      <td width="260" height="25"><a href="#">공지사항입니다</a></td>
-                      <td width="70" align="right" class=board_date>2012-12-31</td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"><img src="../img_nhcard/img_main/img_board_dot.gif" width="330" height="1" border="0"></td>
-                    </tr>
-                  </table>
-                  <table border="0" cellpadding="0" cellspacing="0" width="330">
-                    <tr>
-                      <td width="260" height="25"><a href="#">공지사항입니다</a></td>
-                      <td width="70" align="right" class=board_date>2012-12-31</td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"><img src="../img_nhcard/img_main/img_board_dot.gif" width="330" height="1" border="0"></td>
-                    </tr>
-                  </table>
-                  <table border="0" cellpadding="0" cellspacing="0" width="330">
-                    <tr>
-                      <td width="260" height="25"><a href="#">공지사항입니다</a></td>
-                      <td width="70" align="right" class=board_date>2012-12-31</td>
-                    </tr>
-                    <tr>
-                      <td colspan="2"><img src="../img_nhcard/img_main/img_board_dot.gif" width="330" height="1" border="0"></td>
-                    </tr>
-                  </table>
-                  -->
-                  </td>
+				</td>
               </tr>
             </table></td>
         </tr>

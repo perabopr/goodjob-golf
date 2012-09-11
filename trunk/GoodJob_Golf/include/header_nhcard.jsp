@@ -4,6 +4,8 @@
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
 <title>NH 농협 카드</title>
 <link rel="stylesheet" href="/css/common.css" type="text/css">
+<link rel="stylesheet" href="/css/style.css" type="text/css">
+<link rel="stylesheet" href="/css/jquery.ui.all.css">
 <script src="/js/jquery-1.6.2.min.js"></script>
 <script src="/js/jquery.ui.core.js"></script>
 <script src="/js/jquery.ui.widget.js"></script>

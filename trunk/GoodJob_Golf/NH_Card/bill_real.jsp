@@ -55,8 +55,9 @@ if(prDto.getCoupon_use_yn().equals("1")){
 	couponList = cpDao.getUserCouponList(user_Id, "0", true);
 }
 %>
-
+<%@ include file="/cfg/site_conf_inc_nh.jsp" %>
 <script language="javascript" src="/js/money.js"></script>
+<script type="text/javascript" src="<%= g_conf_js_url %>"></script>
 <script type="text/javascript">
 <!--
 function reSetDate(){
@@ -83,11 +84,6 @@ function billok(){
 		alert("연락처를 입력하세요.");
 		return ;
 	}
-	var rEmail = $("#email1").val()+"@"+$("#email2").val();
-	if($("#email1").val().length == 0 && $("#email2").val().length == 0){
-		alert("E-Mail을 입력하세요.");
-		return ;
-	}
 	
 	$("#menu").val("<%=menu%>");
 	$("#gcId").val("<%=productsubSeq%>");
@@ -95,7 +91,7 @@ function billok(){
 	$("#date").val('<%=date%>');
 	$("#cdate").val('<%=cdate%>');
 
-	$("#reserveEmail").val(rEmail);	
+	$("#reserveEmail").val($("#reserveName").val());	
 	
 	if($("#billBtype").attr("checked")){
 		if(window.confirm("예약을 완료하시려면 확인 버튼을 누르십시오 \r\n예약확인 SMS : "+$("#phone1").val()+$("#phone2").val()+$("#phone3").val())){
@@ -118,12 +114,11 @@ function billSubmit(cbNum){
 function priceChange(){
 	var billprice = <%=buyPrice%> * $("#perNum").val();
 	var save_price = <%=site_save_price%> * $("#perNum").val();
-		billprice = commify(billprice);
 
-	$("#billPrice").html(billprice);
-	$("#buyPrice").val(billprice);
+	$("#billPrice").html(commify(billprice));
+	$("#good_mny").val(billprice);
 
-	$("#savePrice").html(save_price);
+	$("#savePrice").html(commify(save_price));
 	$("#save_price").val(save_price);
 }
 
@@ -170,35 +165,136 @@ function card_order(menu , reserve_seq , good_price , good_name){
 		alert("결제 금액이 없습니다.");
 		return;
 	}
-	var frm = document.order_frm;
-	
-	$("#good_name").val(good_name);
-	$('#good_price').val(good_price);
+	var frm = document.order_info;
+
+	$("#buyr_name").val(good_name);
+	$('#good_mny').val(good_price);
 	$('#menu').val(menu);
 	$('#reserve_seq').val(reserve_seq);
 	$('#reserve_name').val($("#reserveName").val());
 	var phone = $("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val();
 	$('#mtel').val(phone);
 
-	var rEmail = $("#email1").val()+"@"+$("#email2").val();
+	var rEmail = $("#reserveName").val();
 	$('#ordEmail').val(rEmail);
-	
-	var win_pop = window.open("","order_pop","width=650,height=700,scrollbars=no");
-	frm.target =  "order_pop"; 
-	frm.action = "./chk_plugin.jsp";
-	frm.submit();
+
+	$('#buyr_mail').val(rEmail);
+	$('#buyr_tel1').val(phone);
+	$('#buyr_tel2').val(phone);
+
+	init_orderid();
+	jsf__pay( frm );
 }
 
+//플러그인 설치(확인)
+StartSmartUpdate();
+
+/* Payplus Plug-in 실행 */
+function  jsf__pay( form )
+{
+    var RetVal = false;
+    
+    if( document.Payplus.object == null )
+    {
+        openwin = window.open( "/kcp/chk_plugin.html", "chk_plugin", "width=420, height=100, top=300, left=300" );
+    }
+
+    /* Payplus Plugin 실행 */
+    if ( MakePayMessage( form ) == true )
+    {
+        openwin = window.open( "/kcp/proc_win.html", "proc_win", "width=449, height=209, top=300, left=300" );
+        RetVal = true ;
+    }
+    else
+    {
+        /*  res_cd와 res_msg변수에 해당 오류코드와 오류메시지가 설정됩니다.
+            ex) 고객이 Payplus Plugin에서 취소 버튼 클릭시 res_cd=3001, res_msg=사용자 취소값이 설정됩니다.
+        */
+        res_cd  = document.order_info.res_cd.value ;
+        res_msg = document.order_info.res_msg.value ;
+        //alert ( "Payplus Plug-in 실행 결과(샘플)\n" + "res_cd = " + res_cd + "|" + "res_msg=" + res_msg ) ;
+    }
+
+    return RetVal ;
+}
+
+/* 주문번호 생성 예제 */
+function init_orderid()
+{
+    var today = new Date();
+    var year  = today.getFullYear();
+    var month = today.getMonth() + 1;
+    var date  = today.getDate();
+    var time  = today.getTime();
+
+    if(parseInt(month) < 10) {
+        month = "0" + month;
+    }
+
+    if(parseInt(date) < 10) {
+        date = "0" + date;
+    }
+
+    var order_idxx = "NHGLF_" + year + "" + month + "" + date + "" + time;
+
+    $('#ordr_idxx').val(order_idxx);
+    
+    //document.order_info.ordr_idxx.value = order_idxx;
+}
+
+/* onLoad 이벤트 시 Payplus Plug-in이 실행되도록 구성하시려면 다음의 구문을 onLoad 이벤트에 넣어주시기 바랍니다. */
+function onload_pay()
+{
+     if( jsf__pay(document.order_info) )
+        document.order_info.submit();
+}
 //-->
 </script>
-<form name="order_frm" method="post">
-<input type="hidden" id="good_name" name="good_name" value=""/>
-<input type="hidden" id="good_price" name="good_price" value=""/>
+<form name="order_info" action="/NH_Card/pp_ax_hub.jsp" method="post">
+<input type="hidden" id="good_mny" name="good_mny" value=""/>
+<input type="hidden" id="buyr_name" name="buyr_name" value=""/>
+<input type="hidden" id="buyr_mail" name="buyr_mail" value=""/>
 <input type="hidden" id="menu" name="menu" value=""/>
 <input type="hidden" id="reserve_seq" name="reserve_seq" value=""/>
 <input type="hidden" id="reserve_name" name="reserve_name" value=""/>
-<input type="hidden" id="mtel" name="mtel" value=""/>
 <input type="hidden" id="reserveEmail" name="reserveEmail" value=""/>
+
+<input type="hidden" id="mtel" name="mtel" value=""/>
+<input type="hidden" name="buyr_tel1" value=""/>
+<input type="text" name="buyr_tel2" value=""/>
+<input type="hidden" name="req_tx" value="pay" />
+<input type="hidden" name="site_cd" value="<%=g_conf_site_cd%>" />
+<input type="hidden" name="site_key" value="<%=g_conf_site_key%>" />
+<input type="hidden" name="site_name" value="<%=g_conf_site_name%>" />
+
+<input type="hidden" id="ordr_idxx" name="ordr_idxx" value="" />
+
+<input type="hidden" name="pay_method" value="100000000000">
+<input type="hidden" name="quotaopt" value="12">
+<input type="hidden" name="currency"        value="WON"/>
+<input type="hidden" name="site_logo" value="http://www.savekorea.com/images/savekorea_logo_kcp.jpg">
+<input type="hidden" name="not_used_card" value="CCKM:CCSG:CCCT:CCHM:CCXX:CCLO:CCPH:CCHN:CCSS:CCKJ:CCSU:CCSH:CCJB:CCCJ:CCKW:CCLG:CCKE:CCDI:CCSB:CCKD:CCCH:CCCU"/>
+<input type="hidden" name="module_type"     value="01"/>
+<input type="hidden" name="epnt_issu"       value="" />
+<input type="hidden" name="res_cd"          value=""/>
+<input type="hidden" name="res_msg"         value=""/>
+<input type="hidden" name="tno"             value=""/>
+<input type="hidden" name="trace_no"        value=""/>
+<input type="hidden" name="enc_info"        value=""/>
+<input type="hidden" name="enc_data"        value=""/>
+<input type="hidden" name="ret_pay_method"  value=""/>
+<input type="hidden" name="tran_cd"         value=""/>
+<input type="hidden" name="bank_name"       value=""/>
+<input type="hidden" name="bank_issu"       value=""/>
+<input type="hidden" name="use_pay_method"  value=""/>
+
+<!--  현금영수증 관련 정보 : Payplus Plugin 에서 설정하는 정보입니다 -->
+<input type="hidden" name="cash_tsdtime"    value=""/>
+<input type="hidden" name="cash_yn"         value=""/>
+<input type="hidden" name="cash_authno"     value=""/>
+<input type="hidden" name="cash_tr_code"    value=""/>
+<input type="hidden" name="cash_id_info"    value=""/>
+
 </form>
 <FORM NAME="exefrm" METHOD="post">
 <input type="hidden" id="menu" name="menu" value="1">
@@ -207,8 +303,8 @@ function card_order(menu , reserve_seq , good_price , good_name){
 <input type="hidden" id="date" name="date" >
 <input type="hidden" id="cdate" name="cdate" >
 <input type="hidden" id="cbNum" name="cbNum" >
-<input type="hidden" id="bill_price" name="bill_price" value="<%=buyPrice%>"/>
-<input type="hidden" id="save_price" name="save_price" value="<%=buyPrice%>"/>
+<input type="hidden" id="buyPrice" name="buyPrice" value="<%=(buyPrice*4)%>"/>
+<input type="hidden" id="save_price" name="save_price" value="<%=(site_save_price*4)%>"/>
 <table border="0" cellpadding="0" cellspacing="0" width="713" align="center">
   <tr>
     <td width="713"><table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -264,7 +360,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
               </tr>
             </table></td>
         </tr>
-        <tr>
+        <!--tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
         </tr>
         <tr>
@@ -286,7 +382,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
                         <OPTION value="yahoo.co.kr">yahoo.co.kr</OPTION>
                         <OPTION value="gmail.com">gmail.com</OPTION>
                       </SELECT></td>
-        </tr>
+        </tr>-->
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
         </tr>
@@ -330,8 +426,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>결제금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;"><span class=orange><%=Utils.numberFormat(buyPrice*4) %></span> 원
-          <input type="hidden" id="buyPrice" name="buyPrice" value=""/></td>
+          <td style="padding-left: 10px;"><span class=orange id="billPrice"><%=Utils.numberFormat(buyPrice*4) %></span> 원</td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -339,8 +434,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>적립금액</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;"><span class=orange><%=Utils.numberFormat(site_save_price*4) %></span> 원
-          <input type="hidden" id="savePrice" name="savePrice" value="<%=(site_save_price*4)%>"/></td>
+          <td style="padding-left: 10px;"><span class=orange id="savePrice"><%=Utils.numberFormat(site_save_price*4)%></span> 원</td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>

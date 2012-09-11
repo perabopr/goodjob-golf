@@ -41,7 +41,7 @@ int regionseq = NumberUtils.toInt(request.getParameter("region"),0);
 function NewWindow(mypage, myname, w, h, scroll) { 
 var winl = (screen.width - w) / 2; 
 var wint = (screen.height - h) / 2; 
-winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable' 
+winprops = 'height='+h+',width='+w+',top='+wint+',left='+winl+',scrollbars='+scroll+',resizable';
 win = window.open(mypage, myname, winprops) 
 if (parseInt(navigator.appVersion) >= 4) { win.window.focus(); } 
 }
@@ -154,7 +154,7 @@ function orderUpdate(serviceseq){
 	<%
 		}
 	%>
-        <td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_real_time_reg.jsp?menuseq=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','820','520','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
+        <td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_real_time_reg.jsp?menuseq=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','1200','720','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
         <td align="center" bgcolor="white"><a href="real_rule_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
         <td align="center" bgcolor="white"><a href="real_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></td>
         <td align="center" bgcolor="white">

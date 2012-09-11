@@ -128,7 +128,7 @@ function orderUpdate(serviceseq){
 		<td align="center" bgcolor="white"><span class=list_subject><%= arrGolfLink.get(i).getGolflink_name()%></span></td>
 		<td align="center" bgcolor="white"><%= arrGolfLink.get(i).getGolflink_address1()%></td>
 		<td align="center" bgcolor="white"><%= pageName %></td>
-		<td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_pre_time_reg.jsp?menuseq=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','820','520','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
+		<td align="center" bgcolor="white"><a href="/_admin/product/popup/pop_pre_time_reg.jsp?menuseq=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>" onClick="NewWindow(this.href,'name','1200','720','yes');return false;"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
         <td align="center" bgcolor="white"><a href="pre_rule_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_input.gif" width="74" height="26" border="0"></a></td>
         <td align="center" bgcolor="white"><a href="pre_reg.jsp?menu=<%=arrGolfLink.get(i).getMenu_seq() %>&glseq=<%=arrGolfLink.get(i).getGolflink_seq()%>"><img src="../images/inc/btn_edit2.gif" width="74" height="26" border="0"></a></td>
     	<td align="center" bgcolor="white">

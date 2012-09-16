@@ -5,16 +5,20 @@
 <%@ page import="java.util.HashMap"%>
 <%@ page import="java.util.Map"%>
 <%@ page import="com.goodjob.member.*"%><%
-
-	String ses_mem_id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"));
-	String menu = StringUtils.trimToEmpty(request.getParameter("menu"));
-	String reserve_seq = StringUtils.trimToEmpty(request.getParameter("reserve_seq"));
-	String process_status = StringUtils.trimToEmpty(request.getParameter("process_status"));
-	String ordr_id = StringUtils.trimToEmpty(request.getParameter("ordr_id"));
+	
+	int gcId = NumberUtils.toInt(request.getParameter("gcId"),0);
+	int golf = NumberUtils.toInt(request.getParameter("golf"),0);
+	int date = NumberUtils.toInt(request.getParameter("date"),0);
+	int cdate = NumberUtils.toInt(request.getParameter("cdate"),0);
+	int perNum = NumberUtils.toInt(request.getParameter("perNum"),0);
+	int bill_price = NumberUtils.toInt(request.getParameter("bill_price"),0);
+	int save_price = NumberUtils.toInt(request.getParameter("save_price"),0);
+	
 	
 	String reserveName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
 	String mtel = StringUtils.trimToEmpty(request.getParameter("mtel"));
-	String ordEmail = StringUtils.trimToEmpty(request.getParameter("ordEmail"));
+	String bookingDate = StringUtils.trimToEmpty(request.getParameter("bookingDate"));
+	String golflinkName = StringUtils.trimToEmpty(request.getParameter("golflinkName"));
 	
     /* ============================================================================== */
     /* =   PAGE : 지불 요청 및 결과 처리 PAGE                                       = */
@@ -329,32 +333,6 @@
                 {
 
                 }
-                
-                //---------------------- DB 처리 ---------------------
-                MemberDao mDao = new MemberDao();
-                //GolfLinkDao glDao = new GolfLinkDao();
-                MyPageDao myDao = new MyPageDao();
-                
-                Map<String,String> params = new HashMap<String,String>();
-                params.put("process_status",process_status);
-                params.put("reserve_seq", reserve_seq);
-                params.put("card_bill_num", ordr_idxx);
-                
-                String tablename = "";
-                if("3".equals(menu)){
-                	tablename = "tb_package_reserve";
-                }
-                else if("4".equals(menu)){
-                	tablename = "tb_package_reserve";
-                }
-                else if("5".equals(menu)){
-                	tablename = "tb_condo_reserve";
-                }
-                else {
-                	tablename = "tb_golflink_reserve";
-                }
-                myDao.setStatusUpdate(tablename, params);
-            	
 			}
 
             // 07-1-2. 계좌이체
@@ -384,11 +362,24 @@
 			}
 		}
 
+        System.out.println("res_cd : " + res_cd);
+        System.out.println("res_msg : " + res_msg);
+        System.out.println("buyr_tel1 : " + buyr_tel1);
+        
         /* = -------------------------------------------------------------------------- = */
         /* =   07-2. 승인 실패 DB 처리(res_cd != "0000")                                = */
         /* = -------------------------------------------------------------------------- = */
 		if( !"0000".equals ( res_cd ) )
 		{
+%>
+<script type="text/javascript">
+alert('카드 승인 실패 입니다.\n잠시후 다시 시도해 주세요.');
+var openwin = window.open( '/kcp/proc_win.html', 'proc_win', '' );
+openwin.close();
+history.go(-1);
+</script>
+<%
+			return;
 		}
 	}	
     /* = -------------------------------------------------------------------------- = */
@@ -484,7 +475,7 @@
     </head>
 
     <body onload="goResult()">
-    <form name="pay_info" method="post" action="./result.jsp">
+    <form name="pay_info" method="post" action="/NH_Card/exe_real.jsp">
 		<input type="hidden" name="site_cd"         value="<%= g_conf_site_cd	%>">    <!-- 사이트 코드 -->
 		<input type="hidden" name="req_tx"          value="<%= req_tx			%>">    <!-- 요청 구분 -->
         <input type="hidden" name="use_pay_method"  value="<%= use_pay_method	%>">    <!-- 사용한 결제 수단 -->
@@ -536,6 +527,20 @@
         <input type="hidden" name="cash_authno"     value="<%= cash_authno		%>">	<!-- 현금 영수증 승인 번호 -->
         <input type="hidden" name="cash_tr_code"    value="<%= cash_tr_code		%>">	<!-- 현금 영수증 발행 구분 -->
         <input type="hidden" name="cash_id_info"    value="<%= cash_id_info		%>">	<!-- 현금 영수증 등록 번호 -->
+        
+        <input type="hidden" id="gcId" name="gcId" value="<%=gcId%>"/>
+		<input type="hidden" id="golf" name="golf" value="<%=golf%>"/>
+		<input type="hidden" id="date" name="date" value="<%=date%>"/>
+		<input type="hidden" id="cdate" name="cdate" value="<%=cdate%>"/>
+		<input type="hidden" id="cbNum" name="cbNum" value="<%=ordr_idxx%>"/>
+		<input type="hidden" id="buyPrice" name="buyPrice" value="<%=bill_price%>"/>
+		<input type="hidden" id="save_price" name="save_price" value="<%=save_price%>"/>
+		<input type="hidden" id="bookingDate" name="bookingDate" value="<%=bookingDate%>"/>
+		<input type="hidden" id="golflinkName" name="golflinkName" value="<%=golflinkName%>"/>
+		<input type="hidden" id="mtel" name="mtel" value="<%=mtel%>"/>
+		<input type="hidden" id="perNum" name="perNum" value="<%=perNum%>"/>
+		
+
     </form>
 	</body>
 </html>

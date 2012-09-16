@@ -384,11 +384,24 @@
 			}
 		}
 
+System.out.println("res_cd : " + res_cd);
+System.out.println("res_msg : " + res_msg);
+System.out.println("buyr_tel1 : " + buyr_tel1);
+
         /* = -------------------------------------------------------------------------- = */
         /* =   07-2. 승인 실패 DB 처리(res_cd != "0000")                                = */
         /* = -------------------------------------------------------------------------- = */
 		if( !"0000".equals ( res_cd ) )
 		{
+%>
+<script type="text/javascript">
+alert('카드 승인 실패 입니다.\n잠시후 다시 시도해 주세요.');
+var openwin = window.open( '/kcp/proc_win.html', 'proc_win', '' );
+openwin.close();
+history.go(-1);
+</script>
+<%
+			return;
 		}
 	}	
     /* = -------------------------------------------------------------------------- = */
@@ -460,7 +473,6 @@
                 var openwin = window.open( '/kcp/proc_win.html', 'proc_win', '' );
                 document.pay_info.submit();
                 openwin.close();
-                document.pay_info.submit();
             }
 
             // 결제 중 새로고침 방지 샘플 스크립트
@@ -484,7 +496,7 @@
     </head>
 
     <body onload="goResult()">
-    <form name="pay_info" method="post" action="./result.jsp">
+    <form name="pay_info" method="post" action="/NH_Card/result.jsp">
 		<input type="hidden" name="site_cd"         value="<%= g_conf_site_cd	%>">    <!-- 사이트 코드 -->
 		<input type="hidden" name="req_tx"          value="<%= req_tx			%>">    <!-- 요청 구분 -->
         <input type="hidden" name="use_pay_method"  value="<%= use_pay_method	%>">    <!-- 사용한 결제 수단 -->
@@ -536,6 +548,9 @@
         <input type="hidden" name="cash_authno"     value="<%= cash_authno		%>">	<!-- 현금 영수증 승인 번호 -->
         <input type="hidden" name="cash_tr_code"    value="<%= cash_tr_code		%>">	<!-- 현금 영수증 발행 구분 -->
         <input type="hidden" name="cash_id_info"    value="<%= cash_id_info		%>">	<!-- 현금 영수증 등록 번호 -->
+        
+        <input type="hidden" name="reserve_seq"    value="<%= reserve_seq		%>">
+        <input type="hidden" name="menu"    value="<%= menu		%>">
     </form>
 	</body>
 </html>

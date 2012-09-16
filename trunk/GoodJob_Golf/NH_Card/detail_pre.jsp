@@ -309,11 +309,13 @@ function reserveSubmit(){
 		alert("핸드폰을 입력하세요.");
 		return false;
 	}
+	/*
 	var rEmail = $("#email1").val()+"@"+$("#email2").val();
 	if($("#email1").val().length == 0 && $("#email2").val().length == 0){
 		alert("E-Mail을 입력하세요.");
 		return false;
 	}
+	*/
 	var rRequestContent = $("#requestContent").val();
 	
 	$("#reserveCnt").val(rCnt);
@@ -325,7 +327,7 @@ function reserveSubmit(){
 	
 	$("#reserveName").val(rName);	
 	$("#reservePhone").val(rPhone);	
-	$("#reserveEmail").val(rEmail);	
+	//$("#reserveEmail").val(rEmail);	
 	$("#reserveRequest").val(rRequestContent);	
 	frm.submit();
 }

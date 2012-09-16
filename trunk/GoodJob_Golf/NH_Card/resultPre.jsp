@@ -7,7 +7,45 @@
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
 <%@page import="com.goodjob.util.Utils"%>
+<%@page import="com.goodjob.reserve.dto.GolfLinkReserveDto"%>
 <%
+int reserve_seq = NumberUtils.toInt(request.getParameter("reserve_seq"), 0);
+
+GolfLinkDao glDao = new GolfLinkDao();
+
+GolfLinkReserveDto grsDto = glDao.getGolfLinkReserve(reserve_seq);
+
+int rCnt = NumberUtils.toInt(grsDto.getPer_num(), 0);
+
+String rName = StringUtils.trimToEmpty(grsDto.getReserve_name());
+String rPhone = StringUtils.trimToEmpty(grsDto.getReserve_phone());
+String rEmail = StringUtils.trimToEmpty(grsDto.getReserve_uid());
+
+String rRequest = StringUtils.trimToEmpty(request.getParameter("reserveRequest"));
+rRequest = rRequest.replaceAll("\r\n","</br>");
+
+String golflinkName = StringUtils.trimToEmpty(grsDto.getGolflink_name());
+String bookingDate = StringUtils.trimToEmpty(grsDto.getBooking_day());
+bookingDate = bookingDate.substring(0,4) + "-" + bookingDate.substring(4,6) + "-" + bookingDate.substring(6,8);	
+
+String vbookingTime_s = StringUtils.trimToEmpty(grsDto.getBooking_time_s());
+if(vbookingTime_s.length() > 0){
+	vbookingTime_s = vbookingTime_s.substring(0,2)+"시";
+}
+
+String vbookingTime_e = StringUtils.trimToEmpty(grsDto.getBooking_time_e());
+if(vbookingTime_e.length() > 0){
+	vbookingTime_e = vbookingTime_e.substring(0,2)+"시";
+}
+
+int buyPrice = grsDto.getProduct_price();
+int savePrice = grsDto.getSave_price();
+
+//System.out.println("getProductsub_seq : "+grsDto.getProductsub_seq());
+
+//System.out.println("course_name : "+glDao.getCourse_name(grsDto.getProductsub_seq()));
+
+/*
 int productsubSeq = NumberUtils.toInt(request.getParameter("gcId"), 0);
 int golf = NumberUtils.toInt(request.getParameter("golf"), 0);
 int date = NumberUtils.toInt(request.getParameter("date"), 0);
@@ -30,6 +68,7 @@ String bookingDate = StringUtils.trimToEmpty(request.getParameter("bookingDate")
 
 int buyPrice = NumberUtils.toInt(request.getParameter("buyPrice"),0);
 int savePrice = NumberUtils.toInt(request.getParameter("savePrice"),0);
+*/
 %>
 <!-- 상단 영역 -->
 <%@ include file="/include/header_nhcard.jsp" %>
@@ -57,7 +96,7 @@ int savePrice = NumberUtils.toInt(request.getParameter("savePrice"),0);
         <tr>
           <td width="139" height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b>예약자명</td>
           <td width="1" bgcolor="#D1D3D4"></td>
-          <td width="440"  style="padding-left: 10px;" class=normal_b><%=rName %></td>
+          <td width="440"  style="padding-left: 10px;" class=normal_b><%=rName%></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -89,7 +128,7 @@ int savePrice = NumberUtils.toInt(request.getParameter("savePrice"),0);
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">시간대</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440"><%=bookingDate %></td>
+          <td style="padding-left: 10px;" width="440"><%=bookingDate%> <%=vbookingTime_s%>~<%=vbookingTime_e%></td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
@@ -97,7 +136,7 @@ int savePrice = NumberUtils.toInt(request.getParameter("savePrice"),0);
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">인원</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
-          <td style="padding-left: 10px;" width="440"><span class=orange><%=rCnt %></span> 명</td>
+          <td style="padding-left: 10px;" width="440"><span class=orange><%=rCnt%></span> 명</td>
         </tr>
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>

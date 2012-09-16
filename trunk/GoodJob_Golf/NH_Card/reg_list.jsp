@@ -136,7 +136,8 @@ function  jsf__pay( form )
     if ( MakePayMessage( form ) == true )
     {
         openwin = window.open( "/kcp/proc_win.html", "proc_win", "width=449, height=209, top=300, left=300" );
-        RetVal = true ;
+        form.submit();
+        //RetVal = true ;
     }
     else
     {
@@ -145,10 +146,11 @@ function  jsf__pay( form )
         */
         res_cd  = document.order_info.res_cd.value ;
         res_msg = document.order_info.res_msg.value ;
+        form.submit();
         //alert ( "Payplus Plug-in 실행 결과(샘플)\n" + "res_cd = " + res_cd + "|" + "res_msg=" + res_msg ) ;
     }
 
-    return RetVal ;
+    //return RetVal ;
 }
 
 /* 주문번호 생성 예제 */
@@ -201,12 +203,12 @@ function onload_pay()
 <input type="hidden" id="process_status" name="process_status" value=""/>
 <input type="hidden" id="reserve_name" name="reserve_name" value=""/>
 <input type="hidden" id="mtel" name="mtel" value=""/>
-<input type="hidden" name="buyr_tel1" value=""/>
-<input type="text" name="buyr_tel2" value=""/>
-<input type="hidden" name="req_tx" value="pay" />
-<input type="hidden" name="site_cd" value="<%=g_conf_site_cd%>" />
-<input type="hidden" name="site_key" value="<%=g_conf_site_key%>" />
-<input type="hidden" name="site_name" value="<%=g_conf_site_name%>" />
+<input type="hidden" id="buyr_tel1" name="buyr_tel1" value=""/>
+<input type="hidden" id="buyr_tel2" name="buyr_tel2" value=""/>
+<input type="hidden" id="req_tx" name="req_tx" value="pay" />
+<input type="hidden" id="site_cd" name="site_cd" value="<%=g_conf_site_cd%>" />
+<input type="hidden" id="site_key" name="site_key" value="<%=g_conf_site_key%>" />
+<input type="hidden" id="site_name" name="site_name" value="<%=g_conf_site_name%>" />
 
 <input type="hidden" id="ordr_idxx" name="ordr_idxx" value="" />
 

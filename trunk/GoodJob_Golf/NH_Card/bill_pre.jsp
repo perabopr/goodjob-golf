@@ -119,6 +119,7 @@ function commify(n) {
 <input type="hidden" id="reserveName" name="reserveName" value="<%=rName %>">
 <input type="hidden" id="reservePhone" name="reservePhone" value="<%=rPhone %>">
 <input type="hidden" id="reserveEmail" name="reserveEmail" value="<%=rEmail %>">
+<input type="hidden" id="reserve_seq" name="reserve_seq" value="">
 <textarea id="reserveRequest" name="reserveRequest" style="display:none"><%=rRequest%></textarea>
 
 <table border="0" cellpadding="0" cellspacing="0" width="713" align="center">
@@ -154,14 +155,14 @@ function commify(n) {
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
           <td style="padding-left: 10px;" width="440"><%=rPhone %></td>
         </tr>
-        <tr>
+        <!--<tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
         </tr>
         <tr>
           <td height="28" bgcolor="#F1F1F1" align="right" style="padding-right: 10px;" class=normal_b width="139">E-Mail</td>
           <td width="1" height="18" bgcolor="#D1D3D4"></td>
           <td style="padding-left: 10px;" width="440"><%=rEmail %></td>
-        </tr>
+        </tr>-->
         <tr>
           <td height="1" colspan="3" bgcolor="#D1D3D4" width="600"></td>
         </tr>

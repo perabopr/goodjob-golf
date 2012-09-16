@@ -14,6 +14,31 @@ public class RESERVE {
 		"ORDER BY A.order_num, B.region_seq, A.golflink_name";
 		
 	
+	public static final String getReserveGolfDetail = " select a.reserve_seq, " +
+		" a.menu_seq, " +
+		" a.golflink_seq, " +
+		" a.product_seq, " +
+		" a.productsub_seq, " +
+		" a.reserve_day, " +
+		" a.reserve_name, " +
+		" a.reserve_uid, " +
+		" a.golflink_name, " +
+		" a.booking_day, " +
+		" a.booking_time_s, " +
+		" a.booking_time_e, " +
+		" a.golflink_course, " +
+		" a.per_num, " +
+		" a.reserve_phone, " +
+		" a.product_price, " +
+		" a.coupon_price, " +
+		" a.process_status, " +
+		" a.card_bill_num, " +
+		" a.site_seq ,  " +
+		" IFNULL(b.save_price , 0) save_price " +
+		" from tb_golflink_reserve a  " +
+		" left outer join tb_reserve_saveprice b on(a.reserve_seq=b.reserve_seq) " +
+		" where a.reserve_seq = ? limit 1 ";
+	
 	public static final String getReserveGolfDate
 	=	"SELECT " +
 			" A.product_seq" +
@@ -458,6 +483,10 @@ public class RESERVE {
 			"AND b.product_date >= ? %s " +
 		"ORDER BY a.menu_seq, a.golflink_seq, b.product_date, c.time_start";
 	
+	
+	public static final String course_name = " SELECT course_name FROM tb_product_sub a ,  tb_golflink_course b "+
+						"WHERE productsub_seq = ? and a.golflink_course_seq=b.golflink_course_seq ";
+			
 	//-------------------------------- 적립금 -----------------
 	public static final String product_save_price = "select productsub_seq , price3 from tb_product_sub_site where productsub_seq = ? and site_seq = ? ";
 	

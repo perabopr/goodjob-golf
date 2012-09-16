@@ -13,74 +13,61 @@
 <%@page import="com.goodjob.util.Utils"%>
 <%
 //사용자정보.
-String user_Name = StringUtils.trimToEmpty(request.getParameter("username"));
-String user_Id = StringUtils.trimToEmpty(request.getParameter("gr_cd"));
+int menu = 1;
 
-int menu = NumberUtils.toInt(request.getParameter("menu"),0);
+String buyr_name = StringUtils.trimToEmpty(request.getParameter("buyr_name"));
 int gcId = NumberUtils.toInt(request.getParameter("gcId"),0);
 int golf = NumberUtils.toInt(request.getParameter("golf"),0);
 int date = NumberUtils.toInt(request.getParameter("date"),0);
 int cdate = NumberUtils.toInt(request.getParameter("cdate"),0);
 int perNum = NumberUtils.toInt(request.getParameter("perNum"),0);
-int bill_price = NumberUtils.toInt(request.getParameter("bill_price"),0);
+int bill_price = NumberUtils.toInt(request.getParameter("good_mny"),0);
+int save_price = NumberUtils.toInt(request.getParameter("save_price"),0);
+String bookingDate = StringUtils.trimToEmpty(request.getParameter("bookingDate"));
+String golflinkName = StringUtils.trimToEmpty(request.getParameter("golflinkName"));
+golflinkName = golflinkName.replace("(P)","").replace("(PAR3)","");
 
-int savePrice = NumberUtils.toInt(request.getParameter("savePrice"),0);
-
-String cbNum = StringUtils.trimToEmpty(request.getParameter("cbNum"));
-String couponValue = StringUtils.trimToEmpty(request.getParameter("ddlCoupon"));
-String[] arrCouponValue = couponValue.split("/");
+String res_cd = StringUtils.trimToEmpty(request.getParameter("res_cd"));
+String res_msg = StringUtils.trimToEmpty(request.getParameter("res_msg"));
+String cbNum = StringUtils.trimToEmpty(request.getParameter("ordr_idxx"));
 int couponSeq = 0;
-try{
-	couponSeq  = NumberUtils.toInt(arrCouponValue[0]);
-}catch(Exception e){
-	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=1&gr_cd="+request.getParameter("gr_cd")+"&username="+user_Name+"'</script>");
-	return;
-}
 
 if(menu == 0 || gcId == 0 || golf == 0 || date == 0 || cdate == 0){
-	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=1&gr_cd="+request.getParameter("gr_cd")+"&username="+user_Name+"'</script>");
+	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=1&gr_cd="+request.getParameter("gr_cd")+"'</script>");
 	return;
 }
 
-String resName = StringUtils.trimToEmpty(request.getParameter("reserveName"));
-String uPhone = "";
-uPhone += request.getParameter("phone1") + "-";
+
+String uPhone = StringUtils.trimToEmpty(request.getParameter("mtel"));
+
+/*uPhone += request.getParameter("phone1") + "-";
 uPhone += request.getParameter("phone2") + "-";
-uPhone += request.getParameter("phone3");
+uPhone += request.getParameter("phone3");*/
 
 /* ----- 쿠폰 ----- */
 CouponDao cpDao = new CouponDao();
-List<CouponDto> couponList = cpDao.getUserCouponList(user_Id, "0",true);
 
 GolfLinkReserveDto glrDto = new GolfLinkReserveDto();
-glrDto.setReserve_name(resName);
-glrDto.setReserve_uid(resName);
+glrDto.setReserve_name(buyr_name);
+glrDto.setReserve_uid(buyr_name);
 glrDto.setPer_num(Integer.toString(perNum));
+glrDto.setProduct_price(bill_price);
 glrDto.setReserve_phone(uPhone);
 int couponPrice = 0;
-CouponDto cpDto = new CouponDto();
-/*for(int i = 0; i < couponList.size(); i++){
-	if(couponList.get(i).getCoupon_seq() == couponSeq){
-		couponPrice = couponList.get(i).getSale_price(); 
-		cpDto = couponList.get(i);
-		cpDto.setMenu_seq(menu);
-	}
-}*/
+
 glrDto.setCoupon_price(couponPrice);
 glrDto.setProcess_status("1");
 glrDto.setCard_bill_num(cbNum);
 glrDto.setProductsub_seq(gcId);
 glrDto.setSite_seq(3);
-glrDto.setSave_price(savePrice);
+glrDto.setSave_price(save_price);
 
+int reserve_seq = 0;
 GolfLinkDao glDao = new GolfLinkDao();
-glDao.setGolfReserve(glrDto, cpDto);
+
+reserve_seq = glDao.setGolfReserve(glrDto, new CouponDto());
 
 /*--------------- 문자 발송 --------------*/
-String bookingDate = StringUtils.trimToEmpty(request.getParameter("bookingDate"));
-String golflinkName = StringUtils.trimToEmpty(request.getParameter("golflinkName"));
-
-golflinkName = golflinkName.replace("(P)","").replace("(PAR3)","");
 
 String message = "";
 message += "[" + golflinkName + "]";
@@ -89,28 +76,24 @@ message += bookingDate;
 message += " 예약되셨습니다";
 message += "[NH카드고객센터]";
 String sphone = "02-6670-4321";
-String reserveuid = user_Id;
 String reservephone = uPhone;
 
 Map<String,String> params = new HashMap<String,String>();
 params.put("msg",message);
 params.put("sphone",sphone);
-params.put("mem_id",reserveuid);
+params.put("mem_id","nh_card");
 params.put("rphone",reservephone);
 
 SMSDao sDao = new SMSDao();
 boolean isSend = sDao.send(params);
 
 //추가 SMS 발송
-message = "적립금액 : "+(Utils.numberFormat(savePrice))+"원은 익월 초에 자동 적립됩니다.";
+message = "적립금액 : "+(Utils.numberFormat(save_price))+"원은 익월 초에 자동 적립됩니다.";
 message += "(NH카드)";
 params.put("msg",message);
 isSend = sDao.send(params);
 
 %>
 <script type="text/javascript">
-var frm = this.parent.document.exefrm;
-frm.target = ""; 
-frm.action = "result.jsp";
-frm.submit();
+document.location.href="result.jsp?menu=1&reserve_seq=<%=reserve_seq%>";
 </script>

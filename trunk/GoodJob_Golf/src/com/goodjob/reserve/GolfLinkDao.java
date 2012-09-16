@@ -13,6 +13,7 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import com.goodjob.coupon.CouponDao;
@@ -98,6 +99,29 @@ public class GolfLinkDao {
 		}
 
 		return NumberUtils.toInt(map.get("cnt")+"");
+	}
+	
+	public GolfLinkReserveDto getGolfLinkReserve(int idSeq){
+		GolfLinkReserveDto dto = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(idSeq);
+			
+			ResultSetHandler rsh = new BeanHandler(GolfLinkReserveDto.class);
+			QueryRunner qr = new QueryRunner();
+			
+			dto = (GolfLinkReserveDto) qr.query(conn , RESERVE.getReserveGolfDetail, rsh, bind.toArray());
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		return dto;		
 	}
 	
 	public List<GolfLinkDto> getGolfLinkDetail(int idSeq){
@@ -211,7 +235,7 @@ public class GolfLinkDao {
 		return list;
 	}
 	
-	public void setGolfReserve(GolfLinkReserveDto glrDto, CouponDto cpDto){
+	public int setGolfReserve(GolfLinkReserveDto glrDto, CouponDto cpDto){
 		int idSeq = 0;
 		Connection conn = null;
 		List<ProductReserveDto> list = null;
@@ -275,6 +299,8 @@ public class GolfLinkDao {
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
+		
+		return idSeq;
 	}
 	
 	public void setGolfReserve2(GolfLinkReserveDto glrDto, CouponDto cpDto){
@@ -366,6 +392,36 @@ public class GolfLinkDao {
 			DbUtils.closeQuietly(conn);
 		}
 		return list;		
+	}
+	
+	public String getCourse_name(int psSeq){
+		
+		String course_name = "";
+		Map<String, String> map = null;
+		Connection conn = null;
+		
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> params = new ArrayList<Object>();	
+			params.add(psSeq);
+			
+			ResultSetHandler rsh = new MapHandler();
+			QueryRunner qr = new QueryRunner();
+			
+			map = (Map<String, String>)qr.query(conn, RESERVE.course_name, rsh , params.toArray());
+			
+			if(map != null){
+				course_name = StringUtils.trimToEmpty(map.get("course_name"));
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+
+		return course_name;
+		
 	}
 	
 	//---------------------------------- 적립금 -------------------------------

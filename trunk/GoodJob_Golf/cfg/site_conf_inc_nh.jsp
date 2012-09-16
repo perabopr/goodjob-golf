@@ -68,6 +68,8 @@
 
     String g_conf_site_cd   = "A5088";
     String g_conf_site_key  = "1MOt-u6W0um.92D-WcOF8Pf__";
+    //String g_conf_site_cd   = "T0000";
+    //String g_conf_site_key  = "3grptw1.zW0GSo4PQdaGvsF__";
     String g_conf_site_name = "GoodJobGOLF";
 
     /* ============================================================================== */

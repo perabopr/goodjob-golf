@@ -167,11 +167,12 @@ function card_order(menu , reserve_seq , good_price , good_name){
 	}
 	var frm = document.order_info;
 
-	$("#buyr_name").val(good_name);
+	$("#buyr_name").val($("#reserveName").val());
 	$('#good_mny').val(good_price);
 	$('#menu').val(menu);
 	$('#reserve_seq').val(reserve_seq);
 	$('#reserve_name').val($("#reserveName").val());
+	
 	var phone = $("#phone1").val()+"-"+$("#phone2").val()+"-"+$("#phone3").val();
 	$('#mtel').val(phone);
 
@@ -203,7 +204,7 @@ function  jsf__pay( form )
     if ( MakePayMessage( form ) == true )
     {
         openwin = window.open( "/kcp/proc_win.html", "proc_win", "width=449, height=209, top=300, left=300" );
-        RetVal = true ;
+        form.submit();
     }
     else
     {
@@ -212,10 +213,11 @@ function  jsf__pay( form )
         */
         res_cd  = document.order_info.res_cd.value ;
         res_msg = document.order_info.res_msg.value ;
+        form.submit();
         //alert ( "Payplus Plug-in 실행 결과(샘플)\n" + "res_cd = " + res_cd + "|" + "res_msg=" + res_msg ) ;
     }
 
-    return RetVal ;
+    //return RetVal ;
 }
 
 /* 주문번호 생성 예제 */
@@ -250,8 +252,9 @@ function onload_pay()
 }
 //-->
 </script>
-<form name="order_info" action="/NH_Card/pp_ax_hub.jsp" method="post">
+<form name="order_info" action="/NH_Card/pp_ax_hub_real.jsp" method="post">
 <input type="hidden" id="good_mny" name="good_mny" value=""/>
+<input type="hidden" id="good_name" name="good_name" value="<%=prDto.getGolflink_name()%>"/>
 <input type="hidden" id="buyr_name" name="buyr_name" value=""/>
 <input type="hidden" id="buyr_mail" name="buyr_mail" value=""/>
 <input type="hidden" id="menu" name="menu" value=""/>
@@ -261,7 +264,7 @@ function onload_pay()
 
 <input type="hidden" id="mtel" name="mtel" value=""/>
 <input type="hidden" name="buyr_tel1" value=""/>
-<input type="text" name="buyr_tel2" value=""/>
+<input type="hidden" name="buyr_tel2" value=""/>
 <input type="hidden" name="req_tx" value="pay" />
 <input type="hidden" name="site_cd" value="<%=g_conf_site_cd%>" />
 <input type="hidden" name="site_key" value="<%=g_conf_site_key%>" />
@@ -295,8 +298,6 @@ function onload_pay()
 <input type="hidden" name="cash_tr_code"    value=""/>
 <input type="hidden" name="cash_id_info"    value=""/>
 
-</form>
-<FORM NAME="exefrm" METHOD="post">
 <input type="hidden" id="menu" name="menu" value="1">
 <input type="hidden" id="gcId" name="gcId" >
 <input type="hidden" id="golf" name="golf" >
@@ -305,6 +306,7 @@ function onload_pay()
 <input type="hidden" id="cbNum" name="cbNum" >
 <input type="hidden" id="buyPrice" name="buyPrice" value="<%=(buyPrice*4)%>"/>
 <input type="hidden" id="save_price" name="save_price" value="<%=(site_save_price*4)%>"/>
+
 <table border="0" cellpadding="0" cellspacing="0" width="713" align="center">
   <tr>
     <td width="713"><table border="0" cellpadding="0" cellspacing="0" width="100%">

@@ -50,6 +50,7 @@ if(menu == 0 || psId == 0 || golf == 0 || date == 0 || cdate == 0 || rCnt == 0 |
 GolfLinkDao glDao = new GolfLinkDao();
 List<ProductReserveDto> prList = glDao.getGolfProduct(psId);
 
+int reserve_seq = 0;
 if(prList.size() != 1){
 	out.print("<script>alert('잘못된 접근입니다.');location.href='/forGolfbooking/reserve.jsp?menu=2&gr_cd="+nhNum+"&username="+nhName+"'</script>");
 }else{
@@ -57,7 +58,7 @@ if(prList.size() != 1){
 		
 		GolfLinkReserveDto glrDto = new GolfLinkReserveDto();
 		glrDto.setReserve_name(rName);
-		glrDto.setReserve_uid(rEmail);
+		glrDto.setReserve_uid(rName);
 		glrDto.setPer_num(Integer.toString(rCnt));
 		glrDto.setReserve_phone(rPhone);
 		glrDto.setProduct_price(prList.get(0).getGoodjob_price() * rCnt);
@@ -73,11 +74,16 @@ if(prList.size() != 1){
 		
 		glrDto.setProductsub_seq(psId);
 		
-		glDao.setGolfReserve(glrDto, cpDto);
+		reserve_seq = glDao.setGolfReserve(glrDto, cpDto);
 		
 	}else{
 		out.print("<script>alert('예약할 수 없습니다.');location.href='/linkpages/reserve.jsp?menu=2&gr_cd="+nhNum+"&username="+nhName+"'</script>");		
 	}
+}
+
+if(menu == 0 || reserve_seq == 0){
+	out.println("<script>alert('예약 오류 입니다.');location.href='reserve.jsp?menu=2&gr_cd="+nhNum+"&username="+nhName+"'</script>");
+	return;
 }
 
 /*--------------- 문자 발송 --------------*/
@@ -111,6 +117,7 @@ isSend = sDao.send(params);
 <script type="text/javascript">
 var frm = this.parent.document.exefrm;
 frm.target = ""; 
+frm.reserve_seq.value=<%=reserve_seq%>;
 frm.action = "result.jsp";
 frm.submit();
 </script>

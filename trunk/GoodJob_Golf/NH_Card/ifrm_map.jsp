@@ -11,7 +11,7 @@
 	//String mapkey = Config.get("mapkeyUser");
 	String mapkey = "868737e3c3286db0da5e63bf2e40d633";
 	
-	System.out.println("mapkey : "+mapkey);
+	//System.out.println("mapkey : "+mapkey);
 %>
 <html lang="ko" xmlns:v="urn:schemas-microsoft-com:vml">
 <head>

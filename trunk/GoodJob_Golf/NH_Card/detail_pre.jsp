@@ -205,7 +205,7 @@ function DisplayMenu(vIdx){
 			break;
 		case 4:
 			$("#imgtap4").attr("src", "../images/booking/btn_tab_on_04.gif");
-			$("#ifrmMap").attr("src", "http://www.goodjobgolf.com/NH_Card/ifrm_map.jsp?x=<%=glDto.getPoint_x()%>&y=<%=glDto.getPoint_y()%>");
+			$("#ifrmMap").attr("src", "/forGolfbooking/ifrm_map.jsp?x=<%=glDto.getPoint_x()%>&y=<%=glDto.getPoint_y()%>");
 			$("#destap4").show(); 
 			break;
 	}
@@ -754,7 +754,7 @@ for (int i = 1; i < 15 ;i++){
                                                 -
                                                 <INPUT class=mem_input id="phone3" name="phone3" maxLength=4 size=8></td>
                                   </tr>
-                                  <tr>
+                                  <!--tr>
                                     <td bgcolor="#F1F1F1" height="25" align="right" style="padding-right:10px;" class=normal_b width="118">E-Mail</td>
                                     <td bgcolor="white" style="padding-left:10px;" colspan="3" width="559"><INPUT class=mem_input id="email1" name="email1" size=15 value="<%=eMail1 %>">
                                                 @
@@ -772,7 +772,7 @@ for (int i = 1; i < 15 ;i++){
                                                   <OPTION value="yahoo.co.kr">yahoo.co.kr</OPTION>
                                                   <OPTION value="gmail.com">gmail.com</OPTION>
                                                 </SELECT></td>
-                                  </tr>
+                                  </tr-->
                                   <tr>
                                     <td align="right" bgcolor="#F1F1F1" class="normal_b" style="padding-right:10px;" width="118">요청사항</td>
                                     <td bgcolor="white" style="padding-left:10px;" colspan="3" width="559"><TEXTAREA class=box_02 cols=90 rows=4 id="requestContent" name="requestContent"></TEXTAREA></td>

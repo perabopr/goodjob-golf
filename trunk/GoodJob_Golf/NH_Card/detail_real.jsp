@@ -168,7 +168,7 @@ function DisplayMenu(vIdx){
 			break;
 		case 4:
 			$("#imgtap4").attr("src", "../../images/booking/btn_tab_on_04.gif");
-			$("#ifrmMap").attr("src", "http://www.goodjobgolf.com/NH_Card/ifrm_map.jsp?x=<%=glDto.getPoint_x()%>&y=<%=glDto.getPoint_y()%>");
+			$("#ifrmMap").attr("src", "/forGolfbooking/ifrm_map.jsp?x=<%=glDto.getPoint_x()%>&y=<%=glDto.getPoint_y()%>");
 			$("#destap4").show(); 
 			break;
 	}

@@ -3,9 +3,9 @@ package com.goodjob.product.dto;
 public class ProductSubSiteDto {
 	private int productsub_seq;
 	private int site_seq;
-	private int price1;
-	private int price2;
-	private int price3;
+	private int price1 = 0;
+	private int price2 = 0;
+	private int price3 = 0;
 	
 	public int getProductsub_seq() {
 		return productsub_seq;

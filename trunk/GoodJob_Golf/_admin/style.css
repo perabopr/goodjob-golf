@@ -11,6 +11,8 @@ BODY,TD,SELECT,input,DIV,form,TEXTAREA,center,option,pre,blockquote{font-size:9p
 .red{font:12px "돋움","dotum"; color:#E42F1D; text-decoration:none; font-weight:bold;}
 .red_s{font:11px "돋움","dotum"; color:#E42F1D; text-decoration:none; font-weight:bold; letter-spacing:-0.05em;}
 
+.purple{font:12px "돋움","dotum"; color:#E42F1D; text-decoration:none; font-weight:bold;}
+
 
 A:link    {color:#666666;text-decoration:none;}
 A:visited {color:#666666;text-decoration:none;}

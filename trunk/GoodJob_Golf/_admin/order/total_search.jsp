@@ -198,7 +198,8 @@ if(list != null){
 	<TD bgColor=white align=center>
 	<%
           	out.println(list.get(i).getReserve_uid());
-          	if(list.get(i).getSite_seq()==2){out.println("<font color='blue'>[NH하나로]</font>");}
+          	if("ibyoo@koreahart.co.kr".equals(list.get(i).getReserve_uid())){out.println("<font color='purple'>[알리안츠]</font>");}
+          	else if(list.get(i).getSite_seq()==2){out.println("<font color='blue'>[NH하나로]</font>");}
           	else if(list.get(i).getSite_seq()==3){out.println("<font color='orange'>[NH카드]</font>");}
           %>
 	</TD>

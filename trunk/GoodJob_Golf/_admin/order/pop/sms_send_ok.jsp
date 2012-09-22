@@ -62,7 +62,11 @@ if(menu == 5){
 
 Map<String,String> params = new HashMap<String,String>();
 params.put("msg",message);
-params.put("sphone",sphone);
+if("ibyoo@koreahart.co.kr".equals(reserveuid)){
+	params.put("sphone","02-6670-0279");
+}else{
+	params.put("sphone",sphone);
+}
 params.put("mem_id",reserveuid);
 params.put("rphone",reservephone);
 

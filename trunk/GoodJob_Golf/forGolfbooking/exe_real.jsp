@@ -77,19 +77,40 @@ String bookingDate = request.getParameter("bookingDate");
 String golflinkName = request.getParameter("golflinkName");
 golflinkName = golflinkName.replace("(P)","").replace("(PAR3)","");
 String message = "";
-message += "[" + golflinkName + "]";
-bookingDate = bookingDate.substring(5,16).replace("-",".");
-message += bookingDate;
-message += " 예약되셨습니다";
-message += "(굿잡골프)";
+Map<String,String> params = new HashMap<String,String>();
+
 String sphone = "02-6670-0202";
 String reserveuid = user_Id;
 String reservephone = uPhone;
-Map<String,String> params = new HashMap<String,String>();
-params.put("msg",message);
-params.put("sphone",sphone);
-params.put("mem_id",reserveuid);
-params.put("rphone",reservephone);
+
+if("ibyoo@koreahart.co.kr".equals(user_Id)){
+	message += "[" + golflinkName + "]";
+	bookingDate = bookingDate.substring(5,16).replace("-",".");
+	message += bookingDate;
+	message += " 예약되셨습니다";
+	message += "(알리안츠)";
+	sphone = "02-6670-0279";
+	reserveuid = user_Id;
+	reservephone = uPhone;
+	params.put("msg",message);
+	params.put("sphone",sphone);
+	params.put("mem_id",reserveuid);
+	params.put("rphone",reservephone);
+}
+else{
+	message += "[" + golflinkName + "]";
+	bookingDate = bookingDate.substring(5,16).replace("-",".");
+	message += bookingDate;
+	message += " 예약되셨습니다";
+	message += "(굿잡골프)";
+	sphone = "02-6670-0202";
+	reserveuid = user_Id;
+	reservephone = uPhone;
+	params.put("msg",message);
+	params.put("sphone",sphone);
+	params.put("mem_id",reserveuid);
+	params.put("rphone",reservephone);
+}
 
 SMSDao sDao = new SMSDao();
 boolean isSend = sDao.send(params);

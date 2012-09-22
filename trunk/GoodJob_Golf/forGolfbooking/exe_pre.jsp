@@ -126,17 +126,6 @@ else{
 
 SMSDao sDao = new SMSDao();
 boolean isSend = sDao.send(params);
-/*
-message = "계좌번호 : 국민 421737-04-015359\n";
-message += "예금주 : ㈜세이브코리아 입니다.\n";
-message += "(굿잡골프)";
-params.clear();
-params.put("msg",message);
-params.put("sphone",sphone);
-params.put("mem_id",reserveuid);
-params.put("rphone",reservephone);
-isSend = sDao.send(params);
-*/
 %>
 <script language="javascript" type="text/javascript">
 top.document.location.href="result.jsp?menu=2";

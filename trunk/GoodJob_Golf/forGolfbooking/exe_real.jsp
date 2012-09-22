@@ -115,7 +115,7 @@ else{
 SMSDao sDao = new SMSDao();
 boolean isSend = sDao.send(params);
 
-if("".equals(cbNum) && cbNum.length() == 0 ){
+if("".equals(cbNum) && cbNum.length() == 0 && !"ibyoo@koreahart.co.kr".equals(user_Id)){
 	
 	message = "계좌번호 : 국민 421737-04-015359 ";
 	message += "㈜세이브코리아\n";
@@ -129,7 +129,6 @@ if("".equals(cbNum) && cbNum.length() == 0 ){
 	isSend = sDao.send(params);
 }
 %>
-
 <%@page import="com.goodjob.util.Utils"%><script language="javascript" type="text/javascript">
 top.document.location.href="result.jsp?menu=1";
 </script>

@@ -564,7 +564,7 @@ for (int i = 1; i < 15 ;i++){
 <%}%>
               </tr>
               <tr>
-                <td bgcolor="white" height="30" style="padding-left:5px;"><span class=blue_list><a href="#"><%=glDto.getGolflink_name()%></a></span></td>
+                <td bgcolor="white" height="30" style="padding-left:5px;"><span class=blue_list><%=glDto.getGolflink_name()%></span></td>
 <%
 	incDate.set(tYear, tMonth-1, tDay);
 	for (int k = 1; k < 15 ;k++){

@@ -99,7 +99,7 @@
 
 <%@page import="com.goodjob.reserve.dto.ProductDto"%><table border="0" cellpadding="0" cellspacing="0" width="713" align="center">
   <tr>
-    <td width="95%"><p><img src="../img_nhcard/img_main/img_main_visual.gif" width="713" height="232" border="0"></p></td>
+    <td width="95%"></td>
   </tr>
   <tr>
     <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -204,7 +204,7 @@
 				List<ProductDto> listPrdt = glDao.getGolfProductList(pDto);
 			%>
 			<TR height="30">
-			<td bgcolor="white" height="30" style="padding-left:5px;"><span class=blue_list><a href="#"><%=listGolf.get(i).getGolflink_name()%></a></span><!--<%=listGolf.get(i).getEvent_price()!=null&&listGolf.get(i).getEvent_price().length()>0?"</br>"+listGolf.get(i).getEvent_price():"" %>--></td>
+			<td bgcolor="white" height="30" style="padding-left:5px;"><span class=blue_list><%=listGolf.get(i).getGolflink_name()%></span><!--<%=listGolf.get(i).getEvent_price()!=null&&listGolf.get(i).getEvent_price().length()>0?"</br>"+listGolf.get(i).getEvent_price():"" %>--></td>
 			<%
 			incDate.set(tYear, tMonth-1, tDay);
 			for (int k = 1; k < 15 ;k++){
@@ -338,7 +338,7 @@
 				List<ProductDto> listPrdt = glDao.getGolfProductList(pDto);
 		%>
 			<TR height="30">
-			<td bgcolor="white" height="30" style="padding-left:5px;"><span class=blue_list><a href="#"><%=listGolf2.get(i).getGolflink_name()%></a></span><!--<%=listGolf2.get(i).getEvent_price()!=null&&listGolf2.get(i).getEvent_price().length()>0?"</br>"+listGolf2.get(i).getEvent_price():"" %>--></td>
+			<td bgcolor="white" height="30" style="padding-left:5px;"><span class=blue_list><%=listGolf2.get(i).getGolflink_name()%></span><!--<%=listGolf2.get(i).getEvent_price()!=null&&listGolf2.get(i).getEvent_price().length()>0?"</br>"+listGolf2.get(i).getEvent_price():"" %>--></td>
 			<%
 				incDate.set(tYear, tMonth-1, tDay);
 				for (int k = 1; k < 15 ;k++){
@@ -406,38 +406,9 @@
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td><table border="0" width="713" cellpadding="0" cellspacing="0">
-        <tr>
-          <td width="350"><table border="0" cellpadding="0" cellspacing="0" width="350">
-              <tr>
-                <td width="175"><img src="../img_nhcard/img_main/img_customer.gif" width="170" height="70" border="0"></td>
-                <td width="175"><a href="reg_input.jsp"><img src="../img_nhcard/img_main/btn_regist.gif" width="170" height="70" border="0"></a></td>
-              </tr>
-              <tr>
-                <td colspan="2" height="5"></td>
-              </tr>
-              <tr>
-                <td width="175"><a href="#"><img src="../img_nhcard/img_main/btn_guide.gif" width="170" height="70" border="0"></a></td>
-                <td width="175"><a href="faq_list.jsp"><img src="../img_nhcard/img_main/btn_faq.gif" width="170" height="70" border="0"></a></td>
-              </tr>
-            </table></td>
-          <td width="363" align="right" valign="top"><table border="0" cellpadding="0" cellspacing="0" width="350">
-              <tr>
-                <td width="350" bgcolor="white"><table border="0" cellpadding="0" cellspacing="0" width="350">
-                    <tr>
-                      <td width="307"><img src="../img_nhcard/img_main/img_notice_main_title.gif" width="307" height="30" border="0"></td>
-                      <td width="43"><a href="notice_list.jsp"><img src="../img_nhcard/img_main/btn_more.gif" width="43" height="30" border="0"></a></td>
-                    </tr>
-                  </table></td>
-              </tr>
-              <tr>
-                <td bgcolor="white" align="center"">
-                <%@ include file="/NH_Card/nhcard_notice_list.jsp" %>
-				</td>
-              </tr>
-            </table></td>
-        </tr>
-      </table></td>
+    <td>
+            <p>&nbsp;</p>
+</td>
   </tr>
   <tr>
     <td>&nbsp;</td>

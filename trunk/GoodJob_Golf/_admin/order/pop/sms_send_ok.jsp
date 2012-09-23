@@ -61,12 +61,13 @@ if(menu == 5){
 }
 
 Map<String,String> params = new HashMap<String,String>();
-params.put("msg",message);
 if("ibyoo@koreahart.co.kr".equals(reserveuid)){
+	message = message.replaceAll("굿잡골프","알리안츠");
 	params.put("sphone","02-6670-0279");
 }else{
 	params.put("sphone",sphone);
 }
+params.put("msg",message);
 params.put("mem_id",reserveuid);
 params.put("rphone",reservephone);
 

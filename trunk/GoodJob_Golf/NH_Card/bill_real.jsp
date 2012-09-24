@@ -6,6 +6,7 @@
 <%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
+<%@page import="com.goodjob.product.dto.ProductSubSiteDto"%>
 <%@page import="com.goodjob.util.Utils"%>
 <%
 String menu = "1";
@@ -31,9 +32,6 @@ if(productsubSeq == 0 || golf == 0 || date == 0 || cdate == 0){
 GolfLinkDao glDao = new GolfLinkDao();
 List<ProductReserveDto> listPr = glDao.getGolfProduct(productsubSeq);
 
-//=================적립금 가져 오기..
-int site_save_price = glDao.getSiteSavePrice(productsubSeq , 3);
-
 ProductReserveDto prDto = null;
 if(listPr == null || listPr.size() != 1){
 	out.println("<script>location.href='reserve.jsp?menu=1'</script>");
@@ -47,6 +45,11 @@ bookingDate = bookingDate.substring(0,4) + "-" + bookingDate.substring(4,6) + "-
 bookingDate += bookingTime.substring(0,2) + ":" + bookingTime.substring(2,4); 
 int buyPrice = prDto.getNH_price() + prDto.getReal_nh_price();// * 4;
 
+//=================적립금 가져 오기..
+ProductSubSiteDto psDto = glDao.getSitePrice(productsubSeq,3);
+
+buyPrice = psDto.getPrice2() - psDto.getPrice1();
+int site_save_price = glDao.getSiteSavePrice(productsubSeq , 3);
 
 /* ----- 쿠폰 ----- */
 CouponDao cpDao = new CouponDao();

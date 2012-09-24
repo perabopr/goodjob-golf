@@ -10,8 +10,10 @@
 <%@page import="com.goodjob.reserve.dto.GolfLinkDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
+<%@page import="com.goodjob.product.dto.ProductSubSiteDto"%>
 <%@page import="com.goodjob.util.Utils"%>
 <%
+
 int menuNum = NumberUtils.toInt(request.getParameter("menu"),1);
 
 String golfSeq = Integer.toString(NumberUtils.toInt(request.getParameter("golf"),0));
@@ -490,17 +492,22 @@ for (int i = 1; i < 15 ;i++){
 						<TD class=normal_b bgColor=#f1f1f1 width=60 align=center>적립금액</TD>
 						</TR>
 <%
+	int currPrice = 0;
+	ProductSubSiteDto psDto = null;
 	for(int i = 0; i < listPr.size();i++){
 		String tmpDate = listPr.get(i).getProduct_date();
 		String tmpTime = listPr.get(i).getTime_start();
 		tmpDate = tmpDate.substring(0,4) + "-" + tmpDate.substring(4,6) + "-" + tmpDate.substring(6,8);
 		tmpTime = tmpTime.substring(0,2) + ":" + tmpTime.substring(2,4);
+		
+		psDto = glDao.getSitePrice(listPr.get(i).getProductsub_seq(),3);
+		currPrice = psDto.getPrice2() - psDto.getPrice1();
 %>
 						<TR>
 						<TD bgColor=white height=25 align=center><%=tmpDate%></TD>
 						<TD bgColor=white align=center><%=tmpTime%></TD>
 						<TD bgColor=white align=center><%=StringUtils.defaultIfEmpty(listPr.get(i).getCourse_name(), "<div class=red_ss>없음</div>")%></TD>
-						<TD bgColor=white align=center><span class=orange_s><%=Utils.numberFormat((listPr.get(i).getNH_price() + listPr.get(i).getReal_nh_price()) * 4)%></span> <span class=normal_s>원</span></TD>
+						<TD bgColor=white align=center><span class=orange_s><%=Utils.numberFormat(currPrice * 4)%></span> <span class=normal_s>원</span></TD>
 						<TD bgColor=white align=center><span class=normal_s><%=listPr.get(i).getHoll_type()%></span></TD>
 <%
 		if(listPr.get(i).getProduct_status().equals("0")){			
@@ -513,7 +520,7 @@ for (int i = 1; i < 15 ;i++){
 <%			
 		}
 %>
-						<TD bgColor=white align=center><span class=orange_s><%=Utils.numberFormat((glDao.getSiteSavePrice(listPr.get(i).getProductsub_seq(),3)*4))%></span> 원</TD>
+						<TD bgColor=white align=center><span class=orange_s><%=Utils.numberFormat(psDto.getPrice3()*4)%></span> 원</TD>
 						</TR>
 <%
 	}

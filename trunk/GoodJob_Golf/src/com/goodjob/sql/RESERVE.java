@@ -488,6 +488,8 @@ public class RESERVE {
 						"WHERE productsub_seq = ? and a.golflink_course_seq=b.golflink_course_seq ";
 			
 	//-------------------------------- 적립금 -----------------
+	public static final String product_site_price = "select productsub_seq , price1 , price2 , price3 from tb_product_sub_site where productsub_seq = ? and site_seq = ? ";
+	
 	public static final String product_save_price = "select productsub_seq , price3 from tb_product_sub_site where productsub_seq = ? and site_seq = ? ";
 	
 	public static final String set_save_price = "insert into tb_reserve_saveprice( reserve_seq,site_seq,save_price) values( ?, ?, ?)";

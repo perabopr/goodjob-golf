@@ -12,6 +12,7 @@
 <%@page import="com.goodjob.reserve.dto.GolfLinkDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
+<%@page import="com.goodjob.product.dto.ProductSubSiteDto"%>
 <%@page import="com.goodjob.util.Utils"%>
 <%!
 	public boolean indexOf(String str , String... strings){
@@ -672,11 +673,13 @@ for (int i = 1; i < 15 ;i++){
                                                 <OPTION value="/0/0" selected>선택하세요</OPTION>
                                                 <% 	
 	boolean disabled = indexOf(glDto.getGolflink_name(),"PAR3","파3");
-	
+	ProductSubSiteDto psDto = null;
 	for(int i = 0; i < listPr.size();i++){
 		int tPrdtSeq = listPr.get(i).getProductsub_seq();
 		String tTerm = listPr.get(i).getTime_start().substring(0,2) + "시 ~ " + listPr.get(i).getTime_end().substring(0,2) + "시";
-		int tPrice = listPr.get(i).getReal_nh_price() + listPr.get(i).getNH_price();
+		
+		psDto = glDao.getSitePrice(tPrdtSeq,3);
+		int tPrice = psDto.getPrice2() - psDto.getPrice1();
 %>
                                                 <OPTION value="<%=tPrdtSeq+"/"+tPrice+"/"+listPr.get(i).getCoupon_use_yn()%>"><%=tTerm%></OPTION>
                                                 <% 

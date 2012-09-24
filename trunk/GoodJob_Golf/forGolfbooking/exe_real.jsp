@@ -115,18 +115,35 @@ else{
 SMSDao sDao = new SMSDao();
 boolean isSend = sDao.send(params);
 
-if("".equals(cbNum) && cbNum.length() == 0 && !"ibyoo@koreahart.co.kr".equals(user_Id)){
+if("".equals(cbNum) && cbNum.length() == 0){
 	
-	message = "계좌번호 : 국민 421737-04-015359 ";
-	message += "㈜세이브코리아\n";
-	message += "입금액 : "+Utils.numberFormat(bill_price * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price())+"\n";
-	message += "[굿잡골프]";
-	params.clear();
-	params.put("msg",message);
-	params.put("sphone",sphone);
-	params.put("mem_id",reserveuid);
-	params.put("rphone",reservephone);
-	isSend = sDao.send(params);
+	if("ibyoo@koreahart.co.kr".equals(user_Id)){
+		message = "계좌번호 : 국민 421737-04-015359 ";
+		message += "㈜세이브코리아\n";
+		message += "입금액 : "+Utils.numberFormat(bill_price * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price())+"\n";
+		message += "[알리안츠생명]";
+		sphone = "02-6670-0279";
+		params.clear();
+		params.put("msg",message);
+		params.put("sphone",sphone);
+		params.put("mem_id",reserveuid);
+		params.put("rphone",reservephone);
+		isSend = sDao.send(params);
+	}
+	else{
+		message = "계좌번호 : 국민 421737-04-015359 ";
+		message += "㈜세이브코리아\n";
+		message += "입금액 : "+Utils.numberFormat(bill_price * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price())+"\n";
+		message += "[굿잡골프]";
+		sphone = "02-6670-0202";
+		params.clear();
+		params.put("msg",message);
+		params.put("sphone",sphone);
+		params.put("mem_id",reserveuid);
+		params.put("rphone",reservephone);
+		isSend = sDao.send(params);
+	}
+
 }
 %>
 <%@page import="com.goodjob.util.Utils"%><script language="javascript" type="text/javascript">

@@ -62,7 +62,7 @@ if(prDto.getCoupon_use_yn().equals("1")){
 //=================적립금 가져 오기..
 ProductSubSiteDto psDto = glDao.getSitePrice(productsubSeq,3);
 
-buyPrice = psDto.getPrice2() - psDto.getPrice1();
+buyPrice = (psDto.getPrice2() - psDto.getPrice1()) * rCnt;
 int site_save_price = glDao.getSiteSavePrice(productsubSeq , 3);
 
 %>

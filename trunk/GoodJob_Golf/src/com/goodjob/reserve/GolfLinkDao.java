@@ -435,6 +435,9 @@ public class GolfLinkDao {
 			bind.add(product_seq);
 			bind.add(site_seq);
 			
+			System.out.println("product_seq : " + product_seq);
+			System.out.println("site_seq : " + site_seq);
+			
 			ResultSetHandler rsh = new BeanHandler(ProductSubSiteDto.class);
 			QueryRunner qr = new QueryRunner();
 			psDto = (ProductSubSiteDto) qr.query(conn , RESERVE.product_site_price, rsh, bind.toArray());

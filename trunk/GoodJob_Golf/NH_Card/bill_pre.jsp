@@ -6,6 +6,7 @@
 <%@page import="com.goodjob.reserve.dto.ProductReserveDto"%>
 <%@page import="java.util.List"%>
 <%@page import="com.goodjob.reserve.GolfLinkDao"%>
+<%@page import="com.goodjob.product.dto.ProductSubSiteDto"%>
 <%@page import="com.goodjob.util.Utils"%>
 <%
 String menu = "2";
@@ -59,6 +60,9 @@ if(prDto.getCoupon_use_yn().equals("1")){
 }
 
 //=================적립금 가져 오기..
+ProductSubSiteDto psDto = glDao.getSitePrice(productsubSeq,3);
+
+buyPrice = psDto.getPrice2() - psDto.getPrice1();
 int site_save_price = glDao.getSiteSavePrice(productsubSeq , 3);
 
 %>

@@ -424,7 +424,34 @@ public class GolfLinkDao {
 		
 	}
 	
+	public ProductSubSiteDto getSitePrice(int product_seq , int site_seq){
+		
+		Connection conn = null;
+		ProductSubSiteDto psDto =null;
+		try {
+			conn = DBManager.getConnection();
+			
+			ArrayList<Object> bind = new ArrayList<Object>();
+			bind.add(product_seq);
+			bind.add(site_seq);
+			
+			ResultSetHandler rsh = new BeanHandler(ProductSubSiteDto.class);
+			QueryRunner qr = new QueryRunner();
+			psDto = (ProductSubSiteDto) qr.query(conn , RESERVE.product_site_price, rsh, bind.toArray());
+			
+			if(psDto == null)
+				psDto = new ProductSubSiteDto();
+			
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+		return psDto;
+	}
+	
 	//---------------------------------- 적립금 -------------------------------
+	
 	public int getSiteSavePrice(int product_seq , int site_seq){
 		
 		Connection conn = null;

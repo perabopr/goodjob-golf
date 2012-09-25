@@ -500,7 +500,7 @@ function sel_phone2(){
                 <td height="10"></td>
               </tr>
               <tr>
-                <td><%=StringUtils.trimToEmpty(glDto.getCancel_rule_nh())%></td>
+                <td class=red_s><%=StringUtils.trimToEmpty(glDto.getCancel_rule_nh())%></td>
               </tr>
             </table>
             &nbsp;</td>

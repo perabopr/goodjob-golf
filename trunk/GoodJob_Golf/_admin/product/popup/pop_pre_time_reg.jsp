@@ -230,7 +230,7 @@ function selSetting(sDate){
 					vArrSite[ilstCnt][2] = evalData.ProductSub[i].k[ilstCnt].cc;
 					vArrSite[ilstCnt][3] = evalData.ProductSub[i].k[ilstCnt].dd;
 				}
-			}			
+			}
 			addTime(evalData.ProductSub[i].a
 					,evalData.ProductSub[i].c
 					,evalData.ProductSub[i].d.substring(0,2)
@@ -244,20 +244,7 @@ function selSetting(sDate){
 					,evalData.ProductSub[i].j
 					,parseInt(evalData.ProductSub[i].g)+parseInt(evalData.ProductSub[i].j) 
 					,vArrSite);
-			/*
-			var calcVal = document.all['idCourseNh'];
-			if (typeof calcVal.length == "undefined") {
-				calcVal.onkeyup(calcVal,evalData.ProductSub[i].g);
-			} else {
-				for (var j=0; j<calcVal.length; j++) {
-					calcVal[j].onkeyup(calcVal[j],evalData.ProductSub[j].g);
-				}
-			}
-			*/
 		}
-
-		//기본행 -- 삭제
-		//addTime('','0','0','0','0','0','0','0','0','1','0',null);
 	  }
 	});
 	
@@ -426,6 +413,9 @@ function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, 
 	timecostHTML += "</select>";
 	timecostHTML += "</td> ";
 	timecostHTML += "</tr>";
+
+	//alert(timecostHTML);
+	
 	$("#tbTimeCost").append(timecostHTML);
 
 	$("#tbTimeCost tr:last-child select[name='course_list']").val(vCourse);

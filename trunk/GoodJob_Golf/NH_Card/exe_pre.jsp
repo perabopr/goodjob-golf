@@ -96,7 +96,7 @@ bookingDate = bookingDate.substring(5,10).replace("-",".");
 message += bookingDate;
 message += " 예약신청되셨습니다";
 message += "[NH카드고객센터]";
-String sphone = "02-6670-4321";
+String sphone = "02-6670-0205";
 String reservephone = rPhone;
 Map<String,String> params = new HashMap<String,String>();
 params.put("msg",message);

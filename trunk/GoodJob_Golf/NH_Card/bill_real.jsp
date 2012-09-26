@@ -98,7 +98,7 @@ function billok(){
 	
 	if($("#billBtype").attr("checked")){
 		if(window.confirm("예약을 완료하시려면 확인 버튼을 누르십시오 \r\n예약확인 SMS : "+$("#phone1").val()+$("#phone2").val()+$("#phone3").val())){
-			billSubmit("");
+			//billSubmit("");
 		}
 	}else{
 		var billprice = <%=buyPrice%> * $("#perNum").val();
@@ -182,7 +182,7 @@ function card_order(menu , reserve_seq , good_price , good_name){
 	var rEmail = $("#reserveName").val();
 	$('#ordEmail').val(rEmail);
 
-	$('#buyr_mail').val(rEmail);
+	$('#buyr_mail').val('');
 	$('#buyr_tel1').val(phone);
 	$('#buyr_tel2').val(phone);
 
@@ -459,5 +459,4 @@ function onload_pay()
     <a href="javascript:billok();"><img border=0 src="../img_nhcard/common/btn_pay.gif" width="150" height="39"></a></td>
   </tr>
 </table>
-<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe>
 </FORM>

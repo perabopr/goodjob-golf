@@ -105,6 +105,7 @@ function card_order(process_status, menu, reserve_seq, good_price, good_name, re
 
 	$("#good_name").val(good_name);
 	$('#good_mny').val(good_price);
+	$('buyr_name').val(reserve_name);
 	$('#menu').val(menu);
 	$('#reserve_seq').val(reserve_seq);
 	$('#process_status').val(process_status);

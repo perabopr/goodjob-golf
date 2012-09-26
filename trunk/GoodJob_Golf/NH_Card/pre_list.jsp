@@ -98,12 +98,14 @@
 <!-- 상단 영역 -->
 
 <%@page import="com.goodjob.reserve.dto.ProductDto"%>
+
 <table cellpadding="0" cellspacing="0" width="713" bgcolor="white" align="center">
     <tr>
-        <td width="707" align="right" style="padding-right:10px;" height="35"><a href="main.jsp" span class=navi>HOME</a> &gt; <span class=navi_s>사전신청예약예약 골프장</s></td>
+        <td width="356" style="padding-left:10px;" height="35"><a href="default.jsp" span class=navi>실시간/사전신청예약 골프장 전체목록</a></td>
+        <td width="357" align="right" style="padding-right:10px;"><a href="main.jsp" span class=navi>HOME</a> &gt; <span class=navi_s>사전신청예약예약 골프장</s></td>
     </tr>
     <tr>
-        <td bgcolor="#2371bb" height="1"></td>
+        <td bgcolor="#2371bb" height="1" colspan="2"></td>
 </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" width="713" align="center">
@@ -158,7 +160,7 @@
         <tr>
           <td align="center" bgcolor="#F1F1F1" height="35"><img src="/images/common/img_pre_subject.gif" width="160" height="25" border="0"></td>
 		<% 
-			incDate.add(incDate.DATE, -14);
+			//incDate.add(incDate.DATE, -14);
 			for (int i = 1; i < 15 ;i++){
 				int incYear = incDate.get(incDate.YEAR);
 				int incMonth = incDate.get(incDate.MONTH)+1;

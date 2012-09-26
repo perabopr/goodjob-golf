@@ -103,7 +103,7 @@ function card_order(process_status, menu, reserve_seq, good_price, good_name, re
 	
 	var frm = document.order_info;
 
-	$("#good_name").val(good_name);
+	$("good_name").val(good_name);
 	$('#good_mny').val(good_price);
 	$('buyr_name').val(reserve_name);
 	$('#menu').val(menu);
@@ -112,7 +112,7 @@ function card_order(process_status, menu, reserve_seq, good_price, good_name, re
 
 	$('#reserve_name').val(reserve_name);
 	$('#mtel').val(mtel);
-	$('#buyr_mail').val(ordEmail);
+	$('#buyr_mail').val("");
 	$('#buyr_tel1').val(mtel);
 	$('#buyr_tel2').val(mtel);
 	
@@ -186,14 +186,19 @@ function onload_pay()
 }
 </script>
 <!-- 상단 영역 -->
+<table cellpadding="0" cellspacing="0" width="713" bgcolor="white" align="center">
+    <tr>
+        <td width="707" align="right" style="padding-right:10px;" height="35"><a href="main.jsp" span class=navi>HOME</a> &gt; <span class=navi_s>예약확인</s></td>
+    </tr>
+    <tr>
+        <td bgcolor="#2371bb" height="1"></td>
+</tr>
+</table>
 <table border="0" cellpadding="0" cellspacing="0" width="713" align="center">
   <tr>
-    <td width="713"><table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-          <td width="50%" style="padding-left: 15px; padding-top: 4px" class=sub_title height="33" bgcolor="#dcddde">예약확인</td>
-          <td width="50%" height="25" bgcolor="#DCDDDE" style="padding-top:4px; padding-right: 10px;" align="right"><a href="default.jsp"><img align="absmiddle" src="../img_nhcard/common/btn_home.gif" width="60" height="19" border="0"></a></td>
-        </tr>
-      </table></td>
+    <td width="713">
+ <p>&nbsp;</p>
+</td>
   </tr>
 <form name="order_info" action="/NH_Card/pp_ax_hub.jsp" method="post">
 <input type="hidden" id="good_name" name="good_name" value=""/>

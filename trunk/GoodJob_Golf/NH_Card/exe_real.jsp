@@ -70,15 +70,15 @@ reserve_seq = glDao.setGolfReserve(glrDto, new CouponDto());
 /*--------------- 문자 발송 --------------*/
 
 String message = "";
-message += "[" + golflinkName + "]";
-bookingDate = bookingDate.substring(5,16).replace("-",".");
-message += bookingDate;
-message += " 예약되셨습니다";
-message += "[NH카드고객센터]";
+
 String sphone = "02-6670-4321";
 String reservephone = uPhone;
 
 Map<String,String> params = new HashMap<String,String>();
+
+//추가 SMS 발송
+message = "적립금액 : "+(Utils.numberFormat(save_price))+"원은 익월 초에 자동 적립됩니다.";
+message += "(NH카드)";
 params.put("msg",message);
 params.put("sphone",sphone);
 params.put("mem_id","nh_card");
@@ -87,10 +87,16 @@ params.put("rphone",reservephone);
 SMSDao sDao = new SMSDao();
 boolean isSend = sDao.send(params);
 
-//추가 SMS 발송
-message = "적립금액 : "+(Utils.numberFormat(save_price))+"원은 익월 초에 자동 적립됩니다.";
-message += "(NH카드)";
+params.clear();
+message += "[" + golflinkName + "]";
+bookingDate = bookingDate.substring(5,16).replace("-",".");
+message += bookingDate;
+message += " 예약되셨습니다";
+message += "[NH카드고객센터]";
 params.put("msg",message);
+params.put("sphone",sphone);
+params.put("mem_id","nh_card");
+params.put("rphone",reservephone);
 isSend = sDao.send(params);
 
 %>

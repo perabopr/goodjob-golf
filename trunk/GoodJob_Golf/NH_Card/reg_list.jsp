@@ -103,7 +103,7 @@ function card_order(process_status, menu, reserve_seq, good_price, good_name, re
 	
 	var frm = document.order_info;
 
-	$("#buyr_name").val(good_name);
+	$("#good_name").val(good_name);
 	$('#good_mny').val(good_price);
 	$('#menu').val(menu);
 	$('#reserve_seq').val(reserve_seq);
@@ -195,6 +195,7 @@ function onload_pay()
       </table></td>
   </tr>
 <form name="order_info" action="/NH_Card/pp_ax_hub.jsp" method="post">
+<input type="hidden" id="good_name" name="good_name" value=""/>
 <input type="hidden" id="good_mny" name="good_mny" value=""/>
 <input type="hidden" id="buyr_name" name="buyr_name" value=""/>
 <input type="hidden" id="buyr_mail" name="buyr_mail" value=""/>

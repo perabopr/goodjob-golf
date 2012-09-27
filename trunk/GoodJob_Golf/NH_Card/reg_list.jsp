@@ -316,7 +316,7 @@ if(golfList != null && !golfList.isEmpty()){
   </tr>
   <tr>
     <td style="padding-top: 10px; padding-bottom: 20px"> 고객님께서 예약하신 내역입니다<br>
-      변동사항이나 예약취소를 원하실 경우 <span class=blue_list>고객센터(02-6670-4321)</span>로 연락주시면 빠른시일내에 처리해 드리겠습니다. 감사합니다.</td>
+      변동사항이나 예약취소를 원하실 경우 <span class=blue_list>고객센터(02-6670-0205)</span>로 연락주시면 빠른시일내에 처리해 드리겠습니다. 감사합니다.</td>
   </tr>
   <tr>
     <td align="center" style="padding-top: 30px; padding-bottom: 30px"><p><%=strPage%></p></td>

@@ -451,7 +451,7 @@ history.go(-1);
                 var openwin = window.open( '/kcp/proc_win.html', 'proc_win', '' );
                 document.pay_info.submit();
                 openwin.close();
-                document.pay_info.submit();
+                //document.pay_info.submit();
             }
 
             // 결제 중 새로고침 방지 샘플 스크립트

@@ -108,8 +108,8 @@ SMSDao sDao = new SMSDao();
 boolean isSend = sDao.send(params);
 
 //추가 SMS 발송
-message = "적립금액 : "+(Utils.numberFormat(savePrice))+"원은 익월 초에 자동 적립됩니다.";
-message += "(NH카드)";
+message = "적립금액 : "+(Utils.numberFormat(savePrice))+"원은 12월 중 채움 포인트로 일괄 적립 예정";
+message += "[NH카드고객센터]";
 params.put("msg",message);
 isSend = sDao.send(params);
 

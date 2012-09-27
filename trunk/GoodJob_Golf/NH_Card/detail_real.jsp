@@ -20,7 +20,7 @@ String golfSeq = Integer.toString(NumberUtils.toInt(request.getParameter("golf")
 String curDate = Integer.toString(NumberUtils.toInt(request.getParameter("cdate"),0));
 if(curDate == null || curDate.length() != 8){
 	out.print("<script>");
-	out.print("location.href='reserve.jsp?menu=1';");
+	out.print("location.href='realtime_list.jsp?menu=1';");
 	out.print("</script>");
 	return;
 }
@@ -30,7 +30,7 @@ GolfLinkDao glDao = new GolfLinkDao();
 List<GolfLinkDto> listGolf = glDao.getGolfLinkDetail(Integer.parseInt(golfSeq));
 if(listGolf == null || listGolf.size() != 1){
 	out.print("<script>");
-	out.print("location.href='reserveReal.jsp?menu=1';");
+	out.print("location.href='realtime_list.jsp?menu=1';");
 	out.print("</script>");
 	return;
 }
@@ -207,17 +207,18 @@ function imgChange(objId){
 <input type="hidden" id="date" name="date" >
 <input type="hidden" id="cdate" name="cdate" >
 </FORM>
+<table cellpadding="0" cellspacing="0" width="713" bgcolor="white" align="center">
+    <tr>
+        <td width="356" style="padding-left:10px;" height="35"><a href="default.jsp" span class=navi>실시간/사전신청예약 골프장 전체목록</a></td>
+        <td width="357" align="right" style="padding-right:10px;"><a href="main.jsp" span class=navi>HOME</a> &gt; <a href="realtime_list.jsp" span class=navi>실시간예약 골프장</s></td>
+    </tr>
+    <tr>
+        <td bgcolor="#2371bb" height="1" colspan="2"></td>
+</tr>
+</table>
 <table border="0" cellpadding="0" cellspacing="0" width="713" align="center">
   <tr>
-    <td width="713"><table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-          <td width="50%" style="padding-left: 15px; padding-top: 4px" class=sub_title height="33" bgcolor="#dcddde">실시간예약</td>
-          <td width="50%" height="25" bgcolor="#DCDDDE" style="padding-top:4px; padding-right: 10px;" align="right"><a href="default.jsp"><img align="absmiddle" src="../img_nhcard/common/btn_home.gif" width="60" height="19" border="0"></a></td>
-        </tr>
-      </table></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
+    <td width="713">&nbsp;</td>
   </tr>
   <tr>
     <td align="center"><table border="0" cellpadding="0" cellspacing="0" width="100%">

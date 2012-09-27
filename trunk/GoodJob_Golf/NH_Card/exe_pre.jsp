@@ -38,12 +38,12 @@ int couponSeq = 0;
 try{
 	couponSeq  = NumberUtils.toInt(arrCouponValue[0]);
 }catch(Exception e){
-	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=1&gr_cd="+nhNum+"&username="+nhName+"'</script>");
+	out.println("<script>alert('잘못된 접근입니다.');location.href='pre_list.jsp?menu=1&gr_cd="+nhNum+"&username="+nhName+"'</script>");
 	return;
 }
 
 if(menu == 0 || psId == 0 || golf == 0 || date == 0 || cdate == 0 || rCnt == 0 || rTeam == 0){
-	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=2&gr_cd="+nhNum+"&username="+nhName+"'</script>");
+	out.println("<script>alert('잘못된 접근입니다.');location.href='pre_list.jsp?menu=2&gr_cd="+nhNum+"&username="+nhName+"'</script>");
 	return;
 }
 
@@ -52,7 +52,7 @@ List<ProductReserveDto> prList = glDao.getGolfProduct(psId);
 
 int reserve_seq = 0;
 if(prList.size() != 1){
-	out.print("<script>alert('잘못된 접근입니다.');location.href='/forGolfbooking/reserve.jsp?menu=2&gr_cd="+nhNum+"&username="+nhName+"'</script>");
+	out.print("<script>alert('잘못된 접근입니다.');location.href='pre_list.jsp?menu=2&gr_cd="+nhNum+"&username="+nhName+"'</script>");
 }else{
 	if(prList.get(0).getProduct_status().equals("0")){
 		
@@ -77,12 +77,12 @@ if(prList.size() != 1){
 		reserve_seq = glDao.setGolfReserve(glrDto, cpDto);
 		
 	}else{
-		out.print("<script>alert('예약할 수 없습니다.');location.href='/linkpages/reserve.jsp?menu=2&gr_cd="+nhNum+"&username="+nhName+"'</script>");		
+		out.print("<script>alert('예약할 수 없습니다.');location.href='pre_list.jsp?menu=2&gr_cd="+nhNum+"&username="+nhName+"'</script>");		
 	}
 }
 
 if(menu == 0 || reserve_seq == 0){
-	out.println("<script>alert('예약 오류 입니다.');location.href='reserve.jsp?menu=2&gr_cd="+nhNum+"&username="+nhName+"'</script>");
+	out.println("<script>alert('예약 오류 입니다.');location.href='pre_list.jsp?menu=2&gr_cd="+nhNum+"&username="+nhName+"'</script>");
 	return;
 }
 

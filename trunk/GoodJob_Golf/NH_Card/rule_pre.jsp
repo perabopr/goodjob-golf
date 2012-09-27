@@ -11,7 +11,7 @@ GolfLinkDao glDao = new GolfLinkDao();
 List<GolfLinkPromiseDto> listPromise = glDao.getGolfPromise(productsubSeq);
 
 if(listPromise == null || listPromise.size() == 0){
-	out.println("<script>location.href='default.jsp'</script>");
+	out.println("<script>location.href='pre_list.jsp'</script>");
 	return;
 }
 %>

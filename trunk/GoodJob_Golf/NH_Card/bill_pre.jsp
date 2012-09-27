@@ -31,7 +31,7 @@ rRequest = rRequest.replaceAll("\r\n","</br>");
 
 if(productsubSeq == 0 || golf == 0 || date == 0
 		|| cdate == 0 || rCnt == 0 || rTeam == 0){
-	out.println("<script>location.href='default.jsp?menu=2'</script>");
+	out.println("<script>location.href='pre_list.jsp?menu=2'</script>");
 	return;
 }
 
@@ -40,7 +40,7 @@ List<ProductReserveDto> listPr = glDao.getGolfProduct(productsubSeq);
 
 ProductReserveDto prDto = null;
 if(listPr == null || listPr.size() != 1){
-	out.println("<script>location.href='default.jsp?menu=2&'</script>");
+	out.println("<script>location.href='pre_list.jsp?menu=2'</script>");
 	return;
 }
 prDto = listPr.get(0);
@@ -126,17 +126,17 @@ function commify(n) {
 <input type="hidden" id="reserve_seq" name="reserve_seq" value="">
 <textarea id="reserveRequest" name="reserveRequest" style="display:none"><%=rRequest%></textarea>
 
+<table cellpadding="0" cellspacing="0" width="713" bgcolor="white" align="center">
+    <tr>
+      <td width="707" align="right" style="padding-right:10px;" height="35"><a href="main.jsp" span class=navi>HOME</a> &gt; <a href="pre_list.jsp" span class=navi>사전신청예약 골프장</s></td>
+    </tr>
+    <tr>
+     <td bgcolor="#2371bb" height="1"></td>
+</tr>
+</table>
 <table border="0" cellpadding="0" cellspacing="0" width="713" align="center">
   <tr>
-    <td width="713"><table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-          <td width="50%" style="padding-left: 15px; padding-top: 4px" class=sub_title height="33" bgcolor="#dcddde">사전신청예약</td>
-          <td width="50%" height="25" bgcolor="#DCDDDE" style="padding-top:4px; padding-right: 10px;" align="right"><a href="default.jsp"><img align="absmiddle" src="../img_nhcard/common/btn_home.gif" width="60" height="19" border="0"></a></td>
-        </tr>
-      </table></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
+    <td width="713">&nbsp;</td>
   </tr>
   <tr>
     <td style="padding-left: 55px;"><img src="../img_nhcard/common/img_pre_finished_title.gif" width="556" height="80" border="0"></td>

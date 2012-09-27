@@ -33,7 +33,7 @@ String cbNum = StringUtils.trimToEmpty(request.getParameter("ordr_idxx"));
 int couponSeq = 0;
 
 if(menu == 0 || gcId == 0 || golf == 0 || date == 0 || cdate == 0){
-	out.println("<script>alert('잘못된 접근입니다.');location.href='reserve.jsp?menu=1&gr_cd="+request.getParameter("gr_cd")+"'</script>");
+	out.println("<script>alert('잘못된 접근입니다.');location.href='realtime_list.jsp?menu=1'</script>");
 	return;
 }
 

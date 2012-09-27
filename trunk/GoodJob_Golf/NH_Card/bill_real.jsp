@@ -25,7 +25,7 @@ String user_Name = StringUtils.trimToEmpty((String)session.getAttribute("mem_nam
 String user_Id = StringUtils.trimToEmpty((String)session.getAttribute("mem_id"));
 
 if(productsubSeq == 0 || golf == 0 || date == 0 || cdate == 0){
-	out.println("<script>location.href='reserve.jsp?menu=1'</script>");
+	out.println("<script>location.href='realtime_list.jsp?menu=1'</script>");
 	return;
 }
 
@@ -34,7 +34,7 @@ List<ProductReserveDto> listPr = glDao.getGolfProduct(productsubSeq);
 
 ProductReserveDto prDto = null;
 if(listPr == null || listPr.size() != 1){
-	out.println("<script>location.href='reserve.jsp?menu=1'</script>");
+	out.println("<script>location.href='realtime_list.jsp?menu=1'</script>");
 	return;
 }
 prDto = listPr.get(0);
@@ -98,7 +98,7 @@ function billok(){
 	
 	if($("#billBtype").attr("checked")){
 		if(window.confirm("예약을 완료하시려면 확인 버튼을 누르십시오 \r\n예약확인 SMS : "+$("#phone1").val()+$("#phone2").val()+$("#phone3").val())){
-			//billSubmit("");
+			billSubmit("");
 		}
 	}else{
 		var billprice = <%=buyPrice%> * $("#perNum").val();
@@ -310,17 +310,17 @@ function onload_pay()
 <input type="hidden" id="buyPrice" name="buyPrice" value="<%=(buyPrice*4)%>"/>
 <input type="hidden" id="save_price" name="save_price" value="<%=(site_save_price*4)%>"/>
 
+<table cellpadding="0" cellspacing="0" width="713" bgcolor="white" align="center">
+    <tr>
+      <td width="707" align="right" style="padding-right:10px;" height="35"><a href="main.jsp" span class=navi>HOME</a> &gt; <a href="realtime_list.jsp" span class=navi>실시간예약 골프장</s></td>
+    </tr>
+    <tr>
+     <td bgcolor="#2371bb" height="1"></td>
+</tr>
+</table>
 <table border="0" cellpadding="0" cellspacing="0" width="713" align="center">
   <tr>
-    <td width="713"><table border="0" cellpadding="0" cellspacing="0" width="100%">
-        <tr>
-          <td width="50%" style="padding-left: 15px; padding-top: 4px" class=sub_title height="33" bgcolor="#dcddde">실시간예약</td>
-          <td width="50%" height="25" bgcolor="#DCDDDE" style="padding-top:4px; padding-right: 10px;" align="right"><a href="default.jsp"><img align="absmiddle" src="../img_nhcard/common/btn_home.gif" width="60" height="19" border="0"></a></td>
-        </tr>
-      </table></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
+    <td width="713">&nbsp;</td>
   </tr>
   <tr>
     <td style="padding-left: 55px;"><img src="../img_nhcard/common/img_real_finished_title.gif" width="556" height="80" border="0"></td>
@@ -459,4 +459,5 @@ function onload_pay()
     <a href="javascript:billok();"><img border=0 src="../img_nhcard/common/btn_pay.gif" width="150" height="39"></a></td>
   </tr>
 </table>
+<iframe  name="ifr_hidden"  src="" style="width:0;height:0;visibility: hidden;"></iframe>
 </FORM>

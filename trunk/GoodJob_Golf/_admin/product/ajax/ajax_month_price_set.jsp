@@ -1,4 +1,5 @@
-<%@page import="com.goodjob.product.MonthPriceDao"%>
+
+<%@page import="org.apache.commons.lang.math.NumberUtils"%><%@page import="com.goodjob.product.MonthPriceDao"%>
 <%@page import="com.goodjob.product.dto.MonthPriceDto"%>
 <%@page import="org.apache.commons.lang.StringUtils"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -23,8 +24,10 @@ String[] arrSitePrices = prices.split(",");
 for(int i = 0; i < arrSitePrices.length;i++){
 	String[] arrItem = arrSitePrices[i].split(":");
 	if(arrItem[0].equals("")){
-		mpDto.setSite_seq(-1);
+		mpDto.setSite_seq(1);
 	}else{
+		int site_seq = NumberUtils.toInt(arrItem[0] , 0);
+		site_seq = (site_seq==0?site_seq++:site_seq);
 		mpDto.setSite_seq(Integer.parseInt(arrItem[0]));
 	}
 	mpDto.setPrice1(Integer.parseInt(arrItem[1]));

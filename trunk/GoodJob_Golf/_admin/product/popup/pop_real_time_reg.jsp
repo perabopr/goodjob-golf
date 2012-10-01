@@ -94,9 +94,11 @@ mvsDto.setService_seq(Integer.parseInt(glSeq));
 MenuViewSiteDao mvsd = new MenuViewSiteDao();
 List<MenuViewSiteDto> listMvsd = mvsd.getMenuViewSiteListNHException(mvsDto);
 
+List<MenuViewSiteDto> listSiteSeq = mvsd.getMenuViewSiteList(mvsDto);
+
 String siteSeq = "";
-for(int i = 0; i < listMvsd.size();i++){
-	siteSeq += listMvsd.get(i).getSite_seq() +",";
+for(int i = 0; i < listSiteSeq.size();i++){
+	siteSeq += listSiteSeq.get(i).getSite_seq() +",";
 }
 if(siteSeq.length() > 0){
 	siteSeq = siteSeq.substring(0, siteSeq.length() - 1);
@@ -553,6 +555,8 @@ function regMonthPrice(){
 		tmpArrPrices = tmpArrPrices.substring(0, tmpArrPrices.length-1);
 	}
 
+	alert(tmpArrPrices);
+	
 	$.ajax({
 		url: "/_admin/product/ajax/ajax_month_price_set.jsp?menuseq=<%=menuSeq%>&serviceseq=<%=glSeq%>&yearmonth=<%=currYear+selectMonth%>&arrprices="+tmpArrPrices,
 		cache: false,

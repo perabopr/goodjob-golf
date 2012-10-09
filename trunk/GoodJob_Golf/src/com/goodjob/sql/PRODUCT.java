@@ -985,7 +985,7 @@ public class PRODUCT {
 		"FROM tb_month_price " +
 		"WHERE menu_seq = ? " +
 			"AND service_seq = ? " +
-			"AND yearmonth = ? ";
+			"AND yearmonth = ? order by site_seq ";
 	
 	public static final String month_price_insert
 	=	"INSERT INTO tb_month_price(" +

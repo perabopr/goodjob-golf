@@ -78,7 +78,7 @@ else{
 	
 	if(NumberUtils.toInt(menuseq) == 1){	//실시간 일경우
 		
-		String[] tmpArr = {"0000","0000","0000","0000","0000","0000","0000","0000","0000"};
+		String[] tmpArr = {"0600","0600","0600","0600","1200","1200","1200","1200"};
 	
 		int seq = NumberUtils.toInt(golflinkseq, 0);
 	
@@ -130,7 +130,6 @@ else{
 		startTime[1] = "1100";
 		endTime[0] = "1000";
 		endTime[1] = "1500";
-		
 	}
 	
 	/**
@@ -151,6 +150,10 @@ else{
 		arrPrice[0] = arrMPDto.get(0).getPrice1();
 		arrPrice[1] = arrMPDto.get(0).getPrice2();
 		
+		//System.out.println(arrMPDto.get(1).getSite_seq());
+		//System.out.println(arrMPDto.get(1).getPrice1());
+		//System.out.println(arrMPDto.get(1).getPrice2());
+		
 		arrPrice[2] = arrMPDto.get(1).getPrice1();
 		arrPrice[3] = arrMPDto.get(1).getPrice2();
 	}
@@ -159,43 +162,52 @@ else{
 		arrPrice[1] = arrMPDto.get(0).getPrice2();
 	}
 	
+	String strSitePrice = "";
+	
+	//System.out.println("mIndex : "+mIndex);
+	
+	int[][] sitePrice = null;
+	if(mIndex >= 3){
+		sitePrice = new int[3][mIndex - 2];
+		
+		for(int ii = 2 ; ii < mIndex ; ii++){
+			sitePrice[0][ii-2] = arrMPDto.get(ii).getPrice1();
+			sitePrice[1][ii-2] = arrMPDto.get(ii).getPrice2();
+			sitePrice[2][ii-2] = arrMPDto.get(ii).getPrice3();
+		}
+	}
+	else{
+		sitePrice = new int[3][1];
+		sitePrice[0][0] = 0;
+		sitePrice[1][0] = 0;
+		sitePrice[2][0] = 0;
+	}
+	
 	returnJson = "{\"ProductSub\":[";
 	for(int i = 0; i < index ;i++){
+		
 		returnJson += "{";
 		returnJson += "\"a\":\"\",";
 		returnJson += "\"b\":\"\",";
-		returnJson += "\"c\":\"\",";
+		
+		if("1".equals(menuseq))
+			returnJson += "\"c\":\"\",";
+		else
+			returnJson += "\"c\":\"26\",";
 		
 		returnJson += "\"d\":\""+startTime[i]+"\",";
 		returnJson += "\"e\":\""+endTime[i]+"\",";
 		
 		returnJson += "\"f\":\""+arrPrice[0]+"\",";
 		returnJson += "\"g\":\""+arrPrice[1]+"\",";
-		returnJson += "\"h\":\"\",";
-		returnJson += "\"i\":\""+arrPrice[2]+"\",";
-		returnJson += "\"j\":\""+arrPrice[3]+"\",";
+		returnJson += "\"h\":\"0\",";
+		returnJson += "\"i\":\"1\",";
+		returnJson += "\"j\":\"0\",";
 		
-		String strSitePrice = "";
-		
-		int[][] sitePrice = null;
-		if(mIndex >= 3){
-			sitePrice = new int[3][mIndex - 2];
-			
-			for(int ii = 2 ; ii < mIndex ; ii++){
-				sitePrice[0][ii-2] = arrMPDto.get(ii).getPrice1();
-				sitePrice[1][ii-2] = arrMPDto.get(ii).getPrice2();
-				sitePrice[2][ii-2] = arrMPDto.get(ii).getPrice3();
-			}
-		}
-		else{
-			sitePrice = new int[3][1];
-			sitePrice[0][0] = 0;
-			sitePrice[1][0] = 0;
-			sitePrice[2][0] = 0;
-		}
-		
+		strSitePrice = "";
+		int aa = mIndex;
 		for(int k = 0; k < mIndex - 2 ;k++){
-			strSitePrice += "{\"aa\":\"\",";
+			strSitePrice += "{\"aa\":\""+(aa-k)+"\",";
 			strSitePrice += "\"bb\":\""+sitePrice[0][k]+"\",";
 			strSitePrice += "\"cc\":\""+sitePrice[1][k]+"\",";
 			strSitePrice += "\"dd\":\""+sitePrice[2][k]+"\"},";
@@ -204,12 +216,11 @@ else{
 		if(strSitePrice.length() > 0){
 			strSitePrice = strSitePrice.substring(0, strSitePrice.length()-1);
 		}
-		returnJson += "\"k\":[0]";
+		returnJson += "\"k\":[" + strSitePrice + "]";
 		returnJson += "},";
 	}
-	if(arrPrdtSub.size() > 0){
-		returnJson = returnJson.substring(0, returnJson.length()-1);
-	}
+	returnJson = returnJson.substring(0, returnJson.length()-1);
 	returnJson += "]}";
 }
+System.out.println(returnJson);
 out.println(returnJson);%>

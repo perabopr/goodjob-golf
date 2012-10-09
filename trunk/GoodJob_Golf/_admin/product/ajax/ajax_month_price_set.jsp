@@ -24,7 +24,7 @@ String[] arrSitePrices = prices.split(",");
 for(int i = 0; i < arrSitePrices.length;i++){
 	String[] arrItem = arrSitePrices[i].split(":");
 	if(arrItem[0].equals("")){
-		mpDto.setSite_seq(1);
+		mpDto.setSite_seq(-1);
 	}else{
 		int site_seq = NumberUtils.toInt(arrItem[0] , 0);
 		site_seq = (site_seq==0?site_seq++:site_seq);

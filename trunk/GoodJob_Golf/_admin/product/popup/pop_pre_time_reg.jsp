@@ -289,7 +289,7 @@ var addTimeCnt = 0;
 function addTime(pdsubseq, vCourse, vTimeSH, vTimeSM, vTimeEH, vTimeEM, nPrice, sPrice, sStatus, sCoupon, realNhPrice, realNhsPrice, vArrSite){
 	var currMD = selDate.split('/');
 	var timecostHTML = "";
-
+	
 	timecostHTML += "<tr><td bgcolor='white' align='center' width='40' nowrap><input type='hidden' name='pdsubseq' value='" + pdsubseq + "'>"+currMD[1]+"/"+currMD[2]+"</td>"
 		+"<td bgcolor='white' align='center' nowrap><select name='course_S_hour'>"
 	for(var i=0;i<24;i++){

@@ -242,6 +242,7 @@ function selSetting(sDate){
 					vArrSite[ilstCnt][3] = evalData.ProductSub[i].k[ilstCnt].dd;
 				}
 			}
+
 			addTime(evalData.ProductSub[i].a
 					,evalData.ProductSub[i].c
 					,evalData.ProductSub[i].d.substring(0,2)
@@ -253,25 +254,7 @@ function selSetting(sDate){
 					,evalData.ProductSub[i].j
 					,parseInt(evalData.ProductSub[i].g)+parseInt(evalData.ProductSub[i].j) 
 					, vArrSite);
-			/*
-			var calcVal = document.all['idCourseNh'];
-			if (typeof calcVal.length == "undefined") {
-				calcVal.onkeyup(calcVal,evalData.ProductSub[i].g);
-			} else {
-				for (var j=0; j<calcVal.length; j++) {
-					calcVal[j].onkeyup(calcVal[j],evalData.ProductSub[j].g);
-				}
-			}
-			*/
 		}
-		/*
-		var vPriceN = $("#txtAddPriceN").val();
-		var vPriceS = $("#txtAddPriceS").val();
-		var vPriceN0 = $("#txtAddPriceN0").val();
-		var vPriceS0 = $("#txtAddPriceS0").val();
-		*/	
-		//기본행 -- 삭제
-		//addTime('','0','0','0',vPriceN,vPriceS,'0','1',vPriceN0,vPriceS0,null);
 	  }
 	});
 	
@@ -309,6 +292,7 @@ function customAddTime(){
 			}
 		}
 	});
+	
 	addTime('','0','0','0',vPriceN,vPriceS,'0','1',vPriceN0, vPriceS0, vArrSite);
 }
 
@@ -316,7 +300,7 @@ var addTimeCnt = 0;
 function addTime(pdsubseq, vCourse, vTimeH, vTimeM, nPrice, sPrice, sStatus, sCoupon, realNhPrice, realNhsPrice, vArrSite){
 	var currMD = selDate.split('/');
 	var timecostHTML = "";
-
+	
 	timecostHTML += "<tr><td bgcolor='white' align='center' width='40' nowrap><input type='hidden' name='pdsubseq' value='" + pdsubseq + "'>"+currMD[1]+"/"+currMD[2]+"</td>"
 		+"<td bgcolor='white' align='center' nowrap><%= ddlCourseHTML%></td>"
 		+"<td bgcolor='white' align='center' nowrap><select name='course_hour'>"

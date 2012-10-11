@@ -9,7 +9,6 @@ import java.util.Map;
 import org.apache.commons.dbutils.DbUtils;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.MapHandler;
 import org.apache.commons.lang.StringUtils;
@@ -19,9 +18,7 @@ import com.goodjob.coupon.CouponDao;
 import com.goodjob.db.DBManager;
 import com.goodjob.order.dto.GolfLinkDto;
 import com.goodjob.product.productDao;
-import com.goodjob.product.dto.ProductSubSiteDto;
 import com.goodjob.sql.ORDER;
-import com.goodjob.sql.PRODUCT;
 
 public class GolfLinkDao {
 	public List<GolfLinkDto> getList(String tableName , Map<String,String> data){
@@ -58,12 +55,12 @@ public class GolfLinkDao {
 					if(keywords[0].trim().length() > 0)
 					{
 						where += "AND booking_day >= ? " ;
-						params.add(keywords[0].trim().replace("-", ""));
+						params.add(keywords[0].trim().replaceAll("-", ""));
 					}
 					if(keywords[1].trim().length() > 0)
 					{
 						where += "AND booking_day <= ? " ;
-						params.add(keywords[1].trim().replace("-", ""));
+						params.add(keywords[1].trim().replaceAll("-", ""));
 					}
 				}
 				else
@@ -71,17 +68,17 @@ public class GolfLinkDao {
 					if(keyword.startsWith("~"))
 					{
 						where += "AND booking_day <= ? " ;
-						params.add(keyword.substring(1).trim().replace("-", ""));
+						params.add(keyword.substring(1).trim().replaceAll("-", ""));
 					}
 					else if(keyword.endsWith("~"))
 					{
 						where += "AND booking_day >= ? " ;
-						params.add(keyword.substring(0,keyword.length()-1).trim().replace("-", ""));
+						params.add(keyword.substring(0,keyword.length()-1).trim().replaceAll("-", ""));
 					}
 					else
 					{
 						where += "AND booking_day = ? " ;
-						params.add(keyword.trim().replace("-", ""));
+						params.add(keyword.trim().replaceAll("-", ""));
 					}
 				}
 			}else if("reserve_name".equals(field) && keyword.length()>0){
@@ -103,8 +100,6 @@ public class GolfLinkDao {
 				where = ",tb_member where menu_seq = ? and reserve_uid=mem_id and recommend=? " ;
 				params.add(keyword);
 			}
-
-
 
 			//페이징
 			params.add(((npage-1)* per_page));
@@ -170,13 +165,43 @@ public class GolfLinkDao {
 				where += "AND golflink_name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}else if("reserve_day".equals(field) && keyword.length()>0){
-				where += "AND reserve_day LIKE concat('%',?,'%') " ;
+				String[] keywords = keyword.split("~");
+				if(keywords.length == 2)
+				{
+					if(keywords[0].trim().length() > 0)
+					{
+						where += "AND booking_day >= ? " ;
+						params.add(keywords[0].trim().replaceAll("-", ""));
+					}
+					if(keywords[1].trim().length() > 0)
+					{
+						where += "AND booking_day <= ? " ;
+						params.add(keywords[1].trim().replaceAll("-", ""));
+					}
+				}
+				else
+				{
+					if(keyword.startsWith("~"))
+					{
+						where += "AND booking_day <= ? " ;
+						params.add(keyword.substring(1).trim().replaceAll("-", ""));
+					}
+					else if(keyword.endsWith("~"))
+					{
+						where += "AND booking_day >= ? " ;
+						params.add(keyword.substring(0,keyword.length()-1).trim().replaceAll("-", ""));
+					}
+					else
+					{
+						where += "AND booking_day = ? " ;
+						params.add(keyword.trim().replaceAll("-", ""));
+					}
+				}
+			}else if("reserve_name".equals(field) && keyword.length()>0){
+				where += "AND reserve_name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}else if("reserve_uid".equals(field) && keyword.length()>0){
 				where += "AND reserve_uid LIKE concat('%',?,'%') " ;
-				params.add(keyword);
-			}else if("reserve_name".equals(field) && keyword.length()>0){
-				where += "AND reserve_name LIKE concat('%',?,'%') " ;
 				params.add(keyword);
 			}else if("product_price".equals(field) && keyword.length()>0){
 				where += "AND product_price LIKE concat('%',?,'%') " ;

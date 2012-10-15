@@ -2,10 +2,32 @@
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ page import="org.apache.commons.lang.math.NumberUtils"%>
 <%@ page import="java.util.*" %>
+<%@ page import="java.text.*" %>
 <%@ page import="com.goodjob.util.PageNavigater"%>
-<%@page import="com.goodjob.mypage.*"%>
-<%@page import="com.goodjob.reserve.dto.*"%>
+<%@ page import="com.goodjob.mypage.*"%>
+<%@ page import="com.goodjob.reserve.dto.*"%>
 <%@ page import="com.goodjob.util.Utils" %>
+<%!
+long getDiffDay(String date){
+	long diffDays = 0;
+	
+	try{
+		String end = Utils.getDate("yyyyMMdd");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+		date = StringUtils.replace(date , ".","");
+		
+	    Date beginDate = formatter.parse(date);
+	    Date endDate = formatter.parse(end);
+	 
+	    long diff = endDate.getTime() - beginDate.getTime();
+	    diffDays = diff / (24 * 60 * 60 * 1000);
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	
+    return diffDays;
+}
+%>
 <%
 	
 	String npage = StringUtils.defaultIfEmpty(request.getParameter("npage"),"1");
@@ -32,11 +54,6 @@
 	params.put("endDt",endDt);
 	params.put("reserve_name",reserve_name);
 	params.put("reserve_phone",reserve_phone);
-	
-	System.out.println("endDt : "+ endDt);
-	System.out.println("startDt : "+ startDt);
-	System.out.println("reserve_name : "+ reserve_name);
-	System.out.println("reserve_phone : "+ reserve_phone);
 	
 	MyPageDao myDao = new MyPageDao();
 	
@@ -272,6 +289,9 @@ function onload_pay()
 <%
 																			
 GolfLinkReserveDto golfDto;
+
+long reserve_diff = 0;
+
 if(golfList != null && !golfList.isEmpty()){
 	
 	int size = golfList.size();
@@ -281,6 +301,8 @@ if(golfList != null && !golfList.isEmpty()){
 		golfDto = golfList.get(i);
 		
 		booking_time = golfDto.getBooking_time_s().substring(0,2)+":"+golfDto.getBooking_time_s().substring(2,4);
+		
+		reserve_diff = getDiffDay(golfDto.getReserve_day());
 %>
         <tr>
 	        <td height="35" bgcolor="white" align="center" class=m_title><%=golfDto.getReserve_day()%></td>
@@ -295,7 +317,10 @@ if(golfList != null && !golfList.isEmpty()){
 	        <td bgcolor="white" align="center"><%=(golfDto.getMenu_seq()==1?"<span class=m_title_pink>실시간</span>":"<span class=m_title_green>사전신청</span>")%></td>
 			<td bgcolor="white" align="center">
 			<%
-			if("0".equals(golfDto.getProcess_status())){
+			if(0 >= reserve_diff){
+				out.println("<span class=m_title_blue>예약진행중</span>");
+			}
+			else if("0".equals(golfDto.getProcess_status())){
 			%>
 			<a href="javascript:card_order('1','<%=golfDto.getMenu_seq()%>','<%=golfDto.getReserve_seq()%>','<%=golfDto.getProduct_price()%>','<%=golfDto.getGolflink_name()%>','<%=golfDto.getReserve_name()%>','<%=golfDto.getReserve_phone()%>','<%=golfDto.getReserve_uid()%>');">
 			<img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>

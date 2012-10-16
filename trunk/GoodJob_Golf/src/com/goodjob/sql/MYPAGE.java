@@ -82,7 +82,7 @@ public class MYPAGE {
 								"a.golflink_seq," +
 								"a.product_seq," +
 								"a.productsub_seq," +
-								"date_format(a.reserve_day,''%Y.%m.%d'') reserve_day," +
+								"date_format(a.reserve_day,''%Y.%m.%d %H:%i:%s'') reserve_day," +
 								"a.reserve_name," +
 								"a.reserve_phone," +
 								"a.reserve_uid," +

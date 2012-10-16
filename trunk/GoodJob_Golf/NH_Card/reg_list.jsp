@@ -9,23 +9,28 @@
 <%@ page import="com.goodjob.util.Utils" %>
 <%!
 long getDiffDay(String date){
-	long diffDays = 0;
 	
+	long diffTime = 0;
 	try{
-		String end = Utils.getDate("yyyyMMdd");
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-		date = StringUtils.replace(date , ".","");
+		
+		String end = Utils.getDate("yyyy.MM.dd HH:mm:ss");
+		SimpleDateFormat formatter = new SimpleDateFormat ( "yyyy.MM.dd HH:mm:ss", Locale.KOREA );
 		
 	    Date beginDate = formatter.parse(date);
 	    Date endDate = formatter.parse(end);
-	 
+	    
+	    formatter.parse(date).getTime();
+	    
 	    long diff = endDate.getTime() - beginDate.getTime();
-	    diffDays = diff / (24 * 60 * 60 * 1000);
+	    diffTime = diff / (60 * 60 * 1000);
+
+	    System.out.println("diffTime : "+diffTime);
+	    
 	}catch(Exception e){
 		e.printStackTrace();
 	}
 	
-    return diffDays;
+    return diffTime;
 }
 %>
 <%
@@ -289,9 +294,8 @@ function onload_pay()
 <%
 																			
 GolfLinkReserveDto golfDto;
-
 long reserve_diff = 0;
-
+String reserve_day = "";
 if(golfList != null && !golfList.isEmpty()){
 	
 	int size = golfList.size();
@@ -303,9 +307,11 @@ if(golfList != null && !golfList.isEmpty()){
 		booking_time = golfDto.getBooking_time_s().substring(0,2)+":"+golfDto.getBooking_time_s().substring(2,4);
 		
 		reserve_diff = getDiffDay(golfDto.getReserve_day());
+		
+		reserve_day = StringUtils.substring(golfDto.getReserve_day() , 0 , 10);
 %>
         <tr>
-	        <td height="35" bgcolor="white" align="center" class=m_title><%=golfDto.getReserve_day()%></td>
+	        <td height="35" bgcolor="white" align="center" class=m_title><%=reserve_day%></td>
 			<td bgcolor="white" align="center" class=m_title>
 			<span class=<%=Utils.getIsWeek(golfDto.getBooking_day())%>>
 			<%=Utils.dateFormat(golfDto.getBooking_day(),".")%> <%=booking_time%></span>
@@ -317,10 +323,10 @@ if(golfList != null && !golfList.isEmpty()){
 	        <td bgcolor="white" align="center"><%=(golfDto.getMenu_seq()==1?"<span class=m_title_pink>실시간</span>":"<span class=m_title_green>사전신청</span>")%></td>
 			<td bgcolor="white" align="center">
 			<%
-			if(0 >= reserve_diff){
+			if(reserve_diff <24 && "0".equals(golfDto.getProcess_status())){
 				out.println("<span class=m_title_blue>예약진행중</span>");
 			}
-			else if("0".equals(golfDto.getProcess_status())){
+			else if(reserve_diff >= 24 && "0".equals(golfDto.getProcess_status())){
 			%>
 			<a href="javascript:card_order('1','<%=golfDto.getMenu_seq()%>','<%=golfDto.getReserve_seq()%>','<%=golfDto.getProduct_price()%>','<%=golfDto.getGolflink_name()%>','<%=golfDto.getReserve_name()%>','<%=golfDto.getReserve_phone()%>','<%=golfDto.getReserve_uid()%>');">
 			<img align="absmiddle" src="/images/mypage/btn_pay.gif" width="56" height="16" border="0"></a>

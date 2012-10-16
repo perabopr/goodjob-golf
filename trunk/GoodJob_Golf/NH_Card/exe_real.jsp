@@ -40,10 +40,6 @@ if(menu == 0 || gcId == 0 || golf == 0 || date == 0 || cdate == 0){
 
 String uPhone = StringUtils.trimToEmpty(request.getParameter("mtel"));
 
-/*uPhone += request.getParameter("phone1") + "-";
-uPhone += request.getParameter("phone2") + "-";
-uPhone += request.getParameter("phone3");*/
-
 /* ----- 쿠폰 ----- */
 CouponDao cpDao = new CouponDao();
 

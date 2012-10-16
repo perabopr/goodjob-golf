@@ -187,11 +187,6 @@ public class MyPageDao {
 			else{
 				where = " and expiredate_end < date_format(now(),'%Y-%m-%d') " ;
 				
-				/*if(startDt.length()>0 && endDt.length() > 0){
-					where += " and expiredate_end between ? and ? " ;
-					bind.add(startDt);
-					bind.add(endDt);
-				}*/
 				if("code".equals(field) && keyword.length()>0){
 					where += "and a.coupon_code = ? " ;
 					bind.add(keyword);
@@ -254,11 +249,6 @@ public class MyPageDao {
 			else{
 				where = " and expiredate_end < date_format(now(),'%Y-%m-%d') " ;
 				
-				/*if(startDt.length()>0 && endDt.length() > 0){
-					where += " and expiredate_end between ? and ? " ;
-					bind.add(startDt);
-					bind.add(endDt);
-				}*/
 				if("code".equals(field) && keyword.length()>0){
 					where += "and a.coupon_code = ? " ;
 					bind.add(keyword);
@@ -288,6 +278,12 @@ public class MyPageDao {
 		return NumberUtils.toInt(map.get("cnt")+"");
 	}
 	
+	/**
+	 * 
+	 * @param menu_seq
+	 * @param reserve_seq
+	 * @return
+	 */
 	public String getGolflinkName(int menu_seq , int reserve_seq){
 		
 		String name = "";
@@ -315,6 +311,11 @@ public class MyPageDao {
 		return name;
 	}
 	
+	/**
+	 * 
+	 * @param tableName
+	 * @param data
+	 */
 	public void setStatusUpdate(String tableName, Map<String,String> data){
 		Connection conn = null;
 		
@@ -353,7 +354,6 @@ public class MyPageDao {
 		String reserve_name = StringUtils.trimToEmpty(params.get("reserve_name"));
 		String reserve_phone = StringUtils.trimToEmpty(params.get("reserve_phone"));
 		
-		
 		int npage = NumberUtils.toInt(params.get("npage"), 1);
 		int per_page = NumberUtils.toInt(params.get("per_page"), BBS.per_page);
 		
@@ -374,7 +374,9 @@ public class MyPageDao {
 				bind.add(startDt);
 				bind.add(endDt);
 			}
+			
 			System.out.println(MessageFormat.format(MYPAGE.my_nh_reserve, where));
+			
 			list = (List<GolfLinkReserveDto>) qr.query(conn , MessageFormat.format(MYPAGE.my_nh_reserve, where), rsh , bind.toArray());
 			
 		} catch (Exception e) {
@@ -386,6 +388,11 @@ public class MyPageDao {
 		return list;
 	}
 	
+	/**
+	 * 
+	 * @param params
+	 * @return
+	 */
 	public int getNHReserveTotal(Map<String,String> params){
 		
 		Map<String, Long> map = null;

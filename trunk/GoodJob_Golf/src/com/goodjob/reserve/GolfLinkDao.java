@@ -256,10 +256,13 @@ public class GolfLinkDao {
 				bind.add(glrDto.getPer_num());
 				bind.add(glrDto.getReserve_phone());
 				
-				if(glrDto.getSite_seq() == 2)
+				if(glrDto.getSite_seq() == 3)
+					bind.add(glrDto.getProduct_price());
+				else if(glrDto.getSite_seq() == 2)
 					bind.add(list.get(0).getNH_price() * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price() - list.get(0).getReal_nh_price()*Integer.parseInt(glrDto.getPer_num()));
 				else 
 					bind.add(list.get(0).getNH_price() * Integer.parseInt(glrDto.getPer_num()) - glrDto.getCoupon_price());
+
 				bind.add(glrDto.getCoupon_price());
 				bind.add(glrDto.getProcess_status());
 				bind.add(glrDto.getCard_bill_num());

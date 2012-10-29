@@ -121,7 +121,7 @@ public class MemberDao {
 				bind.add(keyword);
 			}
 			else if("reg_dt".equals(field) && keyword.length() > 0){
-				where = " where date_format(reg_dt,'%Y%m%d') = ? " ;
+				where = " where date_format(reg_dt,'%Y-%m-%d') = ? " ;
 				bind.add(keyword);
 			}
 			

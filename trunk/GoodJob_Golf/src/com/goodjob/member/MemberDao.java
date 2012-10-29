@@ -79,6 +79,8 @@ public class MemberDao {
 			bind.add(((npage-1)* MEMBER.per_page));
 			bind.add(MEMBER.per_page);
 			
+			System.out.println("SQL : "+MessageFormat.format(MEMBER.list,where));
+			
 			list = (List<MemberDto>) qr.query(conn , MessageFormat.format(MEMBER.list,where) , rsh , bind.toArray());
 			
 		} catch (Exception e) {
@@ -105,15 +107,11 @@ public class MemberDao {
 			//검색조건
 			String where = "";
 			if("name".equals(field) && keyword.length() > 0){
-				where = " where mem_name like concat('%',?,'%') " ;
+				where = " where mem_name LIKE concat('%',?,'%') " ;
 				bind.add(keyword);
 			}
 			else if("id".equals(field) && keyword.length() > 0){
 				where = " where mem_id like concat('%',?,'%') " ;
-				bind.add(keyword);
-			}
-			else if("mobile".equals(field) && keyword.length() > 0){
-				where = " where mem_mtel = ? " ;
 				bind.add(keyword);
 			}
 			else if("type".equals(field) && keyword.length() > 0){
@@ -124,9 +122,18 @@ public class MemberDao {
 				where = " where date_format(reg_dt,'%Y-%m-%d') = ? " ;
 				bind.add(keyword);
 			}
+			else if("secession".equals(field)){
+				where = " where secession = 'Y'" ;
+			}
+			else if("recomm".equals(field)){
+				where = " where recommend like concat('%',?,'%') " ;
+				bind.add(keyword);
+			}
 			
 			ResultSetHandler rsh = new MapHandler();
 			QueryRunner qr = new QueryRunner();
+			
+			System.out.println("SQL : "+MessageFormat.format(MEMBER.mem_total,where));
 			
 			map = (Map<String, Long>) qr.query(conn , MessageFormat.format(MEMBER.mem_total,where) , rsh , bind.toArray());
 			
@@ -642,7 +649,7 @@ public class MemberDao {
 			bind.add(((npage-1)* per_page));
 			bind.add(per_page);
 			
-			//System.out.println(MessageFormat.format(MEMBER.mem_sub_list,where,having));
+			System.out.println(MessageFormat.format(MEMBER.mem_sub_list,where,having));
 			
 			list = (List<MemberDto>) qr.query(conn , MessageFormat.format(MEMBER.mem_sub_list,where,having) , rsh , bind.toArray());
 			
@@ -675,6 +682,9 @@ public class MemberDao {
 			String where = "";
 			if("reserve".equals(field) && keyword.length() > 0){
 				bind.add(keyword);
+				
+				System.out.println(MEMBER.mem_sub_total2);
+				
 				map = (Map<String, Long>) qr.query(conn , MEMBER.mem_sub_total2 , rsh , bind.toArray());
 				total = NumberUtils.toInt(map.get("total")+"");
 			}

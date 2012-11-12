@@ -1,9 +1,0 @@
-CREATE TABLE `tb_month_price` (
-  `menu_seq` int(11) NOT NULL,
-  `service_seq` int(11) NOT NULL,
-  `yearmonth` varchar(6) NOT NULL,
-  `site_seq` int(11) NOT NULL,
-  `price1` int(11) NOT NULL,
-  `price2` int(11) NOT NULL,
-  `price3` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
